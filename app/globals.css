@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Kimi Platform Design System ── */
+
+  /* Brand & Accent */
+  --color-primary:                 #1a88ff;
+  --color-primary-active:          #1474e1;
+  --color-primary-glow:            rgba(26, 136, 255, 0.25);
+  --color-accent-cyan:             #1a88ff;
+  --color-accent-violet:           #a965c2;
+
+  /* Surface */
+  --color-canvas:                  #141414;
+  --color-canvas-deep:             #0a0a0a;
+  --color-surface-card:            #1e1e1e;
+  --color-surface-card-elevated:   #262626;
+  --color-surface-strong:          #2e2e2e;
+  --color-surface-hover:           #333333;
+
+  /* Hairlines */
+  --color-hairline:                rgba(255, 255, 255, 0.08);
+  --color-hairline-soft:           rgba(255, 255, 255, 0.06);
+  --color-hairline-strong:         rgba(255, 255, 255, 0.12);
+
+  /* Text */
+  --color-ink:                     #ffffff;
+  --color-body:                    hsla(0, 0%, 100%, 0.65);
+  --color-body-strong:             #ffffff;
+  --color-muted:                   hsla(0, 0%, 100%, 0.45);
+  --color-muted-soft:              hsla(0, 0%, 100%, 0.30);
+  --color-on-primary:              #ffffff;
+
+  /* Semantic */
+  --color-success:                 #16c456;
+  --color-success-soft:            rgba(22, 196, 86, 0.12);
+  --color-error:                   #ff4756;
+  --color-error-soft:              rgba(255, 71, 86, 0.12);
+  --color-warning:                 #f2c82e;
+
+  /* Legacy aliases for backward compatibility */
+  --color-canvas-parchment:        #141414;
+  --color-surface-pearl:           #1e1e1e;
+  --color-ink-muted-80:            hsla(0, 0%, 100%, 0.65);
+  --color-ink-muted-48:            hsla(0, 0%, 100%, 0.45);
+  --color-primary-focus:           #1a88ff;
+  --color-primary-on-dark:         #1a88ff;
+  --color-on-dark:                 #ffffff;
+  --color-divider-soft:            rgba(255, 255, 255, 0.06);
+  --color-surface-black:           #0a0a0a;
+  --color-surface-tile-1:          #1e1e1e;
+  --color-surface-tile-2:          #1a1a1a;
+  --color-surface-tile-3:          #1e1e1e;
+  --color-surface-chip-translucent: rgba(255, 255, 255, 0.08);
+
+  /* Elevation */
+  --shadow-product: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -8px rgba(0, 0, 0, 0.6);
+  --shadow-glow-blue: 0 0 40px rgba(26, 136, 255, 0.12);
+
+  /* ── Type scale (Kimi / Developer-tool) ── */
+  --font-size-hero:          72px;
+  --font-size-display-lg:    56px;
+  --font-size-display-md:    44px;
+  --font-size-lead:          32px;
+  --font-size-lead-airy:     24px;
+  --font-size-tagline:       18px;
+  --font-size-body:          16px;
+  --font-size-body-strong:   16px;
+  --font-size-caption:       14px;
+  --font-size-caption-strong: 14px;
+  --font-size-nav-link:      14px;
+  --font-size-fine-print:    12px;
+  --font-size-micro:         11px;
+
+  /* ── Font family ── */
+  --font-system: var(--font-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ── Spacing ── */
+  --space-xxs:     4px;
+  --space-xs:      8px;
+  --space-sm:      12px;
+  --space-md:      16px;
+  --space-lg:      24px;
+  --space-xl:      32px;
+  --space-xxl:     48px;
+  --space-section: 96px;
+
+  /* ── Border radius ── */
+  --radius-none: 0px;
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  20px;
+  --radius-pill: 9999px;
+
+  /* ── Easing ── */
+  --ease-in-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in:     cubic-bezier(0.42, 0, 1, 1);
+}
+
+/* ── Global base ── */
+html {
+  scroll-behavior: smooth;
+  background: var(--color-canvas);
+  color: var(--color-body);
+  font-family: var(--font-system);
+  font-size: var(--font-size-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-body);
+  min-height: 100vh;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(26, 136, 255, 0.3);
+  color: var(--color-ink);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-canvas); }
+::-webkit-scrollbar-thumb { background: var(--color-surface-card-elevated); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-surface-strong); }
+
+/* ── Links ── */
+a {
+  color: var(--color-accent-cyan);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+a:hover {
+  opacity: 0.85;
+}
+
+/* ── Buttons (base) ── */
+button {
+  font-family: var(--font-system);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ── Inputs ── */
+input, textarea, select {
+  font-family: var(--font-system);
+  background: var(--color-surface-card);
+  color: var(--color-body-strong);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: var(--font-size-body);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(26, 136, 255, 0.15);
+}
+input::placeholder, textarea::placeholder {
+  color: var(--color-muted);
+}
+
+/* ── Code ── */
+code, pre {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+}
+pre {
+  background: var(--color-canvas-deep);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  overflow-x: auto;
+}
+
+/* ── Animations ── */
+@keyframes reveal-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-anim {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: reveal-fade-up 0.7s var(--ease-out) forwards;
+}
+
+.reveal-anim-fast {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: reveal-fade-up 0.5s var(--ease-out) forwards;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal-anim,
+  .reveal-anim-fast {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Bridge: section-shell ── */
+.section-shell {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: var(--space-xl);
+}

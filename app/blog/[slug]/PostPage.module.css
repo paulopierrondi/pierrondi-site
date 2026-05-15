@@ -1,0 +1,123 @@
+/* Layout */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 0;
+  margin-top: var(--space-xxl);
+  align-items: start;
+}
+
+.contentCol {
+  padding-right: var(--space-xxl);
+  border-right: 1px solid var(--color-hairline);
+}
+
+.sidebar {
+  padding-left: var(--space-xl);
+  position: sticky;
+  top: 90px;
+}
+
+.sidebarLabel {
+  font-family: var(--font-system);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted-48);
+  margin-bottom: var(--space-md);
+}
+
+.sidebarCard {
+  display: block;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-hairline);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.sidebarCard:hover {
+  opacity: 0.7;
+}
+
+.sidebarCat {
+  font-family: var(--font-system);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-accent-cyan);
+  margin-bottom: 4px;
+}
+
+.sidebarTitle {
+  font-family: var(--font-system);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.35;
+}
+
+/* Meta row in hero */
+.metaRow {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-xxl);
+}
+
+.metaItem {
+  font-family: var(--font-system);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted-48);
+}
+
+/* Back link */
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-system);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted-48);
+  text-decoration: none;
+  padding: var(--space-lg) var(--space-xl);
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: var(--color-accent-cyan);
+}
+
+/* CTA tile overrides */
+.ctaText {
+  font-family: var(--font-system);
+  font-size: var(--font-size-body);
+  color: var(--color-muted);
+  line-height: 1.7;
+  max-width: 520px;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contentCol {
+    padding-right: 0;
+    border-right: none;
+    border-bottom: 1px solid var(--color-hairline);
+    padding-bottom: var(--space-xxl);
+  }
+
+  .sidebar {
+    padding-left: 0;
+    padding-top: var(--space-xl);
+    position: static;
+  }
+}

@@ -1,0 +1,28 @@
+declare global {
+  interface Window {
+    plausible?: (eventName: string, options?: { props?: Record<string, string | number | boolean> }) => void
+  }
+}
+
+type EventProps = Record<string, string | number | boolean | undefined | null>
+
+export function trackEvent(eventName: string, props: EventProps = {}) {
+  if (typeof window === 'undefined' || typeof window.plausible !== 'function') return
+
+  const url = new URL(window.location.href)
+
+  const baseProps: EventProps = {
+    path: window.location.pathname,
+    referrer: document.referrer || undefined,
+    utm_source: url.searchParams.get('utm_source') || undefined,
+    utm_medium: url.searchParams.get('utm_medium') || undefined,
+    utm_campaign: url.searchParams.get('utm_campaign') || undefined,
+    thesisId: url.searchParams.get('thesisId') || url.searchParams.get('thesis') || undefined,
+  }
+
+  const cleanProps = Object.fromEntries(
+    Object.entries({ ...baseProps, ...props }).filter(([, value]) => value !== undefined && value !== null && value !== '')
+  ) as Record<string, string | number | boolean>
+
+  window.plausible(eventName, { props: cleanProps })
+}

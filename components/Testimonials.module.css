@@ -1,0 +1,127 @@
+/* ── Composio-style Testimonials ── */
+
+.section {
+  padding: var(--space-section) var(--space-xl);
+  background: var(--color-canvas);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--font-system);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-muted);
+  margin-bottom: var(--space-md);
+}
+
+.headline {
+  font-family: var(--font-system);
+  font-size: var(--font-size-display-lg);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  color: var(--color-ink);
+  margin: 0 0 var(--space-xl);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.card {
+  background: var(--color-surface-card);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  border: 1px solid var(--color-hairline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.quote {
+  font-family: var(--font-system);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-body);
+  margin: 0;
+  font-style: italic;
+}
+
+.attribution {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: auto;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-card-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-system);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-ink);
+  flex-shrink: 0;
+}
+
+.name {
+  font-family: var(--font-system);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.role {
+  font-family: var(--font-system);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.caveat {
+  font-family: var(--font-system);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-muted);
+  margin: var(--space-xl) 0 0;
+  max-width: 640px;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .headline {
+    font-size: 32px;
+    letter-spacing: -1px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

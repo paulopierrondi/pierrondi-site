@@ -1,0 +1,218 @@
+/* ── Kimi-style Top Navigation ── */
+
+.root {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(20, 20, 20, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--color-hairline-soft);
+}
+
+/* ─── Logo ─── */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-ink);
+  font-family: var(--font-system);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* ─── Desktop nav links ─── */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  text-decoration: none;
+  font-family: var(--font-system);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-body);
+  transition: color 0.15s ease;
+  white-space: nowrap;
+}
+
+.link:hover {
+  color: var(--color-ink);
+}
+
+.linkActive {
+  color: var(--color-ink);
+}
+
+/* ─── Right section (CTA + hamburger) ─── */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* ─── CTA wrapper ─── */
+.ctaWrap {
+  display: flex;
+  align-items: center;
+}
+
+.ctaWrap a,
+.ctaWrap button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 8px 16px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-system);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ctaWrap a:hover,
+.ctaWrap button:hover {
+  background: var(--color-primary-active);
+  box-shadow: 0 0 16px rgba(26, 136, 255, 0.25);
+}
+
+/* ─── Hamburger button ─── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--color-ink);
+  border-radius: 1px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* ─── Mobile fullscreen menu ─── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 51;
+  background: rgba(20, 20, 20, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.overlayOpen {
+  pointer-events: all;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.2s ease, visibility 0s linear 0s;
+}
+
+.overlayLink {
+  text-decoration: none;
+  font-family: var(--font-system);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-ink);
+  letter-spacing: -0.5px;
+  transition: color 0.15s ease;
+}
+
+.overlayLink:hover {
+  color: var(--color-body);
+}
+
+.overlayCta {
+  margin-top: 8px;
+}
+
+.overlayCta a,
+.overlayCta button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 12px 24px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-system);
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+}
+
+/* ─── Responsive: mobile ≤ 768px ─── */
+@media (max-width: 768px) {
+  .root {
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .links {
+    display: none;
+  }
+
+  .ctaWrap {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    transition: none !important;
+    animation: none !important;
+  }
+  .bar {
+    transition: none !important;
+  }
+}

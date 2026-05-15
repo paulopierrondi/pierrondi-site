@@ -1,0 +1,18 @@
+.pill-btn {
+  /* transition is set inline; this override kills it for reduced-motion */
+  outline: none;
+}
+
+.pressed {
+  transform: scale(0.95);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill-btn {
+    transition: none !important;
+  }
+
+  .pressed {
+    transform: none !important;
+  }
+}

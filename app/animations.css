@@ -1,0 +1,29 @@
+/* Scroll reveal animation — applied to [data-animate] elements */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+[data-animate].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delay via --delay CSS var */
+[data-animate][style*="--delay"] {
+  transition-delay: var(--delay, 0s);
+}
+
+/* Respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  [data-animate].revealed {
+    opacity: 1;
+    transform: none;
+  }
+}

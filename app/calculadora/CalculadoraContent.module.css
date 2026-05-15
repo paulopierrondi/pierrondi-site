@@ -1,0 +1,154 @@
+/* ── Calculator form grid ── */
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-xxl);
+  width: 100%;
+  text-align: left;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxs);
+}
+
+.label {
+  font-family: var(--font-system);
+  font-size: var(--font-size-caption);
+  font-weight: 600;
+  color: var(--color-ink-muted-80);
+  letter-spacing: -0.224px;
+}
+
+.input {
+  font-family: var(--font-system);
+  font-size: var(--font-size-body);
+  font-weight: 400;
+  color: var(--color-ink);
+  background: var(--color-canvas-parchment);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color 0.15s var(--ease-out), box-shadow 0.15s var(--ease-out);
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+  width: 100%;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input:focus {
+  border-color: var(--color-accent-cyan);
+  box-shadow: 0 0 0 3px var(--color-primary-focus, rgba(0, 102, 204, 0.18));
+  outline: none;
+}
+
+.helperText {
+  font-family: var(--font-system);
+  font-size: var(--font-size-fine-print);
+  color: var(--color-ink-muted-48);
+  line-height: 1.4;
+  margin-top: var(--space-xxs);
+}
+
+/* ── Results grid ── */
+.resultsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-xxl);
+  width: 100%;
+  text-align: left;
+}
+
+.resultCard {
+  background: var(--color-canvas-parchment);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  transition: border-color 0.15s var(--ease-out);
+}
+
+.resultCardWarning {
+  border-color: rgba(255, 59, 48, 0.35);
+  background: rgba(255, 59, 48, 0.04);
+}
+
+.resultLabel {
+  font-family: var(--font-system);
+  font-size: var(--font-size-fine-print);
+  font-weight: 600;
+  color: var(--color-ink-muted-48);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.resultValue {
+  font-family: var(--font-system);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: var(--color-ink);
+  line-height: 1.05;
+}
+
+.resultValueUnit {
+  font-size: 0.55em;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin-left: 2px;
+  color: var(--color-ink-muted-48);
+}
+
+.resultWarning {
+  font-family: var(--font-system);
+  font-size: var(--font-size-fine-print);
+  color: var(--color-error);
+  line-height: 1.4;
+  margin-top: var(--space-xxs);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .resultsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .resultCard {
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .formGrid {
+    margin-top: var(--space-xl);
+  }
+
+  .resultsGrid {
+    margin-top: var(--space-xl);
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .input,
+  .resultCard {
+    transition: none;
+  }
+}

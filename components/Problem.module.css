@@ -1,0 +1,104 @@
+/* ── Composio-style Problem ── */
+
+.section {
+  padding: var(--space-section) var(--space-xl);
+  background: var(--color-canvas);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--font-system);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-muted);
+  margin-bottom: var(--space-md);
+}
+
+.headline {
+  font-family: var(--font-system);
+  font-size: var(--font-size-display-lg);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  color: var(--color-ink);
+  margin: 0 0 var(--space-lg);
+}
+
+.tagline {
+  font-family: var(--font-system);
+  font-size: var(--font-size-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-body);
+  margin: 0 0 var(--space-xl);
+  max-width: 640px;
+}
+
+.painGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.painCard {
+  background: var(--color-surface-card);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  border: 1px solid var(--color-hairline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.painNumber {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-accent-cyan);
+}
+
+.painTitle {
+  font-family: var(--font-system);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.painText {
+  font-family: var(--font-system);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-body);
+  margin: 0;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .painGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .headline {
+    font-size: 32px;
+    letter-spacing: -1px;
+  }
+
+  .painGrid {
+    grid-template-columns: 1fr;
+  }
+}

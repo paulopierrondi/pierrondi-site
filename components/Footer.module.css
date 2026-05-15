@@ -1,0 +1,96 @@
+/* ── Kimi-style Footer ── */
+
+.footer {
+  background: var(--color-canvas);
+  color: var(--color-body);
+  border-top: 1px solid var(--color-hairline-soft);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px var(--space-xl);
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.logo {
+  font-family: var(--font-system);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--color-ink);
+}
+
+.logoDot {
+  color: var(--color-accent-cyan);
+}
+
+.desc {
+  font-family: var(--font-system);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-muted);
+  max-width: 340px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.link {
+  font-family: var(--font-system);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 2.2;
+  color: var(--color-body);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.link:hover {
+  color: var(--color-ink);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  align-items: flex-end;
+}
+
+.metaText {
+  font-family: var(--font-system);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .inner {
+    grid-template-columns: 1fr;
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  .meta {
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none !important;
+  }
+}
