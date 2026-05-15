@@ -27,16 +27,23 @@ NEXT_PUBLIC_SITE_URL=https://pierrondi.dev
 
 Sem secrets, sem banco, sem auth. Se mudar o endpoint Formspree, atualize as duas vars (server-side `FORMSPREE_URL` e client-side `NEXT_PUBLIC_FORMSPREE_URL`).
 
-## Custom domain (passo manual — Railway CLI bloqueia, precisa do painel)
+## Custom domain — estado atual (2026-05-15 23:00 UTC)
 
-1. Abra o painel: https://railway.com/project/9caba826-e5fd-4654-9a0d-1841e6022b11
-2. Service `pierrondi-site` → Settings → Networking → Custom Domain
-3. Adicione **`pierrondi.dev`** (apex) e **`www.pierrondi.dev`**
-4. Railway vai mostrar os registros DNS exatos. Tipicamente:
-   - Apex `pierrondi.dev` → A record para IP do Railway OU CNAME se o provedor suporta ALIAS/ANAME
-   - `www.pierrondi.dev` → CNAME → `pierrondi-site-production.up.railway.app`
-5. Apontar DNS no registrar (Registro.br, Cloudflare, ou onde está). TTL 300s pra testar.
-6. Aguardar propagação (5min–1h). Railway emite cert TLS automático após verificar.
+DNS na GoDaddy, registrar `pierrondi.dev`. Configuração final:
+
+| Domínio | Tipo | DNS | Aponta pra |
+|---|---|---|---|
+| `pierrondi.dev` (apex) | GoDaddy Forwarding 301 | Auto (GoDaddy DPS) | `https://www.pierrondi.dev` |
+| `www.pierrondi.dev` | CNAME | `n4n21jzb.up.railway.app` | Railway service `pierrondi-site` |
+
+**Por que forwarding no apex?** GoDaddy DNS não suporta CNAME no apex (RFC violation), e Railway só aceita CNAME (sem A record estável). Forwarding 301 da GoDaddy resolve isso sem migrar DNS.
+
+**Custom domain claimed no Railway:**
+- `www.pierrondi.dev` → service `pierrondi-site` (project `9caba826-e5fd-4654-9a0d-1841e6022b11`, env `d5d16496-0bcb-4214-8016-f704e5e1f495`, customDomainId `4069e4c5-d2a0-475d-961b-b9827bc8c5a1`)
+
+**Cert TLS:** Railway provisiona automático após DNS validar (5-15min).
+
+Para mover www pra outro serviço Railway no futuro, use o GraphQL: `customDomainDelete` no antigo + `customDomainCreate` no novo, pegue o novo CNAME target, atualize na GoDaddy DNS.
 
 ## Smoke test pós-deploy
 
@@ -100,8 +107,9 @@ Railway não tem CI integrado próprio — confia no GitHub Actions e re-deploya
 
 ## Pendências de rede
 
-- [ ] Apontar DNS `pierrondi.dev` apex pro Railway
-- [ ] Apontar DNS `www.pierrondi.dev` CNAME pro Railway domain
-- [ ] Adicionar ambos no painel Railway → certificado TLS automático
+- [x] Apontar DNS `www.pierrondi.dev` → CNAME `n4n21jzb.up.railway.app` (GoDaddy) — feito 2026-05-15
+- [x] Apex `pierrondi.dev` → Forwarding 301 → `https://www.pierrondi.dev` (GoDaddy Encaminhamento) — feito 2026-05-15
+- [x] Custom domain `www.pierrondi.dev` adicionado no Railway service `pierrondi-site` — feito 2026-05-15
+- [ ] Aguardar propagação DNS + Railway cert provisioning (~5-15min após DNS change)
 - [ ] Atualizar Plausible: criar site `pierrondi.dev` no painel Plausible (se ainda não existe). A env `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` já está setada, vai funcionar assim que o domínio resolver.
 - [ ] Renomear serviço Railway antigo (linkado ao `pierrondi-ia`/`pierrondi-os`) pra refletir o novo nome — manualmente no painel.
