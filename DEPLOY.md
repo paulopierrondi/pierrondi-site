@@ -110,6 +110,8 @@ Railway não tem CI integrado próprio — confia no GitHub Actions e re-deploya
 - [x] Apontar DNS `www.pierrondi.dev` → CNAME `n4n21jzb.up.railway.app` (GoDaddy) — feito 2026-05-15
 - [x] Apex `pierrondi.dev` → Forwarding 301 → `https://www.pierrondi.dev` (GoDaddy Encaminhamento) — feito 2026-05-15
 - [x] Custom domain `www.pierrondi.dev` adicionado no Railway service `pierrondi-site` — feito 2026-05-15
-- [ ] Aguardar propagação DNS + Railway cert provisioning (~5-15min após DNS change)
-- [ ] Atualizar Plausible: criar site `pierrondi.dev` no painel Plausible (se ainda não existe). A env `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` já está setada, vai funcionar assim que o domínio resolver.
+- [x] TXT `_railway-verify.www` atualizado pro novo token Railway — feito 2026-05-16
+- [x] Cert TLS Let's Encrypt provisionado pra `www.pierrondi.dev` — feito 2026-05-16 (CN=www.pierrondi.dev, issuer Let's Encrypt E7)
+- [x] Smoke test pos-cert: apex 301 → www 200, 18/18 rotas 200, contact API 200 — feito 2026-05-16
+- [ ] Atualizar Plausible: criar site `pierrondi.dev` no painel Plausible (se ainda não existe). A env `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` já está setada e pierrondi.dev resolvendo via 301 → www.
 - [ ] Renomear serviço Railway antigo (linkado ao `pierrondi-ia`/`pierrondi-os`) pra refletir o novo nome — manualmente no painel.
