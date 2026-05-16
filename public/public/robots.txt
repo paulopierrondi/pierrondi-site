@@ -1,0 +1,33 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /studio
+Disallow: /studio/
+Disallow: /login
+Disallow: /login-v2
+Disallow: /obrigado
+Disallow: /ai-command-center
+Disallow: /lp/
+Disallow: /agentes
+Disallow: /portal/
+Disallow: /share/
+
+# Block aggressive AI/SEO crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+Sitemap: https://pierrondi.dev/sitemap.xml
+RSS: https://pierrondi.dev/feed.xml

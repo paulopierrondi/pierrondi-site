@@ -13,7 +13,11 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [{ "name": "next" }],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
       "@/*": ["./*"]
     }
@@ -26,5 +30,17 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "services",
+    "local-agent",
+    "infra/dev-agent-bridge",
+    "lib/jarvis-code/__tests__",
+    "lib/jarvis-memory/__tests__",
+    "lib/jarvis-proactive/__tests__",
+    "lib/jarvis-visual-workspace/__tests__",
+    "lib/v2/__tests__",
+    "scripts/k26-render-videos.test.ts",
+    "scripts/k26-insert-en-drafts.test.ts"
+  ]
 }

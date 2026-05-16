@@ -1,11 +1,18 @@
 node_modules/
+local-agent/dist/
 .next/
-out/
 .env
 .env.local
 *.log
 *.tsbuildinfo
 tmp/
+.claude/*
+!.claude/skills/
+.superpowers/
+/agents/
+/plugins/
+image*.png
+pierrondi-ia-completo.zip
 .DS_Store
 
 # Playwright
@@ -13,3 +20,11 @@ tmp/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Background video assets — keep README, ignore videos (too large for git)
+/assets/video-backgrounds/*
+!/assets/video-backgrounds/README.md
+
+# Temp assets
+.tmp-tiktok/
+
