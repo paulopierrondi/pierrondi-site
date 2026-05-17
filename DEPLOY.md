@@ -69,6 +69,21 @@ curl -fsS -X POST -H "Content-Type: application/json" \
 
 Resultado esperado: todas 200, `/api/contact` retorna `{"ok":true}`.
 
+## Re-deploy
+
+⚠ **Service não está linkado ao GitHub auto-deploy.** Toda mudança no `main` exige `railway up` manual.
+
+```bash
+# Tudo-em-um (build + up + smoke poll)
+bash scripts/redeploy.sh
+
+# Se 'invalid_grant' / 'Unauthorized'
+railway login                 # abre browser → autoriza → continua
+bash scripts/redeploy.sh
+```
+
+Para habilitar auto-deploy via GitHub: Railway dashboard → service `pierrondi-site` → Settings → Source → Connect GitHub Repo → `paulopierrondi/pierrondi-site` → branch `main`. Uma vez feito, `git push origin main` deploya sozinho.
+
 ## Comandos úteis
 
 ```bash
