@@ -6,13 +6,14 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './Nav.module.css'
 
 // Static nav links per design spec (AGE-1454)
+// Studio removed in pierrondi-site (internal Marketing OS only — vive em pierrondi-os).
 const NAV_LINKS = [
   { label: 'Automações', href: '/automacoes' },
   { label: 'Produto Digital', href: '/produto-digital' },
   { label: 'Tech Partner', href: '/tech-partner' },
+  { label: 'Marketing OS', href: '/marketing-os' },
   { label: 'Preços', href: '/precos' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Studio', href: '/studio' },
 ]
 
 const CTA_HREF = '/#contato'

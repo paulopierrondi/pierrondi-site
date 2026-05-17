@@ -12,7 +12,7 @@ export default function Footer({ lang = 'pt' }: FooterProps) {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.brand}>
-          <span className={styles.logo}>Pierrondi<span className={styles.logoDot}>.ia</span></span>
+          <span className={styles.logo}>pierrondi<span className={styles.logoDot}>.dev</span></span>
           <p className={styles.desc}>{t.desc}</p>
         </div>
 

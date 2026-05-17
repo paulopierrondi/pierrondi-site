@@ -1,0 +1,85 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-xxl);
+}
+
+.card {
+  background: var(--tile-card-bg, var(--color-canvas));
+  border: 1px solid var(--tile-card-border, var(--color-hairline));
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+}
+
+.cardLabel {
+  font-family: var(--font-system);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted-48);
+  margin-bottom: var(--space-sm);
+}
+
+.cardValue {
+  font-family: var(--font-system);
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 600;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: var(--color-ink);
+  margin-bottom: var(--space-xs);
+}
+
+.cardDetail {
+  font-family: var(--font-system);
+  font-size: 14px;
+  color: var(--color-ink-muted-80);
+  line-height: 1.6;
+}
+
+.footer {
+  margin-top: var(--space-xxl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-hairline);
+  font-family: var(--font-system);
+  font-size: 12px;
+  color: var(--color-ink-muted-48);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.footer a {
+  color: var(--color-accent-cyan);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.errorBox {
+  margin-top: var(--space-xxl);
+  padding: var(--space-xl);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.06);
+  border-radius: var(--radius-md);
+  font-family: var(--font-system);
+  font-size: 14px;
+  color: #b45309;
+  line-height: 1.7;
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+}
