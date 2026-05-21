@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { trackEvent } from '@/lib/analytics'
 import { home, type Lang } from '@/lib/i18n/home-copy'
@@ -27,30 +27,30 @@ export default function Contact({ lang = 'pt' }: ContactProps) {
   const [empresa, setEmpresa] = useState('')
   const [servico, setServico] = useState('')
   const [mensagem, setMensagem] = useState('')
-  const [trackingContext, setTrackingContext] = useState({
-    landingPage: '',
-    campaignId: '',
-    thesisId: '',
-    referrer: '',
-    utmSource: '',
-  })
-  const [errors, setErrors] = useState<FormErrors>({})
-  const [isLoading, setIsLoading] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [submitError, setSubmitError] = useState('')
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
+  const [trackingContext] = useState(() => {
+    if (typeof window === 'undefined') {
+      return {
+        landingPage: '',
+        campaignId: '',
+        thesisId: '',
+        referrer: '',
+        utmSource: '',
+      }
+    }
 
     const url = new URL(window.location.href)
-    setTrackingContext({
+    return {
       landingPage: window.location.pathname,
       campaignId: url.searchParams.get('utm_campaign') || '',
       thesisId: url.searchParams.get('thesisId') || url.searchParams.get('thesis') || '',
       referrer: document.referrer || '',
       utmSource: url.searchParams.get('utm_source') || '',
-    })
-  }, [])
+    }
+  })
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [isLoading, setIsLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   function validate(): FormErrors {
     const nextErrors: FormErrors = {}

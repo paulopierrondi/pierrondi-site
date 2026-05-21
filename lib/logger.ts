@@ -7,7 +7,11 @@ function makeLog(level: string): LogFn {
   return (msg, data) => {
     if (!isDev && level === 'debug') return
     const prefix = `[${level.toUpperCase()}]`
-    data ? console.log(prefix, msg, data) : console.log(prefix, msg)
+    if (data) {
+      console.log(prefix, msg, data)
+      return
+    }
+    console.log(prefix, msg)
   }
 }
 
