@@ -15,13 +15,13 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: '/bradesco-26',
+    canonical: 'https://www.pierrondi.dev/bradesco-26',
   },
   openGraph: {
     title: 'Knowledge 2026 para Bradesco',
     description:
       'Da novidade ao valor: IA governada, dados confiaveis e execucao ponta a ponta na plataforma.',
-    url: '/bradesco-26',
+    url: 'https://www.pierrondi.dev/bradesco-26',
     siteName: 'pierrondi.dev',
     type: 'website',
     locale: 'pt_BR',
