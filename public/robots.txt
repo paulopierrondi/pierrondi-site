@@ -8,6 +8,7 @@ Disallow: /login
 Disallow: /login-v2
 Disallow: /obrigado
 Disallow: /ai-command-center
+Disallow: /bradesco-26
 Disallow: /lp/
 Disallow: /agentes
 Disallow: /portal/
