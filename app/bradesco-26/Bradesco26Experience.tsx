@@ -71,6 +71,16 @@ const thesis = [
   },
 ]
 
+const motionTicker = [
+  'AI governance',
+  'Context engine',
+  'Workflow data fabric',
+  'Action Fabric',
+  'CMDB / CSDM',
+  'Risk by design',
+  'System of action',
+]
+
 const chapters = [
   {
     number: '01',
@@ -536,6 +546,11 @@ export default function Bradesco26Experience() {
                 governanca de IA, contexto operacional, agentes, risco, dados e execucao ponta a
                 ponta.
               </p>
+              <div className={styles.heroProofLine} aria-label="Temas principais">
+                <span>AI governance</span>
+                <span>Contexto operacional</span>
+                <span>Execucao governada</span>
+              </div>
               <div className={styles.heroActions} aria-label="Acoes principais">
                 <a href="#flow" className={styles.primaryAction}>
                   <Play size={16} aria-hidden="true" />
@@ -548,32 +563,52 @@ export default function Bradesco26Experience() {
               </div>
             </div>
 
-            <aside className={styles.commandPanel} aria-label="Painel executivo">
-              <div className={styles.panelHeader}>
-                <CircleDot size={15} aria-hidden="true" />
-                <span>Tese central</span>
+            <aside className={styles.heroStudio} aria-label="Mapa executivo da conversa">
+              <div className={styles.systemMap} aria-hidden="true">
+                <div className={styles.mapChrome}>
+                  <span>Strategy room</span>
+                  <span>K26 / Bradesco</span>
+                </div>
+                <div className={styles.mapTraceOne} />
+                <div className={styles.mapTraceTwo} />
+                <div className={styles.mapCore}>
+                  <strong>AI</strong>
+                  <span>governada</span>
+                </div>
+                <div className={`${styles.mapNode} ${styles.nodeOne}`}>Govern</div>
+                <div className={`${styles.mapNode} ${styles.nodeTwo}`}>Context</div>
+                <div className={`${styles.mapNode} ${styles.nodeThree}`}>Act</div>
+                <div className={`${styles.mapNode} ${styles.nodeFour}`}>Measure</div>
+                <div className={styles.mapPulse} />
               </div>
-              <p>
-                O diferencial nao e ter mais IA. E colocar IA para trabalhar com contexto real,
-                permissoes corretas, trilha auditavel e governanca operacional.
-              </p>
-              <div className={styles.signalGrid}>
-                {thesis.map((item) => {
-                  const Icon = item.icon
-                  return (
-                    <div key={item.title} className={styles.signalCard}>
-                      <Icon size={18} aria-hidden="true" />
-                      <strong>{item.title}</strong>
-                      <small>{item.copy}</small>
-                    </div>
-                  )
-                })}
-              </div>
-              <div className={styles.modelFlow} aria-label="Modelo operacional">
-                <span>Papel claro</span>
-                <span>Telemetria</span>
-                <span>Guardrails</span>
-                <span>Indicadores</span>
+
+              <div className={styles.commandPanel}>
+                <div className={styles.panelHeader}>
+                  <CircleDot size={15} aria-hidden="true" />
+                  <span>Tese central</span>
+                </div>
+                <p>
+                  O diferencial nao e ter mais IA. E colocar IA para trabalhar com contexto real,
+                  permissoes corretas, trilha auditavel e governanca operacional.
+                </p>
+                <div className={styles.signalGrid}>
+                  {thesis.map((item) => {
+                    const Icon = item.icon
+                    return (
+                      <div key={item.title} className={styles.signalCard}>
+                        <Icon size={18} aria-hidden="true" />
+                        <strong>{item.title}</strong>
+                        <small>{item.copy}</small>
+                      </div>
+                    )
+                  })}
+                </div>
+                <div className={styles.modelFlow} aria-label="Modelo operacional">
+                  <span>Papel claro</span>
+                  <span>Telemetria</span>
+                  <span>Guardrails</span>
+                  <span>Indicadores</span>
+                </div>
               </div>
             </aside>
           </div>
@@ -582,18 +617,27 @@ export default function Bradesco26Experience() {
 
       <section className={styles.briefStrip} aria-label="Resumo do briefing">
         <div className={styles.briefInner}>
-          <article>
-            <span>Objetivo</span>
-            <strong>Traduzir os anuncios do Knowledge 2026 para prioridades praticas.</strong>
-          </article>
-          <article>
-            <span>Formato</span>
-            <strong>Conversa executiva e tecnica, com arquitetura e casos de uso.</strong>
-          </article>
-          <article>
-            <span>Resultado</span>
-            <strong>Dois dominios priorizados, responsavel claro e proximo workshop tecnico.</strong>
-          </article>
+          <div className={styles.briefGrid}>
+            <article>
+              <span>Objetivo</span>
+              <strong>Traduzir os anuncios do Knowledge 2026 para prioridades praticas.</strong>
+            </article>
+            <article>
+              <span>Formato</span>
+              <strong>Conversa executiva e tecnica, com arquitetura e casos de uso.</strong>
+            </article>
+            <article>
+              <span>Resultado</span>
+              <strong>Dois dominios priorizados, responsavel claro e proximo workshop tecnico.</strong>
+            </article>
+          </div>
+          <div className={styles.kineticMarquee} aria-hidden="true">
+            <div>
+              {[...motionTicker, ...motionTicker].map((item, index) => (
+                <span key={`${item}-${index}`}>{item}</span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
