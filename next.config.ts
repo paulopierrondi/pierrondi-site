@@ -38,6 +38,33 @@ const ffmpegTracingIncludes = Object.fromEntries(
   FFMPEG_TRACED_ROUTES.map((route) => [route, FFMPEG_BINARY_GLOBS])
 )
 
+const RETIRED_PUBLIC_ROUTES = [
+  '/agentes',
+  '/automacoes',
+  '/blog',
+  '/blog/:path*',
+  '/calculadora',
+  '/en',
+  '/faq',
+  '/feed.xml',
+  '/marketing-os',
+  '/marketing-os/:path*',
+  '/obrigado',
+  '/portfolio',
+  '/precos',
+  '/privacy',
+  '/privacy-policy',
+  '/policy',
+  '/privacidade',
+  '/produto-digital',
+  '/quiz',
+  '/sobre',
+  '/tech-partner',
+  '/terms',
+  '/terms-of-service',
+  '/termos',
+]
+
 const nextConfig: NextConfig = {
   serverExternalPackages: ['ffmpeg-static', 'ffprobe-static'],
   experimental: {
@@ -93,10 +120,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Legal: consolida URLs duplicadas em uma canonical por idioma (308 permanent).
-      { source: '/privacy-policy', destination: '/privacy', permanent: true },
-      { source: '/policy', destination: '/privacy', permanent: true },
-      { source: '/terms-of-service', destination: '/terms', permanent: true },
+      ...RETIRED_PUBLIC_ROUTES.map((source) => ({
+        source,
+        destination: '/',
+        permanent: false,
+      })),
     ]
   },
 }

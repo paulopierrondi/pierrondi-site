@@ -2,6 +2,26 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_next/
+Disallow: /agentes
+Disallow: /automacoes
+Disallow: /blog
+Disallow: /calculadora
+Disallow: /en
+Disallow: /faq
+Disallow: /marketing-os
+Disallow: /portfolio
+Disallow: /precos
+Disallow: /privacy
+Disallow: /privacy-policy
+Disallow: /policy
+Disallow: /privacidade
+Disallow: /produto-digital
+Disallow: /quiz
+Disallow: /sobre
+Disallow: /tech-partner
+Disallow: /terms
+Disallow: /terms-of-service
+Disallow: /termos
 Disallow: /studio
 Disallow: /studio/
 Disallow: /login
@@ -10,7 +30,6 @@ Disallow: /obrigado
 Disallow: /ai-command-center
 Disallow: /bradesco-26
 Disallow: /lp/
-Disallow: /agentes
 Disallow: /portal/
 Disallow: /share/
 
@@ -31,4 +50,3 @@ User-agent: PerplexityBot
 Disallow: /
 
 Sitemap: https://pierrondi.dev/sitemap.xml
-RSS: https://pierrondi.dev/feed.xml

@@ -39,7 +39,7 @@ export async function GET() {
               width: '10px',
               height: '10px',
               borderRadius: '50%',
-              background: '#c0392b',
+              background: '#62d84e',
             }}
           />
           <span
@@ -51,7 +51,7 @@ export async function GET() {
               textTransform: 'uppercase',
             }}
           >
-            PIERRONDI.IA
+            PAULO PIERRONDI
           </span>
         </div>
 
@@ -66,22 +66,22 @@ export async function GET() {
               letterSpacing: '-3px',
             }}
           >
-            Tech que
+            ServiceNow.
           </div>
           <div
             style={{
               fontSize: '88px',
               fontWeight: 800,
-              color: '#c0392b',
+              color: '#62d84e',
               lineHeight: 0.9,
               letterSpacing: '-3px',
             }}
           >
-            entrega.
+            IA governada.
           </div>
         </div>
 
-        {/* Bottom — tagline + services */}
+        {/* Bottom — tagline */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <span
             style={{
@@ -91,12 +91,12 @@ export async function GET() {
               textTransform: 'uppercase',
             }}
           >
-            Automação · MVP · Tech Partner
+            Enterprise AI | Platform Strategy | Workflows
           </span>
           <span
             style={{
               fontSize: '16px',
-              color: '#c0392b',
+              color: '#62d84e',
               letterSpacing: '1px',
             }}
           >

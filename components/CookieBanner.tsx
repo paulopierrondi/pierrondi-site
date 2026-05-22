@@ -6,7 +6,11 @@ import { useState, useEffect } from 'react'
 export default function CookieBanner() {
   const pathname = usePathname()
   const [visible, setVisible] = useState(false)
-  const suppressed = pathname?.startsWith('/studio') || pathname?.startsWith('/bradesco-26')
+  const suppressed =
+    pathname === '/' ||
+    pathname?.startsWith('/apps') ||
+    pathname?.startsWith('/studio') ||
+    pathname?.startsWith('/bradesco-26')
 
   useEffect(() => {
     if (suppressed) return
