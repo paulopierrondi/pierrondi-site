@@ -56,6 +56,14 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: '/bradesco-26',
+        headers: [{ key: 'Cache-Control', value: 'no-store, max-age=0, must-revalidate' }],
+      },
+      {
+        source: '/bradesco-26/:path*',
+        headers: [{ key: 'Cache-Control', value: 'no-store, max-age=0, must-revalidate' }],
+      },
+      {
         source: '/(.*)',
         headers: [
           { key: 'X-Frame-Options', value: 'DENY' },

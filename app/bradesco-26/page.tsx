@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import Bradesco26Experience from './Bradesco26Experience'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export const metadata: Metadata = {
   title: 'Knowledge 2026 para Bradesco',
   description:
