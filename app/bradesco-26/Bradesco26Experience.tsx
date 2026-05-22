@@ -554,10 +554,10 @@ export default function Bradesco26Experience() {
         <div className={styles.sectionFrame}>
           <div className={styles.sectionHeader}>
             <p className={styles.eyebrow}>Radar K26</p>
-            <h2 id="radar-title">Tres lentes para transformar novidade em decisao.</h2>
+            <h2 id="radar-title">Escolha a lente. Mostre o que muda.</h2>
             <p>
-              A mesma novidade tem tres leituras: decisao executiva, profundidade tecnica e valor
-              operacional para Bradesco.
+              A mesma novidade pode ser lida pela decisao executiva, pela profundidade tecnica ou
+              pelo valor operacional para Bradesco.
             </p>
           </div>
 

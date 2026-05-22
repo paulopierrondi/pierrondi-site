@@ -15,7 +15,7 @@
   --blue: #56a8e8;
   --gold: #e5b45a;
   --cyan: #45c7bc;
-  --max: 1220px;
+  --max: 1180px;
   min-height: 100vh;
   color: var(--ink);
   background:
@@ -23,6 +23,11 @@
     linear-gradient(180deg, #090b10 0, #0a0d12 42%, #f7f1e6 42%, #f7f1e6 100%);
   overflow-x: hidden;
   font-family: var(--font-system), var(--font-mono), ui-sans-serif, system-ui, sans-serif;
+}
+
+.page,
+.page * {
+  box-sizing: border-box;
 }
 
 .nav {
@@ -368,14 +373,31 @@
 .architectureSection,
 .closeSection,
 .sources {
-  padding: 108px 0;
+  padding: 88px 0;
 }
 
 .sectionHeader {
   display: grid;
-  grid-template-columns: minmax(0, 0.74fr) minmax(360px, 0.55fr);
-  gap: 48px;
-  align-items: end;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 28px;
+  row-gap: 16px;
+  align-items: start;
+}
+
+.sectionHeader .eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: 2px;
+}
+
+.sectionHeader h2 {
+  grid-column: 1 / span 6;
+  max-width: 620px;
+}
+
+.sectionHeader p:not(.eyebrow) {
+  grid-column: 8 / -1;
+  max-width: 480px;
+  padding-top: 9px;
 }
 
 .sectionHeader h2,
@@ -384,8 +406,8 @@
 .closeGrid h2,
 .sourcesGrid h2 {
   color: inherit;
-  font-size: 54px;
-  line-height: 0.96;
+  font-size: 50px;
+  line-height: 1;
 }
 
 .sectionHeader p:not(.eyebrow),
@@ -394,12 +416,12 @@
 .closeGrid p {
   margin: 0;
   color: var(--muted-light);
-  font-size: 18px;
-  line-height: 1.62;
+  font-size: 17px;
+  line-height: 1.58;
 }
 
 .flowGrid {
-  margin-top: 38px;
+  margin-top: 32px;
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   border: 1px solid var(--line-light);
@@ -409,10 +431,10 @@
 }
 
 .flowCard {
-  min-height: 330px;
+  min-height: 286px;
   display: flex;
   flex-direction: column;
-  padding: 22px;
+  padding: 20px;
 }
 
 .flowCard + .flowCard {
@@ -446,7 +468,7 @@
 }
 
 .flowCard h3 {
-  margin: 30px 0 12px;
+  margin: 24px 0 12px;
   color: #0b0d12;
   font-size: 24px;
   line-height: 1;
@@ -465,7 +487,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  padding-top: 26px;
+  padding-top: 22px;
 }
 
 .flowCard small,
@@ -488,7 +510,7 @@
   grid-template-columns: minmax(0, 0.78fr) minmax(420px, 0.74fr);
   gap: 54px;
   align-items: center;
-  padding: 42px 0;
+  padding: 36px 0;
   border-top: 1px solid var(--line-light);
   border-bottom: 1px solid var(--line-light);
 }
@@ -507,7 +529,7 @@
 }
 
 .radarControls {
-  margin-top: 34px;
+  margin-top: 30px;
   display: grid;
   gap: 14px;
 }
@@ -520,7 +542,7 @@
 
 .lensButton,
 .lensActive {
-  min-height: 78px;
+  min-height: 72px;
   border: 1px solid var(--line-light);
   border-radius: 8px;
   padding: 16px;
@@ -581,10 +603,10 @@
 }
 
 .radarBoard {
-  margin-top: 20px;
+  margin-top: 18px;
   display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
-  min-height: 580px;
+  grid-template-columns: 320px minmax(0, 1fr);
+  min-height: 520px;
   border: 1px solid var(--line-light);
   border-radius: 8px;
   overflow: hidden;
@@ -602,13 +624,13 @@
 .radarItem,
 .radarItemActive {
   width: 100%;
-  min-height: 58px;
+  min-height: 54px;
   display: grid;
   grid-template-columns: 36px 28px minmax(0, 1fr);
   gap: 10px;
   align-items: center;
   border-bottom: 1px solid var(--line-light);
-  padding: 12px 16px;
+  padding: 11px 15px;
   text-align: left;
   color: #101319;
 }
@@ -647,8 +669,10 @@
 
 .radarDetail {
   position: relative;
-  min-height: 580px;
-  padding: 46px;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
   color: #fff;
   background:
     linear-gradient(120deg, rgba(214, 9, 52, 0.82), transparent 54%),
@@ -689,9 +713,9 @@
 
 .radarDetail h3 {
   max-width: 720px;
-  margin: 76px 0 0;
+  margin: 50px 0 0;
   color: #fff;
-  font-size: 58px;
+  font-size: 52px;
   line-height: 0.95;
   font-weight: 950;
 }
@@ -700,20 +724,20 @@
   max-width: 680px;
   margin: 20px 0 0;
   color: rgba(255, 255, 255, 0.62);
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.48;
 }
 
 .radarCopy {
   max-width: 760px;
-  margin: 42px 0 0;
+  margin: 30px 0 0;
   color: rgba(255, 255, 255, 0.84);
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.48;
 }
 
 .questionBox {
-  margin-top: 36px;
+  margin-top: auto;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 8px;
   padding: 18px;
@@ -967,6 +991,17 @@
     grid-template-columns: 1fr;
   }
 
+  .sectionHeader .eyebrow,
+  .sectionHeader h2,
+  .sectionHeader p:not(.eyebrow) {
+    grid-column: 1 / -1;
+  }
+
+  .sectionHeader p:not(.eyebrow) {
+    max-width: 720px;
+    padding-top: 0;
+  }
+
   .commandPanel {
     max-width: 680px;
   }
@@ -984,7 +1019,7 @@
   }
 
   .radarBoard {
-    grid-template-columns: 300px minmax(0, 1fr);
+    grid-template-columns: 290px minmax(0, 1fr);
   }
 }
 
@@ -1066,8 +1101,12 @@
   }
 
   .radarDetail h3 {
-    margin-top: 48px;
+    margin-top: 34px;
     font-size: 40px;
+  }
+
+  .questionBox {
+    margin-top: 28px;
   }
 
   .layerNodes {
@@ -1107,7 +1146,7 @@
   .architectureSection,
   .closeSection,
   .sources {
-    padding: 76px 0;
+    padding: 66px 0;
   }
 
   .sectionHeader h2,
