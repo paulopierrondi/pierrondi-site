@@ -23,7 +23,7 @@
   background:
     repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.026) 0 1px, transparent 1px 96px),
     linear-gradient(180deg, #030305 0, #07080b 44%, #f7f1e6 44%, #f7f1e6 100%);
-  overflow-x: hidden;
+  overflow-x: clip;
   font-family: var(--font-system), var(--font-mono), ui-sans-serif, system-ui, sans-serif;
 }
 
