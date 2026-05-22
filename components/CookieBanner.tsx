@@ -6,15 +6,16 @@ import { useState, useEffect } from 'react'
 export default function CookieBanner() {
   const pathname = usePathname()
   const [visible, setVisible] = useState(false)
+  const suppressed = pathname?.startsWith('/studio') || pathname?.startsWith('/bradesco-26')
 
   useEffect(() => {
-    if (pathname?.startsWith('/studio')) return
+    if (suppressed) return
     const consent = localStorage.getItem('cookie-consent')
     if (!consent) {
       const timer = setTimeout(() => setVisible(true), 1500)
       return () => clearTimeout(timer)
     }
-  }, [pathname])
+  }, [suppressed])
 
   function accept(level: 'all' | 'essential') {
     localStorage.setItem('cookie-consent', level)
@@ -24,7 +25,7 @@ export default function CookieBanner() {
     }
   }
 
-  if (!visible || pathname?.startsWith('/studio')) return null
+  if (!visible || suppressed) return null
 
   return (
     <>

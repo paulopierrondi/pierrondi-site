@@ -124,7 +124,16 @@ const announcements = [
       'Exige inventário de agentes, runtime observável, IAM, CMDB, logs, políticas e critérios de aprovação.',
     value:
       'Usar como trilha-mestra para qualquer piloto de Now Assist ou agente externo.',
-    question: 'Quais agentes já existem fora da visibilidade central do banco?',
+    bradescoAngle: 'Camada comum para governar Now Assist, agentes internos e agentes externos.',
+    architecture: 'Inventario de agentes, runtime observavel, IAM, CMDB, logs, politicas e metricas.',
+    operatingModel: 'Fórum único para aprovar exceções, permissoes, risco e entrada em produção.',
+    nextMove: 'Escolher um dominio piloto e mapear assistentes/agentes ja existentes.',
+    proofPoints: ['Discover', 'Observe', 'Govern', 'Secure', 'Measure'],
+    discussion: {
+      executivo: 'Quem assina o modelo de governanca de IA operacional?',
+      tecnico: 'Quais logs, IAM e CMDB precisam existir antes de producao?',
+      valor: 'Qual piloto precisa de governanca antes de escalar?',
+    },
   },
   {
     id: 'otto',
@@ -139,7 +148,17 @@ const announcements = [
       'Depende de catálogo, base de conhecimento, elegibilidade, identidade, approvals e integrações.',
     value:
       'Começar por jornadas de alto volume e baixa ambiguidade com escala humana clara.',
-    question: 'Qual jornada interna deveria deixar de exigir navegação por portal?',
+    bradescoAngle: 'Experiencia unificada para colaborador, operador e lider sem navegar por silos.',
+    architecture: 'Intencao, catalogo, KB, identidade, approvals, integrações e handoff humano.',
+    operatingModel:
+      'Curadoria de jornadas, responsaveis por conhecimento e monitoramento de resolucao.',
+    nextMove: 'Selecionar duas jornadas internas com volume alto e regra de elegibilidade clara.',
+    proofPoints: ['Natural language', 'Enterprise search', 'Voice', 'Cross-system work'],
+    discussion: {
+      executivo: 'Qual jornada deve desaparecer do portal e virar conversa resolutiva?',
+      tecnico: 'Quais catalogos, bases e approvals precisam estar confiaveis para Otto?',
+      valor: 'Onde reduzir navegacao manual sem aumentar risco operacional?',
+    },
   },
   {
     id: 'specialists',
@@ -154,7 +173,16 @@ const announcements = [
       'Precisa de taxonomia, conhecimento confiável, critérios de confiança, exceções e métricas.',
     value:
       'O primeiro piloto deve ter alto volume, caminho conhecido e baixo risco operacional.',
-    question: 'Qual processo repetitivo já tem dados e caminho de resolução maduros?',
+    bradescoAngle: 'Agentes por funcao para tirar trabalho repetitivo da fila, com controle.',
+    architecture: 'Taxonomia, conhecimento, regras de excecao, confianca, fila e medicao de resultado.',
+    operatingModel: 'Cada agente precisa de responsavel, escopo permitido e criterio de fallback.',
+    nextMove: 'Priorizar um processo repetitivo com dados maduros e caminho de resolucao conhecido.',
+    proofPoints: ['Role-based agents', 'Exception handling', 'Knowledge quality', 'Human fallback'],
+    discussion: {
+      executivo: 'Qual operacao ganha escala se o agente resolver o repetitivo?',
+      tecnico: 'Quais sinais indicam baixa confianca e retorno imediato para humano?',
+      valor: 'Qual processo tem volume suficiente para provar resultado em semanas?',
+    },
   },
   {
     id: 'action-fabric',
@@ -169,7 +197,16 @@ const announcements = [
       'Separar leitura de dados de execução: RBAC, OAuth, approvals, auditoria e rollback.',
     value:
       'Integra agentes Microsoft, modelos internos e apps próprios sem perder governança central.',
-    question: 'Quais ações podem ser expostas primeiro como ferramentas seguras?',
+    bradescoAngle: 'Transforma a ServiceNow no sistema de acao para agentes corporativos.',
+    architecture: 'MCP Server, OAuth, tool packages, RBAC, approvals, auditoria e rollback.',
+    operatingModel: 'Catalogar quais ações podem ser executadas por agente e com qual aprovacao.',
+    nextMove: 'Publicar primeiro um conjunto pequeno de acoes seguras e auditaveis.',
+    proofPoints: ['MCP', 'Headless actions', 'Approvals', 'Audit trail'],
+    discussion: {
+      executivo: 'Quais agentes externos devem agir pela plataforma, e nao fora dela?',
+      tecnico: 'Quais ferramentas MCP podem ser expostas sem abrir risco desnecessario?',
+      valor: 'Qual acao simples provaria execucao governada ponta a ponta?',
+    },
   },
   {
     id: 'context-engine',
@@ -184,7 +221,16 @@ const announcements = [
       'Depende de relações, responsáveis, serviços, políticas, SLAs, histórico e conhecimento.',
     value:
       'Conectar o programa de CMDB ao roadmap de IA e automação governada.',
-    question: 'Quais relações da CMDB são indispensáveis para um agente decidir?',
+    bradescoAngle: 'Converte CMDB/CSDM em contexto vivo para decisao automatizada.',
+    architecture: 'Servicos, responsaveis, dependencias, SLAs, politicas, conhecimento e historico.',
+    operatingModel: 'Governanca de qualidade de contexto ligada aos dominios de automacao.',
+    nextMove: 'Escolher relacoes criticas para um caso de IA antes de ampliar escopo.',
+    proofPoints: ['CMDB', 'CSDM', 'Knowledge Graph', 'Context Engine'],
+    discussion: {
+      executivo: 'Qual decisao de IA fica insegura sem contexto de servico?',
+      tecnico: 'Quais relacionamentos da CMDB sao obrigatorios para o primeiro agente?',
+      valor: 'Qual dominio melhora se a CMDB virar contexto de decisao?',
+    },
   },
   {
     id: 'wdf',
@@ -199,7 +245,16 @@ const announcements = [
       'Tratar fonte de verdade, autorização, latência, contratos de dados, lineage e observabilidade.',
     value:
       'Escolher poucos dados externos que destravam decisões de IT, risco, atendimento ou portfolio.',
-    question: 'Qual dado externo mudaria uma decisão operacional hoje?',
+    bradescoAngle: 'Permite enriquecer workflows com dados externos sem replicar tudo.',
+    architecture: 'Fonte de verdade, autorizacao, latencia, contratos de dados, lineage e observabilidade.',
+    operatingModel: 'Responsaveis por dados conectados aos donos dos workflows consumidores.',
+    nextMove: 'Mapear tres dados externos que mudam uma decisao operacional concreta.',
+    proofPoints: ['Data federation', 'Authorization', 'Lineage', 'Operational context'],
+    discussion: {
+      executivo: 'Qual dado fora da plataforma muda uma decisao importante?',
+      tecnico: 'Como controlar autorizacao, latencia e linhagem antes de usar em IA?',
+      valor: 'Qual integracao evita trabalho manual sem criar copia desnecessaria?',
+    },
   },
   {
     id: 'security-risk',
@@ -214,7 +269,16 @@ const announcements = [
       'Cobrir identidade humana e não humana, least privilege, ativos, CMDB vivo e resposta auditável.',
     value:
       'IA confiável exige governar quem ou o que pode agir, sobre qual ativo e com qual evidência.',
-    question: 'Como enxergar agentes, APIs e serviços automatizados no mesmo modelo de risco?',
+    bradescoAngle: 'Traz agente, identidade, ativo e risco para o mesmo desenho operacional.',
+    architecture: 'Identidade humana e nao humana, least privilege, ativo, CMDB e resposta auditavel.',
+    operatingModel: 'Risk, security e operacao definem permissoes e respostas por tipo de agente.',
+    nextMove: 'Mapear identidades nao humanas e acoes automatizadas de maior risco.',
+    proofPoints: ['Non-human identity', 'Least privilege', 'Asset context', 'Risk response'],
+    discussion: {
+      executivo: 'Onde a escala de agentes muda o apetite de risco?',
+      tecnico: 'Como correlacionar API, identidade, agente e ativo em tempo real?',
+      valor: 'Qual risco pode ser reduzido conectando identidade e workflow?',
+    },
   },
   {
     id: 'spm',
@@ -229,7 +293,16 @@ const announcements = [
       'Discutir modelo de dados, integrações, migração, qualidade de épicos e governança de mudança.',
     value:
       'Evoluir de ferramenta de planejamento para sistema de decisão de portfolio.',
-    question: 'Quais decisões de portfolio dependem de dados fora da visão atual?',
+    bradescoAngle: 'Conecta demanda, capacidade, risco e execucao em uma visao unica de portfolio.',
+    architecture: 'Modelo de dados, integracoes, migracao, epicos, capacidade e mudancas.',
+    operatingModel: 'Ritual de portfolio decide com dados, dependencias e criterios comuns.',
+    nextMove: 'Selecionar um fluxo de decisao de portfolio para redesenhar com SPM.',
+    proofPoints: ['Demand', 'Capacity', 'Dependencies', 'Execution metrics'],
+    discussion: {
+      executivo: 'Qual decisao de portfolio hoje depende de planilhas paralelas?',
+      tecnico: 'Quais objetos precisam ficar consistentes entre Jira, SPM e execucao?',
+      valor: 'Qual decisao mensal poderia virar rotina governada na plataforma?',
+    },
   },
   {
     id: 'build-agent',
@@ -244,7 +317,16 @@ const announcements = [
       'Separar produtividade de controle: ambientes, ACLs, regras, Git, review e App Engine.',
     value:
       'Escalar criação de apps sem abrir mão de arquitetura e governança.',
-    question: 'Quais apps deveriam nascer com code review desde o primeiro dia?',
+    bradescoAngle: 'Acelera desenvolvimento ServiceNow com padrao, revisao e governanca.',
+    architecture: 'Ambientes, ACLs, regras, Git, review, App Engine e esteira de promocao.',
+    operatingModel: 'Padroes reutilizaveis, guardrails tecnicos e revisao antes de producao.',
+    nextMove: 'Escolher um app novo para nascer com esteira e code review desde o primeiro dia.',
+    proofPoints: ['App Engine', 'Git', 'Review', 'Reusable patterns'],
+    discussion: {
+      executivo: 'Onde acelerar app sem aumentar debito tecnico?',
+      tecnico: 'Quais padroes precisam ser obrigatorios para Build Agent?',
+      valor: 'Qual app prova produtividade com governanca de entrega?',
+    },
   },
   {
     id: 'project-arc',
@@ -259,7 +341,16 @@ const announcements = [
       'Tema exploratório: sandbox, logs, rollback, escopo permitido e limites de produção.',
     value:
       'Mapear processos legados onde API não resolve antes de discutir escala.',
-    question: 'Quais processos ainda exigem interação manual por falta de API?',
+    bradescoAngle: 'Explora automacao governada de sistemas legados e tarefas multi-etapa.',
+    architecture: 'Desktop agent, sandbox, logs, comandos, APIs chamadas, rollback e politica.',
+    operatingModel: 'Uso exploratorio com escopo restrito, aprovacao previa e trilha auditavel.',
+    nextMove: 'Mapear processos sem API onde automacao desktop faria sentido controlado.',
+    proofPoints: ['OpenShell sandbox', 'AI Control Tower', 'Action Fabric', 'CMDB context'],
+    discussion: {
+      executivo: 'Qual processo legado justifica testar agente desktop governado?',
+      tecnico: 'Quais limites de sandbox, rollback e auditoria seriam obrigatorios?',
+      valor: 'Onde a falta de API ainda trava automacao de ponta a ponta?',
+    },
   },
 ]
 
@@ -395,6 +486,9 @@ export default function Bradesco26Experience() {
     activeLens === 'executivo' ? 'executive' : activeLens === 'tecnico' ? 'technical' : 'value'
   const activeItem = filtered.find((item) => item.id === selectedId) ?? filtered[0]
   const ActiveIcon = activeItem.icon
+  const activeLensInfo = lenses.find((lens) => lens.id === activeLens) ?? lenses[0]
+  const activeThemeInfo = themes.find((theme) => theme.id === activeTheme) ?? themes[0]
+  const activeDiscussion = activeItem.discussion[activeLens]
 
   const selectTheme = (theme: Theme) => {
     setActiveTheme(theme)
@@ -590,6 +684,22 @@ export default function Bradesco26Experience() {
             </div>
           </div>
 
+          <div className={styles.radarInsightStrip} aria-label="Resumo da leitura selecionada">
+            <article>
+              <span>Lente ativa</span>
+              <strong>{activeLensInfo.label}</strong>
+              <p>{activeItem[lensCopyKey]}</p>
+            </article>
+            <article>
+              <span>Aplicacao Bradesco</span>
+              <strong>{activeItem.bradescoAngle}</strong>
+            </article>
+            <article>
+              <span>Proxima decisao</span>
+              <strong>{activeItem.nextMove}</strong>
+            </article>
+          </div>
+
           <div className={styles.radarBoard}>
             <div className={styles.radarList}>
               {filtered.map((item) => {
@@ -608,19 +718,61 @@ export default function Bradesco26Experience() {
                   </button>
                 )
               })}
+              <div className={styles.radarListMeta}>
+                <span>Trilha ativa</span>
+                <strong>{activeThemeInfo.label}</strong>
+                <small>{filtered.length} temas para explorar</small>
+              </div>
             </div>
 
-            <article className={styles.radarDetail}>
+            <article key={`${activeItem.id}-${activeLens}`} className={styles.radarDetail}>
+              <div className={styles.detailSweep} aria-hidden="true" />
               <div className={styles.radarDetailTop}>
                 <span>{activeItem.number}</span>
-                <ActiveIcon size={28} aria-hidden="true" />
+                <div className={styles.detailIcon}>
+                  <ActiveIcon size={30} aria-hidden="true" />
+                </div>
               </div>
-              <h3>{activeItem.title}</h3>
-              <p className={styles.radarSubtitle}>{activeItem.subtitle}</p>
+              <div className={styles.detailHero}>
+                <div>
+                  <small>{activeLensInfo.helper}</small>
+                  <h3>{activeItem.title}</h3>
+                  <p className={styles.radarSubtitle}>{activeItem.subtitle}</p>
+                </div>
+                <div className={styles.detailSignal} aria-label="Sinal da lente ativa">
+                  <span>{activeLensInfo.label}</span>
+                  <strong>{activeItem.number}</strong>
+                </div>
+              </div>
               <p className={styles.radarCopy}>{activeItem[lensCopyKey]}</p>
-              <div className={styles.questionBox}>
-                <span>Pergunta de trabalho</span>
-                <strong>{activeItem.question}</strong>
+              <div className={styles.decisionGrid}>
+                <article>
+                  <span>Arquitetura</span>
+                  <p>{activeItem.architecture}</p>
+                </article>
+                <article>
+                  <span>Modelo operacional</span>
+                  <p>{activeItem.operatingModel}</p>
+                </article>
+                <article>
+                  <span>Proximo movimento</span>
+                  <p>{activeItem.nextMove}</p>
+                </article>
+              </div>
+              <div className={styles.proofRail} aria-label="Elementos de prova">
+                {activeItem.proofPoints.map((point) => (
+                  <span key={point}>{point}</span>
+                ))}
+              </div>
+              <div className={styles.discussionBox}>
+                <span>
+                  {activeLens === 'executivo'
+                    ? 'Decisao para a sala'
+                    : activeLens === 'tecnico'
+                      ? 'Criterio tecnico'
+                      : 'Workshop de valor'}
+                </span>
+                <strong>{activeDiscussion}</strong>
               </div>
             </article>
           </div>
