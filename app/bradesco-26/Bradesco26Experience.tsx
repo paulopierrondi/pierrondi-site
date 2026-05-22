@@ -36,10 +36,10 @@ const themes: Array<{ id: Theme; label: string }> = [
   { id: 'data', label: 'Dados e CMDB' },
   { id: 'ops', label: 'Operacoes' },
   { id: 'risk', label: 'Risco' },
-  { id: 'dev', label: 'Dev platform' },
+  { id: 'dev', label: 'Plataforma dev' },
 ]
 
-const footprint = [
+const capabilitySet = [
   'ITSM',
   'ITOM / CMDB',
   'SPM',
@@ -57,17 +57,17 @@ const thesis = [
   {
     icon: ShieldCheck,
     title: 'Governar',
-    copy: 'Política, identidade, telemetria e auditoria antes de escala.',
+    copy: 'Política, identidade, telemetria e auditoria desde o desenho.',
   },
   {
     icon: DatabaseZap,
     title: 'Contextualizar',
-    copy: 'CMDB, CSDM, dados e conhecimento como base para decisão confiável.',
+    copy: 'Dados, serviços e conhecimento como base para decisão confiável.',
   },
   {
     icon: Workflow,
     title: 'Executar',
-    copy: 'Agentes saindo da recomendação para ação governada ponta a ponta.',
+    copy: 'Agentes conectando recomendação, aprovação e ação ponta a ponta.',
   },
 ]
 
@@ -181,7 +181,7 @@ const announcements = [
     executive:
       'CMDB e CSDM deixam de ser higiene de TI e viram fundação para IA confiável.',
     technical:
-      'Depende de relações, ownership, serviços, políticas, SLAs, histórico e conhecimento.',
+      'Depende de relações, responsáveis, serviços, políticas, SLAs, histórico e conhecimento.',
     value:
       'Conectar o programa de CMDB ao roadmap de IA e automação governada.',
     question: 'Quais relações da CMDB são indispensáveis para um agente decidir?',
@@ -267,21 +267,21 @@ const architectureLayers = [
   {
     title: 'Experiência e canais',
     copy: 'Otto, Employee Center, portal, chat e atendimento assistido.',
-    nodes: ['Otto', 'Employee Center', 'Portal', 'Handoff'],
+    nodes: ['Otto', 'Employee Center', 'Portal', 'Transicao'],
   },
   {
     title: 'IA governada',
     copy: 'AI Control Tower, Now Assist, AI Specialists e orquestração com políticas.',
-    nodes: ['AI Control Tower', 'Now Assist', 'Specialists', 'Orchestrator'],
+    nodes: ['AI Control Tower', 'Now Assist', 'Specialists', 'Orquestrador'],
   },
   {
     title: 'Domínios de workflow',
     copy: 'ITSM, ITOM, SPM, HRSD, SecOps, IRM, App Engine, CSM e FSI.',
-    nodes: ['Autonomous IT', 'Risk', 'HRSD', 'App Engine'],
+    nodes: ['Autonomous IT', 'Risco', 'HRSD', 'App Engine'],
   },
   {
     title: 'Dados e contexto',
-    copy: 'WDF, Context Engine, Knowledge Graph, CMDB/CSDM e analytics.',
+    copy: 'WDF, Context Engine, Knowledge Graph, CMDB/CSDM e metricas.',
     nodes: ['WDF', 'Context Engine', 'CMDB / CSDM', 'RaptorDB'],
   },
   {
@@ -294,7 +294,7 @@ const architectureLayers = [
 const useCases = [
   {
     title: 'Governança de IA corporativa',
-    outcome: 'Inventariar agentes, owner, permissão, telemetria e aprovação.',
+    outcome: 'Inventariar agentes, responsável, permissão, telemetria e aprovação.',
     stack: 'AI Control Tower + IAM + Action Fabric',
   },
   {
@@ -304,13 +304,13 @@ const useCases = [
   },
   {
     title: 'CMDB como fundação de IA',
-    outcome: 'Priorizar relações, serviços, owners e atributos que reduzem ambiguidade.',
+    outcome: 'Priorizar relações, serviços, responsáveis e atributos que reduzem ambiguidade.',
     stack: 'CMDB/CSDM + Context Engine + WDF',
   },
   {
     title: 'Portfolio conectado',
     outcome: 'Ligar demanda, dependência, capacidade, risco e mudança em SPM.',
-    stack: 'SPM + App Engine + analytics',
+    stack: 'SPM + App Engine + métricas',
   },
   {
     title: 'Risco e identidade',
@@ -335,7 +335,7 @@ const roadmap = [
   },
   {
     title: 'Sair com decisão',
-    detail: 'Escolher dois domínios, owner de negócio, owner técnico e pré-requisitos.',
+    detail: 'Escolher dois domínios, responsável de negócio, responsável técnico e pré-requisitos.',
   },
 ]
 
@@ -407,13 +407,13 @@ export default function Bradesco26Experience() {
 
   return (
     <main className={styles.page}>
-      <nav className={styles.nav} aria-label="Navegacao da apresentacao">
+      <nav className={styles.nav} aria-label="Navegacao do briefing">
         <a href="#top" className={styles.navBrand}>
           <span>ServiceNow</span>
           <span>Bradesco</span>
         </a>
         <div className={styles.navLinks}>
-          <a href="#flow">Flow</a>
+          <a href="#flow">Roteiro</a>
           <a href="#radar">Radar</a>
           <a href="#architecture">Arquitetura</a>
           <a href="#use-cases">Casos</a>
@@ -430,24 +430,25 @@ export default function Bradesco26Experience() {
           <div className={styles.heroTopline}>
             <span>Knowledge 2026</span>
             <span>04 jun 2026</span>
-            <span>Client-facing / sem valores</span>
+            <span>Briefing executivo e tecnico</span>
           </div>
 
           <div className={styles.heroLayout}>
             <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>De assistente a agente autonomo</p>
+              <p className={styles.eyebrow}>De assistente a agente corporativo</p>
               <h1 id="bradesco-26-title">Bradesco no ciclo da IA governada.</h1>
               <p className={styles.heroLead}>
-                Um briefing executivo e tecnico sobre o que o K26 muda para banco: governanca de IA,
-                contexto operacional, agentes, risco, dados e execucao ponta a ponta.
+                Um briefing executivo e tecnico sobre o que o Knowledge 2026 muda para bancos:
+                governanca de IA, contexto operacional, agentes, risco, dados e execucao ponta a
+                ponta.
               </p>
               <div className={styles.heroActions} aria-label="Acoes principais">
                 <a href="#flow" className={styles.primaryAction}>
                   <Play size={16} aria-hidden="true" />
-                  Comecar roteiro
+                  Iniciar conversa
                 </a>
                 <a href="#radar" className={styles.secondaryAction}>
-                  Ver radar K26
+                  Explorar temas K26
                   <ArrowUpRight size={15} aria-hidden="true" />
                 </a>
               </div>
@@ -456,11 +457,11 @@ export default function Bradesco26Experience() {
             <aside className={styles.commandPanel} aria-label="Painel executivo">
               <div className={styles.panelHeader}>
                 <CircleDot size={15} aria-hidden="true" />
-                <span>Tese para a sala</span>
+                <span>Tese central</span>
               </div>
               <p>
                 O diferencial nao e ter mais IA. E colocar IA para trabalhar com contexto real,
-                permissoes corretas, trilha auditavel e modelo operacional.
+                permissoes corretas, trilha auditavel e governanca operacional.
               </p>
               <div className={styles.signalGrid}>
                 {thesis.map((item) => {
@@ -475,29 +476,29 @@ export default function Bradesco26Experience() {
                 })}
               </div>
               <div className={styles.modelFlow} aria-label="Modelo operacional">
-                <span>Owner</span>
+                <span>Papel claro</span>
                 <span>Telemetria</span>
                 <span>Guardrails</span>
-                <span>Valor</span>
+                <span>Indicadores</span>
               </div>
             </aside>
           </div>
         </div>
       </section>
 
-      <section className={styles.briefStrip} aria-label="Escopo seguro da apresentacao">
+      <section className={styles.briefStrip} aria-label="Resumo do briefing">
         <div className={styles.briefInner}>
           <article>
-            <span>Conteudo seguro</span>
-            <strong>Sem valores comerciais internos ou informacoes confidenciais.</strong>
+            <span>Objetivo</span>
+            <strong>Traduzir os anuncios do Knowledge 2026 para prioridades praticas.</strong>
           </article>
           <article>
             <span>Formato</span>
-            <strong>Briefing premium para apresentar em tela cheia.</strong>
+            <strong>Conversa executiva e tecnica, com arquitetura e casos de uso.</strong>
           </article>
           <article>
-            <span>Resultado esperado</span>
-            <strong>Dois dominios priorizados, owner claro e proximo workshop tecnico.</strong>
+            <span>Resultado</span>
+            <strong>Dois dominios priorizados, responsavel claro e proximo workshop tecnico.</strong>
           </article>
         </div>
       </section>
@@ -505,11 +506,11 @@ export default function Bradesco26Experience() {
       <section id="flow" className={styles.flowSection} aria-labelledby="flow-title">
         <div className={styles.sectionFrame}>
           <div className={styles.sectionHeader}>
-            <p className={styles.eyebrow}>Flow da apresentacao</p>
+            <p className={styles.eyebrow}>Roteiro da conversa</p>
             <h2 id="flow-title">Seis capitulos. Uma narrativa de valor.</h2>
             <p>
-              A conversa sai de novidade de produto e entra em arquitetura: plataforma, dominios,
-              risco, desenvolvedores e casos de uso Bradesco.
+              A conversa sai de anuncio de produto e entra em arquitetura: plataforma, dominios,
+              risco, desenvolvedores e casos de uso aplicaveis ao Bradesco.
             </p>
           </div>
           <div className={styles.flowGrid}>
@@ -534,14 +535,14 @@ export default function Bradesco26Experience() {
           <div className={styles.platformGrid}>
             <div>
               <p className={styles.eyebrow}>Contexto Bradesco</p>
-              <h2 id="platform-title">O material conversa com o footprint real, sem expor contrato.</h2>
+              <h2 id="platform-title">Conectar capacidades conhecidas a uma arquitetura de IA governada.</h2>
               <p>
-                A narrativa nao precisa vender produto isolado. Ela precisa conectar capacidades ja
-                conhecidas com o que K26 trouxe de novo em IA, dados e execucao.
+                A proposta e organizar o que o K26 trouxe de novo em IA, dados e execucao dentro de
+                uma jornada clara de governanca, adocao e valor operacional.
               </p>
             </div>
-            <div className={styles.footprintCloud} aria-label="Capacidades em discussao">
-              {footprint.map((item) => (
+            <div className={styles.capabilityCloud} aria-label="Capacidades em foco">
+              {capabilitySet.map((item) => (
                 <span key={item}>{item}</span>
               ))}
             </div>
@@ -553,7 +554,7 @@ export default function Bradesco26Experience() {
         <div className={styles.sectionFrame}>
           <div className={styles.sectionHeader}>
             <p className={styles.eyebrow}>Radar K26</p>
-            <h2 id="radar-title">Escolha a lente. Mostre o que muda.</h2>
+            <h2 id="radar-title">Tres lentes para transformar novidade em decisao.</h2>
             <p>
               A mesma novidade tem tres leituras: decisao executiva, profundidade tecnica e valor
               operacional para Bradesco.
@@ -618,7 +619,7 @@ export default function Bradesco26Experience() {
               <p className={styles.radarSubtitle}>{activeItem.subtitle}</p>
               <p className={styles.radarCopy}>{activeItem[lensCopyKey]}</p>
               <div className={styles.questionBox}>
-                <span>Pergunta para a sala</span>
+                <span>Pergunta de trabalho</span>
                 <strong>{activeItem.question}</strong>
               </div>
             </article>
@@ -661,8 +662,8 @@ export default function Bradesco26Experience() {
             <p className={styles.eyebrow}>Casos de uso Bradesco</p>
             <h2 id="use-cases-title">Seis conversas para sair da sala com proximo passo.</h2>
             <p>
-              Nao e para fechar escopo na apresentacao. E para priorizar dominio, owner e
-              prerequisitos tecnicos.
+              A sessao ajuda a priorizar dominio, responsavel de negocio, responsavel tecnico e
+              prerequisitos para avancar com seguranca.
             </p>
           </div>
           <div className={styles.useCaseGrid}>
@@ -683,10 +684,10 @@ export default function Bradesco26Experience() {
           <div className={styles.closeGrid}>
             <div>
               <p className={styles.eyebrow}>Roteiro de 04 de junho</p>
-              <h2 id="close-title">Conversa tecnica, sem virar tour de produto.</h2>
+              <h2 id="close-title">Da inspiracao a decisao operacional.</h2>
               <p>
                 Primeiro a tese, depois a arquitetura, entao os casos de uso. O objetivo e sair com
-                uma decisao operacional, nao com uma lista de anuncios.
+                uma decisao clara sobre onde aprofundar valor, dados, governanca e execucao.
               </p>
             </div>
             <ol className={styles.roadmapList}>
@@ -724,8 +725,8 @@ export default function Bradesco26Experience() {
       </section>
 
       <footer className={styles.footer}>
-        <span>Uso restrito: briefing tecnico para conversa com Bradesco.</span>
-        <span>Pagina nao indexada e nao listada no sitemap.</span>
+        <span>Preparado para conversa executiva e tecnica com Bradesco.</span>
+        <span>Fontes publicas ServiceNow e trilha de discussao orientada a valor.</span>
       </footer>
     </main>
   )

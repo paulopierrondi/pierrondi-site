@@ -469,7 +469,7 @@
 }
 
 .flowCard small,
-.footprintCloud span,
+.capabilityCloud span,
 .layerNodes small {
   border-radius: 999px;
   font-size: 10px;
@@ -493,13 +493,13 @@
   border-bottom: 1px solid var(--line-light);
 }
 
-.footprintCloud {
+.capabilityCloud {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.footprintCloud span {
+.capabilityCloud span {
   border: 1px solid var(--line-light);
   padding: 10px 12px;
   color: #111319;
