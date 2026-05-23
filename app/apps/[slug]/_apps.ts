@@ -59,6 +59,56 @@ export const APPS = {
     description:
       'PrivyText AI runs entirely on your device. No accounts, no servers, no telemetry on the text you analyze — your notes, chats and snippets stay local by design.',
   },
+  // Alias: asc.toml for privytext-ios uses /apps/privytext-ai as its canonical URL.
+  // Keep both slugs working so existing App Store metadata does not 404.
+  'privytext-ai': {
+    name: 'PrivyText AI',
+    category: '100% on-device private text analysis app',
+    contactSubject: 'PrivyText AI Support',
+    tagline: 'Private text analysis that never leaves your iPhone.',
+    description:
+      'PrivyText AI runs entirely on your device. No accounts, no servers, no telemetry on the text you analyze — your notes, chats and snippets stay local by design.',
+  },
+  'easylearn-003': {
+    name: 'EasyLearn',
+    category: 'On-device flashcards and self-quiz study habit app',
+    contactSubject: 'EasyLearn Support',
+    tagline: 'EasyLearn turns studying into a habit.',
+    description:
+      'EasyLearn is a local-first study companion: flashcards, self-quizzes and a daily streak that keeps you reviewing without a backend or account.',
+  },
+  'novalife-001': {
+    name: 'NovaLife',
+    category: 'Daily wellness and routine companion app',
+    contactSubject: 'NovaLife Support',
+    tagline: 'NovaLife is your daily wellness companion.',
+    description:
+      'NovaLife is a calm, local-first wellness companion: track moods, energy, sleep and small daily wins. Data stays on your device.',
+  },
+  'lifttool-002': {
+    name: 'LiftTool',
+    category: 'Simple on-device task and routine organizer app',
+    contactSubject: 'LiftTool Support',
+    tagline: 'LiftTool organizes your tasks with simplicity.',
+    description:
+      'LiftTool is a minimal task organizer for people who want fewer dashboards and more done. Local-first, no account, no clutter.',
+  },
+  'flexlife-004': {
+    name: 'FlexLife',
+    category: 'On-device routine and habit balance app',
+    contactSubject: 'FlexLife Support',
+    tagline: 'FlexLife balances your routine.',
+    description:
+      'FlexLife helps you balance work, rest and recovery with a simple weekly view. Runs entirely on your iPhone with no account required.',
+  },
+  'supercode-005': {
+    name: 'SuperCode',
+    category: 'On-device developer notebook and snippet app',
+    contactSubject: 'SuperCode Support',
+    tagline: 'SuperCode is the notebook for developers.',
+    description:
+      'SuperCode is a fast, local-first notebook for snippets, commands and short scratch notes. Built for developers who want their notes on-device, searchable and private.',
+  },
   scanvault: {
     name: 'ScanVault',
     category: 'Private on-device receipt and document scanner app',
