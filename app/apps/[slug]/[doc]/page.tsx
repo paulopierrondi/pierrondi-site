@@ -3,50 +3,8 @@ import { notFound } from 'next/navigation'
 import Footer from '@/components/Footer'
 import Nav from '@/components/Nav'
 import { ProductTile } from '@/components/ui/ProductTile'
+import { APPS, isAppSlug, type AppSlug } from '../_apps'
 import styles from './AppLegal.module.css'
-
-const APPS = {
-  faithschool: {
-    name: 'FaithSchool',
-    category: 'Christian homeschool planning and family records app',
-    contactSubject: 'FaithSchool Support',
-  },
-  provadoria: {
-    name: 'ProvadorIA',
-    category: 'AI-assisted outfit preview and style planning app',
-    contactSubject: 'ProvadorIA Support',
-  },
-  voudeque: {
-    name: 'VouDeQue',
-    category: 'AI-assisted outfit challenge and wardrobe idea app',
-    contactSubject: 'VouDeQue Support',
-  },
-  investcoach: {
-    name: 'InvestCoach.AI',
-    category: 'Financial planning and education app',
-    contactSubject: 'InvestCoach Support',
-  },
-  mytone: {
-    name: 'MyTone Studio',
-    category: 'AI-assisted ringtone creation app',
-    contactSubject: 'MyTone Support',
-  },
-  'bandle-br': {
-    name: 'Bandle BR',
-    category: 'Daily Brazilian music quiz app',
-    contactSubject: 'Bandle BR Support',
-  },
-  'parabens-ia-br': {
-    name: 'Parabens IA BR',
-    category: 'Personalized birthday message and video app',
-    contactSubject: 'Parabens IA BR Support',
-  },
-  adivinha: {
-    name: 'Adivinha!',
-    category: 'Music quiz app',
-    contactSubject: 'Adivinha Support',
-  },
-} as const
 
 const DOCS = {
   support: 'Support',
@@ -54,15 +12,10 @@ const DOCS = {
   terms: 'Terms of Use',
 } as const
 
-type AppSlug = keyof typeof APPS
 type DocSlug = keyof typeof DOCS
 
 interface Props {
   params: Promise<{ slug: string; doc: string }>
-}
-
-function isAppSlug(slug: string): slug is AppSlug {
-  return slug in APPS
 }
 
 function isDocSlug(doc: string): doc is DocSlug {
@@ -95,7 +48,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-function SupportContent({ app }: { app: (typeof APPS)[AppSlug] }) {
+type AppEntry = (typeof APPS)[AppSlug]
+
+function SupportContent({ app }: { app: AppEntry }) {
   return (
     <div className={styles.prose}>
       <p className={styles.meta}>Last updated: May 20, 2026</p>
@@ -125,7 +80,7 @@ function SupportContent({ app }: { app: (typeof APPS)[AppSlug] }) {
   )
 }
 
-function PrivacyContent({ app }: { app: (typeof APPS)[AppSlug] }) {
+function PrivacyContent({ app }: { app: AppEntry }) {
   return (
     <div className={styles.prose}>
       <p className={styles.meta}>Last updated: May 20, 2026</p>
@@ -162,7 +117,7 @@ function PrivacyContent({ app }: { app: (typeof APPS)[AppSlug] }) {
   )
 }
 
-function TermsContent({ app }: { app: (typeof APPS)[AppSlug] }) {
+function TermsContent({ app }: { app: AppEntry }) {
   return (
     <div className={styles.prose}>
       <p className={styles.meta}>Last updated: May 20, 2026</p>

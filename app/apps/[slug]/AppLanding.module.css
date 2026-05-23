@@ -1,0 +1,62 @@
+.prose {
+  display: grid;
+  gap: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.prose h2 {
+  color: var(--color-on-dark);
+  font-size: 24px;
+  font-weight: 650;
+  line-height: 1.2;
+  margin: 8px 0 0 0;
+}
+
+.prose p,
+.prose li {
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.prose ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.linkList a {
+  font-weight: 600;
+}
+
+.meta {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background-color: var(--color-on-dark);
+  color: var(--color-surface-tile-1);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cta:hover {
+  opacity: 0.9;
+}
