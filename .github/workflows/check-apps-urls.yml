@@ -1,0 +1,73 @@
+name: check-apps-urls
+
+# Verify every /apps/[slug] in the catalog renders 200 (and unknown slug 404).
+# Runs in two modes:
+#   - on pull_request / push to main: build, start the server, and curl localhost.
+#   - daily at 06:00 UTC: hit the live production URL to catch external drift
+#     (Railway revert, broken DNS, etc.) before the iOS App Factory release
+#     clerk gets blocked again.
+
+on:
+  pull_request:
+    paths:
+      - 'app/apps/**'
+      - 'scripts/check-apps-urls.mjs'
+      - '.github/workflows/check-apps-urls.yml'
+      - 'package.json'
+  push:
+    branches: [main]
+    paths:
+      - 'app/apps/**'
+      - 'scripts/check-apps-urls.mjs'
+  schedule:
+    # Daily 06:00 UTC = 03:00 BRT — before the iOS factory 03:00 cron.
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Target URL (default: production)'
+        required: false
+        default: 'https://www.pierrondi.dev'
+
+jobs:
+  local-build-check:
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - name: Start Next server and run check
+        run: |
+          PORT=3000 npm run start &
+          SERVER_PID=$!
+          # Wait until /healthcheck-ish; root is enough.
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:3000/ > /dev/null; then break; fi
+            sleep 1
+          done
+          set +e
+          TARGET_URL=http://localhost:3000 node scripts/check-apps-urls.mjs
+          STATUS=$?
+          set -e
+          kill $SERVER_PID 2>/dev/null || true
+          exit $STATUS
+
+  production-check:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check production URLs
+        env:
+          TARGET_URL: ${{ inputs.target || 'https://www.pierrondi.dev' }}
+        run: node scripts/check-apps-urls.mjs
