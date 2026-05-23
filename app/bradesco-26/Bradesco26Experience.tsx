@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   ArrowUpRight,
   Bot,
@@ -11,18 +11,31 @@ import {
   DatabaseZap,
   Gauge,
   GitBranch,
+  Headphones,
   LockKeyhole,
+  Maximize2,
   Network,
+  Pause,
   Play,
   Radar,
   ShieldCheck,
   Sparkles,
+  Volume2,
   Workflow,
+  X,
 } from 'lucide-react'
 import styles from './Bradesco26Experience.module.css'
 
 type Lens = 'executivo' | 'tecnico' | 'valor'
 type Theme = 'all' | 'ai' | 'data' | 'ops' | 'risk' | 'dev'
+
+type DeepDive = {
+  premise: string
+  doubleClick: string
+  talkTrack: string
+  watchouts: string[]
+  workshop: string[]
+}
 
 const lenses: Array<{ id: Lens; label: string; helper: string }> = [
   { id: 'executivo', label: 'Executivo', helper: 'Por que importa' },
@@ -364,6 +377,228 @@ const announcements = [
   },
 ]
 
+const deepDives: Record<string, DeepDive> = {
+  'control-tower': {
+    premise:
+      'A pergunta deixa de ser qual agente usar e vira quem enxerga, aprova, monitora e mede o agente em producao.',
+    doubleClick:
+      'Comecar por um inventario vivo de agentes e assistentes, classificando cada um por dado consumido, permissao, criticidade, dependencia operacional e indicador de resultado. Sem essa camada, a escala de IA vira uma colecao de pilotos desconectados.',
+    talkTrack:
+      'Para Bradesco, AI Control Tower pode ser apresentado como a sala de comando da IA operacional: nao substitui as plataformas existentes, mas cria visibilidade comum para agentes, modelos, dados, risco e resultado antes de escalar.',
+    watchouts: [
+      'Agente sem responsavel claro',
+      'Log tecnico sem contexto de negocio',
+      'Permissao fora do modelo de identidade',
+      'Metrica limitada a uso, sem resultado operacional',
+    ],
+    workshop: [
+      'Inventario inicial de agentes e assistentes',
+      'Politica de aprovacao por risco',
+      'Telemetria minima para piloto',
+      'Ritual de excecao e revisao executiva',
+    ],
+  },
+  otto: {
+    premise:
+      'Otto muda a interface: o usuario descreve o resultado, e a plataforma orquestra conhecimento, fluxo, aprovacao e handoff.',
+    doubleClick:
+      'A conversa tecnica deve separar experiencia conversacional de prontidao operacional. A qualidade depende de catalogo, conhecimento, elegibilidade, identidade e integracoes funcionando como uma jornada unica.',
+    talkTrack:
+      'Para Bradesco, Otto faz sentido quando a jornada ja tem regra clara e alto volume. O ganho nao vem de trocar a tela por chat, mas de reduzir navegacao, ambiguidade e transferencia manual entre areas.',
+    watchouts: [
+      'Base de conhecimento desatualizada',
+      'Catalogo com regra implicita',
+      'Aprovacao fora do fluxo',
+      'Handoff humano sem contexto da conversa',
+    ],
+    workshop: [
+      'Selecionar duas jornadas internas de alto volume',
+      'Mapear intencoes e variacoes de linguagem',
+      'Validar catalogo, KB e approvals',
+      'Definir quando Otto resolve e quando transfere',
+    ],
+  },
+  specialists: {
+    premise:
+      'AI Specialists tiram a conversa de assistente generico e levam para agentes por funcao, com escopo, confianca e fallback.',
+    doubleClick:
+      'O desenho bom comeca pela tarefa repetitiva, nao pela tecnologia. Cada especialista precisa ter fronteira clara: o que pode decidir, o que pode executar, quando pede aprovacao e quando devolve para humano.',
+    talkTrack:
+      'Para Bradesco, a melhor entrada e uma operacao com caminho conhecido, volume relevante e baixo risco de decisao irreversivel. Assim o piloto mede escala real sem comprometer controle.',
+    watchouts: [
+      'Agente treinado em processo mal definido',
+      'Criterio de confianca invisivel',
+      'Excecao tratada como caso comum',
+      'Fila humana recebendo contexto incompleto',
+    ],
+    workshop: [
+      'Escolher um processo repetitivo por dominio',
+      'Desenhar matriz de confianca e excecao',
+      'Definir fallback e aprovacao',
+      'Medir resolucao, qualidade e retrabalho',
+    ],
+  },
+  'action-fabric': {
+    premise:
+      'Action Fabric posiciona a ServiceNow como sistema de acao para agentes corporativos, inclusive agentes fora da plataforma.',
+    doubleClick:
+      'O ponto tecnico e separar leitura de dado de execucao de trabalho. Ferramentas expostas via MCP precisam de permissao, aprovacao, auditoria, rollback e limite de escopo antes de virar automacao real.',
+    talkTrack:
+      'Para Bradesco, isso permite que agentes Microsoft, modelos internos ou apps proprios acionem trabalho governado na ServiceNow, em vez de criarem automacoes paralelas sem trilha operacional.',
+    watchouts: [
+      'Ferramenta MCP ampla demais',
+      'Acao sem aprovacao contextual',
+      'OAuth sem politica por tipo de agente',
+      'Rollback nao desenhado antes do piloto',
+    ],
+    workshop: [
+      'Catalogar acoes seguras para primeiro pacote',
+      'Separar leitura, recomendacao e execucao',
+      'Definir RBAC e aprovacao por acao',
+      'Testar auditoria ponta a ponta',
+    ],
+  },
+  'context-engine': {
+    premise:
+      'Context Engine torna CMDB, CSDM, servicos e conhecimento parte do raciocinio da IA, nao apenas inventario tecnico.',
+    doubleClick:
+      'O foco deve ser escolher o menor grafo de contexto que muda uma decisao. Servico, responsavel, dependencia, criticidade, SLA e historico precisam estar conectados ao caso de uso, nao tratados como projeto abstrato de dados.',
+    talkTrack:
+      'Para Bradesco, essa e a ponte entre a maturidade de CMDB e a ambicao de IA governada. Quanto melhor o contexto, menor a chance de uma resposta correta no texto e errada na operacao.',
+    watchouts: [
+      'CMDB ampla demais para o primeiro caso',
+      'Relacao critica ausente',
+      'Conhecimento sem responsavel de curadoria',
+      'SLA e criticidade fora do contexto do agente',
+    ],
+    workshop: [
+      'Definir uma decisao que a IA precisa tomar',
+      'Listar relacoes minimas de CMDB/CSDM',
+      'Validar qualidade do contexto com operadores',
+      'Criar ciclo de melhoria de dados por uso real',
+    ],
+  },
+  wdf: {
+    premise:
+      'Workflow Data Fabric enriquece workflows com dados onde eles vivem, sem transformar cada decisao em uma nova copia de dados.',
+    doubleClick:
+      'A discussao deve ser sobre contrato de dados: fonte de verdade, autorizacao, latencia aceitavel, lineage, observabilidade e quem responde quando um dado externo muda o comportamento do workflow.',
+    talkTrack:
+      'Para Bradesco, WDF e mais forte quando destrava uma decisao operacional concreta em IT, risco, atendimento ou portfolio. A pergunta certa e qual dado externo muda a acao dentro do workflow.',
+    watchouts: [
+      'Dado externo sem contrato de uso',
+      'Latencia incompatível com decisao operacional',
+      'Autorizacao tratada depois da arquitetura',
+      'Lineage invisivel para auditoria',
+    ],
+    workshop: [
+      'Escolher tres dados externos de alto impacto',
+      'Definir fonte de verdade e consumidor',
+      'Mapear autorizacao e observabilidade',
+      'Prototipar uma decisao enriquecida',
+    ],
+  },
+  'security-risk': {
+    premise:
+      'A escala de agentes muda o desenho de risco: identidade humana, identidade nao humana, ativo e workflow precisam estar conectados.',
+    doubleClick:
+      'O tema nao e apenas detectar risco, mas governar quem ou o que pode agir, sobre qual ativo, com qual permissao e com qual evidencia. Agentes criam uma nova superficie operacional que precisa nascer auditavel.',
+    talkTrack:
+      'Para Bradesco, Autonomous Security and Risk conecta a pauta de IA com governanca de identidade, ativo e resposta. Isso ajuda a tratar agente como participante controlado da operacao, nao como excecao.',
+    watchouts: [
+      'Identidade nao humana sem ciclo de vida',
+      'Permissao sem menor privilegio',
+      'Ativo sem contexto operacional',
+      'Resposta de risco fora do sistema de acao',
+    ],
+    workshop: [
+      'Inventariar identidades nao humanas relevantes',
+      'Correlacionar agente, API, ativo e permissao',
+      'Definir resposta automatizada por risco',
+      'Criar evidencia auditavel do primeiro fluxo',
+    ],
+  },
+  spm: {
+    premise:
+      'SPM com IA aproxima demanda, capacidade, dependencia, risco e execucao para melhorar a decisao de portfolio.',
+    doubleClick:
+      'A oportunidade e sair de relatorio de status e entrar em sistema de decisao. Para isso, o dado de portfolio precisa conversar com execucao, arquitetura, mudanca e capacidade de times.',
+    talkTrack:
+      'Para Bradesco, SPM pode ser posicionado como a mesa de decisao que reduz planilhas paralelas e conecta prioridade com capacidade real, dependencia tecnica e risco de mudanca.',
+    watchouts: [
+      'Portfolio decidido fora da plataforma',
+      'Epicos com qualidade inconsistente',
+      'Dependencia tecnica invisivel',
+      'Migracao tratada como troca de ferramenta',
+    ],
+    workshop: [
+      'Selecionar uma decisao mensal de portfolio',
+      'Mapear objetos de dado obrigatorios',
+      'Definir integracao com execucao atual',
+      'Criar painel de decisao com criterios comuns',
+    ],
+  },
+  'build-agent': {
+    premise:
+      'Build Agent aumenta capacidade de entrega, mas precisa nascer junto com padrao, revisao e esteira de promocao.',
+    doubleClick:
+      'A conversa nao deve ser so produtividade de desenvolvimento. O ponto e criar uma fabrica governada: padroes reutilizaveis, ACLs, revisao, Git, ambientes e criterio de promocao antes de producao.',
+    talkTrack:
+      'Para Bradesco, Build Agent combina bem com App Engine quando a organizacao quer acelerar apps sem aumentar debito tecnico. A IA ajuda a construir, mas a arquitetura continua sendo decisao controlada.',
+    watchouts: [
+      'Codigo gerado sem padrao reutilizavel',
+      'ACL e seguranca revisadas tarde demais',
+      'Ambiente sem esteira clara',
+      'Produtividade medida sem qualidade de entrega',
+    ],
+    workshop: [
+      'Escolher um app novo com escopo controlado',
+      'Definir padroes obrigatorios de desenvolvimento',
+      'Conectar Git, review e ambientes',
+      'Medir tempo, qualidade e retrabalho',
+    ],
+  },
+  'project-arc': {
+    premise:
+      'Project Arc explora automacao desktop governada para processos multi-etapa onde API nao resolve tudo.',
+    doubleClick:
+      'Esse tema deve ser tratado como exploratorio e controlado. O desenho precisa explicitar sandbox, comando permitido, logs, rollback, escopo de producao e o que nunca deve ser automatizado por agente desktop.',
+    talkTrack:
+      'Para Bradesco, Project Arc e uma conversa forte para processos legados, mas a entrada correta e mapear casos onde a falta de API ainda trava automacao ponta a ponta. A governanca vem antes da escala.',
+    watchouts: [
+      'Automacao desktop sem sandbox',
+      'Comando permitido amplo demais',
+      'Rollback nao testado',
+      'Processo legado automatizado sem criticidade definida',
+    ],
+    workshop: [
+      'Mapear processos sem API com alto atrito manual',
+      'Classificar risco e escopo permitido',
+      'Definir sandbox, logs e rollback',
+      'Avaliar se o caso deve virar API, workflow ou agente desktop',
+    ],
+  },
+}
+
+type Announcement = (typeof announcements)[number]
+
+const composeAudioBrief = (item: Announcement, dive: DeepDive, lens: Lens) => {
+  const lensCopy =
+    lens === 'executivo' ? item.executive : lens === 'tecnico' ? item.technical : item.value
+
+  return [
+    `Briefing K26 sobre ${item.title}.`,
+    item.subtitle,
+    `Leitura para Bradesco: ${item.bradescoAngle}`,
+    `Ponto principal: ${lensCopy}`,
+    dive.premise,
+    dive.doubleClick,
+    `Como apresentar: ${dive.talkTrack}`,
+    `Cuidado principal: ${dive.watchouts[0]}.`,
+    `Proximo workshop: ${dive.workshop[0]}, ${dive.workshop[1]} e ${dive.workshop[2]}.`,
+  ].join(' ')
+}
+
 const architectureLayers = [
   {
     title: 'Experiência e canais',
@@ -483,6 +718,9 @@ export default function Bradesco26Experience() {
   const [activeLens, setActiveLens] = useState<Lens>('executivo')
   const [activeTheme, setActiveTheme] = useState<Theme>('all')
   const [selectedId, setSelectedId] = useState('control-tower')
+  const [deepDiveId, setDeepDiveId] = useState<string | null>(null)
+  const [speakingId, setSpeakingId] = useState<string | null>(null)
+  const speechRef = useRef<SpeechSynthesisUtterance | null>(null)
 
   const filtered = useMemo(
     () =>
@@ -499,6 +737,27 @@ export default function Bradesco26Experience() {
   const activeLensInfo = lenses.find((lens) => lens.id === activeLens) ?? lenses[0]
   const activeThemeInfo = themes.find((theme) => theme.id === activeTheme) ?? themes[0]
   const activeDiscussion = activeItem.discussion[activeLens]
+  const activeDeepDive = deepDives[activeItem.id]
+  const deepDiveItem = announcements.find((item) => item.id === deepDiveId) ?? activeItem
+  const selectedDeepDive = deepDives[deepDiveItem.id]
+  const DeepDiveIcon = deepDiveItem.icon
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setDeepDiveId(null)
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel()
+      }
+    }
+  }, [])
 
   const selectTheme = (theme: Theme) => {
     setActiveTheme(theme)
@@ -507,6 +766,50 @@ export default function Bradesco26Experience() {
     if (nextItem) {
       setSelectedId(nextItem.id)
     }
+  }
+
+  const openDeepDive = (id: string) => {
+    setSelectedId(id)
+    setDeepDiveId(id)
+  }
+
+  const speakBrief = (item: Announcement) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+      return
+    }
+
+    const synth = window.speechSynthesis
+
+    if (speakingId === item.id) {
+      synth.cancel()
+      setSpeakingId(null)
+      return
+    }
+
+    synth.cancel()
+
+    const utterance = new SpeechSynthesisUtterance(
+      composeAudioBrief(item, deepDives[item.id], activeLens),
+    )
+    const voices = synth.getVoices()
+    const ptVoice =
+      voices.find((voice) => voice.lang.toLowerCase().startsWith('pt-br')) ??
+      voices.find((voice) => voice.lang.toLowerCase().startsWith('pt'))
+
+    if (ptVoice) {
+      utterance.voice = ptVoice
+    }
+
+    utterance.lang = 'pt-BR'
+    utterance.rate = 0.94
+    utterance.pitch = 0.88
+    utterance.volume = 1
+    utterance.onend = () => setSpeakingId(null)
+    utterance.onerror = () => setSpeakingId(null)
+
+    speechRef.current = utterance
+    setSpeakingId(item.id)
+    synth.speak(utterance)
   }
 
   return (
@@ -755,10 +1058,13 @@ export default function Bradesco26Experience() {
                     type="button"
                     className={selected ? styles.radarItemActive : styles.radarItem}
                     onClick={() => setSelectedId(item.id)}
+                    onDoubleClick={() => openDeepDive(item.id)}
+                    title="Duplo clique para abrir o briefing completo"
                   >
                     <span>{item.number}</span>
                     <Icon size={18} aria-hidden="true" />
                     <strong>{item.title}</strong>
+                    <small>2x</small>
                   </button>
                 )
               })}
@@ -772,9 +1078,37 @@ export default function Bradesco26Experience() {
             <article key={`${activeItem.id}-${activeLens}`} className={styles.radarDetail}>
               <div className={styles.detailSweep} aria-hidden="true" />
               <div className={styles.radarDetailTop}>
-                <span>{activeItem.number}</span>
-                <div className={styles.detailIcon}>
-                  <ActiveIcon size={30} aria-hidden="true" />
+                <div className={styles.radarDetailMeta}>
+                  <span>{activeItem.number}</span>
+                  <small>Duplo clique abre o briefing completo</small>
+                </div>
+                <div className={styles.detailTopActions}>
+                  <button
+                    type="button"
+                    className={
+                      speakingId === activeItem.id ? styles.audioChipActive : styles.audioChip
+                    }
+                    onClick={() => speakBrief(activeItem)}
+                    aria-pressed={speakingId === activeItem.id}
+                  >
+                    {speakingId === activeItem.id ? (
+                      <Pause size={14} aria-hidden="true" />
+                    ) : (
+                      <Volume2 size={14} aria-hidden="true" />
+                    )}
+                    <span>{speakingId === activeItem.id ? 'Pausar' : 'Audio'}</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.iconAction}
+                    onClick={() => openDeepDive(activeItem.id)}
+                    aria-label={`Abrir deep dive de ${activeItem.title}`}
+                  >
+                    <Maximize2 size={15} aria-hidden="true" />
+                  </button>
+                  <div className={styles.detailIcon}>
+                    <ActiveIcon size={30} aria-hidden="true" />
+                  </div>
                 </div>
               </div>
               <div className={styles.detailHero}>
@@ -789,6 +1123,10 @@ export default function Bradesco26Experience() {
                 </div>
               </div>
               <p className={styles.radarCopy}>{activeItem[lensCopyKey]}</p>
+              <div className={styles.studioCue}>
+                <Headphones size={14} aria-hidden="true" />
+                <p>{activeDeepDive.premise}</p>
+              </div>
               <div className={styles.decisionGrid}>
                 <article>
                   <span>Arquitetura</span>
@@ -818,10 +1156,150 @@ export default function Bradesco26Experience() {
                 </span>
                 <strong>{activeDiscussion}</strong>
               </div>
+              <div className={styles.detailActions}>
+                <button type="button" onClick={() => openDeepDive(activeItem.id)}>
+                  <Maximize2 size={14} aria-hidden="true" />
+                  Abrir deep dive
+                </button>
+                <button
+                  type="button"
+                  onClick={() => speakBrief(activeItem)}
+                  aria-pressed={speakingId === activeItem.id}
+                >
+                  {speakingId === activeItem.id ? (
+                    <Pause size={14} aria-hidden="true" />
+                  ) : (
+                    <Volume2 size={14} aria-hidden="true" />
+                  )}
+                  {speakingId === activeItem.id ? 'Pausar audio' : 'Ouvir briefing'}
+                </button>
+              </div>
             </article>
           </div>
         </div>
       </section>
+
+      {deepDiveId ? (
+        <div className={styles.deepDiveOverlay} role="dialog" aria-modal="true" aria-labelledby="deep-dive-title">
+          <button
+            type="button"
+            className={styles.deepDiveBackdrop}
+            onClick={() => setDeepDiveId(null)}
+            aria-label="Fechar deep dive"
+          />
+          <article className={styles.deepDivePanel}>
+            <div className={styles.deepDiveScanner} aria-hidden="true" />
+            <header className={styles.deepDiveHeader}>
+              <div>
+                <p className={styles.deepDiveKicker}>Duplo clique K26</p>
+                <h2 id="deep-dive-title">{deepDiveItem.title}</h2>
+                <p>{deepDiveItem.subtitle}</p>
+              </div>
+              <div className={styles.deepDiveHeaderActions}>
+                <button
+                  type="button"
+                  className={
+                    speakingId === deepDiveItem.id
+                      ? styles.deepDiveAudioActive
+                      : styles.deepDiveAudio
+                  }
+                  onClick={() => speakBrief(deepDiveItem)}
+                  aria-pressed={speakingId === deepDiveItem.id}
+                >
+                  {speakingId === deepDiveItem.id ? (
+                    <Pause size={16} aria-hidden="true" />
+                  ) : (
+                    <Volume2 size={16} aria-hidden="true" />
+                  )}
+                  {speakingId === deepDiveItem.id ? 'Pausar audio' : 'Audio briefing'}
+                </button>
+                <button
+                  type="button"
+                  className={styles.deepDiveClose}
+                  onClick={() => setDeepDiveId(null)}
+                  aria-label="Fechar"
+                >
+                  <X size={18} aria-hidden="true" />
+                </button>
+              </div>
+            </header>
+
+            <div className={styles.deepDiveHero}>
+              <div className={styles.deepDiveThesis}>
+                <span>Leitura para Bradesco</span>
+                <strong>{selectedDeepDive.premise}</strong>
+              </div>
+              <div className={styles.sonicConsole} aria-label="Controle de audio">
+                <div className={styles.sonicWave} aria-hidden="true">
+                  {Array.from({ length: 14 }).map((_, index) => (
+                    <span key={index} />
+                  ))}
+                </div>
+                <button type="button" onClick={() => speakBrief(deepDiveItem)}>
+                  <Headphones size={16} aria-hidden="true" />
+                  Roteiro narrado
+                </button>
+              </div>
+            </div>
+
+            <div className={styles.deepDiveBody}>
+              <section className={styles.deepDiveStory}>
+                <span>O duplo clique</span>
+                <p>{selectedDeepDive.doubleClick}</p>
+              </section>
+              <section className={styles.deepDiveStory}>
+                <span>Como apresentar</span>
+                <p>{selectedDeepDive.talkTrack}</p>
+              </section>
+              <section className={styles.deepDiveStack}>
+                <span>Arquitetura</span>
+                <p>{deepDiveItem.architecture}</p>
+              </section>
+              <section className={styles.deepDiveStack}>
+                <span>Modelo operacional</span>
+                <p>{deepDiveItem.operatingModel}</p>
+              </section>
+            </div>
+
+            <div className={styles.deepDiveColumns}>
+              <section>
+                <div className={styles.deepDiveSectionTitle}>
+                  <DeepDiveIcon size={17} aria-hidden="true" />
+                  <h3>Pontos de cuidado</h3>
+                </div>
+                <ul>
+                  {selectedDeepDive.watchouts.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </section>
+              <section>
+                <div className={styles.deepDiveSectionTitle}>
+                  <Workflow size={17} aria-hidden="true" />
+                  <h3>Workshop sugerido</h3>
+                </div>
+                <ol>
+                  {selectedDeepDive.workshop.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ol>
+              </section>
+            </div>
+
+            <footer className={styles.deepDiveFooter}>
+              <div>
+                <span>Proximo movimento</span>
+                <strong>{deepDiveItem.nextMove}</strong>
+              </div>
+              <div className={styles.deepDiveProof}>
+                {deepDiveItem.proofPoints.map((point) => (
+                  <small key={point}>{point}</small>
+                ))}
+              </div>
+            </footer>
+          </article>
+        </div>
+      ) : null}
 
       <section id="architecture" className={styles.architectureSection} aria-labelledby="architecture-title">
         <div className={styles.sectionFrame}>

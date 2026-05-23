@@ -1186,7 +1186,7 @@
   width: 100%;
   min-height: 28px;
   display: grid;
-  grid-template-columns: 32px 24px minmax(0, 1fr);
+  grid-template-columns: 32px 24px minmax(0, 1fr) 28px;
   gap: 8px;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -1201,8 +1201,10 @@
 }
 
 .radarItem:hover {
-  transform: translateX(4px);
-  background: rgba(255, 255, 255, 0.07);
+  transform: translateX(5px) scale(1.008);
+  background:
+    linear-gradient(90deg, rgba(255, 49, 93, 0.14), transparent 72%),
+    rgba(255, 255, 255, 0.07);
 }
 
 .radarItem span,
@@ -1227,6 +1229,18 @@
   white-space: nowrap;
 }
 
+.radarItem small,
+.radarItemActive small {
+  justify-self: end;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 3px 5px;
+  color: rgba(248, 244, 236, 0.46);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 8px;
+  font-weight: 950;
+}
+
 .radarItemActive {
   color: #fff;
   background:
@@ -1237,6 +1251,12 @@
 .radarItemActive span,
 .radarItemActive svg {
   color: var(--green);
+}
+
+.radarItemActive small {
+  color: #07100b;
+  border-color: var(--green);
+  background: var(--green);
 }
 
 .radarListMeta {
@@ -1320,12 +1340,76 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 }
 
-.radarDetailTop span {
+.radarDetailMeta span {
   color: rgba(255, 255, 255, 0.42);
   font-size: 11px;
   font-weight: 950;
+}
+
+.radarDetailMeta small {
+  display: block;
+  margin-top: 3px;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.detailTopActions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.audioChip,
+.audioChipActive,
+.iconAction {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.08);
+  transition:
+    transform 170ms ease,
+    border-color 170ms ease,
+    background 170ms ease,
+    color 170ms ease;
+}
+
+.audioChip,
+.audioChipActive {
+  padding: 0 11px;
+  font-size: 10px;
+  font-weight: 950;
+}
+
+.audioChip svg,
+.audioChipActive svg,
+.iconAction svg {
+  color: currentColor;
+}
+
+.audioChip:hover,
+.audioChipActive,
+.iconAction:hover {
+  transform: translateY(-2px);
+  color: #07100b;
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.iconAction {
+  width: 34px;
+  padding: 0;
 }
 
 .detailIcon {
@@ -1414,6 +1498,32 @@
   line-height: 1.24;
 }
 
+.studioCue {
+  margin-top: 7px;
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  border: 1px solid rgba(101, 212, 110, 0.2);
+  border-radius: 8px;
+  padding: 7px 9px;
+  color: rgba(230, 255, 232, 0.9);
+  background:
+    linear-gradient(90deg, rgba(101, 212, 110, 0.1), transparent),
+    rgba(255, 255, 255, 0.045);
+}
+
+.studioCue svg {
+  color: var(--green);
+}
+
+.studioCue p {
+  margin: 0;
+  color: rgba(248, 244, 236, 0.78);
+  font-size: 10px;
+  line-height: 1.25;
+}
+
 .decisionGrid {
   margin-top: 7px;
   display: grid;
@@ -1473,7 +1583,7 @@
 }
 
 .discussionBox {
-  margin-top: auto;
+  margin-top: 6px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 8px;
   padding: 8px;
@@ -1488,6 +1598,407 @@
   color: #fff;
   font-size: 12px;
   line-height: 1.24;
+}
+
+.detailActions {
+  margin-top: auto;
+  padding-top: 7px;
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.detailActions button {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 0 10px;
+  color: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 10px;
+  font-weight: 950;
+  transition:
+    transform 170ms ease,
+    border-color 170ms ease,
+    background 170ms ease,
+    color 170ms ease;
+}
+
+.detailActions button:hover,
+.detailActions button[aria-pressed='true'] {
+  transform: translateY(-2px);
+  color: #07100b;
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.deepDiveOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  animation: overlayFade 260ms ease both;
+}
+
+.deepDiveBackdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background:
+    radial-gradient(circle at 28% 16%, rgba(214, 9, 52, 0.34), transparent 32%),
+    rgba(2, 3, 5, 0.76);
+  backdrop-filter: blur(18px) saturate(1.25);
+}
+
+.deepDivePanel {
+  position: relative;
+  width: min(1080px, calc(100vw - 44px));
+  max-height: min(820px, calc(100svh - 44px));
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 10px;
+  color: #fff;
+  background:
+    linear-gradient(120deg, rgba(214, 9, 52, 0.46), transparent 34%),
+    linear-gradient(155deg, #11141c, #07090d 58%, #2a0714);
+  box-shadow:
+    0 50px 160px rgba(0, 0, 0, 0.62),
+    inset 0 1px rgba(255, 255, 255, 0.13);
+  animation: panelEnter 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.deepDivePanel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.28;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.065) 1px, transparent 1px);
+  background-size: 54px 54px;
+  animation: gridFloat 18s linear infinite;
+  pointer-events: none;
+}
+
+.deepDiveScanner {
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: -18%;
+  width: 18%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+  transform: skewX(-15deg);
+  animation: studioScanner 3.4s ease-in-out 120ms both;
+  pointer-events: none;
+}
+
+.deepDivePanel > * {
+  position: relative;
+}
+
+.deepDiveHeader,
+.deepDiveHero,
+.deepDiveBody,
+.deepDiveColumns,
+.deepDiveFooter {
+  flex: 0 0 auto;
+}
+
+.deepDiveHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: start;
+  padding: 24px 26px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.deepDiveKicker,
+.deepDiveStory span,
+.deepDiveStack span,
+.deepDiveFooter span {
+  display: block;
+  color: rgba(101, 212, 110, 0.92);
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.deepDiveHeader h2 {
+  margin: 7px 0 0;
+  color: #fff;
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: 0.92;
+  font-weight: 950;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.deepDiveHeader p:not(.deepDiveKicker) {
+  max-width: 720px;
+  margin: 10px 0 0;
+  color: rgba(248, 244, 236, 0.68);
+  font-size: 15px;
+  line-height: 1.36;
+}
+
+.deepDiveHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.deepDiveAudio,
+.deepDiveAudioActive,
+.deepDiveClose,
+.sonicConsole button {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.075);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  font-weight: 950;
+  transition:
+    transform 170ms ease,
+    border-color 170ms ease,
+    background 170ms ease,
+    color 170ms ease;
+}
+
+.deepDiveAudio,
+.deepDiveAudioActive {
+  padding: 0 14px;
+}
+
+.deepDiveAudio:hover,
+.deepDiveAudioActive,
+.sonicConsole button:hover {
+  transform: translateY(-2px);
+  color: #07100b;
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.deepDiveClose {
+  width: 38px;
+  padding: 0;
+}
+
+.deepDiveClose:hover {
+  transform: translateY(-2px) rotate(6deg);
+  color: #fff;
+  border-color: rgba(255, 49, 93, 0.72);
+  background: rgba(255, 49, 93, 0.22);
+}
+
+.deepDiveHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 12px;
+  padding: 14px 26px;
+}
+
+.deepDiveThesis,
+.sonicConsole,
+.deepDiveStory,
+.deepDiveStack,
+.deepDiveColumns section,
+.deepDiveFooter {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035)),
+    rgba(255, 255, 255, 0.045);
+}
+
+.deepDiveThesis {
+  padding: 16px;
+}
+
+.deepDiveThesis span {
+  display: block;
+  color: rgba(248, 244, 236, 0.46);
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.deepDiveThesis strong {
+  display: block;
+  margin-top: 8px;
+  color: #fff;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.05;
+  font-weight: 950;
+  text-wrap: balance;
+}
+
+.sonicConsole {
+  display: grid;
+  align-content: space-between;
+  gap: 14px;
+  padding: 14px;
+  overflow: hidden;
+}
+
+.sonicWave {
+  height: 54px;
+  display: flex;
+  align-items: end;
+  gap: 5px;
+}
+
+.sonicWave span {
+  width: 100%;
+  min-width: 4px;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(180deg, var(--green), rgba(101, 212, 110, 0.18));
+  animation: waveLift 980ms ease-in-out infinite;
+}
+
+.sonicWave span:nth-child(2n) {
+  animation-delay: 120ms;
+}
+
+.sonicWave span:nth-child(3n) {
+  animation-delay: 240ms;
+}
+
+.sonicWave span:nth-child(4n) {
+  animation-delay: 360ms;
+}
+
+.sonicConsole button {
+  width: 100%;
+}
+
+.deepDiveBody {
+  display: grid;
+  grid-template-columns: 1.12fr 1.12fr 0.82fr 0.82fr;
+  gap: 10px;
+  padding: 0 26px 14px;
+}
+
+.deepDiveStory,
+.deepDiveStack {
+  padding: 14px;
+}
+
+.deepDiveStory p,
+.deepDiveStack p {
+  margin: 8px 0 0;
+  color: rgba(248, 244, 236, 0.76);
+  font-size: 13px;
+  line-height: 1.44;
+}
+
+.deepDiveStory p {
+  color: #fff;
+  font-size: 14px;
+}
+
+.deepDiveColumns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 0 26px 14px;
+  overflow: visible;
+}
+
+.deepDiveColumns section {
+  min-height: 176px;
+  padding: 14px;
+}
+
+.deepDiveSectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--green);
+}
+
+.deepDiveSectionTitle h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 950;
+}
+
+.deepDiveColumns ul,
+.deepDiveColumns ol {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.deepDiveColumns li {
+  position: relative;
+  padding-left: 22px;
+  color: rgba(248, 244, 236, 0.76);
+  font-size: 12px;
+  line-height: 1.34;
+}
+
+.deepDiveColumns li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 10px;
+  height: 2px;
+  background: var(--green);
+}
+
+.deepDiveFooter {
+  margin: 0 26px 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  padding: 14px;
+}
+
+.deepDiveFooter strong {
+  display: block;
+  margin-top: 5px;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.24;
+}
+
+.deepDiveProof {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.deepDiveProof small {
+  border: 1px solid rgba(101, 212, 110, 0.22);
+  border-radius: 999px;
+  padding: 6px 8px;
+  color: rgba(230, 255, 232, 0.86);
+  background: rgba(101, 212, 110, 0.08);
+  font-size: 9px;
+  font-weight: 950;
 }
 
 .architectureSection,
@@ -1953,6 +2464,53 @@
   }
 }
 
+@keyframes overlayFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes panelEnter {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.975);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes studioScanner {
+  from {
+    transform: skewX(-15deg) translateX(0);
+  }
+
+  to {
+    transform: skewX(-15deg) translateX(780%);
+  }
+}
+
+@keyframes waveLift {
+  0%,
+  100% {
+    height: 18%;
+  }
+
+  35% {
+    height: 92%;
+  }
+
+  70% {
+    height: 42%;
+  }
+}
+
 @media (min-width: 1121px) and (max-height: 760px) {
   .nav {
     height: 56px;
@@ -2094,7 +2652,7 @@
   .radarItem,
   .radarItemActive {
     min-height: 26px;
-    grid-template-columns: 28px 22px minmax(0, 1fr);
+    grid-template-columns: 28px 22px minmax(0, 1fr) 24px;
     gap: 7px;
     padding: 3px 9px;
   }
@@ -2149,6 +2707,16 @@
     line-height: 1.2;
   }
 
+  .studioCue {
+    margin-top: 5px;
+    padding: 6px 8px;
+  }
+
+  .studioCue p {
+    font-size: 9px;
+    line-height: 1.2;
+  }
+
   .decisionGrid {
     margin-top: 6px;
     gap: 6px;
@@ -2170,6 +2738,65 @@
 
   .discussionBox {
     padding: 7px;
+  }
+
+  .discussionBox strong {
+    font-size: 11px;
+  }
+
+  .detailActions {
+    padding-top: 6px;
+  }
+
+  .detailActions button {
+    min-height: 27px;
+    padding: 0 8px;
+    font-size: 9px;
+  }
+
+  .deepDivePanel {
+    max-height: calc(100svh - 28px);
+  }
+
+  .deepDiveHeader {
+    padding: 18px 20px 12px;
+  }
+
+  .deepDiveHeader h2 {
+    font-size: clamp(30px, 3.2vw, 44px);
+  }
+
+  .deepDiveHero {
+    padding: 10px 20px;
+  }
+
+  .deepDiveBody {
+    padding: 0 20px 10px;
+  }
+
+  .deepDiveStory,
+  .deepDiveStack,
+  .deepDiveColumns section {
+    padding: 11px;
+  }
+
+  .deepDiveStory p,
+  .deepDiveStack p {
+    font-size: 11px;
+    line-height: 1.32;
+  }
+
+  .deepDiveColumns {
+    padding: 0 20px 10px;
+  }
+
+  .deepDiveColumns section {
+    min-height: 142px;
+  }
+
+  .deepDiveFooter {
+    margin: 0 20px 18px;
+    padding: 11px;
   }
 }
 
@@ -2216,7 +2843,11 @@
   }
 
   .detailHero,
-  .decisionGrid {
+  .decisionGrid,
+  .deepDiveHero,
+  .deepDiveBody,
+  .deepDiveColumns,
+  .deepDiveFooter {
     grid-template-columns: 1fr;
   }
 
@@ -2224,6 +2855,18 @@
     min-height: auto;
     justify-items: start;
     gap: 12px;
+  }
+
+  .deepDiveBody {
+    overflow: auto;
+  }
+
+  .deepDiveFooter {
+    align-items: start;
+  }
+
+  .deepDiveProof {
+    justify-content: flex-start;
   }
 }
 
@@ -2306,6 +2949,15 @@
     padding: 28px;
   }
 
+  .radarDetailTop {
+    align-items: flex-start;
+  }
+
+  .detailTopActions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
   .radarDetail h3 {
     margin-top: 34px;
     font-size: 40px;
@@ -2313,6 +2965,33 @@
 
   .discussionBox {
     margin-top: 28px;
+  }
+
+  .detailActions {
+    margin-top: 16px;
+  }
+
+  .deepDiveOverlay {
+    padding: 12px;
+  }
+
+  .deepDivePanel {
+    width: calc(100vw - 24px);
+    max-height: calc(100svh - 24px);
+    overflow: auto;
+  }
+
+  .deepDiveHeader {
+    grid-template-columns: 1fr;
+  }
+
+  .deepDiveHeaderActions {
+    justify-content: space-between;
+  }
+
+  .deepDiveAudio,
+  .deepDiveAudioActive {
+    flex: 1;
   }
 
   .layerNodes {
@@ -2399,6 +3078,32 @@
   .sourcesGrid h2 {
     font-size: 34px;
   }
+
+  .audioChip span {
+    display: none;
+  }
+
+  .radarItem,
+  .radarItemActive {
+    grid-template-columns: 28px 22px minmax(0, 1fr) 24px;
+  }
+
+  .deepDiveHeader,
+  .deepDiveHero,
+  .deepDiveBody,
+  .deepDiveColumns {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .deepDiveFooter {
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+
+  .deepDiveHeader h2 {
+    font-size: 32px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2423,6 +3128,11 @@
   .radarDetail,
   .detailSweep,
   .detailIcon,
+  .deepDiveOverlay,
+  .deepDivePanel,
+  .deepDivePanel::before,
+  .deepDiveScanner,
+  .sonicWave span,
   .architectureLayer {
     animation: none;
   }
@@ -2433,6 +3143,14 @@
   .themeActive,
   .radarItem,
   .radarItemActive,
+  .audioChip,
+  .audioChipActive,
+  .iconAction,
+  .detailActions button,
+  .deepDiveAudio,
+  .deepDiveAudioActive,
+  .deepDiveClose,
+  .sonicConsole button,
   .flowCard,
   .capabilityCloud span,
   .architectureLayer,
