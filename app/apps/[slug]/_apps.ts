@@ -127,6 +127,79 @@ export const APPS = {
       'HabitDot is a minimalist daily habit tracker. Tap a dot, see your streak, keep going. Data stays on your device — no account, no sync, no noise.',
     appStoreUrl: 'https://apps.apple.com/app/id6772399435',
   },
+  pawproof: {
+    name: 'PawProof Pet Sitter',
+    category: 'Local-first pet handoff and sitter checklist app',
+    contactSubject: 'PawProof Support',
+    tagline: 'Hand off your pet without losing the routine.',
+    description:
+      'PawProof Pet Sitter keeps the feeding, walk and medication routine on the same iPhone the sitter holds. No account, no upload — share the proof when you are back.',
+    appStoreUrl: 'https://apps.apple.com/app/id6772389962',
+  },
+  snapread: {
+    name: 'SnapRead AI Leitor',
+    category: 'On-device OCR document reading app',
+    contactSubject: 'SnapRead AI Leitor Support',
+    tagline: 'Read printed text with your camera, on-device.',
+    description:
+      'SnapRead AI Leitor turns printed pages, signs and screenshots into clean readable text using your iPhone camera. OCR runs on-device — your captures never leave the phone.',
+    appStoreUrl: 'https://apps.apple.com/app/id6772517083',
+  },
+  // Alias: original Kimi-created asc.toml referenced /apps/snapread-ai before the global-name suffix.
+  'snapread-ai': {
+    name: 'SnapRead AI Leitor',
+    category: 'On-device OCR document reading app',
+    contactSubject: 'SnapRead AI Leitor Support',
+    tagline: 'Read printed text with your camera, on-device.',
+    description:
+      'SnapRead AI Leitor turns printed pages, signs and screenshots into clean readable text using your iPhone camera. OCR runs on-device — your captures never leave the phone.',
+    appStoreUrl: 'https://apps.apple.com/app/id6772517083',
+  },
+  brewmate: {
+    name: 'BrewMate Cafe',
+    category: 'On-device coffee brewing companion app',
+    contactSubject: 'BrewMate Cafe Support',
+    tagline: 'Brew better coffee, one ratio at a time.',
+    description:
+      'BrewMate Cafe is a quiet brewing companion: pour-over recipes, timers and dose ratios that stay on your iPhone. No account, no sync, just better coffee.',
+    appStoreUrl: 'https://apps.apple.com/app/id6772517662',
+  },
+  packsmart: {
+    name: 'PackSmart Viagem',
+    category: 'On-device travel packing checklist app',
+    contactSubject: 'PackSmart Viagem Support',
+    tagline: 'Pack faster. Forget nothing.',
+    description:
+      'PackSmart Viagem turns trip type, weather and length into a clean packing checklist. Lists stay on your phone — no login, no cloud, no clutter.',
+    appStoreUrl: 'https://apps.apple.com/app/id6772517823',
+  },
+  repcount: {
+    name: 'RepCount Treino',
+    category: 'On-device strength training rep counter app',
+    contactSubject: 'RepCount Treino Support',
+    tagline: 'Count reps. Track sets. Stay focused.',
+    description:
+      'RepCount Treino is a minimal strength training companion: log sets, count reps and watch your progression. All data stays on your iPhone — no account required.',
+    appStoreUrl: 'https://apps.apple.com/app/id6772518296',
+  },
+  'chroma-ai': {
+    name: 'Chroma AI Paleta',
+    category: 'On-device color palette generator app',
+    contactSubject: 'Chroma AI Paleta Support',
+    tagline: 'Build palettes from photos, on-device.',
+    description:
+      'Chroma AI Paleta extracts harmonious color palettes from your photos using on-device vision. Save, share and reuse palettes without ever uploading an image.',
+    appStoreUrl: 'https://apps.apple.com/app/id6772518398',
+  },
+  siteproof: {
+    name: 'SiteProof Obras',
+    category: 'On-device construction punch-list app',
+    contactSubject: 'SiteProof Obras Support',
+    tagline: 'Punch lists that travel with the job, not the cloud.',
+    description:
+      'SiteProof Obras is a construction punch-list app: add items, tag rooms, share the owner handoff. Boards stay on the iPhone running the job — no account, no backend.',
+    appStoreUrl: 'https://apps.apple.com/app/id6772519142',
+  },
 } satisfies Record<string, AppEntry>
 
 export type AppSlug = keyof typeof APPS
