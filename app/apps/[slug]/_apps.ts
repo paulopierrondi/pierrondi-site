@@ -200,6 +200,38 @@ export const APPS = {
       'SiteProof Obras is a construction punch-list app: add items, tag rooms, share the owner handoff. Boards stay on the iPhone running the job — no account, no backend.',
     appStoreUrl: 'https://apps.apple.com/app/id6772519142',
   },
+  codestash: {
+    name: 'CodeStash Snippets',
+    category: 'On-device developer code snippet vault app',
+    contactSubject: 'CodeStash Snippets Support',
+    tagline: 'A private vault for your code snippets, on your iPhone.',
+    description:
+      'CodeStash Snippets stores your most useful code snippets offline: instant search, language tags, Markdown export via the native share sheet. No GitHub, no Gist, no login — everything stays on your iPhone.',
+  },
+  diarydot: {
+    name: 'DiaryDot Diário',
+    category: 'Private on-device personal journal app',
+    contactSubject: 'DiaryDot Diário Support',
+    tagline: 'Your private personal journal, only on your iPhone.',
+    description:
+      'DiaryDot Diário is a private journal with daily entries, mood, energy 1-10 and tags. Optional FaceID lock. No accounts, no cloud, no auto-backup — your thoughts stay yours.',
+  },
+  linguagil: {
+    name: 'Linguagil Flashcards',
+    category: 'On-device spaced-repetition language flashcards app',
+    contactSubject: 'Linguagil Flashcards Support',
+    tagline: 'Language flashcards with on-device spaced repetition.',
+    description:
+      'Linguagil Flashcards is a privacy-first language study app with local spaced repetition, per-language streaks and decks across EN/PT/FR/DE/JA/ES and more. No tracking, no cloud — your decks stay on your iPhone.',
+  },
+  sommelier: {
+    name: 'Sommelier Pessoal',
+    category: 'Private on-device wine tasting journal app',
+    contactSubject: 'Sommelier Pessoal Support',
+    tagline: 'Your private wine journal, on your iPhone.',
+    description:
+      'Sommelier Pessoal is a private wine journal: log country, grape, rating, price and occasion for every bottle. Tags by style, region or moment. No accounts, no cloud, no analytics — your notes stay on your iPhone only.',
+  },
 } satisfies Record<string, AppEntry>
 
 export type AppSlug = keyof typeof APPS
