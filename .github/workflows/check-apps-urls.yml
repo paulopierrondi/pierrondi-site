@@ -8,17 +8,13 @@ name: check-apps-urls
 #     clerk gets blocked again.
 
 on:
+  # Run on every PR and every push to main, regardless of which paths changed.
+  # The iOS App Factory Catalog Contract is a hard gate — a refactor that
+  # accidentally drops a route or breaks the catalog must fail even when the
+  # PR does not touch app/apps/**. Branch protection requires this check.
   pull_request:
-    paths:
-      - 'app/apps/**'
-      - 'scripts/check-apps-urls.mjs'
-      - '.github/workflows/check-apps-urls.yml'
-      - 'package.json'
   push:
     branches: [main]
-    paths:
-      - 'app/apps/**'
-      - 'scripts/check-apps-urls.mjs'
   schedule:
     # Daily 06:00 UTC = 03:00 BRT — before the iOS factory 03:00 cron.
     - cron: '0 6 * * *'
