@@ -1,6 +1,6 @@
 # Project Brain Context
 
-Generated: `2026-05-27 18:55:56`
+Generated: `2026-05-27 20:29:42`
 Tool: `railway-run`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
@@ -2512,6 +2512,12 @@ Stack enxuto: **Next.js 16 + React 19 + Tailwind v4 + Formspree**. Zero banco, z
   - Links `/feitos/sada-servicenow`, `/feitos/agentes-governados`, `/feitos/llm-inferencia`, `/feitos/plataformas-automacao-ia` responderam `200`.
   - Evidencias visuais: `qa/screenshots/paulo-production-live-desktop.png`, `qa/screenshots/paulo-production-live-mobile.png`.
 - Git: deploy manual Railway feito a partir do workspace local; nenhum `git push` executado nesta etapa.
+
+### 2026-05-27 20:18 BRT — `/control_tower` privado preparado localmente
+
+- Pedido de Paulo: usar `pierrondi.dev/control_tower` para gerenciar operacoes.
+- Estado remoto antes do patch: `https://pierrondi.dev/control_tower` retornava `404` via Playwright; `HEAD` no apex continuou retornando `405`, comportam
+...[truncated]
 
 ## AI History Snapshot
 
