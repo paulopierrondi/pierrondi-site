@@ -2,18 +2,13 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import type { KeyboardEvent } from 'react'
 import { useEffect, useRef, useState } from 'react'
+import { X } from 'lucide-react'
 import styles from './Nav.module.css'
 
-// Static nav links per design spec (AGE-1454)
-// Studio removed in pierrondi-site (internal Marketing OS only — vive em pierrondi-os).
 const NAV_LINKS = [
-  { label: 'Automações', href: '/automacoes' },
-  { label: 'Produto Digital', href: '/produto-digital' },
-  { label: 'Tech Partner', href: '/tech-partner' },
-  { label: 'Marketing OS', href: '/marketing-os' },
-  { label: 'Preços', href: '/precos' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Paulo', href: '/paulo' },
 ]
 
 const CTA_HREF = '/#contato'
@@ -26,11 +21,12 @@ export default function Nav({ lang: _lang = 'pt' }: NavProps) {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const overlayRef = useRef<HTMLDivElement>(null)
+  const hamburgerRef = useRef<HTMLButtonElement>(null)
 
-  // Lock body scroll when mobile menu is open — save/restore previous value
   useEffect(() => {
+    if (!menuOpen) return
     const prev = document.body.style.overflow
-    document.body.style.overflow = menuOpen ? 'hidden' : prev
+    document.body.style.overflow = 'hidden'
     return () => {
       document.body.style.overflow = prev
     }
@@ -47,6 +43,36 @@ export default function Nav({ lang: _lang = 'pt' }: NavProps) {
     if (href.includes('#')) return pathname === '/'
     if (href === '/blog') return pathname.startsWith('/blog')
     return pathname === href || pathname.startsWith(href + '/')
+  }
+
+  function closeMenu(restoreFocus = false) {
+    setMenuOpen(false)
+    if (restoreFocus) {
+      requestAnimationFrame(() => hamburgerRef.current?.focus())
+    }
+  }
+
+  function handleOverlayKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+    if (e.key === 'Escape') {
+      closeMenu(true)
+      return
+    }
+
+    if (e.key !== 'Tab') return
+
+    const focusable = overlayRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+    if (!focusable?.length) return
+
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault()
+      last.focus()
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault()
+      first.focus()
+    }
   }
 
   return (
@@ -83,6 +109,7 @@ export default function Nav({ lang: _lang = 'pt' }: NavProps) {
 
           {/* Hamburger (mobile only) */}
           <button
+            ref={hamburgerRef}
             className={styles.hamburger}
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
@@ -116,22 +143,31 @@ export default function Nav({ lang: _lang = 'pt' }: NavProps) {
         className={`${styles.overlay}${menuOpen ? ` ${styles.overlayOpen}` : ''}`}
         role="dialog"
         aria-modal="true"
+        aria-hidden={!menuOpen}
         aria-label="Menu de navegação"
-        onKeyDown={(e) => { if (e.key === 'Escape') setMenuOpen(false) }}
+        onKeyDown={handleOverlayKeyDown}
       >
+        <button
+          type="button"
+          className={styles.overlayClose}
+          onClick={() => closeMenu(true)}
+          aria-label="Fechar menu"
+        >
+          <X size={24} aria-hidden="true" />
+        </button>
         {NAV_LINKS.map((item) => (
           <Link
             key={item.href}
             href={item.href}
             className={styles.overlayLink}
-            onClick={() => setMenuOpen(false)}
+            onClick={() => closeMenu(isActive(item.href))}
             aria-current={isActive(item.href) ? 'page' : undefined}
           >
             {item.label}
           </Link>
         ))}
         <div className={styles.overlayCta}>
-          <Link href={CTA_HREF} onClick={() => setMenuOpen(false)}>
+          <Link href={CTA_HREF} onClick={() => closeMenu(false)}>
             Diagnóstico gratuito
           </Link>
         </div>

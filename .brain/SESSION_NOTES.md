@@ -1,6 +1,6 @@
 # Session Notes To Sync Back To Obsidian
 
-Repository: `/Users/paulopierrondi/Downloads/pierrondi-site`
+Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
 
 Use this file only when the local Obsidian vault is not accessible, especially from cloud runners.
 

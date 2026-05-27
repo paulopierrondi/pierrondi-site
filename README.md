@@ -19,7 +19,7 @@ Stack enxuto: **Next.js 16 + React 19 + Tailwind v4 + Formspree**. Zero banco, z
 | Fontes | Geist Sans + Geist Mono via `next/font` |
 | Form | Formspree (`https://formspree.io/f/xpqoodnr`) via `app/api/contact` proxy |
 | Analytics | Plausible (opcional, via `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`) |
-| Deploy | Railway (nixpacks) ou Vercel |
+| Deploy | Railway (nixpacks) — plataforma canônica de produção |
 
 ## Dev
 
@@ -45,7 +45,8 @@ NEXT_PUBLIC_SITE_URL=https://pierrondi.dev
 ## Deploy
 
 **Railway** — `next build` → `next start -p $PORT`. Nixpacks pega `nixpacks.toml`.
-**Vercel** — auto-detect Next.js, sem configuração adicional.
+
+`pierrondi.dev` e `www.pierrondi.dev` são produção Railway. Qualquer projeto/alias Vercel remanescente é legado e não deve ser tratado como fonte oficial.
 
 ## Princípios
 

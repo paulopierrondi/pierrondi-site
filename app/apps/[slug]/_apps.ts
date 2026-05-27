@@ -8,6 +8,7 @@ export interface AppEntry {
   tagline?: string
   description?: string
   appStoreUrl?: string
+  privacyMode?: 'standard' | 'localOnly'
 }
 
 export const APPS = {
@@ -231,6 +232,34 @@ export const APPS = {
     tagline: 'Your private wine journal, on your iPhone.',
     description:
       'Sommelier Pessoal is a private wine journal: log country, grape, rating, price and occasion for every bottle. Tags by style, region or moment. No accounts, no cloud, no analytics — your notes stay on your iPhone only.',
+  },
+  'caso-relampago-ai': {
+    name: 'Caso Relampago AI',
+    category: 'Offline mystery game with an on-device AI-style director',
+    contactSubject: 'Caso Relampago AI Support',
+    tagline: 'Fast mystery cases. Ask, infer, solve.',
+    description:
+      'Caso Relampago AI is a short-session mystery game for iPhone. Read the case, ask limited questions, use hints carefully and solve before the round ends. The game director runs on-device with deterministic local logic — no account, no internet and no data collection.',
+    appStoreUrl: 'https://apps.apple.com/app/id6772540994',
+    privacyMode: 'localOnly',
+  },
+  'mesa-de-guerra': {
+    name: 'Mesa de Guerra',
+    category: 'Offline strategic card wargame with on-device adaptive AI personas',
+    contactSubject: 'Mesa de Guerra Support',
+    tagline: '5 turnos. 3 frentes. IA com persona.',
+    description:
+      'Mesa de Guerra is a short-session strategic card wargame for iPhone. Choose an AI persona and difficulty, then play up to two cards per turn across three fronts. The adaptive AI runs entirely on-device with deterministic local logic — no account, no internet, no data collection. Win by controlling more fronts after five turns.',
+    privacyMode: 'localOnly',
+  },
+  'ammosort-siege': {
+    name: 'AmmoSort Siege',
+    category: 'Offline tactical supply sorting puzzle game',
+    contactSubject: 'AmmoSort Siege Support',
+    tagline: 'Sort crates. Load bunkers. Hold the line.',
+    description:
+      'AmmoSort Siege is a short-session tactical sorting puzzle for iPhone. Move crates between bunkers, group supplies by type and finish each wave before pressure builds. The game runs fully on-device with no account, no ads SDK and no gameplay data collection.',
+    privacyMode: 'localOnly',
   },
 } satisfies Record<string, AppEntry>
 

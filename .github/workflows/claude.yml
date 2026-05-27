@@ -1,0 +1,46 @@
+name: Claude Code
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  claude:
+    if: contains(github.event.comment.body, '@claude')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ANTHROPIC_API_KEY_VALUE: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - name: Skip when Anthropic key is missing
+        if: env.ANTHROPIC_API_KEY_VALUE == ''
+        run: echo "ANTHROPIC_API_KEY is not configured; skipping Claude Code."
+
+      - uses: actions/checkout@v4
+        if: env.ANTHROPIC_API_KEY_VALUE != ''
+        with:
+          fetch-depth: 1
+
+      - name: Verify second brain context
+        if: env.ANTHROPIC_API_KEY_VALUE != ''
+        run: |
+          test -f CLAUDE.md
+          test -f .brain/PROJECT_CONTEXT.md
+          test -f .brain/CLAUDE_CLOUD_CONTEXT.md
+
+      - uses: anthropics/claude-code-action@v1
+        if: env.ANTHROPIC_API_KEY_VALUE != ''
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_args: |
+            --max-turns 8
+            --append-system-prompt "Before work, read CLAUDE.md, .brain/PROJECT_CONTEXT.md, and .brain/CLAUDE_CLOUD_CONTEXT.md. Treat them as required project memory. Apply Paulo profile context plus relevant platform best practices, Linear/Git tracking, product/revenue context, app/web quality, screenshots visual QA, marketing creative/video, frontend/backend/API/AI/deploy/security checklists. For career, executive, ServiceNow, Bradesco, FSI, deck, roadmap, positioning or personal context work, use the Paulo profile snapshot. For roadmap, bug, status, priority, release or planning work, use the Linear/Git snapshot and matching Linear issue/project when connector access exists. For product, monetization, app ideas, revenue, pricing, growth, App Store portfolio or side-project prioritization, use the Product Revenue MOC, App Store Apps Dashboard, App Store Priorities and opportunity backlogs from the snapshot. For app, site, UI, iOS, Android or store work, use the matching preflight before implementation and capture screenshot evidence when relevant. For iOS/App Store Connect/TestFlight/signing/IAP/APNS work, use the Apple inventory and upload runbook snapshots before asking for IDs, keys, CI values, provider env vars or running an upload; prefer repo-local Fastlane/Xcode upload lanes over custom JWT scripts. For social video, ElevenLabs, subtitles, LinkedIn, Shorts, TikTok, Instagram/Reels or pierrondi.dev work, use the Marketing MOC, Creative Video OS, voice/subtitle workflow, platform specs, prompt starters and Creative QA checklist. For Apple Ads / ASA, App Store paid acquisition, ASO, CPP, paid campaigns or app marketing tuning, use the App Marketing Intelligence OS, Apple Ads ASA Tuning Runbook, Metrics Inventory, Daily Tuning Report and Tuning Backlog; generate proposals only and never mutate spend, bid, budget, campaign, keyword or creative without explicit Paulo approval. For automations/routines/scheduled jobs/cloud runners, use the Automation Email Policy and send a final email to pierrondi@gmail.com; if no transport is available, create a safe draft and record EMAIL_FAILED. For credentials, use the Credential Vault Operating Model: inventory/references/provider env vars/secret managers only, never real secret values in Markdown, chat, logs, Linear or screenshots. If you learn a reusable development pattern, append it to .brain/SESSION_NOTES.md. Do not expose or store secrets. Prefer focused pull requests and include tests when relevant."
+            --append-system-prompt "If a credential is in scope for Secret Exposure Incident 2026-05-19, require rotation before use and never ask Paulo to paste secret values in chat."

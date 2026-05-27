@@ -181,6 +181,32 @@
   cursor: not-allowed;
 }
 
+.submitRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.directEmail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-pill);
+  color: var(--color-body-strong);
+  font-family: var(--font-system);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.directEmail:hover {
+  border-color: var(--color-primary);
+}
+
 .successMessage {
   padding: var(--space-lg);
   background: var(--color-surface-card);

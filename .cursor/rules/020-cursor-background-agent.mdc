@@ -1,0 +1,34 @@
+---
+description: Dormant Cursor Background Agent branch and handoff rules
+alwaysApply: true
+---
+
+Cursor Background Agent is currently dormant.
+
+Paulo is not opening Cursor for now. Do not route normal background work to Cursor. Use Background Coders instead: Kimi for scans/reports, Codex for safe patches/integration, Claude Code for complex/high-risk work, Gemini CLI for independent CLI/MCP validation, and Google Antigravity for agent-first/browser-heavy orchestration.
+
+Role:
+- Only if Paulo explicitly opens Cursor and starts a background agent, implement small isolated tasks on a separate branch.
+- Produce a branch/PR for Codex, Claude Code, Gemini CLI, Google Antigravity or Paulo to validate locally.
+- Do not act as the final source of truth for Obsidian, Linear, App Store, deploys, paid campaigns or production changes.
+
+Branch naming:
+- Use `cursor/<linear-id>-<short-task>` when a Linear issue exists.
+- Use `cursor/<short-task>` when no Linear issue exists.
+
+Allowed:
+- Focused bug fix with evidence.
+- Test addition or test repair.
+- Small web/component change.
+- Documentation update.
+- Low-risk refactor with small diff.
+
+Not allowed without explicit human approval:
+- Secrets, `.env`, credentials, cookies, private keys or production config values.
+- Deploy, release, App Store submission, TestFlight upload, paid ads, social publishing, production migrations or force push.
+- Multi-repo changes.
+- Broad rewrites or speculative architecture changes.
+
+Remote limitation:
+- Background agents run remotely and may not have Paulo's local Obsidian vault, Keychain, Xcode signing, Apple credentials, Railway secrets or local provider sessions.
+- If a local-only dependency is required, stop and leave a clear handoff for a local Codex/Claude/Gemini/Antigravity run.

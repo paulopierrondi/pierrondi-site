@@ -14,7 +14,7 @@ const contactSchema = z.object({
   email: z.string().email().max(255),
   empresa: z.string().max(256).optional().nullable(),
   servico: z.string().max(64).optional().nullable(),
-  mensagem: z.string().max(4000).optional().nullable(),
+  mensagem: z.string().min(1).max(4000),
   trackingContext: z
     .object({
       landingPage: z.string().optional(),
@@ -27,11 +27,55 @@ const contactSchema = z.object({
   _gotcha: z.string().optional().nullable(),
 })
 
+function firstString(value: FormDataEntryValue | null) {
+  return typeof value === 'string' ? value : ''
+}
+
+async function readContactPayload(request: Request) {
+  const contentType = request.headers.get('content-type') ?? ''
+
+  if (contentType.includes('application/json')) {
+    return request.json()
+  }
+
+  const formData = await request.formData()
+
+  return {
+    nome: firstString(formData.get('nome')),
+    email: firstString(formData.get('email')),
+    empresa: firstString(formData.get('empresa')),
+    servico: firstString(formData.get('servico')),
+    mensagem: firstString(formData.get('mensagem')),
+    trackingContext: {
+      landingPage: firstString(formData.get('landingPage')),
+      campaignId: firstString(formData.get('campaignId')),
+      thesisId: firstString(formData.get('thesisId')),
+      referrer: firstString(formData.get('referrer')),
+      utmSource: firstString(formData.get('utmSource')),
+    },
+    _gotcha: firstString(formData.get('_gotcha')),
+  }
+}
+
+function wantsJsonResponse(request: Request) {
+  const accept = request.headers.get('accept') ?? ''
+  const contentType = request.headers.get('content-type') ?? ''
+  return accept.includes('application/json') || contentType.includes('application/json')
+}
+
+function redirectToContact(request: Request, status: 'ok' | 'invalid' | 'error') {
+  return NextResponse.redirect(new URL(`/?contact=${status}#contact`, request.url), 303)
+}
+
 export async function POST(request: Request): Promise<Response> {
+  const wantsJson = wantsJsonResponse(request)
   let payload: z.infer<typeof contactSchema>
+
   try {
-    payload = contactSchema.parse(await request.json())
+    payload = contactSchema.parse(await readContactPayload(request))
   } catch (error) {
+    if (!wantsJson) return redirectToContact(request, 'invalid')
+
     return NextResponse.json(
       { error: 'invalid_body', detail: error instanceof Error ? error.message : 'parse error' },
       { status: 400 },
@@ -39,35 +83,46 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   if (payload._gotcha && payload._gotcha.length > 0) {
-    return NextResponse.json({ ok: true }, { status: 200 })
+    return wantsJson ? NextResponse.json({ ok: true }, { status: 200 }) : redirectToContact(request, 'ok')
   }
 
   const tc = payload.trackingContext ?? {}
 
-  const formspreeRes = await fetch(FORMSPREE_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({
-      nome: payload.nome,
-      email: payload.email,
-      empresa: payload.empresa ?? '',
-      servico: payload.servico ?? '',
-      mensagem: payload.mensagem ?? '',
-      _subject: `Novo lead pierrondi.dev — ${payload.servico ?? 'sem serviço'}`,
-      landingPage: tc.landingPage ?? '',
-      campaignId: tc.campaignId ?? '',
-      thesisId: tc.thesisId ?? '',
-      referrer: tc.referrer ?? '',
-      utm_source: tc.utmSource ?? '',
-    }),
-  })
+  let formspreeRes: Response
+  try {
+    formspreeRes = await fetch(FORMSPREE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        name: payload.nome,
+        nome: payload.nome,
+        email: payload.email,
+        _replyto: payload.email,
+        empresa: payload.empresa ?? '',
+        servico: payload.servico ?? '',
+        mensagem: payload.mensagem,
+        _subject: `Novo lead pierrondi.dev - ${payload.servico ?? 'sem servico'}`,
+        landingPage: tc.landingPage ?? '',
+        campaignId: tc.campaignId ?? '',
+        thesisId: tc.thesisId ?? '',
+        referrer: tc.referrer ?? '',
+        utm_source: tc.utmSource ?? '',
+      }),
+    })
+  } catch {
+    if (!wantsJson) return redirectToContact(request, 'error')
+
+    return NextResponse.json({ error: 'formspree_unreachable' }, { status: 502 })
+  }
 
   if (!formspreeRes.ok) {
+    if (!wantsJson) return redirectToContact(request, 'error')
+
     return NextResponse.json(
       { error: 'formspree_failed', status: formspreeRes.status },
       { status: 502 },
     )
   }
 
-  return NextResponse.json({ ok: true })
+  return wantsJson ? NextResponse.json({ ok: true }) : redirectToContact(request, 'ok')
 }

@@ -146,6 +146,22 @@
   transition: opacity 0.2s ease, visibility 0s linear 0s;
 }
 
+.overlayClose {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-hairline-soft);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
 .overlayLink {
   text-decoration: none;
   font-family: var(--font-system);

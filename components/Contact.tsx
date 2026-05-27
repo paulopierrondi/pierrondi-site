@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { trackEvent } from '@/lib/analytics'
 import { home, type Lang } from '@/lib/i18n/home-copy'
@@ -52,6 +52,22 @@ export default function Contact({ lang = 'pt' }: ContactProps) {
   const [isSuccess, setIsSuccess] = useState(false)
   const [submitError, setSubmitError] = useState('')
 
+  const mailtoHref = useMemo(() => {
+    const subject = encodeURIComponent('Contato via pierrondi.dev')
+    const body = encodeURIComponent(
+      [
+        `Nome: ${nome.trim()}`,
+        `Email: ${email.trim()}`,
+        `Empresa/contexto: ${empresa.trim() || 'Nao informado'}`,
+        `Servico: ${servico || 'Nao informado'}`,
+        '',
+        mensagem.trim() || 'Quero conversar sobre...',
+      ].join('\n')
+    )
+
+    return `mailto:pierrondi@gmail.com?subject=${subject}&body=${body}`
+  }, [email, empresa, mensagem, nome, servico])
+
   function validate(): FormErrors {
     const nextErrors: FormErrors = {}
     if (!nome.trim()) nextErrors.nome = t.errors.name
@@ -99,6 +115,7 @@ export default function Contact({ lang = 'pt' }: ContactProps) {
     } catch {
       setIsLoading(false)
       setSubmitError(t.fields.submitError)
+      window.location.href = mailtoHref
       setTimeout(() => setSubmitError(''), 3000)
     }
   }
@@ -124,6 +141,8 @@ export default function Contact({ lang = 'pt' }: ContactProps) {
         </div>
 
         <form
+          action="/api/contact"
+          method="post"
           onSubmit={handleSubmit}
           onFocusCapture={() => {
             if (hasTrackedStart.current) return
@@ -140,6 +159,12 @@ export default function Contact({ lang = 'pt' }: ContactProps) {
           data-animate
           style={{ '--delay': '0.12s' } as React.CSSProperties}
         >
+          <input type="hidden" name="landingPage" value={trackingContext.landingPage} />
+          <input type="hidden" name="campaignId" value={trackingContext.campaignId} />
+          <input type="hidden" name="thesisId" value={trackingContext.thesisId} />
+          <input type="hidden" name="referrer" value={trackingContext.referrer} />
+          <input type="hidden" name="utmSource" value={trackingContext.utmSource} />
+
           <div className={styles.fields}>
             <div>
               <label htmlFor="nome" className={styles.label}>{t.fields.name}</label>
@@ -231,6 +256,9 @@ export default function Contact({ lang = 'pt' }: ContactProps) {
               >
                 {isSuccess ? t.fields.submitOk : isLoading ? t.fields.submitting : submitError || t.fields.submit}
               </button>
+              <a href={mailtoHref} className={styles.directEmail}>
+                pierrondi@gmail.com
+              </a>
             </div>
           </div>
         </form>

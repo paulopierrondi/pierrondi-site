@@ -1,6 +1,9 @@
 # Deploy — pierrondi-site
 
-Site em produção: **https://pierrondi-site-production.up.railway.app**
+Site oficial em produção: **https://www.pierrondi.dev**  
+Railway service URL: **https://pierrondi-site-production.up.railway.app**
+
+`pierrondi.dev` / `www.pierrondi.dev` é Railway. Vercel não é produção canônica deste site; qualquer alias Vercel remanescente é legado e não deve orientar operação, QA, SEO ou Linear.
 
 ## Infra
 

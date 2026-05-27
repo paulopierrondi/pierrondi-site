@@ -1,93 +1,70 @@
 import type { Metadata } from 'next'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
-import WhatsApp from '@/components/WhatsApp'
-import JsonLd from '@/components/JsonLd'
-import AutomacoesContent from './AutomacoesContent'
-import { SITE_URL } from '@/lib/site'
+import { cookies } from 'next/headers'
+import { LockKeyhole } from 'lucide-react'
+
+import {
+  AUTOMATION_CONTROL_COOKIE,
+  verifySessionCookie,
+} from '@/lib/automation-control/auth'
+import { readAutomationSnapshot } from '@/lib/automation-control/storage'
+import AutomationControlPane from './AutomationControlPane'
+import styles from './AutomationControlPane.module.css'
+
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 export const metadata: Metadata = {
-  title: 'Automação de Processos com n8n e IA',
-  description: 'Automatize processos manuais em até 14 dias. n8n, Make, APIs e IA integrados. Diagnóstico gratuito, proposta com escopo fechado, preço entre R$1.500 e R$3.000. Para PMEs no Brasil.',
-  keywords: [
-    'automação n8n brasil',
-    'automação de processos empresariais',
-    'integração de sistemas pme',
-    'n8n make zapier',
-    'automação com IA',
-    'workflow automation pme',
-  ],
+  title: 'Automation Control Pane',
+  description: 'Painel privado de automações, coders e LLMs em uso no ecossistema Paulo Pierrondi.',
+  robots: { index: false, follow: false, nocache: true },
   alternates: { canonical: '/automacoes' },
-  openGraph: {
-    title: 'Automação de Processos com n8n e IA | pierrondi.dev',
-    description: 'Automatize processos manuais em até 14 dias. R$1.500–3.000, escopo fechado, código seu.',
-    url: '/automacoes',
-    siteName: 'pierrondi.dev',
-    type: 'website',
-    locale: 'pt_BR',
-    images: [{ url: '/og', width: 1200, height: 630, alt: 'Automação de Processos com n8n — pierrondi.dev' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Automação de Processos com n8n e IA | pierrondi.dev',
-    description: 'Automatize processos manuais em até 14 dias. R$1.500–3.000, escopo fechado.',
-    images: ['/og'],
-  },
 }
 
-const breadcrumb = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-    { '@type': 'ListItem', position: 2, name: 'Automações', item: `${SITE_URL}/automacoes` },
-  ],
+interface AutomacoesPageProps {
+  searchParams: Promise<{ auth?: string }>
 }
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: 'Automação de Processos',
-  provider: { '@type': 'Organization', name: 'pierrondi.dev' },
-  description: 'Automação de processos com n8n, Make e integrações sob medida. CRM, planilhas, WhatsApp, ERPs, APIs e IA no mesmo workflow.',
-  offers: {
-    '@type': 'Offer',
-    priceCurrency: 'BRL',
-    price: '1500',
-    priceSpecification: { '@type': 'PriceSpecification', minPrice: '1500', maxPrice: '3000', priceCurrency: 'BRL' },
-  },
-  areaServed: { '@type': 'Country', name: 'Brazil' },
-  serviceType: 'Business Process Automation',
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Ferramentas de automação',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'n8n workflow' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Make (Integromat)' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'WhatsApp Business API' } },
-    ],
-  },
-  mainEntityOfPage: {
-    '@type': 'FAQPage',
-    mainEntity: [
-      { '@type': 'Question', name: 'Preciso saber programar para automatizar?', acceptedAnswer: { '@type': 'Answer', text: 'Não. Você descreve o processo; a gente implementa.' } },
-      { '@type': 'Question', name: 'Quanto tempo leva o primeiro fluxo?', acceptedAnswer: { '@type': 'Answer', text: 'Fluxos focados costumam sair em 1–2 semanas, dependendo da complexidade.' } },
-      { '@type': 'Question', name: 'Quanto custa uma automação?', acceptedAnswer: { '@type': 'Answer', text: 'A partir de R$1.500 para fluxos focados. O valor final depende de escopo e integrações.' } },
-      { '@type': 'Question', name: 'O workflow fica com minha empresa?', acceptedAnswer: { '@type': 'Answer', text: 'Sim. Documentação, credenciais e acesso completo. Zero caixa preta.' } },
-    ],
-  },
-}
-
-export default function AutomacoesPage() {
+function LockedPane({ invalid }: { invalid: boolean }) {
   return (
-    <>
-      <JsonLd data={[schema, breadcrumb]} />
-      <Nav />
-      <main>
-        <AutomacoesContent />
-      </main>
-      <Footer />
-      <WhatsApp />
-    </>
+    <main className={styles.lockShell}>
+      <section className={styles.lockPanel} aria-labelledby="automation-lock-title">
+        <div className={styles.lockIcon} aria-hidden="true">
+          <LockKeyhole size={22} />
+        </div>
+        <p className={styles.kicker}>pierrondi.dev / automacoes</p>
+        <h1 id="automation-lock-title">Control pane privado.</h1>
+        <p>
+          Esta rota mostra sinais locais de automações, coders, LLMs e Railway.
+          Use o token de visualização configurado no provider.
+        </p>
+        <form className={styles.lockForm} method="post" action="/api/automation-control/session">
+          <label htmlFor="token">Token de acesso</label>
+          <div className={styles.lockInputRow}>
+            <input
+              id="token"
+              name="token"
+              type="password"
+              autoComplete="current-password"
+              placeholder="AUTOMATION_CONTROL_VIEW_TOKEN"
+              required
+            />
+            <button type="submit">Entrar</button>
+          </div>
+          {invalid && <span className={styles.lockError}>Token inválido ou ausente.</span>}
+        </form>
+      </section>
+    </main>
   )
+}
+
+export default async function AutomacoesPage({ searchParams }: AutomacoesPageProps) {
+  const [cookieStore, params] = await Promise.all([cookies(), searchParams])
+  const session = cookieStore.get(AUTOMATION_CONTROL_COOKIE)?.value
+  const authorized = verifySessionCookie(session)
+
+  if (!authorized) return <LockedPane invalid={params.auth === 'invalid'} />
+
+  const snapshot = await readAutomationSnapshot()
+
+  return <AutomationControlPane snapshot={snapshot} />
 }

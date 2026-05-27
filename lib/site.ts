@@ -1,3 +1,3 @@
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  'https://pierrondi.dev'
+  'https://www.pierrondi.dev'

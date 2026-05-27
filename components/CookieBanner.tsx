@@ -8,6 +8,7 @@ export default function CookieBanner() {
   const [visible, setVisible] = useState(false)
   const suppressed =
     pathname === '/' ||
+    pathname === '/paulo' ||
     pathname?.startsWith('/apps') ||
     pathname?.startsWith('/studio') ||
     pathname?.startsWith('/bradesco-26')

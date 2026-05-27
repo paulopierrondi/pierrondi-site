@@ -3,6 +3,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import Script from 'next/script'
 import dynamic from 'next/dynamic'
+import KimiSwarmEffects from '@/components/KimiSwarmEffects'
 import SiteJsonLd from '@/components/SiteJsonLd'
 import { SITE_URL } from '@/lib/site'
 import './globals.css'
@@ -17,21 +18,30 @@ const CookieBanner = dynamic(() => import('@/components/CookieBanner'))
 
 export const metadata: Metadata = {
   title: {
-    default: 'Paulo Pierrondi - ServiceNow, IA governada e enterprise workflows',
+    default: 'Paulo Pierrondi - IA governada, ServiceNow, AgentOps e LLM inference',
     template: '%s | pierrondi.dev',
   },
   description:
-    'Site pessoal de Paulo Pierrondi, Technical Account Executive na ServiceNow, sobre IA governada, plataforma, dados e workflows corporativos.',
+    'Portfolio executivo de Paulo Pierrondi sobre IA governada, ServiceNow, SADA, AgentOps, LLM inference, agentes autonomos com governanca e workflows corporativos.',
   keywords: [
     'Paulo Pierrondi',
     'ServiceNow',
     'IA governada',
+    'SADA ServiceNow',
+    'ServiceNow AI-Driven Architecture',
     'AI Control Tower',
     'Now Assist',
+    'AI Agents',
+    'AgentOps',
+    'LLM inference',
+    'LLMOps',
     'Workflow Data Fabric',
     'Service Graph',
     'CSDM',
+    'CMDB',
+    'enterprise AI governance',
     'enterprise workflows',
+    'workflow automation',
     'pierrondi.dev',
   ],
   authors: [{ name: 'Paulo Pierrondi', url: SITE_URL }],
@@ -53,9 +63,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi - ServiceNow, IA governada e enterprise workflows',
+    title: 'Paulo Pierrondi - IA governada, ServiceNow, AgentOps e LLM inference',
     description:
-      'Site pessoal sobre ServiceNow, IA governada, dados, contexto e execucao corporativa.',
+      'Portfolio executivo sobre ServiceNow, SADA, agentes governados, LLM inference, AgentOps, dados e execucao corporativa.',
     url: '/',
     siteName: 'pierrondi.dev',
     type: 'website',
@@ -64,8 +74,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Paulo Pierrondi - ServiceNow e IA governada',
-    description: 'Site pessoal sobre ServiceNow, IA governada e workflows corporativos.',
+    title: 'Paulo Pierrondi - IA governada, ServiceNow e AgentOps',
+    description: 'Portfolio executivo sobre ServiceNow, SADA, agentes governados, LLM inference e workflows corporativos.',
     images: ['/og'],
   },
   alternates: {
@@ -109,6 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${sans.variable} ${mono.variable} antialiased`}>
         <SiteJsonLd />
+        <KimiSwarmEffects />
         {children}
         <CookieBanner />
       </body>

@@ -1,0 +1,18 @@
+node_modules/
+.next/
+.git/
+.codegraph/
+.brain/
+.cursor/
+.github/
+qa/
+tmp/
+test-results/
+playwright-report/
+blob-report/
+*.log
+*.tsbuildinfo
+.DS_Store
+
+# Duplicated legacy public tree. Canonical assets live directly under /public.
+public/public/

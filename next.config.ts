@@ -40,7 +40,6 @@ const ffmpegTracingIncludes = Object.fromEntries(
 
 const RETIRED_PUBLIC_ROUTES = [
   '/agentes',
-  '/automacoes',
   '/blog',
   '/blog/:path*',
   '/calculadora',
@@ -102,7 +101,7 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io",
               "style-src 'self' 'unsafe-inline' fonts.googleapis.com",
               "font-src 'self' fonts.gstatic.com",
               "img-src 'self' data: blob:",
@@ -110,7 +109,7 @@ const nextConfig: NextConfig = {
               // localhost / 127.0.0.1 allowed so the Studio (browser) can talk
               // to the local-agent (pierrondi-local-agent) on the user's Mac.
               // The local-agent itself enforces token + Origin allowlist.
-              "connect-src 'self' formspree.io *.sentry.io http://127.0.0.1:* http://localhost:* ws://127.0.0.1:* ws://localhost:*",
+              "connect-src 'self' formspree.io https://plausible.io *.sentry.io http://127.0.0.1:* http://localhost:* ws://127.0.0.1:* ws://localhost:*",
               "frame-src 'self'",
             ].join('; '),
           },

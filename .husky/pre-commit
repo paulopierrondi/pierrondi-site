@@ -1,1 +1,4 @@
 npx lint-staged
+
+# agents-hub:secrets-guard
+bash /Users/paulopierrondi/agents-hub/scripts/secrets-pre-commit-guard.sh

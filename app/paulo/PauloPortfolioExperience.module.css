@@ -1,0 +1,1800 @@
+.page {
+  --paulo-bg: #050606;
+  --paulo-ink: #f8f3e7;
+  --paulo-muted: rgba(248, 243, 231, 0.66);
+  --paulo-soft: rgba(248, 243, 231, 0.1);
+  --paulo-line: rgba(248, 243, 231, 0.14);
+  --paulo-green: #7ee35f;
+  --paulo-cyan: #6dc6d9;
+  --paulo-brass: #d8b45f;
+  --paulo-panel: rgba(17, 19, 19, 0.76);
+  --ease-executive: cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  min-height: 100vh;
+  overflow: clip;
+  color: var(--paulo-ink);
+  background: linear-gradient(180deg, #050606 0%, #0a0d0c 42%, #050606 100%);
+}
+
+.page *,
+.page *::before,
+.page *::after {
+  box-sizing: border-box;
+}
+
+.page::before {
+  content: "";
+  position: fixed;
+  inset: -76px;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(248, 243, 231, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(248, 243, 231, 0.025) 1px, transparent 1px);
+  background-size: 76px 76px;
+  will-change: transform;
+}
+
+.motionEnabled::before {
+  animation: gridTranslate 34s linear infinite;
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.34;
+  mix-blend-mode: soft-light;
+  background-image:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.08), transparent 28%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 3px);
+}
+
+.localNav {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  z-index: 30;
+  display: flex;
+  max-width: calc(100vw - 24px);
+  transform: translateX(-50%);
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(248, 243, 231, 0.14);
+  border-radius: 999px;
+  padding: 7px;
+  background: rgba(5, 6, 6, 0.72);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(20px);
+}
+
+.motionEnabled .localNav {
+  animation: navRise 720ms cubic-bezier(0.16, 1, 0.3, 1) 260ms both;
+}
+
+.localNav a,
+.localNav button {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 12px;
+  color: rgba(248, 243, 231, 0.72);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.localNavText {
+  display: inline;
+}
+
+.localNav button:last-child {
+  min-width: 132px;
+}
+
+.localNav a:hover,
+.localNav button:hover {
+  color: #fff;
+  background: rgba(248, 243, 231, 0.08);
+  transform: translateY(-1px);
+}
+
+.localNav a:focus-visible,
+.localNav button:focus-visible,
+.heroActions a:focus-visible,
+.investorPanel a:focus-visible {
+  outline: 2px solid var(--paulo-green);
+  outline-offset: 3px;
+}
+
+.hero,
+.proof,
+.operating,
+.workflowSection,
+.architectureSection,
+.investor {
+  position: relative;
+  z-index: 1;
+  padding-inline: max(22px, calc((100vw - 1180px) / 2));
+}
+
+.neuralSection {
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.heroCopy,
+.portraitSystem,
+.sectionHeader,
+.metricsGrid,
+.operatingIntro,
+.capabilityGrid,
+.workflowTrack,
+.architectureGrid,
+.investorPanel {
+  position: relative;
+  z-index: 2;
+}
+
+.neuralField {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.76;
+  mix-blend-mode: screen;
+  --neural-a: rgba(126, 227, 95, 0.32);
+  --neural-b: rgba(109, 198, 217, 0.25);
+  --neural-c: rgba(216, 180, 95, 0.16);
+}
+
+.neuralFieldHero {
+  --neural-a: rgba(126, 227, 95, 0.36);
+  --neural-b: rgba(109, 198, 217, 0.28);
+  --neural-c: rgba(248, 243, 231, 0.1);
+}
+
+.neuralFieldProof {
+  --neural-a: rgba(126, 227, 95, 0.24);
+  --neural-b: rgba(109, 198, 217, 0.3);
+  --neural-c: rgba(216, 180, 95, 0.12);
+}
+
+.neuralFieldOperating {
+  --neural-a: rgba(126, 227, 95, 0.3);
+  --neural-b: rgba(109, 198, 217, 0.2);
+  --neural-c: rgba(216, 180, 95, 0.2);
+}
+
+.neuralFieldWorkflow {
+  --neural-a: rgba(216, 180, 95, 0.26);
+  --neural-b: rgba(126, 227, 95, 0.22);
+  --neural-c: rgba(109, 198, 217, 0.16);
+}
+
+.neuralFieldArchitecture {
+  --neural-a: rgba(109, 198, 217, 0.34);
+  --neural-b: rgba(126, 227, 95, 0.22);
+  --neural-c: rgba(248, 243, 231, 0.1);
+}
+
+.neuralFieldInvestor {
+  --neural-a: rgba(126, 227, 95, 0.32);
+  --neural-b: rgba(216, 180, 95, 0.2);
+  --neural-c: rgba(109, 198, 217, 0.16);
+}
+
+.neuralField::before,
+.neuralField::after {
+  content: "";
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.neuralField::before {
+  top: clamp(20px, 8vw, 110px);
+  right: -8%;
+  width: clamp(310px, 44vw, 740px);
+  background: radial-gradient(circle, var(--neural-a), transparent 64%);
+  filter: blur(34px);
+  opacity: 0.38;
+}
+
+.neuralField::after {
+  left: -9%;
+  bottom: -14%;
+  width: clamp(260px, 36vw, 560px);
+  background: radial-gradient(circle, var(--neural-b), transparent 66%);
+  filter: blur(44px);
+  opacity: 0.28;
+}
+
+.neuralMesh,
+.neuralNodes,
+.neuralSignals {
+  position: absolute;
+  inset: 0;
+}
+
+.neuralMesh span {
+  position: absolute;
+  height: 1px;
+  width: clamp(220px, 34vw, 590px);
+  background: linear-gradient(90deg, transparent, var(--neural-a), var(--neural-b), transparent);
+  opacity: 0.42;
+  transform-origin: left center;
+}
+
+.neuralMesh span:nth-child(1) {
+  left: 8%;
+  top: 20%;
+  transform: rotate(14deg);
+  animation-delay: 0.1s;
+}
+
+.neuralMesh span:nth-child(2) {
+  right: 4%;
+  top: 31%;
+  transform: rotate(151deg);
+  animation-delay: 1.2s;
+}
+
+.neuralMesh span:nth-child(3) {
+  left: 18%;
+  top: 56%;
+  transform: rotate(-10deg);
+  animation-delay: 2.1s;
+}
+
+.neuralMesh span:nth-child(4) {
+  right: 10%;
+  bottom: 21%;
+  transform: rotate(198deg);
+  animation-delay: 3s;
+}
+
+.neuralMesh span:nth-child(5) {
+  left: 38%;
+  top: 40%;
+  width: clamp(180px, 25vw, 420px);
+  transform: rotate(82deg);
+  animation-delay: 3.8s;
+}
+
+.motionEnabled .neuralMesh span {
+  animation: neuralLineBreathe 7s ease-in-out infinite;
+}
+
+.neuralNodes span {
+  position: absolute;
+  width: var(--node-size, 7px);
+  height: var(--node-size, 7px);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 36% 32%, #fff, var(--neural-a) 34%, rgba(126, 227, 95, 0.08) 70%);
+  box-shadow:
+    0 0 0 1px rgba(248, 243, 231, 0.18),
+    0 0 24px var(--neural-a);
+  opacity: 0.8;
+}
+
+.neuralNodes span:nth-child(1) {
+  --node-size: 8px;
+  left: 8%;
+  top: 22%;
+  animation-delay: 0.1s;
+}
+
+.neuralNodes span:nth-child(2) {
+  --node-size: 5px;
+  left: 18%;
+  top: 41%;
+  animation-delay: 0.6s;
+}
+
+.neuralNodes span:nth-child(3) {
+  --node-size: 9px;
+  left: 31%;
+  top: 28%;
+  animation-delay: 1.1s;
+}
+
+.neuralNodes span:nth-child(4) {
+  --node-size: 6px;
+  left: 44%;
+  top: 62%;
+  animation-delay: 1.6s;
+}
+
+.neuralNodes span:nth-child(5) {
+  --node-size: 7px;
+  left: 58%;
+  top: 35%;
+  animation-delay: 2.1s;
+}
+
+.neuralNodes span:nth-child(6) {
+  --node-size: 10px;
+  left: 72%;
+  top: 19%;
+  animation-delay: 2.6s;
+}
+
+.neuralNodes span:nth-child(7) {
+  --node-size: 6px;
+  left: 84%;
+  top: 48%;
+  animation-delay: 3.1s;
+}
+
+.neuralNodes span:nth-child(8) {
+  --node-size: 8px;
+  left: 69%;
+  top: 72%;
+  animation-delay: 3.6s;
+}
+
+.neuralNodes span:nth-child(9) {
+  --node-size: 5px;
+  left: 12%;
+  top: 76%;
+  animation-delay: 4.1s;
+}
+
+.neuralNodes span:nth-child(10) {
+  --node-size: 7px;
+  left: 25%;
+  top: 67%;
+  animation-delay: 4.6s;
+}
+
+.neuralNodes span:nth-child(11) {
+  --node-size: 6px;
+  left: 51%;
+  top: 18%;
+  animation-delay: 5.1s;
+}
+
+.neuralNodes span:nth-child(12) {
+  --node-size: 9px;
+  left: 91%;
+  top: 25%;
+  animation-delay: 5.6s;
+}
+
+.neuralNodes span:nth-child(13) {
+  --node-size: 5px;
+  left: 36%;
+  top: 82%;
+  animation-delay: 6.1s;
+}
+
+.neuralNodes span:nth-child(14) {
+  --node-size: 7px;
+  left: 79%;
+  top: 84%;
+  animation-delay: 6.6s;
+}
+
+.neuralNodes span:nth-child(15) {
+  --node-size: 6px;
+  left: 6%;
+  top: 55%;
+  animation-delay: 7.1s;
+}
+
+.neuralNodes span:nth-child(16) {
+  --node-size: 8px;
+  left: 61%;
+  top: 55%;
+  animation-delay: 7.6s;
+}
+
+.motionEnabled .neuralNodes span {
+  animation: neuronPulse 5.6s ease-in-out infinite;
+}
+
+.neuralSignals span {
+  position: absolute;
+  width: clamp(82px, 10vw, 150px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), var(--neural-a), transparent);
+  opacity: 0;
+  transform-origin: left center;
+  filter: drop-shadow(0 0 8px var(--neural-a));
+}
+
+.neuralSignals span:nth-child(1) {
+  left: 6%;
+  top: 24%;
+  transform: rotate(18deg);
+  animation-delay: 0.1s;
+}
+
+.neuralSignals span:nth-child(2) {
+  left: 24%;
+  top: 36%;
+  transform: rotate(-8deg);
+  animation-delay: 1s;
+}
+
+.neuralSignals span:nth-child(3) {
+  left: 43%;
+  top: 59%;
+  transform: rotate(13deg);
+  animation-delay: 1.9s;
+}
+
+.neuralSignals span:nth-child(4) {
+  left: 66%;
+  top: 25%;
+  transform: rotate(151deg);
+  animation-delay: 2.8s;
+}
+
+.neuralSignals span:nth-child(5) {
+  left: 72%;
+  top: 70%;
+  transform: rotate(202deg);
+  animation-delay: 3.7s;
+}
+
+.neuralSignals span:nth-child(6) {
+  left: 16%;
+  top: 76%;
+  transform: rotate(-18deg);
+  animation-delay: 4.6s;
+}
+
+.neuralSignals span:nth-child(7) {
+  left: 52%;
+  top: 18%;
+  transform: rotate(86deg);
+  animation-delay: 5.5s;
+}
+
+.motionEnabled .neuralSignals span {
+  animation: axonTravel 6.8s ease-in-out infinite;
+}
+
+.hero {
+  min-height: calc(100svh - 64px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.96fr) minmax(300px, 0.44fr);
+  gap: clamp(34px, 6vw, 84px);
+  align-items: center;
+  padding-top: clamp(72px, 9vw, 126px);
+  padding-bottom: clamp(84px, 10vw, 132px);
+}
+
+.motionField {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  opacity: 0.9;
+  mask-image: linear-gradient(90deg, #000 0%, #000 72%, transparent 100%);
+}
+
+.motionField::before {
+  content: "";
+  position: absolute;
+  inset: 10% 0 8%;
+  background:
+    linear-gradient(90deg, transparent 0 28%, rgba(126, 227, 95, 0.12) 50%, transparent 72%),
+    linear-gradient(180deg, transparent, rgba(109, 198, 217, 0.08), transparent);
+  transform: translateX(-38%);
+}
+
+.motionEnabled .motionField::before {
+  animation: fieldSweep 12s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.motionField span {
+  position: absolute;
+  left: -14vw;
+  width: 42vw;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--paulo-green), var(--paulo-cyan), transparent);
+}
+
+.motionEnabled .motionField span {
+  animation: signalSlide 11s ease-in-out infinite;
+}
+
+.motionField span:nth-child(1) {
+  top: 18%;
+}
+
+.motionField span:nth-child(2) {
+  top: 42%;
+  animation-delay: 1.8s;
+}
+
+.motionField span:nth-child(3) {
+  top: 64%;
+  animation-delay: 3.6s;
+}
+
+.motionField span:nth-child(4) {
+  top: 82%;
+  animation-delay: 5.4s;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  color: var(--paulo-green);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.heroCopy h1,
+.sectionHeader h2,
+.operatingIntro h2,
+.investorPanel h2 {
+  margin: 0;
+  color: #fff;
+  font-weight: 950;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.heroCopy h1 {
+  max-width: 860px;
+  font-size: clamp(50px, 6.15vw, 98px);
+  line-height: 0.9;
+  text-shadow:
+    0 1px 0 rgba(248, 243, 231, 0.16),
+    0 28px 90px rgba(126, 227, 95, 0.08);
+}
+
+.lead {
+  max-width: 730px;
+  margin: 28px 0 0;
+  color: rgba(248, 243, 231, 0.78);
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.42;
+}
+
+.note {
+  max-width: 690px;
+  margin: 18px 0 0;
+  color: rgba(248, 243, 231, 0.56);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.heroActions {
+  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.heroActions a,
+.investorPanel a {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 0 20px;
+  color: #061006;
+  background: var(--paulo-green);
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.heroActions a + a {
+  color: var(--paulo-ink);
+  border: 1px solid var(--paulo-line);
+  background: rgba(248, 243, 231, 0.06);
+}
+
+.heroActions a:hover,
+.investorPanel a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 48px rgba(126, 227, 95, 0.16);
+}
+
+.heroActions a:active,
+.investorPanel a:active {
+  transform: translateY(0);
+}
+
+.portraitSystem {
+  justify-self: end;
+  width: min(340px, 100%);
+  isolation: isolate;
+}
+
+.portraitSystem::before,
+.portraitSystem::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.portraitSystem::before {
+  inset: -28px;
+  z-index: -1;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 50% 34%, rgba(126, 227, 95, 0.24), transparent 52%),
+    conic-gradient(
+      from 178deg,
+      transparent 0deg,
+      rgba(126, 227, 95, 0.28) 52deg,
+      transparent 118deg,
+      rgba(109, 198, 217, 0.22) 210deg,
+      transparent 286deg
+    );
+  filter: blur(10px);
+  opacity: 0.64;
+}
+
+.portraitSystem::after {
+  inset: -18px;
+  z-index: -1;
+  border: 1px solid rgba(126, 227, 95, 0.16);
+  border-radius: 24px;
+  background:
+    linear-gradient(90deg, rgba(126, 227, 95, 0.16) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(109, 198, 217, 0.12) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(circle at 50% 48%, #000 0 55%, transparent 78%);
+  opacity: 0.55;
+}
+
+.motionEnabled .portraitSystem::before {
+  animation: portraitHalo 9s ease-in-out infinite;
+}
+
+.motionEnabled .portraitSystem::after {
+  animation: portraitGrid 16s linear infinite;
+}
+
+.portraitFrame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(126, 227, 95, 0.2);
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 52% 18%, rgba(126, 227, 95, 0.18), transparent 36%),
+    linear-gradient(145deg, rgba(109, 198, 217, 0.16), transparent 38%),
+    #070d0b;
+  box-shadow:
+    0 34px 120px rgba(0, 0, 0, 0.54),
+    0 0 52px rgba(126, 227, 95, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+  transform: translateZ(0);
+  transition:
+    border-color 320ms var(--ease-executive),
+    box-shadow 320ms var(--ease-executive),
+    transform 320ms var(--ease-executive);
+}
+
+.portraitFrame::before,
+.portraitFrame::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.portraitFrame::before {
+  inset: 0;
+  border: 1px solid rgba(248, 243, 231, 0.09);
+  background:
+    linear-gradient(180deg, transparent 0 62%, rgba(5, 6, 6, 0.42) 100%),
+    radial-gradient(circle at 50% 17%, rgba(126, 227, 95, 0.1), transparent 36%),
+    linear-gradient(90deg, rgba(109, 198, 217, 0.09), transparent 18%, transparent 82%, rgba(126, 227, 95, 0.08));
+  opacity: 1;
+}
+
+.portraitFrame::after {
+  right: 14px;
+  bottom: 14px;
+  width: 58px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--paulo-green));
+}
+
+.motionEnabled .portraitSystem:hover .portraitFrame::after {
+  animation: edgePing 1.9s ease-in-out infinite;
+}
+
+.motionEnabled .portraitFrame::after {
+  animation: edgePing 2.8s ease-in-out infinite;
+}
+
+.motionEnabled .portraitFrame {
+  animation: portraitFloat 7.5s ease-in-out infinite;
+}
+
+.portraitSystem:hover .portraitFrame {
+  transform: translateY(-6px) scale(1.01);
+  border-color: rgba(126, 227, 95, 0.42);
+  box-shadow:
+    0 34px 120px rgba(0, 0, 0, 0.54),
+    0 0 0 1px rgba(126, 227, 95, 0.12),
+    0 0 64px rgba(109, 198, 217, 0.12);
+}
+
+.portraitImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.04) saturate(0.92) contrast(1.08) brightness(0.96);
+  transform: translateZ(0);
+}
+
+.portraitScan {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 0 45%, rgba(126, 227, 95, 0.18) 49%, transparent 54%),
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 4px);
+  opacity: 0.09;
+  mix-blend-mode: screen;
+  transition: opacity 260ms var(--ease-executive);
+}
+
+.motionEnabled .portraitSystem:hover .portraitScan {
+  opacity: 0.22;
+  animation: portraitScan 3.2s ease-in-out 1;
+}
+
+.motionEnabled .portraitScan {
+  opacity: 0.18;
+  animation: portraitScan 5.2s ease-in-out infinite;
+}
+
+.statusCard {
+  position: relative;
+  width: calc(100% - 26px);
+  margin: -18px auto 0;
+  border: 1px solid rgba(126, 227, 95, 0.22);
+  border-radius: 8px;
+  padding: 15px;
+  background:
+    linear-gradient(120deg, rgba(126, 227, 95, 0.08), rgba(109, 198, 217, 0.04)),
+    rgba(5, 6, 6, 0.86);
+  box-shadow:
+    0 22px 70px rgba(0, 0, 0, 0.36),
+    0 0 26px rgba(126, 227, 95, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.statusCard::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--paulo-green);
+  box-shadow: 0 0 0 0 rgba(126, 227, 95, 0.32);
+}
+
+.motionEnabled .statusCard::before {
+  animation: statusPulse 3.8s ease-out infinite;
+}
+
+.statusCard span,
+.statusCard strong {
+  display: block;
+}
+
+.statusCard span {
+  color: var(--paulo-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.statusCard strong {
+  margin-top: 6px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.proof,
+.operating,
+.workflowSection,
+.architectureSection,
+.investor {
+  padding-top: clamp(72px, 10vw, 124px);
+  padding-bottom: clamp(72px, 10vw, 124px);
+}
+
+.sectionHeader {
+  max-width: 860px;
+}
+
+.sectionHeader h2,
+.operatingIntro h2,
+.investorPanel h2 {
+  font-size: clamp(38px, 5.4vw, 74px);
+  line-height: 0.94;
+}
+
+.sectionHeader p:not(.eyebrow),
+.operatingIntro p:not(.eyebrow),
+.investorPanel p {
+  max-width: 690px;
+  margin: 22px 0 0;
+  color: var(--paulo-muted);
+  font-size: 17px;
+  line-height: 1.58;
+}
+
+.metricsGrid {
+  margin-top: 38px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metricsGrid article {
+  position: relative;
+  overflow: hidden;
+  min-height: 168px;
+  border: 1px solid var(--paulo-line);
+  border-radius: 8px;
+  padding: 22px;
+  background:
+    linear-gradient(145deg, rgba(126, 227, 95, 0.08), rgba(109, 198, 217, 0.04)),
+    rgba(248, 243, 231, 0.035);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.metricsGrid article::after,
+.capabilityCard::after,
+.workflowCard::after,
+.architectureCard::after,
+.investorPanel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 0 36%, rgba(255, 255, 255, 0.13) 50%, transparent 64%);
+  transform: translateX(-115%);
+  transition: transform 640ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.metricsGrid article::before,
+.capabilityCard::before,
+.workflowCard::before,
+.architectureCard::before,
+.investorPanel::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  --card-node: var(--paulo-green);
+  --card-node-rgb: 126, 227, 95;
+  background: var(--card-node);
+  box-shadow:
+    0 0 0 1px rgba(248, 243, 231, 0.16),
+    0 0 24px rgba(var(--card-node-rgb), 0.28);
+  opacity: 0.72;
+}
+
+.workflowCard::before {
+  --card-node: var(--paulo-brass);
+  --card-node-rgb: 216, 180, 95;
+}
+
+.architectureCard::before {
+  --card-node: var(--paulo-cyan);
+  --card-node-rgb: 109, 198, 217;
+}
+
+.motionEnabled .metricsGrid article::before,
+.motionEnabled .capabilityCard::before,
+.motionEnabled .workflowCard::before,
+.motionEnabled .architectureCard::before,
+.motionEnabled .investorPanel::before {
+  animation: cardNeuron 3.8s ease-in-out infinite;
+}
+
+.motionEnabled .metricsGrid article:nth-child(2)::before,
+.motionEnabled .capabilityCard:nth-child(2)::before,
+.motionEnabled .workflowCard:nth-child(2)::before,
+.motionEnabled .architectureCard:nth-child(2)::before {
+  animation-delay: 0.45s;
+}
+
+.motionEnabled .metricsGrid article:nth-child(3)::before,
+.motionEnabled .capabilityCard:nth-child(3)::before,
+.motionEnabled .workflowCard:nth-child(3)::before,
+.motionEnabled .architectureCard:nth-child(3)::before {
+  animation-delay: 0.9s;
+}
+
+.motionEnabled .metricsGrid article:nth-child(4)::before,
+.motionEnabled .capabilityCard:nth-child(4)::before {
+  animation-delay: 1.35s;
+}
+
+.metricsGrid article:hover {
+  transform: translateY(-4px);
+  border-color: rgba(126, 227, 95, 0.28);
+  background:
+    linear-gradient(145deg, rgba(126, 227, 95, 0.12), rgba(109, 198, 217, 0.06)),
+    rgba(248, 243, 231, 0.045);
+}
+
+.metricsGrid article:hover::after,
+.capabilityCard:hover::after,
+.workflowCard:hover::after,
+.architectureCard:hover::after,
+.investorPanel:hover::after {
+  transform: translateX(115%);
+}
+
+.metricsGrid strong {
+  display: block;
+  color: #fff;
+  font-size: clamp(38px, 5vw, 72px);
+  line-height: 0.9;
+  font-weight: 950;
+}
+
+.metricsGrid span {
+  display: block;
+  margin-top: 20px;
+  color: var(--paulo-muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.operating {
+  background:
+    radial-gradient(circle at 82% 12%, rgba(109, 198, 217, 0.12), transparent 38%),
+    radial-gradient(circle at 14% 80%, rgba(216, 180, 95, 0.12), transparent 40%),
+    linear-gradient(180deg, #06100d, #050706 74%, #050606);
+  color: var(--paulo-ink);
+}
+
+.operating .eyebrow {
+  color: var(--paulo-green);
+}
+
+.operatingIntro h2 {
+  color: #fff;
+}
+
+.operatingIntro p:not(.eyebrow) {
+  color: rgba(248, 243, 231, 0.66);
+}
+
+.capabilityGrid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.capabilityCard {
+  position: relative;
+  overflow: hidden;
+  min-height: 292px;
+  border: 1px solid rgba(248, 243, 231, 0.12);
+  border-radius: 8px;
+  padding: 22px;
+  background:
+    linear-gradient(145deg, rgba(126, 227, 95, 0.08), rgba(109, 198, 217, 0.035)),
+    rgba(7, 13, 12, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(14px);
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.capabilityCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(126, 227, 95, 0.28);
+  background:
+    linear-gradient(145deg, rgba(126, 227, 95, 0.12), rgba(109, 198, 217, 0.045)),
+    rgba(11, 21, 18, 0.82);
+}
+
+.capabilityCard svg {
+  color: var(--paulo-green);
+  transition: transform 180ms ease;
+}
+
+.capabilityCard:hover svg {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.capabilityCard h3 {
+  margin: 44px 0 14px;
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 950;
+}
+
+.capabilityCard p {
+  margin: 0;
+  color: rgba(248, 243, 231, 0.62);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.workflowTrack {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.workflowCard {
+  position: relative;
+  overflow: hidden;
+  min-height: 270px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: 1px solid var(--paulo-line);
+  border-radius: 8px;
+  padding: 22px;
+  background:
+    linear-gradient(145deg, rgba(216, 180, 95, 0.12), transparent 38%),
+    rgba(248, 243, 231, 0.035);
+  transition:
+    transform 190ms ease,
+    border-color 190ms ease,
+    background 190ms ease;
+}
+
+.workflowCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(216, 180, 95, 0.32);
+  background:
+    linear-gradient(145deg, rgba(216, 180, 95, 0.16), transparent 42%),
+    rgba(248, 243, 231, 0.05);
+}
+
+.workflowCard span {
+  color: var(--paulo-brass);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.workflowCard h3 {
+  margin: 18px 0 12px;
+  color: #fff;
+  font-size: 27px;
+  line-height: 1;
+  font-weight: 950;
+}
+
+.workflowCard p {
+  margin: 0;
+  color: var(--paulo-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.architectureSection {
+  background:
+    linear-gradient(180deg, rgba(109, 198, 217, 0.08), transparent 34%),
+    #060706;
+}
+
+.architectureGrid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.architectureCard {
+  position: relative;
+  border: 1px solid var(--paulo-line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(248, 243, 231, 0.035);
+  transition:
+    transform 210ms ease,
+    border-color 210ms ease,
+    background 210ms ease;
+}
+
+.architectureCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(109, 198, 217, 0.34);
+  background: rgba(248, 243, 231, 0.05);
+}
+
+.architectureViewport {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(125deg, rgba(126, 227, 95, 0.16), transparent 30%),
+    linear-gradient(305deg, rgba(109, 198, 217, 0.18), transparent 36%),
+    repeating-linear-gradient(115deg, rgba(248, 243, 231, 0.055) 0 1px, transparent 1px 24px),
+    #080b0a;
+}
+
+.architectureViewport::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 1px solid rgba(248, 243, 231, 0.1);
+  background:
+    linear-gradient(180deg, rgba(5, 6, 6, 0.1), transparent 38%, rgba(5, 6, 6, 0.24)),
+    radial-gradient(circle at 50% 45%, transparent 0 34%, rgba(5, 6, 6, 0.2) 100%);
+  pointer-events: none;
+}
+
+.architectureViewport::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  z-index: 3;
+  height: 3px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, var(--paulo-green), var(--paulo-cyan)) left / 42% 100% no-repeat,
+    rgba(248, 243, 231, 0.12);
+  background-size: 28% 100%, 100% 100%;
+  transition: background-size 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.motionEnabled .architectureCard:hover .architectureViewport::after {
+  background-size: 74% 100%, 100% 100%;
+}
+
+.motionEnabled .architectureViewport::after {
+  animation: architectureProgress 3.8s ease-in-out infinite;
+}
+
+.architectureFlow {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(90deg, transparent, rgba(126, 227, 95, 0.16), transparent),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 18px);
+  opacity: 0.72;
+  transform: translateX(-60%);
+  pointer-events: none;
+}
+
+.motionEnabled .architectureCard:hover .architectureFlow {
+  animation: architectureSweep 1.8s ease-out 1;
+}
+
+.motionEnabled .architectureFlow {
+  animation: architectureSweep 4.2s ease-in-out infinite;
+}
+
+.architectureMeta {
+  padding: 18px;
+}
+
+.architectureMeta span {
+  color: var(--paulo-green);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.architectureMeta h3 {
+  margin: 10px 0 8px;
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.architectureMeta p {
+  margin: 0;
+  color: var(--paulo-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.diagramOutcome {
+  display: block;
+  margin-top: 14px;
+  color: rgba(248, 243, 231, 0.84);
+  font-size: 12px;
+  line-height: 1.48;
+  font-weight: 850;
+}
+
+.architectureLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 16px;
+  color: var(--paulo-green);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.architectureLink:hover {
+  color: #f2d38b;
+}
+
+.architectureLink svg {
+  flex: 0 0 auto;
+  transition: transform 180ms ease;
+}
+
+.architectureLink:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.investor {
+  padding-bottom: 132px;
+}
+
+.investorPanel {
+  position: relative;
+  overflow: hidden;
+  max-width: 980px;
+  border: 1px solid var(--paulo-line);
+  border-radius: 8px;
+  padding: clamp(26px, 5vw, 58px);
+  background:
+    linear-gradient(130deg, rgba(126, 227, 95, 0.11), transparent 34%),
+    rgba(248, 243, 231, 0.035);
+  transition:
+    border-color 220ms ease,
+    background 220ms ease;
+}
+
+.investorPanel:hover {
+  border-color: rgba(126, 227, 95, 0.28);
+  background:
+    linear-gradient(130deg, rgba(126, 227, 95, 0.14), transparent 38%),
+    rgba(248, 243, 231, 0.045);
+}
+
+.bulletLine {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bulletLine span {
+  border: 1px solid var(--paulo-line);
+  border-radius: 999px;
+  padding: 8px 11px;
+  color: rgba(248, 243, 231, 0.76);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.investorPanel a {
+  margin-top: 32px;
+}
+
+.paused .localNav a,
+.paused .localNav button,
+.paused .heroActions a,
+.paused .investorPanel a,
+.paused .portraitFrame,
+.paused .metricsGrid article,
+.paused .capabilityCard,
+.paused .workflowCard,
+.paused .architectureCard,
+.paused .investorPanel {
+  transition: none;
+}
+
+.paused .motionField {
+  display: none;
+}
+
+.paused .neuralField {
+  opacity: 0.34;
+  mix-blend-mode: normal;
+}
+
+.paused .neuralMesh span,
+.paused .neuralNodes span,
+.paused .neuralSignals span,
+.paused .portraitSystem::before,
+.paused .portraitSystem::after,
+.paused .metricsGrid article::before,
+.paused .capabilityCard::before,
+.paused .workflowCard::before,
+.paused .architectureCard::before,
+.paused .investorPanel::before {
+  animation: none;
+}
+
+.paused .localNav a:hover,
+.paused .localNav button:hover,
+.paused .heroActions a:hover,
+.paused .investorPanel a:hover,
+.paused .portraitSystem:hover .portraitFrame,
+.paused .metricsGrid article:hover,
+.paused .capabilityCard:hover,
+.paused .capabilityCard:hover svg,
+.paused .workflowCard:hover,
+.paused .architectureCard:hover,
+.paused .investorPanel:hover {
+  transform: none;
+}
+
+/* Architecture Diagrams */
+.diagramViewport {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(125deg, rgba(126, 227, 95, 0.08), transparent 30%),
+    linear-gradient(305deg, rgba(109, 198, 217, 0.1), transparent 36%),
+    repeating-linear-gradient(115deg, rgba(248, 243, 231, 0.04) 0 1px, transparent 1px 24px),
+    #080b0a;
+}
+
+.diagramViewport::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 1px solid rgba(248, 243, 231, 0.1);
+  background:
+    linear-gradient(180deg, rgba(5, 6, 6, 0.1), transparent 38%, rgba(5, 6, 6, 0.24)),
+    radial-gradient(circle at 50% 45%, transparent 0 34%, rgba(5, 6, 6, 0.2) 100%);
+  pointer-events: none;
+}
+
+.diagramSvg {
+  width: 100%;
+  height: 100%;
+  max-width: 420px;
+  z-index: 1;
+}
+
+.diagramEdge {
+  fill: none;
+  stroke: rgba(126, 227, 95, 0.35);
+  stroke-width: 1.5;
+  stroke-dasharray: 10 7;
+  stroke-linecap: round;
+  stroke-dashoffset: 0;
+  transition:
+    stroke 320ms ease,
+    stroke-opacity 320ms ease;
+}
+
+.diagramEdge[data-dashed='true'] {
+  stroke: rgba(109, 198, 217, 0.3);
+  stroke-dasharray: 4 3;
+}
+
+.architectureCard:hover .diagramEdge {
+  stroke: rgba(126, 227, 95, 0.55);
+}
+
+.architectureCard:hover .diagramEdge[data-dashed='true'] {
+  stroke: rgba(109, 198, 217, 0.45);
+}
+
+.motionEnabled .diagramEdge {
+  animation: diagramDashFlow 2.8s linear infinite;
+}
+
+.diagramNode {
+  opacity: 0.85;
+  transition: opacity 260ms ease;
+}
+
+.motionEnabled .diagramNode {
+  animation: neuronPulse 5.6s ease-in-out infinite;
+}
+
+.diagramLabel {
+  fill: rgba(248, 243, 231, 0.72);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+.architectureCard:hover .diagramNode {
+  opacity: 1;
+}
+
+.diagramSignal {
+  opacity: 0;
+  filter:
+    drop-shadow(0 0 4px currentColor)
+    drop-shadow(0 0 10px currentColor);
+}
+
+.paused .diagramSvg .diagramNode,
+.paused .diagramSvg .diagramEdge,
+.paused .diagramSvg .diagramSignal {
+  animation: none;
+}
+
+.paused .diagramSvg .diagramSignal {
+  opacity: 0;
+}
+
+@media (max-width: 760px) {
+  .diagramLabel {
+    font-size: 9px;
+  }
+}
+
+@keyframes diagramDashFlow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -34;
+  }
+}
+
+@keyframes gridTranslate {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(76px, 76px, 0);
+  }
+}
+
+@keyframes navRise {
+  0% {
+    transform: translate(-50%, 16px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes fieldSweep {
+  0%,
+  100% {
+    transform: translateX(-42%);
+    opacity: 0.18;
+  }
+  48% {
+    transform: translateX(34%);
+    opacity: 0.56;
+  }
+}
+
+@keyframes signalSlide {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.78;
+  }
+  66% {
+    opacity: 0.74;
+  }
+  100% {
+    transform: translateX(126vw);
+    opacity: 0;
+  }
+}
+
+@keyframes portraitScan {
+  0%,
+  100% {
+    transform: translateY(-18%);
+  }
+  50% {
+    transform: translateY(18%);
+  }
+}
+
+@keyframes portraitFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.006);
+  }
+}
+
+@keyframes edgePing {
+  0%,
+  100% {
+    opacity: 0.28;
+    transform: scaleX(0.72);
+  }
+  50% {
+    opacity: 0.86;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes statusPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(126, 227, 95, 0.28);
+  }
+  70% {
+    box-shadow: 0 0 0 11px rgba(126, 227, 95, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(126, 227, 95, 0);
+  }
+}
+
+@keyframes neuralLineBreathe {
+  0%,
+  100% {
+    opacity: 0.2;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 0.62;
+    filter: blur(0.2px);
+  }
+}
+
+@keyframes neuronPulse {
+  0%,
+  100% {
+    transform: scale(0.82);
+    opacity: 0.42;
+  }
+  44% {
+    transform: scale(1.24);
+    opacity: 0.95;
+  }
+  68% {
+    transform: scale(0.96);
+    opacity: 0.64;
+  }
+}
+
+@keyframes axonTravel {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  20% {
+    opacity: 0.9;
+    clip-path: inset(0 0 0 0);
+  }
+  58% {
+    opacity: 0.58;
+    clip-path: inset(0 0 0 28%);
+  }
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 0 100%);
+  }
+}
+
+@keyframes portraitHalo {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.98) rotate(0deg);
+  }
+  50% {
+    opacity: 0.78;
+    transform: scale(1.03) rotate(4deg);
+  }
+}
+
+@keyframes portraitGrid {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 34px 34px, -34px 34px;
+  }
+}
+
+@keyframes cardNeuron {
+  0%,
+  100% {
+    opacity: 0.46;
+    transform: scale(0.86);
+    box-shadow:
+      0 0 0 1px rgba(248, 243, 231, 0.16),
+      0 0 18px rgba(var(--card-node-rgb), 0.18);
+  }
+  52% {
+    opacity: 0.98;
+    transform: scale(1.18);
+    box-shadow:
+      0 0 0 1px rgba(248, 243, 231, 0.22),
+      0 0 32px rgba(var(--card-node-rgb), 0.34);
+  }
+}
+
+@keyframes architectureSweep {
+  0% {
+    transform: translateX(-60%);
+  }
+  55% {
+    transform: translateX(60%);
+  }
+  100% {
+    transform: translateX(60%);
+  }
+}
+
+@keyframes pulseRing {
+  0%,
+  100% {
+    transform: scale(0.84);
+    opacity: 0.32;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.82;
+  }
+}
+
+@keyframes architectureProgress {
+  0%,
+  100% {
+    background-size: 18% 100%, 100% 100%;
+  }
+  52% {
+    background-size: 76% 100%, 100% 100%;
+  }
+}
+
+@media (max-width: 980px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .portraitSystem {
+    justify-self: start;
+    width: min(320px, 78vw);
+  }
+
+  .metricsGrid,
+  .capabilityGrid,
+  .workflowTrack,
+  .architectureGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .localNav {
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    left: 12px;
+    max-width: none;
+    transform: none;
+    overflow-x: auto;
+    justify-content: flex-start;
+    gap: 2px;
+    padding: 5px;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: 12px;
+    scrollbar-width: none;
+  }
+
+  .motionEnabled .localNav {
+    animation-name: mobileNavRise;
+  }
+
+  .localNav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .localNav a,
+  .localNav button {
+    min-height: 32px;
+    padding: 0 8px;
+    font-size: 10px;
+  }
+
+  .localNavText {
+    display: none;
+  }
+
+  .localNav button {
+    width: 34px;
+    min-width: 34px;
+    padding: 0;
+  }
+
+  .localNav button:last-child {
+    min-width: 34px;
+  }
+
+  .hero {
+    padding-top: 76px;
+    padding-bottom: 64px;
+  }
+
+  .heroCopy h1 {
+    font-size: clamp(40px, 12.2vw, 58px);
+    line-height: 0.92;
+  }
+
+  .metricsGrid,
+  .capabilityGrid,
+  .workflowTrack,
+  .architectureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .metricsGrid article,
+  .capabilityCard,
+  .workflowCard {
+    min-height: auto;
+  }
+
+  .investor {
+    padding-bottom: calc(132px + env(safe-area-inset-bottom));
+  }
+}
+
+@keyframes mobileNavRise {
+  0% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

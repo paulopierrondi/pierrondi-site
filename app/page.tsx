@@ -1,4 +1,9 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import KimiHomeHero from '@/components/KimiHomeHero'
+import HomeContactForm from './HomeContactForm'
+import { feitos } from './feitos/feitos-data'
 import styles from './page.module.css'
 
 const themes = [
@@ -26,14 +31,6 @@ const themes = [
     copy:
       'Servicos, ownership, dependencias e dados operacionais bem modelados continuam separando demo bonita de operacao confiavel.',
   },
-]
-
-const agentSignals = [
-  ['Intent', 'front door'],
-  ['Context', 'service graph'],
-  ['Policy', 'AI control'],
-  ['Action', 'workflow'],
-  ['Evidence', 'audit trail'],
 ]
 
 const focusAreas = [
@@ -115,16 +112,35 @@ const sourceLinks = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Paulo Pierrondi - ServiceNow, IA governada e enterprise workflows',
+  title: 'Paulo Pierrondi - IA governada, ServiceNow, AgentOps e LLM inference',
   description:
-    'Site pessoal de Paulo Pierrondi, Technical Account Executive na ServiceNow, sobre IA governada, plataforma, dados e workflows corporativos.',
+    'Portfolio executivo de Paulo Pierrondi sobre IA governada, ServiceNow, SADA, agentes autonomos com governanca, LLM inference, AgentOps e plataformas de automacao enterprise.',
+  keywords: [
+    'Paulo Pierrondi',
+    'IA governada',
+    'ServiceNow',
+    'SADA ServiceNow',
+    'ServiceNow AI-Driven Architecture',
+    'Now Assist',
+    'AI Agents',
+    'AgentOps',
+    'LLM inference',
+    'LLMOps',
+    'CSDM',
+    'CMDB',
+    'enterprise AI',
+    'workflow automation',
+    'FSI AI',
+    'Energy AI',
+    'Retail AI',
+  ],
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Paulo Pierrondi - ServiceNow, IA governada e enterprise workflows',
+    title: 'Paulo Pierrondi - IA governada, ServiceNow, AgentOps e LLM inference',
     description:
-      'Uma pagina pessoal sobre ServiceNow, agentes governados, modelo operacional, dados, contexto e execucao corporativa.',
+      'Portfolio executivo sobre ServiceNow, SADA, agentes governados, inferencia de LLMs, AgentOps, dados e execucao corporativa.',
     url: '/',
     siteName: 'pierrondi.dev',
     locale: 'pt_BR',
@@ -133,76 +149,42 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Paulo Pierrondi - ServiceNow e IA governada',
-    description: 'Site pessoal sobre ServiceNow, agentes governados, modelo operacional e workflows corporativos.',
+    title: 'Paulo Pierrondi - IA governada, AgentOps e ServiceNow',
+    description: 'Portfolio executivo sobre ServiceNow, SADA, agentes governados, LLM inference e workflows corporativos.',
     images: ['/og'],
   },
 }
 
 export default function Home() {
   return (
-    <main className={styles.page}>
+    <main className={styles.page} data-swarm-root>
       <nav className={styles.nav} aria-label="Navegacao principal">
         <a href="#top" className={styles.brand} aria-label="Paulo Pierrondi">
-          Paulo Pierrondi
+          PIERRONDI
         </a>
         <div className={styles.navLinks}>
-          <a href="#thesis">Tese</a>
-          <a href="#operating">Modelo</a>
-          <a href="#themes">Temas</a>
-          <a href="https://br.linkedin.com/in/paulopierrondi" target="_blank" rel="noreferrer">
-            LinkedIn
+          <a href="#top">Inicio</a>
+          <Link href="/feitos/sada-servicenow">SADA</Link>
+          <Link href="/feitos/agentes-governados">Agentes</Link>
+          <Link href="/feitos/llm-inferencia">LLM</Link>
+          <Link href="/feitos/plataformas-automacao-ia">Automacao</Link>
+          <a href="#contact">Contato</a>
+          <a
+            href="https://br.linkedin.com/in/paulopierrondi"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn de Paulo Pierrondi"
+          >
+            <span className={styles.navIcon} aria-hidden="true">in</span>
           </a>
         </div>
       </nav>
 
-      <section id="top" className={styles.hero} aria-labelledby="home-title">
-        <div className={styles.heroScene} aria-hidden="true">
-          <div className={styles.sceneGrid} />
-          <span className={`${styles.sceneNode} ${styles.nodeOne}`}>AI Control Tower</span>
-          <span className={`${styles.sceneNode} ${styles.nodeTwo}`}>Workflow Data Fabric</span>
-          <span className={`${styles.sceneNode} ${styles.nodeThree}`}>AI Workforce</span>
-          <span className={`${styles.sceneNode} ${styles.nodeFour}`}>Service Graph</span>
-          <div className={styles.sceneCore}>
-            <span>Govern</span>
-            <strong>AI</strong>
-            <span>Act</span>
-          </div>
-          <div className={styles.agentPanel}>
-            <span className={styles.agentPanelLabel}>Agent operating model</span>
-            {agentSignals.map(([label, value]) => (
-              <span key={label}>
-                <strong>{label}</strong>
-                <em>{value}</em>
-              </span>
-            ))}
-          </div>
-          <div className={styles.signalLine} />
-        </div>
-
-        <div className={styles.heroContent}>
-          <p className={styles.eyebrow}>ServiceNow / Enterprise AI / Platform strategy</p>
-          <h1 id="home-title">IA corporativa nao escala so por modelos.</h1>
-          <p className={styles.lead}>
-            Ela escala quando governanca, contexto operacional e execucao em workflow andam juntos. Sou Technical
-            Account Executive na ServiceNow, trabalhando na intersecao entre estrategia, plataforma, dados e adocao.
-          </p>
-          <p className={styles.personalNote}>
-            Este e meu site pessoal, baseado em materiais publicos e na minha perspectiva profissional. Nao e um canal
-            oficial da ServiceNow e nao inclui informacao de clientes.
-          </p>
-          <div className={styles.actions}>
-            <a href="https://br.linkedin.com/in/paulopierrondi" target="_blank" rel="noreferrer">
-              Conectar no LinkedIn
-            </a>
-            <a href="#thesis">Ver minha tese</a>
-          </div>
-        </div>
-      </section>
+      <KimiHomeHero />
 
       <section id="thesis" className={styles.focusSection} aria-labelledby="thesis-title">
         <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
+          <div className={styles.sectionHeader} data-swarm-reveal>
             <p className={styles.eyebrow}>Minha lente</p>
             <h2 id="thesis-title">A conversa deixou de ser sobre IA. Agora e sobre trabalho delegado.</h2>
             <p className={styles.sectionCopy}>
@@ -211,8 +193,8 @@ export default function Home() {
             </p>
           </div>
           <div className={styles.focusGrid}>
-            {focusAreas.map((area) => (
-              <article key={area.number}>
+            {focusAreas.map((area, index) => (
+              <article key={area.number} data-swarm-reveal data-swarm-tilt data-reveal-delay={index + 1}>
                 <span>{area.number}</span>
                 <h3>{area.title}</h3>
                 <p>{area.copy}</p>
@@ -225,17 +207,17 @@ export default function Home() {
       <section id="operating" className={styles.operatingSection} aria-labelledby="operating-title">
         <div className={styles.sectionInner}>
           <div className={styles.operatingLayout}>
-            <div>
+            <div data-swarm-reveal>
               <p className={styles.eyebrow}>Modelo operacional</p>
-              <h2 id="operating-title">O agente precisa de chao: contexto, permissao, acao e evidencia.</h2>
+              <h2 id="operating-title">Agente autonomo exige base operacional: contexto, permissao, acao e evidencia.</h2>
               <p>
                 Essa e a forma como eu estruturo a conversa: antes de escalar autonomia, desenhar a cadeia que conecta
                 intencao, dados, controle, workflow e resultado mensuravel.
               </p>
             </div>
             <div className={styles.operatingRail}>
-              {operatingLayers.map((layer) => (
-                <article key={layer.label}>
+              {operatingLayers.map((layer, index) => (
+                <article key={layer.label} data-swarm-reveal data-reveal-delay={index + 1}>
                   <span>{layer.label}</span>
                   <div>
                     <h3>{layer.title}</h3>
@@ -250,22 +232,70 @@ export default function Home() {
 
       <section id="themes" className={styles.themeSection} aria-labelledby="themes-title">
         <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
+          <div className={`${styles.sectionHeader} ${styles.themeHeader}`} data-swarm-reveal>
             <p className={styles.eyebrow}>Temas que importam agora</p>
             <h2 id="themes-title">O ciclo da IA governada na ServiceNow.</h2>
             <p className={styles.sectionCopy}>
               Minha leitura das novidades publicas: a plataforma esta se movendo de assistencia pontual para execucao
               governada, com dados vivos e agentes sob controle operacional.
             </p>
+            <div className={styles.themeIdentity} data-swarm-reveal data-reveal-delay="2" aria-hidden="true">
+              <div className={styles.themePortraitFrame}>
+                <Image
+                  src="/assets/paulo-pierrondi-executive-neural.jpg"
+                  alt=""
+                  fill
+                  sizes="(max-width: 980px) 220px, 300px"
+                  className={styles.themePortraitImage}
+                />
+                <span className={styles.themePortraitScan} />
+              </div>
+              <div className={styles.themeIdentityCopy}>
+                <strong>Paulo Pierrondi</strong>
+                <span>leitura executiva + arquitetura operacional</span>
+              </div>
+            </div>
           </div>
           <div className={styles.themeGrid}>
-            {themes.map((theme) => (
-              <article key={theme.label}>
+            {themes.map((theme, index) => (
+              <article key={theme.label} data-swarm-reveal data-swarm-tilt data-reveal-delay={index + 1}>
+                <b className={styles.themeCardIndex}>{String(index + 1).padStart(2, '0')}</b>
                 <span>{theme.label}</span>
                 <h3>{theme.title}</h3>
                 <p>{theme.copy}</p>
               </article>
             ))}
+          </div>
+
+          <div id="feitos" className={styles.achievementsBlock} aria-labelledby="feitos-title">
+            <div className={styles.achievementsHeader} data-swarm-reveal>
+              <p className={styles.eyebrow}>Feitos aplicados</p>
+              <h3 id="feitos-title">Arquiteturas de valor que ja construi, refinei e transformei em sistema.</h3>
+              <p>
+                Sem expor nomes: minha experiencia inclui apoiar grandes enterprises e industrias como FSI, Energy e
+                Retail a avancarem na era da IA, dados e agentes. Abaixo estao os sistemas de pensamento e execucao que
+                eu levo para conversas de investimento, contratacao e parceria.
+              </p>
+            </div>
+            <div className={styles.achievementGrid}>
+              {feitos.map((feito, index) => (
+                <Link
+                  key={feito.slug}
+                  href={`/feitos/${feito.slug}`}
+                  className={styles.achievementCard}
+                  style={{ animationDelay: `${index * 90}ms` }}
+                  data-swarm-reveal
+                  data-swarm-tilt
+                  data-reveal-delay={index + 1}
+                >
+                  <span className={styles.achievementIndex}>0{index + 1}</span>
+                  <span className={styles.achievementLabel}>{feito.cardLabel}</span>
+                  <h4>{feito.cardTitle}</h4>
+                  <p>{feito.cardCopy}</p>
+                  <span className={styles.achievementCta}>Abrir arquitetura</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -273,7 +303,7 @@ export default function Home() {
       <section className={styles.sourcesSection} aria-labelledby="sources-title">
         <div className={styles.sectionInner}>
           <div className={styles.sourcesLayout}>
-            <div>
+            <div data-swarm-reveal>
               <p className={styles.eyebrow}>Referencias publicas</p>
               <h2 id="sources-title">A base da conversa vem dos anuncios oficiais.</h2>
               <p>
@@ -282,8 +312,15 @@ export default function Home() {
               </p>
             </div>
             <div className={styles.sourceLinks}>
-              {sourceLinks.map((source) => (
-                <a key={source.href} href={source.href} target="_blank" rel="noreferrer">
+              {sourceLinks.map((source, index) => (
+                <a
+                  key={source.href}
+                  href={source.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-swarm-reveal
+                  data-reveal-delay={index + 1}
+                >
                   {source.label}
                 </a>
               ))}
@@ -292,9 +329,38 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="contact" className={styles.contactSection} aria-labelledby="contact-title">
+        <div className={styles.contactNeuralField} aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className={styles.sectionInner}>
+          <div className={styles.contactLayout}>
+            <div className={styles.contactPitch} data-swarm-reveal>
+              <p className={styles.eyebrow}>Contato executivo</p>
+              <h2 id="contact-title">Vamos conversar sobre IA que vira execucao governada.</h2>
+              <p>
+                Use o formulario ou email direto para oportunidades, investimento, parcerias, arquitetura enterprise,
+                ServiceNow, agentes governados, LLM inference ou plataformas de automacao com IA.
+              </p>
+              <div className={styles.contactProof}>
+                <span>Resposta por email</span>
+                <span>Sem nomes de clientes</span>
+                <span>Contexto tecnico + executivo</span>
+              </div>
+            </div>
+            <HomeContactForm />
+          </div>
+        </div>
+      </section>
+
       <footer className={styles.footer}>
         <span>pierrondi.dev</span>
-        <span>Site pessoal. Opinioes minhas. ServiceNow e marcas relacionadas pertencem aos seus respectivos titulares.</span>
+        <span>
+          Site pessoal. Email: <a href="mailto:pierrondi@gmail.com">pierrondi@gmail.com</a>. ServiceNow e marcas
+          relacionadas pertencem aos seus respectivos titulares.
+        </span>
       </footer>
     </main>
   )

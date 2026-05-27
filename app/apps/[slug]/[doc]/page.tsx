@@ -51,6 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 type AppEntry = (typeof APPS)[AppSlug]
 
 function SupportContent({ app }: { app: AppEntry }) {
+  const localOnly = app.privacyMode === 'localOnly'
   return (
     <div className={styles.prose}>
       <p className={styles.meta}>Last updated: May 20, 2026</p>
@@ -64,10 +65,17 @@ function SupportContent({ app }: { app: AppEntry }) {
       </section>
       <section>
         <h2>Account and data requests</h2>
-        <p>
-          You can request account deletion, data correction or support for purchases through the same email address. We may
-          ask for enough information to verify the account before acting on account-specific requests.
-        </p>
+        {localOnly ? (
+          <p>
+            {app.name} does not require an account. Gameplay progress is stored on the device. If you need support, email the
+            address above with the app name, device model and iOS version.
+          </p>
+        ) : (
+          <p>
+            You can request account deletion, data correction or support for purchases through the same email address. We may
+            ask for enough information to verify the account before acting on account-specific requests.
+          </p>
+        )}
       </section>
       <section>
         <h2>Purchases</h2>
@@ -81,6 +89,36 @@ function SupportContent({ app }: { app: AppEntry }) {
 }
 
 function PrivacyContent({ app }: { app: AppEntry }) {
+  if (app.privacyMode === 'localOnly') {
+    return (
+      <div className={styles.prose}>
+        <p className={styles.meta}>Last updated: May 23, 2026</p>
+        <section>
+          <h2>Information collected</h2>
+          <p>
+            {app.name} does not collect personal data. Gameplay state and preferences are stored locally on the device and are
+            not sent to the developer or a third-party service.
+          </p>
+        </section>
+        <section>
+          <h2>Network, accounts and tracking</h2>
+          <ul>
+            <li>No account is required.</li>
+            <li>No analytics, advertising SDK or tracking SDK is used.</li>
+            <li>No gameplay text, questions, scores or progress are uploaded.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Your choices</h2>
+          <p>
+            You can remove local gameplay data by deleting the app from the device. For privacy questions, contact{' '}
+            <a href="mailto:pierrondi@gmail.com">pierrondi@gmail.com</a>.
+          </p>
+        </section>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.prose}>
       <p className={styles.meta}>Last updated: May 20, 2026</p>

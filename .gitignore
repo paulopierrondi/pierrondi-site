@@ -5,7 +5,10 @@ local-agent/dist/
 .env.local
 *.log
 *.tsbuildinfo
+*.pyc
 tmp/
+qa/
+scripts/__pycache__/
 .claude/*
 !.claude/skills/
 .superpowers/
@@ -28,3 +31,11 @@ pierrondi-ia-completo.zip
 # Temp assets
 .tmp-tiktok/
 
+.vercel
+
+# Local agent context snapshots: keep tracked .brain files intentional,
+# but do not auto-add generated local overlays.
+.brain/*
+!.brain/PROJECT_CONTEXT.md
+!.brain/SESSION_NOTES.md
+!.brain/README.md

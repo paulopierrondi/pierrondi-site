@@ -1,0 +1,33 @@
+---
+description: Paulo Agent Hub governance for Cursor work
+alwaysApply: true
+---
+
+This repo is part of Paulo's Agent Hub.
+
+Before editing:
+- Read `AGENTS.md`.
+- Read `CODEX_RULES.md` if present.
+- Read `.brain/PROJECT_CONTEXT.md` if present.
+- Read `.brain/HUB_COUNCIL_CONTEXT.md` if present.
+- Read `.brain/CURSOR_BACKGROUND_AGENT_CONTEXT.md` if present.
+- Treat Linear as the live source for issue/project/cycle/status when a connector or issue link is available.
+
+Project identity:
+- Registry id: `pierrondi-site`
+- Linear hint: `pierrondi.dev Public Site (AGE-1486)`
+- Obsidian note: `02_Projects/pierrondi-site`
+
+Guardrails:
+- Preserve existing user and agent changes.
+- Do not touch secrets, `.env` values, credentials, production deploys, App Store submission, TestFlight upload, paid campaigns, social publishing, migrations or destructive git operations.
+- Keep work scoped to one issue or one small task.
+- Stop and report if more than 5 files need changes.
+- Update or add tests when production code changes.
+
+Final output must include:
+- What changed.
+- Files touched.
+- Commands/tests run.
+- Risks or blockers.
+- Suggested Obsidian/Linear update.
