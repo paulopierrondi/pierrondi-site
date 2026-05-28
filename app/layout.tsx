@@ -4,6 +4,7 @@ import { GeistMono } from 'geist/font/mono'
 import Script from 'next/script'
 import dynamic from 'next/dynamic'
 import KimiSwarmEffects from '@/components/KimiSwarmEffects'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 import SiteJsonLd from '@/components/SiteJsonLd'
 import { SITE_URL } from '@/lib/site'
 import './globals.css'
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     template: '%s | pierrondi.dev',
   },
   description:
-    'Portfolio executivo de Paulo Pierrondi sobre IA governada, ServiceNow, SADA, AgentOps, LLM inference, agentes autonomos com governanca e workflows corporativos.',
+    'Portfólio executivo de Paulo Pierrondi sobre IA governada, ServiceNow, SADA, AgentOps, LLM inference, agentes autônomos com governança e workflows corporativos.',
   keywords: [
     'Paulo Pierrondi',
     'ServiceNow',
@@ -65,7 +66,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Paulo Pierrondi - IA governada, ServiceNow, AgentOps e LLM inference',
     description:
-      'Portfolio executivo sobre ServiceNow, SADA, agentes governados, LLM inference, AgentOps, dados e execucao corporativa.',
+      'Portfólio executivo sobre ServiceNow, SADA, agentes governados, LLM inference, AgentOps, dados e execução corporativa.',
     url: '/',
     siteName: 'pierrondi.dev',
     type: 'website',
@@ -75,13 +76,14 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Paulo Pierrondi - IA governada, ServiceNow e AgentOps',
-    description: 'Portfolio executivo sobre ServiceNow, SADA, agentes governados, LLM inference e workflows corporativos.',
+    description: 'Portfólio executivo sobre ServiceNow, SADA, agentes governados, LLM inference e workflows corporativos.',
     images: ['/og'],
   },
   alternates: {
     canonical: '/',
     languages: {
       'pt-BR': '/',
+      'en-US': '/en',
       'x-default': '/',
     },
   },
@@ -120,6 +122,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${sans.variable} ${mono.variable} antialiased`}>
         <SiteJsonLd />
         <KimiSwarmEffects />
+        <LanguageSwitcher />
         {children}
         <CookieBanner />
       </body>

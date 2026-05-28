@@ -43,7 +43,6 @@ const RETIRED_PUBLIC_ROUTES = [
   '/blog',
   '/blog/:path*',
   '/calculadora',
-  '/en',
   '/faq',
   '/feed.xml',
   '/marketing-os',
@@ -51,17 +50,13 @@ const RETIRED_PUBLIC_ROUTES = [
   '/obrigado',
   '/portfolio',
   '/precos',
-  '/privacy',
   '/privacy-policy',
   '/policy',
-  '/privacidade',
   '/produto-digital',
   '/quiz',
   '/sobre',
   '/tech-partner',
-  '/terms',
   '/terms-of-service',
-  '/termos',
 ]
 
 const nextConfig: NextConfig = {

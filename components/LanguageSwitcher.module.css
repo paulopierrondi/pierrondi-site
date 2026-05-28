@@ -1,0 +1,54 @@
+.switcher {
+  position: fixed;
+  top: 76px;
+  right: max(14px, calc((100vw - 1180px) / 2));
+  z-index: 70;
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(38px, 1fr));
+  overflow: hidden;
+  border: 1px solid rgba(247, 245, 238, 0.16);
+  background: rgba(3, 3, 3, 0.72);
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(16px) saturate(1.2);
+}
+
+.switcher a {
+  min-height: 34px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 11px;
+  color: rgba(247, 245, 238, 0.7);
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.switcher a + a {
+  border-left: 1px solid rgba(247, 245, 238, 0.12);
+}
+
+.switcher a:hover,
+.switcher a:focus-visible {
+  color: #fff;
+}
+
+.switcher a:focus-visible {
+  outline: 2px solid #c8ff2e;
+  outline-offset: 2px;
+}
+
+.switcher .active {
+  color: #081008;
+  background: #c8ff2e;
+}
+
+@media (max-width: 720px) {
+  .switcher {
+    top: 62px;
+    right: 14px;
+  }
+}

@@ -1,35 +1,30 @@
 import type { Metadata } from 'next'
-import Nav from '@/components/Nav'
-import Hero from '@/components/Hero'
-import Marquee from '@/components/Marquee'
-import Problem from '@/components/Problem'
-import About from '@/components/About'
-import Metrics from '@/components/Metrics'
-import Portfolio from '@/components/Portfolio'
-import Services from '@/components/Services'
-import Process from '@/components/Process'
-import Contact from '@/components/Contact'
-import Footer from '@/components/Footer'
-import WhatsApp from '@/components/WhatsApp'
-import MobileCTA from '@/components/MobileCTA'
-import LangSync from '@/components/LangSync'
 import JsonLd from '@/components/JsonLd'
 import { SITE_URL } from '@/lib/site'
+import HomeExperience from '../HomeExperience'
 
 export const metadata: Metadata = {
-  title: 'pierrondi.dev — applied AI, automation and digital products that sell',
+  title: 'Paulo Pierrondi - governed AI, ServiceNow, AgentOps and LLM inference',
   description:
-    'pierrondi.dev ships conversion landing pages, n8n automations, AI agents and digital products for SMBs, creators and early-stage startups. Technical founder, real Git-backed proof, fast delivery.',
+    'Executive portfolio by Paulo Pierrondi on governed AI, ServiceNow, SADA, autonomous agents with governance, LLM inference, AgentOps and enterprise automation platforms.',
   keywords: [
-    'applied AI',
-    'n8n automation',
-    'fractional CTO',
-    'digital product MVP',
-    'tech partner',
-    'conversion landing page',
-    'AI agent for business',
-    'marketing OS',
-    'pierrondi.dev',
+    'Paulo Pierrondi',
+    'governed AI',
+    'ServiceNow',
+    'SADA ServiceNow',
+    'ServiceNow AI-Driven Architecture',
+    'Now Assist',
+    'AI Agents',
+    'AgentOps',
+    'LLM inference',
+    'LLMOps',
+    'CSDM',
+    'CMDB',
+    'enterprise AI',
+    'workflow automation',
+    'FSI AI',
+    'Energy AI',
+    'Retail AI',
   ],
   alternates: {
     canonical: '/en',
@@ -40,20 +35,21 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'pierrondi.dev — applied AI, automation and pages that help you sell',
+    title: 'Paulo Pierrondi - governed AI, ServiceNow, AgentOps and LLM inference',
     description:
-      'Landing pages, automation, agents and digital products with real technical direction, sharp commercial narrative and proof of execution.',
+      'Executive portfolio on ServiceNow, SADA, governed agents, LLM inference, AgentOps, data and enterprise execution.',
     url: '/en',
     siteName: 'pierrondi.dev',
-    type: 'website',
     locale: 'en_US',
     alternateLocale: ['pt_BR'],
-    images: [{ url: '/og', width: 1200, height: 630, alt: 'pierrondi.dev — Tech that sells and ships.' }],
+    type: 'website',
+    images: [{ url: '/og', width: 1200, height: 630, alt: 'Paulo Pierrondi - ServiceNow and governed AI' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'pierrondi.dev — applied AI and automation for SMBs',
-    description: 'Applied AI, automation and digital products for SMBs and early-stage startups.',
+    title: 'Paulo Pierrondi - governed AI, AgentOps and ServiceNow',
+    description:
+      'Executive portfolio on ServiceNow, SADA, governed agents, LLM inference and enterprise workflows.',
     images: ['/og'],
   },
 }
@@ -63,34 +59,19 @@ const enWebPageSchema = {
   '@type': 'WebPage',
   '@id': `${SITE_URL}/en`,
   url: `${SITE_URL}/en`,
-  name: 'pierrondi.dev — applied AI, automation and digital products',
+  name: 'Paulo Pierrondi - governed AI, ServiceNow, AgentOps and LLM inference',
   description:
-    'pierrondi.dev ships conversion landing pages, n8n automations, AI agents and digital products for SMBs, creators and early-stage startups.',
+    'Executive portfolio by Paulo Pierrondi on governed AI, ServiceNow, autonomous agents, LLM inference and enterprise workflow execution.',
   inLanguage: 'en-US',
   isPartOf: { '@id': `${SITE_URL}/#website` },
-  about: { '@id': `${SITE_URL}/#organization` },
+  about: { '@id': `${SITE_URL}/#person` },
 }
 
 export default function HomeEn() {
   return (
     <>
-      <LangSync lang="en" />
       <JsonLd data={enWebPageSchema} />
-      <Nav lang="en" />
-      <main>
-        <Hero lang="en" />
-        <Marquee lang="en" />
-        <Problem lang="en" />
-        <About lang="en" />
-        <Metrics lang="en" />
-        <Portfolio lang="en" />
-        <Services lang="en" />
-        <Process lang="en" />
-        <Contact lang="en" />
-      </main>
-      <Footer lang="en" />
-      <WhatsApp lang="en" />
-      <MobileCTA lang="en" />
+      <HomeExperience lang="en" />
     </>
   )
 }

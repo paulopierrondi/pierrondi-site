@@ -65,7 +65,7 @@ const siteSchema = {
       '@type': 'WebSite',
       name: 'pierrondi.dev',
       url: SITE_URL,
-      inLanguage: ['pt-BR'],
+      inLanguage: ['pt-BR', 'en-US'],
       publisher: { '@id': `${SITE_URL}/#organization` },
       about: { '@id': `${SITE_URL}/#person` },
       potentialAction: {

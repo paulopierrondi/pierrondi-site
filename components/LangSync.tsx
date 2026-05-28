@@ -1,9 +1,14 @@
 'use client'
 
 import { useEffect } from 'react'
-import { HTML_LANG, type Lang } from '@/lib/i18n/home-copy'
+import type { HomeLang } from '@/app/home-experience-copy'
 
-export default function LangSync({ lang }: { lang: Lang }) {
+const HTML_LANG: Record<HomeLang, string> = {
+  pt: 'pt-BR',
+  en: 'en-US',
+}
+
+export default function LangSync({ lang }: { lang: HomeLang }) {
   useEffect(() => {
     document.documentElement.lang = HTML_LANG[lang]
   }, [lang])

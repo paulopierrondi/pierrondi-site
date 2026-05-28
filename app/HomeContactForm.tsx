@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState } from 'react'
 import { trackEvent } from '@/lib/analytics'
+import type { HomeExperienceCopy } from './home-experience-copy'
 import styles from './page.module.css'
 
 interface FormErrors {
@@ -10,7 +11,11 @@ interface FormErrors {
   mensagem?: string
 }
 
-export default function HomeContactForm() {
+interface HomeContactFormProps {
+  copy: HomeExperienceCopy['form']
+}
+
+export default function HomeContactForm({ copy }: HomeContactFormProps) {
   const startedRef = useRef(false)
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
@@ -42,25 +47,25 @@ export default function HomeContactForm() {
   }, [])
 
   const mailtoHref = useMemo(() => {
-    const subject = encodeURIComponent('Contato via pierrondi.dev')
+    const subject = encodeURIComponent(copy.subject)
     const body = encodeURIComponent(
       [
         `Nome: ${nome.trim()}`,
         `Email: ${email.trim()}`,
-        `Empresa/contexto: ${empresa.trim() || 'Nao informado'}`,
+        `Empresa/contexto: ${empresa.trim() || copy.fallbackCompany}`,
         '',
-        mensagem.trim() || 'Quero conversar sobre...',
+        mensagem.trim() || copy.fallbackMessage,
       ].join('\n')
     )
 
     return `mailto:pierrondi@gmail.com?subject=${subject}&body=${body}`
-  }, [email, empresa, mensagem, nome])
+  }, [copy.fallbackCompany, copy.fallbackMessage, copy.subject, email, empresa, mensagem, nome])
 
   function validate() {
     const nextErrors: FormErrors = {}
-    if (!nome.trim()) nextErrors.nome = 'Me diga seu nome.'
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = 'Use um email valido.'
-    if (!mensagem.trim()) nextErrors.mensagem = 'Me diga o contexto da conversa.'
+    if (!nome.trim()) nextErrors.nome = copy.errors.name
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = copy.errors.email
+    if (!mensagem.trim()) nextErrors.mensagem = copy.errors.message
     return nextErrors
   }
 
@@ -87,7 +92,7 @@ export default function HomeContactForm() {
           nome,
           email,
           empresa,
-          servico: 'portfolio-executivo-ai',
+          servico: copy.serviceValue,
           mensagem,
           trackingContext,
           _gotcha: '',
@@ -132,7 +137,7 @@ export default function HomeContactForm() {
         })
       }}
     >
-      <input type="hidden" name="servico" value="portfolio-executivo-ai" />
+      <input type="hidden" name="servico" value={copy.serviceValue} />
       <input type="hidden" name="landingPage" value={trackingContext.landingPage} />
       <input type="hidden" name="campaignId" value={trackingContext.campaignId} />
       <input type="hidden" name="thesisId" value={trackingContext.thesisId} />
@@ -140,14 +145,14 @@ export default function HomeContactForm() {
       <input type="hidden" name="utmSource" value={trackingContext.utmSource} />
 
       <div className={styles.contactField}>
-        <label htmlFor="home-contact-name">Nome</label>
+        <label htmlFor="home-contact-name">{copy.fields.name}</label>
         <input
           id="home-contact-name"
           name="nome"
           type="text"
           value={nome}
           onChange={(event) => setNome(event.target.value)}
-          placeholder="Seu nome"
+          placeholder={copy.fields.namePlaceholder}
           autoComplete="name"
           aria-invalid={errors.nome ? 'true' : 'false'}
           aria-describedby={errors.nome ? 'home-contact-name-error' : undefined}
@@ -160,14 +165,14 @@ export default function HomeContactForm() {
       </div>
 
       <div className={styles.contactField}>
-        <label htmlFor="home-contact-email">Email</label>
+        <label htmlFor="home-contact-email">{copy.fields.email}</label>
         <input
           id="home-contact-email"
           name="email"
           type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          placeholder="voce@empresa.com"
+          placeholder={copy.fields.emailPlaceholder}
           autoComplete="email"
           aria-invalid={errors.email ? 'true' : 'false'}
           aria-describedby={errors.email ? 'home-contact-email-error' : undefined}
@@ -180,26 +185,26 @@ export default function HomeContactForm() {
       </div>
 
       <div className={`${styles.contactField} ${styles.contactFieldFull}`}>
-        <label htmlFor="home-contact-company">Empresa ou contexto</label>
+        <label htmlFor="home-contact-company">{copy.fields.company}</label>
         <input
           id="home-contact-company"
           name="empresa"
           type="text"
           value={empresa}
           onChange={(event) => setEmpresa(event.target.value)}
-          placeholder="Empresa, fundo, time ou oportunidade"
+          placeholder={copy.fields.companyPlaceholder}
           autoComplete="organization"
         />
       </div>
 
       <div className={`${styles.contactField} ${styles.contactFieldFull}`}>
-        <label htmlFor="home-contact-message">Mensagem</label>
+        <label htmlFor="home-contact-message">{copy.fields.message}</label>
         <textarea
           id="home-contact-message"
           name="mensagem"
           value={mensagem}
           onChange={(event) => setMensagem(event.target.value)}
-          placeholder="Quero conversar sobre..."
+          placeholder={copy.fields.messagePlaceholder}
           rows={5}
           aria-invalid={errors.mensagem ? 'true' : 'false'}
           aria-describedby={errors.mensagem ? 'home-contact-message-error' : undefined}
@@ -215,19 +220,19 @@ export default function HomeContactForm() {
 
       <div className={`${styles.contactFieldFull} ${styles.contactSubmitRow}`}>
         <button type="submit" disabled={isLoading} data-swarm-magnetic>
-          {isLoading ? 'Enviando...' : 'Enviar email'}
+          {isLoading ? copy.fields.submitting : copy.fields.submit}
         </button>
         <a href={mailtoHref}>pierrondi@gmail.com</a>
       </div>
 
       {status === 'success' && (
         <p className={styles.contactStatus} role="status">
-          Recebi. Vou responder pelo email informado.
+          {copy.fields.success}
         </p>
       )}
       {status === 'error' && (
         <p className={styles.contactStatus} data-error="true" role="alert">
-          Nao consegui enviar pelo formulario. Abri um email direto; se nao abrir, use{' '}
+          {copy.fields.errorPrefix}{' '}
           <a href={mailtoHref}>pierrondi@gmail.com</a>.
         </p>
       )}

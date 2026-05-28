@@ -2,12 +2,35 @@
 
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import { getCurrentLanguage } from '@/lib/i18n/site-language'
+
+const copy = {
+  pt: {
+    aria: 'Consentimento de cookies',
+    text: 'Usamos cookies para melhorar sua experiência e medir performance.',
+    link: 'Política de Privacidade',
+    linkHref: '/privacidade',
+    essential: 'Apenas essenciais',
+    accept: 'Aceitar todos',
+  },
+  en: {
+    aria: 'Cookie consent',
+    text: 'We use cookies to improve your experience and measure performance.',
+    link: 'Privacy Policy',
+    linkHref: '/privacy',
+    essential: 'Essential only',
+    accept: 'Accept all',
+  },
+} as const
 
 export default function CookieBanner() {
   const pathname = usePathname()
+  const lang = getCurrentLanguage(pathname || '/')
+  const t = copy[lang]
   const [visible, setVisible] = useState(false)
   const suppressed =
     pathname === '/' ||
+    pathname === '/en' ||
     pathname === '/paulo' ||
     pathname === '/whypaulo' ||
     pathname?.startsWith('/apps') ||
@@ -108,17 +131,16 @@ export default function CookieBanner() {
         }
       `}</style>
 
-      <div className="cookie-banner" role="dialog" aria-label="Consentimento de cookies">
+      <div className="cookie-banner" role="dialog" aria-label={t.aria}>
         <p className="cookie-text">
-          Usamos cookies para melhorar sua experiência e medir performance.
-          Leia nossa <a href="/privacidade">Política de Privacidade</a>.
+          {t.text} <a href={t.linkHref}>{t.link}</a>.
         </p>
         <div className="cookie-actions">
           <button className="cookie-btn cookie-btn-essential" onClick={() => accept('essential')}>
-            Apenas essenciais
+            {t.essential}
           </button>
           <button className="cookie-btn cookie-btn-accept" onClick={() => accept('all')}>
-            Aceitar todos
+            {t.accept}
           </button>
         </div>
       </div>

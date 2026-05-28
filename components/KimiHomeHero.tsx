@@ -4,33 +4,14 @@ import { Fragment, useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import Image from 'next/image'
 import KimiNeuralNetwork from '@/components/KimiNeuralNetwork'
+import type { HomeExperienceCopy } from '@/app/home-experience-copy'
 import styles from '@/app/page.module.css'
 
-const agentSignals = [
-  ['Intent', 'front door'],
-  ['Context', 'service graph'],
-  ['Policy', 'AI control'],
-  ['Action', 'workflow'],
-  ['Evidence', 'audit trail'],
-] as const
+interface KimiHomeHeroProps {
+  copy: HomeExperienceCopy['hero']
+}
 
-const headlineLines = [
-  [
-    { text: 'IA' },
-    { text: 'corporativa' },
-  ],
-  [
-    { text: 'nao' },
-    { text: 'escala' },
-    { text: 'so' },
-  ],
-  [
-    { text: 'por' },
-    { text: 'modelos.', accent: true },
-  ],
-] as const
-
-export default function KimiHomeHero() {
+export default function KimiHomeHero({ copy }: KimiHomeHeroProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const kickerRef = useRef<HTMLParagraphElement>(null)
   const headlineRef = useRef<HTMLHeadingElement>(null)
@@ -110,8 +91,8 @@ export default function KimiHomeHero() {
           <span className={styles.heroPortraitScan} />
         </div>
         <div ref={panelRef} className={styles.agentPanel}>
-          <span className={styles.agentPanelLabel}>Agent operating model</span>
-          {agentSignals.map(([label, value]) => (
+          <span className={styles.agentPanelLabel}>{copy.agentPanelLabel}</span>
+          {copy.agentSignals.map(([label, value]) => (
             <span key={label} className={styles.agentPanelRow} data-agent-row>
               <i aria-hidden="true" />
               <strong>{label}</strong>
@@ -125,10 +106,10 @@ export default function KimiHomeHero() {
       <div className={styles.heroContent}>
         <div className={styles.heroTextMatte} aria-hidden="true" />
         <p ref={kickerRef} className={styles.eyebrow}>
-          ServiceNow / Enterprise AI / Platform strategy
+          {copy.kicker}
         </p>
-        <h1 id="home-title" ref={headlineRef} aria-label="IA corporativa nao escala so por modelos.">
-          {headlineLines.map((line, lineIndex) => (
+        <h1 id="home-title" ref={headlineRef} aria-label={copy.ariaLabel}>
+          {copy.headlineLines.map((line, lineIndex) => (
             <Fragment key={lineIndex}>
               <span className={styles.heroWordLine}>
                 {line.map((word, wordIndex) => (
@@ -143,24 +124,22 @@ export default function KimiHomeHero() {
                   </Fragment>
                 ))}
               </span>
-              {lineIndex < headlineLines.length - 1 ? ' ' : null}
+              {lineIndex < copy.headlineLines.length - 1 ? ' ' : null}
             </Fragment>
           ))}
         </h1>
         <p ref={leadRef} className={styles.lead}>
-          Ela escala quando governanca, contexto operacional e execucao em workflow andam juntos. Sou Technical
-          Account Executive na ServiceNow, trabalhando na intersecao entre estrategia, plataforma, dados e adocao.
+          {copy.lead}
         </p>
         <p ref={noteRef} className={styles.personalNote}>
-          Este e meu site pessoal, baseado em materiais publicos, frameworks proprios e na minha perspectiva
-          profissional. Nao e um canal oficial da ServiceNow e nao inclui informacao confidencial.
+          {copy.note}
         </p>
         <div ref={actionsRef} className={styles.actions}>
           <a href="https://br.linkedin.com/in/paulopierrondi" target="_blank" rel="noreferrer" data-swarm-magnetic>
-            Conectar no LinkedIn
+            {copy.linkedIn}
           </a>
           <a href="#contact" data-swarm-magnetic>
-            Enviar email
+            {copy.email}
           </a>
         </div>
       </div>
