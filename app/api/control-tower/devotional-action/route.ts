@@ -7,9 +7,10 @@ import {
   verifySessionCookie,
 } from '@/lib/automation-control/auth'
 import {
-  faithschoolActionUrl,
-  faithschoolAdminToken,
+  faithschoolMagicBaseUrl,
+  faithschoolMagicSecret,
   hashSession,
+  mintMagicTokens,
 } from '@/lib/creative-control/auth'
 import { appendDevotionalAudit } from '@/lib/creative-control/storage'
 
@@ -54,10 +55,9 @@ export async function POST(request: Request) {
     )
   }
 
-  const adminToken = faithschoolAdminToken()
-  if (!adminToken) {
+  if (!faithschoolMagicSecret()) {
     return NextResponse.json(
-      { ok: false, error: 'admin_token_missing' },
+      { ok: false, error: 'magic_secret_missing' },
       { status: 503 },
     )
   }
@@ -86,49 +86,48 @@ export async function POST(request: Request) {
 
   const { action, docIds } = parsed.data
 
-  let upstreamStatus = 0
-  let upstreamOk = false
-  let upstreamPayload: unknown = null
-
+  let tokens: ReturnType<typeof mintMagicTokens>
   try {
-    const upstream = await fetch(faithschoolActionUrl(), {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${adminToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ action, docIds }),
-      cache: 'no-store',
-      signal: AbortSignal.timeout(15_000),
-    })
-    upstreamStatus = upstream.status
-    upstreamOk = upstream.ok
-    try {
-      upstreamPayload = await upstream.json()
-    } catch {
-      upstreamPayload = null
-    }
+    tokens = mintMagicTokens(action, docIds)
   } catch (err) {
-    upstreamStatus = 599
-    upstreamOk = false
-    upstreamPayload = { error: err instanceof Error ? err.message : 'upstream_failed' }
+    return NextResponse.json(
+      { ok: false, error: err instanceof Error ? err.message : 'mint_failed' },
+      { status: 503 },
+    )
   }
+
+  const baseUrl = faithschoolMagicBaseUrl()
+  const results: Array<{ docId: string; status: number; ok: boolean }> = []
+
+  for (const { docId, token } of tokens) {
+    try {
+      const upstream = await fetch(`${baseUrl}?token=${encodeURIComponent(token)}`, {
+        method: 'GET',
+        cache: 'no-store',
+        signal: AbortSignal.timeout(15_000),
+      })
+      results.push({ docId, status: upstream.status, ok: upstream.ok })
+    } catch {
+      results.push({ docId, status: 599, ok: false })
+    }
+  }
+
+  const overallOk = results.every((r) => r.ok)
 
   await appendDevotionalAudit({
     sessionHash,
     action,
     docIds,
-    upstreamStatus,
-    upstreamOk,
+    upstreamStatus: overallOk ? 200 : 502,
+    upstreamOk: overallOk,
   })
 
-  if (!upstreamOk) {
+  if (!overallOk) {
     return NextResponse.json(
       {
         ok: false,
         error: 'upstream_failed',
-        upstreamStatus,
-        upstreamPayload,
+        results,
       },
       { status: 502 },
     )
@@ -138,6 +137,6 @@ export async function POST(request: Request) {
     ok: true,
     action,
     updated: docIds.length,
-    upstreamPayload,
+    results,
   })
 }

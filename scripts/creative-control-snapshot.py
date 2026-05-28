@@ -14,10 +14,14 @@ Never prints secrets. Never logs Bearer tokens. Designed to run via
 from __future__ import annotations
 
 import argparse
+import base64
+import hashlib
+import hmac
 import json
 import os
 import socket
 import sys
+import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
@@ -303,11 +307,26 @@ def build_looks_section(db: dict[str, Any], max_looks: int) -> dict[str, Any]:
     }
 
 
-def fetch_devotionals(url: str, token: str, timeout: int = 15) -> dict[str, Any]:
-    if not url or not token:
+def _b64url(data: bytes) -> str:
+    return base64.urlsafe_b64encode(data).rstrip(b"=").decode("ascii")
+
+
+def sign_ingest_bearer(scope: str, secret: str) -> str:
+    ts = int(time.time())
+    payload = f"{scope}.{ts}"
+    sig = hmac.new(secret.encode("utf-8"), payload.encode("utf-8"), hashlib.sha256).digest()
+    return f"ingest:{payload}.{_b64url(sig)}"
+
+
+def fetch_devotionals(url: str, magic_secret: str, timeout: int = 15) -> dict[str, Any]:
+    if not url or not magic_secret:
         return {"items": []}
+    if len(magic_secret) < 32:
+        print("[creative-control] MAGIC_LINK_SECRET too short (>=32 required)", file=sys.stderr)
+        return {"items": [], "error": "secret_too_short"}
+    bearer = sign_ingest_bearer("devotional-pending", magic_secret)
     req = urllib.request.Request(url, method="GET")
-    req.add_header("Authorization", f"Bearer {token}")
+    req.add_header("Authorization", f"Bearer {bearer}")
     req.add_header("Accept", "application/json")
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
@@ -412,8 +431,8 @@ def build_snapshot(args: argparse.Namespace) -> dict[str, Any]:
     looks_section = build_looks_section(db, max_looks=args.max_looks)
 
     devotional_url = args.devotional_url or os.environ.get("FAITHSCHOOL_PENDING_URL", "")
-    devotional_token = os.environ.get("FAITHSCHOOL_ADMIN_TOKEN_LOCAL", "")
-    devotional_payload = fetch_devotionals(devotional_url, devotional_token) if devotional_url else {"items": []}
+    magic_secret = os.environ.get("FAITHSCHOOL_MAGIC_LINK_SECRET", "")
+    devotional_payload = fetch_devotionals(devotional_url, magic_secret) if devotional_url else {"items": []}
     devotionals_section = build_devotionals_section(devotional_payload, max_pending=args.max_devotionals)
 
     return {

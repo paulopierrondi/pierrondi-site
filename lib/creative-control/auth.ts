@@ -28,13 +28,45 @@ export function hashSession(value: string) {
   return crypto.createHash('sha256').update(value).digest('hex').slice(0, 12)
 }
 
-export function faithschoolAdminToken() {
-  return process.env.CONTROL_TOWER_FAITHSCHOOL_ADMIN_TOKEN ?? ''
+export function faithschoolMagicSecret() {
+  return process.env.FAITHSCHOOL_MAGIC_LINK_SECRET ?? ''
 }
 
-export function faithschoolActionUrl() {
+export function faithschoolMagicBaseUrl() {
   return (
-    process.env.FAITHSCHOOL_ACTION_URL ??
-    'https://faithschool.app/api/admin/devotional/action'
+    process.env.FAITHSCHOOL_MAGIC_URL ??
+    'https://faithschool.app/api/admin/devotional/magic'
   )
+}
+
+interface MagicPayload {
+  docId: string
+  action: 'approve' | 'reject'
+  exp: number
+}
+
+function b64url(input: string) {
+  return Buffer.from(input).toString('base64url')
+}
+
+function signMagicToken(docId: string, action: 'approve' | 'reject') {
+  const secret = faithschoolMagicSecret()
+  if (!secret || secret.length < 32) {
+    throw new Error('magic_secret_missing_or_too_short')
+  }
+  const payload: MagicPayload = {
+    docId,
+    action,
+    exp: Math.floor(Date.now() / 1000) + 60 * 5,
+  }
+  const body = b64url(JSON.stringify(payload))
+  const sig = crypto.createHmac('sha256', secret).update(body).digest('base64url')
+  return `${body}.${sig}`
+}
+
+export function mintMagicTokens(action: 'approve' | 'reject', docIds: string[]) {
+  return docIds.map((docId) => ({
+    docId,
+    token: signMagicToken(docId, action),
+  }))
 }
