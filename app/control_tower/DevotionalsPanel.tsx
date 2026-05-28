@@ -13,6 +13,8 @@ import styles from './ControlTower.module.css'
 interface DevotionalsPanelProps {
   stats: DevotionalsStats
   pending: DevotionalPending[]
+  freshnessLabel?: string
+  freshnessTone?: 'green' | 'amber' | 'red' | 'unknown'
 }
 
 type RowState = 'idle' | 'pending' | 'approved' | 'rejected' | 'error'
@@ -37,7 +39,7 @@ async function postAction(action: 'approve' | 'reject', docId: string) {
   return payload
 }
 
-export default function DevotionalsPanel({ stats, pending }: DevotionalsPanelProps) {
+export default function DevotionalsPanel({ stats, pending, freshnessLabel, freshnessTone }: DevotionalsPanelProps) {
   const [rows, setRows] = useState<Record<string, RowStatus>>({})
   const [isPending, startTransition] = useTransition()
 
@@ -69,7 +71,10 @@ export default function DevotionalsPanel({ stats, pending }: DevotionalsPanelPro
     <section id="devotionais" className={styles.panel}>
       <div className={styles.panelHeader}>
         <h2>FaithSchool devotionals</h2>
-        <span>{stats.totalPending} pendente{stats.totalPending === 1 ? '' : 's'}</span>
+        <span data-tone={freshnessTone}>
+          {stats.totalPending} pendente{stats.totalPending === 1 ? '' : 's'}
+          {freshnessLabel ? ` · ${freshnessLabel}` : ''}
+        </span>
       </div>
 
       <div className={styles.creativeStatsRow}>
