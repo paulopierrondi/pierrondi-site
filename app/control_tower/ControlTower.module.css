@@ -49,6 +49,8 @@
 .supervisorGrid p,
 .contextGrid p,
 .workflowList p,
+.llmOpsGrid p,
+.aliasGrid p,
 .automationGrid p,
 .guardrailBand p,
 .emptyState p {
@@ -365,6 +367,8 @@
 
 .supervisorGrid,
 .contextGrid,
+.llmOpsGrid,
+.aliasGrid,
 .automationGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -374,6 +378,8 @@
 .supervisorGrid div,
 .contextGrid div,
 .workflowList div,
+.llmOpsGrid article,
+.aliasGrid article,
 .automationGrid article,
 .emptyState {
   border: 1px solid #161611;
@@ -385,6 +391,8 @@
 .supervisorGrid strong,
 .contextGrid strong,
 .workflowList strong,
+.llmOpsGrid strong,
+.aliasGrid strong,
 .automationGrid strong {
   display: block;
   font-size: 13px;
@@ -394,6 +402,8 @@
 .supervisorGrid p,
 .contextGrid p,
 .workflowList p,
+.llmOpsGrid p,
+.aliasGrid p,
 .automationGrid p {
   margin: 8px 0 0;
   font-size: 12px;
@@ -412,6 +422,67 @@
 
 .workflowList div {
   background: #fffdf7;
+}
+
+.llmOpsGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 10px;
+}
+
+.llmOpsGrid article {
+  min-height: 132px;
+  display: grid;
+  align-content: space-between;
+}
+
+.llmOpsGrid article[data-tone='green'] { background: #dff0e7; }
+.llmOpsGrid article[data-tone='amber'] { background: #f6ead4; }
+
+.llmOpsGrid span,
+.aliasGrid span {
+  color: rgba(22, 22, 17, 0.58);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.aliasGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 10px;
+}
+
+.aliasGrid article {
+  background: #e8e4f4;
+}
+
+.commandRail {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  border: 1px solid #161611;
+  border-radius: 6px;
+  background: #161611;
+  color: #fbfaf6;
+  padding: 12px;
+}
+
+.commandRail div {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+.commandRail code {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  border: 1px solid rgba(251, 250, 246, 0.24);
+  border-radius: 6px;
+  background: rgba(251, 250, 246, 0.08);
+  color: #fbfaf6;
+  padding: 8px;
+  font-size: 11px;
 }
 
 .automationGrid {
@@ -554,7 +625,7 @@
   }
 
   .railNav {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .hero,
@@ -563,6 +634,8 @@
   }
 
   .metrics,
+  .llmOpsGrid,
+  .aliasGrid,
   .automationGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -574,11 +647,13 @@
   }
 
   .railNav,
-  .decisionBand,
-  .metrics,
-  .board,
+    .decisionBand,
+    .metrics,
+    .board,
   .supervisorGrid,
   .contextGrid,
+  .llmOpsGrid,
+  .aliasGrid,
   .automationGrid,
   .lockInputRow {
     grid-template-columns: 1fr;

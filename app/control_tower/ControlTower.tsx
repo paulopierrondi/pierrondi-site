@@ -5,9 +5,12 @@ import {
   CircleDollarSign,
   Cpu,
   GitBranch,
+  KeyRound,
   ListChecks,
   Radar,
+  ServerCog,
   ShieldCheck,
+  TerminalSquare,
   Workflow,
 } from 'lucide-react'
 
@@ -103,10 +106,10 @@ const supervisors = [
 ]
 
 const llmContext = [
-  ['Runtime', 'CLI disponível, processos ativos, último sinal e fallback por superfície.'],
-  ['Custo', 'Modelo, tier, tokens, cache hit e custo estimado por workflow.'],
-  ['Qualidade', 'Schema validado, retries, falhas de parsing e evidência de saída.'],
-  ['Risco', 'Contexto sensível, secrets bloqueados, human gate e autonomia permitida.'],
+  ['Runtime', 'LiteLLM fica como proxy OpenAI-compatible para agentes e workflows.'],
+  ['Custo', 'Aliases controlam tier por workflow antes de qualquer chamada cara.'],
+  ['Qualidade', 'Smoke testa /v1/models e /v1/chat/completions com saída mínima.'],
+  ['Risco', 'Secrets via Railway/env central; nenhum token aparece no painel.'],
 ]
 
 const workflowModel = [
@@ -115,6 +118,44 @@ const workflowModel = [
   ['handoff_stale_sweeper', 'Handoffs antigos viram fechar, reativar ou backlog.'],
   ['agent_activation_gate', 'Scorecard >= 70 antes de qualquer agente novo ficar ativo.'],
   ['llm_cost_quality_daily', 'Custo, cache, tiering e anomalias por workflow.'],
+]
+
+const llmOperation = [
+  {
+    label: 'Railway service',
+    value: 'litellm-gateway',
+    detail: 'Provisionado separado do gateway atual para rollback limpo.',
+    tone: 'amber',
+    icon: ServerCog,
+  },
+  {
+    label: 'Secrets',
+    value: 'master + salt',
+    detail: 'Sincronizados via env central e Railway; valores nunca renderizados.',
+    tone: 'green',
+    icon: KeyRound,
+  },
+  {
+    label: 'Deploy',
+    value: 'gated',
+    detail: 'Automação exige CONFIRM_PRODUCTION_DEPLOY=1 antes de subir.',
+    tone: 'amber',
+    icon: ShieldCheck,
+  },
+]
+
+const modelAliases = [
+  ['workflow-cheap', 'Gemini Flash', 'Triagem, relatórios, varreduras e rotinas de volume.'],
+  ['workflow-standard', 'GPT-5 mini', 'Execução padrão para agentes e workflows previsíveis.'],
+  ['workflow-reasoning-manual', 'GPT-5', 'Escalação manual para raciocínio profundo.'],
+  ['claude-manual-premium', 'Claude Opus', 'Fallback premium manual; Sonnet automatizado bloqueado.'],
+]
+
+const opsCommands = [
+  ['check', 'npm run litellm:check'],
+  ['secrets', 'npm run litellm:sync-secrets'],
+  ['deploy', 'CONFIRM_PRODUCTION_DEPLOY=1 npm run litellm:deploy'],
+  ['smoke', 'LITELLM_BASE_URL=https://<service> npm run litellm:smoke'],
 ]
 
 function formatDate(value?: string) {
@@ -206,6 +247,7 @@ export default function ControlTower({ snapshot }: ControlTowerProps) {
           <a href="#risco">Risco</a>
           <a href="#score">Score</a>
           <a href="#agentes">Agentes</a>
+          <a href="#llm">LLM</a>
           <a href="#automacoes">Automações</a>
           <a href="#governanca">Governança</a>
         </nav>
@@ -221,8 +263,8 @@ export default function ControlTower({ snapshot }: ControlTowerProps) {
             <p className={styles.kicker}>pierrondi.dev / control_tower</p>
             <h1>Gerencie a operação agentica por risco, não por ruído.</h1>
             <p>
-              Painel privado para decidir o que para, o que corrige e o que pode
-              escalar com evidência operacional.
+              Painel privado para decidir o que para, o que corrige, qual modelo roda
+              cada workflow e o que pode escalar com evidência operacional.
             </p>
           </div>
           <div className={styles.statusCard} data-status={snapshot?.summary.overallStatus ?? 'red'}>
@@ -235,8 +277,8 @@ export default function ControlTower({ snapshot }: ControlTowerProps) {
         <section className={styles.decisionBand}>
           <Radar size={22} />
           <div>
-            <strong>Decisão recomendada: congelar novos agentes até o scorecard existir.</strong>
-            <span>Resolver dirty repos, automações falhas e handoff stale antes de escalar autonomia.</span>
+            <strong>Decisão recomendada: agentes usam LiteLLM por alias, não provider direto.</strong>
+            <span>Gateway customizado continua para apps; workflows passam pelo proxy com gates, custo e smoke.</span>
           </div>
           <em>{p0} P0</em>
         </section>
@@ -341,6 +383,43 @@ export default function ControlTower({ snapshot }: ControlTowerProps) {
               ))}
             </div>
           </article>
+        </section>
+
+        <section id="llm" className={styles.panel}>
+          <div className={styles.panelHeader}>
+            <h2>Operação LLM</h2>
+            <span>LiteLLM + Railway + aliases</span>
+          </div>
+          <div className={styles.llmOpsGrid}>
+            {llmOperation.map((item) => {
+              const Icon = item.icon
+              return (
+                <article key={item.label} data-tone={item.tone}>
+                  <Icon size={18} />
+                  <span>{item.label}</span>
+                  <strong>{item.value}</strong>
+                  <p>{item.detail}</p>
+                </article>
+              )
+            })}
+          </div>
+          <div className={styles.aliasGrid}>
+            {modelAliases.map(([alias, route, detail]) => (
+              <article key={alias}>
+                <strong>{alias}</strong>
+                <span>{route}</span>
+                <p>{detail}</p>
+              </article>
+            ))}
+          </div>
+          <div className={styles.commandRail}>
+            <TerminalSquare size={18} />
+            <div>
+              {opsCommands.map(([label, command]) => (
+                <code key={label}>{command}</code>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section id="automacoes" className={styles.panel}>
