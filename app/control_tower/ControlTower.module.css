@@ -612,6 +612,297 @@
   font-weight: 900;
 }
 
+.creativeStatsRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.creativeStatsRow article {
+  min-height: 116px;
+  display: grid;
+  align-content: space-between;
+  border: 1px solid #161611;
+  border-radius: 6px;
+  background: #fffdf7;
+  padding: 12px;
+}
+
+.creativeStatsRow article[data-tone='red'] { background: #f7dfdb; }
+.creativeStatsRow article[data-tone='amber'] { background: #f6ead4; }
+.creativeStatsRow article[data-tone='blue'] { background: #dcecf3; }
+.creativeStatsRow article[data-tone='green'] { background: #dff0e7; }
+
+.creativeStatsRow article span {
+  color: rgba(22, 22, 17, 0.58);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.creativeStatsRow article strong {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 36px;
+  line-height: 0.9;
+}
+
+.creativeStatsRow article small {
+  color: rgba(22, 22, 17, 0.58);
+  font-size: 11px;
+}
+
+.tierHeatmap {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.tierBar {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 36px;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.tierLabel {
+  border: 1px solid #161611;
+  border-radius: 6px;
+  padding: 4px 8px;
+  text-align: center;
+  font-weight: 900;
+}
+
+.occasionChips,
+.langChips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  color: rgba(22, 22, 17, 0.66);
+  font-size: 11px;
+}
+
+.occasionChip,
+.langChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #161611;
+  border-radius: 999px;
+  background: #fffdf7;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.occasionChip em,
+.langChip em {
+  border-left: 1px solid rgba(22, 22, 17, 0.3);
+  padding-left: 5px;
+  font-style: normal;
+  font-weight: 700;
+  color: rgba(22, 22, 17, 0.62);
+}
+
+.looksGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lookCard {
+  display: grid;
+  gap: 8px;
+  border: 1px solid #161611;
+  border-radius: 6px;
+  background: #fffdf7;
+  padding: 12px;
+}
+
+.lookCard[data-tone='green'] { background: #dff0e7; }
+.lookCard[data-tone='blue'] { background: #dcecf3; }
+.lookCard[data-tone='amber'] { background: #f6ead4; }
+.lookCard[data-tone='red'] { background: #f7dfdb; }
+
+.lookCard header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.lookCard header strong {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.lookTier {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #161611;
+  border-radius: 999px;
+  background: #fbfaf6;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.lookOccasion {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.lookOccasion em {
+  font-style: normal;
+  font-weight: 400;
+  color: rgba(22, 22, 17, 0.62);
+}
+
+.lookBreakdown {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.lookBreakdown span {
+  display: block;
+  height: 7px;
+  border: 1px solid #161611;
+  border-radius: 999px;
+  background: #ece7dc;
+  overflow: hidden;
+}
+
+.lookBreakdown span i {
+  display: block;
+  height: 100%;
+  background: #207a51;
+}
+
+.lookCard footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: rgba(22, 22, 17, 0.58);
+  font-size: 11px;
+}
+
+.devotionalGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.devotionalCard {
+  display: grid;
+  gap: 8px;
+  border: 1px solid #161611;
+  border-radius: 6px;
+  background: #fffdf7;
+  padding: 12px;
+}
+
+.devotionalCard[data-state='pending'] {
+  opacity: 0.7;
+}
+
+.devotionalCard[data-state='approved'] {
+  background: #dff0e7;
+}
+
+.devotionalCard[data-state='rejected'] {
+  background: #f7dfdb;
+}
+
+.devotionalCard header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.devotionalCard header strong {
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.devotionalCard header em {
+  font-style: normal;
+  color: rgba(22, 22, 17, 0.58);
+  font-size: 11px;
+}
+
+.scriptureRef {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.devotionalTitle {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.devotionalSnippet {
+  margin: 0;
+  color: rgba(22, 22, 17, 0.72);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.devotionalCard footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.approveButton,
+.rejectButton {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 36px;
+  border: 1px solid #161611;
+  border-radius: 6px;
+  background: #fbfaf6;
+  color: #161611;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.approveButton {
+  background: #161611;
+  color: #fbfaf6;
+}
+
+.approveButton:disabled,
+.rejectButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.devotionalError {
+  margin: 0;
+  color: #c4332f;
+  font-size: 11px;
+  font-weight: 900;
+}
+
 @media (max-width: 1180px) {
   .shell {
     grid-template-columns: 1fr;
@@ -639,6 +930,18 @@
   .automationGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .creativeStatsRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .looksGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .devotionalGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 760px) {
@@ -655,6 +958,8 @@
   .llmOpsGrid,
   .aliasGrid,
   .automationGrid,
+  .creativeStatsRow,
+  .looksGrid,
   .lockInputRow {
     grid-template-columns: 1fr;
   }

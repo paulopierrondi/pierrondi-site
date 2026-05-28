@@ -15,10 +15,14 @@ import {
 } from 'lucide-react'
 
 import type { AutomationControlSnapshot } from '@/lib/automation-control/types'
+import type { CreativeControlSnapshot } from '@/lib/creative-control/types'
+import DevotionalsPanel from './DevotionalsPanel'
+import LooksPanel from './LooksPanel'
 import styles from './ControlTower.module.css'
 
 interface ControlTowerProps {
   snapshot: AutomationControlSnapshot | null
+  creative: CreativeControlSnapshot | null
 }
 
 const baseline = {
@@ -231,7 +235,7 @@ function scoreRows(snapshot: AutomationControlSnapshot | null) {
   ] as const
 }
 
-export default function ControlTower({ snapshot }: ControlTowerProps) {
+export default function ControlTower({ snapshot, creative }: ControlTowerProps) {
   const metrics = metricData(snapshot)
   const p0 = lanes[0].items.length
   const topAutomations = snapshot?.automations.slice(0, 12) ?? []
@@ -249,6 +253,8 @@ export default function ControlTower({ snapshot }: ControlTowerProps) {
           <a href="#agentes">Agentes</a>
           <a href="#llm">LLM</a>
           <a href="#automacoes">Automações</a>
+          <a href="#looks">Looks</a>
+          <a href="#devotionais">Devotionais</a>
           <a href="#governanca">Governança</a>
         </nav>
         <p className={styles.railNote}>
@@ -447,6 +453,45 @@ export default function ControlTower({ snapshot }: ControlTowerProps) {
             </div>
           )}
         </section>
+
+        {creative ? (
+          <LooksPanel stats={creative.looks.stats} recent={creative.looks.recent} />
+        ) : (
+          <section id="looks" className={styles.panel}>
+            <div className={styles.panelHeader}>
+              <h2>FashionCore looks</h2>
+              <span>sem snapshot</span>
+            </div>
+            <div className={styles.emptyState}>
+              <Workflow size={20} />
+              <p>
+                Rode <code>brain-env-run -- python3 scripts/creative-control-snapshot.py</code>
+                no host local para ingerir looks do fashioncore.
+              </p>
+            </div>
+          </section>
+        )}
+
+        {creative ? (
+          <DevotionalsPanel
+            stats={creative.devotionals.stats}
+            pending={creative.devotionals.pending}
+          />
+        ) : (
+          <section id="devotionais" className={styles.panel}>
+            <div className={styles.panelHeader}>
+              <h2>FaithSchool devotionals</h2>
+              <span>sem snapshot</span>
+            </div>
+            <div className={styles.emptyState}>
+              <Workflow size={20} />
+              <p>
+                Coletor ainda não rodou. Approve/reject ficam habilitados quando
+                o snapshot for ingerido com pelo menos um devotional pendente.
+              </p>
+            </div>
+          </section>
+        )}
 
         <section id="governanca" className={styles.guardrailBand}>
           <ShieldCheck size={24} />

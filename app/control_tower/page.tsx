@@ -7,6 +7,7 @@ import {
   verifySessionCookie,
 } from '@/lib/automation-control/auth'
 import { readAutomationSnapshot } from '@/lib/automation-control/storage'
+import { readCreativeSnapshot } from '@/lib/creative-control/storage'
 import ControlTower from './ControlTower'
 import styles from './ControlTower.module.css'
 
@@ -35,7 +36,7 @@ function LockedControlTower({ invalid }: { invalid: boolean }) {
         <p className={styles.kicker}>pierrondi.dev / control_tower</p>
         <h1 id="control-tower-lock-title">Control Tower privado.</h1>
         <p>
-          Esta rota consolida agentes, automações, repos, handoffs e gates.
+          A rota consolida agentes, automações, repos, handoffs e gates.
           Use o token operacional configurado no provider.
         </p>
         <form className={styles.lockForm} method="post" action="/api/automation-control/session">
@@ -66,7 +67,10 @@ export default async function ControlTowerPage({ searchParams }: ControlTowerPag
 
   if (!authorized) return <LockedControlTower invalid={params.auth === 'invalid'} />
 
-  const snapshot = await readAutomationSnapshot()
+  const [snapshot, creative] = await Promise.all([
+    readAutomationSnapshot(),
+    readCreativeSnapshot(),
+  ])
 
-  return <ControlTower snapshot={snapshot} />
+  return <ControlTower snapshot={snapshot} creative={creative} />
 }
