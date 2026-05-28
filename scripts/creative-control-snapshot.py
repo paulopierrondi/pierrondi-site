@@ -489,7 +489,14 @@ def main(argv: Iterable[str] | None = None) -> int:
     )
     parser.add_argument(
         "--devotional-url",
-        default=os.environ.get("FAITHSCHOOL_PENDING_URL", ""),
+        default=os.environ.get(
+            "FAITHSCHOOL_PENDING_URL",
+            "https://faithschool.app/api/admin/devotional/pending/",
+        ),
+    )
+    parser.add_argument(
+        "--site-url",
+        default=os.environ.get("PIERRONDI_SITE_URL", "https://www.pierrondi.dev"),
     )
     parser.add_argument("--max-looks", type=int, default=12)
     parser.add_argument("--max-devotionals", type=int, default=24)
@@ -509,8 +516,11 @@ def main(argv: Iterable[str] | None = None) -> int:
         print(json.dumps(snapshot, indent=2))
         return 0
 
-    site_url = os.environ.get("PIERRONDI_SITE_URL", "")
-    ingest_token = os.environ.get("CREATIVE_CONTROL_INGEST_TOKEN", "")
+    site_url = args.site_url
+    ingest_token = os.environ.get(
+        "CREATIVE_CONTROL_INGEST_TOKEN",
+        os.environ.get("AUTOMATION_CONTROL_INGEST_TOKEN", ""),
+    )
     return post_snapshot(snapshot, site_url, ingest_token)
 
 
