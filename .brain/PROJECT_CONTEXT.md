@@ -1,6 +1,6 @@
 # Project Brain Context
 
-Generated: `2026-05-28 06:49:10`
+Generated: `2026-05-28 06:50:08`
 Tool: `claude`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
@@ -2475,6 +2475,16 @@ Stack enxuto: **Next.js 16 + React 19 + Tailwind v4 + Formspree**. Zero banco, z
 - Vault atualizado: `High Craft Frontend Visual Standard.md` agora exige consultar `/design`, `docs/design-vault.md`, `app/design/design-catalog.ts` e o snapshot 21st antes de criar paginas visuais novas para o portfolio/pierrondi.dev.
 - Deploy/push: nao executado. Producao Railway continua exigindo comando explicito do Paulo.
 [REDACTED SECRET LINE]
+
+### 2026-05-28 06:49 BRT — Design Vault pushed to `main`
+
+- Paulo autorizou explicitamente: "Push to main".
+- Preflight Agent Hub passou antes do push.
+- Commit enviado: `72a0785 feat: add pierrondi design vault`.
+- Remote: `origin/main` atualizado de `33ee981` para `72a0785`.
+- GitHub reportou bypass de regra: required status check esperado `check-apps-urls / local-build-check`.
+- Sem deploy Railway executado nesta etapa.
+- Validacao local anterior ao push: `npm run lint`, `npm run build` e QA Playwright em `/design` passaram.
 
 ## AI History Snapshot
 
