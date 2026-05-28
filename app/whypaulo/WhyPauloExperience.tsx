@@ -21,7 +21,8 @@ import {
 } from 'lucide-react'
 import { useMemo } from 'react'
 import type { CSSProperties } from 'react'
-import { useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
+import type { Variants } from 'framer-motion'
 import styles from './WhyPauloExperience.module.css'
 
 const marketPressures = [
@@ -170,23 +171,90 @@ const theaterMetrics = [
   ['1', 'platform-first story'],
 ]
 
+const motionEase = [0.16, 1, 0.3, 1] as const
+const revealViewport = { once: true, amount: 0.18 } as const
+
+const sectionReveal: Variants = {
+  hidden: { opacity: 0, y: 34, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.72, ease: motionEase },
+  },
+}
+
+const heroCopyReveal: Variants = {
+  hidden: { opacity: 0, x: -34, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    x: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.82, ease: motionEase },
+  },
+}
+
+const panelReveal: Variants = {
+  hidden: { opacity: 0, y: 24, scale: 0.97, filter: 'blur(8px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: { duration: 0.72, ease: motionEase },
+  },
+}
+
+const cardReveal: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.56, ease: motionEase },
+  },
+}
+
+const staggerReveal: Variants = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.08 },
+  },
+}
+
+const agentPaths = [
+  'M12 24 C24 18 38 36 52 52',
+  'M28 66 C38 60 44 56 52 52',
+  'M43 22 C50 28 52 38 52 52',
+  'M52 52 C62 42 68 34 74 29',
+  'M52 52 C64 58 74 63 84 67',
+]
+
 export default function WhyPauloExperience() {
   const reducedMotion = useReducedMotion()
   const neuralDots = useMemo(() => Array.from({ length: 26 }, (_, index) => index), [])
   const motionClass = reducedMotion ? styles.motionPaused : styles.motionEnabled
+  const revealProps = reducedMotion
+    ? { initial: 'visible' as const, animate: 'visible' as const }
+    : { initial: 'hidden' as const, whileInView: 'visible' as const, viewport: revealViewport }
+  const loadProps = reducedMotion
+    ? { initial: 'visible' as const, animate: 'visible' as const }
+    : { initial: 'hidden' as const, animate: 'visible' as const }
+  const cardHover = reducedMotion ? undefined : { y: -7, borderColor: 'rgba(200, 255, 46, 0.34)' }
+  const softHover = reducedMotion ? undefined : { y: -3, scale: 1.015 }
 
   return (
     <main className={`${styles.page} ${motionClass}`}>
       <div className={styles.noise} aria-hidden="true" />
 
-      <section className={styles.hero} aria-labelledby="why-paulo-title">
+      <motion.section className={styles.hero} aria-labelledby="why-paulo-title" {...loadProps} variants={sectionReveal}>
         <div className={styles.neuralMap} aria-hidden="true">
           {neuralDots.map((dot) => (
             <span key={dot} style={{ '--dot-index': dot } as CSSProperties} />
           ))}
         </div>
 
-        <div className={styles.heroCopy}>
+        <motion.div className={styles.heroCopy} variants={heroCopyReveal}>
           <p className={styles.kicker}>Private briefing / ServiceNow agentic strategy</p>
           <h1 id="why-paulo-title">AI is not the future. It is the platform battleground now.</h1>
           <p className={styles.heroLead}>
@@ -206,9 +274,9 @@ export default function WhyPauloExperience() {
             <span>Client maturity</span>
             <span>Governed execution</span>
           </div>
-        </div>
+        </motion.div>
 
-        <aside className={styles.pressurePanel} aria-label="Market pressure readout">
+        <motion.aside className={styles.pressurePanel} aria-label="Market pressure readout" variants={panelReveal}>
           <div className={styles.pressureHeader}>
             <Cpu size={22} aria-hidden="true" />
             <span>Live market readout</span>
@@ -232,10 +300,10 @@ export default function WhyPauloExperience() {
               <span>able to turn workflow context into governed execution</span>
             </li>
           </ul>
-        </aside>
-      </section>
+        </motion.aside>
+      </motion.section>
 
-      <section className={styles.marketSection} aria-labelledby="market-title">
+      <motion.section className={styles.marketSection} aria-labelledby="market-title" {...revealProps} variants={sectionReveal}>
         <div className={styles.sectionHeader}>
           <p className={styles.kicker}>The panorama</p>
           <h2 id="market-title">The conversation changed faster than the enterprise buying cycle.</h2>
@@ -245,23 +313,23 @@ export default function WhyPauloExperience() {
           </p>
         </div>
 
-        <div className={styles.marketGrid}>
+        <motion.div className={styles.marketGrid} variants={staggerReveal}>
           {marketPressures.map((item) => {
             const Icon = item.icon
             return (
-              <article key={item.title}>
+              <motion.article key={item.title} variants={cardReveal} whileHover={cardHover}>
                 <Icon size={22} aria-hidden="true" />
                 <h3>{item.title}</h3>
                 <p>{item.copy}</p>
-              </article>
+              </motion.article>
             )
           })}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section className={styles.agentSection} aria-labelledby="agent-title">
+      <motion.section className={styles.agentSection} aria-labelledby="agent-title" {...revealProps} variants={sectionReveal}>
         <div className={styles.agentLayout}>
-          <div className={styles.agentNarrative}>
+          <motion.div className={styles.agentNarrative} variants={heroCopyReveal}>
             <p className={styles.kicker}>Agent execution model</p>
             <h2 id="agent-title">The answer is not another AI demo. It is a customer modernization motion.</h2>
             <p>
@@ -271,28 +339,53 @@ export default function WhyPauloExperience() {
             </p>
             <div className={styles.theaterStats} aria-label="Execution signals">
               {theaterMetrics.map(([value, label]) => (
-                <div key={label}>
+                <motion.div key={label} whileHover={softHover}>
                   <strong>{value}</strong>
                   <span>{label}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div className={styles.agentTheater} aria-label="Visual model of agents executing customer modernization work">
+          <motion.div
+            className={styles.agentTheater}
+            aria-label="Visual model of agents executing customer modernization work"
+            variants={panelReveal}
+          >
             <div className={styles.agentCanvas}>
               <svg className={styles.agentLines} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M12 24 C24 18 38 36 52 52" />
-                <path d="M28 66 C38 60 44 56 52 52" />
-                <path d="M43 22 C50 28 52 38 52 52" />
-                <path d="M52 52 C62 42 68 34 74 29" />
-                <path d="M52 52 C64 58 74 63 84 67" />
+                {agentPaths.map((path, index) => (
+                  <motion.path
+                    key={path}
+                    d={path}
+                    initial={reducedMotion ? undefined : { pathLength: 0.24, opacity: 0.28 }}
+                    animate={
+                      reducedMotion
+                        ? undefined
+                        : { pathLength: [0.24, 1, 0.42], opacity: [0.32, 0.86, 0.42] }
+                    }
+                    transition={{ duration: 4.2 + index * 0.34, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                ))}
               </svg>
-              {agentNodes.map((node) => (
-                <div
+              {agentNodes.map((node, index) => (
+                <motion.div
                   key={node.label}
                   className={styles.agentNode}
                   data-tone={node.tone}
+                  animate={
+                    reducedMotion
+                      ? undefined
+                      : {
+                          opacity: [0.9, 1, 0.92],
+                          borderColor: [
+                            'rgba(247, 245, 238, 0.16)',
+                            index === 3 ? 'rgba(200, 255, 46, 0.54)' : 'rgba(247, 245, 238, 0.3)',
+                            'rgba(247, 245, 238, 0.16)',
+                          ],
+                        }
+                  }
+                  transition={{ duration: 3.8 + index * 0.22, repeat: Infinity, ease: 'easeInOut' }}
                   style={
                     {
                       '--x': `${node.x}%`,
@@ -304,28 +397,38 @@ export default function WhyPauloExperience() {
                 >
                   <span />
                   <strong>{node.label}</strong>
-                </div>
+                </motion.div>
               ))}
-              <div className={styles.executionCore}>
+              <motion.div
+                className={styles.executionCore}
+                animate={reducedMotion ? undefined : { boxShadow: ['0 0 0 rgba(200, 255, 46, 0)', '0 0 34px rgba(200, 255, 46, 0.2)', '0 0 0 rgba(200, 255, 46, 0)'] }}
+                transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
+              >
                 <GitBranch size={18} aria-hidden="true" />
                 <strong>agentic operating loop</strong>
                 <span>discover → govern → prove → expand</span>
-              </div>
+              </motion.div>
             </div>
 
-            <div className={styles.taskQueue} aria-label="Agent task queue">
+            <motion.div className={styles.taskQueue} aria-label="Agent task queue" variants={staggerReveal}>
               {agentQueue.map((task, index) => (
-                <div key={task} style={{ '--queue-index': index } as CSSProperties}>
+                <motion.div key={task} variants={cardReveal} whileHover={softHover} style={{ '--queue-index': index } as CSSProperties}>
                   <CheckCircle2 size={16} aria-hidden="true" />
                   <span>{task}</span>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className={styles.serviceNowSection} id="service-now-position" aria-labelledby="service-now-title">
+      <motion.section
+        className={styles.serviceNowSection}
+        id="service-now-position"
+        aria-labelledby="service-now-title"
+        {...revealProps}
+        variants={sectionReveal}
+      >
         <div className={styles.sectionHeader}>
           <p className={styles.kicker}>ServiceNow position</p>
           <h2 id="service-now-title">Respect the leadership position. Name the challenge clearly.</h2>
@@ -336,21 +439,21 @@ export default function WhyPauloExperience() {
           </p>
         </div>
 
-        <div className={styles.serviceNowGrid}>
+        <motion.div className={styles.serviceNowGrid} variants={staggerReveal}>
           {serviceNowAngles.map((item) => {
             const Icon = item.icon
             return (
-              <article key={item.title}>
+              <motion.article key={item.title} variants={cardReveal} whileHover={cardHover}>
                 <Icon size={22} aria-hidden="true" />
                 <h3>{item.title}</h3>
                 <p>{item.copy}</p>
-              </article>
+              </motion.article>
             )
           })}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section className={styles.planSection} id="agentic-plan" aria-labelledby="plan-title">
+      <motion.section className={styles.planSection} id="agentic-plan" aria-labelledby="plan-title" {...revealProps} variants={sectionReveal}>
         <div className={styles.sectionHeader}>
           <p className={styles.kicker}>My plan</p>
           <h2 id="plan-title">Turn AI urgency into ServiceNow adoption and expansion.</h2>
@@ -360,22 +463,22 @@ export default function WhyPauloExperience() {
           </p>
         </div>
 
-        <div className={styles.planGrid}>
+        <motion.div className={styles.planGrid} variants={staggerReveal}>
           {planSteps.map((item) => {
             const Icon = item.icon
             return (
-              <article key={item.phase} className={styles.planStep}>
+              <motion.article key={item.phase} className={styles.planStep} variants={cardReveal} whileHover={cardHover}>
                 <span>{item.phase}</span>
                 <Icon size={22} aria-hidden="true" />
                 <h3>{item.title}</h3>
                 <p>{item.copy}</p>
-              </article>
+              </motion.article>
             )
           })}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section className={styles.operatingSection} aria-labelledby="operating-title">
+      <motion.section className={styles.operatingSection} aria-labelledby="operating-title" {...revealProps} variants={sectionReveal}>
         <div className={styles.sectionHeader}>
           <p className={styles.kicker}>Operating maturity</p>
           <h2 id="operating-title">Enough depth to execute. Enough restraint to avoid exporting the system.</h2>
@@ -385,59 +488,61 @@ export default function WhyPauloExperience() {
           </p>
         </div>
 
-        <div className={styles.operatingFlow}>
+        <motion.div className={styles.operatingFlow} variants={staggerReveal}>
           {operatingSignals.map((item, index) => (
-            <article key={item.label}>
+            <motion.article key={item.label} variants={cardReveal} whileHover={softHover}>
               <span>{String(index + 1).padStart(2, '0')}</span>
               <h3>{item.label}</h3>
               <p>{item.copy}</p>
-            </article>
+            </motion.article>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section className={styles.proofSection} aria-labelledby="proof-title">
-        <div className={styles.proofIntro}>
+      <motion.section className={styles.proofSection} aria-labelledby="proof-title" {...revealProps} variants={sectionReveal}>
+        <motion.div className={styles.proofIntro} variants={heroCopyReveal}>
           <p className={styles.kicker}>Proof without oversharing</p>
           <h2 id="proof-title">The maturity signal is real, but intentionally bounded.</h2>
           <p>
             I can speak credibly about AI operations because I run them. The point is not to expose internals.
             The point is to show I know how to turn AI from novelty into governed work that helps customers move.
           </p>
-        </div>
-        <div className={styles.proofGrid}>
+        </motion.div>
+        <motion.div className={styles.proofGrid} variants={staggerReveal}>
           {proofPillars.map(([title, copy]) => (
-            <article key={title}>
+            <motion.article key={title} variants={cardReveal} whileHover={cardHover}>
               <BadgeCheck size={20} aria-hidden="true" />
               <h3>{title}</h3>
               <p>{copy}</p>
-            </article>
+            </motion.article>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section className={styles.stackSection} aria-labelledby="stack-title">
-        <div>
+      <motion.section className={styles.stackSection} aria-labelledby="stack-title" {...revealProps} variants={sectionReveal}>
+        <motion.div variants={heroCopyReveal}>
           <p className={styles.kicker}>Capability stack</p>
           <h2 id="stack-title">AI expert enough to make ServiceNow more valuable.</h2>
-        </div>
-        <div className={styles.stackCloud}>
+        </motion.div>
+        <motion.div className={styles.stackCloud} variants={staggerReveal}>
           {capabilityStack.map((item) => (
-            <span key={item}>{item}</span>
+            <motion.span key={item} variants={cardReveal} whileHover={softHover}>
+              {item}
+            </motion.span>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section className={styles.authorSection} aria-labelledby="author-title">
-        <div className={styles.authorPhoto}>
+      <motion.section className={styles.authorSection} aria-labelledby="author-title" {...revealProps} variants={sectionReveal}>
+        <motion.div className={styles.authorPhoto} variants={panelReveal} whileHover={softHover}>
           <Image
             src="/assets/paulo-pierrondi-executive-neural.jpg"
             alt="Paulo Pierrondi"
             fill
             sizes="(max-width: 760px) 86vw, 340px"
           />
-        </div>
-        <div className={styles.authorPanel}>
+        </motion.div>
+        <motion.div className={styles.authorPanel} variants={panelReveal}>
           <p className={styles.kicker}>Author</p>
           <h2 id="author-title">Paulo Pierrondi</h2>
           <p>
@@ -454,8 +559,8 @@ export default function WhyPauloExperience() {
               ServiceNow first. AI as leverage. Revenue as the test.
             </span>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
     </main>
   )
 }

@@ -1076,4 +1076,39 @@
   .taskQueue div {
     animation: none !important;
   }
+
+  .hero,
+  .marketSection,
+  .agentSection,
+  .serviceNowSection,
+  .planSection,
+  .operatingSection,
+  .proofSection,
+  .stackSection,
+  .authorSection,
+  .heroCopy,
+  .pressurePanel,
+  .marketGrid,
+  .agentNarrative,
+  .agentTheater,
+  .serviceNowGrid,
+  .planGrid,
+  .operatingFlow,
+  .proofIntro,
+  .proofGrid,
+  .stackCloud,
+  .authorPhoto,
+  .authorPanel,
+  .marketGrid article,
+  .serviceNowGrid article,
+  .planStep,
+  .operatingFlow article,
+  .proofGrid article,
+  .theaterStats div,
+  .taskQueue > div,
+  .stackCloud span {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
 }
