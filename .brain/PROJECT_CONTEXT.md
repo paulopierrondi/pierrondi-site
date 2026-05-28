@@ -1,7 +1,7 @@
 # Project Brain Context
 
-Generated: `2026-05-28 06:50:08`
-Tool: `claude`
+Generated: `2026-05-28 09:25:57`
+Tool: `sync`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
 
@@ -146,7 +146,7 @@ Every Bradesco Now Assist material must explicitly connect:
 ---
 type: policy
 status: generated
-generated_at: "2026-05-28 03:51:23"
+generated_at: "2026-05-28 09:25:03"
 tags:
   - ai-agents
   - policy
@@ -405,7 +405,7 @@ tags:
 ---
 # Linear Project Map
 
-Updated: 2026-05-26
+Updated: 2026-05-28
 
 This map links Linear projects to local repos and Obsidian project notes. It is mapping metadata only.
 
@@ -2362,39 +2362,15 @@ O arquivo temporario nao deve entrar em Obsidian, Git, Linear, email ou screensh
 
 ## Project Note Snapshot
 
-
-
-<!-- PROJECT_LOCAL_COUNCIL_NOTE_START -->
-## Project Local Council
-
-This project has a local council overlay in `.brain/PROJECT_COUNCIL.md`.
-
-| Local agent | Extends | Default coder |
-| --- | --- | --- |
-| `local-product-owner` | [[agente_business_owner]] | `kimi` |
-| `local-technical-lead` | [[agente_technical_lead]] | `codex` |
-| `local-qa-test-agent` | [[agente_test_lead]] | `gemini` |
-| `local-release-guardian` | [[agente_release_lead]] | `claude` |
-| `local-automation-steward` | [[agente_automation_lead]] | `codex` |
-| `local-growth-operator` | [[agente_marketing_evolution]] | `kimi` |
-| `local-growth-domain-agent` | [[agente_unknown_unknowns]] | `claude` |
-
-Rules:
-[REDACTED SECRET LINE]
-- Use only the relevant local agents for the task; do not inflate small changes.
-- Prompt caching: follow `Prompt Caching Workflow Policy`, use stable prefix plus dynamic suffix, and record `prompt_cache` telemetry when possible.
-- Registry id: `pierrondi-site`.
-<!-- PROJECT_LOCAL_COUNCIL_NOTE_END -->
-
 ---
 type: project
 repo_name: "pierrondi-site"
 repo_path: "/Users/paulopierrondi/Projects/pierrondi-site"
 repo_kind: "repo"
 branch: "main"
-dirty_files: 1
+dirty_files: 5
 remote: "https://github.com/paulopierrondi/pierrondi-site.git"
-generated_at: "2026-05-28 03:51:23"
+generated_at: "2026-05-28 09:25:03"
 tags:
   - project
   - git
@@ -2407,8 +2383,8 @@ tags:
 - Tipo: `node`
 - Repo kind: `repo`
 - Branch: `main`
-- Arquivos alterados agora: `1`
-- Ultimo commit: `33ee981 2026-05-27 fix: align control tower llm aliases with gemini`
+- Arquivos alterados agora: `5`
+- Ultimo commit: `7fbe412 2026-05-28 feat: add bilingual executive home`
 - Remote: `https://github.com/paulopierrondi/pierrondi-site.git`
 - Marcadores encontrados: `package.json, README.md, CLAUDE.md, AGENTS.md, GEMINI.md`
 
@@ -2452,47 +2428,13 @@ Stack enxuto: **Next.js 16 + React 19 + Tailwind v4 + Formspree**. Zero banco, z
 - Use esta nota para manter o estado atual do projeto, decisoes abertas, comandos canonicos e riscos.
 - As sessoes locais de Codex, Claude Code, Kimi e Gemini foram indexadas no vault quando estavam disponiveis em disco.
 
-### 2026-05-28 06:45 BRT — `/design` criado como Pierrondi Design Vault
-
-- Pedido de Paulo: criar em `pierrondi.dev/design` uma biblioteca propria para designs/componentes inspirada no 21st.dev e deixar o vault orientando futuros trabalhos visuais.
-- Entrega local:
-  - Nova rota estatica `/design` com hero, preview lab, categorias, fila de componentes e comandos de operacao.
-  - Catalogo versionado em `app/design/design-catalog.ts`.
-  - Runbook em `docs/design-vault.md`.
-  - Snapshot gerado de 60 categorias publicas 21st em `docs/design-vault/21st-source-snapshot.json`.
-  - Scripts: `npm run design:sync-21st` e `npm run design:install -- author/component`.
-  - Home linkada para `/design`; sitemap inclui `/design`.
-- Decisao de licenca/uso: componentes 21st Community entram como MIT com atribuicao preservada; screens/themes de terceiros sao referencia, nao portfolio proprio. Codigo nao sera importado em massa para o bundle publico; instalacao e seletiva por caso de uso.
-- Validacao:
-  - `npm run design:sync-21st` passou e gerou 60 categorias.
-  - `npm run lint` passou.
-  - `npm run build` passou; `/design` apareceu como rota estatica.
-  - QA Playwright em `next start` sem console errors e sem overflow horizontal desktop/mobile.
-- Evidencias visuais:
-  - `qa/screenshots/design-vault-start-desktop-hero.png`
-  - `qa/screenshots/design-vault-start-mobile-hero.png`
-  - `qa/screenshots/design-vault-local-desktop-scroll.png`
-- Vault atualizado: `High Craft Frontend Visual Standard.md` agora exige consultar `/design`, `docs/design-vault.md`, `app/design/design-catalog.ts` e o snapshot 21st antes de criar paginas visuais novas para o portfolio/pierrondi.dev.
-- Deploy/push: nao executado. Producao Railway continua exigindo comando explicito do Paulo.
-[REDACTED SECRET LINE]
-
-### 2026-05-28 06:49 BRT — Design Vault pushed to `main`
-
-- Paulo autorizou explicitamente: "Push to main".
-- Preflight Agent Hub passou antes do push.
-- Commit enviado: `72a0785 feat: add pierrondi design vault`.
-- Remote: `origin/main` atualizado de `33ee981` para `72a0785`.
-- GitHub reportou bypass de regra: required status check esperado `check-apps-urls / local-build-check`.
-- Sem deploy Railway executado nesta etapa.
-- Validacao local anterior ao push: `npm run lint`, `npm run build` e QA Playwright em `/design` passaram.
-
 ## AI History Snapshot
 
 ---
 type: project-ai-history
 project: "pierrondi-site"
 status: generated
-generated_at: "2026-05-28 03:51:23"
+generated_at: "2026-05-28 09:25:03"
 tags:
   - ai-history
   - project-history
@@ -2504,7 +2446,7 @@ Projeto: [[02_Projects/pierrondi-site|pierrondi-site]]
 
 - Path: `/Users/paulopierrondi/Projects/pierrondi-site`
 - Codex relacionado: `2`
-- Claude Code relacionado: `3`
+- Claude Code relacionado: `6`
 - Kimi relacionado: `1`
 - Claude-Mem observations relacionadas: `68`
 - Claude-Mem summaries relacionados: `0`
@@ -2520,6 +2462,9 @@ Projeto: [[02_Projects/pierrondi-site|pierrondi-site]]
 
 | Atualizado | Titulo | Primeiro pedido | Fonte |
 | --- | --- | --- | --- |
+| 2026-05-28T09:50:37.372Z | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (876384d3b58db575da1acc03fddfd77d9503ec91). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-876384d ...[truncated] | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (876384d3b58db575da1acc03fddfd77d9503ec91). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-876384d ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/758a618a-05d2-4418-bf47-df16b7d4eb42.jsonl |
+| 2026-05-28T09:50:10.486Z | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (b557f84d980be3ed84067a9ba8143acc61ba5a0c). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-b557f84 ...[truncated] | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (b557f84d980be3ed84067a9ba8143acc61ba5a0c). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-b557f84 ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/fa270f64-8922-4e4c-acae-057e3bd6d2c7.jsonl |
+| 2026-05-28T04:37:29 | -Users-paulopierrondi-Projects-pierrondi-site |  | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/fa02996c-9d32-4317-bf8a-fe14ea845a8d.jsonl |
 | 2026-05-28T01:03:20.713Z | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (33ee9815351b25bf043a7fa6e8473832dd7ea6e0). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-33ee981 ...[truncated] | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (33ee9815351b25bf043a7fa6e8473832dd7ea6e0). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-33ee981 ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/d783913a-f0c3-4c36-b5f2-e9237cd4f814.jsonl |
 | 2026-05-24T19:31:56 | -Users-paulopierrondi-Projects-pierrondi-site |  | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/7ea700d3-df0c-4f6b-8d5a-2a9e2c412404.jsonl |
 | 2026-05-24T19:27:55 | -Users-paulopierrondi-Projects-pierrondi-site |  | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/6f55a0aa-0bfb-44cb-9a7b-7832474d981f.jsonl |
@@ -2528,7 +2473,7 @@ Projeto: [[02_Projects/pierrondi-site|pierrondi-site]]
 
 | Atualizado | Titulo | Prompts | Fonte |
 | --- | --- | --- | --- |
-| 2026-05-25T11:18:14 | Read-only critique. Paulo wants all agents to… |  | /Users/paulopierrondi/.kimi/sessions/37a3f6aa06af4012258660ad163eb5b1/0216c125-1c66-4b54-a9d3-a0dfcdbcbf76 |
+| 2026-05-28T09:02:30 | <git-context> Working directory:… |  | /Users/paulopierrondi/.kimi/sessions/37a3f6aa06af4012258660ad163eb5b1/8e49ec6a-dfde-4367-8a74-7353c4a7c89d |
 
 ## Claude-Mem
 
@@ -2542,11 +2487,5 @@ Projeto: [[02_Projects/pierrondi-site|pierrondi-site]]
 | 2026-05-21T23:57:21.716Z | discovery | pierrondi-site Uses Multi-Agent Governance with Hub de Agentes Product Council | ["Active coder workflow: Kimi CLI (triage/reports), Codex (patch/test/integration), Claude Code (architecture/compliance/hard bugs).","Cursor Background Agent is dormant by choice — Paulo avoids opening Cur ...[truncated] |
 | 2026-05-21T23:54:24.504Z | feature | pierrondi-site Container Image Built and Exported Successfully | ["Container image config digest: `sha256:7afb6a9286875dc7eb20e87f3714ba2e7f456a97c65343367265ef9f10fecadf`.","Container image manifest digest: `sha256:179e1ac8908ae6c44e5a8fc11f1d78b2bf48cb397f3514f737393af ...[truncated] |
 | 2026-05-21T23:52:34.269Z | security_note | 2 npm Vulnerabilities Found in pierrondi-site Dependencies | ["382 packages installed via `npm ci`; 383 packages audited total.","2 vulnerabilities found: 1 moderate, 1 high severity.","npm suggests `npm audit fix --force` to resolve all issues.","Build did not fail ...[truncated] |
-| 2026-05-21T23:52:20.053Z | discovery | pierrondi-site Production Runtime: Node 22.22.3 / npm 10.9.8 on Debian Bookworm | ["Node.js version: `22.22.3` (installed via mise from `node-v22.22.3-linux-x64.tar.gz`).","npm version: `10.9.8`.","Base OS: Debian Bookworm (amd64), runtime image `ghcr.io/railwayapp/railpack-runtime:mise- ...[truncated] |
-| 2026-05-21T23:52:11.927Z | discovery | pierrondi-site Builds with Railpack 0.23.0 via npm run build | ["Railway builder uses Railpack v0.23.0 (`ghcr.io/railwayapp/railpack-frontend:v0.23.0@sha256:ba4c430961d9ee3215c64807727a4b11e2198daac31250e9db9eaf9cee4624d6`).","Build step detected automatically as `npm ...[truncated] |
-| 2026-05-21T23:51:54.075Z | feature | Railway Production Deployment Triggered for pierrondi-site | ["Railway deployment ID: `ee3b8a3d-36ff-469a-8a97-057b6fd1e2f9`.","Railway service ID: `626d8614-191d-43e4-a7fe-c74702c9e461` within project `9caba826-e5fd-4654-9a0d-1841e6022b11`.","Build logs URL: `https: ...[truncated] |
-| 2026-05-21T23:51:03.361Z | feature | Bradesco K26 Briefing Page Added to pierrondi-site | ["Commit `19c781d` on branch `main` in `/Users/paulopierrondi/Downloads/pierrondi-site` added 1887 lines across 4 files.","New route `app/bradesco-26/page.tsx` (34 lines) created, following Next.js App Rout ...[truncated] |
-| 2026-05-21T23:50:22.151Z | feature | bradesco-26 Playwright Visual QA Passed on pierrondi-site Local Dev — No Overflow, Correct Metadata | ["Local dev server started at http://127.0.0.1:3001 (Next.js 16.2.4 Turbopack), ready in 201ms","All 4 viewports confirmed scrollWidth === clientWidth: desktop-hero (1440px), desktop-radar (1440px), mobile- ...[truncated] |
-| 2026-05-21T23:50:12.990Z | feature | bradesco-26 Route Ported to pierrondi-site — Build Passes, Ready for Deploy | ["3 files copied from pierrondi-ia to pierrondi-site/app/bradesco-26/: page.tsx (34 lines), Bradesco26Experience.tsx (732 lines), Bradesco26Experience.module.css (1120 lines), total 1886 lines","CSS font fi ...[truncated] |
-| 2026-05-21T23:49:20.262Z | dis
+| 2026-05-21T23:52:20.053Z | discovery | pierrondi-site Production Runtime: Node 22.22.3 / npm 10.9.8 on Debian Bookworm | ["Node.js version: `22.22.3` (installed via mise from `node-v22.22.3-linux-x64.tar.gz`).","npm version: `10.9.8`.","Base OS: Debian Bookworm (amd64), runtime image `ghcr.io/railwayapp/railpack-runtime:mi
 ...[truncated]

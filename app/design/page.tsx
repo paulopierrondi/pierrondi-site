@@ -56,6 +56,7 @@ export default function DesignVaultPage() {
         </Link>
         <div className={styles.navLinks}>
           <a href="#catalogo">Catalogo</a>
+          <Link href="/design/library">Library</Link>
           <a href="#componentes">Componentes</a>
           <a href="#operacao">Operacao</a>
           <a href="https://21st.dev/community/components" target="_blank" rel="noreferrer">
