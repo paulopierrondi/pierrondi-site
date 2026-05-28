@@ -9,6 +9,7 @@ export default function CookieBanner() {
   const suppressed =
     pathname === '/' ||
     pathname === '/paulo' ||
+    pathname === '/whypaulo' ||
     pathname?.startsWith('/apps') ||
     pathname?.startsWith('/studio') ||
     pathname?.startsWith('/bradesco-26')
