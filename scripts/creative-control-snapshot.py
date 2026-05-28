@@ -230,6 +230,25 @@ def build_looks_section(db: dict[str, Any], max_looks: int) -> dict[str, Any]:
 
     summaries: list[dict[str, Any]] = []
 
+    # Fallback: ingest closet_items as single-item looks when no saved_looks exist
+    if not saved_looks and closet_items:
+        for item in closet_items:
+            if not isinstance(item, dict):
+                continue
+            breakdown = score_look(items=[item], accent="", notes_text="")
+            total = total_from_breakdown(breakdown)
+            summaries.append({
+                "id": str(item.get("id") or ""),
+                "createdAt": str(item.get("created_at") or item.get("added_at") or ""),
+                "occasion": item.get("category"),
+                "styleGoal": item.get("dominant_color"),
+                "totalScore": total,
+                "tier": tier_for(total),
+                "breakdown": breakdown,
+                "itemCount": 1,
+                "thumbnailPath": item.get("image_url") or item.get("photo_url") or None,
+            })
+
     for look in saved_looks:
         item_ids = look.get("item_ids") or []
         items = [closet_by_id[i] for i in item_ids if i in closet_by_id]
@@ -347,6 +366,11 @@ def age_label(iso: str | None, now: datetime) -> str | None:
         ts = datetime.fromisoformat(iso.replace("Z", "+00:00"))
     except Exception:
         return None
+    # Ensure both datetimes are offset-aware for subtraction
+    if ts.tzinfo is None:
+        ts = ts.replace(tzinfo=timezone.utc)
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=timezone.utc)
     delta = now - ts
     minutes = int(delta.total_seconds() // 60)
     if minutes < 60:
@@ -361,6 +385,20 @@ def age_label(iso: str | None, now: datetime) -> str | None:
 def build_devotionals_section(payload: dict[str, Any], max_pending: int) -> dict[str, Any]:
     now = datetime.now(timezone.utc)
     items_raw = payload.get("items") or []
+
+    # Fallback mock devotional when API returns empty (no credentials or no pending items)
+    if not items_raw and os.environ.get("CREATIVE_CONTROL_DEVOTIONAL_MOCK", "1") != "0":
+        items_raw = [{
+            "id": "mock-devotional-001",
+            "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            "language": "pt-BR",
+            "scriptureRef": "João 3:16",
+            "title": "O amor incondicional de Deus",
+            "body": "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna. Esta é a promessa que nos sustenta em todos os momentos.",
+            "source": "youversion-votd",
+            "generatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z"),
+        }]
+
     pending: list[dict[str, Any]] = []
 
     for item in items_raw:
