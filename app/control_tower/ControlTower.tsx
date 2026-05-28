@@ -145,7 +145,7 @@ const llmOperation = [
 ]
 
 const modelAliases = [
-  ['workflow-cheap', 'Gemini Flash', 'Triagem, relatórios, varreduras e rotinas de volume.'],
+  ['workflow-cheap', 'Gemini API Flash', 'Triagem, relatórios, varreduras e rotinas de volume.'],
   ['workflow-standard', 'GPT-5 mini', 'Execução padrão para agentes e workflows previsíveis.'],
   ['workflow-reasoning-manual', 'GPT-5', 'Escalação manual para raciocínio profundo.'],
   ['claude-manual-premium', 'Claude Opus', 'Fallback premium manual; Sonnet automatizado bloqueado.'],
