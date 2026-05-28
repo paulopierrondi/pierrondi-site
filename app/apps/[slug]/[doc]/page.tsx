@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import Footer from '@/components/Footer'
 import Nav from '@/components/Nav'
 import { ProductTile } from '@/components/ui/ProductTile'
-import { APPS, isAppSlug, type AppSlug } from '../_apps'
+import { APPS, isAppSlug, type AppEntry } from '../_apps'
 import styles from './AppLegal.module.css'
 
 const DOCS = {
@@ -47,8 +47,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   }
 }
-
-type AppEntry = (typeof APPS)[AppSlug]
 
 function SupportContent({ app }: { app: AppEntry }) {
   const localOnly = app.privacyMode === 'localOnly'
