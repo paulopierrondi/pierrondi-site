@@ -1,7 +1,7 @@
 .page {
   --why-bg: #030404;
-  --why-panel: rgba(13, 16, 15, 0.76);
-  --why-panel-strong: rgba(17, 22, 21, 0.92);
+  --why-panel: rgba(12, 16, 15, 0.78);
+  --why-panel-strong: rgba(17, 22, 21, 0.94);
   --why-ink: #f7f5ee;
   --why-muted: rgba(247, 245, 238, 0.68);
   --why-soft: rgba(247, 245, 238, 0.1);
@@ -11,15 +11,16 @@
   --why-cyan: #77d9f2;
   --why-brass: #d6b45d;
   --why-danger: #ff7d68;
+  --radius-card: 8px;
+  --radius-panel: 12px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   min-height: 100vh;
   overflow: clip;
   color: var(--why-ink);
   background:
-    radial-gradient(circle at 72% 12%, rgba(200, 255, 46, 0.14), transparent 28rem),
-    radial-gradient(circle at 14% 36%, rgba(119, 217, 242, 0.12), transparent 24rem),
-    linear-gradient(180deg, #030404 0%, #07100e 46%, #040505 100%);
+    linear-gradient(135deg, rgba(200, 255, 46, 0.08), transparent 30%, rgba(119, 217, 242, 0.07) 64%, transparent),
+    linear-gradient(180deg, #030404 0%, #07100e 48%, #040505 100%);
 }
 
 .page *,
@@ -43,6 +44,10 @@
   background-size: 78px 78px;
 }
 
+.motionPaused {
+  --motion-state: paused;
+}
+
 .motionEnabled::before {
   animation: gridDrift 32s linear infinite;
 }
@@ -52,7 +57,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.34;
+  opacity: 0.28;
   mix-blend-mode: soft-light;
   background-image:
     linear-gradient(115deg, rgba(255, 255, 255, 0.08), transparent 30%),
@@ -60,24 +65,25 @@
 }
 
 .hero,
-.filmSection,
-.valueSection,
+.marketSection,
+.agentSection,
+.serviceNowSection,
+.planSection,
 .operatingSection,
-.platformSection,
 .proofSection,
 .stackSection,
-.closeSection {
+.authorSection {
   position: relative;
   z-index: 1;
   padding-inline: max(24px, calc((100vw - 1180px) / 2));
 }
 
 .hero {
-  min-height: 92svh;
+  min-height: 88svh;
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(310px, 0.72fr);
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.58fr);
   align-items: center;
-  gap: 52px;
+  gap: 46px;
   padding-top: 72px;
   padding-bottom: 72px;
 }
@@ -88,31 +94,7 @@
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  opacity: 0.64;
-}
-
-.neuralMap::before,
-.neuralMap::after {
-  content: "";
-  position: absolute;
-  border-radius: 999px;
-  filter: blur(34px);
-}
-
-.neuralMap::before {
-  right: 6%;
-  top: 16%;
-  width: 23rem;
-  height: 23rem;
-  background: rgba(200, 255, 46, 0.18);
-}
-
-.neuralMap::after {
-  left: 4%;
-  bottom: 8%;
-  width: 19rem;
-  height: 19rem;
-  background: rgba(119, 217, 242, 0.16);
+  opacity: 0.72;
 }
 
 .neuralMap span {
@@ -134,7 +116,7 @@
 }
 
 .heroCopy,
-.heroSystem {
+.pressurePanel {
   position: relative;
   z-index: 2;
 }
@@ -149,23 +131,24 @@
 }
 
 .hero h1 {
-  max-width: 820px;
+  max-width: 880px;
   margin: 0;
   color: #fffdf4;
-  font-size: 5.1rem;
-  line-height: 0.94;
+  font-size: 4.85rem;
+  line-height: 0.95;
   font-weight: 950;
 }
 
 .heroLead {
-  max-width: 760px;
+  max-width: 780px;
   margin: 28px 0 0;
   color: var(--why-muted);
-  font-size: 1.22rem;
+  font-size: 1.2rem;
   line-height: 1.68;
 }
 
-.heroActions {
+.heroActions,
+.authorActions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -173,7 +156,7 @@
 }
 
 .heroActions a,
-.closePanel a {
+.authorPanel a {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -184,7 +167,7 @@
   padding: 0 18px;
   color: #07100a;
   background: var(--why-lime);
-  box-shadow: 0 20px 60px rgba(200, 255, 46, 0.2);
+  box-shadow: 0 20px 60px rgba(200, 255, 46, 0.18);
   font-size: 0.92rem;
   font-weight: 900;
   text-decoration: none;
@@ -201,25 +184,27 @@
 }
 
 .heroActions a:hover,
-.closePanel a:hover {
+.authorPanel a:hover {
   transform: translateY(-2px);
-  box-shadow: 0 24px 80px rgba(200, 255, 46, 0.25);
+  box-shadow: 0 24px 80px rgba(200, 255, 46, 0.24);
 }
 
 .heroActions a:focus-visible,
-.closePanel a:focus-visible,
-.playToggle:focus-visible,
-.sceneRail button:focus-visible,
+.authorPanel a:focus-visible,
 .lockForm button:focus-visible,
 .lockForm input:focus-visible {
   outline: 2px solid var(--why-lime);
   outline-offset: 3px;
 }
 
-.signalStrip {
+.signalStrip,
+.stackCloud {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.signalStrip {
   margin-top: 28px;
 }
 
@@ -234,299 +219,430 @@
   font-weight: 820;
 }
 
-.heroSystem {
+.pressurePanel {
   display: grid;
-  gap: 16px;
-  align-content: center;
-}
-
-.portraitFrame {
-  position: relative;
-  width: min(360px, 80vw);
-  aspect-ratio: 1;
-  justify-self: center;
-  overflow: hidden;
-  border: 1px solid rgba(200, 255, 46, 0.24);
-  border-radius: 28px;
-  background: rgba(247, 245, 238, 0.04);
-  box-shadow:
-    0 42px 110px rgba(0, 0, 0, 0.54),
-    0 0 0 1px rgba(247, 245, 238, 0.08) inset;
-}
-
-.portraitFrame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
+  gap: 20px;
+  border: 1px solid rgba(247, 245, 238, 0.16);
+  border-radius: var(--radius-panel);
+  padding: 22px;
   background:
-    linear-gradient(125deg, rgba(200, 255, 46, 0.18), transparent 42%),
-    radial-gradient(circle at 50% 112%, rgba(119, 217, 242, 0.2), transparent 34%);
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-
-.portraitFrame img {
-  object-fit: cover;
-}
-
-.motionEnabled .portraitFrame {
-  animation: portraitFloat 6.5s var(--ease) infinite alternate;
-}
-
-.systemReadout {
-  width: min(420px, 100%);
-  justify-self: center;
-  border: 1px solid rgba(247, 245, 238, 0.15);
-  border-radius: 18px;
-  padding: 18px;
-  background: rgba(5, 7, 7, 0.78);
+    linear-gradient(145deg, rgba(247, 245, 238, 0.075), transparent 45%),
+    rgba(5, 7, 7, 0.82);
+  box-shadow: 0 36px 100px rgba(0, 0, 0, 0.44);
   backdrop-filter: blur(18px);
 }
 
-.systemReadout span {
-  display: block;
-  margin-bottom: 8px;
+.pressureHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   color: var(--why-cyan);
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   font-weight: 900;
-  letter-spacing: 0.11em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.systemReadout strong {
-  color: #fff;
-  font-size: 1.04rem;
-  line-height: 1.35;
+.pressureGauge {
+  height: 178px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
+  gap: 12px;
+  border: 1px solid rgba(247, 245, 238, 0.11);
+  border-radius: var(--radius-card);
+  padding: 16px;
+  background:
+    linear-gradient(180deg, rgba(200, 255, 46, 0.08), transparent),
+    rgba(247, 245, 238, 0.035);
 }
 
-.filmSection,
-.valueSection,
+.pressureGauge span {
+  display: block;
+  height: 40%;
+  border: 1px solid rgba(200, 255, 46, 0.22);
+  border-radius: 999px 999px 4px 4px;
+  background: linear-gradient(180deg, rgba(200, 255, 46, 0.75), rgba(119, 217, 242, 0.18));
+}
+
+.pressureGauge span:nth-child(2) {
+  height: 72%;
+}
+
+.pressureGauge span:nth-child(3) {
+  height: 92%;
+}
+
+.motionEnabled .pressureGauge span {
+  animation: gaugeRise 3.8s var(--ease) infinite alternate;
+}
+
+.motionEnabled .pressureGauge span:nth-child(2) {
+  animation-delay: -900ms;
+}
+
+.motionEnabled .pressureGauge span:nth-child(3) {
+  animation-delay: -1600ms;
+}
+
+.pressurePanel ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pressurePanel li {
+  display: grid;
+  gap: 5px;
+  border-top: 1px solid rgba(247, 245, 238, 0.1);
+  padding-top: 12px;
+}
+
+.pressurePanel strong {
+  color: #fff;
+  font-size: 0.98rem;
+}
+
+.pressurePanel span {
+  color: var(--why-muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.marketSection,
+.agentSection,
+.serviceNowSection,
+.planSection,
 .operatingSection,
-.platformSection,
 .proofSection,
 .stackSection,
-.closeSection {
+.authorSection {
   padding-top: 74px;
   padding-bottom: 74px;
 }
 
 .sectionHeader {
-  max-width: 900px;
+  max-width: 920px;
   margin-bottom: 34px;
 }
 
 .sectionHeader h2,
+.agentNarrative h2,
 .proofIntro h2,
 .stackSection h2,
-.closePanel h2 {
+.authorPanel h2 {
   margin: 0;
   color: #fffdf4;
-  font-size: 3.15rem;
+  font-size: 3.05rem;
   line-height: 1;
   font-weight: 930;
 }
 
 .sectionHeader p,
+.agentNarrative p,
 .proofIntro p,
-.closePanel p {
-  max-width: 820px;
+.authorPanel p {
+  max-width: 840px;
   margin: 18px 0 0;
   color: var(--why-muted);
   font-size: 1.04rem;
   line-height: 1.72;
 }
 
-.filmGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 330px;
-  gap: 20px;
-  align-items: stretch;
-}
-
-.filmStage {
-  position: relative;
-  min-height: 540px;
-  overflow: hidden;
-  border: 1px solid rgba(247, 245, 238, 0.14);
-  border-radius: 22px;
-  background: #040606;
-  box-shadow: 0 36px 110px rgba(0, 0, 0, 0.46);
-}
-
-.filmStage::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, rgba(3, 4, 4, 0.82), transparent 56%),
-    linear-gradient(0deg, rgba(3, 4, 4, 0.82), transparent 62%);
-}
-
-.filmVideo {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(1.08) contrast(1.04);
-}
-
-.filmOverlay {
-  position: absolute;
-  left: 28px;
-  right: 28px;
-  bottom: 28px;
-  z-index: 3;
-  max-width: 680px;
-}
-
-.filmOverlay span {
-  display: inline-flex;
-  border: 1px solid rgba(200, 255, 46, 0.28);
-  border-radius: 999px;
-  padding: 8px 10px;
-  color: var(--why-lime);
-  background: rgba(3, 4, 4, 0.62);
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.filmOverlay h3 {
-  max-width: 700px;
-  margin: 16px 0 0;
-  color: #fff;
-  font-size: 2.52rem;
-  line-height: 1.02;
-  font-weight: 930;
-}
-
-.filmOverlay p {
-  max-width: 640px;
-  margin: 16px 0 0;
-  color: rgba(247, 245, 238, 0.78);
-  font-size: 1rem;
-  line-height: 1.62;
-}
-
-.playToggle {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  z-index: 4;
-  width: 42px;
-  height: 42px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(247, 245, 238, 0.18);
-  border-radius: 999px;
-  color: var(--why-ink);
-  background: rgba(3, 4, 4, 0.72);
-  backdrop-filter: blur(14px);
-  cursor: pointer;
-}
-
-.sceneRail {
-  display: grid;
-  gap: 12px;
-}
-
-.sceneRail button {
-  min-height: 154px;
-  display: grid;
-  align-content: start;
-  gap: 10px;
-  border: 1px solid rgba(247, 245, 238, 0.14);
-  border-radius: 18px;
-  padding: 18px;
-  color: var(--why-ink);
-  background: rgba(247, 245, 238, 0.055);
-  text-align: left;
-  cursor: pointer;
-  transition:
-    border-color 170ms ease,
-    background 170ms ease,
-    transform 170ms ease;
-}
-
-.sceneRail button:hover,
-.sceneRail .sceneActive {
-  border-color: rgba(200, 255, 46, 0.38);
-  background: rgba(200, 255, 46, 0.09);
-  transform: translateY(-2px);
-}
-
-.sceneRail span {
-  color: var(--why-cyan);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.78rem;
-  font-weight: 900;
-}
-
-.sceneRail strong {
-  font-size: 1rem;
-  line-height: 1.2;
-}
-
-.sceneRail small {
-  color: var(--why-muted);
-  font-size: 0.88rem;
-  line-height: 1.45;
-}
-
-.valueGrid,
-.platformGrid,
+.marketGrid,
+.serviceNowGrid,
 .proofGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 }
 
-.valueCard,
-.platformGrid article,
-.proofGrid article {
+.marketGrid article,
+.serviceNowGrid article,
+.proofGrid article,
+.planStep {
   border: 1px solid rgba(247, 245, 238, 0.14);
-  border-radius: 18px;
-  padding: 24px;
+  border-radius: var(--radius-card);
+  padding: 22px;
   background: var(--why-panel);
   backdrop-filter: blur(18px);
 }
 
-.valueCard svg,
-.platformGrid svg,
-.proofGrid svg {
+.marketGrid svg,
+.serviceNowGrid svg,
+.proofGrid svg,
+.planStep svg {
   color: var(--why-lime);
 }
 
-.valueCard h3,
-.platformGrid h3,
+.marketGrid h3,
+.serviceNowGrid h3,
 .proofGrid h3,
-.operatingFlow h3 {
+.operatingFlow h3,
+.planStep h3 {
   margin: 18px 0 0;
   color: #fff;
-  font-size: 1.18rem;
+  font-size: 1.12rem;
   line-height: 1.24;
 }
 
-.valueCard p,
-.platformGrid p,
+.marketGrid p,
+.serviceNowGrid p,
 .proofGrid p,
-.operatingFlow p {
+.operatingFlow p,
+.planStep p {
   margin: 12px 0 0;
   color: var(--why-muted);
-  font-size: 0.95rem;
+  font-size: 0.94rem;
   line-height: 1.62;
+}
+
+.agentLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(520px, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.agentNarrative {
+  align-self: center;
+}
+
+.theaterStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.theaterStats div {
+  border: 1px solid rgba(247, 245, 238, 0.14);
+  border-radius: var(--radius-card);
+  padding: 16px;
+  background: rgba(247, 245, 238, 0.045);
+}
+
+.theaterStats strong {
+  display: block;
+  color: var(--why-lime);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.theaterStats span {
+  display: block;
+  margin-top: 8px;
+  color: var(--why-muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.agentTheater {
+  overflow: hidden;
+  border: 1px solid rgba(247, 245, 238, 0.14);
+  border-radius: var(--radius-panel);
+  background:
+    linear-gradient(120deg, rgba(200, 255, 46, 0.08), transparent 34%),
+    linear-gradient(210deg, rgba(119, 217, 242, 0.08), transparent 46%),
+    rgba(3, 5, 5, 0.86);
+  box-shadow: 0 36px 110px rgba(0, 0, 0, 0.46);
+}
+
+.agentCanvas {
+  position: relative;
+  min-height: 470px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(247, 245, 238, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(247, 245, 238, 0.034) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.agentLines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.agentLines path {
+  fill: none;
+  stroke: rgba(200, 255, 46, 0.44);
+  stroke-width: 0.55;
+  stroke-linecap: round;
+  stroke-dasharray: 7 11;
+}
+
+.motionEnabled .agentLines path {
+  animation: pathFlow 4s linear infinite;
+}
+
+.agentNode {
+  position: absolute;
+  left: clamp(78px, var(--x), calc(100% - 78px));
+  top: clamp(50px, var(--y), calc(100% - 50px));
+  z-index: 2;
+  width: 156px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(247, 245, 238, 0.16);
+  border-radius: var(--radius-card);
+  padding: 10px;
+  color: #fff;
+  background: rgba(5, 7, 7, 0.82);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(12px);
+}
+
+.agentNode span {
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: var(--why-cyan);
+  box-shadow: 0 0 22px rgba(119, 217, 242, 0.48);
+}
+
+.agentNode strong {
+  min-width: 0;
+  color: rgba(247, 245, 238, 0.92);
+  font-size: 0.76rem;
+  line-height: 1.2;
+}
+
+.agentNode[data-tone='main'] {
+  width: 184px;
+  border-color: rgba(200, 255, 46, 0.42);
+  background: rgba(19, 30, 17, 0.92);
+}
+
+.agentNode[data-tone='main'] span,
+.agentNode[data-tone='lime'] span {
+  background: var(--why-lime);
+  box-shadow: 0 0 24px rgba(200, 255, 46, 0.58);
+}
+
+.agentNode[data-tone='danger'] {
+  border-color: rgba(255, 125, 104, 0.36);
+}
+
+.agentNode[data-tone='danger'] span {
+  background: var(--why-danger);
+  box-shadow: 0 0 24px rgba(255, 125, 104, 0.48);
+}
+
+.agentNode[data-tone='brass'] span {
+  background: var(--why-brass);
+  box-shadow: 0 0 24px rgba(214, 180, 93, 0.48);
+}
+
+.motionEnabled .agentNode span {
+  animation: nodePulse 3.1s var(--ease) infinite;
+}
+
+.executionCore {
+  position: absolute;
+  left: 50%;
+  top: 82%;
+  z-index: 3;
+  width: min(340px, calc(100% - 36px));
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px 10px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(200, 255, 46, 0.26);
+  border-radius: var(--radius-card);
+  padding: 14px;
+  color: #fff;
+  background: rgba(4, 6, 6, 0.9);
+}
+
+.executionCore svg {
+  grid-row: span 2;
+  color: var(--why-lime);
+}
+
+.executionCore strong {
+  font-size: 0.92rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.executionCore span {
+  color: var(--why-muted);
+  font-size: 0.8rem;
+}
+
+.taskQueue {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid rgba(247, 245, 238, 0.12);
+}
+
+.taskQueue div {
+  min-height: 96px;
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  border-right: 1px solid rgba(247, 245, 238, 0.1);
+  padding: 16px;
+}
+
+.taskQueue div:last-child {
+  border-right: 0;
+}
+
+.taskQueue svg {
+  color: var(--why-lime);
+}
+
+.taskQueue span {
+  color: var(--why-muted);
+  font-size: 0.78rem;
+  font-weight: 760;
+  line-height: 1.3;
+}
+
+.motionEnabled .taskQueue div {
+  animation: queueGlow 4.5s var(--ease) infinite;
+  animation-delay: calc(var(--queue-index) * 260ms);
+}
+
+.planGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.planStep {
+  min-height: 300px;
+  display: grid;
+  align-content: start;
+}
+
+.planStep > span {
+  color: var(--why-brass);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.planStep svg {
+  margin-top: 22px;
 }
 
 .operatingFlow {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   border: 1px solid rgba(247, 245, 238, 0.14);
-  border-radius: 22px;
+  border-radius: var(--radius-panel);
   overflow: hidden;
   background: rgba(3, 4, 4, 0.52);
 }
@@ -546,10 +662,6 @@
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.8rem;
   font-weight: 900;
-}
-
-.platformGrid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .proofSection {
@@ -575,12 +687,6 @@
   align-items: start;
 }
 
-.stackCloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
 .stackCloud span:nth-child(3n + 1) {
   border-color: rgba(200, 255, 46, 0.24);
   color: rgba(221, 255, 140, 0.92);
@@ -596,47 +702,67 @@
   color: rgba(238, 216, 158, 0.9);
 }
 
-.closeSection {
+.authorSection {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 20px;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 26px;
+  align-items: stretch;
   padding-bottom: 112px;
 }
 
-.closePanel,
-.closeAside {
-  border: 1px solid rgba(200, 255, 46, 0.18);
-  border-radius: 22px;
-  padding: 30px;
+.authorPhoto {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  border: 1px solid rgba(200, 255, 46, 0.22);
+  border-radius: var(--radius-panel);
+  background: rgba(247, 245, 238, 0.04);
+  box-shadow: 0 42px 110px rgba(0, 0, 0, 0.5);
+}
+
+.authorPhoto::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
   background:
-    radial-gradient(circle at 18% 0%, rgba(200, 255, 46, 0.12), transparent 20rem),
+    linear-gradient(125deg, rgba(200, 255, 46, 0.16), transparent 38%),
+    linear-gradient(0deg, rgba(3, 4, 4, 0.38), transparent 48%);
+  mix-blend-mode: screen;
+}
+
+.authorPhoto img {
+  object-fit: cover;
+}
+
+.authorPanel {
+  display: grid;
+  align-content: center;
+  border: 1px solid rgba(200, 255, 46, 0.18);
+  border-radius: var(--radius-panel);
+  padding: 34px;
+  background:
+    linear-gradient(120deg, rgba(200, 255, 46, 0.1), transparent 36%),
     var(--why-panel-strong);
 }
 
-.closePanel svg,
-.closeAside svg {
+.authorActions span {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(247, 245, 238, 0.14);
+  border-radius: 999px;
+  padding: 0 14px;
+  color: rgba(247, 245, 238, 0.78);
+  background: rgba(247, 245, 238, 0.055);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.authorActions svg {
   color: var(--why-lime);
-}
-
-.closePanel a {
-  width: fit-content;
-  margin-top: 26px;
-}
-
-.closeAside {
-  display: grid;
-  align-content: end;
-  gap: 12px;
-}
-
-.closeAside strong {
-  color: #fff;
-  font-size: 1.1rem;
-}
-
-.closeAside span {
-  color: var(--why-muted);
-  line-height: 1.56;
+  flex: 0 0 auto;
 }
 
 .lockShell {
@@ -646,14 +772,14 @@
   padding: 24px;
   color: var(--why-ink);
   background:
-    radial-gradient(circle at 64% 20%, rgba(200, 255, 46, 0.15), transparent 24rem),
+    linear-gradient(135deg, rgba(200, 255, 46, 0.1), transparent 38%),
     linear-gradient(180deg, #030404 0%, #07100e 100%);
 }
 
 .lockPanel {
   width: min(560px, 100%);
   border: 1px solid rgba(247, 245, 238, 0.16);
-  border-radius: 24px;
+  border-radius: var(--radius-panel);
   padding: 34px;
   background: rgba(10, 13, 12, 0.84);
   box-shadow: 0 36px 110px rgba(0, 0, 0, 0.54);
@@ -743,30 +869,50 @@
 @keyframes nodePulse {
   0%,
   100% {
-    opacity: 0.28;
-    transform: scale(0.72);
+    opacity: 0.36;
+    transform: scale(0.82);
   }
   50% {
     opacity: 1;
-    transform: scale(1.24);
+    transform: scale(1.18);
   }
 }
 
-@keyframes portraitFloat {
+@keyframes gaugeRise {
   from {
-    transform: translateY(0);
+    transform: scaleY(0.82);
+    transform-origin: bottom;
+    opacity: 0.72;
   }
   to {
-    transform: translateY(-12px);
+    transform: scaleY(1);
+    transform-origin: bottom;
+    opacity: 1;
+  }
+}
+
+@keyframes pathFlow {
+  to {
+    stroke-dashoffset: -72;
+  }
+}
+
+@keyframes queueGlow {
+  0%,
+  100% {
+    background: transparent;
+  }
+  50% {
+    background: rgba(200, 255, 46, 0.055);
   }
 }
 
 @media (max-width: 1080px) {
   .hero,
-  .filmGrid,
+  .agentLayout,
   .proofSection,
   .stackSection,
-  .closeSection {
+  .authorSection {
     grid-template-columns: 1fr;
   }
 
@@ -776,12 +922,22 @@
   }
 
   .hero h1 {
-    font-size: 4.1rem;
+    font-size: 4rem;
   }
 
-  .platformGrid,
-  .operatingFlow {
+  .marketGrid,
+  .serviceNowGrid,
+  .operatingFlow,
+  .planGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .taskQueue {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .taskQueue div:nth-child(3) {
+    border-right: 0;
   }
 
   .operatingFlow article:nth-child(2) {
@@ -795,23 +951,28 @@
   .proofIntro {
     position: static;
   }
+
+  .authorPhoto {
+    min-height: 520px;
+  }
 }
 
 @media (max-width: 760px) {
   .hero,
-  .filmSection,
-  .valueSection,
+  .marketSection,
+  .agentSection,
+  .serviceNowSection,
+  .planSection,
   .operatingSection,
-  .platformSection,
   .proofSection,
   .stackSection,
-  .closeSection {
+  .authorSection {
     padding-inline: 18px;
   }
 
   .hero h1 {
-    font-size: 3.05rem;
-    line-height: 0.98;
+    font-size: 3rem;
+    line-height: 0.99;
   }
 
   .heroLead {
@@ -819,32 +980,54 @@
   }
 
   .sectionHeader h2,
+  .agentNarrative h2,
   .proofIntro h2,
   .stackSection h2,
-  .closePanel h2 {
-    font-size: 2.18rem;
+  .authorPanel h2 {
+    font-size: 2.15rem;
   }
 
-  .filmStage {
-    min-height: 500px;
-  }
-
-  .filmOverlay {
-    left: 18px;
-    right: 18px;
-    bottom: 18px;
-  }
-
-  .filmOverlay h3 {
-    font-size: 1.88rem;
-  }
-
-  .sceneRail,
-  .valueGrid,
-  .platformGrid,
+  .marketGrid,
+  .serviceNowGrid,
   .proofGrid,
-  .operatingFlow {
+  .operatingFlow,
+  .planGrid,
+  .taskQueue,
+  .theaterStats {
     grid-template-columns: 1fr;
+  }
+
+  .agentCanvas {
+    min-height: 520px;
+  }
+
+  .agentNode {
+    left: clamp(78px, var(--mobile-x, var(--x)), calc(100% - 78px));
+    top: clamp(46px, var(--mobile-y, var(--y)), calc(100% - 46px));
+    width: 132px;
+    padding: 8px;
+  }
+
+  .agentNode[data-tone='main'] {
+    width: 148px;
+  }
+
+  .agentNode strong {
+    font-size: 0.68rem;
+  }
+
+  .executionCore {
+    top: 86%;
+  }
+
+  .taskQueue div,
+  .taskQueue div:nth-child(3) {
+    border-right: 0;
+    border-bottom: 1px solid rgba(247, 245, 238, 0.1);
+  }
+
+  .taskQueue div:last-child {
+    border-bottom: 0;
   }
 
   .operatingFlow article,
@@ -856,6 +1039,23 @@
 
   .operatingFlow article:last-child {
     border-bottom: 0;
+  }
+
+  .authorPhoto {
+    min-height: 430px;
+  }
+
+  .authorPanel {
+    padding: 24px;
+  }
+
+  .authorActions span {
+    width: 100%;
+    min-height: 0;
+    align-items: flex-start;
+    border-radius: var(--radius-card);
+    padding: 12px;
+    line-height: 1.45;
   }
 
   .lockPanel {
@@ -870,7 +1070,10 @@
 @media (prefers-reduced-motion: reduce) {
   .page::before,
   .neuralMap span,
-  .portraitFrame {
+  .pressureGauge span,
+  .agentLines path,
+  .agentNode span,
+  .taskQueue div {
     animation: none !important;
   }
 }
