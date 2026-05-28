@@ -173,6 +173,31 @@ function formatDate(value?: string) {
   }).format(date)
 }
 
+interface Freshness {
+  status: 'green' | 'amber' | 'red' | 'unknown'
+  label: string
+  ageMin: number | null
+}
+
+function freshness(collectedAt?: string): Freshness {
+  if (!collectedAt) {
+    return { status: 'unknown', label: 'sem ingestão', ageMin: null }
+  }
+  const ts = new Date(collectedAt).getTime()
+  if (Number.isNaN(ts)) {
+    return { status: 'unknown', label: 'timestamp inválido', ageMin: null }
+  }
+  const ageMin = Math.round((Date.now() - ts) / 60000)
+  if (ageMin < 0) return { status: 'green', label: 'agora', ageMin }
+  if (ageMin < 60) return { status: 'green', label: `${Math.max(1, ageMin)}min atrás`, ageMin }
+  const ageHr = ageMin / 60
+  if (ageMin < 360) {
+    return { status: 'amber', label: `${ageHr.toFixed(1)}h atrás · envelhecendo`, ageMin }
+  }
+  if (ageHr < 24) return { status: 'red', label: `${ageHr.toFixed(0)}h atrás · STALE`, ageMin }
+  return { status: 'red', label: `${(ageHr / 24).toFixed(1)}d atrás · STALE`, ageMin }
+}
+
 function metricData(snapshot: AutomationControlSnapshot | null) {
   return [
     {
@@ -239,6 +264,16 @@ export default function ControlTower({ snapshot, creative }: ControlTowerProps) 
   const metrics = metricData(snapshot)
   const p0 = lanes[0].items.length
   const topAutomations = snapshot?.automations.slice(0, 12) ?? []
+  const automationFreshness = freshness(snapshot?.collectedAt)
+  const creativeFreshness = freshness(creative?.collectedAt)
+  const statusTone =
+    snapshot == null
+      ? 'red'
+      : automationFreshness.status === 'red'
+        ? 'red'
+        : automationFreshness.status === 'amber'
+          ? 'yellow'
+          : snapshot.summary.overallStatus
 
   return (
     <main className={styles.shell}>
@@ -273,10 +308,22 @@ export default function ControlTower({ snapshot, creative }: ControlTowerProps) 
               cada workflow e o que pode escalar com evidência operacional.
             </p>
           </div>
-          <div className={styles.statusCard} data-status={snapshot?.summary.overallStatus ?? 'red'}>
-            <span>{snapshot ? 'Snapshot vivo' : 'Baseline Kimi'}</span>
+          <div className={styles.statusCard} data-status={statusTone}>
+            <span>
+              {snapshot
+                ? automationFreshness.status === 'red'
+                  ? 'Snapshot STALE'
+                  : automationFreshness.status === 'amber'
+                    ? 'Snapshot envelhecendo'
+                    : 'Snapshot vivo'
+                : 'Baseline Kimi'}
+            </span>
             <strong>{formatDate(snapshot?.collectedAt)}</strong>
-            <small>{snapshot?.machine.hostname ?? 'sem ingestão recente'}</small>
+            <small>
+              {snapshot
+                ? `${snapshot.machine.hostname} · ${automationFreshness.label}`
+                : 'sem ingestão recente'}
+            </small>
           </div>
         </header>
 
@@ -455,7 +502,12 @@ export default function ControlTower({ snapshot, creative }: ControlTowerProps) 
         </section>
 
         {creative ? (
-          <LooksPanel stats={creative.looks.stats} recent={creative.looks.recent} />
+          <LooksPanel
+            stats={creative.looks.stats}
+            recent={creative.looks.recent}
+            freshnessLabel={creativeFreshness.label}
+            freshnessTone={creativeFreshness.status}
+          />
         ) : (
           <section id="looks" className={styles.panel}>
             <div className={styles.panelHeader}>
@@ -476,6 +528,8 @@ export default function ControlTower({ snapshot, creative }: ControlTowerProps) 
           <DevotionalsPanel
             stats={creative.devotionals.stats}
             pending={creative.devotionals.pending}
+            freshnessLabel={creativeFreshness.label}
+            freshnessTone={creativeFreshness.status}
           />
         ) : (
           <section id="devotionais" className={styles.panel}>

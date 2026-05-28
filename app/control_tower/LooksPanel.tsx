@@ -7,6 +7,8 @@ import styles from './ControlTower.module.css'
 interface LooksPanelProps {
   stats: LooksStats
   recent: LookSummary[]
+  freshnessLabel?: string
+  freshnessTone?: 'green' | 'amber' | 'red' | 'unknown'
 }
 
 const tierToneMap: Record<string, string> = {
@@ -25,7 +27,7 @@ function formatDate(value?: string) {
   }
 }
 
-export default function LooksPanel({ stats, recent }: LooksPanelProps) {
+export default function LooksPanel({ stats, recent, freshnessLabel, freshnessTone }: LooksPanelProps) {
   const total = stats.total
   const tierEntries: Array<['A' | 'B' | 'C' | 'D', number]> = [
     ['A', stats.byTier.A],
@@ -38,7 +40,10 @@ export default function LooksPanel({ stats, recent }: LooksPanelProps) {
     <section id="looks" className={styles.panel}>
       <div className={styles.panelHeader}>
         <h2>FashionCore looks</h2>
-        <span>{total} look{total === 1 ? '' : 's'} no snapshot</span>
+        <span data-tone={freshnessTone}>
+          {total} look{total === 1 ? '' : 's'}
+          {freshnessLabel ? ` · ${freshnessLabel}` : ''}
+        </span>
       </div>
 
       <div className={styles.creativeStatsRow}>

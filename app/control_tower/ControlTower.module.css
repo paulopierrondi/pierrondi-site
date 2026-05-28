@@ -278,6 +278,22 @@
   font-weight: 900;
 }
 
+.panelHeader span[data-tone='amber'] {
+  border: 1px solid #b06b12;
+  border-radius: 999px;
+  background: #f6ead4;
+  color: #6f4109;
+  padding: 4px 9px;
+}
+
+.panelHeader span[data-tone='red'] {
+  border: 1px solid #c4332f;
+  border-radius: 999px;
+  background: #f7dfdb;
+  color: #7a1f1a;
+  padding: 4px 9px;
+}
+
 .issue {
   display: grid;
   gap: 9px;
