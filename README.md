@@ -31,6 +31,15 @@ npm run start
 npm run test:e2e     # Playwright
 ```
 
+## Design Vault
+
+`/design` e a biblioteca viva de referencias, categorias e componentes para novas paginas do portfolio e produtos. O catalogo usa 21st.dev como fonte MIT, mas instala codigo seletivamente para evitar bloat e preservar atribuicao.
+
+```bash
+npm run design:sync-21st
+npm run design:install -- author/component
+```
+
 ## Env vars
 
 Copiar `.env.example` → `.env.local`:

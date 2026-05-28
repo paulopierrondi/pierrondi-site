@@ -18,6 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
+    {
+      url: `${BASE_URL}/design`,
+      lastModified: portfolioUpdatedAt,
+      changeFrequency: 'monthly',
+      priority: 0.86,
+    },
     ...feitos.map((feito) => ({
       url: `${BASE_URL}/feitos/${feito.slug}`,
       lastModified: portfolioUpdatedAt,

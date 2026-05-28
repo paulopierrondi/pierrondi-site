@@ -1,7 +1,7 @@
 # Project Brain Context
 
-Generated: `2026-05-27 20:29:42`
-Tool: `railway-run`
+Generated: `2026-05-28 06:48:23`
+Tool: `claude`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
 
@@ -146,7 +146,7 @@ Every Bradesco Now Assist material must explicitly connect:
 ---
 type: policy
 status: generated
-generated_at: "2026-05-27 09:39:45"
+generated_at: "2026-05-28 03:51:23"
 tags:
   - ai-agents
   - policy
@@ -2392,9 +2392,9 @@ repo_name: "pierrondi-site"
 repo_path: "/Users/paulopierrondi/Projects/pierrondi-site"
 repo_kind: "repo"
 branch: "main"
-dirty_files: 126
+dirty_files: 1
 remote: "https://github.com/paulopierrondi/pierrondi-site.git"
-generated_at: "2026-05-27 09:39:45"
+generated_at: "2026-05-28 03:51:23"
 tags:
   - project
   - git
@@ -2407,8 +2407,8 @@ tags:
 - Tipo: `node`
 - Repo kind: `repo`
 - Branch: `main`
-- Arquivos alterados agora: `126`
-- Ultimo commit: `8aa79b0 2026-05-23 feat: add K26 deep dive audio experience`
+- Arquivos alterados agora: `1`
+- Ultimo commit: `33ee981 2026-05-27 fix: align control tower llm aliases with gemini`
 - Remote: `https://github.com/paulopierrondi/pierrondi-site.git`
 - Marcadores encontrados: `package.json, README.md, CLAUDE.md, AGENTS.md, GEMINI.md`
 
@@ -2452,72 +2452,29 @@ Stack enxuto: **Next.js 16 + React 19 + Tailwind v4 + Formspree**. Zero banco, z
 - Use esta nota para manter o estado atual do projeto, decisoes abertas, comandos canonicos e riscos.
 - As sessoes locais de Codex, Claude Code, Kimi e Gemini foram indexadas no vault quando estavam disponiveis em disco.
 
-### 2026-05-27 16:29 BRT — Diagnostico Railway/Vercel/domino oficial
+### 2026-05-28 06:45 BRT — `/design` criado como Pierrondi Design Vault
 
-- Decisao canonica de Paulo: `pierrondi.dev` / `www.pierrondi.dev` e Railway, nao Vercel. Tratar Vercel como legado/nao oficial.
-- Paulo sinalizou que o site oficial deve ser `pierrondi.dev`, com Railway como plataforma correta, e que o estado Vercel/Railway parecia errado.
-- Evidencia: `https://www.pierrondi.dev` e `https://pierrondi-site-production.up.railway.app` respondem `200` com `server: railway-edge`; `https://pierrondi.dev` via `GET -L` redireciona para `https://www.pierrondi.dev/` e responde `200`.
-- Evidencia DNS: `www.pierrondi.dev` esta como CNAME para `n4n21jzb.up.railway.app`; apex `pierrondi.dev` usa forwarding GoDaddy. `HEAD https://pierrondi.dev` retornou `405`, mas `GET -L` funciona.
-- Evidencia Vercel: projeto `pierrondi-site` ainda existe em Vercel com alias `https://pierrondi-site.vercel.app`, mas e legado/nao oficial; ultimo deploy inspecionado foi criado em `2026-05-22 21:44:29 -03:00`.
-- Evidencia Railway: `railway status` via `brain-railway-run` apontou `Project: pierrondi-site`, `Environment: production`, `Service: pierrondi-site`; deployment ativo `0d911529-50f6-4f76-9b1d-e700ebc7c284` de `2026-05-26 10:41:04 -03:00`.
-- Risco real: producao Railway esta atrasada frente ao worktree local. Build local `npm run build` passou com Next `16.2.6` e `162` rotas; logs Railway mostraram build com Next `16.2.4` e `149` rotas. Em producao, `/paulo` e `/feitos/sada-servicenow` retornam `404`.
-- Worktree esta muito suja (`126` itens no status inicial do council; diff tracked relevante com `30` arquivos modificados, alem de deletes/untracked). Nao fazer deploy/push sem confirmar escopo exato.
-- Proxima acao segura: Paulo precisa aprovar explicitamente o deploy Railway/manual ou a conexao GitHub auto-deploy. Antes disso, revisar/stagear escopo, rodar `npm run build`, `npm run lint` se possivel, e smoke test em `www.pierrondi.dev`.
-[REDACTED SECRET LINE]
-
-### 2026-05-27 16:28 BRT — Correcao canonica de plataforma
-
-- Paulo reforcou: "`pierrondi.dev` e Railway e nao Vercel".
-- Registro atualizado: README/DEPLOY do repo, esta nota do vault e Linear devem tratar Railway como unica plataforma canonica de producao.
-- Vercel pode existir como artefato historico (`pierrondi-site.vercel.app`), mas nao deve ser usado como fonte de verdade para status, QA, SEO, roadmap ou operacao.
-- Linear: atualizar `AGE-1486 / pierrondi.dev Public Site` com comentario e status update refletindo Railway-only.
-
-### 2026-05-27 16:58 BRT — Arquiteturas e links SADA/feitos restaurados em `/paulo`
-
-- Paulo apontou que faltavam arquiteturas e links de SADA e outros feitos.
-- Ajuste local: `/paulo` agora exibe quatro arquiteturas com CTAs diretos para paginas detalhadas:
-  - SADA: `/feitos/sada-servicenow`
-  - Agentes governados: `/feitos/agentes-governados`
-  - LLM inference: `/feitos/llm-inferencia`
-  - Plataforma de automacao/IA: `/feitos/plataformas-automacao-ia`
-- Arquivos alterados: `app/paulo/PauloPortfolioExperience.tsx`, `app/paulo/PauloPortfolioExperience.module.css`.
-- Validacao: `npm run build` passou com 162 rotas; `npm run lint` passou.
-- Browser QA local via Playwright:
-  - Desktop screenshot: `qa/screenshots/paulo-architecture-links-local.png`
-  - Mobile screenshot: `qa/screenshots/paulo-architecture-links-mobile-local.png`
-  - Todos os quatro links `/feitos/...` retornaram 200 localmente.
-- Sem deploy/push executado; producao Railway ainda exige aprovacao explicita para receber essas rotas/alteracoes.
-
-### 2026-05-27 17:06 BRT — Deploy Railway de `/paulo` + foto + animacoes
-
-- Paulo autorizou explicitamente producao: "mande para producao".
-- Correcoes antes do deploy:
-  - Foto de Paulo confirmada em `public/assets/paulo-pierrondi-executive-neural.jpg` e fallback em `public/assets/paulo-pierrondi-executive-enhanced.jpg`.
-  - Arquiteturas de `/paulo` mantidas em quatro cards com links para SADA, agentes governados, LLM inference e plataforma IA.
-  - Animações reforcadas: `portraitFloat`, `architectureSweep` e `architectureProgress` agora rodam continuamente quando motion esta ativo.
-  - Grade das quatro arquiteturas ajustada para 2x2 no desktop e 1 coluna no mobile.
-- Validacao pre-deploy:
-  - `npm run build` passou com 162 rotas.
+- Pedido de Paulo: criar em `pierrondi.dev/design` uma biblioteca propria para designs/componentes inspirada no 21st.dev e deixar o vault orientando futuros trabalhos visuais.
+- Entrega local:
+  - Nova rota estatica `/design` com hero, preview lab, categorias, fila de componentes e comandos de operacao.
+  - Catalogo versionado em `app/design/design-catalog.ts`.
+  - Runbook em `docs/design-vault.md`.
+  - Snapshot gerado de 60 categorias publicas 21st em `docs/design-vault/21st-source-snapshot.json`.
+  - Scripts: `npm run design:sync-21st` e `npm run design:install -- author/component`.
+  - Home linkada para `/design`; sitemap inclui `/design`.
+- Decisao de licenca/uso: componentes 21st Community entram como MIT com atribuicao preservada; screens/themes de terceiros sao referencia, nao portfolio proprio. Codigo nao sera importado em massa para o bundle publico; instalacao e seletiva por caso de uso.
+- Validacao:
+  - `npm run design:sync-21st` passou e gerou 60 categorias.
   - `npm run lint` passou.
-  - Playwright local confirmou imagem com `naturalWidth > 0`, animacoes CSS ativas e links corretos.
-- Deploy:
-  - Comando: `brain-railway-run -- railway up --ci --service pierrondi-site --detach`.
-  - Deployment Railway: `224bcb60-2641-4c09-8b73-291dc2c5c762`.
-  - Status final: `SUCCESS`.
-- Validacao producao:
-  - `https://www.pierrondi.dev/paulo` respondeu `200`.
-  - `https://www.pierrondi.dev/assets/paulo-pierrondi-executive-neural.jpg` respondeu `200 image/jpeg`.
-  - Playwright producao desktop/mobile confirmou `naturalWidth` 340/304, respectivamente.
-  - Animações CSS em produção: `portraitFloat`, `architectureSweep`, `architectureProgress`.
-  - Links `/feitos/sada-servicenow`, `/feitos/agentes-governados`, `/feitos/llm-inferencia`, `/feitos/plataformas-automacao-ia` responderam `200`.
-  - Evidencias visuais: `qa/screenshots/paulo-production-live-desktop.png`, `qa/screenshots/paulo-production-live-mobile.png`.
-- Git: deploy manual Railway feito a partir do workspace local; nenhum `git push` executado nesta etapa.
-
-### 2026-05-27 20:18 BRT — `/control_tower` privado preparado localmente
-
-- Pedido de Paulo: usar `pierrondi.dev/control_tower` para gerenciar operacoes.
-- Estado remoto antes do patch: `https://pierrondi.dev/control_tower` retornava `404` via Playwright; `HEAD` no apex continuou retornando `405`, comportam
-...[truncated]
+  - `npm run build` passou; `/design` apareceu como rota estatica.
+  - QA Playwright em `next start` sem console errors e sem overflow horizontal desktop/mobile.
+- Evidencias visuais:
+  - `qa/screenshots/design-vault-start-desktop-hero.png`
+  - `qa/screenshots/design-vault-start-mobile-hero.png`
+  - `qa/screenshots/design-vault-local-desktop-scroll.png`
+- Vault atualizado: `High Craft Frontend Visual Standard.md` agora exige consultar `/design`, `docs/design-vault.md`, `app/design/design-catalog.ts` e o snapshot 21st antes de criar paginas visuais novas para o portfolio/pierrondi.dev.
+- Deploy/push: nao executado. Producao Railway continua exigindo comando explicito do Paulo.
+[REDACTED SECRET LINE]
 
 ## AI History Snapshot
 
@@ -2525,7 +2482,7 @@ Stack enxuto: **Next.js 16 + React 19 + Tailwind v4 + Formspree**. Zero banco, z
 type: project-ai-history
 project: "pierrondi-site"
 status: generated
-generated_at: "2026-05-27 09:39:45"
+generated_at: "2026-05-28 03:51:23"
 tags:
   - ai-history
   - project-history
@@ -2536,20 +2493,24 @@ tags:
 Projeto: [[02_Projects/pierrondi-site|pierrondi-site]]
 
 - Path: `/Users/paulopierrondi/Projects/pierrondi-site`
-- Codex relacionado: `0`
-- Claude Code relacionado: `2`
+- Codex relacionado: `2`
+- Claude Code relacionado: `3`
 - Kimi relacionado: `1`
 - Claude-Mem observations relacionadas: `68`
 - Claude-Mem summaries relacionados: `0`
 
 ## Codex
 
-_Nenhuma sessao Codex relacionada encontrada._
+| Atualizado | Titulo | Primeiro pedido | Fonte |
+| --- | --- | --- | --- |
+[REDACTED SECRET LINE]
+[REDACTED SECRET LINE]
 
 ## Claude Code
 
 | Atualizado | Titulo | Primeiro pedido | Fonte |
 | --- | --- | --- | --- |
+| 2026-05-28T01:03:20.713Z | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (33ee9815351b25bf043a7fa6e8473832dd7ea6e0). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-33ee981 ...[truncated] | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (33ee9815351b25bf043a7fa6e8473832dd7ea6e0). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-33ee981 ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/d783913a-f0c3-4c36-b5f2-e9237cd4f814.jsonl |
 | 2026-05-24T19:31:56 | -Users-paulopierrondi-Projects-pierrondi-site |  | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/7ea700d3-df0c-4f6b-8d5a-2a9e2c412404.jsonl |
 | 2026-05-24T19:27:55 | -Users-paulopierrondi-Projects-pierrondi-site |  | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/6f55a0aa-0bfb-44cb-9a7b-7832474d981f.jsonl |
 
@@ -2577,7 +2538,5 @@ _Nenhuma sessao Codex relacionada encontrada._
 | 2026-05-21T23:51:03.361Z | feature | Bradesco K26 Briefing Page Added to pierrondi-site | ["Commit `19c781d` on branch `main` in `/Users/paulopierrondi/Downloads/pierrondi-site` added 1887 lines across 4 files.","New route `app/bradesco-26/page.tsx` (34 lines) created, following Next.js App Rout ...[truncated] |
 | 2026-05-21T23:50:22.151Z | feature | bradesco-26 Playwright Visual QA Passed on pierrondi-site Local Dev — No Overflow, Correct Metadata | ["Local dev server started at http://127.0.0.1:3001 (Next.js 16.2.4 Turbopack), ready in 201ms","All 4 viewports confirmed scrollWidth === clientWidth: desktop-hero (1440px), desktop-radar (1440px), mobile- ...[truncated] |
 | 2026-05-21T23:50:12.990Z | feature | bradesco-26 Route Ported to pierrondi-site — Build Passes, Ready for Deploy | ["3 files copied from pierrondi-ia to pierrondi-site/app/bradesco-26/: page.tsx (34 lines), Bradesco26Experience.tsx (732 lines), Bradesco26Experience.module.css (1120 lines), total 1886 lines","CSS font fi ...[truncated] |
-| 2026-05-21T23:49:20.262Z | discovery | pierrondi-site Requires Manual Railway Deploy — Not Connected to GitHub Auto-Deploy | ["pierrondi-site production URL: https://pierrondi-site-production.up.railway.app, Railway Project ID: 9caba826-e5fd-4654-9a0d-1841e6022b11, Service ID: 626d8614-191d-43e4-a7fe-c74702c9e461","DEPLOY.md expl ...[truncated] |
-| 2026-05-21T23:49:20.262Z | discovery | pierrondi-site Product Council Yellow — Release Not Ready, Brain Files Untracked | ["Product Council start gate for pierrondi-site returned overall status: yellow (less severe than pierrondi-ia's red)","13 dirty files: 5 modified tracked (.brain/PROJECT_CONTEXT.md, AGENTS.md, CLAUDE.md, G ...[truncated] |
-| 2026-05-17T10:43:23.439Z | discovery | www.pierrondi.dev Live via pierrondi-site — /studio Routes Return 404 by Design | ["GET https://www.pierrondi.dev/ returns HTTP 200 wi
+| 2026-05-21T23:49:20.262Z | dis
 ...[truncated]

@@ -1,0 +1,270 @@
+{
+  "generatedAt": "2026-05-28T09:37:06.692Z",
+  "source": "21st.dev Community public pages",
+  "licenseNote": "21st docs state Community components are open-source with MIT license; preserve author attribution when copying code.",
+  "usagePolicy": "Keep full source map as metadata; install component code selectively with npm run design:install when there is a real page/product use case.",
+  "docs": {
+    "overview": "https://help.21st.dev/community",
+    "components": "https://21st.dev/community/components",
+    "installPattern": "npx shadcn@latest add https://21st.dev/r/author/component-name"
+  },
+  "categories": [
+    {
+      "slug": "21st-dev",
+      "url": "https://21st.dev/community/components/s/21st-dev"
+    },
+    {
+      "slug": "accordion",
+      "url": "https://21st.dev/community/components/s/accordion"
+    },
+    {
+      "slug": "ai-chat",
+      "url": "https://21st.dev/community/components/s/ai-chat"
+    },
+    {
+      "slug": "alert",
+      "url": "https://21st.dev/community/components/s/alert"
+    },
+    {
+      "slug": "announcement",
+      "url": "https://21st.dev/community/components/s/announcement"
+    },
+    {
+      "slug": "avatar",
+      "url": "https://21st.dev/community/components/s/avatar"
+    },
+    {
+      "slug": "background",
+      "url": "https://21st.dev/community/components/s/background"
+    },
+    {
+      "slug": "badge",
+      "url": "https://21st.dev/community/components/s/badge"
+    },
+    {
+      "slug": "border",
+      "url": "https://21st.dev/community/components/s/border"
+    },
+    {
+      "slug": "button",
+      "url": "https://21st.dev/community/components/s/button"
+    },
+    {
+      "slug": "calendar",
+      "url": "https://21st.dev/community/components/s/calendar"
+    },
+    {
+      "slug": "call-to-action",
+      "url": "https://21st.dev/community/components/s/call-to-action"
+    },
+    {
+      "slug": "card",
+      "url": "https://21st.dev/community/components/s/card"
+    },
+    {
+      "slug": "carousel",
+      "url": "https://21st.dev/community/components/s/carousel"
+    },
+    {
+      "slug": "checkbox",
+      "url": "https://21st.dev/community/components/s/checkbox"
+    },
+    {
+      "slug": "chip-tag",
+      "url": "https://21st.dev/community/components/s/chip-tag"
+    },
+    {
+      "slug": "clients",
+      "url": "https://21st.dev/community/components/s/clients"
+    },
+    {
+      "slug": "comparison",
+      "url": "https://21st.dev/community/components/s/comparison"
+    },
+    {
+      "slug": "date-picker",
+      "url": "https://21st.dev/community/components/s/date-picker"
+    },
+    {
+      "slug": "dock",
+      "url": "https://21st.dev/community/components/s/dock"
+    },
+    {
+      "slug": "dropdown",
+      "url": "https://21st.dev/community/components/s/dropdown"
+    },
+    {
+      "slug": "empty-state",
+      "url": "https://21st.dev/community/components/s/empty-state"
+    },
+    {
+      "slug": "features",
+      "url": "https://21st.dev/community/components/s/features"
+    },
+    {
+      "slug": "file-tree",
+      "url": "https://21st.dev/community/components/s/file-tree"
+    },
+    {
+      "slug": "footer",
+      "url": "https://21st.dev/community/components/s/footer"
+    },
+    {
+      "slug": "form",
+      "url": "https://21st.dev/community/components/s/form"
+    },
+    {
+      "slug": "hero",
+      "url": "https://21st.dev/community/components/s/hero"
+    },
+    {
+      "slug": "hook",
+      "url": "https://21st.dev/community/components/s/hook"
+    },
+    {
+      "slug": "icons",
+      "url": "https://21st.dev/community/components/s/icons"
+    },
+    {
+      "slug": "image",
+      "url": "https://21st.dev/community/components/s/image"
+    },
+    {
+      "slug": "input",
+      "url": "https://21st.dev/community/components/s/input"
+    },
+    {
+      "slug": "link",
+      "url": "https://21st.dev/community/components/s/link"
+    },
+    {
+      "slug": "map",
+      "url": "https://21st.dev/community/components/s/map"
+    },
+    {
+      "slug": "menu",
+      "url": "https://21st.dev/community/components/s/menu"
+    },
+    {
+      "slug": "modal-dialog",
+      "url": "https://21st.dev/community/components/s/modal-dialog"
+    },
+    {
+      "slug": "navbar-navigation",
+      "url": "https://21st.dev/community/components/s/navbar-navigation"
+    },
+    {
+      "slug": "notification",
+      "url": "https://21st.dev/community/components/s/notification"
+    },
+    {
+      "slug": "number",
+      "url": "https://21st.dev/community/components/s/number"
+    },
+    {
+      "slug": "pagination",
+      "url": "https://21st.dev/community/components/s/pagination"
+    },
+    {
+      "slug": "popover",
+      "url": "https://21st.dev/community/components/s/popover"
+    },
+    {
+      "slug": "pricing-section",
+      "url": "https://21st.dev/community/components/s/pricing-section"
+    },
+    {
+      "slug": "radio-group",
+      "url": "https://21st.dev/community/components/s/radio-group"
+    },
+    {
+      "slug": "registration-signup",
+      "url": "https://21st.dev/community/components/s/registration-signup"
+    },
+    {
+      "slug": "scroll-area",
+      "url": "https://21st.dev/community/components/s/scroll-area"
+    },
+    {
+      "slug": "select",
+      "url": "https://21st.dev/community/components/s/select"
+    },
+    {
+      "slug": "shader",
+      "url": "https://21st.dev/community/components/s/shader"
+    },
+    {
+      "slug": "sidebar",
+      "url": "https://21st.dev/community/components/s/sidebar"
+    },
+    {
+      "slug": "sign-in",
+      "url": "https://21st.dev/community/components/s/sign-in"
+    },
+    {
+      "slug": "slider",
+      "url": "https://21st.dev/community/components/s/slider"
+    },
+    {
+      "slug": "spinner-loader",
+      "url": "https://21st.dev/community/components/s/spinner-loader"
+    },
+    {
+      "slug": "table",
+      "url": "https://21st.dev/community/components/s/table"
+    },
+    {
+      "slug": "tabs",
+      "url": "https://21st.dev/community/components/s/tabs"
+    },
+    {
+      "slug": "testimonials",
+      "url": "https://21st.dev/community/components/s/testimonials"
+    },
+    {
+      "slug": "text",
+      "url": "https://21st.dev/community/components/s/text"
+    },
+    {
+      "slug": "textarea",
+      "url": "https://21st.dev/community/components/s/textarea"
+    },
+    {
+      "slug": "toast",
+      "url": "https://21st.dev/community/components/s/toast"
+    },
+    {
+      "slug": "toggle",
+      "url": "https://21st.dev/community/components/s/toggle"
+    },
+    {
+      "slug": "tooltip",
+      "url": "https://21st.dev/community/components/s/tooltip"
+    },
+    {
+      "slug": "upload-download",
+      "url": "https://21st.dev/community/components/s/upload-download"
+    },
+    {
+      "slug": "video",
+      "url": "https://21st.dev/community/components/s/video"
+    }
+  ],
+  "seedRegistryItems": [
+    {
+      "title": "Pricing Component",
+      "author": "jatin-yadav05",
+      "registryUrl": "https://21st.dev/r/jatin-yadav05/pricing-component"
+    },
+    {
+      "title": "Cards Stack",
+      "author": "youcefbnm",
+      "registryUrl": "https://21st.dev/r/youcefbnm/cards-stack"
+    },
+    {
+      "title": "Footer Column",
+      "author": "mvp_Subha",
+      "registryUrl": "https://21st.dev/r/mvp_Subha/footer-column"
+    }
+  ]
+}

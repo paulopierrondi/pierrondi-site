@@ -164,6 +164,7 @@ export default function Home() {
         </a>
         <div className={styles.navLinks}>
           <a href="#top">Inicio</a>
+          <Link href="/design">Design</Link>
           <Link href="/feitos/sada-servicenow">SADA</Link>
           <Link href="/feitos/agentes-governados">Agentes</Link>
           <Link href="/feitos/llm-inferencia">LLM</Link>
