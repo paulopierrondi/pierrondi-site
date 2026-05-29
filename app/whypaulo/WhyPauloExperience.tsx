@@ -195,10 +195,14 @@ const agentQueue = [
   'executive POV and adoption plan',
 ]
 
+// Repositioned to lead with the hardest-to-copy asset: governed ServiceNow + AI at
+// top-tier Brazilian FSI scale. These framings are defensible/true (no invented numbers).
+// TODO(paulo): add ONE real, anonymized measured outcome as a 4th metric — see
+// app/whypaulo/WHYPAULO_PROOF_TODO.md (the single biggest credibility lift on this page).
 const theaterMetrics = [
-  ['3x', 'faster AI POV cycle'],
-  ['0', 'secrets exposed'],
-  ['1', 'platform-first story'],
+  ['FSI', 'ServiceNow at top-tier Brazilian bank scale'],
+  ['BACEN · LGPD', 'governed AI under real regulation'],
+  ['CMDB · Now Assist', 'platform depth, not slideware'],
 ]
 
 const motionEase = [0.16, 1, 0.3, 1] as const
@@ -300,13 +304,15 @@ export default function WhyPauloExperience() {
         </motion.div>
 
         <motion.div className={styles.heroCopy} variants={heroCopyReveal} style={{ y: heroCopyY }}>
-          <p className={styles.kicker}>The case to make me ServiceNow&apos;s AI person</p>
-          <h1 id="why-paulo-title">Every vendor has an AI story. I&apos;m the rare one who actually runs the system.</h1>
+          <p className={styles.kicker}>The case to make me ServiceNow&apos;s AI person — proven in FSI Brazil</p>
+          <h1 id="why-paulo-title">Every vendor has an AI story. I&apos;m the rare one who actually runs the system — where the bar is highest.</h1>
           <p className={styles.heroLead}>
             ServiceNow already owns the install base, the workflow context and the enterprise trust to win
-            the agentic era. What it needs is a person who lives where AI operating depth meets enterprise
-            field execution — who can sit with a CIO in the morning and ship a governed agent in the
-            afternoon. That is the job I already do every day. Hire me to do it for ServiceNow.
+            the agentic era. What it needs is someone who has already run governed AI inside the hardest
+            enterprise environment there is: top-tier Brazilian financial services — Bradesco-scale install
+            base, BACEN and LGPD governance, real adoption pressure. I sit with a CIO in the morning and ship
+            a governed agent in the afternoon, where the regulatory and scale bar leaves no room for slideware.
+            That is the operating maturity the agentic shift needs. Hire me to bring it to ServiceNow.
           </p>
           <div className={styles.heroActions}>
             <a href="#agentic-plan">
@@ -626,13 +632,15 @@ export default function WhyPauloExperience() {
           <p className={styles.kicker}>The ask</p>
           <h2 id="author-title">Make me ServiceNow&apos;s AI person.</h2>
           <p>
-            I&apos;m a ServiceNow professional with rare, hands-on AI and LLM operating depth. I don&apos;t want
-            to sit beside the platform — I want to make it the place where governed agents create measurable
-            enterprise value. Give me the role and I&apos;ll turn AI urgency into adoption velocity,
-            install-base defense and expansion. This is the highest-leverage hire you can make this year.
+            I&apos;m a ServiceNow Technical Account Executive in FSI Brazil with rare, hands-on AI and LLM
+            operating depth — running governed agents at top-tier Brazilian bank scale, under BACEN and LGPD.
+            I don&apos;t want to sit beside the platform — I want to make it the place where governed agents
+            create measurable enterprise value. Give me the role and I&apos;ll turn AI urgency into adoption
+            velocity, install-base defense and expansion, proven where the governance bar is highest. This is
+            the highest-leverage hire you can make this year.
           </p>
           <div className={styles.authorActions}>
-            <a href="mailto:paulo@pierrondi.dev?subject=US%20ServiceNow%20AI%20role%20conversation">
+            <a href="mailto:paulo@pierrondi.dev?subject=ServiceNow%20AI%20role%20conversation%20%E2%80%94%20FSI%2FBrazil-proven">
               Let&apos;s talk about the role <ArrowUpRight size={16} />
             </a>
             <span>
