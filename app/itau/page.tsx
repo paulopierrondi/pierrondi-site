@@ -7,20 +7,19 @@ export const revalidate = 0
 export const metadata: Metadata = {
   title: 'Itaú × ServiceNow — AI Agent Governance no CMDB (CSDM 5)',
   description:
-    'Material executivo e técnico para Squad Gaia (Itaú) sobre cadastro e governança de agentes de IA no CMDB, alinhado com CSDM 5 e forward-compatible com AI Control Tower + Now Assist Agent Fabric.',
+    'Resposta executiva para Squad Gaia (Itaú) sobre como cadastrar e governar agentes de IA no CMDB, escolhendo entre AI Function e AI & Model Application com racional CSDM 5.',
   keywords: [
     'Itaú Unibanco',
     'ServiceNow',
     'CSDM 5',
     'AI Agent Governance',
     'cmdb_ci_appl_ai_application',
-    'cmdb_ci_ai_agent',
+    'cmdb_ci_function_ai',
+    'AI Digital Asset',
     'Now Assist',
     'AI Control Tower',
-    'Now Assist Agent Fabric',
     'Squad Gaia',
-    'BACEN CP 109',
-    'LGPD IA',
+    'LGPD',
     'OPR-2025-0162762',
   ],
   authors: [{ name: 'Paulo Pierrondi' }],
@@ -37,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Itaú × ServiceNow — AI Agent Governance no CMDB (CSDM 5)',
     description:
-      'Cadastro de agentes de IA no CMDB do Itaú, alinhado com CSDM 5 e forward-compatible com AI Control Tower.',
+      'Como cadastrar agentes de IA no CMDB do Itaú: AI Function, AI & Model Application, AI Digital Asset e CSDM 5.',
     url: 'https://www.pierrondi.dev/itau',
     siteName: 'pierrondi.dev',
     type: 'website',
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Itaú × ServiceNow — AI Agent Governance no CMDB',
-    description: 'CSDM 5 forward-compatible com AI Control Tower + Now Assist Agent Fabric.',
+    description: 'Como escolher a tabela correta e o racional CSDM 5 para agentes de IA.',
     images: ['/og'],
   },
 }
