@@ -19,36 +19,36 @@ import {
   Workflow,
   Zap,
 } from 'lucide-react'
-import { useMemo } from 'react'
+import { useMemo, useRef } from 'react'
 import type { CSSProperties } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import type { Variants } from 'framer-motion'
 import styles from './WhyPauloExperience.module.css'
 
 const marketPressures = [
   {
     icon: Zap,
-    title: 'The cycle compressed',
+    title: 'The clock is the real competitor',
     copy:
-      'In roughly two months, the customer conversation moved from AI roadmap to active experimentation. AI is no longer a future theme. It is a present operating pressure.',
+      'In a matter of months the customer conversation jumped from AI roadmap to live experimentation. The threat to ServiceNow is not a feature gap. It is the speed at which others are moving inside the accounts.',
   },
   {
     icon: TerminalSquare,
-    title: 'Customers can now build',
+    title: 'Customers now build without us',
     copy:
-      'Local LLMs, vibe-code environments and agent frameworks let business and technology teams prototype new workflows before a platform conversation even starts.',
+      'Local LLMs, vibe-code environments and agent frameworks let business and IT teams prototype workflows before a platform conversation even starts. Every one of those is a workflow ServiceNow could have owned.',
   },
   {
     icon: Radar,
-    title: 'Competitors attack the edges',
+    title: 'Competitors attack the edges first',
     copy:
-      'Agentic tools will not begin by replacing the whole estate. They will start around intake, approvals, service requests, reporting and small legacy workflows.',
+      'Agentic tools will not replace the estate on day one. They land on intake, approvals, service requests, reporting and small legacy workflows — then expand. That is how install bases erode quietly.',
   },
   {
     icon: Layers3,
-    title: 'The platform opportunity is bigger',
+    title: 'The upside dwarfs the risk',
     copy:
-      'ServiceNow can turn this pressure into modernization: retire fragmented SaaS and legacy apps, govern autonomy and expand from workflow context.',
+      'Handled right, this pressure becomes the biggest modernization wave in years: retire fragmented SaaS and legacy apps, govern autonomy, and expand out from the workflow context only ServiceNow holds.',
   },
 ]
 
@@ -114,6 +114,36 @@ const planSteps = [
     title: 'Convert into expansion',
     copy:
       'Connect the operating model to adoption velocity, then convert adoption velocity into expansion and install-base defense.',
+  },
+]
+
+const firstNinety = [
+  {
+    window: 'Days 0–30',
+    title: 'Listen, map, pick the beachheads',
+    points: [
+      'Sit with field leaders and top accounts; map exactly where customers are already building AI around ServiceNow.',
+      'Pick the 3–5 highest-leverage replacement plays per region and the legacy or SaaS they retire.',
+      'Stand up the governance guardrails — human gates, data boundaries, audit — so nothing ships ungoverned.',
+    ],
+  },
+  {
+    window: 'Days 30–60',
+    title: 'Ship proof that moves a deal',
+    points: [
+      'Turn one customer problem into a working, governed agent — real data, real workflow, not slideware.',
+      'Pair with AEs and SCs to put that proof in front of an economic buyer and tie it to pipeline.',
+      'Codify the discovery and demo into a kit the field can run without me in the room.',
+    ],
+  },
+  {
+    window: 'Days 60–90',
+    title: 'Turn proof into a repeatable motion',
+    points: [
+      'Roll the play into a second and third account; track adoption velocity and the expansion signal.',
+      'Publish the operating model: how ServiceNow positions, governs and expands agentic work.',
+      'Hand the field a motion that defends the install base and opens new growth — reported in revenue terms.',
+    ],
   },
 ]
 
@@ -234,6 +264,15 @@ export default function WhyPauloExperience() {
   const reducedMotion = useReducedMotion()
   const neuralDots = useMemo(() => Array.from({ length: 26 }, (_, index) => index), [])
   const motionClass = reducedMotion ? styles.motionPaused : styles.motionEnabled
+
+  const heroRef = useRef<HTMLElement | null>(null)
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  })
+  const heroCopyY = useTransform(heroProgress, [0, 1], [0, reducedMotion ? 0 : 80])
+  const heroFade = useTransform(heroProgress, [0, 1], [1, reducedMotion ? 1 : 0])
+  const neuralY = useTransform(heroProgress, [0, 1], [0, reducedMotion ? 0 : -120])
   const revealProps = reducedMotion
     ? { initial: 'visible' as const, animate: 'visible' as const }
     : { initial: 'hidden' as const, whileInView: 'visible' as const, viewport: revealViewport }
@@ -247,32 +286,39 @@ export default function WhyPauloExperience() {
     <main className={`${styles.page} ${motionClass}`}>
       <div className={styles.noise} aria-hidden="true" />
 
-      <motion.section className={styles.hero} aria-labelledby="why-paulo-title" {...loadProps} variants={sectionReveal}>
-        <div className={styles.neuralMap} aria-hidden="true">
+      <motion.section
+        ref={heroRef}
+        className={styles.hero}
+        aria-labelledby="why-paulo-title"
+        {...loadProps}
+        variants={sectionReveal}
+      >
+        <motion.div className={styles.neuralMap} aria-hidden="true" style={{ y: neuralY, opacity: heroFade }}>
           {neuralDots.map((dot) => (
             <span key={dot} style={{ '--dot-index': dot } as CSSProperties} />
           ))}
-        </div>
+        </motion.div>
 
-        <motion.div className={styles.heroCopy} variants={heroCopyReveal}>
-          <p className={styles.kicker}>Private briefing / ServiceNow agentic strategy</p>
-          <h1 id="why-paulo-title">AI is not the future. It is the platform battleground now.</h1>
+        <motion.div className={styles.heroCopy} variants={heroCopyReveal} style={{ y: heroCopyY }}>
+          <p className={styles.kicker}>The case to make me ServiceNow&apos;s AI person</p>
+          <h1 id="why-paulo-title">Every vendor has an AI story. I&apos;m the rare one who actually runs the system.</h1>
           <p className={styles.heroLead}>
-            ServiceNow has the install base, workflow context and enterprise trust to win the agentic shift.
-            The risk is speed: customers and competitors are already building AI around the platform with
-            local models, vibe-code tools and agentic applications.
+            ServiceNow already owns the install base, the workflow context and the enterprise trust to win
+            the agentic era. What it needs is a person who lives where AI operating depth meets enterprise
+            field execution — who can sit with a CIO in the morning and ship a governed agent in the
+            afternoon. That is the job I already do every day. Hire me to do it for ServiceNow.
           </p>
           <div className={styles.heroActions}>
             <a href="#agentic-plan">
-              Review the plan <ArrowUpRight size={16} />
+              See how I&apos;d win <ArrowUpRight size={16} />
             </a>
-            <a href="#service-now-position">ServiceNow position</a>
+            <a href="#why-me">Why me, specifically</a>
           </div>
           <div className={styles.signalStrip} aria-label="Positioning signals">
-            <span>ServiceNow first</span>
-            <span>Agentic modernization</span>
-            <span>Client maturity</span>
-            <span>Governed execution</span>
+            <span>Operates AI daily</span>
+            <span>Speaks to the C-suite</span>
+            <span>Ships governed agents</span>
+            <span>Measured in revenue</span>
           </div>
         </motion.div>
 
@@ -306,10 +352,11 @@ export default function WhyPauloExperience() {
       <motion.section className={styles.marketSection} aria-labelledby="market-title" {...revealProps} variants={sectionReveal}>
         <div className={styles.sectionHeader}>
           <p className={styles.kicker}>The panorama</p>
-          <h2 id="market-title">The conversation changed faster than the enterprise buying cycle.</h2>
+          <h2 id="market-title">The agentic shift is already inside your accounts.</h2>
           <p>
-            This is the point I would make to leaders: AI is already changing how customers imagine software,
-            how fast they expect prototypes, and how competitors can capture pieces of workflow value.
+            This is the read I would bring to leadership on day one: AI has already changed how customers
+            imagine software, how fast they expect results, and how quietly a competitor can take a slice of
+            workflow value. The window to lead this — instead of defend against it — is open right now.
           </p>
         </div>
 
@@ -330,12 +377,13 @@ export default function WhyPauloExperience() {
       <motion.section className={styles.agentSection} aria-labelledby="agent-title" {...revealProps} variants={sectionReveal}>
         <div className={styles.agentLayout}>
           <motion.div className={styles.agentNarrative} variants={heroCopyReveal}>
-            <p className={styles.kicker}>Agent execution model</p>
-            <h2 id="agent-title">The answer is not another AI demo. It is a customer modernization motion.</h2>
+            <p className={styles.kicker}>How I&apos;d run the role</p>
+            <h2 id="agent-title">Not another AI demo. A repeatable customer modernization motion.</h2>
             <p>
-              My thesis is to use AI maturity to help ServiceNow defend and expand the install base:
-              find where customers are creating workarounds, show what can be retired, and move them into
-              governed agents and workflows on the platform.
+              My playbook is simple and it scales: find where customers are quietly building around
+              ServiceNow, show them what can be retired, and move that work onto governed agents and
+              workflows on the platform. AI stops being a science project and becomes install-base
+              defense plus expansion — measured in pipeline, not slides.
             </p>
             <div className={styles.theaterStats} aria-label="Execution signals">
               {theaterMetrics.map(([value, label]) => (
@@ -431,11 +479,12 @@ export default function WhyPauloExperience() {
       >
         <div className={styles.sectionHeader}>
           <p className={styles.kicker}>ServiceNow position</p>
-          <h2 id="service-now-title">Respect the leadership position. Name the challenge clearly.</h2>
+          <h2 id="service-now-title">You&apos;re winning. The one missing piece is a translator.</h2>
           <p>
-            The credible message is balanced: ServiceNow is a leading technology company with a serious install
-            base and a unique workflow advantage. The challenge is that agentic competitors and customer-built
-            AI are moving faster than traditional transformation motions.
+            Let me be balanced and honest: ServiceNow is a leader with a serious install base and a workflow
+            advantage no one else has. The only real exposure is speed — agentic competitors and
+            customer-built AI move faster than classic transformation motions. Closing that gap is less about
+            more AI features and more about a person who can translate AI capability into enterprise outcomes.
           </p>
         </div>
 
@@ -455,11 +504,12 @@ export default function WhyPauloExperience() {
 
       <motion.section className={styles.planSection} id="agentic-plan" aria-labelledby="plan-title" {...revealProps} variants={sectionReveal}>
         <div className={styles.sectionHeader}>
-          <p className={styles.kicker}>My plan</p>
-          <h2 id="plan-title">Turn AI urgency into ServiceNow adoption and expansion.</h2>
+          <p className={styles.kicker}>My plan in the seat</p>
+          <h2 id="plan-title">What I&apos;d do with the role — turn AI urgency into adoption and expansion.</h2>
           <p>
-            This is where my customer knowledge and AI operating maturity matter: not as a side interest, but as
-            a practical field motion for platform value, install-base defense and new growth.
+            This is where customer knowledge and AI operating maturity stop being a résumé line and become a
+            repeatable field motion. Five moves, run account by account, that defend the install base and open
+            new growth.
           </p>
         </div>
 
@@ -478,13 +528,42 @@ export default function WhyPauloExperience() {
         </motion.div>
       </motion.section>
 
+      <motion.section className={styles.ninetySection} aria-labelledby="ninety-title" {...revealProps} variants={sectionReveal}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.kicker}>First 90 days</p>
+          <h2 id="ninety-title">What you&apos;d see from me in the first quarter.</h2>
+          <p>
+            No ramp-up theater. A time-boxed plan that produces a governed proof and a repeatable field
+            motion before the quarter closes.
+          </p>
+        </div>
+
+        <motion.div className={styles.ninetyGrid} variants={staggerReveal}>
+          {firstNinety.map((phase) => (
+            <motion.article key={phase.window} className={styles.ninetyCard} variants={cardReveal} whileHover={cardHover}>
+              <span className={styles.ninetyWindow}>{phase.window}</span>
+              <h3>{phase.title}</h3>
+              <ul>
+                {phase.points.map((point) => (
+                  <li key={point}>
+                    <CheckCircle2 size={15} aria-hidden="true" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.article>
+          ))}
+        </motion.div>
+      </motion.section>
+
       <motion.section className={styles.operatingSection} aria-labelledby="operating-title" {...revealProps} variants={sectionReveal}>
         <div className={styles.sectionHeader}>
-          <p className={styles.kicker}>Operating maturity</p>
-          <h2 id="operating-title">Enough depth to execute. Enough restraint to avoid exporting the system.</h2>
+          <p className={styles.kicker}>How I actually operate AI</p>
+          <h2 id="operating-title">I run governed AI every day — this is the discipline I&apos;d bring in.</h2>
           <p>
-            This page deliberately exposes the maturity pattern, not the confidential machinery. The signal is
-            disciplined AI management: context, routing, guardrails, evidence and business translation.
+            I&apos;m showing the operating pattern, not the confidential machinery. The point is that I treat AI
+            the way an enterprise has to: context, routing, guardrails, evidence and business translation — not
+            prompts and vibes.
           </p>
         </div>
 
@@ -499,13 +578,14 @@ export default function WhyPauloExperience() {
         </motion.div>
       </motion.section>
 
-      <motion.section className={styles.proofSection} aria-labelledby="proof-title" {...revealProps} variants={sectionReveal}>
+      <motion.section className={styles.proofSection} id="why-me" aria-labelledby="proof-title" {...revealProps} variants={sectionReveal}>
         <motion.div className={styles.proofIntro} variants={heroCopyReveal}>
-          <p className={styles.kicker}>Proof without oversharing</p>
-          <h2 id="proof-title">The maturity signal is real, but intentionally bounded.</h2>
+          <p className={styles.kicker}>Why me, specifically</p>
+          <h2 id="proof-title">The combination almost no one has — all four at once.</h2>
           <p>
-            I can speak credibly about AI operations because I run them. The point is not to expose internals.
-            The point is to show I know how to turn AI from novelty into governed work that helps customers move.
+            Plenty of people have one or two of these. The value is in holding all four together: the AI
+            engineer who understands the customer, the platform and how to ship. That intersection is exactly
+            where ServiceNow needs to win the agentic era — and it is where I already live.
           </p>
         </motion.div>
         <motion.div className={styles.proofGrid} variants={staggerReveal}>
@@ -521,8 +601,8 @@ export default function WhyPauloExperience() {
 
       <motion.section className={styles.stackSection} aria-labelledby="stack-title" {...revealProps} variants={sectionReveal}>
         <motion.div variants={heroCopyReveal}>
-          <p className={styles.kicker}>Capability stack</p>
-          <h2 id="stack-title">AI expert enough to make ServiceNow more valuable.</h2>
+          <p className={styles.kicker}>What I bring on day one</p>
+          <h2 id="stack-title">AI-fluent enough to make ServiceNow more valuable — fast.</h2>
         </motion.div>
         <motion.div className={styles.stackCloud} variants={staggerReveal}>
           {capabilityStack.map((item) => (
@@ -543,16 +623,17 @@ export default function WhyPauloExperience() {
           />
         </motion.div>
         <motion.div className={styles.authorPanel} variants={panelReveal}>
-          <p className={styles.kicker}>Author</p>
-          <h2 id="author-title">Paulo Pierrondi</h2>
+          <p className={styles.kicker}>The ask</p>
+          <h2 id="author-title">Make me ServiceNow&apos;s AI person.</h2>
           <p>
-            ServiceNow professional with practical AI and LLM operating depth. My focus is not to become separate
-            from the platform. It is to help ServiceNow customers move faster, retire fragmented applications and
-            convert governed agents into measurable enterprise value.
+            I&apos;m a ServiceNow professional with rare, hands-on AI and LLM operating depth. I don&apos;t want
+            to sit beside the platform — I want to make it the place where governed agents create measurable
+            enterprise value. Give me the role and I&apos;ll turn AI urgency into adoption velocity,
+            install-base defense and expansion. This is the highest-leverage hire you can make this year.
           </p>
           <div className={styles.authorActions}>
             <a href="mailto:paulo@pierrondi.dev?subject=US%20ServiceNow%20AI%20role%20conversation">
-              Start the conversation <ArrowUpRight size={16} />
+              Let&apos;s talk about the role <ArrowUpRight size={16} />
             </a>
             <span>
               <Workflow size={16} aria-hidden="true" />

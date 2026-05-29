@@ -1,3 +1,15 @@
+'use client'
+
+import { useRef } from 'react'
+import type { ReactNode } from 'react'
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'framer-motion'
+import type { Variants } from 'framer-motion'
 import styles from './ItauExperience.module.css'
 
 type VerdictKind = 'approved' | 'adjust' | 'reject'
@@ -370,13 +382,154 @@ const correctedHandler = `(function process(request, response) {
   }
 })(request, response);`
 
+const csdmLayers: Array<{
+  tier: string
+  name: string
+  meta: string
+  toneClass: string
+  highlight?: boolean
+}> = [
+  {
+    tier: 'L5',
+    name: 'Service Portfolio / Negócio',
+    meta: 'Business Service · Service Offering',
+    toneClass: styles.csdmNavy,
+  },
+  {
+    tier: 'L4',
+    name: 'Application Service (ponto de entrega)',
+    meta: 'cmdb_ci_service_auto',
+    toneClass: styles.csdmBlue,
+  },
+  {
+    tier: 'L3',
+    name: 'AI Agent — o IC que falta governar',
+    meta: 'cmdb_ci_appl_ai_application',
+    toneClass: styles.csdmOrange,
+    highlight: true,
+  },
+  {
+    tier: 'L2',
+    name: 'AI Function / Skill + AI Assets',
+    meta: 'cmdb_ci_function_ai · alm_ai_*_digital_asset',
+    toneClass: styles.csdmGreen,
+  },
+  {
+    tier: 'L1',
+    name: 'Foundation / Technical Services',
+    meta: 'CMDB core · CSDM 5 baseline',
+    toneClass: styles.csdmSlate,
+  },
+]
+
+const csdmLessons = [
+  'CSDM 5 não é tabela nova: é onde cada coisa mora e como ela se conecta.',
+  'O AI Agent entra como IC executável abaixo do Application Service — não como app solta.',
+  'Sem camada de serviço explícita, a CMDB registra presença mas não governa risco.',
+  'Governança real nasce do relacionamento: agente → função → modelo → dado → owner.',
+]
+
+const motionEase = [0.16, 1, 0.3, 1] as const
+const revealViewport = { once: true, amount: 0.2 } as const
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 36, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.7, ease: motionEase },
+  },
+}
+
+const stagger: Variants = {
+  hidden: { opacity: 1 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+}
+
+const cardItem: Variants = {
+  hidden: { opacity: 0, y: 26, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.55, ease: motionEase },
+  },
+}
+
+const layerItem: Variants = {
+  hidden: { opacity: 0, x: -48, filter: 'blur(6px)' },
+  visible: {
+    opacity: 1,
+    x: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.6, ease: motionEase },
+  },
+}
+
+function Reveal({
+  children,
+  className,
+  reduced,
+}: {
+  children: ReactNode
+  className?: string
+  reduced: boolean | null
+}) {
+  const props = reduced
+    ? { initial: 'visible' as const, animate: 'visible' as const }
+    : {
+        initial: 'hidden' as const,
+        whileInView: 'visible' as const,
+        viewport: revealViewport,
+      }
+  return (
+    <motion.section className={className} variants={fadeUp} {...props}>
+      {children}
+    </motion.section>
+  )
+}
+
 export default function ItauExperience() {
+  const reduced = useReducedMotion()
+  const heroRef = useRef<HTMLElement | null>(null)
+
+  const { scrollYProgress } = useScroll()
+  const progressScale = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  })
+
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  })
+  const heroY = useTransform(heroProgress, [0, 1], [0, reduced ? 0 : 90])
+  const heroFade = useTransform(heroProgress, [0, 1], [1, reduced ? 1 : 0])
+
+  const cardHover = reduced ? undefined : { y: -5, borderColor: 'rgba(236, 112, 0, 0.5)' }
+
   return (
     <main className={styles.shell}>
+      <motion.div
+        className={styles.scrollProgress}
+        style={{ scaleX: reduced ? 1 : progressScale }}
+        aria-hidden="true"
+      />
       <div className={styles.container}>
         {/* ─────────── HERO ─────────── */}
-        <section className={styles.hero}>
-          <div className={styles.heroBadges}>
+        <motion.section
+          ref={heroRef}
+          className={styles.hero}
+          style={{ y: heroY, opacity: heroFade }}
+        >
+          <motion.div
+            initial={reduced ? false : 'hidden'}
+            animate="visible"
+            variants={stagger}
+          >
+          <motion.div className={styles.heroBadges} variants={fadeUp}>
             <span className={styles.brandChip}>
               <span className={styles.brandDot} /> Itaú Unibanco
             </span>
@@ -384,15 +537,16 @@ export default function ItauExperience() {
               <span className={styles.brandDot} /> ServiceNow
             </span>
             <span className={`${styles.brandChip} ${styles.opr}`}>OPR-2025-0162762</span>
-          </div>
-          <h1 className={styles.heroTitle}>
-            AI Agent Governance no <em>CMDB</em>.
-          </h1>
-          <p className={styles.heroLede}>
-            Proposta executiva para cadastrar, governar e operar agentes de IA como ativos de negócio
-            rastreáveis, alinhados ao CSDM 5 e prontos para evoluir com AI Control Tower e Now Assist Agent Fabric.
-          </p>
-          <div className={styles.heroMeta}>
+          </motion.div>
+          <motion.h1 className={styles.heroTitle} variants={fadeUp}>
+            Uma aula de CSDM 5: como governar <em>AI Agents</em> no CMDB.
+          </motion.h1>
+          <motion.p className={styles.heroLede} variants={fadeUp}>
+            Sessão técnica e executiva para a Squad Gaia. Saímos do cadastro técnico e chegamos ao
+            controle operacional: agentes de IA nascendo como ativos de negócio rastreáveis, no lugar
+            certo do CSDM 5 e prontos para AI Control Tower e Now Assist Agent Fabric.
+          </motion.p>
+          <motion.div className={styles.heroMeta} variants={fadeUp}>
             <div className={styles.heroMetaItem}>
               <span className={styles.heroMetaLabel}>Audience</span>
               <span className={styles.heroMetaValue}>Squad Gaia + Governança</span>
@@ -405,11 +559,94 @@ export default function ItauExperience() {
               <span className={styles.heroMetaLabel}>Decision</span>
               <span className={styles.heroMetaValue}>Classe mínima + piloto auditável</span>
             </div>
+          </motion.div>
+          {!reduced && (
+            <motion.div
+              className={styles.scrollCue}
+              aria-hidden="true"
+              animate={{ y: [0, 8, 0], opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <span>role para a aula</span>
+              <span className={styles.scrollCueArrow}>↓</span>
+            </motion.div>
+          )}
+          </motion.div>
+        </motion.section>
+
+        {/* ─────────── AULA: CAMADAS CSDM 5 ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>aula · onde o agente mora</span>
+            <h2 className={styles.sectionTitle}>CSDM 5 em camadas — e por que isso importa.</h2>
+            <p className={styles.sectionSub}>
+              Antes de qualquer campo ou relacionamento: CSDM é um mapa de camadas. Cada decisão de
+              governança fica fácil quando o AI Agent está na camada certa. Role e veja onde ele entra.
+            </p>
           </div>
-        </section>
+
+          <div className={styles.csdmGrid}>
+            <motion.div
+              className={styles.csdmStack}
+              variants={stagger}
+              initial={reduced ? false : 'hidden'}
+              whileInView={reduced ? undefined : 'visible'}
+              viewport={revealViewport}
+            >
+              {csdmLayers.map((layer) => (
+                <motion.div
+                  key={layer.tier}
+                  className={`${styles.csdmLayer} ${layer.toneClass} ${
+                    layer.highlight ? styles.csdmLayerHighlight : ''
+                  }`}
+                  variants={layerItem}
+                  whileHover={reduced ? undefined : { x: 6 }}
+                  animate={
+                    reduced || !layer.highlight
+                      ? undefined
+                      : {
+                          boxShadow: [
+                            '0 0 0 rgba(236,112,0,0)',
+                            '0 0 32px rgba(236,112,0,0.35)',
+                            '0 0 0 rgba(236,112,0,0)',
+                          ],
+                        }
+                  }
+                  transition={
+                    layer.highlight
+                      ? { duration: 3.4, repeat: Infinity, ease: 'easeInOut' }
+                      : undefined
+                  }
+                >
+                  <span className={styles.csdmTier}>{layer.tier}</span>
+                  <div className={styles.csdmLayerBody}>
+                    <p className={styles.csdmLayerName}>{layer.name}</p>
+                    <span className={styles.csdmLayerMeta}>{layer.meta}</span>
+                  </div>
+                  {layer.highlight && <span className={styles.csdmYouAreHere}>aqui</span>}
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.ul
+              className={styles.csdmLessons}
+              variants={stagger}
+              initial={reduced ? false : 'hidden'}
+              whileInView={reduced ? undefined : 'visible'}
+              viewport={revealViewport}
+            >
+              {csdmLessons.map((lesson, i) => (
+                <motion.li key={i} variants={cardItem}>
+                  <span className={styles.csdmLessonNum}>{String(i + 1).padStart(2, '0')}</span>
+                  <p>{lesson}</p>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </div>
+        </Reveal>
 
         {/* ─────────── VEREDITO ITEM-POR-ITEM ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>veredito item-por-item</span>
             <h2 className={styles.sectionTitle}>
@@ -423,9 +660,20 @@ export default function ItauExperience() {
             </p>
           </div>
 
-          <div className={styles.verdictTable}>
+          <motion.div
+            className={styles.verdictTable}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.08 }}
+          >
             {verdictItems.map((v, i) => (
-              <div key={i} className={styles.verdictRow}>
+              <motion.div
+                key={i}
+                className={styles.verdictRow}
+                variants={cardItem}
+                whileHover={reduced ? undefined : { backgroundColor: 'rgba(236, 112, 0, 0.06)' }}
+              >
                 <span className={`${styles.verdictBadge} ${verdictBadgeClass[v.kind]}`}>
                   {verdictBadgeLabel[v.kind]}
                 </span>
@@ -434,9 +682,9 @@ export default function ItauExperience() {
                   {v.meta && <span className={styles.verdictItemMeta}>{v.meta}</span>}
                 </div>
                 <p className={styles.verdictItemBody}>{v.reason}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           <div className={styles.commitBanner}>
             <div>
@@ -456,10 +704,10 @@ export default function ItauExperience() {
               <span style={{ color: '#FFCC00' }}>→ todos cabem na MESMA sprint da API.</span>
             </div>
           </div>
-        </section>
+        </Reveal>
 
         {/* ─────────── VEREDITO CONCEITUAL ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>veredito conceitual</span>
             <h2 className={styles.sectionTitle}>Não trate agente de IA como aplicação comum.</h2>
@@ -468,7 +716,13 @@ export default function ItauExperience() {
               guardrails e evidência operacional. Sem isso, a CMDB registra presença, mas não governa risco.
             </p>
           </div>
-          <article className={styles.verdictCard}>
+          <motion.article
+            className={styles.verdictCard}
+            variants={cardItem}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={revealViewport}
+          >
             <span className={styles.verdictStamp}>Recomendação</span>
             <h3 className={styles.verdictHeadline}>
               Criar uma classe controlada para AI Agent como extensão CSDM, com relacionamentos mínimos
@@ -488,18 +742,29 @@ export default function ItauExperience() {
                 <p className={styles.verdictItemDesc}>Modelo preparado para migrar quando o AI Control Tower amadurecer no roadmap ServiceNow.</p>
               </li>
             </ul>
-          </article>
-        </section>
+          </motion.article>
+        </Reveal>
 
         {/* ─────────── 5 RISCOS CRÍTICOS ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>riscos críticos</span>
             <h2 className={styles.sectionTitle}>Cinco pontos que travam escala segura.</h2>
           </div>
-          <div className={styles.criticalGrid}>
+          <motion.div
+            className={styles.criticalGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.15 }}
+          >
             {criticalItems.map((item, index) => (
-              <article key={item.title} className={styles.criticalCard}>
+              <motion.article
+                key={item.title}
+                className={styles.criticalCard}
+                variants={cardItem}
+                whileHover={cardHover}
+              >
                 <span className={styles.criticalNum}>{index + 1}</span>
                 <span className={`${styles.criticalSeverity} ${item.severityClass}`}>{item.severity}</span>
                 <h3 className={styles.criticalTitle}>{item.title}</h3>
@@ -508,13 +773,13 @@ export default function ItauExperience() {
                   <span className={styles.criticalActionLabel}>Ação</span>
                   {item.action}
                 </p>
-              </article>
+              </motion.article>
             ))}
-          </div>
-        </section>
+          </motion.div>
+        </Reveal>
 
         {/* ─────────── CÓDIGO CORRIGIDO ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>código corrigido — copy/paste-ready</span>
             <h2 className={styles.sectionTitle}>
@@ -600,10 +865,10 @@ export default function ItauExperience() {
               </div>
             </div>
           </div>
-        </section>
+        </Reveal>
 
         {/* ─────────── RELEASE MAP ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>release map</span>
             <h2 className={styles.sectionTitle}>Como manter o desenho compatível com o roadmap.</h2>
@@ -631,10 +896,10 @@ export default function ItauExperience() {
           <p className={styles.matrixNote}>
             O objetivo é começar com governança acionável agora, sem bloquear a migração para capacidades nativas futuras.
           </p>
-        </section>
+        </Reveal>
 
         {/* ─────────── COMO AJUDAMOS ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>como ajudamos a entregar</span>
             <h2 className={styles.sectionTitle}>
@@ -647,54 +912,93 @@ export default function ItauExperience() {
             </p>
           </div>
 
-          <div className={styles.helpGrid}>
+          <motion.div
+            className={styles.helpGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.15 }}
+          >
             {helpItems.map((h) => (
-              <article key={h.title} className={styles.helpCard}>
+              <motion.article
+                key={h.title}
+                className={styles.helpCard}
+                variants={cardItem}
+                whileHover={reduced ? undefined : { y: -5, borderColor: 'rgba(255, 184, 112, 0.55)' }}
+              >
                 <span className={styles.helpIcon}>{h.icon}</span>
                 <h3 className={styles.helpTitle}>{h.title}</h3>
                 <p className={styles.helpDesc}>{h.desc}</p>
                 <span className={styles.helpEffort}>{h.effort}</span>
-              </article>
+              </motion.article>
             ))}
-          </div>
-        </section>
+          </motion.div>
+        </Reveal>
 
         {/* ─────────── ROADMAP ─────────── */}
-        <section id="roadmap" className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
+          <div id="roadmap" />
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>execução</span>
             <h2 className={styles.sectionTitle}>Roadmap de quatro semanas para piloto auditável.</h2>
           </div>
-          <div className={styles.roadmap}>
+          <motion.div
+            className={styles.roadmap}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {roadmap.map(([when, title, desc, owner], index) => (
-              <article key={title} className={`${styles.roadmapItem} ${index === 0 ? styles.done : ''}`}>
+              <motion.article
+                key={title}
+                className={`${styles.roadmapItem} ${index === 0 ? styles.done : ''}`}
+                variants={cardItem}
+              >
                 <p className={styles.roadmapWhen}>{when}</p>
                 <h3 className={styles.roadmapTitle}>{title}</h3>
                 <p className={styles.roadmapDesc}>{desc}</p>
                 <span className={styles.roadmapOwner}>{owner}</span>
-              </article>
+              </motion.article>
             ))}
-          </div>
-        </section>
+          </motion.div>
+        </Reveal>
 
         {/* ─────────── PERGUNTAS ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>perguntas de controle</span>
             <h2 className={styles.sectionTitle}>O checklist que evita CMDB decorativa.</h2>
           </div>
-          <div className={styles.questionGrid}>
+          <motion.div
+            className={styles.questionGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.15 }}
+          >
             {questions.map((question, index) => (
-              <article key={question} className={styles.questionCard}>
+              <motion.article
+                key={question}
+                className={styles.questionCard}
+                variants={cardItem}
+                whileHover={reduced ? undefined : { y: -4, borderColor: 'rgba(236, 112, 0, 0.4)' }}
+              >
                 <span className={styles.questionNum}>{String(index + 1).padStart(2, '0')}</span>
                 <p className={styles.questionText}>{question}</p>
-              </article>
+              </motion.article>
             ))}
-          </div>
-        </section>
+          </motion.div>
+        </Reveal>
 
         {/* ─────────── CTA ─────────── */}
-        <section className={styles.cta}>
+        <motion.section
+          className={styles.cta}
+          initial={reduced ? false : { opacity: 0, y: 40, scale: 0.97 }}
+          whileInView={reduced ? undefined : { opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: motionEase }}
+        >
           <div className={styles.ctaInner}>
             <div>
               <p className={styles.ctaKicker}>próxima decisão</p>
@@ -709,7 +1013,7 @@ export default function ItauExperience() {
               <a className={styles.ctaActionSecondary} href="/tech-partner">Contexto ServiceNow</a>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         <footer className={styles.confidential}>
           <span>Material executivo reservado</span>

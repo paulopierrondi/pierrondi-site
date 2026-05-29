@@ -32,6 +32,7 @@
   box-sizing: border-box;
 }
 
+
 .page::before {
   content: "";
   position: fixed;
@@ -69,6 +70,7 @@
 .agentSection,
 .serviceNowSection,
 .planSection,
+.ninetySection,
 .operatingSection,
 .proofSection,
 .stackSection,
@@ -316,6 +318,7 @@
 .agentSection,
 .serviceNowSection,
 .planSection,
+.ninetySection,
 .operatingSection,
 .proofSection,
 .stackSection,
@@ -398,6 +401,76 @@
   color: var(--why-muted);
   font-size: 0.94rem;
   line-height: 1.62;
+}
+
+.ninetyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ninetyCard {
+  position: relative;
+  border: 1px solid rgba(247, 245, 238, 0.14);
+  border-radius: var(--radius-panel);
+  padding: 24px;
+  background: var(--why-panel);
+  backdrop-filter: blur(18px);
+  display: flex;
+  flex-direction: column;
+}
+
+.ninetyCard::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--why-lime), rgba(200, 255, 46, 0.1));
+}
+
+.ninetyWindow {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--why-lime);
+}
+
+.ninetyCard h3 {
+  margin: 12px 0 18px;
+  color: #fff;
+  font-size: 1.18rem;
+  line-height: 1.22;
+  font-weight: 800;
+}
+
+.ninetyCard ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.ninetyCard li {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+}
+
+.ninetyCard li svg {
+  color: var(--why-lime);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.ninetyCard li span {
+  color: var(--why-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
 }
 
 .agentLayout {
@@ -910,6 +983,7 @@
 @media (max-width: 1080px) {
   .hero,
   .agentLayout,
+  .ninetyGrid,
   .proofSection,
   .stackSection,
   .authorSection {
@@ -963,6 +1037,7 @@
   .agentSection,
   .serviceNowSection,
   .planSection,
+  .ninetySection,
   .operatingSection,
   .proofSection,
   .stackSection,
