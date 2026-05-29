@@ -1,5 +1,7 @@
 import { ImageResponse } from 'next/og'
 
+export const revalidate = 86400 // cache the static OG image for a day [perf]
+
 // Note: removed `runtime = 'edge'`. We deploy on Railway (single Node.js server,
 // no edge runtime available). Edge here just got simulated and triggered the
 // "Using edge runtime on a page currently disables static generation" warning
@@ -39,7 +41,7 @@ export async function GET() {
               width: '10px',
               height: '10px',
               borderRadius: '50%',
-              background: '#62d84e',
+              background: '#c8ff2e',
             }}
           />
           <span
@@ -72,7 +74,7 @@ export async function GET() {
             style={{
               fontSize: '88px',
               fontWeight: 800,
-              color: '#62d84e',
+              color: '#c8ff2e',
               lineHeight: 0.9,
               letterSpacing: '-3px',
             }}
@@ -96,7 +98,7 @@ export async function GET() {
           <span
             style={{
               fontSize: '16px',
-              color: '#62d84e',
+              color: '#c8ff2e',
               letterSpacing: '1px',
             }}
           >

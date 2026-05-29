@@ -3,9 +3,12 @@
 import { Fragment, useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import Image from 'next/image'
-import KimiNeuralNetwork from '@/components/KimiNeuralNetwork'
+import dynamic from 'next/dynamic'
 import type { HomeExperienceCopy } from '@/app/home-experience-copy'
 import styles from '@/app/page.module.css'
+
+// Defer the three.js hero scene so it doesn't block first paint / LCP. [perf]
+const KimiNeuralNetwork = dynamic(() => import('@/components/KimiNeuralNetwork'), { ssr: false })
 
 interface KimiHomeHeroProps {
   copy: HomeExperienceCopy['hero']
@@ -86,7 +89,7 @@ export default function KimiHomeHero({ copy }: KimiHomeHeroProps) {
             fill
             sizes="(max-width: 980px) 0px, 320px"
             className={styles.heroPortraitImage}
-            preload
+            priority
           />
           <span className={styles.heroPortraitScan} />
         </div>
