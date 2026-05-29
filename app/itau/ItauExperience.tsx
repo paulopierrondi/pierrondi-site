@@ -10,6 +10,24 @@ import {
   useTransform,
 } from 'framer-motion'
 import type { Variants } from 'framer-motion'
+import {
+  Activity,
+  Bot,
+  Boxes,
+  Building2,
+  Cloud,
+  Database,
+  FileCheck2,
+  Gauge,
+  GitBranch,
+  Link2,
+  Network,
+  ScrollText,
+  Server,
+  ShieldCheck,
+  Workflow,
+} from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import styles from './ItauExperience.module.css'
 
 type VerdictKind = 'approved' | 'adjust' | 'reject'
@@ -339,6 +357,217 @@ const csdmLessons = [
   'Governança real nasce do relacionamento: ativo → CI → Service Instance → dado → owner.',
 ]
 
+const architectureNodes: Array<{
+  layer: string
+  title: string
+  table: string
+  desc: string
+  icon: LucideIcon
+  toneClass: string
+}> = [
+  {
+    layer: 'Negócio',
+    title: 'Jornada, produto ou capability',
+    table: 'Business Service · Digital Product · Business Application',
+    desc: 'Explica valor, dono de negócio, público impactado e criticidade para o banco.',
+    icon: Building2,
+    toneClass: styles.archBusiness,
+  },
+  {
+    layer: 'Entrega',
+    title: 'Service Instance',
+    table: 'cmdb_ci_service_auto',
+    desc: 'Ponto operacional de impacto: health, mudança, incidente, disponibilidade e suporte.',
+    icon: Network,
+    toneClass: styles.archService,
+  },
+  {
+    layer: 'Governança',
+    title: 'AI Digital Asset',
+    table: 'alm_ai_system/model/dataset/prompt_digital_asset',
+    desc: 'Registra finalidade, dono, risco, dados, modelo, prompt, dataset, ciclo de vida e aprovação.',
+    icon: ShieldCheck,
+    toneClass: styles.archGovernance,
+  },
+  {
+    layer: 'Runtime SaaS',
+    title: 'AI Function',
+    table: 'cmdb_ci_function_ai',
+    desc: 'Agente, skill ou capacidade de IA consumida como SaaS, cloud gerenciada ou plataforma de terceiro.',
+    icon: Cloud,
+    toneClass: styles.archRuntime,
+  },
+  {
+    layer: 'Runtime Itaú',
+    title: 'AI & Model Application',
+    table: 'cmdb_ci_appl_ai_application',
+    desc: 'Workload de IA rodando em infraestrutura controlada pelo Itaú: container, Kubernetes, private cloud ou on-prem.',
+    icon: Server,
+    toneClass: styles.archRuntimeAlt,
+  },
+  {
+    layer: 'Dependências',
+    title: 'Modelo, prompt, dados e ferramentas',
+    table: 'model · prompt · dataset · API · vector store · MCP',
+    desc: 'Itens que precisam de impacto, mudança, revisão de acesso e evidência de auditoria.',
+    icon: Database,
+    toneClass: styles.archDependency,
+  },
+]
+
+const architectureEdges: Array<{
+  from: string
+  verb: string
+  to: string
+  reason: string
+}> = [
+  {
+    from: 'Business Application',
+    verb: 'suporta',
+    to: 'Service Instance',
+    reason: 'mantém a leitura CSDM: valor e criticidade descem até o ponto operacional.',
+  },
+  {
+    from: 'AI Digital Asset',
+    verb: 'governa',
+    to: 'AI CI',
+    reason: 'separa aprovação, risco e ciclo de vida do deployment técnico.',
+  },
+  {
+    from: 'Service Instance',
+    verb: 'depende de',
+    to: 'AI Function / AI & Model Application',
+    reason: 'habilita impacto, change, incident, SLA/OLA e suporte.',
+  },
+  {
+    from: 'AI CI',
+    verb: 'consome',
+    to: 'modelo, prompt, dataset e API',
+    reason: 'torna mudança de modelo, prompt ou fonte de dados visível para auditoria.',
+  },
+  {
+    from: 'AI CI',
+    verb: 'correlaciona',
+    to: 'runtime / AI Control Tower',
+    reason: 'external_id evita inventário manual sem ligação com execução real.',
+  },
+]
+
+const csdmAlignment: Array<{
+  title: string
+  desc: string
+  icon: LucideIcon
+}> = [
+  {
+    title: 'Cada camada responde uma pergunta diferente',
+    desc: 'Negócio responde valor. Service Instance responde impacto operacional. AI Digital Asset responde governança. AI CI responde deployment.',
+    icon: Boxes,
+  },
+  {
+    title: 'CI só quando existe runtime governável',
+    desc: 'Caso de uso, ideação ou demanda não precisa virar CI. Primeiro é ativo de IA; depois vira CI quando há execução rastreável.',
+    icon: FileCheck2,
+  },
+  {
+    title: 'A classe depende do modelo de hospedagem',
+    desc: 'SaaS, cloud gerenciada ou terceiro: AI Function. Software operado pelo Itaú: AI & Model Application.',
+    icon: GitBranch,
+  },
+  {
+    title: 'O desenho preserva operações e auditoria',
+    desc: 'A relação com Service Instance e dependências evita uma CMDB decorativa e permite change, incident, risco, revisão e decommission.',
+    icon: ScrollText,
+  },
+]
+
+const aiControlTowerFlow: Array<{
+  step: string
+  title: string
+  desc: string
+  outcome: string
+  icon: LucideIcon
+}> = [
+  {
+    step: '01',
+    title: 'Descobrir e consolidar ativos de IA',
+    desc: 'Inventariar sistemas de IA, modelos, prompts, datasets, MCP servers e deployments internos ou de terceiros.',
+    outcome: 'Menos inventário paralelo e menos “shadow AI”.',
+    icon: Activity,
+  },
+  {
+    step: '02',
+    title: 'Classificar risco, dono e ciclo de vida',
+    desc: 'Aplicar managed by, lifecycle phase, state, status e risk classification no AI Asset Inventory.',
+    outcome: 'Accountability explícita para banco regulado.',
+    icon: ShieldCheck,
+  },
+  {
+    step: '03',
+    title: 'Relacionar AI Asset, CI e Service Instance',
+    desc: 'Usar IDs externos e vínculo Asset-CI para conectar governança, runtime e contexto CSDM.',
+    outcome: 'Impacto operacional conectado a valor e risco.',
+    icon: Link2,
+  },
+  {
+    step: '04',
+    title: 'Governar atividade, performance e compliance',
+    desc: 'Observar runtime, controles, postura, métricas, revisões pendentes e ações recomendadas.',
+    outcome: 'Auditoria contínua sem depender de planilha.',
+    icon: Gauge,
+  },
+  {
+    step: '05',
+    title: 'Acionar workflows ServiceNow',
+    desc: 'Abrir revisão, change, remediation, decommission, recertificação ou exceção a partir do mesmo sistema de registro.',
+    outcome: 'Governança vira execução, não só relatório.',
+    icon: Workflow,
+  },
+]
+
+const officialSources: Array<{
+  title: string
+  desc: string
+  href: string
+  tag: string
+}> = [
+  {
+    title: 'Common Service Data Model',
+    desc: 'Documentação oficial ServiceNow: CSDM como modelo padrão para produtos que usam CMDB e orientação para CIs e relacionamentos.',
+    href: 'https://www.servicenow.com/docs/r/servicenow-platform/common-service-data-model-csdm/csdm-landing-page.html',
+    tag: 'CSDM',
+  },
+  {
+    title: 'CSDM data domains',
+    desc: 'Modelo conceitual de domínios CSDM e uso de Service Instance/Application Service no desenho de serviços.',
+    href: 'https://www.servicenow.com/docs/r/servicenow-platform/common-service-data-model-csdm/csdm-conceptual-model.html?contentId=e1kF7ZEWJwXl_wia~9NHNw',
+    tag: 'CSDM 5',
+  },
+  {
+    title: 'AI Control Tower',
+    desc: 'Página oficial do produto: governança de agentes, modelos, identidade, risco, runtime, valor e conexão com CMDB/CSDM.',
+    href: 'https://www.servicenow.com/products/ai-control-tower.html',
+    tag: 'AICT',
+  },
+  {
+    title: 'AI asset inventory',
+    desc: 'Documentação oficial: inventário de AI systems, AI models, prompts, datasets e MCP servers.',
+    href: 'https://www.servicenow.com/docs/r/intelligent-experiences/ai-control-tower/ai-inventory.html',
+    tag: 'Inventory',
+  },
+  {
+    title: 'Create AI system assets',
+    desc: 'Documentação oficial: criação de AI system asset, associação com modelos, prompts, datasets e submissão para revisão.',
+    href: 'https://www.servicenow.com/docs/r/zurich/intelligent-experiences/ai-control-tower/create-ai-system-assets.html',
+    tag: 'Lifecycle',
+  },
+  {
+    title: 'AI Control Tower subscription unit overview',
+    desc: 'PDF oficial ServiceNow que lista AI System Digital Asset, AI Model Digital Asset, AI Dataset Digital Asset e os deployed AI system/model CIs.',
+    href: 'https://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/legal/ai-control-tower-servicenow-subscription-unit-overview.pdf',
+    tag: 'Tables',
+  },
+]
+
 const motionEase = [0.16, 1, 0.3, 1] as const
 const revealViewport = { once: true, amount: 0.2 } as const
 
@@ -368,10 +597,10 @@ const cardItem: Variants = {
 }
 
 const layerItem: Variants = {
-  hidden: { opacity: 0, x: -48, filter: 'blur(6px)' },
+  hidden: { opacity: 0, y: 28, filter: 'blur(6px)' },
   visible: {
     opacity: 1,
-    x: 0,
+    y: 0,
     filter: 'blur(0px)',
     transition: { duration: 0.6, ease: motionEase },
   },
@@ -656,6 +885,101 @@ export default function ItauExperience() {
           </motion.article>
         </Reveal>
 
+        {/* ─────────── DESENHO ALVO ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>desenho alvo</span>
+            <h2 className={styles.sectionTitle}>Arquitetura recomendada para o Itaú.</h2>
+            <p className={styles.sectionSub}>
+              A notação abaixo segue o raciocínio CSDM: separar contexto de negócio, ponto
+              operacional, governança do ativo de IA, deployment e dependências. Isso evita
+              cadastrar agente como “coisa solta” na CMDB.
+            </p>
+          </div>
+
+          <motion.div
+            className={styles.architectureBoard}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.12 }}
+          >
+            <div className={styles.architectureNodes}>
+              {architectureNodes.map((node) => {
+                const Icon = node.icon
+                return (
+                  <motion.article
+                    key={node.title}
+                    className={`${styles.archNode} ${node.toneClass}`}
+                    variants={cardItem}
+                    whileHover={cardHover}
+                  >
+                    <div className={styles.archNodeTop}>
+                      <span className={styles.nowIcon} aria-hidden="true">
+                        <span>SN</span>
+                        <Icon size={20} strokeWidth={1.8} />
+                      </span>
+                      <span className={styles.archLayer}>{node.layer}</span>
+                    </div>
+                    <h3 className={styles.archTitle}>{node.title}</h3>
+                    <p className={styles.archTable}>{node.table}</p>
+                    <p className={styles.archDesc}>{node.desc}</p>
+                  </motion.article>
+                )
+              })}
+            </div>
+
+            <motion.ul className={styles.architectureEdges} variants={stagger}>
+              {architectureEdges.map((edge) => (
+                <motion.li key={`${edge.from}-${edge.to}`} variants={cardItem}>
+                  <div className={styles.edgeLine}>
+                    <span>{edge.from}</span>
+                    <strong>{edge.verb}</strong>
+                    <span>{edge.to}</span>
+                  </div>
+                  <p>{edge.reason}</p>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
+        </Reveal>
+
+        {/* ─────────── ALINHAMENTO CSDM 5 ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>por que é CSDM 5</span>
+            <h2 className={styles.sectionTitle}>O racional arquitetural em quatro regras.</h2>
+            <p className={styles.sectionSub}>
+              A decisão não é “qual tabela parece mais moderna”. A decisão é preservar a
+              semântica do CSDM e deixar cada registro explicar valor, impacto, risco e operação.
+            </p>
+          </div>
+
+          <motion.div
+            className={styles.alignmentGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.16 }}
+          >
+            {csdmAlignment.map((item) => {
+              const Icon = item.icon
+              return (
+                <motion.article
+                  key={item.title}
+                  className={styles.alignmentCard}
+                  variants={cardItem}
+                  whileHover={cardHover}
+                >
+                  <Icon className={styles.alignmentIcon} size={24} strokeWidth={1.8} aria-hidden="true" />
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
+                </motion.article>
+              )
+            })}
+          </motion.div>
+        </Reveal>
+
         {/* ─────────── 5 RISCOS CRÍTICOS ─────────── */}
         <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
@@ -809,9 +1133,9 @@ export default function ItauExperience() {
         {/* ─────────── COMO AJUDAMOS ─────────── */}
         <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
-            <span className={styles.sectionKicker}>como ajudamos a entregar</span>
+            <span className={styles.sectionKicker}>condução da reunião</span>
             <h2 className={styles.sectionTitle}>
-              ServiceNow ajuda a fechar a modelagem, não só a apresentar tabela.
+              Sair da reunião com critério, exemplos e piloto.
             </h2>
             <p className={styles.sectionSub}>
               A melhor reunião amanhã é sair com critério de decisão, exemplos classificados,
@@ -898,6 +1222,103 @@ export default function ItauExperience() {
           </motion.div>
         </Reveal>
 
+        {/* ─────────── FONTES OFICIAIS ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div id="fontes-oficiais" />
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>fontes oficiais</span>
+            <h2 className={styles.sectionTitle}>Links para sustentar a conversa com o cliente.</h2>
+            <p className={styles.sectionSub}>
+              Use estes materiais como base de validação com arquitetura, CMDB owner e governança.
+              A instância do Itaú ainda deve confirmar plugins ativos, nomes de relacionamento e
+              release aplicável.
+            </p>
+          </div>
+
+          <motion.div
+            className={styles.sourcesGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            {officialSources.map((source) => (
+              <motion.a
+                key={source.href}
+                className={styles.sourceCard}
+                href={source.href}
+                target="_blank"
+                rel="noreferrer"
+                variants={cardItem}
+                whileHover={cardHover}
+              >
+                <span className={styles.sourceTag}>{source.tag}</span>
+                <h3>{source.title}</h3>
+                <p>{source.desc}</p>
+                <span className={styles.sourceLink}>
+                  Abrir fonte oficial <Link2 size={14} strokeWidth={2} aria-hidden="true" />
+                </span>
+              </motion.a>
+            ))}
+          </motion.div>
+        </Reveal>
+
+        {/* ─────────── AI CONTROL TOWER FLOW ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div id="ai-control-tower-flow" />
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>AI Control Tower</span>
+            <h2 className={styles.sectionTitle}>Como o AI Control Tower fortalece essa arquitetura.</h2>
+            <p className={styles.sectionSub}>
+              O desenho proposto já prepara os registros para uma camada de controle central:
+              descoberta, inventário, risco, runtime, valor e workflows ServiceNow conectados
+              ao CSDM.
+            </p>
+          </div>
+
+          <motion.div
+            className={styles.controlTower}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.12 }}
+          >
+            {aiControlTowerFlow.map((step, index) => {
+              const Icon = step.icon
+              return (
+                <motion.article
+                  key={step.step}
+                  className={styles.controlStep}
+                  variants={cardItem}
+                  whileHover={cardHover}
+                >
+                  <div className={styles.controlStepTop}>
+                    <span className={styles.controlStepNum}>{step.step}</span>
+                    <span className={styles.controlIcon}>
+                      <Icon size={22} strokeWidth={1.8} aria-hidden="true" />
+                    </span>
+                  </div>
+                  <h3>{step.title}</h3>
+                  <p>{step.desc}</p>
+                  <strong>{step.outcome}</strong>
+                  {index < aiControlTowerFlow.length - 1 && (
+                    <span className={styles.controlConnector} aria-hidden="true">→</span>
+                  )}
+                </motion.article>
+              )
+            })}
+          </motion.div>
+
+          <div className={styles.controlTowerSummary}>
+            <Bot size={28} strokeWidth={1.8} aria-hidden="true" />
+            <p>
+              Para o Itaú, o ganho é sair de cadastro manual para controle contínuo: todo agente
+              tem owner, risco, runtime, dependências, serviço impactado e ação operacional quando
+              algo muda.
+            </p>
+          </div>
+        </Reveal>
+
         {/* ─────────── CTA ─────────── */}
         <motion.section
           className={styles.cta}
@@ -917,14 +1338,15 @@ export default function ItauExperience() {
             </div>
             <div className={styles.ctaActions}>
               <a className={styles.ctaActionPrimary} href="#roadmap">Ver execução</a>
-              <a className={styles.ctaActionSecondary} href="/tech-partner">Contexto ServiceNow</a>
+              <a className={styles.ctaActionSecondary} href="#fontes-oficiais">Fontes oficiais</a>
+              <a className={styles.ctaActionSecondary} href="#ai-control-tower-flow">Flow AICT</a>
             </div>
           </div>
         </motion.section>
 
         <footer className={styles.confidential}>
-          <span>Material executivo reservado</span>
-          <span className={styles.confidentialAuthor}>Preparado por <strong>Paulo Pierrondi</strong></span>
+          <span>Material executivo reservado · Itaú × ServiceNow</span>
+          <span className={styles.confidentialAuthor}>CSDM 5 · CMDB · AI Control Tower</span>
         </footer>
       </div>
     </main>
