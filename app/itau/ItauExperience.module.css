@@ -1262,6 +1262,7 @@
   gap: 28px;
   grid-template-columns: 1fr;
   align-items: start;
+  min-width: 0;
 }
 
 @media (min-width: 920px) {
@@ -1275,6 +1276,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
 }
 
 .csdmLayer {
@@ -1287,6 +1289,7 @@
   border: 1px solid rgba(255, 255, 255, 0.10);
   background: rgba(255, 255, 255, 0.03);
   overflow: hidden;
+  min-width: 0;
 }
 
 .csdmLayer::before {
@@ -1345,6 +1348,7 @@
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 11.5px;
   color: rgba(255, 255, 255, 0.6);
+  overflow-wrap: anywhere;
 }
 
 .csdmYouAreHere {
@@ -1383,6 +1387,7 @@
   font-size: 14.5px;
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.85);
+  overflow-wrap: anywhere;
 }
 
 .csdmLessonNum {
@@ -1391,4 +1396,20 @@
   font-size: 13px;
   font-weight: 800;
   color: #EC7000;
+}
+
+@media (max-width: 760px) {
+  .csdmLayer {
+    gap: 12px;
+    padding: 16px 18px;
+  }
+
+  .csdmLayerHighlight {
+    transform: none;
+  }
+
+  .csdmYouAreHere {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
 }
