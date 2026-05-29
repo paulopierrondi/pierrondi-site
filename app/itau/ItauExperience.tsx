@@ -536,7 +536,6 @@ export default function ItauExperience() {
             <span className={`${styles.brandChip} ${styles.sn}`}>
               <span className={styles.brandDot} /> ServiceNow
             </span>
-            <span className={`${styles.brandChip} ${styles.opr}`}>OPR-2025-0162762</span>
           </motion.div>
           <motion.h1 className={styles.heroTitle} variants={fadeUp}>
             Uma aula de CSDM 5: como governar <em>AI Agents</em> no CMDB.
@@ -1010,7 +1009,7 @@ export default function ItauExperience() {
             </div>
             <div className={styles.ctaActions}>
               <a className={styles.ctaActionPrimary} href="#roadmap">Ver execução</a>
-              <a className={styles.ctaActionSecondary} href="/tech-partner">Contexto ServiceNow</a>
+              <a className={styles.ctaActionSecondary} href="/paulo">Contexto ServiceNow</a>
             </div>
           </div>
         </motion.section>

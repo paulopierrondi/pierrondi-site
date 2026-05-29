@@ -183,7 +183,7 @@ export default function MarketingOsContent() {
             </PillButton>
             <PillButton
               variant="ghost"
-              href="/portfolio"
+              href="/paulo"
               className="plausible-event-name=marketing-os-cta-secondary"
             >
               Ver portfólio

@@ -2,10 +2,6 @@
   "nav": {
     "links": [
       {
-        "label": "Portfolio",
-        "href": "/en/portfolio"
-      },
-      {
         "label": "Marketing OS",
         "href": "/marketing-os"
       },
@@ -376,10 +372,6 @@
     "desc": "Software, automation, agents and pages that help your business sell with more clarity.",
     "links": [
       {
-        "label": "Portfolio",
-        "href": "/portfolio"
-      },
-      {
         "label": "Marketing OS",
         "href": "/marketing-os"
       },
@@ -394,10 +386,6 @@
       {
         "label": "Blog",
         "href": "/blog"
-      },
-      {
-        "label": "FAQ",
-        "href": "/faq"
       },
       {
         "label": "Privacy",

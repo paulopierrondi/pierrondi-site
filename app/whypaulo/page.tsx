@@ -5,13 +5,13 @@ import WhyPauloExperience from './WhyPauloExperience'
 export const metadata: Metadata = {
   title: 'Why Paulo — ServiceNow’s AI person',
   description:
-    'The executive case to hire Paulo Pierrondi as ServiceNow’s AI person: real AI and LLM operating depth, enterprise field execution and governed agents that turn AI urgency into adoption and revenue.',
+    'The executive case to hire Paulo Pierrondi as ServiceNow’s AI person: governed ServiceNow + AI run at top-tier Brazilian FSI scale (BACEN/LGPD), real LLM operating depth and enterprise field execution that turn AI urgency into adoption and revenue.',
   robots: { index: false, follow: false, nocache: true },
   alternates: { canonical: '/whypaulo' },
   openGraph: {
     title: 'Why Paulo — the case to make me ServiceNow’s AI person',
     description:
-      'AI operating depth meets enterprise field execution: install-base defense, governed agents and expansion, measured in revenue.',
+      'Governed ServiceNow + AI at top-tier Brazilian FSI scale: install-base defense, governed agents and expansion, measured in revenue.',
     url: '/whypaulo',
     siteName: 'pierrondi.dev',
     type: 'website',

@@ -18,7 +18,7 @@ export function Hero(_props: { lang?: string } = {}) {
           entregues com direção técnica real. Em até 4 semanas, código seu.
         </p>
         <div className={styles.ctas}>
-          <Link href="#contato" className={styles.ctaPrimary}>
+          <Link href="#contact" className={styles.ctaPrimary}>
             Diagnóstico gratuito
           </Link>
           <Link href="#servicos" className={styles.ctaSecondary}>

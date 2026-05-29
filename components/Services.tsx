@@ -11,7 +11,7 @@ interface ServicesProps {
 export default function Services({ lang = 'pt' }: ServicesProps) {
   const t = home[lang].services
   const sectionId = lang === 'en' ? 'services' : 'servicos'
-  const contactAnchor = lang === 'en' ? '#contact' : '#contato'
+  const contactAnchor = lang === 'en' ? '#contact' : '#contact'
 
   const headline = `${t.titleLines[0]} ${t.titleLines[1]} ${t.titleLines[2]}${t.titleEm}`
 

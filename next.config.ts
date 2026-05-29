@@ -40,11 +40,8 @@ const ffmpegTracingIncludes = Object.fromEntries(
 
 const RETIRED_PUBLIC_ROUTES = [
   '/agentes',
-  '/blog',
-  '/blog/:path*',
   '/calculadora',
   '/faq',
-  '/feed.xml',
   '/marketing-os',
   '/marketing-os/:path*',
   '/obrigado',
