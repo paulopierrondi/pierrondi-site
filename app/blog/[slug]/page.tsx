@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.title,
     description: post.excerpt,
     keywords: [post.category.toLowerCase(), 'pierrondi.dev', 'blog', 'guia prático', post.title.toLowerCase()],
-    authors: [{ name: 'Paulo Pierrondi', url: `${SITE_URL}/sobre` }],
+    authors: [{ name: 'Paulo Pierrondi', url: `${SITE_URL}/paulo` }],
     alternates: { canonical: url },
     openGraph: {
       title: post.title,
@@ -72,12 +72,12 @@ export default async function PostPage({ params }: Props) {
       eyebrow: 'Quer automatizar isso na sua empresa?',
     },
     'Produto Digital': {
-      href: '/produto-digital',
+      href: '/#contato',
       label: 'Ver Produto Digital (MVP)',
       eyebrow: 'Quer construir um MVP assim?',
     },
     'Tech Partner': {
-      href: '/tech-partner',
+      href: '/#contato',
       label: 'Ver Tech Partner',
       eyebrow: 'Precisa de direção técnica recorrente?',
     },
@@ -105,7 +105,7 @@ export default async function PostPage({ params }: Props) {
     author: {
       '@type': 'Person',
       name: 'Paulo Pierrondi',
-      url: `${SITE_URL}/sobre`,
+      url: `${SITE_URL}/paulo`,
     },
     publisher: {
       '@type': 'Organization',

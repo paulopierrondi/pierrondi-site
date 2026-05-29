@@ -61,7 +61,7 @@ export default function AutomacoesContent() {
         ctas={
           <>
             <PillButton variant="primary" href="/#contato">Diagnóstico gratuito</PillButton>
-            <PillButton variant="ghost" href="/precos">Ver preços</PillButton>
+            <PillButton variant="ghost" href="/#contato">Falar comigo</PillButton>
           </>
         }
       />

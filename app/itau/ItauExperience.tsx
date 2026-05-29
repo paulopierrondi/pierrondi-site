@@ -1009,7 +1009,7 @@ export default function ItauExperience() {
             </div>
             <div className={styles.ctaActions}>
               <a className={styles.ctaActionPrimary} href="#roadmap">Ver execução</a>
-              <a className={styles.ctaActionSecondary} href="/tech-partner">Contexto ServiceNow</a>
+              <a className={styles.ctaActionSecondary} href="/paulo">Contexto ServiceNow</a>
             </div>
           </div>
         </motion.section>
