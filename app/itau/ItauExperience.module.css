@@ -408,6 +408,38 @@
   background: rgba(236, 112, 0, 0.04);
 }
 
+@media (max-width: 760px) {
+  .matrixWrap {
+    overflow-x: visible;
+  }
+
+  .matrix {
+    min-width: 0;
+  }
+
+  .matrix thead {
+    display: none;
+  }
+
+  .matrix,
+  .matrix tbody,
+  .matrix tr,
+  .matrix td {
+    display: block;
+  }
+
+  .matrix tbody tr {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .matrix tbody td {
+    padding: 5px 0;
+    border-bottom: none;
+    overflow-wrap: anywhere;
+  }
+}
+
 .releaseTag {
   display: inline-block;
   padding: 4px 10px;
@@ -737,7 +769,7 @@
 
 .verdictRow {
   display: grid;
-  grid-template-columns: 110px 1fr 1.3fr;
+  grid-template-columns: 158px 1fr 1.3fr;
   gap: 24px;
   padding: 22px 24px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -767,8 +799,11 @@
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.10em;
-  white-space: nowrap;
+  white-space: normal;
   align-self: start;
+  max-width: 100%;
+  text-align: center;
+  overflow-wrap: anywhere;
 }
 
 .verdictBadgeApproved {
@@ -840,6 +875,7 @@
 }
 
 .codeCard {
+  min-width: 0;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.10);
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.25));
@@ -860,6 +896,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
 }
 
 .codeKicker {
@@ -868,6 +905,7 @@
   text-transform: uppercase;
   font-weight: 800;
   color: #FFB870;
+  overflow-wrap: anywhere;
 }
 
 .codeTitle {
@@ -875,6 +913,7 @@
   font-weight: 700;
   color: #ffffff;
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .codeStatus {
@@ -890,6 +929,7 @@
   color: #8AD8B0;
   border: 1px solid rgba(74, 184, 130, 0.30);
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 .codeBlock {
@@ -926,7 +966,33 @@
   font-weight: 700;
 }
 
+@media (max-width: 760px) {
+  .codeHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .codeHeaderLeft {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .codeStatus {
+    white-space: normal;
+  }
+
+  .codeBlock {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}
+
 /* ─────────── MAPA DE RELACIONAMENTOS ─────────── */
+
+.relTableWrap {
+  padding: 0 8px;
+  overflow-x: auto;
+}
 
 .relTable {
   width: 100%;
@@ -966,6 +1032,39 @@
   white-space: nowrap;
 }
 
+@media (max-width: 760px) {
+  .relTableWrap {
+    overflow-x: visible;
+  }
+
+  .relTable thead {
+    display: none;
+  }
+
+  .relTable,
+  .relTable tbody,
+  .relTable tr,
+  .relTable td {
+    display: block;
+  }
+
+  .relTable tr {
+    padding: 12px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .relTable td {
+    padding: 5px 8px;
+    border-bottom: none;
+    overflow-wrap: anywhere;
+  }
+
+  .relTable code {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
 .relArrow {
   display: inline-block;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
@@ -994,15 +1093,16 @@
   gap: 12px;
   transition: transform 0.3s ease, border-color 0.3s ease;
   overflow: hidden;
+  overflow-wrap: anywhere;
 }
 
 .helpCard::after {
   content: '';
   position: absolute;
-  top: -40%;
-  right: -40%;
-  width: 180px;
-  height: 180px;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
   background: radial-gradient(circle, rgba(255, 204, 0, 0.18), transparent 60%);
   pointer-events: none;
 }
