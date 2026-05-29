@@ -6,7 +6,6 @@ Disallow: /agentes
 Disallow: /automacoes
 Disallow: /blog
 Disallow: /calculadora
-Disallow: /en
 Disallow: /faq
 Disallow: /marketing-os
 Disallow: /portfolio
@@ -29,6 +28,7 @@ Disallow: /login-v2
 Disallow: /obrigado
 Disallow: /ai-command-center
 Disallow: /bradesco-26
+Disallow: /itau
 Disallow: /lp/
 Disallow: /portal/
 Disallow: /share/

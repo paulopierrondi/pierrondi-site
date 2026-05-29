@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: 'Paulo', href: '/paulo' },
 ]
 
-const CTA_HREF = '/#contato'
+const CTA_HREF = '/#contact'
 
 export interface NavProps {
   lang?: string
