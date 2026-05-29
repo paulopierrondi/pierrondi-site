@@ -152,6 +152,7 @@
 .section {
   padding: clamp(56px, 9vh, 96px) 0;
   position: relative;
+  overflow-x: clip;
 }
 
 .sectionHeader {
@@ -1263,6 +1264,7 @@
   grid-template-columns: 1fr;
   align-items: start;
   min-width: 0;
+  overflow-x: clip;
 }
 
 @media (min-width: 920px) {
@@ -1277,6 +1279,7 @@
   flex-direction: column;
   gap: 12px;
   min-width: 0;
+  overflow-x: clip;
 }
 
 .csdmLayer {
