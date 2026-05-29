@@ -633,6 +633,454 @@
   padding-left: 14px;
 }
 
+/* ─────────── CSDM 5 MAPA COMPLETO ─────────── */
+
+.csdmMapViewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0 18px;
+  scrollbar-color: rgba(236, 112, 0, 0.75) rgba(255, 255, 255, 0.08);
+}
+
+.csdmMapCanvas {
+  min-width: 1120px;
+  padding: 24px;
+  border-radius: 26px;
+  color: #162033;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.72)),
+    linear-gradient(135deg, #F7FAFC 0%, #EEF4F7 100%);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.32);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-areas:
+    "top top top top top top top top top top top top"
+    "build build build build portfolio portfolio design design design design design design"
+    "build build build build portfolio portfolio design design design design design design"
+    "delivery delivery delivery delivery portfolio portfolio ideation ideation ideation ideation ideation ideation"
+    "delivery delivery delivery delivery overlay overlay consumption consumption consumption consumption consumption consumption"
+    "foundation foundation foundation foundation foundation foundation foundation foundation foundation foundation foundation foundation"
+    "relations relations relations relations relations relations relations relations relations relations relations relations";
+  gap: 14px;
+  position: relative;
+}
+
+.csdmMapCanvas::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 2px solid rgba(22, 32, 51, 0.16);
+  border-radius: 22px;
+  pointer-events: none;
+}
+
+.csdmMapTopline {
+  grid-area: top;
+  min-width: 0;
+  padding: 12px 16px 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.csdmMark {
+  display: inline-flex;
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #1F9D55;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.csdmMapTopline h3 {
+  margin: 10px 0 0;
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #162033;
+}
+
+.csdmMapTopline p {
+  max-width: 58ch;
+  margin: 0;
+  padding-right: 112px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(22, 32, 51, 0.72);
+}
+
+.mapDomain {
+  min-width: 0;
+  padding: 16px;
+  border-radius: 22px;
+  border: 1px solid rgba(22, 32, 51, 0.16);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.mapDomain::after {
+  content: '';
+  position: absolute;
+  inset: auto 18px 18px auto;
+  width: 78px;
+  height: 78px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.14);
+  transform: rotate(12deg);
+  pointer-events: none;
+}
+
+.mapDomain_build {
+  grid-area: build;
+  background: #F06466;
+}
+
+.mapDomain_design {
+  grid-area: design;
+  background: #79AEB8;
+}
+
+.mapDomain_ideation {
+  grid-area: ideation;
+  background: #F2E35C;
+}
+
+.mapDomain_delivery {
+  grid-area: delivery;
+  background: #F2A13A;
+}
+
+.mapDomain_consumption {
+  grid-area: consumption;
+  background: #A7C763;
+}
+
+.mapDomain_foundation {
+  grid-area: foundation;
+  background: #C8CDD1;
+}
+
+.mapDomainHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.mapDomainHeader h3 {
+  margin: 0;
+  color: #162033;
+  font-size: 17px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.mapDomainHeader span {
+  max-width: 30ch;
+  text-align: right;
+  color: rgba(22, 32, 51, 0.66);
+  font-size: 11px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.mapDomainBlocks {
+  display: grid;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.mapDomain_design .mapDomainBlocks,
+.mapDomain_foundation .mapDomainBlocks,
+.mapDomain_consumption .mapDomainBlocks {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mapDomain_delivery .mapDomainBlocks {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mapDomain_build .mapDomainBlocks,
+.mapDomain_ideation .mapDomainBlocks {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mapBlock {
+  min-width: 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(22, 32, 51, 0.20);
+  box-shadow: 0 12px 28px rgba(22, 32, 51, 0.08);
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+
+.mapBlock:hover {
+  box-shadow: 0 18px 34px rgba(22, 32, 51, 0.14);
+}
+
+.mapBlockIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0A4C3A;
+  background: rgba(31, 157, 85, 0.13);
+  border: 1px solid rgba(31, 157, 85, 0.24);
+}
+
+.mapBlock h4 {
+  margin: 0 0 5px;
+  color: #162033;
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.mapBlock code {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 7px;
+  padding: 3px 6px;
+  border-radius: 5px;
+  background: rgba(22, 32, 51, 0.06);
+  color: #334155;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.mapBlock p {
+  margin: 0;
+  color: rgba(22, 32, 51, 0.70);
+  font-size: 11.2px;
+  line-height: 1.42;
+}
+
+.mapPortfolio {
+  grid-area: portfolio;
+  min-width: 0;
+  padding: 18px;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  align-self: center;
+  justify-self: center;
+  width: min(100%, 210px);
+  background: rgba(255, 255, 255, 0.94);
+  border: 2px solid rgba(22, 32, 51, 0.18);
+  box-shadow: 0 18px 48px rgba(22, 32, 51, 0.14);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.portfolioIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #1F9D55;
+  background: rgba(31, 157, 85, 0.11);
+  border: 1px solid rgba(31, 157, 85, 0.24);
+  margin-bottom: 10px;
+}
+
+.mapPortfolio h3 {
+  margin: 0 0 8px;
+  color: #162033;
+  font-size: 16px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.mapPortfolio p {
+  margin: 0;
+  color: rgba(22, 32, 51, 0.68);
+  font-size: 11.5px;
+  line-height: 1.38;
+}
+
+.aiOverlayPanel {
+  grid-area: overlay;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 2px solid rgba(236, 112, 0, 0.58);
+  box-shadow: 0 20px 44px rgba(236, 112, 0, 0.16);
+  display: grid;
+  gap: 10px;
+  position: relative;
+  z-index: 3;
+}
+
+.aiOverlayPanel article {
+  min-width: 0;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(236, 112, 0, 0.08);
+  border: 1px solid rgba(236, 112, 0, 0.22);
+}
+
+.aiOverlayPanel strong {
+  display: block;
+  color: #9A4100;
+  font-size: 12px;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+
+.aiOverlayPanel code {
+  display: block;
+  color: #334155;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.aiOverlayPanel p {
+  margin: 6px 0 0;
+  color: rgba(22, 32, 51, 0.70);
+  font-size: 11px;
+  line-height: 1.38;
+}
+
+.mapRelationsPanel {
+  grid-area: relations;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(22, 32, 51, 0.14);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 18px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.mapRelationsPanel h3 {
+  margin: 0;
+  color: #162033;
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.mapRelationsPanel ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.mapRelationsPanel li {
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(0, 59, 113, 0.08);
+  color: rgba(22, 32, 51, 0.78);
+  font-size: 11px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.resolutionGrid {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.resolutionCard {
+  min-width: 0;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: linear-gradient(160deg, rgba(236, 112, 0, 0.10), rgba(0, 59, 113, 0.12));
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.resolutionCard span {
+  display: inline-flex;
+  margin-bottom: 14px;
+  color: #FFCC00;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-weight: 900;
+}
+
+.resolutionCard h3 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.resolutionCard p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1120px) {
+  .resolutionGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .csdmMapCanvas {
+    min-width: 1060px;
+    padding: 18px;
+  }
+
+  .csdmMapTopline {
+    align-items: flex-start;
+  }
+
+  .csdmMapTopline p {
+    padding-right: 0;
+  }
+
+  .resolutionGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ─────────── ARQUITETURA ALVO ─────────── */
 
 .architectureBoard {

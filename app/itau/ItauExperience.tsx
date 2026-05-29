@@ -357,6 +357,221 @@ const csdmLessons = [
   'Governança real nasce do relacionamento: ativo → CI → Service Instance → dado → owner.',
 ]
 
+const csdmMapDomains: Array<{
+  key: string
+  title: string
+  owner: string
+  blocks: Array<{
+    title: string
+    table: string
+    recommendation: string
+    icon: LucideIcon
+  }>
+}> = [
+  {
+    key: 'build',
+    title: 'Build & Integration',
+    owner: 'Squad Gaia · DevOps · Change',
+    blocks: [
+      {
+        title: 'DevOps Change Data Model',
+        table: 'Change · release · deployment pipeline',
+        recommendation: 'Toda alteração de prompt, modelo, API ou permissão entra como mudança governada.',
+        icon: Workflow,
+      },
+      {
+        title: 'SDLC Component',
+        table: 'repo · package · prompt bundle · test evidence',
+        recommendation: 'Guardar evidência técnica do agente: versão, pipeline, testes e rollback.',
+        icon: GitBranch,
+      },
+    ],
+  },
+  {
+    key: 'design',
+    title: 'Design & Planning',
+    owner: 'Enterprise Architect · Digital Product Owner · Data Steward',
+    blocks: [
+      {
+        title: 'Business Capability',
+        table: 'capability de atendimento, crédito, operações ou risco',
+        recommendation: 'Começar pelo capability que o agente melhora; isso evita CI sem valor de negócio.',
+        icon: Building2,
+      },
+      {
+        title: 'Business Application',
+        table: 'aplicação ou produto digital consumidor',
+        recommendation: 'Relacionar o agente ao produto/canal Itaú que recebe benefício ou risco.',
+        icon: Boxes,
+      },
+      {
+        title: 'Information Object',
+        table: 'cliente · conta · contrato · documento · transação',
+        recommendation: 'Classificar dado, LGPD/PII, data residency e restrições antes do deployment.',
+        icon: Database,
+      },
+    ],
+  },
+  {
+    key: 'ideation',
+    title: 'Ideation & Strategy',
+    owner: 'Product Owner · AI Governance',
+    blocks: [
+      {
+        title: 'Product Idea',
+        table: 'novo agente, skill ou automação com IA',
+        recommendation: 'Registrar a intenção e o racional de valor antes de criar CI na CMDB.',
+        icon: Bot,
+      },
+      {
+        title: 'Planning Item',
+        table: 'épico · demanda · backlog item',
+        recommendation: 'Converter em piloto quando owner, risco, dados e escopo estiverem explícitos.',
+        icon: FileCheck2,
+      },
+    ],
+  },
+  {
+    key: 'delivery',
+    title: 'Service Delivery',
+    owner: 'Service Instance Owner · Service Delivery Owner',
+    blocks: [
+      {
+        title: 'Service Instance',
+        table: 'cmdb_ci_service_auto',
+        recommendation: 'Ponto de impacto operacional: incidente, mudança, disponibilidade, suporte e health.',
+        icon: Network,
+      },
+      {
+        title: 'AI Function',
+        table: 'cmdb_ci_function_ai',
+        recommendation: 'Usar para SaaS/cloud/terceiro: Now Assist, Azure AI Foundry, Bedrock, Copilot.',
+        icon: Cloud,
+      },
+      {
+        title: 'AI & Model Application',
+        table: 'cmdb_ci_appl_ai_application',
+        recommendation: 'Usar para workload controlado pelo Itaú: container, Kubernetes, private cloud, on-prem.',
+        icon: Server,
+      },
+      {
+        title: 'Dynamic CI Group',
+        table: 'grupo de agentes críticos por domínio',
+        recommendation: 'Agrupar agentes por jornada/serviço para análise de risco, disponibilidade e impacto.',
+        icon: Activity,
+      },
+    ],
+  },
+  {
+    key: 'consumption',
+    title: 'Service Consumption',
+    owner: 'Business Relationship Manager · Customer Service Manager',
+    blocks: [
+      {
+        title: 'Business Service',
+        table: 'serviço de negócio impactado',
+        recommendation: 'Explicar quem consome o resultado do agente e qual serviço o banco presta.',
+        icon: Building2,
+      },
+      {
+        title: 'Business Offering',
+        table: 'oferta/capacidade entregue ao negócio',
+        recommendation: 'Mapear oferta que o agente acelera: atendimento assistido, triagem, análise, execução.',
+        icon: Boxes,
+      },
+      {
+        title: 'Catalog',
+        table: 'request de registro, revisão, recertificação, decommission',
+        recommendation: 'Transformar governança em solicitação operacional, não planilha.',
+        icon: ScrollText,
+      },
+    ],
+  },
+  {
+    key: 'foundation',
+    title: 'Foundation',
+    owner: 'CMDB Owner · Data Steward · Contract Manager',
+    blocks: [
+      {
+        title: 'Organization & People',
+        table: 'company · BU · department · group · user · team',
+        recommendation: 'Preencher owner, support_group, approver, risk owner e data steward.',
+        icon: Building2,
+      },
+      {
+        title: 'Lifecycle & Knowledge',
+        table: 'life cycle · knowledge · policy · evidence',
+        recommendation: 'Definir status, lifecycle phase, revisão periódica, evidência e runbook.',
+        icon: ScrollText,
+      },
+      {
+        title: 'Contracts & Platform',
+        table: 'contract · location · CMDB group · product model',
+        recommendation: 'Amarrar provedor, contrato, região, data residency e custo quando aplicável.',
+        icon: ShieldCheck,
+      },
+    ],
+  },
+]
+
+const aiOverlayBlocks = [
+  {
+    title: 'AI Digital Asset',
+    table: 'alm_ai_system/model/dataset/prompt_digital_asset',
+    desc: 'Registro de governança: finalidade, owner, risco, dados, modelo, prompt, dataset e revisão.',
+  },
+  {
+    title: 'External ID / Correlation ID',
+    table: 'provider_resource_id · runtime_id · aict_id',
+    desc: 'Chave que liga CMDB, runtime, observabilidade, custo e AI Control Tower.',
+  },
+]
+
+const csdmMapRelations = [
+  'Product Idea → Planning Item → AI Digital Asset',
+  'Business Application → Service Instance → AI CI',
+  'AI Digital Asset → AI Function ou AI & Model Application',
+  'AI CI → modelo, prompt, dataset, API e vector store',
+  'AI Control Tower → revisão, risco, runtime, auditoria e remediation',
+]
+
+const resolutionSteps: Array<{
+  step: string
+  title: string
+  desc: string
+}> = [
+  {
+    step: '01',
+    title: 'Fixar owners por camada',
+    desc: 'Digital Product Owner para valor, Service Instance Owner para operação, Data Steward para dados e AI Governance para risco.',
+  },
+  {
+    step: '02',
+    title: 'Criar intake único',
+    desc: 'Form/API com owner, support group, finalidade, dado, risco, modelo, autonomia, ambiente, lifecycle e external_id.',
+  },
+  {
+    step: '03',
+    title: 'Decidir classe por runtime',
+    desc: 'SaaS/cloud/terceiro vira AI Function. Runtime Itaú-managed vira AI & Model Application. Sem runtime fica só como AI Digital Asset.',
+  },
+  {
+    step: '04',
+    title: 'Relacionar no CSDM',
+    desc: 'Business Application/Digital Product → Service Instance → AI CI; AI Digital Asset → AI CI; AI CI → dependências.',
+  },
+  {
+    step: '05',
+    title: 'Operar controles',
+    desc: 'Change para modelo/prompt/API, revisão periódica, kill switch, recertificação, evidência de teste e decommission.',
+  },
+  {
+    step: '06',
+    title: 'Preparar AI Control Tower',
+    desc: 'Guardar IDs externos e lifecycle para descoberta, inventário, risco, runtime, compliance e workflows automáticos.',
+  },
+]
+
 const architectureNodes: Array<{
   layer: string
   title: string
@@ -629,6 +844,37 @@ function Reveal({
   )
 }
 
+function MapBlock({
+  block,
+  reduced,
+}: {
+  block: {
+    title: string
+    table: string
+    recommendation: string
+    icon: LucideIcon
+  }
+  reduced: boolean | null
+}) {
+  const Icon = block.icon
+
+  return (
+    <motion.article
+      className={styles.mapBlock}
+      whileHover={reduced ? undefined : { y: -3 }}
+    >
+      <span className={styles.mapBlockIcon} aria-hidden="true">
+        <Icon size={16} strokeWidth={1.9} />
+      </span>
+      <div>
+        <h4>{block.title}</h4>
+        <code>{block.table}</code>
+        <p>{block.recommendation}</p>
+      </div>
+    </motion.article>
+  )
+}
+
 export default function ItauExperience() {
   const reduced = useReducedMotion()
   const heroRef = useRef<HTMLElement | null>(null)
@@ -781,6 +1027,105 @@ export default function ItauExperience() {
               ))}
             </motion.ul>
           </div>
+        </Reveal>
+
+        {/* ─────────── VEREDITO ITEM-POR-ITEM ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div id="mapa-csdm-itau" />
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>mapa CSDM 5 preenchido</span>
+            <h2 className={styles.sectionTitle}>Como o desenho fica para agentes de IA no Itaú.</h2>
+            <p className={styles.sectionSub}>
+              Abaixo está a leitura prática do CSDM 5: cada domínio recebe os registros, owners e
+              decisões necessários para resolver o cadastro de agentes de IA sem criar uma CMDB paralela.
+            </p>
+          </div>
+
+          <motion.div
+            className={styles.csdmMapViewport}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.08 }}
+          >
+            <div className={styles.csdmMapCanvas} aria-label="Mapa CSDM 5 preenchido para agentes de IA no Itaú">
+              <div className={styles.csdmMapTopline}>
+                <div>
+                  <span className={styles.csdmMark}>CSDM 5</span>
+                  <h3>AI Agent Governance · Itaú</h3>
+                </div>
+                <p>
+                  Regra central: primeiro governar o ativo de IA; depois criar CI somente quando há
+                  runtime visível; sempre relacionar ao Service Instance.
+                </p>
+              </div>
+
+              {csdmMapDomains.map((domain) => (
+                <section
+                  key={domain.key}
+                  className={`${styles.mapDomain} ${styles[`mapDomain_${domain.key}`]}`}
+                >
+                  <div className={styles.mapDomainHeader}>
+                    <h3>{domain.title}</h3>
+                    <span>{domain.owner}</span>
+                  </div>
+                  <div className={styles.mapDomainBlocks}>
+                    {domain.blocks.map((block) => (
+                      <MapBlock key={`${domain.key}-${block.title}`} block={block} reduced={reduced} />
+                    ))}
+                  </div>
+                </section>
+              ))}
+
+              <section className={styles.mapPortfolio}>
+                <span className={styles.portfolioIcon} aria-hidden="true">
+                  <ShieldCheck size={24} strokeWidth={1.8} />
+                </span>
+                <h3>Manage Portfolio</h3>
+                <p>AI Governance Board prioriza, aprova risco e decide entrada no piloto.</p>
+              </section>
+
+              <section className={styles.aiOverlayPanel}>
+                {aiOverlayBlocks.map((item) => (
+                  <article key={item.title}>
+                    <strong>{item.title}</strong>
+                    <code>{item.table}</code>
+                    <p>{item.desc}</p>
+                  </article>
+                ))}
+              </section>
+
+              <section className={styles.mapRelationsPanel}>
+                <h3>Relações que resolvem o problema</h3>
+                <ol>
+                  {csdmMapRelations.map((relation) => (
+                    <li key={relation}>{relation}</li>
+                  ))}
+                </ol>
+              </section>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className={styles.resolutionGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            {resolutionSteps.map((step) => (
+              <motion.article
+                key={step.step}
+                className={styles.resolutionCard}
+                variants={cardItem}
+                whileHover={cardHover}
+              >
+                <span>{step.step}</span>
+                <h3>{step.title}</h3>
+                <p>{step.desc}</p>
+              </motion.article>
+            ))}
+          </motion.div>
         </Reveal>
 
         {/* ─────────── VEREDITO ITEM-POR-ITEM ─────────── */}
