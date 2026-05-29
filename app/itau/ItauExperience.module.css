@@ -46,6 +46,7 @@
 /* ─────────── HERO ─────────── */
 
 .hero {
+  position: relative;
   padding: clamp(96px, 14vh, 160px) 0 clamp(72px, 10vh, 120px);
 }
 
