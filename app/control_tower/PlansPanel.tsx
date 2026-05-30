@@ -48,6 +48,29 @@ async function postAction(action: PlanAction, planId: string) {
   return payload
 }
 
+const ERROR_LABELS: Record<string, string> = {
+  rate_limited: 'limite de aprovações atingido — aguarde ~1min e tente de novo',
+  unauthorized: 'sessão expirada — recarregue a página e entre de novo',
+}
+function humanError(msg: string) {
+  return ERROR_LABELS[msg] ?? msg
+}
+
+async function postBatch(action: PlanAction, planIds: string[]) {
+  const response = await fetch('/api/control-tower/plan-action', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action, planIds }),
+    cache: 'no-store',
+  })
+  const payload = await response.json().catch(() => ({}))
+  if (!response.ok) {
+    const msg = typeof payload?.error === 'string' ? payload.error : `http_${response.status}`
+    throw new Error(msg)
+  }
+  return payload
+}
+
 function ageLabel(createdAtUtc: string): string {
   const ts = new Date(createdAtUtc).getTime()
   if (Number.isNaN(ts)) return '—'
@@ -93,8 +116,41 @@ export default function PlansPanel({ plans, freshnessLabel, freshnessTone }: Pla
         .catch((err: Error) => {
           setRows((current) => ({
             ...current,
-            [planId]: { state: 'error', message: err.message },
+            [planId]: { state: 'error', message: humanError(err.message) },
           }))
+        })
+    })
+  }
+
+  function handleBatchApprove() {
+    const ids = visible.filter((p) => p.risk_class === 'low').map((p) => p.planId)
+    if (ids.length === 0) return
+    setRows((current) => {
+      const next = { ...current }
+      ids.forEach((id) => {
+        next[id] = { state: 'pending' }
+      })
+      return next
+    })
+    startTransition(() => {
+      postBatch('approve', ids)
+        .then(() => {
+          setRows((current) => {
+            const next = { ...current }
+            ids.forEach((id) => {
+              next[id] = { state: 'approved' }
+            })
+            return next
+          })
+        })
+        .catch((err: Error) => {
+          setRows((current) => {
+            const next = { ...current }
+            ids.forEach((id) => {
+              next[id] = { state: 'error', message: humanError(err.message) }
+            })
+            return next
+          })
         })
     })
   }
@@ -126,6 +182,20 @@ export default function PlansPanel({ plans, freshnessLabel, freshnessTone }: Pla
           <small>exige revisão antes do gate</small>
         </article>
       </div>
+
+      {visible.some((p) => p.risk_class === 'low') && (
+        <div className={styles.commandRail}>
+          <button
+            type="button"
+            onClick={handleBatchApprove}
+            disabled={isPending}
+            className={styles.approveButton}
+            aria-label="Aprovar todos os planos low risk de uma vez"
+          >
+            <Check size={14} /> Aprovar todos low risk ({visible.filter((p) => p.risk_class === 'low').length})
+          </button>
+        </div>
+      )}
 
       {visible.length === 0 ? (
         <div className={styles.emptyState}>
