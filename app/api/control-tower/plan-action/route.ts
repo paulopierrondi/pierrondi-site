@@ -12,7 +12,7 @@ import { applyPlanAction, appendPlanAudit } from '@/lib/control-tower/plan-stora
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
-const RATE_LIMIT_MAX = 10
+const RATE_LIMIT_MAX = 60
 const RATE_LIMIT_WINDOW_MS = 60_000
 
 const bucket = new Map<string, { count: number; resetAt: number }>()
