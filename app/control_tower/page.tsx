@@ -8,6 +8,7 @@ import {
 } from '@/lib/automation-control/auth'
 import { readAutomationSnapshot } from '@/lib/automation-control/storage'
 import { readCreativeSnapshot } from '@/lib/creative-control/storage'
+import { readPlansSnapshot } from '@/lib/control-tower/plan-storage'
 import ControlTower from './ControlTower'
 import styles from './ControlTower.module.css'
 
@@ -67,10 +68,17 @@ export default async function ControlTowerPage({ searchParams }: ControlTowerPag
 
   if (!authorized) return <LockedControlTower invalid={params.auth === 'invalid'} />
 
-  const [snapshot, creative] = await Promise.all([
+  const [snapshot, creative, plansSnapshot] = await Promise.all([
     readAutomationSnapshot(),
     readCreativeSnapshot(),
+    readPlansSnapshot(),
   ])
 
-  return <ControlTower snapshot={snapshot} creative={creative} />
+  return (
+    <ControlTower
+      snapshot={snapshot}
+      creative={creative}
+      plans={plansSnapshot?.plans ?? []}
+    />
+  )
 }
