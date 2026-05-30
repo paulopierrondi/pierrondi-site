@@ -34,6 +34,7 @@ export default function HomeExperience({ lang }: { lang: HomeLang }) {
         </a>
         <div className={styles.navLinks}>
           <a href="#top">{t.nav.home}</a>
+          <Link href={lang === 'pt' ? '/about' : '/en/about'}>{t.nav.about}</Link>
           <Link href="/design">{t.nav.design}</Link>
           <Link href="/feitos/sada-servicenow">{t.nav.sada}</Link>
           <Link href="/feitos/agentes-governados">{t.nav.agents}</Link>

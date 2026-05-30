@@ -5,6 +5,7 @@ export interface HomeExperienceCopy {
   nav: {
     aria: string
     home: string
+    about: string
     design: string
     sada: string
     agents: string
@@ -100,6 +101,7 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
     nav: {
       aria: 'Navegação principal',
       home: 'Início',
+      about: 'About',
       design: 'Design',
       sada: 'SADA',
       agents: 'Agentes',
@@ -289,6 +291,7 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
     nav: {
       aria: 'Main navigation',
       home: 'Home',
+      about: 'About',
       design: 'Design',
       sada: 'SADA',
       agents: 'Agents',

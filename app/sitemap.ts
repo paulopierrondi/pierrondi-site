@@ -3,7 +3,7 @@ import { feitos } from './feitos/feitos-data'
 import { SITE_URL as BASE_URL } from '@/lib/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const portfolioUpdatedAt = new Date('2026-05-24T00:00:00.000Z')
+  const portfolioUpdatedAt = new Date('2026-05-30T00:00:00.000Z')
 
   return [
     {
@@ -11,6 +11,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: portfolioUpdatedAt,
       changeFrequency: 'monthly',
       priority: 1,
+    },
+    {
+      url: `${BASE_URL}/about`,
+      lastModified: portfolioUpdatedAt,
+      changeFrequency: 'monthly',
+      priority: 0.94,
+    },
+    {
+      url: `${BASE_URL}/en/about`,
+      lastModified: portfolioUpdatedAt,
+      changeFrequency: 'monthly',
+      priority: 0.9,
     },
     {
       url: `${BASE_URL}/paulo`,
