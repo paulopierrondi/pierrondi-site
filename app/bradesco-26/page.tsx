@@ -5,9 +5,9 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export const metadata: Metadata = {
-  title: 'Knowledge 2026 para Bradesco',
+  title: 'Knowledge 2026 | Bradesco',
   description:
-    'Briefing executivo e tecnico sobre os anuncios do ServiceNow Knowledge 2026 aplicados ao contexto do Bradesco.',
+    'Material executivo e técnico sobre os anúncios do ServiceNow Knowledge 2026 aplicados ao contexto Bradesco.',
   keywords: [
     'ServiceNow Knowledge 2026',
     'Bradesco',
@@ -33,20 +33,20 @@ export const metadata: Metadata = {
     canonical: 'https://www.pierrondi.dev/bradesco-26',
   },
   openGraph: {
-    title: 'Knowledge 2026 para Bradesco',
+    title: 'Knowledge 2026 | Bradesco',
     description:
-      'Da novidade ao valor: IA governada, dados confiaveis e execucao ponta a ponta na plataforma.',
+      'Da novidade ao valor: IA governada, dados confiáveis e execução ponta a ponta na plataforma.',
     url: 'https://www.pierrondi.dev/bradesco-26',
     siteName: 'pierrondi.dev',
     type: 'website',
     locale: 'pt_BR',
-    images: [{ url: '/og', width: 1200, height: 630, alt: 'Knowledge 2026 para Bradesco' }],
+    images: [{ url: '/og', width: 1200, height: 630, alt: 'Knowledge 2026 | Bradesco' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Knowledge 2026 para Bradesco',
+    title: 'Knowledge 2026 | Bradesco',
     description:
-      'Briefing executivo e tecnico sobre IA governada, dados confiaveis e execucao ponta a ponta.',
+      'Material executivo e técnico sobre IA governada, dados confiáveis e execução ponta a ponta.',
     images: ['/og'],
   },
 }

@@ -489,6 +489,18 @@
   min-width: 0;
 }
 
+.planActionRail {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 0 14px;
+}
+
+.planActionRail .approveButton {
+  flex: 0 1 auto;
+  min-width: min(100%, 260px);
+  padding-inline: 14px;
+}
+
 .commandRail code {
   display: block;
   min-width: 0;
@@ -577,10 +589,10 @@
 }
 
 .lockPanel h1 {
-  margin: 0;
+  margin: 0 0 12px;
   font-family: Georgia, 'Times New Roman', serif;
   font-size: clamp(36px, 8vw, 64px);
-  line-height: 0.95;
+  line-height: 1.03;
 }
 
 .lockPanel p {
@@ -630,7 +642,7 @@
 
 .creativeStatsRow {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 10px;
   margin-bottom: 14px;
 }

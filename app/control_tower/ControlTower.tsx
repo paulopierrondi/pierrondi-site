@@ -16,13 +16,17 @@ import {
 
 import type { AutomationControlSnapshot } from '@/lib/automation-control/types'
 import type { CreativeControlSnapshot } from '@/lib/creative-control/types'
+import type { PlanApprovalView } from '@/lib/control-tower/plan-view'
 import DevotionalsPanel from './DevotionalsPanel'
+import PlansPanel, { type PlanQueueItem } from './PlansPanel'
 import LooksPanel from './LooksPanel'
 import styles from './ControlTower.module.css'
 
 interface ControlTowerProps {
   snapshot: AutomationControlSnapshot | null
   creative: CreativeControlSnapshot | null
+  plans: PlanQueueItem[]
+  planApprovals: Record<string, PlanApprovalView>
 }
 
 const baseline = {
@@ -260,7 +264,12 @@ function scoreRows(snapshot: AutomationControlSnapshot | null) {
   ] as const
 }
 
-export default function ControlTower({ snapshot, creative }: ControlTowerProps) {
+export default function ControlTower({
+  snapshot,
+  creative,
+  plans,
+  planApprovals,
+}: ControlTowerProps) {
   const metrics = metricData(snapshot)
   const p0 = lanes[0].items.length
   const topAutomations = snapshot?.automations.slice(0, 12) ?? []
@@ -290,6 +299,7 @@ export default function ControlTower({ snapshot, creative }: ControlTowerProps) 
           <a href="#automacoes">Automações</a>
           <a href="#looks">Looks</a>
           <a href="#devotionais">Devotionais</a>
+          <a href="#planos">Planos</a>
           <a href="#governanca">Governança</a>
         </nav>
         <p className={styles.railNote}>
@@ -546,6 +556,13 @@ export default function ControlTower({ snapshot, creative }: ControlTowerProps) 
             </div>
           </section>
         )}
+
+        <PlansPanel
+          plans={plans}
+          approvals={planApprovals}
+          freshnessLabel={automationFreshness.label}
+          freshnessTone={automationFreshness.status}
+        />
 
         <section id="governanca" className={styles.guardrailBand}>
           <ShieldCheck size={24} />

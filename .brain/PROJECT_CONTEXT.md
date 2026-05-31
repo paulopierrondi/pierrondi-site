@@ -1,7 +1,7 @@
 # Project Brain Context
 
-Generated: `2026-05-28 09:25:57`
-Tool: `sync`
+Generated: `2026-05-31 20:42:16`
+Tool: `claude`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
 
@@ -146,7 +146,7 @@ Every Bradesco Now Assist material must explicitly connect:
 ---
 type: policy
 status: generated
-generated_at: "2026-05-28 09:25:03"
+generated_at: "2026-05-31 09:25:02"
 tags:
   - ai-agents
   - policy
@@ -655,6 +655,7 @@ Antes de implementar, revisar ou desenhar arquitetura, escolha os guias relevant
 
 - App/Web quality: [[04_Areas/Coding/Best Practices/App Web Quality Best Practices]]
 - High-craft frontend visual standard: [[04_Areas/Coding/Best Practices/High Craft Frontend Visual Standard]]
+- Guided tour UX: [[04_Areas/Coding/Best Practices/Guided Tour UX Standard]]
 - Mobile opening motion: [[04_Areas/Coding/Best Practices/Mobile App Opening Motion Standard]]
 - Mobile privacy/consent: [[04_Areas/Coding/Best Practices/Mobile App Privacy Consent Standard]]
 - iOS QA/TestFlight closure: [[04_Areas/Coding/Best Practices/iOS Functional QA And TestFlight Closure Standard]]
@@ -678,6 +679,14 @@ Todo coder deve registrar aprendizados reutilizaveis em:
 
 - [[04_Areas/Coding/Best Practices/Learning Inbox]]
 - [[04_Areas/Coding/Best Practices/Patterns To Promote]]
+
+## Padrões recentemente promovidos
+
+- Prompt caching e workflow layout: separar prefixo estável de delta dinâmico, registrar `prompt_cache.strategy`, `prefix_version` e telemetria quando houver.
+- CLI/headless orchestration: comandos batch devem ter modo não-interativo explícito; quando o CLI default for TUI, usar flag headless/documentada antes de integrar em automação.
+- iOS/Android/App Store/Play submissions: smoke real no runtime alvo continua sendo gate obrigatório, mesmo quando lint/build/health check passam.
+- Screenshot/release QA: assets de loja e marketing precisam composição final, dimensão exata e validação lado a lado antes do submit.
+- Guided tours: cada rota/funcionalidade relevante precisa tour contextual com spotlight correto, persistencia por usuario e validacao desktop/mobile/producao antes de release.
 
 Aprendizado reutilizavel e algo que deve guiar projetos futuros:
 
@@ -2362,71 +2371,251 @@ O arquivo temporario nao deve entrar em Obsidian, Git, Linear, email ou screensh
 
 ## Project Note Snapshot
 
+
+
+<!-- PROJECT_LOCAL_COUNCIL_NOTE_START -->
+## Project Local Council
+
+This project has a local council overlay in `.brain/PROJECT_COUNCIL.md`.
+
+| Local agent | Extends | Default coder |
+| --- | --- | --- |
+| `local-product-owner` | [[agente_business_owner]] | `kimi` |
+| `local-technical-lead` | [[agente_technical_lead]] | `codex` |
+| `local-qa-test-agent` | [[agente_test_lead]] | `gemini` |
+| `local-release-guardian` | [[agente_release_lead]] | `claude` |
+| `local-automation-steward` | [[agente_automation_lead]] | `codex` |
+| `local-growth-operator` | [[agente_marketing_evolution]] | `kimi` |
+| `local-growth-domain-agent` | [[agente_unknown_unknowns]] | `claude` |
+
+Rules:
+[REDACTED SECRET LINE]
+- Use only the relevant local agents for the task; do not inflate small changes.
+- Prompt caching: follow `Prompt Caching Workflow Policy`, use stable prefix plus dynamic suffix, and record `prompt_cache` telemetry when possible.
+- Registry id: `pierrondi-site`.
+<!-- PROJECT_LOCAL_COUNCIL_NOTE_END -->
+
 ---
 type: project
-repo_name: "pierrondi-site"
-repo_path: "/Users/paulopierrondi/Projects/pierrondi-site"
-repo_kind: "repo"
-branch: "main"
-dirty_files: 5
-remote: "https://github.com/paulopierrondi/pierrondi-site.git"
-generated_at: "2026-05-28 09:25:03"
+project_type: web-app
+monetization: SaaS/ad-supported (unconfirmed)
+git: sim
+path: "/Users/paulopierrondi/Projects/pierrondi-site"
+last_analyzed: "2026-05-29"
 tags:
   - project
-  - git
+  - web-app
+  - daily-analysis
+  - sales
+  - ux
 ---
-# pierrondi-site
-
-## Estado rapido
-
-- Path: `/Users/paulopierrondi/Projects/pierrondi-site`
-- Tipo: `node`
-- Repo kind: `repo`
-- Branch: `main`
-- Arquivos alterados agora: `5`
-- Ultimo commit: `7fbe412 2026-05-28 feat: add bilingual executive home`
-- Remote: `https://github.com/paulopierrondi/pierrondi-site.git`
-- Marcadores encontrados: `package.json, README.md, CLAUDE.md, AGENTS.md, GEMINI.md`
-
-## Links do vault
-
-- Indice de projetos: [[02_Projects/Projects Index]]
-- Mapa de projetos: [[07_MOCs/Projects MOC]]
-- Historico AI deste projeto: [[03_AI-Chats/Projects/pierrondi-site - AI History]]
-- Mapa de agentes: [[07_MOCs/AI Agents MOC]]
-- Politica dos agentes: [[99_System/AI Agent Vault Policy]]
-- Linear/Git tracking: [[04_Areas/Coding/Linear/Linear Git Development Tracking OS]]
-- Linear project map: [[04_Areas/Coding/Linear/Linear Project Map]]
-
-## Contexto importado do README
 
 # pierrondi-site
 
-Landing page pública de [pierrondi.dev](https://pierrondi.dev) — agência de IA aplicada, automação e produto digital.
+> **Tipo**: web-app  
+> **Modelo**: SaaS/ad-supported (unconfirmed)  
+> **Stack**: `react` `nextjs` `tailwind`  
+> **Linguagens**: `typescript` `javascript`  
+> **Path**: `/Users/paulopierrondi/Projects/pierrondi-site`
 
-Stack enxuto: **Next.js 16 + React 19 + Tailwind v4 + Formspree**. Zero banco, zero auth, CI em segundos.
+---
 
-> Marketing OS interno vive em [pierrondi-os](https://github.com/paulopierrondi/pierrondi-os). Esse split foi feito em 2026-05-15.
+## 🎯 Marketing Hooks
 
-## Stack
+🎯 AI-powered
 
-| | |
-|---|---|
-| Framework | Next.js 16.2 (App Router, React 19) |
-| Linguagem | TypeScript 5 strict |
-| CSS | Tailwind v4 + CSS variables em `app/globals.css` |
-| Componentes | `@base-ui/react` + shadcn-style primitives em `components/ui/` |
-| Animação | `framer-motion` 12 |
-| Ícones | `lucide-react` |
-| Fontes | Geist Sans + Geist Mono via `next/font` |
-| Form | Formspree (`https://formspree.io/f/xpqoodnr`) via `app/api/contact` proxy |
-| Analytics | Plausible (opcional, via `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`)
+---
+
+## 📋 Linear Context
+
+| Campo | Valor |
+|-------|-------|
+| **Linear Project** | `pierrondi.dev Public Site` |
+| **Status** | 🔵 Todo via issue |
+| **Priority** | 🔴 High |
+| **Repo Hint** | ``pierrondi-site`` |
+| **Obsidian Note** | [[Projects Index]] |
+
+> **Regra AGE-1470:** Todo projeto ativo deve ter issue no Linear app. 
+> Se não há issue aberta para trabalho atual, crie uma antes de começar.
+> Sprint/cycle atual: consulte o Linear app connector para dados vivos.
+
+---
+
+
+
+## 📸 Screenshots & Previews
+
+### 📸 Screenshots & Previews
+
+
+
+---
+
+## 📊 UX & Sales Analysis (2026-05-29)
+
+| Métrica | Score | Status |
+|---------|-------|--------|
+| Onboarding | 3/10 | ❌ Não detectado |
+| Hook Strength | 6/10 | Potencial: referral links + social proof + embedda |
+| Monetização | 8/10 | SaaS/ad-supported (unconfirmed) |
+
+### ⚠️ Friction Points (Revenue Killers)
+
+- 🔴 Sem fluxo de onboarding — usuários abandonam no primeiro uso (20-40% churn)
+- 🔴 Sem mecanismo de compartilhamento — crescimento orgânico limitado a ASO/ads
+- 🔴 Sem screenshots de App Store — ASO comprometida, conversão de listing baixa
+
+---
+
+## 💡 Como Melhorar (Oportunidades Acionáveis)
+
+##### Adicionar share nativo com preview gerado
+
+**Impacto estimado:** Viral coefficient K > 0.3  
+**Categoria:** `viral`
+
+<details>
+<summary>🛠️ Como Implementar (clique para expandir)</summary>
+
+1. Implementar ShareSheet (iOS) / Intent (Android)
+2. Gerar imagem/card do resultado (ex: emoji grid como Wordle)
+3. Deep link que abre app na tela certa
+4. Add 'Share on TikTok' com template de vídeo
+5. Tracking de convites (referral attribution)
+
+</details>
+
+---
+
+##### Criar onboarding de 3 telas com Aha Moment
+
+**Impacto estimado:** +40% completion rate, +25% D1 retention  
+**Categoria:** `ux`
+
+<details>
+<summary>🛠️ Como Implementar (clique para expandir)</summary>
+
+1. Tela 1: Problema (ex: 'Sua playlist está chata?')
+2. Tela 2: Solução (GIF do app em ação, 3 segundos)
+3. Tela 3: CTA ('Começar Agora' + skip option)
+4. Pedir notification permission APÓS o Aha moment
+5. A/B test: onboarding vs direto pro app
+
+</details>
+
+---
+
+##### Gerar screenshots de App Store profissionais
+
+**Impacto estimado:** +25-50% conversion na App Store listing  
+**Categoria:** `marketing`
+
+<details>
+<summary>🛠️ Como Implementar (clique para expandir)</summary>
+
+1. Usar fastlane snapshot ou screenshot-tests-for-android
+2. Device frames via frameit (iPhone 15 Pro, iPad Pro)
+3. 5 screenshots: Value prop → Feature 1 → Feature 2 → Social proof → CTA
+4. Texto em português + inglês (2 locales)
+5. Preview video de 15-30s para App Store
+6. A/B test com different copy (emotional vs functional)
+
+</details>
+
+---
+
+
+
+---
+
+## 🔬 Pesquisa de Mercado (2026-05-29)
+
+#### 🔍 RESEARCH: skipped
+
+_Pesquisa pulada_
+
+
+
+---
+
+## 📁 Detalhes do Projeto
+
+- Commits (30d): `47`
+- Branches: `6`
+- Último: `f354e3f feat(itau): clarify CSDM AI agent registration model`
+
+
+### Tech Stack Completo
+
+- react
+- nextjs
+- tailwind
+
+### Monetização Detectada
+
+| Método | Status |
+|--------|--------|
+| RevenueCat | ❌ |
+| Stripe | ❌ |
+| Firebase | ❌ |
+| Ads | ❌ |
+
+### 📱 Screenshots Originais
+
+_Nenhum screenshot encontrado no projeto._
+
+---
+
+## 📝 Sobre
+
+Landing page pública de [pierrondi.dev](https://pierrondi.dev) — agência de IA aplicada, automação e produto digital. Stack enxuto: **Next.js 16 + React 19 + Tailwind v4 + Formspree**. Zero banco, zero auth, CI em segundos. > Marketing OS interno vive em [pierrondi-os](https://github.com/paulopierro
+
+---
+
+## 🔗 Links
+
+- Repo local: `file:///Users/paulopierrondi/Projects/pierrondi-site`
+- [[Dashboard]]
+- [[Projects Index]]
+- [[2026-05-29-All-Projects-Intelligence]]
+
+---
+
+*Última análise automática: 2026-05-29 12:00:53*
+
+---
+
+## Sessão Codex — `/itau` CSDM 5 / AI Control Tower — 2026-05-29
+
+- Publicado em produção: `https://www.pierrondi.dev/itau`
+- Commits: `50b7db0`, `58b2fd3`, `52f18b9`
+- Escopo: adicionado diagrama alvo CSDM, bloco de fontes oficiais ServiceNow, flow final de AI Control Tower e encerramento neutro sem autopromo.
+
+## Sessão Codex — Control Tower queue/rate limit — 2026-05-30
+
+- Escopo: corrigido `/control_tower` para reduzir falsos `rate_limited` na aprovação de planos, adicionar aprovação em lote para planos `low`, esconder o seletor PT/EN em rotas operacionais e ajustar layout do painel/lock screen.
+- Arquivos alterados: `app/api/control-tower/plan-action/route.ts`, `app/api/control-tower/devotional-action/route.ts`, `app/control_tower/PlansPanel.tsx`, `components/LanguageSwitcher.tsx`, `app/control_tower/ControlTower.module.css`.
+- Validação: `npx eslint app/api/control-tower/plan-action/route.ts app/api/control-tower/devotional-action/route.ts app/control_tower/PlansPanel.tsx components/LanguageSwitcher.tsx` passou.
+- Visual QA: Browser em `http://localhost:3029/control_tower` confirmou lock screen sem seletor PT/EN e sem overlap; evidência em `/Users/paulopierrondi/Documents/Codex/2026-05-30/files-mentioned-by-the-user-captura/outputs/control-tower-locked-no-switcher-20260531.png`.
+- Pendências externas: `npm run lint` ainda falha por `.claude/worktrees/.../.next` gerado; `npx tsc --noEmit` ainda falha porque `components/WhatsApp.tsx` está deletado enquanto páginas públicas ainda importam o componente. Sem deploy/push nesta sessão.
+- Follow-up: adicionado mapa CSDM 5 preenchido no estilo do modelo oficial, com domínios, owners, registros/tabelas, relações e passos de resolução para agentes de IA do Itaú.
+- Arquivos alterados: `app/itau/ItauExperience.tsx`, `app/itau/ItauExperience.module.css`
+- Validação: ESLint, `npm run build`, QA Playwright desktop/mobile em localhost e produção.
+- Evidência: `outputs/manual-20260529-itau-csdm5/production-qa/desktop-aict.png`; `outputs/manual-20260529-itau-csdm5/production-qa/desktop-csdm-map.png`
+
+## Sessão Codex — Soro vs pierrondi.dev authority surface — 2026-05-30
+
+- Pedido: avaliar `https://trysoro.com/about` e planejar algo melhor para promover Paulo com apoio multiagente.
+- Preflight: Agent Hub `pass`; Product Council start registrado em `085958-pierrondi-site-product-council-start.md`.
+- Fontes inspecionadas: Soro `/about`, `/`, `/pricing`, `/blog`; site público `pierrondi.dev`; repo vivo `/Users/paulopierrondi/Projects/pierrondi-site`; checkout recovery `/Users/paulopierrondi/Projects/pierrondi-site-recovery`.
+- Consenso multiagente: não usar Soro como autopilot nem como casa da reputação. Construir primeiro uma superfície própria em `pierrondi.dev`; se Soro entrar, usar apenas como keyword map/rascunho com autopublish desligado e revisão humana.
+- Rota recomendada: criar `/about` e `/en/about` como página pública indexável de autoridade/prova operacional; manter `/whypaulo` `noindex` para pitch estratégico específico; preservar `/paulo` como portfólio/alias ou consolidar depois.
+- Posicionamento: Paulo como operador de IA corporativa governada em ServiceNow/FSI, conectando `modelo operacional -> velocidade de adoção -> expansão de receita`.
+- Guardrails P0: não citar Bradesco como case, resultado, stakeholder, roadmap, budget, incidente, métrica ou screenshot sem aprovação formal; não sugerir endosso oficial da ServiceNow; não vender consultoria independente conflitante de ServiceNow/Now Assist/FSI; LinkedIn segue exclusivo para ServiceNow; sem autopublish SEO/AEO em temas sensíveis.
+- Assets planejados: página flagship, framework visual próprio, proof library redigida, cluster SEO/AEO curado, lead magnet executivo.
+- Observação técnica: worktree vivo
 ...[truncated]
-
-## Decisoes e estado vivo
-
-- Use esta nota para manter o estado atual do projeto, decisoes abertas, comandos canonicos e riscos.
-- As sessoes locais de Codex, Claude Code, Kimi e Gemini foram indexadas no vault quando estavam disponiveis em disco.
 
 ## AI History Snapshot
 
@@ -2434,7 +2623,7 @@ Stack enxuto: **Next.js 16 + React 19 + Tailwind v4 + Formspree**. Zero banco, z
 type: project-ai-history
 project: "pierrondi-site"
 status: generated
-generated_at: "2026-05-28 09:25:03"
+generated_at: "2026-05-29 09:25:06"
 tags:
   - ai-history
   - project-history
@@ -2445,10 +2634,10 @@ tags:
 Projeto: [[02_Projects/pierrondi-site|pierrondi-site]]
 
 - Path: `/Users/paulopierrondi/Projects/pierrondi-site`
-- Codex relacionado: `2`
-- Claude Code relacionado: `6`
+- Codex relacionado: `3`
+- Claude Code relacionado: `30`
 - Kimi relacionado: `1`
-- Claude-Mem observations relacionadas: `68`
+- Claude-Mem observations relacionadas: `78`
 - Claude-Mem summaries relacionados: `0`
 
 ## Codex
@@ -2457,35 +2646,18 @@ Projeto: [[02_Projects/pierrondi-site|pierrondi-site]]
 | --- | --- | --- | --- |
 [REDACTED SECRET LINE]
 [REDACTED SECRET LINE]
+[REDACTED SECRET LINE]
 
 ## Claude Code
 
 | Atualizado | Titulo | Primeiro pedido | Fonte |
 | --- | --- | --- | --- |
-| 2026-05-28T09:50:37.372Z | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (876384d3b58db575da1acc03fddfd77d9503ec91). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-876384d ...[truncated] | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (876384d3b58db575da1acc03fddfd77d9503ec91). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-876384d ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/758a618a-05d2-4418-bf47-df16b7d4eb42.jsonl |
-| 2026-05-28T09:50:10.486Z | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (b557f84d980be3ed84067a9ba8143acc61ba5a0c). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-b557f84 ...[truncated] | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (b557f84d980be3ed84067a9ba8143acc61ba5a0c). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-b557f84 ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/fa270f64-8922-4e4c-acae-057e3bd6d2c7.jsonl |
-| 2026-05-28T04:37:29 | -Users-paulopierrondi-Projects-pierrondi-site |  | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/fa02996c-9d32-4317-bf8a-fe14ea845a8d.jsonl |
-| 2026-05-28T01:03:20.713Z | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (33ee9815351b25bf043a7fa6e8473832dd7ea6e0). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-33ee981 ...[truncated] | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (33ee9815351b25bf043a7fa6e8473832dd7ea6e0). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-33ee981 ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/d783913a-f0c3-4c36-b5f2-e9237cd4f814.jsonl |
-| 2026-05-24T19:31:56 | -Users-paulopierrondi-Projects-pierrondi-site |  | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/7ea700d3-df0c-4f6b-8d5a-2a9e2c412404.jsonl |
-| 2026-05-24T19:27:55 | -Users-paulopierrondi-Projects-pierrondi-site |  | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/6f55a0aa-0bfb-44cb-9a7b-7832474d981f.jsonl |
-
-## Kimi
-
-| Atualizado | Titulo | Prompts | Fonte |
-| --- | --- | --- | --- |
-| 2026-05-28T09:02:30 | <git-context> Working directory:… |  | /Users/paulopierrondi/.kimi/sessions/37a3f6aa06af4012258660ad163eb5b1/8e49ec6a-dfde-4367-8a74-7353c4a7c89d |
-
-## Claude-Mem
-
-| Criado | Tipo | Titulo | Resumo |
-| --- | --- | --- | --- |
-| 2026-05-22T01:16:41.881Z | discovery | Bradesco26Experience.tsx — Full React Component Already Exists in pierrondi-site | ["File path: /Users/paulopierrondi/Downloads/pierrondi-site/app/bradesco-26/Bradesco26Experience.tsx","Component is a full-page interactive React experience with lens switching (Executivo / Técnico / Valor) ...[truncated] |
-| 2026-05-22T01:16:41.881Z | discovery | pierrondi-site Project Council Touchpoint — Yellow Status, 13 Dirty Files | ["Project: pierrondi-site, path /Users/paulopierrondi/Downloads/pierrondi-site, branch main, 13 dirty files.","Last commit: 861d797 2026-05-20 \"fix: add app legal fallback pages\".","Linear project ticket: ...[truncated] |
-| 2026-05-22T00:06:18.182Z | discovery | pierrondi-site Hosts App Store Legal Pages for Multiple iOS Apps | ["iOS App Preflight Checklist specifies: \"Se o domínio do produto não estiver pronto, usar `https://www.pierrondi.dev/apps/<app-slug>/support`, `/privacy` e `/terms` como fallback oficial.\"","App Store Co ...[truncated] |
-| 2026-05-22T00:00:45.911Z | bugfix | Canonical URL Fix Deployed to Production — pierrondi-site Now Fully Complete | ["Railway CLI exited with code 0 and printed \"Deploy complete\" for deployment `66f25fd3-c5b0-4f8c-80cd-638336635463`.","Second deploy duration: ~1 min 40s (from upload to \"Deploy complete\") — faster tha ...[truncated] |
-| 2026-05-21T23:58:01.145Z | discovery | Product Council Finish Gate: pierrondi-site Yellow, pierrondi-ia Red — Worktree Cleanup Needed | ["`pierrondi-site` council status: **yellow** — Release Lead verdict \"not-ready\" due to 13 dirty files and missing formal test evidence.","Council script read stale commit `861d797` for pierrondi-site (th ...[truncated] |
-| 2026-05-21T23:57:21.716Z | discovery | pierrondi-site Uses Multi-Agent Governance with Hub de Agentes Product Council | ["Active coder workflow: Kimi CLI (triage/reports), Codex (patch/test/integration), Claude Code (architecture/compliance/hard bugs).","Cursor Background Agent is dormant by choice — Paulo avoids opening Cur ...[truncated] |
-| 2026-05-21T23:54:24.504Z | feature | pierrondi-site Container Image Built and Exported Successfully | ["Container image config digest: `sha256:7afb6a9286875dc7eb20e87f3714ba2e7f456a97c65343367265ef9f10fecadf`.","Container image manifest digest: `sha256:179e1ac8908ae6c44e5a8fc11f1d78b2bf48cb397f3514f737393af ...[truncated] |
-| 2026-05-21T23:52:34.269Z | security_note | 2 npm Vulnerabilities Found in pierrondi-site Dependencies | ["382 packages installed via `npm ci`; 383 packages audited total.","2 vulnerabilities found: 1 moderate, 1 high severity.","npm suggests `npm audit fix --force` to resolve all issues.","Build did not fail ...[truncated] |
-| 2026-05-21T23:52:20.053Z | discovery | pierrondi-site Production Runtime: Node 22.22.3 / npm 10.9.8 on Debian Bookworm | ["Node.js version: `22.22.3` (installed via mise from `node-v22.22.3-linux-x64.tar.gz`).","npm version: `10.9.8`.","Base OS: Debian Bookworm (amd64), runtime image `ghcr.io/railwayapp/railpack-runtime:mi
+| 2026-05-29T10:54:11.411Z | Revise o commit HEAD `bd015e8821b6d116968decc7390b1845996742e3` no repositório `/Users/paulopierrondi/Projects/.worktrees/pierrondi-site-p0` (branch `claude/site-p0-hardening`). Contexto: O commit é "fix(site): P0 security/privacy + conversion/SEO quick wins" — quick wins de segurança/ ...[truncated] | Revise o commit HEAD `bd015e8821b6d116968decc7390b1845996742e3` no repositório `/Users/paulopierrondi/Projects/.worktrees/pierrondi-site-p0` (branch `claude/site-p0-hardening`). Contexto: O commit é "fix(site): P0 security/privacy + conversion/SEO quick wins" — quick wins de segurança/ ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects--worktrees-pierrondi-site-p0/0cf794d0-f2e5-4961-b4c4-88b23ad04f87/subagents/agent-ad3e04191a1421380.jsonl |
+| 2026-05-30T09:00:00-03:00 | Planejamento multiagente para promover Paulo melhor que `trysoro.com/about`: Soro avaliado como SEO/AEO draft-only, não autopilot; recomendada página pública própria em `pierrondi.dev` com autoridade/prova operacional; `/whypaulo` permanece noindex. | Agentes acionados: produto/posicionamento, growth/SEO, técnico/site, reputação/compliance e criativo. Consenso: criar `/about` + `/en/about`, manter LinkedIn ServiceNow-only, sem cliente sensível, sem autopublish, sem paid ads/deploy/push. Nota do projeto atualizada em `02_Projects/pierrondi-site.md`. | Codex session journal `2026-05-30-090011-codex-manual-codex.md`; Product Council start `085958-pierrondi-site-product-council-start.md` |
+| 2026-05-29T10:53:40.844Z | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/.worktrees/pierrondi-site-p0, revise o commit HEAD (bd015e8821b6d116968decc7390b1845996742e3). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/.worktrees/pierrondi-site-p0/.brain/agent ...[truncated] | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/.worktrees/pierrondi-site-p0, revise o commit HEAD (bd015e8821b6d116968decc7390b1845996742e3). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/.worktrees/pierrondi-site-p0/.brain/agent ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects--worktrees-pierrondi-site-p0/0cf794d0-f2e5-4961-b4c4-88b23ad04f87.jsonl |
+| 2026-05-29T10:41:08.243Z | You are reviewing the pierrondi.dev personal-brand site at /Users/paulopierrondi/Projects/pierrondi-site (Next.js 16 App Router, React 19, Tailwind 4, framer-motion, three.js). Owner: Paulo Pierrondi — ServiceNow Technical Account Executive (Bradesco/FSI Brazil), who also ships side-pr ...[truncated] | You are reviewing the pierrondi.dev personal-brand site at /Users/paulopierrondi/Projects/pierrondi-site (Next.js 16 App Router, React 19, Tailwind 4, framer-motion, three.js). Owner: Paulo Pierrondi — ServiceNow Technical Account Executive (Bradesco/FSI Brazil), who also ships side-pr ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects/9e182741-8fde-4022-8f3b-fdb78ec60014/subagents/workflows/wf_69e2c32a-e7f/agent-a7c817d6c5adb3180.jsonl |
+| 2026-05-29T10:40:11.276Z | You are reviewing the pierrondi.dev personal-brand site at /Users/paulopierrondi/Projects/pierrondi-site (Next.js 16 App Router, React 19, Tailwind 4, framer-motion, three.js). Owner: Paulo Pierrondi — ServiceNow Technical Account Executive (Bradesco/FSI Brazil), who also ships side-pr ...[truncated] | You are reviewing the pierrondi.dev personal-brand site at /Users/paulopierrondi/Projects/pierrondi-site (Next.js 16 App Router, React 19, Tailwind 4, framer-motion, three.js). Owner: Paulo Pierrondi — ServiceNow Technical Account Executive (Bradesco/FSI Brazil), who also ships side-pr ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects/9e182741-8fde-4022-8f3b-fdb78ec60014/subagents/workflows/wf_69e2c32a-e7f/agent-aee8244f025ced9a3.jsonl |
+| 2026-05-29T10:39:45.423Z | You are reviewing the pierrondi.dev personal-brand site at /Users/paulopierrondi/Projects/pierrondi-site (Next.js 16 App Router, React 19, Tailwind 4, framer-motion, three.js). Owner: Paulo Pierrondi — ServiceNow Technical Account Executive (Bradesco/FSI Brazil), who also ships side-pr ...[truncated] | You are reviewing the pierrondi.dev personal-brand site at /Users/paulopierrondi/Projects/pierrondi-site (Next.js 16 App Router, React 19, Tailwind 4, framer-motion, three.js). Owner: Paulo Pierrondi — ServiceNow Technical Account Executive (Bradesco/FSI Brazil), who also ships side-pr ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects/9e182741-8fde-4022-8f3b-fdb78ec60014/subagents/workflows/wf_69e2c32a-e7f/agent-acaf08b953e6ba9c8.jsonl |
+| 2026-05-29T10:39:42.750Z | You are reviewing the pierrondi.dev personal-brand site at /Users/paulopierrondi/Projects/pierrondi-site (Next.js 16 App Router, React 19, Tailwind 4, framer-motion, three.js). Owner: Paulo Pierrondi — ServiceNow Technical Account Executive (Bradesco/FSI Brazil), who also ships side-pr ...[truncated] | You are reviewing the pierrondi.dev personal-brand site at /Users/paulopierrondi/Projects/pierrondi-site (Next.js 16 App Router, React 19, Tailwind 4, framer-motion, three.js). Owner: Paulo Pierrondi — ServiceNow Technical Account Executive (Bradesco/FSI Brazil), who also ships side-pr ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects/9e182741-8fde-4022-8f3b-fdb78ec60014/subagents/workflows/wf_69e2c32a-e7f/agent-a2ff23a18e7aee09e.jsonl |
+| 2026-05-29T10:39:41.176Z | You are reviewing the pierrondi.dev personal-brand site at /Users/paulopierrondi/Projects/pierrondi-site (Next.js 16 App Router, React 19, Tailwind 4, framer-motion, three.js). Owner: Paulo Pierrondi — ServiceNow Technical Account Executive (Bradesco/FSI Brazil), who also ships side-pr ...[truncated] | You are reviewing the pierrondi.dev personal-brand site at /Users/paulopierrondi/Projects/pierrondi-site (Next.js 16 App Router, React 19, Tailwind 4, framer-motion, three.js). Owner: Paulo Pierrondi — ServiceNow Technical Account Executive (Bradesco/FSI Brazil), who also ships side-pr ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projec
 ...[truncated]

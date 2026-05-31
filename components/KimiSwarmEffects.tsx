@@ -70,7 +70,9 @@ export default function KimiSwarmEffects() {
 
       if (reducedMotion) {
         revealItems.forEach((item) => item.classList.add('is-visible'))
-        gsap.set(revealItems, { autoAlpha: 1, clearProps: 'transform,filter' })
+        if (revealItems.length > 0) {
+          gsap.set(revealItems, { autoAlpha: 1, clearProps: 'transform,filter' })
+        }
         return
       }
 

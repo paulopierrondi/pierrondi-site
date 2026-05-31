@@ -2,6 +2,16 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
+  AnimatePresence,
+  motion,
+  type MotionStyle,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'framer-motion'
+import {
   ArrowUpRight,
   Bot,
   Boxes,
@@ -14,6 +24,7 @@ import {
   Headphones,
   LockKeyhole,
   Maximize2,
+  MonitorPlay,
   Network,
   Pause,
   Play,
@@ -39,15 +50,15 @@ type DeepDive = {
 
 const lenses: Array<{ id: Lens; label: string; helper: string }> = [
   { id: 'executivo', label: 'Executivo', helper: 'Por que importa' },
-  { id: 'tecnico', label: 'Tecnico', helper: 'Como viabilizar' },
-  { id: 'valor', label: 'Valor', helper: 'Proximo movimento' },
+  { id: 'tecnico', label: 'Técnico', helper: 'Como viabilizar' },
+  { id: 'valor', label: 'Valor', helper: 'Próximo movimento' },
 ]
 
 const themes: Array<{ id: Theme; label: string }> = [
   { id: 'all', label: 'Todos' },
   { id: 'ai', label: 'IA e agentes' },
   { id: 'data', label: 'Dados e CMDB' },
-  { id: 'ops', label: 'Operacoes' },
+  { id: 'ops', label: 'Operações' },
   { id: 'risk', label: 'Risco' },
   { id: 'dev', label: 'Plataforma dev' },
 ]
@@ -100,36 +111,42 @@ const chapters = [
     title: 'AI & Plataforma',
     copy: 'AI Control Tower, Otto e Action Fabric como sistema governado de trabalho.',
     items: ['AI Control Tower', 'Otto', 'Action Fabric'],
+    targetId: 'control-tower',
   },
   {
     number: '02',
     title: 'Developers',
     copy: 'Build Agent, App Engine e Project Arc para escala com padrão e revisão.',
     items: ['Build Agent', 'App Engine', 'Project Arc'],
+    targetId: 'build-agent',
   },
   {
     number: '03',
     title: 'Autonomous IT',
     copy: 'ITSM, ITOM, CMDB e SPM conectados por contexto operacional.',
     items: ['ITSM', 'ITOM / CMDB', 'SPM'],
+    targetId: 'specialists',
   },
   {
     number: '04',
     title: 'FSI & Atendimento',
     copy: 'FSO, CSM e ouvidoria como jornada, evidência e continuidade.',
     items: ['FSO', 'CSM', 'Ouvidoria'],
+    targetId: 'otto',
   },
   {
     number: '05',
     title: 'Security & Risk',
     copy: 'Identidade, ativo, risco e resposta no mesmo sistema de ação.',
     items: ['SecOps', 'IRM / VRM', 'Veza / Armis'],
+    targetId: 'security-risk',
   },
   {
     number: '06',
     title: 'Arquitetura',
     copy: 'Camadas técnicas para transformar anúncio em plano executável.',
     items: ['WDF', 'Context Engine', 'Guardrails'],
+    targetId: 'context-engine',
   },
 ]
 
@@ -140,22 +157,27 @@ const announcements = [
     number: '01',
     icon: Radar,
     title: 'AI Control Tower',
-    subtitle: 'Controle central para agentes, modelos, dados, risco e resultado.',
+    subtitle:
+      'Controle central para agentes, modelos, dados, risco e resultado.',
     executive:
       'Tira IA do modo experimento e coloca a operação sob governança, visibilidade e métricas.',
     technical:
       'Exige inventário de agentes, runtime observável, IAM, CMDB, logs, políticas e critérios de aprovação.',
     value:
       'Usar como trilha-mestra para qualquer piloto de Now Assist ou agente externo.',
-    bradescoAngle: 'Camada comum para governar Now Assist, agentes internos e agentes externos.',
-    architecture: 'Inventario de agentes, runtime observavel, IAM, CMDB, logs, politicas e metricas.',
-    operatingModel: 'Fórum único para aprovar exceções, permissoes, risco e entrada em produção.',
-    nextMove: 'Escolher um dominio piloto e mapear assistentes/agentes ja existentes.',
+    bradescoAngle:
+      'Camada comum para governar Now Assist, agentes internos e agentes externos.',
+    architecture:
+      'Inventário de agentes, runtime observável, IAM, CMDB, logs, políticas e métricas.',
+    operatingModel:
+      'Fórum único para aprovar exceções, permissões, risco e entrada em produção.',
+    nextMove:
+      'Escolher um domínio piloto e mapear assistentes/agentes já existentes.',
     proofPoints: ['Discover', 'Observe', 'Govern', 'Secure', 'Measure'],
     discussion: {
-      executivo: 'Quem assina o modelo de governanca de IA operacional?',
-      tecnico: 'Quais logs, IAM e CMDB precisam existir antes de producao?',
-      valor: 'Qual piloto precisa de governanca antes de escalar?',
+      executivo: 'Quem assina o modelo de governança de IA operacional?',
+      tecnico: 'Quais logs, IAM e CMDB precisam existir antes de produção?',
+      valor: 'Qual piloto precisa de governança antes de escalar?',
     },
   },
   {
@@ -164,23 +186,34 @@ const announcements = [
     number: '02',
     icon: Bot,
     title: 'ServiceNow Otto',
-    subtitle: 'Interface conversacional única para transformar intenção em resultado.',
+    subtitle:
+      'Interface conversacional única para transformar intenção em resultado.',
     executive:
       'O colaborador pede o resultado. A plataforma decide fluxo, política, aprovação e handoff.',
     technical:
       'Depende de catálogo, base de conhecimento, elegibilidade, identidade, approvals e integrações.',
     value:
       'Começar por jornadas de alto volume e baixa ambiguidade com escala humana clara.',
-    bradescoAngle: 'Experiencia unificada para colaborador, operador e lider sem navegar por silos.',
-    architecture: 'Intencao, catalogo, KB, identidade, approvals, integrações e handoff humano.',
+    bradescoAngle:
+      'Experiência unificada para colaborador, operador e líder sem navegar por silos.',
+    architecture:
+      'Intenção, catálogo, KB, identidade, approvals, integrações e handoff humano.',
     operatingModel:
-      'Curadoria de jornadas, responsaveis por conhecimento e monitoramento de resolucao.',
-    nextMove: 'Selecionar duas jornadas internas com volume alto e regra de elegibilidade clara.',
-    proofPoints: ['Natural language', 'Enterprise search', 'Voice', 'Cross-system work'],
+      'Curadoria de jornadas, responsáveis por conhecimento e monitoramento de resolução.',
+    nextMove:
+      'Selecionar duas jornadas internas com volume alto e regra de elegibilidade clara.',
+    proofPoints: [
+      'Natural language',
+      'Enterprise search',
+      'Voice',
+      'Cross-system work',
+    ],
     discussion: {
-      executivo: 'Qual jornada deve desaparecer do portal e virar conversa resolutiva?',
-      tecnico: 'Quais catalogos, bases e approvals precisam estar confiaveis para Otto?',
-      valor: 'Onde reduzir navegacao manual sem aumentar risco operacional?',
+      executivo:
+        'Qual jornada deve desaparecer do portal e virar conversa resolutiva?',
+      tecnico:
+        'Quais catálogos, bases e approvals precisam estar confiáveis para Otto?',
+      valor: 'Onde reduzir navegação manual sem aumentar risco operacional?',
     },
   },
   {
@@ -196,15 +229,27 @@ const announcements = [
       'Precisa de taxonomia, conhecimento confiável, critérios de confiança, exceções e métricas.',
     value:
       'O primeiro piloto deve ter alto volume, caminho conhecido e baixo risco operacional.',
-    bradescoAngle: 'Agentes por funcao para tirar trabalho repetitivo da fila, com controle.',
-    architecture: 'Taxonomia, conhecimento, regras de excecao, confianca, fila e medicao de resultado.',
-    operatingModel: 'Cada agente precisa de responsavel, escopo permitido e criterio de fallback.',
-    nextMove: 'Priorizar um processo repetitivo com dados maduros e caminho de resolucao conhecido.',
-    proofPoints: ['Role-based agents', 'Exception handling', 'Knowledge quality', 'Human fallback'],
+    bradescoAngle:
+      'Agentes por função para tirar trabalho repetitivo da fila, com controle.',
+    architecture:
+      'Taxonomia, conhecimento, regras de exceção, confiança, fila e medição de resultado.',
+    operatingModel:
+      'Cada agente precisa de responsável, escopo permitido e critério de fallback.',
+    nextMove:
+      'Priorizar um processo repetitivo com dados maduros e caminho de resolução conhecido.',
+    proofPoints: [
+      'Role-based agents',
+      'Exception handling',
+      'Knowledge quality',
+      'Human fallback',
+    ],
     discussion: {
-      executivo: 'Qual operacao ganha escala se o agente resolver o repetitivo?',
-      tecnico: 'Quais sinais indicam baixa confianca e retorno imediato para humano?',
-      valor: 'Qual processo tem volume suficiente para provar resultado em semanas?',
+      executivo:
+        'Qual operação ganha escala se o agente resolver o repetitivo?',
+      tecnico:
+        'Quais sinais indicam baixa confiança e retorno imediato para humano?',
+      valor:
+        'Qual processo tem volume suficiente para provar resultado em semanas?',
     },
   },
   {
@@ -220,15 +265,21 @@ const announcements = [
       'Separar leitura de dados de execução: RBAC, OAuth, approvals, auditoria e rollback.',
     value:
       'Integra agentes Microsoft, modelos internos e apps próprios sem perder governança central.',
-    bradescoAngle: 'Transforma a ServiceNow no sistema de acao para agentes corporativos.',
-    architecture: 'MCP Server, OAuth, tool packages, RBAC, approvals, auditoria e rollback.',
-    operatingModel: 'Catalogar quais ações podem ser executadas por agente e com qual aprovacao.',
-    nextMove: 'Publicar primeiro um conjunto pequeno de acoes seguras e auditaveis.',
+    bradescoAngle:
+      'Transforma a ServiceNow no sistema de ação para agentes corporativos.',
+    architecture:
+      'MCP Server, OAuth, tool packages, RBAC, approvals, auditoria e rollback.',
+    operatingModel:
+      'Catalogar quais ações podem ser executadas por agente e com qual aprovação.',
+    nextMove:
+      'Publicar primeiro um conjunto pequeno de ações seguras e auditáveis.',
     proofPoints: ['MCP', 'Headless actions', 'Approvals', 'Audit trail'],
     discussion: {
-      executivo: 'Quais agentes externos devem agir pela plataforma, e nao fora dela?',
-      tecnico: 'Quais ferramentas MCP podem ser expostas sem abrir risco desnecessario?',
-      valor: 'Qual acao simples provaria execucao governada ponta a ponta?',
+      executivo:
+        'Quais agentes externos devem agir pela plataforma, e não fora dela?',
+      tecnico:
+        'Quais ferramentas MCP podem ser expostas sem abrir risco desnecessário?',
+      valor: 'Qual ação simples provaria execução governada ponta a ponta?',
     },
   },
   {
@@ -244,15 +295,20 @@ const announcements = [
       'Depende de relações, responsáveis, serviços, políticas, SLAs, histórico e conhecimento.',
     value:
       'Conectar o programa de CMDB ao roadmap de IA e automação governada.',
-    bradescoAngle: 'Converte CMDB/CSDM em contexto vivo para decisao automatizada.',
-    architecture: 'Servicos, responsaveis, dependencias, SLAs, politicas, conhecimento e historico.',
-    operatingModel: 'Governanca de qualidade de contexto ligada aos dominios de automacao.',
-    nextMove: 'Escolher relacoes criticas para um caso de IA antes de ampliar escopo.',
+    bradescoAngle:
+      'Converte CMDB/CSDM em contexto vivo para decisão automatizada.',
+    architecture:
+      'Serviços, responsáveis, dependências, SLAs, políticas, conhecimento e histórico.',
+    operatingModel:
+      'Governança de qualidade de contexto ligada aos domínios de automação.',
+    nextMove:
+      'Escolher relações críticas para um caso de IA antes de ampliar escopo.',
     proofPoints: ['CMDB', 'CSDM', 'Knowledge Graph', 'Context Engine'],
     discussion: {
-      executivo: 'Qual decisao de IA fica insegura sem contexto de servico?',
-      tecnico: 'Quais relacionamentos da CMDB sao obrigatorios para o primeiro agente?',
-      valor: 'Qual dominio melhora se a CMDB virar contexto de decisao?',
+      executivo: 'Qual decisão de IA fica insegura sem contexto de serviço?',
+      tecnico:
+        'Quais relacionamentos da CMDB são obrigatórios para o primeiro agente?',
+      valor: 'Qual domínio melhora se a CMDB virar contexto de decisão?',
     },
   },
   {
@@ -268,15 +324,26 @@ const announcements = [
       'Tratar fonte de verdade, autorização, latência, contratos de dados, lineage e observabilidade.',
     value:
       'Escolher poucos dados externos que destravam decisões de IT, risco, atendimento ou portfolio.',
-    bradescoAngle: 'Permite enriquecer workflows com dados externos sem replicar tudo.',
-    architecture: 'Fonte de verdade, autorizacao, latencia, contratos de dados, lineage e observabilidade.',
-    operatingModel: 'Responsaveis por dados conectados aos donos dos workflows consumidores.',
-    nextMove: 'Mapear tres dados externos que mudam uma decisao operacional concreta.',
-    proofPoints: ['Data federation', 'Authorization', 'Lineage', 'Operational context'],
+    bradescoAngle:
+      'Permite enriquecer workflows com dados externos sem replicar tudo.',
+    architecture:
+      'Fonte de verdade, autorização, latência, contratos de dados, lineage e observabilidade.',
+    operatingModel:
+      'Responsáveis por dados conectados aos donos dos workflows consumidores.',
+    nextMove:
+      'Mapear três dados externos que mudam uma decisão operacional concreta.',
+    proofPoints: [
+      'Data federation',
+      'Authorization',
+      'Lineage',
+      'Operational context',
+    ],
     discussion: {
-      executivo: 'Qual dado fora da plataforma muda uma decisao importante?',
-      tecnico: 'Como controlar autorizacao, latencia e linhagem antes de usar em IA?',
-      valor: 'Qual integracao evita trabalho manual sem criar copia desnecessaria?',
+      executivo: 'Qual dado fora da plataforma muda uma decisão importante?',
+      tecnico:
+        'Como controlar autorização, latência e linhagem antes de usar em IA?',
+      valor:
+        'Qual integração evita trabalho manual sem criar cópia desnecessária?',
     },
   },
   {
@@ -285,21 +352,32 @@ const announcements = [
     number: '07',
     icon: LockKeyhole,
     title: 'Autonomous Security and Risk',
-    subtitle: 'Identidades, ativos e risco conectados ao mesmo sistema de ação.',
+    subtitle:
+      'Identidades, ativos e risco conectados ao mesmo sistema de ação.',
     executive:
       'Com agentes crescendo, identidade não humana e autorização viram tema executivo.',
     technical:
       'Cobrir identidade humana e não humana, least privilege, ativos, CMDB vivo e resposta auditável.',
     value:
       'IA confiável exige governar quem ou o que pode agir, sobre qual ativo e com qual evidência.',
-    bradescoAngle: 'Traz agente, identidade, ativo e risco para o mesmo desenho operacional.',
-    architecture: 'Identidade humana e nao humana, least privilege, ativo, CMDB e resposta auditavel.',
-    operatingModel: 'Risk, security e operacao definem permissoes e respostas por tipo de agente.',
-    nextMove: 'Mapear identidades nao humanas e acoes automatizadas de maior risco.',
-    proofPoints: ['Non-human identity', 'Least privilege', 'Asset context', 'Risk response'],
+    bradescoAngle:
+      'Traz agente, identidade, ativo e risco para o mesmo desenho operacional.',
+    architecture:
+      'Identidade humana e não humana, least privilege, ativo, CMDB e resposta auditável.',
+    operatingModel:
+      'Risk, security e operação definem permissões e respostas por tipo de agente.',
+    nextMove:
+      'Mapear identidades não humanas e ações automatizadas de maior risco.',
+    proofPoints: [
+      'Non-human identity',
+      'Least privilege',
+      'Asset context',
+      'Risk response',
+    ],
     discussion: {
       executivo: 'Onde a escala de agentes muda o apetite de risco?',
-      tecnico: 'Como correlacionar API, identidade, agente e ativo em tempo real?',
+      tecnico:
+        'Como correlacionar API, identidade, agente e ativo em tempo real?',
       valor: 'Qual risco pode ser reduzido conectando identidade e workflow?',
     },
   },
@@ -309,22 +387,30 @@ const announcements = [
     number: '08',
     icon: Gauge,
     title: 'SPM com IA',
-    subtitle: 'Portfolio, dependências e priorização conectados ao contexto operacional.',
+    subtitle:
+      'Portfolio, dependências e priorização conectados ao contexto operacional.',
     executive:
       'Portfolio, demanda, execução e arquitetura deixam de ser silos de decisão.',
     technical:
       'Discutir modelo de dados, integrações, migração, qualidade de épicos e governança de mudança.',
     value:
       'Evoluir de ferramenta de planejamento para sistema de decisão de portfolio.',
-    bradescoAngle: 'Conecta demanda, capacidade, risco e execucao em uma visao unica de portfolio.',
-    architecture: 'Modelo de dados, integracoes, migracao, epicos, capacidade e mudancas.',
-    operatingModel: 'Ritual de portfolio decide com dados, dependencias e criterios comuns.',
-    nextMove: 'Selecionar um fluxo de decisao de portfolio para redesenhar com SPM.',
+    bradescoAngle:
+      'Conecta demanda, capacidade, risco e execução em uma visão única de portfolio.',
+    architecture:
+      'Modelo de dados, integrações, migração, épicos, capacidade e mudanças.',
+    operatingModel:
+      'Ritual de portfolio decide com dados, dependências e critérios comuns.',
+    nextMove:
+      'Selecionar um fluxo de decisão de portfolio para redesenhar com SPM.',
     proofPoints: ['Demand', 'Capacity', 'Dependencies', 'Execution metrics'],
     discussion: {
-      executivo: 'Qual decisao de portfolio hoje depende de planilhas paralelas?',
-      tecnico: 'Quais objetos precisam ficar consistentes entre Jira, SPM e execucao?',
-      valor: 'Qual decisao mensal poderia virar rotina governada na plataforma?',
+      executivo:
+        'Qual decisão de portfolio hoje depende de planilhas paralelas?',
+      tecnico:
+        'Quais objetos precisam ficar consistentes entre Jira, SPM e execução?',
+      valor:
+        'Qual decisão mensal poderia virar rotina governada na plataforma?',
     },
   },
   {
@@ -338,17 +424,20 @@ const announcements = [
       'Mais capacidade de entrega, mas com padrão, revisão e rastreabilidade.',
     technical:
       'Separar produtividade de controle: ambientes, ACLs, regras, Git, review e App Engine.',
-    value:
-      'Escalar criação de apps sem abrir mão de arquitetura e governança.',
-    bradescoAngle: 'Acelera desenvolvimento ServiceNow com padrao, revisao e governanca.',
-    architecture: 'Ambientes, ACLs, regras, Git, review, App Engine e esteira de promocao.',
-    operatingModel: 'Padroes reutilizaveis, guardrails tecnicos e revisao antes de producao.',
-    nextMove: 'Escolher um app novo para nascer com esteira e code review desde o primeiro dia.',
+    value: 'Escalar criação de apps sem abrir mão de arquitetura e governança.',
+    bradescoAngle:
+      'Acelera desenvolvimento ServiceNow com padrão, revisão e governança.',
+    architecture:
+      'Ambientes, ACLs, regras, Git, review, App Engine e esteira de promoção.',
+    operatingModel:
+      'Padrões reutilizáveis, guardrails técnicos e revisão antes de produção.',
+    nextMove:
+      'Escolher um app novo para nascer com esteira e code review desde o primeiro dia.',
     proofPoints: ['App Engine', 'Git', 'Review', 'Reusable patterns'],
     discussion: {
-      executivo: 'Onde acelerar app sem aumentar debito tecnico?',
-      tecnico: 'Quais padroes precisam ser obrigatorios para Build Agent?',
-      valor: 'Qual app prova produtividade com governanca de entrega?',
+      executivo: 'Onde acelerar app sem aumentar débito técnico?',
+      tecnico: 'Quais padrões precisam ser obrigatórios para Build Agent?',
+      valor: 'Qual app prova produtividade com governança de entrega?',
     },
   },
   {
@@ -364,15 +453,26 @@ const announcements = [
       'Tema exploratório: sandbox, logs, rollback, escopo permitido e limites de produção.',
     value:
       'Mapear processos legados onde API não resolve antes de discutir escala.',
-    bradescoAngle: 'Explora automacao governada de sistemas legados e tarefas multi-etapa.',
-    architecture: 'Desktop agent, sandbox, logs, comandos, APIs chamadas, rollback e politica.',
-    operatingModel: 'Uso exploratorio com escopo restrito, aprovacao previa e trilha auditavel.',
-    nextMove: 'Mapear processos sem API onde automacao desktop faria sentido controlado.',
-    proofPoints: ['OpenShell sandbox', 'AI Control Tower', 'Action Fabric', 'CMDB context'],
+    bradescoAngle:
+      'Explora automação governada de sistemas legados e tarefas multi-etapa.',
+    architecture:
+      'Desktop agent, sandbox, logs, comandos, APIs chamadas, rollback e política.',
+    operatingModel:
+      'Uso exploratório com escopo restrito, aprovação prévia e trilha auditável.',
+    nextMove:
+      'Mapear processos sem API onde automação desktop faria sentido controlado.',
+    proofPoints: [
+      'OpenShell sandbox',
+      'AI Control Tower',
+      'Action Fabric',
+      'CMDB context',
+    ],
     discussion: {
-      executivo: 'Qual processo legado justifica testar agente desktop governado?',
-      tecnico: 'Quais limites de sandbox, rollback e auditoria seriam obrigatorios?',
-      valor: 'Onde a falta de API ainda trava automacao de ponta a ponta?',
+      executivo:
+        'Qual processo legado justifica testar agente desktop governado?',
+      tecnico:
+        'Quais limites de sandbox, rollback e auditoria seriam obrigatórios?',
+      valor: 'Onde a falta de API ainda trava automação de ponta a ponta?',
     },
   },
 ]
@@ -380,195 +480,195 @@ const announcements = [
 const deepDives: Record<string, DeepDive> = {
   'control-tower': {
     premise:
-      'A pergunta deixa de ser qual agente usar e vira quem enxerga, aprova, monitora e mede o agente em producao.',
+      'A pergunta deixa de ser qual agente usar e vira quem enxerga, aprova, monitora e mede o agente em produção.',
     doubleClick:
-      'Comecar por um inventario vivo de agentes e assistentes, classificando cada um por dado consumido, permissao, criticidade, dependencia operacional e indicador de resultado. Sem essa camada, a escala de IA vira uma colecao de pilotos desconectados.',
+      'Começar por um inventário vivo de agentes e assistentes, classificando cada um por dado consumido, permissão, criticidade, dependência operacional e indicador de resultado. Sem essa camada, a escala de IA vira uma coleção de pilotos desconectados.',
     talkTrack:
-      'Para Bradesco, AI Control Tower pode ser apresentado como a sala de comando da IA operacional: nao substitui as plataformas existentes, mas cria visibilidade comum para agentes, modelos, dados, risco e resultado antes de escalar.',
+      'Para Bradesco, AI Control Tower pode ser discutido como a sala de comando da IA operacional: não substitui as plataformas existentes, mas cria visibilidade comum para agentes, modelos, dados, risco e resultado antes de escalar.',
     watchouts: [
-      'Agente sem responsavel claro',
-      'Log tecnico sem contexto de negocio',
-      'Permissao fora do modelo de identidade',
-      'Metrica limitada a uso, sem resultado operacional',
+      'Agente sem responsável claro',
+      'Log técnico sem contexto de negócio',
+      'Permissão fora do modelo de identidade',
+      'Métrica limitada a uso, sem resultado operacional',
     ],
     workshop: [
-      'Inventario inicial de agentes e assistentes',
-      'Politica de aprovacao por risco',
-      'Telemetria minima para piloto',
-      'Ritual de excecao e revisao executiva',
+      'Inventário inicial de agentes e assistentes',
+      'Política de aprovação por risco',
+      'Telemetria mínima para piloto',
+      'Ritual de exceção e revisão executiva',
     ],
   },
   otto: {
     premise:
-      'Otto muda a interface: o usuario descreve o resultado, e a plataforma orquestra conhecimento, fluxo, aprovacao e handoff.',
+      'Otto muda a interface: o usuário descreve o resultado, e a plataforma orquestra conhecimento, fluxo, aprovação e handoff.',
     doubleClick:
-      'A conversa tecnica deve separar experiencia conversacional de prontidao operacional. A qualidade depende de catalogo, conhecimento, elegibilidade, identidade e integracoes funcionando como uma jornada unica.',
+      'A leitura técnica deve separar experiência conversacional de prontidão operacional. A qualidade depende de catálogo, conhecimento, elegibilidade, identidade e integrações funcionando como uma jornada única.',
     talkTrack:
-      'Para Bradesco, Otto faz sentido quando a jornada ja tem regra clara e alto volume. O ganho nao vem de trocar a tela por chat, mas de reduzir navegacao, ambiguidade e transferencia manual entre areas.',
+      'Para Bradesco, Otto faz sentido quando a jornada já tem regra clara e alto volume. O ganho não vem de trocar a tela por chat, mas de reduzir navegação, ambiguidade e transferência manual entre áreas.',
     watchouts: [
       'Base de conhecimento desatualizada',
-      'Catalogo com regra implicita',
-      'Aprovacao fora do fluxo',
+      'Catálogo com regra implícita',
+      'Aprovação fora do fluxo',
       'Handoff humano sem contexto da conversa',
     ],
     workshop: [
       'Selecionar duas jornadas internas de alto volume',
-      'Mapear intencoes e variacoes de linguagem',
-      'Validar catalogo, KB e approvals',
+      'Mapear intenções e variações de linguagem',
+      'Validar catálogo, KB e approvals',
       'Definir quando Otto resolve e quando transfere',
     ],
   },
   specialists: {
     premise:
-      'AI Specialists tiram a conversa de assistente generico e levam para agentes por funcao, com escopo, confianca e fallback.',
+      'AI Specialists tiram a conversa de assistente genérico e levam para agentes por função, com escopo, confiança e fallback.',
     doubleClick:
-      'O desenho bom comeca pela tarefa repetitiva, nao pela tecnologia. Cada especialista precisa ter fronteira clara: o que pode decidir, o que pode executar, quando pede aprovacao e quando devolve para humano.',
+      'O desenho bom começa pela tarefa repetitiva, não pela tecnologia. Cada especialista precisa ter fronteira clara: o que pode decidir, o que pode executar, quando pede aprovação e quando devolve para humano.',
     talkTrack:
-      'Para Bradesco, a melhor entrada e uma operacao com caminho conhecido, volume relevante e baixo risco de decisao irreversivel. Assim o piloto mede escala real sem comprometer controle.',
+      'Para Bradesco, a melhor entrada é uma operação com caminho conhecido, volume relevante e baixo risco de decisão irreversível. Assim o piloto mede escala real sem comprometer controle.',
     watchouts: [
       'Agente treinado em processo mal definido',
-      'Criterio de confianca invisivel',
-      'Excecao tratada como caso comum',
+      'Critério de confiança invisível',
+      'Exceção tratada como caso comum',
       'Fila humana recebendo contexto incompleto',
     ],
     workshop: [
-      'Escolher um processo repetitivo por dominio',
-      'Desenhar matriz de confianca e excecao',
-      'Definir fallback e aprovacao',
-      'Medir resolucao, qualidade e retrabalho',
+      'Escolher um processo repetitivo por domínio',
+      'Desenhar matriz de confiança e exceção',
+      'Definir fallback e aprovação',
+      'Medir resolução, qualidade e retrabalho',
     ],
   },
   'action-fabric': {
     premise:
-      'Action Fabric posiciona a ServiceNow como sistema de acao para agentes corporativos, inclusive agentes fora da plataforma.',
+      'Action Fabric posiciona a ServiceNow como sistema de ação para agentes corporativos, inclusive agentes fora da plataforma.',
     doubleClick:
-      'O ponto tecnico e separar leitura de dado de execucao de trabalho. Ferramentas expostas via MCP precisam de permissao, aprovacao, auditoria, rollback e limite de escopo antes de virar automacao real.',
+      'O ponto técnico é separar leitura de dado de execução de trabalho. Ferramentas expostas via MCP precisam de permissão, aprovação, auditoria, rollback e limite de escopo antes de virar automação real.',
     talkTrack:
-      'Para Bradesco, isso permite que agentes Microsoft, modelos internos ou apps proprios acionem trabalho governado na ServiceNow, em vez de criarem automacoes paralelas sem trilha operacional.',
+      'Para Bradesco, isso permite que agentes Microsoft, modelos internos ou apps próprios acionem trabalho governado na ServiceNow, em vez de criarem automações paralelas sem trilha operacional.',
     watchouts: [
       'Ferramenta MCP ampla demais',
-      'Acao sem aprovacao contextual',
-      'OAuth sem politica por tipo de agente',
-      'Rollback nao desenhado antes do piloto',
+      'Ação sem aprovação contextual',
+      'OAuth sem política por tipo de agente',
+      'Rollback não desenhado antes do piloto',
     ],
     workshop: [
-      'Catalogar acoes seguras para primeiro pacote',
-      'Separar leitura, recomendacao e execucao',
-      'Definir RBAC e aprovacao por acao',
+      'Catalogar ações seguras para primeiro pacote',
+      'Separar leitura, recomendação e execução',
+      'Definir RBAC e aprovação por ação',
       'Testar auditoria ponta a ponta',
     ],
   },
   'context-engine': {
     premise:
-      'Context Engine torna CMDB, CSDM, servicos e conhecimento parte do raciocinio da IA, nao apenas inventario tecnico.',
+      'Context Engine torna CMDB, CSDM, serviços e conhecimento parte do raciocínio da IA, não apenas inventário técnico.',
     doubleClick:
-      'O foco deve ser escolher o menor grafo de contexto que muda uma decisao. Servico, responsavel, dependencia, criticidade, SLA e historico precisam estar conectados ao caso de uso, nao tratados como projeto abstrato de dados.',
+      'O foco deve ser escolher o menor grafo de contexto que muda uma decisão. Serviço, responsável, dependência, criticidade, SLA e histórico precisam estar conectados ao caso de uso, não tratados como projeto abstrato de dados.',
     talkTrack:
-      'Para Bradesco, essa e a ponte entre a maturidade de CMDB e a ambicao de IA governada. Quanto melhor o contexto, menor a chance de uma resposta correta no texto e errada na operacao.',
+      'Para Bradesco, essa é a ponte entre a maturidade de CMDB e a ambição de IA governada. Quanto melhor o contexto, menor a chance de uma resposta correta no texto e errada na operação.',
     watchouts: [
       'CMDB ampla demais para o primeiro caso',
       'Relacao critica ausente',
-      'Conhecimento sem responsavel de curadoria',
+      'Conhecimento sem responsável de curadoria',
       'SLA e criticidade fora do contexto do agente',
     ],
     workshop: [
-      'Definir uma decisao que a IA precisa tomar',
-      'Listar relacoes minimas de CMDB/CSDM',
+      'Definir uma decisão que a IA precisa tomar',
+      'Listar relações mínimas de CMDB/CSDM',
       'Validar qualidade do contexto com operadores',
       'Criar ciclo de melhoria de dados por uso real',
     ],
   },
   wdf: {
     premise:
-      'Workflow Data Fabric enriquece workflows com dados onde eles vivem, sem transformar cada decisao em uma nova copia de dados.',
+      'Workflow Data Fabric enriquece workflows com dados onde eles vivem, sem transformar cada decisão em uma nova cópia de dados.',
     doubleClick:
-      'A discussao deve ser sobre contrato de dados: fonte de verdade, autorizacao, latencia aceitavel, lineage, observabilidade e quem responde quando um dado externo muda o comportamento do workflow.',
+      'A discussão deve ser sobre contrato de dados: fonte de verdade, autorização, latência aceitável, lineage, observabilidade e quem responde quando um dado externo muda o comportamento do workflow.',
     talkTrack:
-      'Para Bradesco, WDF e mais forte quando destrava uma decisao operacional concreta em IT, risco, atendimento ou portfolio. A pergunta certa e qual dado externo muda a acao dentro do workflow.',
+      'Para Bradesco, WDF é mais forte quando destrava uma decisão operacional concreta em IT, risco, atendimento ou portfolio. A pergunta certa é qual dado externo muda a ação dentro do workflow.',
     watchouts: [
       'Dado externo sem contrato de uso',
-      'Latencia incompatível com decisao operacional',
+      'Latência incompatível com decisão operacional',
       'Autorizacao tratada depois da arquitetura',
       'Lineage invisivel para auditoria',
     ],
     workshop: [
-      'Escolher tres dados externos de alto impacto',
+      'Escolher três dados externos de alto impacto',
       'Definir fonte de verdade e consumidor',
-      'Mapear autorizacao e observabilidade',
-      'Prototipar uma decisao enriquecida',
+      'Mapear autorização e observabilidade',
+      'Prototipar uma decisão enriquecida',
     ],
   },
   'security-risk': {
     premise:
-      'A escala de agentes muda o desenho de risco: identidade humana, identidade nao humana, ativo e workflow precisam estar conectados.',
+      'A escala de agentes muda o desenho de risco: identidade humana, identidade não humana, ativo e workflow precisam estar conectados.',
     doubleClick:
-      'O tema nao e apenas detectar risco, mas governar quem ou o que pode agir, sobre qual ativo, com qual permissao e com qual evidencia. Agentes criam uma nova superficie operacional que precisa nascer auditavel.',
+      'O tema não é apenas detectar risco, mas governar quem ou o que pode agir, sobre qual ativo, com qual permissão e com qual evidência. Agentes criam uma nova superfície operacional que precisa nascer auditável.',
     talkTrack:
-      'Para Bradesco, Autonomous Security and Risk conecta a pauta de IA com governanca de identidade, ativo e resposta. Isso ajuda a tratar agente como participante controlado da operacao, nao como excecao.',
+      'Para Bradesco, Autonomous Security and Risk conecta a pauta de IA com governança de identidade, ativo e resposta. Isso ajuda a tratar agente como participante controlado da operação, não como exceção.',
     watchouts: [
-      'Identidade nao humana sem ciclo de vida',
-      'Permissao sem menor privilegio',
+      'Identidade não humana sem ciclo de vida',
+      'Permissão sem menor privilégio',
       'Ativo sem contexto operacional',
-      'Resposta de risco fora do sistema de acao',
+      'Resposta de risco fora do sistema de ação',
     ],
     workshop: [
-      'Inventariar identidades nao humanas relevantes',
-      'Correlacionar agente, API, ativo e permissao',
+      'Inventariar identidades não humanas relevantes',
+      'Correlacionar agente, API, ativo e permissão',
       'Definir resposta automatizada por risco',
-      'Criar evidencia auditavel do primeiro fluxo',
+      'Criar evidência auditável do primeiro fluxo',
     ],
   },
   spm: {
     premise:
-      'SPM com IA aproxima demanda, capacidade, dependencia, risco e execucao para melhorar a decisao de portfolio.',
+      'SPM com IA aproxima demanda, capacidade, dependência, risco e execução para melhorar a decisão de portfolio.',
     doubleClick:
-      'A oportunidade e sair de relatorio de status e entrar em sistema de decisao. Para isso, o dado de portfolio precisa conversar com execucao, arquitetura, mudanca e capacidade de times.',
+      'A oportunidade é sair de relatório de status e entrar em sistema de decisão. Para isso, o dado de portfolio precisa conversar com execução, arquitetura, mudança e capacidade de times.',
     talkTrack:
-      'Para Bradesco, SPM pode ser posicionado como a mesa de decisao que reduz planilhas paralelas e conecta prioridade com capacidade real, dependencia tecnica e risco de mudanca.',
+      'Para Bradesco, SPM pode ser discutido como a mesa de decisão que reduz planilhas paralelas e conecta prioridade com capacidade real, dependência técnica e risco de mudança.',
     watchouts: [
       'Portfolio decidido fora da plataforma',
-      'Epicos com qualidade inconsistente',
-      'Dependencia tecnica invisivel',
-      'Migracao tratada como troca de ferramenta',
+      'Épicos com qualidade inconsistente',
+      'Dependência técnica invisível',
+      'Migração tratada como troca de ferramenta',
     ],
     workshop: [
-      'Selecionar uma decisao mensal de portfolio',
-      'Mapear objetos de dado obrigatorios',
-      'Definir integracao com execucao atual',
-      'Criar painel de decisao com criterios comuns',
+      'Selecionar uma decisão mensal de portfolio',
+      'Mapear objetos de dado obrigatórios',
+      'Definir integração com execução atual',
+      'Criar painel de decisão com critérios comuns',
     ],
   },
   'build-agent': {
     premise:
-      'Build Agent aumenta capacidade de entrega, mas precisa nascer junto com padrao, revisao e esteira de promocao.',
+      'Build Agent aumenta capacidade de entrega, mas precisa nascer junto com padrão, revisão e esteira de promoção.',
     doubleClick:
-      'A conversa nao deve ser so produtividade de desenvolvimento. O ponto e criar uma fabrica governada: padroes reutilizaveis, ACLs, revisao, Git, ambientes e criterio de promocao antes de producao.',
+      'A leitura não deve ser só produtividade de desenvolvimento. O ponto é criar uma fábrica governada: padrões reutilizáveis, ACLs, revisão, Git, ambientes e critério de promoção antes de produção.',
     talkTrack:
-      'Para Bradesco, Build Agent combina bem com App Engine quando a organizacao quer acelerar apps sem aumentar debito tecnico. A IA ajuda a construir, mas a arquitetura continua sendo decisao controlada.',
+      'Para Bradesco, Build Agent combina bem com App Engine quando a organização quer acelerar apps sem aumentar débito técnico. A IA ajuda a construir, mas a arquitetura continua sendo decisão controlada.',
     watchouts: [
-      'Codigo gerado sem padrao reutilizavel',
-      'ACL e seguranca revisadas tarde demais',
+      'Código gerado sem padrão reutilizável',
+      'ACL e segurança revisadas tarde demais',
       'Ambiente sem esteira clara',
       'Produtividade medida sem qualidade de entrega',
     ],
     workshop: [
       'Escolher um app novo com escopo controlado',
-      'Definir padroes obrigatorios de desenvolvimento',
+      'Definir padrões obrigatórios de desenvolvimento',
       'Conectar Git, review e ambientes',
       'Medir tempo, qualidade e retrabalho',
     ],
   },
   'project-arc': {
     premise:
-      'Project Arc explora automacao desktop governada para processos multi-etapa onde API nao resolve tudo.',
+      'Project Arc explora automação desktop governada para processos multi-etapa onde API não resolve tudo.',
     doubleClick:
-      'Esse tema deve ser tratado como exploratorio e controlado. O desenho precisa explicitar sandbox, comando permitido, logs, rollback, escopo de producao e o que nunca deve ser automatizado por agente desktop.',
+      'Esse tema deve ser tratado como exploratório e controlado. O desenho precisa explicitar sandbox, comando permitido, logs, rollback, escopo de produção e o que nunca deve ser automatizado por agente desktop.',
     talkTrack:
-      'Para Bradesco, Project Arc e uma conversa forte para processos legados, mas a entrada correta e mapear casos onde a falta de API ainda trava automacao ponta a ponta. A governanca vem antes da escala.',
+      'Para Bradesco, Project Arc é uma conversa forte para processos legados, mas a entrada correta é mapear casos onde a falta de API ainda trava automação ponta a ponta. A governança vem antes da escala.',
     watchouts: [
-      'Automacao desktop sem sandbox',
+      'Automação desktop sem sandbox',
       'Comando permitido amplo demais',
-      'Rollback nao testado',
+      'Rollback não testado',
       'Processo legado automatizado sem criticidade definida',
     ],
     workshop: [
@@ -584,7 +684,11 @@ type Announcement = (typeof announcements)[number]
 
 const composeAudioBrief = (item: Announcement, dive: DeepDive, lens: Lens) => {
   const lensCopy =
-    lens === 'executivo' ? item.executive : lens === 'tecnico' ? item.technical : item.value
+    lens === 'executivo'
+      ? item.executive
+      : lens === 'tecnico'
+        ? item.technical
+        : item.value
 
   return [
     `Briefing K26 sobre ${item.title}.`,
@@ -593,9 +697,9 @@ const composeAudioBrief = (item: Announcement, dive: DeepDive, lens: Lens) => {
     `Ponto principal: ${lensCopy}`,
     dive.premise,
     dive.doubleClick,
-    `Como apresentar: ${dive.talkTrack}`,
+    `Linha de discussão: ${dive.talkTrack}`,
     `Cuidado principal: ${dive.watchouts[0]}.`,
-    `Proximo workshop: ${dive.workshop[0]}, ${dive.workshop[1]} e ${dive.workshop[2]}.`,
+    `Próximo workshop: ${dive.workshop[0]}, ${dive.workshop[1]} e ${dive.workshop[2]}.`,
   ].join(' ')
 }
 
@@ -603,7 +707,7 @@ const architectureLayers = [
   {
     title: 'Experiência e canais',
     copy: 'Otto, Employee Center, portal, chat e atendimento assistido.',
-    nodes: ['Otto', 'Employee Center', 'Portal', 'Transicao'],
+    nodes: ['Otto', 'Employee Center', 'Portal', 'Transição'],
   },
   {
     title: 'IA governada',
@@ -617,7 +721,7 @@ const architectureLayers = [
   },
   {
     title: 'Dados e contexto',
-    copy: 'WDF, Context Engine, Knowledge Graph, CMDB/CSDM e metricas.',
+    copy: 'WDF, Context Engine, Knowledge Graph, CMDB/CSDM e métricas.',
     nodes: ['WDF', 'Context Engine', 'CMDB / CSDM', 'RaptorDB'],
   },
   {
@@ -630,17 +734,20 @@ const architectureLayers = [
 const useCases = [
   {
     title: 'Governança de IA corporativa',
-    outcome: 'Inventariar agentes, responsável, permissão, telemetria e aprovação.',
+    outcome:
+      'Inventariar agentes, responsável, permissão, telemetria e aprovação.',
     stack: 'AI Control Tower + IAM + Action Fabric',
   },
   {
     title: 'Service desk autônomo',
-    outcome: 'Resolver jornadas repetitivas com conhecimento confiável e escala humana.',
+    outcome:
+      'Resolver jornadas repetitivas com conhecimento confiável e escala humana.',
     stack: 'Otto + AI Specialists + ITSM + HRSD',
   },
   {
     title: 'CMDB como fundação de IA',
-    outcome: 'Priorizar relações, serviços, responsáveis e atributos que reduzem ambiguidade.',
+    outcome:
+      'Priorizar relações, serviços, responsáveis e atributos que reduzem ambiguidade.',
     stack: 'CMDB/CSDM + Context Engine + WDF',
   },
   {
@@ -650,7 +757,8 @@ const useCases = [
   },
   {
     title: 'Risco e identidade',
-    outcome: 'Enxergar agentes, APIs, ativos e identidades no mesmo modelo de risco.',
+    outcome:
+      'Enxergar agentes, APIs, ativos e identidades no mesmo modelo de risco.',
     stack: 'IRM + SecOps + Veza + Armis',
   },
   {
@@ -663,15 +771,45 @@ const useCases = [
 const roadmap = [
   {
     title: 'Abrir pela tese',
-    detail: 'K26 não foi sobre chatbot. Foi sobre IA governada executando trabalho corporativo.',
+    detail:
+      'K26 não foi sobre chatbot. Foi sobre IA governada executando trabalho corporativo.',
   },
   {
     title: 'Desenhar a arquitetura',
-    detail: 'Conectar governança, contexto, dados, agentes, execução e medição.',
+    detail:
+      'Conectar governança, contexto, dados, agentes, execução e medição.',
   },
   {
     title: 'Sair com decisão',
-    detail: 'Escolher dois domínios, responsável de negócio, responsável técnico e pré-requisitos.',
+    detail:
+      'Escolher dois domínios, responsável de negócio, responsável técnico e pré-requisitos.',
+  },
+]
+
+const updatedSignals = [
+  {
+    label: 'K26 oficial',
+    value: '05-07 mai',
+    detail:
+      'Las Vegas. Base atualizada pelos releases oficiais de 05/05 e 06/05.',
+  },
+  {
+    label: 'AI Control Tower',
+    value: '5 dimensões',
+    detail:
+      'Discover, Observe, Govern, Secure e Measure como ciclo de controle.',
+  },
+  {
+    label: 'Sistema de ação',
+    value: 'MCP + Action Fabric',
+    detail:
+      'Agentes externos podem acionar trabalho com permissão, aprovação e auditoria.',
+  },
+  {
+    label: 'Dados vivos',
+    value: 'Context Engine + WDF',
+    detail:
+      'CMDB, grafo, catálogo e dados federados viram contexto operacional da IA.',
   },
 ]
 
@@ -709,8 +847,8 @@ const sources = [
     href: 'https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-moves-beyond-the-sidecar-AI-era-giving-customers-a-complete-AI-native-experience-across-all-products-and-packages/default.aspx',
   },
   {
-    label: 'Workflow Data Fabric',
-    href: 'https://www.servicenow.com/now-platform/workflow-data-fabric.html',
+    label: 'Context Engine e Workflow Data Fabric',
+    href: 'https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-launches-the-real-time-data-foundation-that-puts-autonomous-AI-to-work-across-the-enterprise/default.aspx',
   },
 ]
 
@@ -720,7 +858,53 @@ export default function Bradesco26Experience() {
   const [selectedId, setSelectedId] = useState('control-tower')
   const [deepDiveId, setDeepDiveId] = useState<string | null>(null)
   const [speakingId, setSpeakingId] = useState<string | null>(null)
+  const pageRef = useRef<HTMLElement | null>(null)
   const speechRef = useRef<SpeechSynthesisUtterance | null>(null)
+  const prefersReducedMotion = useReducedMotion()
+  const { scrollYProgress } = useScroll()
+  const pageScrollSpring = useSpring(scrollYProgress, {
+    stiffness: 86,
+    damping: 24,
+    mass: 0.42,
+  })
+  const scrollArtOpacity = useTransform(
+    pageScrollSpring,
+    [0, 0.22, 0.82, 1],
+    [0.72, 0.98, 0.62, 0.44],
+  )
+  const flowBeamScale = useTransform(pageScrollSpring, [0.08, 0.34], [0.08, 1])
+  const flowOrbitY = useTransform(pageScrollSpring, [0.05, 0.42], [72, -82])
+  const flowOrbitRotate = useTransform(
+    pageScrollSpring,
+    [0.05, 0.42],
+    [-10, 12],
+  )
+  const heroDepthX = useTransform(pageScrollSpring, [0, 0.28], [-18, 22])
+  const heroDepthY = useTransform(pageScrollSpring, [0, 0.28], [22, -34])
+  const heroRotateX = useTransform(pageScrollSpring, [0, 0.28], [7, -5])
+  const heroRotateY = useTransform(pageScrollSpring, [0, 0.28], [-8, 7])
+  const heroStudioStyle =
+    prefersReducedMotion === true
+      ? undefined
+      : ({
+          x: heroDepthX,
+          y: heroDepthY,
+          rotateX: heroRotateX,
+          rotateY: heroRotateY,
+          transformPerspective: 1280,
+        } as MotionStyle)
+  const flowSectionStyle =
+    prefersReducedMotion === true
+      ? undefined
+      : ({
+          '--flow-beam-scale': flowBeamScale,
+          '--flow-orbit-y': flowOrbitY,
+          '--flow-orbit-rotate': flowOrbitRotate,
+        } as MotionStyle)
+  const scrollArtStyle =
+    prefersReducedMotion === true
+      ? undefined
+      : ({ opacity: scrollArtOpacity } as MotionStyle)
 
   const filtered = useMemo(
     () =>
@@ -731,16 +915,147 @@ export default function Bradesco26Experience() {
   )
 
   const lensCopyKey =
-    activeLens === 'executivo' ? 'executive' : activeLens === 'tecnico' ? 'technical' : 'value'
-  const activeItem = filtered.find((item) => item.id === selectedId) ?? filtered[0]
+    activeLens === 'executivo'
+      ? 'executive'
+      : activeLens === 'tecnico'
+        ? 'technical'
+        : 'value'
+  const activeItem =
+    filtered.find((item) => item.id === selectedId) ?? filtered[0]
   const ActiveIcon = activeItem.icon
-  const activeLensInfo = lenses.find((lens) => lens.id === activeLens) ?? lenses[0]
-  const activeThemeInfo = themes.find((theme) => theme.id === activeTheme) ?? themes[0]
+  const activeLensInfo =
+    lenses.find((lens) => lens.id === activeLens) ?? lenses[0]
+  const activeThemeInfo =
+    themes.find((theme) => theme.id === activeTheme) ?? themes[0]
   const activeDiscussion = activeItem.discussion[activeLens]
   const activeDeepDive = deepDives[activeItem.id]
-  const deepDiveItem = announcements.find((item) => item.id === deepDiveId) ?? activeItem
+  const deepDiveItem =
+    announcements.find((item) => item.id === deepDiveId) ?? activeItem
   const selectedDeepDive = deepDives[deepDiveItem.id]
   const DeepDiveIcon = deepDiveItem.icon
+
+  useMotionValueEvent(pageScrollSpring, 'change', (latest) => {
+    const root = pageRef.current
+    if (!root) {
+      return
+    }
+
+    if (prefersReducedMotion === true) {
+      return
+    }
+
+    const progress = Math.min(1, Math.max(0, latest))
+    const heroProgress = Math.min(1, progress * 5.2)
+    const sectionProgress = Math.min(1, Math.max(0, (progress - 0.14) * 1.5))
+
+    root.style.setProperty('--scroll-progress', progress.toFixed(4))
+    root.style.setProperty('--scroll-art-y', `${Math.round(-220 * progress)}px`)
+    root.style.setProperty('--scroll-art-x', `${Math.round(90 * progress)}px`)
+    root.style.setProperty(
+      '--scroll-art-rotate',
+      `${(-7 + progress * 18).toFixed(2)}deg`,
+    )
+    root.style.setProperty(
+      '--scroll-art-scale',
+      `${(1 + progress * 0.1).toFixed(4)}`,
+    )
+    root.style.setProperty(
+      '--scroll-plane-two-x',
+      `${Math.round(-90 * progress)}px`,
+    )
+    root.style.setProperty(
+      '--scroll-plane-two-y',
+      `${Math.round(-158 * progress)}px`,
+    )
+    root.style.setProperty(
+      '--scroll-plane-two-rotate',
+      `${(5.6 - progress * 14.4).toFixed(2)}deg`,
+    )
+    root.style.setProperty('--scroll-field-x', `${Math.round(49 * progress)}px`)
+    root.style.setProperty(
+      '--scroll-field-y',
+      `${Math.round(-92 * progress)}px`,
+    )
+    root.style.setProperty(
+      '--scroll-stars-one-x',
+      `${Math.round(36 * progress)}px`,
+    )
+    root.style.setProperty(
+      '--scroll-stars-one-y',
+      `${Math.round(-77 * progress)}px`,
+    )
+    root.style.setProperty(
+      '--scroll-stars-two-x',
+      `${Math.round(-27 * progress)}px`,
+    )
+    root.style.setProperty(
+      '--scroll-stars-two-y',
+      `${Math.round(-121 * progress)}px`,
+    )
+    root.style.setProperty(
+      '--scroll-progress-scale',
+      `${Math.max(0.08, progress).toFixed(4)}`,
+    )
+    root.style.setProperty(
+      '--scroll-scan-y',
+      `${Math.round(8 + progress * 84)}%`,
+    )
+    root.style.setProperty(
+      '--hero-parallax',
+      `${Math.round(heroProgress * -74)}px`,
+    )
+    root.style.setProperty(
+      '--hero-parallax-reverse',
+      `${Math.round(heroProgress * 74)}px`,
+    )
+    root.style.setProperty(
+      '--hero-art-drift',
+      `${Math.round(heroProgress * 128)}px`,
+    )
+    root.style.setProperty(
+      '--hero-art-tilt',
+      `${(heroProgress * -11).toFixed(2)}deg`,
+    )
+    root.style.setProperty(
+      '--section-art-y',
+      `${Math.round(sectionProgress * -96)}px`,
+    )
+  })
+
+  useEffect(() => {
+    if (prefersReducedMotion !== true) {
+      return
+    }
+
+    const root = pageRef.current
+    if (!root) {
+      return
+    }
+
+    ;[
+      '--scroll-progress',
+      '--scroll-art-y',
+      '--scroll-art-x',
+      '--scroll-art-rotate',
+      '--scroll-art-scale',
+      '--scroll-plane-two-x',
+      '--scroll-plane-two-y',
+      '--scroll-plane-two-rotate',
+      '--scroll-field-x',
+      '--scroll-field-y',
+      '--scroll-stars-one-x',
+      '--scroll-stars-one-y',
+      '--scroll-stars-two-x',
+      '--scroll-stars-two-y',
+      '--scroll-progress-scale',
+      '--scroll-scan-y',
+      '--hero-parallax',
+      '--hero-parallax-reverse',
+      '--hero-art-drift',
+      '--hero-art-tilt',
+      '--section-art-y',
+    ].forEach((property) => root.style.removeProperty(property))
+  }, [prefersReducedMotion])
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -762,15 +1077,23 @@ export default function Bradesco26Experience() {
   const selectTheme = (theme: Theme) => {
     setActiveTheme(theme)
     const nextItem =
-      theme === 'all' ? announcements[0] : announcements.find((item) => item.theme === theme)
+      theme === 'all'
+        ? announcements[0]
+        : announcements.find((item) => item.theme === theme)
     if (nextItem) {
       setSelectedId(nextItem.id)
     }
   }
 
   const openDeepDive = (id: string) => {
-    setSelectedId(id)
-    setDeepDiveId(id)
+    const item = announcements.find((announcement) => announcement.id === id)
+    if (!item) {
+      return
+    }
+
+    setActiveTheme(item.theme)
+    setSelectedId(item.id)
+    setDeepDiveId(item.id)
   }
 
   const speakBrief = (item: Announcement) => {
@@ -813,8 +1136,20 @@ export default function Bradesco26Experience() {
   }
 
   return (
-    <main className={styles.page}>
-      <nav className={styles.nav} aria-label="Navegacao do briefing">
+    <main ref={pageRef} className={styles.page}>
+      <motion.div
+        className={styles.scrollArt}
+        style={scrollArtStyle}
+        aria-hidden="true"
+      >
+        <span className={`${styles.scrollPlane} ${styles.scrollPlaneOne}`} />
+        <span className={`${styles.scrollPlane} ${styles.scrollPlaneTwo}`} />
+        <span className={styles.scrollVectorField} />
+        <span className={styles.scrollScanBand} />
+        <span className={styles.scrollConstellation} />
+        <span className={styles.scrollProgressRail} />
+      </motion.div>
+      <nav className={styles.nav} aria-label="Navegação do material">
         <a href="#top" className={styles.navBrand}>
           <span>ServiceNow</span>
           <span>Bradesco</span>
@@ -831,57 +1166,130 @@ export default function Bradesco26Experience() {
         </a>
       </nav>
 
-      <section id="top" className={styles.hero} aria-labelledby="bradesco-26-title">
+      <section
+        id="top"
+        className={styles.hero}
+        aria-labelledby="bradesco-26-title"
+      >
         <div className={styles.heroTexture} aria-hidden="true" />
+        <div className={styles.motionFrame} aria-hidden="true">
+          <span className={styles.frameRailTop} />
+          <span className={styles.frameRailRight} />
+          <span className={styles.frameRailBottom} />
+          <span className={styles.frameRailLeft} />
+          <span
+            className={`${styles.frameCorner} ${styles.frameCornerTopLeft}`}
+          />
+          <span
+            className={`${styles.frameCorner} ${styles.frameCornerTopRight}`}
+          />
+          <span
+            className={`${styles.frameCorner} ${styles.frameCornerBottomLeft}`}
+          />
+          <span
+            className={`${styles.frameCorner} ${styles.frameCornerBottomRight}`}
+          />
+          <span className={styles.frameScanner} />
+          <span className={`${styles.frameSignal} ${styles.frameSignalOne}`} />
+          <span className={`${styles.frameSignal} ${styles.frameSignalTwo}`} />
+        </div>
+        <div className={styles.heroSculpture} aria-hidden="true">
+          <span className={styles.sculptureGrid} />
+          <span
+            className={`${styles.sculptureRing} ${styles.sculptureRingOne}`}
+          />
+          <span
+            className={`${styles.sculptureRing} ${styles.sculptureRingTwo}`}
+          />
+          <span className={styles.sculpturePlane} />
+          <span className={styles.sculptureScan} />
+          <span className={styles.sculptureNodeOne} />
+          <span className={styles.sculptureNodeTwo} />
+          <span className={styles.sculptureNodeThree} />
+          <div className={styles.heroBarcode}>
+            {Array.from({ length: 14 }).map((_, index) => (
+              <span key={index} />
+            ))}
+          </div>
+        </div>
         <div className={styles.heroShell}>
           <div className={styles.heroTopline}>
             <span>Knowledge 2026</span>
-            <span>04 jun 2026</span>
-            <span>Briefing executivo e tecnico</span>
+            <span>K26 oficial 05-07 mai</span>
+            <span>Atualizado em 31 mai 2026</span>
           </div>
 
           <div className={styles.heroLayout}>
             <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>De assistente a agente corporativo</p>
+              <p className={styles.eyebrow}>
+                De assistente a agente corporativo
+              </p>
               <h1 id="bradesco-26-title">Bradesco no ciclo da IA governada.</h1>
               <p className={styles.heroLead}>
-                Um briefing executivo e tecnico sobre o que o Knowledge 2026 muda para bancos:
-                governanca de IA, contexto operacional, agentes, risco, dados e execucao ponta a
-                ponta.
+                Material executivo e técnico sobre o que o Knowledge 2026 muda
+                para bancos: governança de IA, contexto operacional, agentes,
+                risco, dados e execução ponta a ponta. Atualizado com a trilha
+                oficial de anúncios de 05/05 e 06/05.
               </p>
-              <div className={styles.heroProofLine} aria-label="Temas principais">
+              <div
+                className={styles.heroProofLine}
+                aria-label="Temas principais"
+              >
                 <span>AI governance</span>
                 <span>Contexto operacional</span>
-                <span>Execucao governada</span>
+                <span>Execução governada</span>
               </div>
-              <div className={styles.heroActions} aria-label="Acoes principais">
+              <div className={styles.heroActions} aria-label="Ações principais">
                 <a href="#flow" className={styles.primaryAction}>
                   <Play size={16} aria-hidden="true" />
-                  Iniciar conversa
+                  Abrir roteiro
                 </a>
                 <a href="#radar" className={styles.secondaryAction}>
-                  Explorar temas K26
+                  Ver radar K26
                   <ArrowUpRight size={15} aria-hidden="true" />
                 </a>
               </div>
             </div>
 
-            <aside className={styles.heroStudio} aria-label="Mapa executivo da conversa">
+            <motion.aside
+              className={styles.heroStudio}
+              style={heroStudioStyle}
+              aria-label="Mapa executivo da conversa"
+            >
               <div className={styles.systemMap} aria-hidden="true">
                 <div className={styles.mapChrome}>
                   <span>Strategy room</span>
                   <span>K26 / Bradesco</span>
                 </div>
+                <span className={styles.depthFloor} />
+                <span
+                  className={`${styles.depthStack} ${styles.depthStackOne}`}
+                />
+                <span
+                  className={`${styles.depthStack} ${styles.depthStackTwo}`}
+                />
+                <span
+                  className={`${styles.depthStack} ${styles.depthStackThree}`}
+                />
+                <span className={styles.depthBeam} />
                 <div className={styles.mapTraceOne} />
                 <div className={styles.mapTraceTwo} />
                 <div className={styles.mapCore}>
                   <strong>AI</strong>
                   <span>governada</span>
                 </div>
-                <div className={`${styles.mapNode} ${styles.nodeOne}`}>Govern</div>
-                <div className={`${styles.mapNode} ${styles.nodeTwo}`}>Context</div>
-                <div className={`${styles.mapNode} ${styles.nodeThree}`}>Act</div>
-                <div className={`${styles.mapNode} ${styles.nodeFour}`}>Measure</div>
+                <div className={`${styles.mapNode} ${styles.nodeOne}`}>
+                  Govern
+                </div>
+                <div className={`${styles.mapNode} ${styles.nodeTwo}`}>
+                  Context
+                </div>
+                <div className={`${styles.mapNode} ${styles.nodeThree}`}>
+                  Act
+                </div>
+                <div className={`${styles.mapNode} ${styles.nodeFour}`}>
+                  Measure
+                </div>
                 <div className={styles.mapPulse} />
               </div>
 
@@ -891,8 +1299,9 @@ export default function Bradesco26Experience() {
                   <span>Tese central</span>
                 </div>
                 <p>
-                  O diferencial nao e ter mais IA. E colocar IA para trabalhar com contexto real,
-                  permissoes corretas, trilha auditavel e governanca operacional.
+                  O diferencial não é ter mais IA. É colocar IA para trabalhar
+                  com contexto real, permissões corretas, trilha auditável e
+                  governança operacional.
                 </p>
                 <div className={styles.signalGrid}>
                   {thesis.map((item) => {
@@ -906,15 +1315,22 @@ export default function Bradesco26Experience() {
                     )
                   })}
                 </div>
-                <div className={styles.modelFlow} aria-label="Modelo operacional">
+                <div
+                  className={styles.modelFlow}
+                  aria-label="Modelo operacional"
+                >
                   <span>Papel claro</span>
                   <span>Telemetria</span>
                   <span>Guardrails</span>
                   <span>Indicadores</span>
                 </div>
               </div>
-            </aside>
+            </motion.aside>
           </div>
+        </div>
+        <div className={styles.scrollCue} aria-hidden="true">
+          <span />
+          <span />
         </div>
       </section>
 
@@ -923,15 +1339,23 @@ export default function Bradesco26Experience() {
           <div className={styles.briefGrid}>
             <article>
               <span>Objetivo</span>
-              <strong>Traduzir os anuncios do Knowledge 2026 para prioridades praticas.</strong>
+              <strong>
+                Traduzir os anúncios do Knowledge 2026 para prioridades
+                práticas.
+              </strong>
             </article>
             <article>
               <span>Formato</span>
-              <strong>Conversa executiva e tecnica, com arquitetura e casos de uso.</strong>
+              <strong>
+                Material executivo e técnico, com arquitetura e casos de uso.
+              </strong>
             </article>
             <article>
               <span>Resultado</span>
-              <strong>Dois dominios priorizados, responsavel claro e proximo workshop tecnico.</strong>
+              <strong>
+                Dois domínios priorizados, responsável claro e próximo workshop
+                técnico.
+              </strong>
             </article>
           </div>
           <div className={styles.kineticMarquee} aria-hidden="true">
@@ -944,20 +1368,66 @@ export default function Bradesco26Experience() {
         </div>
       </section>
 
-      <section id="flow" className={styles.flowSection} aria-labelledby="flow-title">
+      <motion.section
+        id="flow"
+        className={styles.flowSection}
+        style={flowSectionStyle}
+        aria-labelledby="flow-title"
+      >
         <div className={styles.sectionFrame}>
           <div className={styles.sectionHeader}>
-            <p className={styles.eyebrow}>Roteiro da conversa</p>
-            <h2 id="flow-title">Seis capitulos. Uma narrativa de valor.</h2>
+            <p className={styles.eyebrow}>Roteiro de trabalho</p>
+            <h2 id="flow-title">Seis blocos para orientar decisão.</h2>
             <p>
-              A conversa sai de anuncio de produto e entra em arquitetura: plataforma, dominios,
-              risco, desenvolvedores e casos de uso aplicaveis ao Bradesco.
+              O material sai de anúncio de produto e entra em arquitetura:
+              plataforma, domínios, risco, desenvolvedores e casos de uso
+              aplicáveis ao Bradesco.
             </p>
           </div>
+          <div
+            className={styles.k26UpdateRail}
+            aria-label="Detalhes atualizados do Knowledge 2026"
+          >
+            {updatedSignals.map((signal) => (
+              <article key={signal.label}>
+                <span>{signal.label}</span>
+                <strong>{signal.value}</strong>
+                <p>{signal.detail}</p>
+              </article>
+            ))}
+          </div>
           <div className={styles.flowGrid}>
-            {chapters.map((chapter) => (
-              <article key={chapter.title} className={styles.flowCard}>
-                <span>{chapter.number}</span>
+            {chapters.map((chapter, index) => (
+              <motion.button
+                key={chapter.title}
+                type="button"
+                className={styles.flowCard}
+                onClick={() => openDeepDive(chapter.targetId)}
+                aria-label={`Abrir detalhes do bloco ${chapter.number}: ${chapter.title}`}
+                whileHover={
+                  prefersReducedMotion
+                    ? undefined
+                    : {
+                        y: -4,
+                        scale: 1.006,
+                        rotateX: -2.4,
+                        rotateY: index % 2 === 0 ? 1.4 : -1.4,
+                        z: 8,
+                      }
+                }
+                whileTap={prefersReducedMotion ? undefined : { scale: 0.985 }}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 30 }}
+                whileInView={
+                  prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
+                }
+                viewport={{ once: true, amount: 0.34 }}
+                transition={{
+                  duration: 0.48,
+                  delay: index * 0.045,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                <span className={styles.flowNumber}>{chapter.number}</span>
                 <h3>{chapter.title}</h3>
                 <p>{chapter.copy}</p>
                 <div>
@@ -965,24 +1435,38 @@ export default function Bradesco26Experience() {
                     <small key={item}>{item}</small>
                   ))}
                 </div>
-              </article>
+                <span className={styles.flowCta}>
+                  Mais detalhes
+                  <ArrowUpRight size={15} aria-hidden="true" />
+                </span>
+              </motion.button>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className={styles.platformSection} aria-labelledby="platform-title">
+      <section
+        className={styles.platformSection}
+        aria-labelledby="platform-title"
+      >
         <div className={styles.sectionFrame}>
           <div className={styles.platformGrid}>
             <div>
               <p className={styles.eyebrow}>Contexto Bradesco</p>
-              <h2 id="platform-title">Conectar capacidades conhecidas a uma arquitetura de IA governada.</h2>
+              <h2 id="platform-title">
+                Conectar capacidades conhecidas a uma arquitetura de IA
+                governada.
+              </h2>
               <p>
-                A proposta e organizar o que o K26 trouxe de novo em IA, dados e execucao dentro de
-                uma jornada clara de governanca, adocao e valor operacional.
+                A leitura organiza o que o K26 trouxe de novo em IA, dados e
+                execução dentro de uma jornada clara de governança, adoção e
+                valor operacional.
               </p>
             </div>
-            <div className={styles.capabilityCloud} aria-label="Capacidades em foco">
+            <div
+              className={styles.capabilityCloud}
+              aria-label="Capacidades em foco"
+            >
               {capabilitySet.map((item) => (
                 <span key={item}>{item}</span>
               ))}
@@ -991,24 +1475,47 @@ export default function Bradesco26Experience() {
         </div>
       </section>
 
-      <section id="radar" className={styles.radarSection} aria-labelledby="radar-title">
+      <section
+        id="radar"
+        className={styles.radarSection}
+        aria-labelledby="radar-title"
+      >
         <div className={styles.sectionFrame}>
           <div className={styles.sectionHeader}>
             <p className={styles.eyebrow}>Radar K26</p>
-            <h2 id="radar-title">Escolha a lente. Mostre o que muda.</h2>
+            <h2 id="radar-title">Selecione a lente de leitura.</h2>
             <p>
-              A mesma novidade pode ser lida pela decisao executiva, pela profundidade tecnica ou
-              pelo valor operacional para Bradesco.
+              A mesma novidade pode ser lida pela decisão executiva, pela
+              profundidade técnica ou pelo valor operacional para Bradesco.
             </p>
           </div>
 
-          <div className={styles.radarControls} aria-label="Controles de visualizacao">
+          <a href="/bradesco-26/slides" className={styles.radarSlidesCallout}>
+            <span>
+              <MonitorPlay size={18} aria-hidden="true" />
+              Apresentação executiva
+            </span>
+            <strong>Abrir material K26</strong>
+            <small>
+              Mesmas informações em uma versão ampla e objetiva para reunião.
+            </small>
+            <ArrowUpRight size={16} aria-hidden="true" />
+          </a>
+
+          <div
+            className={styles.radarControls}
+            aria-label="Controles de visualização"
+          >
             <div className={styles.lensSwitch}>
               {lenses.map((lens) => (
                 <button
                   key={lens.id}
                   type="button"
-                  className={activeLens === lens.id ? styles.lensActive : styles.lensButton}
+                  className={
+                    activeLens === lens.id
+                      ? styles.lensActive
+                      : styles.lensButton
+                  }
                   onClick={() => setActiveLens(lens.id)}
                 >
                   <span>{lens.label}</span>
@@ -1022,7 +1529,11 @@ export default function Bradesco26Experience() {
                 <button
                   key={theme.id}
                   type="button"
-                  className={activeTheme === theme.id ? styles.themeActive : styles.themeButton}
+                  className={
+                    activeTheme === theme.id
+                      ? styles.themeActive
+                      : styles.themeButton
+                  }
                   onClick={() => selectTheme(theme.id)}
                 >
                   {theme.label}
@@ -1031,18 +1542,21 @@ export default function Bradesco26Experience() {
             </div>
           </div>
 
-          <div className={styles.radarInsightStrip} aria-label="Resumo da leitura selecionada">
+          <div
+            className={styles.radarInsightStrip}
+            aria-label="Resumo da leitura selecionada"
+          >
             <article>
               <span>Lente ativa</span>
               <strong>{activeLensInfo.label}</strong>
               <p>{activeItem[lensCopyKey]}</p>
             </article>
             <article>
-              <span>Aplicacao Bradesco</span>
+              <span>Aplicação Bradesco</span>
               <strong>{activeItem.bradescoAngle}</strong>
             </article>
             <article>
-              <span>Proxima decisao</span>
+              <span>Próxima decisão</span>
               <strong>{activeItem.nextMove}</strong>
             </article>
           </div>
@@ -1056,15 +1570,17 @@ export default function Bradesco26Experience() {
                   <button
                     key={item.id}
                     type="button"
-                    className={selected ? styles.radarItemActive : styles.radarItem}
+                    className={
+                      selected ? styles.radarItemActive : styles.radarItem
+                    }
                     onClick={() => setSelectedId(item.id)}
                     onDoubleClick={() => openDeepDive(item.id)}
-                    title="Duplo clique para abrir o briefing completo"
+                    title="Selecionar tema"
                   >
                     <span>{item.number}</span>
                     <Icon size={18} aria-hidden="true" />
                     <strong>{item.title}</strong>
-                    <small>2x</small>
+                    <small>Tema</small>
                   </button>
                 )
               })}
@@ -1075,18 +1591,23 @@ export default function Bradesco26Experience() {
               </div>
             </div>
 
-            <article key={`${activeItem.id}-${activeLens}`} className={styles.radarDetail}>
+            <article
+              key={`${activeItem.id}-${activeLens}`}
+              className={styles.radarDetail}
+            >
               <div className={styles.detailSweep} aria-hidden="true" />
               <div className={styles.radarDetailTop}>
                 <div className={styles.radarDetailMeta}>
                   <span>{activeItem.number}</span>
-                  <small>Duplo clique abre o briefing completo</small>
+                  <small>Análise completa disponível</small>
                 </div>
                 <div className={styles.detailTopActions}>
                   <button
                     type="button"
                     className={
-                      speakingId === activeItem.id ? styles.audioChipActive : styles.audioChip
+                      speakingId === activeItem.id
+                        ? styles.audioChipActive
+                        : styles.audioChip
                     }
                     onClick={() => speakBrief(activeItem)}
                     aria-pressed={speakingId === activeItem.id}
@@ -1096,7 +1617,9 @@ export default function Bradesco26Experience() {
                     ) : (
                       <Volume2 size={14} aria-hidden="true" />
                     )}
-                    <span>{speakingId === activeItem.id ? 'Pausar' : 'Audio'}</span>
+                    <span>
+                      {speakingId === activeItem.id ? 'Pausar' : 'Áudio'}
+                    </span>
                   </button>
                   <button
                     type="button"
@@ -1117,7 +1640,10 @@ export default function Bradesco26Experience() {
                   <h3>{activeItem.title}</h3>
                   <p className={styles.radarSubtitle}>{activeItem.subtitle}</p>
                 </div>
-                <div className={styles.detailSignal} aria-label="Sinal da lente ativa">
+                <div
+                  className={styles.detailSignal}
+                  aria-label="Sinal da lente ativa"
+                >
                   <span>{activeLensInfo.label}</span>
                   <strong>{activeItem.number}</strong>
                 </div>
@@ -1137,7 +1663,7 @@ export default function Bradesco26Experience() {
                   <p>{activeItem.operatingModel}</p>
                 </article>
                 <article>
-                  <span>Proximo movimento</span>
+                  <span>Próximo movimento</span>
                   <p>{activeItem.nextMove}</p>
                 </article>
               </div>
@@ -1149,17 +1675,20 @@ export default function Bradesco26Experience() {
               <div className={styles.discussionBox}>
                 <span>
                   {activeLens === 'executivo'
-                    ? 'Decisao para a sala'
+                    ? 'Decisão para a sala'
                     : activeLens === 'tecnico'
-                      ? 'Criterio tecnico'
+                      ? 'Critério técnico'
                       : 'Workshop de valor'}
                 </span>
                 <strong>{activeDiscussion}</strong>
               </div>
               <div className={styles.detailActions}>
-                <button type="button" onClick={() => openDeepDive(activeItem.id)}>
+                <button
+                  type="button"
+                  onClick={() => openDeepDive(activeItem.id)}
+                >
                   <Maximize2 size={14} aria-hidden="true" />
-                  Abrir deep dive
+                  Abrir análise
                 </button>
                 <button
                   type="button"
@@ -1171,7 +1700,9 @@ export default function Bradesco26Experience() {
                   ) : (
                     <Volume2 size={14} aria-hidden="true" />
                   )}
-                  {speakingId === activeItem.id ? 'Pausar audio' : 'Ouvir briefing'}
+                  {speakingId === activeItem.id
+                    ? 'Pausar áudio'
+                    : 'Ouvir resumo'}
                 </button>
               </div>
             </article>
@@ -1179,136 +1710,175 @@ export default function Bradesco26Experience() {
         </div>
       </section>
 
-      {deepDiveId ? (
-        <div className={styles.deepDiveOverlay} role="dialog" aria-modal="true" aria-labelledby="deep-dive-title">
-          <button
-            type="button"
-            className={styles.deepDiveBackdrop}
-            onClick={() => setDeepDiveId(null)}
-            aria-label="Fechar deep dive"
-          />
-          <article className={styles.deepDivePanel}>
-            <div className={styles.deepDiveScanner} aria-hidden="true" />
-            <header className={styles.deepDiveHeader}>
-              <div>
-                <p className={styles.deepDiveKicker}>Duplo clique K26</p>
-                <h2 id="deep-dive-title">{deepDiveItem.title}</h2>
-                <p>{deepDiveItem.subtitle}</p>
-              </div>
-              <div className={styles.deepDiveHeaderActions}>
-                <button
-                  type="button"
-                  className={
-                    speakingId === deepDiveItem.id
-                      ? styles.deepDiveAudioActive
-                      : styles.deepDiveAudio
-                  }
-                  onClick={() => speakBrief(deepDiveItem)}
-                  aria-pressed={speakingId === deepDiveItem.id}
+      <AnimatePresence>
+        {deepDiveId ? (
+          <motion.div
+            className={styles.deepDiveOverlay}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="deep-dive-title"
+            initial={prefersReducedMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={prefersReducedMotion ? undefined : { opacity: 0 }}
+            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <button
+              type="button"
+              className={styles.deepDiveBackdrop}
+              onClick={() => setDeepDiveId(null)}
+              aria-label="Fechar deep dive"
+            />
+            <motion.article
+              className={styles.deepDivePanel}
+              initial={
+                prefersReducedMotion
+                  ? false
+                  : { opacity: 0, y: 58, scale: 0.96 }
+              }
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={
+                prefersReducedMotion
+                  ? undefined
+                  : { opacity: 0, y: 28, scale: 0.98 }
+              }
+              transition={{ duration: 0.48, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className={styles.deepDiveScanner} aria-hidden="true" />
+              <header className={styles.deepDiveHeader}>
+                <div>
+                  <p className={styles.deepDiveKicker}>Análise K26</p>
+                  <h2 id="deep-dive-title">{deepDiveItem.title}</h2>
+                  <p>{deepDiveItem.subtitle}</p>
+                </div>
+                <div className={styles.deepDiveHeaderActions}>
+                  <button
+                    type="button"
+                    className={
+                      speakingId === deepDiveItem.id
+                        ? styles.deepDiveAudioActive
+                        : styles.deepDiveAudio
+                    }
+                    onClick={() => speakBrief(deepDiveItem)}
+                    aria-pressed={speakingId === deepDiveItem.id}
+                  >
+                    {speakingId === deepDiveItem.id ? (
+                      <Pause size={16} aria-hidden="true" />
+                    ) : (
+                      <Volume2 size={16} aria-hidden="true" />
+                    )}
+                    {speakingId === deepDiveItem.id
+                      ? 'Pausar áudio'
+                      : 'Áudio resumo'}
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.deepDiveClose}
+                    onClick={() => setDeepDiveId(null)}
+                    aria-label="Fechar"
+                  >
+                    <X size={18} aria-hidden="true" />
+                  </button>
+                </div>
+              </header>
+
+              <div className={styles.deepDiveHero}>
+                <div className={styles.deepDiveThesis}>
+                  <span>Leitura para Bradesco</span>
+                  <strong>{selectedDeepDive.premise}</strong>
+                </div>
+                <div
+                  className={styles.sonicConsole}
+                  aria-label="Controle de áudio"
                 >
-                  {speakingId === deepDiveItem.id ? (
-                    <Pause size={16} aria-hidden="true" />
-                  ) : (
-                    <Volume2 size={16} aria-hidden="true" />
-                  )}
-                  {speakingId === deepDiveItem.id ? 'Pausar audio' : 'Audio briefing'}
-                </button>
-                <button
-                  type="button"
-                  className={styles.deepDiveClose}
-                  onClick={() => setDeepDiveId(null)}
-                  aria-label="Fechar"
-                >
-                  <X size={18} aria-hidden="true" />
-                </button>
+                  <div className={styles.sonicWave} aria-hidden="true">
+                    {Array.from({ length: 14 }).map((_, index) => (
+                      <span key={index} />
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => speakBrief(deepDiveItem)}
+                  >
+                    <Headphones size={16} aria-hidden="true" />
+                    Roteiro narrado
+                  </button>
+                </div>
               </div>
-            </header>
 
-            <div className={styles.deepDiveHero}>
-              <div className={styles.deepDiveThesis}>
-                <span>Leitura para Bradesco</span>
-                <strong>{selectedDeepDive.premise}</strong>
+              <div className={styles.deepDiveBody}>
+                <section className={styles.deepDiveStory}>
+                  <span>O duplo clique</span>
+                  <p>{selectedDeepDive.doubleClick}</p>
+                </section>
+                <section className={styles.deepDiveStory}>
+                  <span>Linha de discussão</span>
+                  <p>{selectedDeepDive.talkTrack}</p>
+                </section>
+                <section className={styles.deepDiveStack}>
+                  <span>Arquitetura</span>
+                  <p>{deepDiveItem.architecture}</p>
+                </section>
+                <section className={styles.deepDiveStack}>
+                  <span>Modelo operacional</span>
+                  <p>{deepDiveItem.operatingModel}</p>
+                </section>
               </div>
-              <div className={styles.sonicConsole} aria-label="Controle de audio">
-                <div className={styles.sonicWave} aria-hidden="true">
-                  {Array.from({ length: 14 }).map((_, index) => (
-                    <span key={index} />
+
+              <div className={styles.deepDiveColumns}>
+                <section>
+                  <div className={styles.deepDiveSectionTitle}>
+                    <DeepDiveIcon size={17} aria-hidden="true" />
+                    <h3>Pontos de cuidado</h3>
+                  </div>
+                  <ul>
+                    {selectedDeepDive.watchouts.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </section>
+                <section>
+                  <div className={styles.deepDiveSectionTitle}>
+                    <Workflow size={17} aria-hidden="true" />
+                    <h3>Workshop sugerido</h3>
+                  </div>
+                  <ol>
+                    {selectedDeepDive.workshop.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ol>
+                </section>
+              </div>
+
+              <footer className={styles.deepDiveFooter}>
+                <div>
+                  <span>Próximo movimento</span>
+                  <strong>{deepDiveItem.nextMove}</strong>
+                </div>
+                <div className={styles.deepDiveProof}>
+                  {deepDiveItem.proofPoints.map((point) => (
+                    <small key={point}>{point}</small>
                   ))}
                 </div>
-                <button type="button" onClick={() => speakBrief(deepDiveItem)}>
-                  <Headphones size={16} aria-hidden="true" />
-                  Roteiro narrado
-                </button>
-              </div>
-            </div>
+              </footer>
+            </motion.article>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
 
-            <div className={styles.deepDiveBody}>
-              <section className={styles.deepDiveStory}>
-                <span>O duplo clique</span>
-                <p>{selectedDeepDive.doubleClick}</p>
-              </section>
-              <section className={styles.deepDiveStory}>
-                <span>Como apresentar</span>
-                <p>{selectedDeepDive.talkTrack}</p>
-              </section>
-              <section className={styles.deepDiveStack}>
-                <span>Arquitetura</span>
-                <p>{deepDiveItem.architecture}</p>
-              </section>
-              <section className={styles.deepDiveStack}>
-                <span>Modelo operacional</span>
-                <p>{deepDiveItem.operatingModel}</p>
-              </section>
-            </div>
-
-            <div className={styles.deepDiveColumns}>
-              <section>
-                <div className={styles.deepDiveSectionTitle}>
-                  <DeepDiveIcon size={17} aria-hidden="true" />
-                  <h3>Pontos de cuidado</h3>
-                </div>
-                <ul>
-                  {selectedDeepDive.watchouts.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </section>
-              <section>
-                <div className={styles.deepDiveSectionTitle}>
-                  <Workflow size={17} aria-hidden="true" />
-                  <h3>Workshop sugerido</h3>
-                </div>
-                <ol>
-                  {selectedDeepDive.workshop.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ol>
-              </section>
-            </div>
-
-            <footer className={styles.deepDiveFooter}>
-              <div>
-                <span>Proximo movimento</span>
-                <strong>{deepDiveItem.nextMove}</strong>
-              </div>
-              <div className={styles.deepDiveProof}>
-                {deepDiveItem.proofPoints.map((point) => (
-                  <small key={point}>{point}</small>
-                ))}
-              </div>
-            </footer>
-          </article>
-        </div>
-      ) : null}
-
-      <section id="architecture" className={styles.architectureSection} aria-labelledby="architecture-title">
+      <section
+        id="architecture"
+        className={styles.architectureSection}
+        aria-labelledby="architecture-title"
+      >
         <div className={styles.sectionFrame}>
           <div className={styles.architectureHeader}>
-            <p className={styles.eyebrow}>Arquitetura Pos-K26</p>
-            <h2 id="architecture-title">Agente so gera valor quando sabe onde agir.</h2>
+            <p className={styles.eyebrow}>Arquitetura Pós-K26</p>
+            <h2 id="architecture-title">
+              Agente só gera valor quando sabe onde agir.
+            </h2>
             <p>
-              A ponte entre anuncio e desenho tecnico: canais, IA, workflows, dados, seguranca e
-              integracao operando como sistema de acao.
+              A ponte entre anúncio e desenho técnico: canais, IA, workflows,
+              dados, segurança e integração operando como sistema de ação.
             </p>
           </div>
           <div className={styles.architectureMap}>
@@ -1330,14 +1900,20 @@ export default function Bradesco26Experience() {
         </div>
       </section>
 
-      <section id="use-cases" className={styles.useCaseSection} aria-labelledby="use-cases-title">
+      <section
+        id="use-cases"
+        className={styles.useCaseSection}
+        aria-labelledby="use-cases-title"
+      >
         <div className={styles.sectionFrame}>
           <div className={styles.sectionHeader}>
             <p className={styles.eyebrow}>Casos de uso Bradesco</p>
-            <h2 id="use-cases-title">Seis conversas para sair da sala com proximo passo.</h2>
+            <h2 id="use-cases-title">
+              Seis frentes para sair da sala com próximo passo.
+            </h2>
             <p>
-              A sessao ajuda a priorizar dominio, responsavel de negocio, responsavel tecnico e
-              prerequisitos para avancar com seguranca.
+              A sessão ajuda a priorizar domínio, responsável de negócio,
+              responsável técnico e pré-requisitos para avançar com segurança.
             </p>
           </div>
           <div className={styles.useCaseGrid}>
@@ -1357,11 +1933,12 @@ export default function Bradesco26Experience() {
         <div className={styles.sectionFrame}>
           <div className={styles.closeGrid}>
             <div>
-              <p className={styles.eyebrow}>Roteiro de 04 de junho</p>
-              <h2 id="close-title">Da inspiracao a decisao operacional.</h2>
+              <p className={styles.eyebrow}>Roteiro de 03 de junho</p>
+              <h2 id="close-title">Da inspiração à decisão operacional.</h2>
               <p>
-                Primeiro a tese, depois a arquitetura, entao os casos de uso. O objetivo e sair com
-                uma decisao clara sobre onde aprofundar valor, dados, governanca e execucao.
+                Primeiro a tese, depois a arquitetura, então os casos de uso. O
+                objetivo é sair com uma decisão clara sobre onde aprofundar
+                valor, dados, governança e execução.
               </p>
             </div>
             <ol className={styles.roadmapList}>
@@ -1379,16 +1956,27 @@ export default function Bradesco26Experience() {
         </div>
       </section>
 
-      <section id="sources" className={styles.sources} aria-labelledby="sources-title">
+      <section
+        id="sources"
+        className={styles.sources}
+        aria-labelledby="sources-title"
+      >
         <div className={styles.sectionFrame}>
           <div className={styles.sourcesGrid}>
             <div>
               <p className={styles.eyebrow}>Fontes verificadas</p>
-              <h2 id="sources-title">Baseado em anuncios oficiais do Knowledge 2026.</h2>
+              <h2 id="sources-title">
+                Baseado em anúncios oficiais do Knowledge 2026.
+              </h2>
             </div>
             <div className={styles.sourceLinks}>
               {sources.map((source) => (
-                <a key={source.href} href={source.href} target="_blank" rel="noreferrer">
+                <a
+                  key={source.href}
+                  href={source.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {source.label}
                   <ArrowUpRight size={15} aria-hidden="true" />
                 </a>
@@ -1399,8 +1987,10 @@ export default function Bradesco26Experience() {
       </section>
 
       <footer className={styles.footer}>
-        <span>Preparado para conversa executiva e tecnica com Bradesco.</span>
-        <span>Fontes publicas ServiceNow e trilha de discussao orientada a valor.</span>
+        <span>Preparado para conversa executiva e técnica com Bradesco.</span>
+        <span>
+          Fontes públicas ServiceNow e trilha de discussão orientada a valor.
+        </span>
       </footer>
     </main>
   )

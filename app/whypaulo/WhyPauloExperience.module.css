@@ -69,6 +69,7 @@
 .agentSection,
 .serviceNowSection,
 .planSection,
+.ninetySection,
 .operatingSection,
 .proofSection,
 .stackSection,
@@ -119,6 +120,42 @@
 .pressurePanel {
   position: relative;
   z-index: 2;
+}
+
+.languageSwitch {
+  width: max-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(247, 245, 238, 0.14);
+  border-radius: 999px;
+  padding: 5px;
+  color: rgba(247, 245, 238, 0.82);
+  background: rgba(247, 245, 238, 0.055);
+  backdrop-filter: blur(14px);
+}
+
+.languageSwitch svg {
+  margin-left: 6px;
+  color: var(--why-lime);
+}
+
+.languageSwitch button {
+  min-height: 30px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 10px;
+  color: rgba(247, 245, 238, 0.72);
+  background: transparent;
+  font-size: 0.76rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.languageSwitch button[aria-pressed='true'] {
+  color: #061009;
+  background: var(--why-lime);
 }
 
 .kicker {
@@ -191,6 +228,7 @@
 
 .heroActions a:focus-visible,
 .authorPanel a:focus-visible,
+.languageSwitch button:focus-visible,
 .lockForm button:focus-visible,
 .lockForm input:focus-visible {
   outline: 2px solid var(--why-lime);
@@ -316,6 +354,7 @@
 .agentSection,
 .serviceNowSection,
 .planSection,
+.ninetySection,
 .operatingSection,
 .proofSection,
 .stackSection,
@@ -398,6 +437,76 @@
   color: var(--why-muted);
   font-size: 0.94rem;
   line-height: 1.62;
+}
+
+.ninetyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ninetyCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(247, 245, 238, 0.14);
+  border-radius: var(--radius-panel);
+  padding: 24px;
+  background: var(--why-panel);
+  backdrop-filter: blur(18px);
+}
+
+.ninetyCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--why-lime), rgba(200, 255, 46, 0.1));
+}
+
+.ninetyWindow {
+  color: var(--why-lime);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.ninetyCard h3 {
+  margin: 12px 0 18px;
+  color: #fff;
+  font-size: 1.18rem;
+  line-height: 1.22;
+  font-weight: 840;
+}
+
+.ninetyCard ul {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ninetyCard li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+}
+
+.ninetyCard li svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--why-lime);
+}
+
+.ninetyCard li span {
+  color: var(--why-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
 }
 
 .agentLayout {
@@ -910,6 +1019,7 @@
 @media (max-width: 1080px) {
   .hero,
   .agentLayout,
+  .ninetyGrid,
   .proofSection,
   .stackSection,
   .authorSection {
@@ -925,10 +1035,10 @@
     font-size: 4rem;
   }
 
-  .marketGrid,
-  .serviceNowGrid,
-  .operatingFlow,
-  .planGrid {
+.marketGrid,
+.serviceNowGrid,
+.operatingFlow,
+.planGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -963,6 +1073,7 @@
   .agentSection,
   .serviceNowSection,
   .planSection,
+  .ninetySection,
   .operatingSection,
   .proofSection,
   .stackSection,
@@ -987,13 +1098,14 @@
     font-size: 2.15rem;
   }
 
-  .marketGrid,
-  .serviceNowGrid,
-  .proofGrid,
-  .operatingFlow,
-  .planGrid,
-  .taskQueue,
-  .theaterStats {
+.marketGrid,
+.serviceNowGrid,
+.proofGrid,
+.operatingFlow,
+.planGrid,
+.ninetyGrid,
+.taskQueue,
+.theaterStats {
     grid-template-columns: 1fr;
   }
 
@@ -1082,6 +1194,7 @@
   .agentSection,
   .serviceNowSection,
   .planSection,
+  .ninetySection,
   .operatingSection,
   .proofSection,
   .stackSection,
@@ -1093,6 +1206,7 @@
   .agentTheater,
   .serviceNowGrid,
   .planGrid,
+  .ninetyGrid,
   .operatingFlow,
   .proofIntro,
   .proofGrid,

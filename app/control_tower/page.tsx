@@ -8,6 +8,11 @@ import {
 } from '@/lib/automation-control/auth'
 import { readAutomationSnapshot } from '@/lib/automation-control/storage'
 import { readCreativeSnapshot } from '@/lib/creative-control/storage'
+import {
+  readPlanApprovals,
+  readPlansSnapshot,
+} from '@/lib/control-tower/plan-storage'
+import type { PlanApprovalView } from '@/lib/control-tower/plan-view'
 import ControlTower from './ControlTower'
 import styles from './ControlTower.module.css'
 
@@ -67,10 +72,29 @@ export default async function ControlTowerPage({ searchParams }: ControlTowerPag
 
   if (!authorized) return <LockedControlTower invalid={params.auth === 'invalid'} />
 
-  const [snapshot, creative] = await Promise.all([
+  const [snapshot, creative, plansSnapshot, approvals] = await Promise.all([
     readAutomationSnapshot(),
     readCreativeSnapshot(),
+    readPlansSnapshot(),
+    readPlanApprovals(),
   ])
+  const planApprovals = Object.fromEntries(
+    Object.entries(approvals).map(([planId, record]) => [
+      planId,
+      {
+        status: record.status,
+        action_at_utc: record.action_at_utc,
+        expires_at_utc: record.expires_at_utc,
+      } satisfies PlanApprovalView,
+    ]),
+  )
 
-  return <ControlTower snapshot={snapshot} creative={creative} />
+  return (
+    <ControlTower
+      snapshot={snapshot}
+      creative={creative}
+      plans={plansSnapshot?.plans ?? []}
+      planApprovals={planApprovals}
+    />
+  )
 }

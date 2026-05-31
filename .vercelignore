@@ -1,0 +1,10 @@
+outputs/
+test-results/
+playwright-report/
+blob-report/
+qa/
+tmp/
+.brain/
+.claude/
+.superpowers/
+*.log

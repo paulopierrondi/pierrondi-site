@@ -8,6 +8,7 @@ local-agent/dist/
 *.pyc
 tmp/
 qa/
+outputs/
 scripts/__pycache__/
 .claude/*
 !.claude/skills/
