@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import {
@@ -410,6 +410,7 @@ const slideTransition = {
 
 export default function Bradesco26Slides() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const pageRef = useRef<HTMLElement | null>(null)
   const prefersReducedMotion = useReducedMotion()
   const activeSlide = slides[activeIndex]
   const ActiveIcon = activeSlide.icon
@@ -449,8 +450,20 @@ export default function Bradesco26Slides() {
     setActiveIndex((index) => Math.min(slides.length - 1, index + 1))
   }
 
+  const enterPresentationMode = async () => {
+    const target = pageRef.current
+    if (!target || !document.fullscreenEnabled) return
+
+    if (document.fullscreenElement) {
+      await document.exitFullscreen()
+      return
+    }
+
+    await target.requestFullscreen()
+  }
+
   return (
-    <main className={styles.page}>
+    <main ref={pageRef} className={styles.page}>
       <div className={styles.progressRail} aria-hidden="true">
         <span style={{ width: `${progress}%` }} />
       </div>
@@ -462,12 +475,38 @@ export default function Bradesco26Slides() {
         </Link>
         <div className={styles.brand}>
           <strong>ServiceNow - Bradesco</strong>
-          <span>Apresentação K26</span>
+          <span>Material K26</span>
         </div>
-        <a href="#slide-deck" className={styles.presentMode}>
-          <MonitorPlay size={15} aria-hidden="true" />
-          Apresentar
-        </a>
+        <div className={styles.topActions}>
+          <button
+            type="button"
+            className={styles.navStep}
+            onClick={goToPrevious}
+            disabled={activeIndex === 0}
+            aria-label="Voltar seção"
+            title="Voltar seção"
+          >
+            <ArrowLeft size={15} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className={styles.navStep}
+            onClick={goToNext}
+            disabled={activeIndex === slides.length - 1}
+            aria-label="Avançar seção"
+            title="Avançar seção"
+          >
+            <ArrowRight size={15} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className={styles.presentMode}
+            onClick={enterPresentationMode}
+          >
+            <MonitorPlay size={15} aria-hidden="true" />
+            Tela cheia
+          </button>
+        </div>
       </nav>
 
       <section
@@ -565,28 +604,6 @@ export default function Bradesco26Slides() {
               </footer>
             </motion.article>
           </AnimatePresence>
-
-          <div
-            className={styles.deckControls}
-            aria-label="Controles da apresentação"
-          >
-            <button
-              type="button"
-              onClick={goToPrevious}
-              disabled={activeIndex === 0}
-            >
-              <ArrowLeft size={16} aria-hidden="true" />
-              Anterior
-            </button>
-            <button
-              type="button"
-              onClick={goToNext}
-              disabled={activeIndex === slides.length - 1}
-            >
-              Próximo
-              <ArrowRight size={16} aria-hidden="true" />
-            </button>
-          </div>
         </div>
       </section>
     </main>

@@ -1,7 +1,7 @@
 # Project Brain Context
 
-Generated: `2026-05-31 20:42:16`
-Tool: `claude`
+Generated: `2026-05-31 21:24:36`
+Tool: `railway-run`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
 
