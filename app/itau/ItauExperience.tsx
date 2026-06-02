@@ -43,7 +43,7 @@ const verdictItems: Array<{
     item: 'Ponto de partida para agentes/skills em SaaS ou cloud gerenciada',
     meta: 'cmdb_ci_function_ai · AI Function',
     reason:
-      'Use quando o agente, skill ou capacidade de IA é consumido como serviço gerenciado: Now Assist, Azure AI Foundry, AWS Bedrock, Copilot, SaaS ou plataforma hospedada por terceiro.',
+      'Use quando o agente, skill ou capacidade de IA é consumido como serviço gerenciado: Now Assist, Azure AI Foundry, AWS Bedrock, Copilot Studio, SaaS ou plataforma hospedada por terceiro.',
   },
   {
     kind: 'adjust',
@@ -55,9 +55,16 @@ const verdictItems: Array<{
   {
     kind: 'approved',
     item: 'Governança do ativo de IA antes da CI operacional',
-    meta: 'alm_ai_*_digital_asset',
+    meta: 'alm_ai_system_digital_asset · cmdb_ai_system_product_model',
     reason:
-      'Crie ativo de IA para declarar uso, dono, risco, modelo, dataset e finalidade. Se não há deployment visível, o ativo existe mesmo sem CI operacional.',
+      'Crie AI System Digital Asset para declarar uso, dono, risco, modelo, dataset, prompt, ferramenta e finalidade. O Product Model classifica o tipo de AI System; a CI só entra quando há deployment visível.',
+  },
+  {
+    kind: 'approved',
+    item: 'Vínculo governança ↔ runtime',
+    meta: 'cmdb_rel_asset_ci · Asset-CI Relationship',
+    reason:
+      'Quando houver CI, ligar o AI Digital Asset ao CI pelo relacionamento Asset-CI. Isso evita tratar governança de ativo e runtime operacional como registros desconectados.',
   },
   {
     kind: 'approved',
@@ -85,7 +92,14 @@ const verdictItems: Array<{
     item: 'Cadastro centralizado com validação',
     meta: 'intake + API + workflow de aprovação',
     reason:
-      'Bom caminho para evitar inventário paralelo: o cadastro deve validar classe, owner, risco, dados, ambiente, suporte e ciclo de vida antes de virar registro operacional.',
+      'Bom caminho para evitar inventário paralelo: o cadastro deve validar classe, owner, risco, dados, ambiente, suporte, source_unique_id e ciclo de vida antes de virar registro operacional.',
+  },
+  {
+    kind: 'adjust',
+    item: 'Pipeline não substitui discovery enterprise',
+    meta: 'Service Graph Connectors · AI Control Tower',
+    reason:
+      'Pipeline Git cobre agentes governados pelo processo de engenharia. Para shadow AI, SaaS e hyperscalers, a estratégia precisa prever discovery/SGC e reconciliação com a CMDB.',
   },
   {
     kind: 'adjust',
@@ -103,9 +117,9 @@ const verdictItems: Array<{
   {
     kind: 'reject',
     item: 'Falta chave de correlação com runtime',
-    meta: 'correlation_id / external_id / provider_resource_id',
+    meta: 'correlation_id / external_id / provider_resource_id / source_unique_id',
     reason:
-      'Sem identificador externo, o inventário da CMDB fica desconectado de execução real, observabilidade, custo, logs, AI Control Tower e auditoria.',
+      'Sem identificador externo, o inventário da CMDB fica desconectado de execução real, observabilidade, custo, logs, AI Control Tower, IRE e auditoria.',
   },
   {
     kind: 'reject',
@@ -124,7 +138,7 @@ const criticalItems = [
     description:
       'Antes de escolher tabela CMDB, declarar que a organização usa ou possui aquele agente, modelo, dataset, prompt ou sistema de IA.',
     action:
-      'Criar AI Digital Asset com owner, finalidade, risco, dados, modelo/provedor, status e ciclo de vida. Isso governa intenção e accountability.',
+      'Criar AI System Digital Asset em alm_ai_system_digital_asset, com Product Model em cmdb_ai_system_product_model, owner, finalidade, risco, dados, provider, status e ciclo de vida.',
   },
   {
     title: '2. Classificar o tipo de deployment',
@@ -160,23 +174,23 @@ const criticalItems = [
     description:
       'O valor não está em ter uma lista; está em manter o agente confiável depois de mudança de prompt, modelo, permissão ou base de dados.',
     action:
-      'Amarrar change, incident, revisão de risco, evidência de teste, kill switch, decommission e recertificação de acesso.',
+      'Amarrar change, incident, revisão de risco, evidência de teste, kill switch, decommission, recertificação de acesso e deduplicação via IRE.',
   },
 ]
 
 const releaseRows = [
-  ['Agora', 'Resolver a dúvida de tabela sem criar modelo paralelo.', 'Adotar regra de decisão: AI Function vs AI & Model Application.', styles.releaseVancouver],
-  ['Piloto', 'Provar rastreabilidade em poucos agentes críticos.', '3 a 5 agentes reais com ativo, CI quando aplicável, owners e serviço.', styles.releaseWashington],
-  ['Operação', 'Transformar cadastro em processo vivo.', 'Workflow de intake, aprovação, mudança, revisão e auditoria.', styles.releaseXanadu],
-  ['AICT', 'Preparar visibilidade centralizada de agentes, modelos e workflows.', 'Guardar external_id/correlation_id e link Asset-CI para descoberta/runtime.', styles.releaseYokohama],
-  ['Escala', 'Evitar CMDB decorativa e inventário duplicado.', 'Métricas de completude, atualização, risco e cobertura por domínio.', styles.releaseZurich],
+  ['Agora', 'Pacificar a semântica sem criar modelo paralelo.', 'AI Digital Asset para governança; CI só para deployment visível.', styles.releaseVancouver],
+  ['Sandbox', 'Testar com dados reais sem sujar dev/prod.', '3 a 5 agentes em ambiente descartável, com source_unique_id e owner.', styles.releaseWashington],
+  ['Piloto', 'Provar rastreabilidade ponta a ponta.', 'Asset-CI via cmdb_rel_asset_ci, Service Instance e change/incident coverage.', styles.releaseXanadu],
+  ['AICT', 'Preparar descoberta e inventário centralizado.', 'Service Graph Connectors + IRE para reconciliar pipeline, cloud e shadow AI.', styles.releaseYokohama],
+  ['Carga em escala', 'Evitar CMDB decorativa e inventário duplicado.', 'Métricas de completude, atualização, risco, duplicidade e cobertura por domínio.', styles.releaseZurich],
 ]
 
 const roadmap = [
-  ['Semana 1', 'Taxonomia e intake mínimo', 'Fechar critérios de classe, campos obrigatórios, owner, risco, dados e ciclo de vida.', 'Gaia + ServiceNow'],
-  ['Semana 2', 'Carga piloto', 'Cadastrar 3 a 5 agentes críticos com ativo de IA, CI quando aplicável e relação com Service Instance.', 'Squad Gaia'],
-  ['Semana 3', 'Governança e operação', 'Amarrar aprovação, change, incident, revisão de risco, evidência de teste e kill switch.', 'Governança + Operação'],
-  ['Semana 4', 'Painel e go/no-go', 'Publicar visão executiva: cobertura, risco, gaps, owners, runtime correlacionado e próximos domínios.', 'Squad + Governança'],
+  ['Semana 1', 'Taxonomia e intake mínimo', 'Fechar critérios de classe, campos obrigatórios, owner, risco, dados, source_unique_id e ciclo de vida.', 'Gaia + ServiceNow'],
+  ['Semana 2', 'Sandbox descartável', 'Cadastrar 3 a 5 agentes reais com AI Digital Asset, CI quando aplicável e relação com Service Instance.', 'Squad Gaia'],
+  ['Semana 3', 'Piloto governado', 'Amarrar Asset-CI, aprovação, change, incident, revisão de risco, evidência de teste, IRE e kill switch.', 'Governança + Operação'],
+  ['Semana 4', 'Go/no-go para carga em escala', 'Publicar visão executiva: cobertura, risco, gaps, owners, runtime correlacionado e próximos domínios.', 'Squad + Governança'],
 ]
 
 const questions = [
@@ -186,13 +200,15 @@ const questions = [
   'Qual Business Application, Digital Product ou Service Instance consome esse agente?',
   'Que dados o agente acessa e qual classificação LGPD/risco se aplica?',
   'Quem aprova mudança de modelo, prompt, permissão, ferramenta ou dataset?',
-  'Qual external_id/correlation_id liga CMDB ao runtime, logs, custo e AI Control Tower?',
+  'Qual external_id/correlation_id/source_unique_id liga CMDB ao runtime, logs, custo e AI Control Tower?',
+  'Esse registro veio da esteira, de Service Graph Connectors, de Now Assist sync ou de cadastro manual?',
   'Qual evidência prova que o agente continua aderente depois de uma mudança?',
 ]
 
 const relationships: Array<[string, string, string, string]> = [
-  ['AI Digital Asset', 'declara governança', 'alm_ai_system/model/dataset/prompt_digital_asset', 'Uso, dono, finalidade, risco e ciclo de vida'],
-  ['AI Digital Asset', 'Asset-CI linkage', 'cmdb_ci_function_ai ou cmdb_ci_appl_ai_application', 'Liga governança ao deployment quando houver CI'],
+  ['AI System Product Model', 'classifica', 'cmdb_ai_system_product_model', 'Tipo de AI system, agente, skill ou capacidade'],
+  ['AI System Digital Asset', 'declara governança', 'alm_ai_system_digital_asset', 'Uso, dono, finalidade, risco e ciclo de vida'],
+  ['AI System Digital Asset', 'cmdb_rel_asset_ci', 'cmdb_ci_function_ai ou cmdb_ci_appl_ai_application', 'Liga governança ao deployment quando houver CI'],
   ['Business Application / Digital Product', 'usa / suporta', 'Service Instance', 'Contexto de negócio e ownership'],
   ['Service Instance', 'contém / depende de', 'AI Function', 'Agente SaaS/cloud/terceiro em operação'],
   ['Service Instance', 'contém / depende de', 'AI & Model Application', 'Workload de IA operado pelo Itaú'],
@@ -220,8 +236,8 @@ const helpItems: Array<{
   },
   {
     icon: '03',
-    title: 'Piloto com agentes reais',
-    desc: 'Selecionar 3 a 5 agentes que já existam ou estejam próximos de produção, cobrindo SaaS/cloud e infraestrutura controlada.',
+    title: 'Sandbox com agentes reais',
+    desc: 'Selecionar 3 a 5 agentes que já existam ou estejam próximos de produção, cobrindo SaaS/cloud e infraestrutura controlada, sem contaminar dev/prod.',
     effort: '1 sprint',
   },
   {
@@ -233,8 +249,47 @@ const helpItems: Array<{
   {
     icon: '05',
     title: 'Validação com especialistas ServiceNow',
-    desc: 'Usar a sessão para validar a semântica contra CSDM 5, CI Class Manager da instância e roadmap de AI Control Tower.',
+    desc: 'Validar semântica contra CSDM 5, CI Class Manager, CMDB CI Class Models, IRE, AI Asset Inventory e roadmap de AI Control Tower.',
     effort: 'pontual',
+  },
+]
+
+const sourceChecks = [
+  {
+    title: 'Classe AI & Model Application',
+    fact:
+      'A documentação do CMDB CI Class Models descreve cmdb_ci_appl_ai_application para aplicações de IA executadas em Linux, Windows, containers ou Kubernetes.',
+    href: 'https://www.servicenow.com/docs/r/servicenow-platform/configuration-management-database-cmdb/cmdb-ci-class-model-list-of-classes.html',
+  },
+  {
+    title: 'Classe AI Function',
+    fact:
+      'As release notes do CMDB CI Class Models descrevem cmdb_ci_function_ai para AI SaaS/cloud com serviços escaláveis e on-demand.',
+    href: 'https://www.servicenow.com/docs/en-US/bundle/store-release-notes/page/release-notes/store/it-operations-management/store-rn-itom-cmdb-class-models.html',
+  },
+  {
+    title: 'AI Asset Inventory',
+    fact:
+      'AI Control Tower organiza AI systems, models, prompts, datasets e MCP servers; AI system pode ser associado a modelos, prompts, datasets e tools.',
+    href: 'https://www.servicenow.com/docs/r/intelligent-experiences/ai-control-tower/ai-inventory.html',
+  },
+  {
+    title: 'Discovery e shadow AI',
+    fact:
+      'Enterprise AI discovery usa Service Graph Connectors para descobrir agentes, modelos, prompts e tools e adicioná-los à CMDB para governança unificada.',
+    href: 'https://www.servicenow.com/docs/r/intelligent-experiences/ai-control-tower/enterprise-ai-discovery.html',
+  },
+  {
+    title: 'Asset-CI Relationship',
+    fact:
+      'Padrões de discovery documentam o vínculo entre AI Function e AI System Digital Asset no Asset-CI Relationship cmdb_rel_asset_ci.',
+    href: 'https://www.servicenow.com/docs/r/yokohama/it-operations-management/itom-visibility/microsoft-foundry-classic-pattern.html',
+  },
+  {
+    title: 'IRE e duplicidade',
+    fact:
+      'Identification and Reconciliation Engine usa regras para identificar/reconciliar CIs, prevenir duplicidade e controlar fontes autoritativas.',
+    href: 'https://www.servicenow.com/docs/r/servicenow-platform/configuration-management-database-cmdb/c_CompsandProcessIDandReconcil.html',
   },
 ]
 
@@ -260,6 +315,8 @@ const correctedPayload = `{
 
   "ai_asset": {
     "type": "AI system",
+    "asset_table": "alm_ai_system_digital_asset",
+    "product_model_table": "cmdb_ai_system_product_model",
     "purpose": "Apoiar respostas e abertura de solicitacoes",
     "risk_tier": "HIGH",
     "data_classification": "CONFIDENTIAL",
@@ -270,10 +327,12 @@ const correctedPayload = `{
   "deployment": {
     "hosting_model": "CLOUD_MANAGED",
     "recommended_ci_class": "cmdb_ci_function_ai",
+    "asset_ci_relationship_table": "cmdb_rel_asset_ci",
     "provider": "AZURE_OPENAI",
     "environment": "PROD",
     "region_or_residency": "BR",
-    "external_id": "azure-ai-foundry-agent-123"
+    "external_id": "azure-ai-foundry-agent-123",
+    "source_unique_id": "provider-resource-id-or-sgc-source-id"
   },
 
   "dependencies": {
@@ -286,12 +345,14 @@ const correctedPayload = `{
   "controls": {
     "audit_cadence_days": 90,
     "kill_switch_owner": "GRP-IA-SUPORTE",
-    "last_review_date": "2026-05-29"
+    "last_review_date": "2026-05-29",
+    "ire_policy": "create/update CI through IRE-aware integration"
   }
 }`
 
 const correctedHandler = `if no approved AI use exists:
-  create AI Digital Asset first
+  create AI System Digital Asset first [alm_ai_system_digital_asset]
+  classify the AI System Product Model [cmdb_ai_system_product_model]
   capture owner, purpose, risk, data, provider, review cadence
 
 if deployment is not visible / not operational:
@@ -305,9 +366,10 @@ if hosting_model in [ITAU_MANAGED, ON_PREM, PRIVATE_CLOUD, CONTAINER, KUBERNETES
   create/link CI as cmdb_ci_appl_ai_application
 
 always:
-  link AI Asset to CI when CI exists
+  link AI Asset to CI through cmdb_rel_asset_ci when CI exists
   link CI to Service Instance / business context
-  require owner, support group, risk, data classification, external_id
+  require owner, support group, risk, data classification, source_unique_id
+  use Service Graph Connectors / IRE-aware path for discovery or imports
   return HTTP 400 for validation errors, never HTTP 500`
 
 const csdmLayers: Array<{
@@ -924,11 +986,12 @@ export default function ItauExperience() {
             <span className={`${styles.brandChip} ${styles.opr}`}>OPR-2025-0162762</span>
           </motion.div>
           <motion.h1 className={styles.heroTitle} variants={fadeUp}>
-            AI Agent Governance no <em>CMDB</em>.
+            AI Agent Governance: <em>CMDB</em> + AI Control Tower.
           </motion.h1>
           <motion.p className={styles.heroLede} variants={fadeUp}>
-            Resposta objetiva para a dúvida do Itaú: em qual tabela cadastrar agentes de IA,
-            como relacionar com CSDM 5 e qual racional usar para governança, operação e auditoria.
+            Resposta objetiva para o alinhamento com o Itaú: como cadastrar agentes de IA sem criar
+            inventário paralelo, quando usar AI Digital Asset, quando criar CI operacional e como preparar
+            o desenho para discovery, IRE e carga em escala.
           </motion.p>
           <motion.div className={styles.heroMeta} variants={fadeUp}>
             <div className={styles.heroMetaItem}>
@@ -941,7 +1004,7 @@ export default function ItauExperience() {
             </div>
             <div className={styles.heroMetaItem}>
               <span className={styles.heroMetaLabel}>Decision</span>
-              <span className={styles.heroMetaValue}>Classe mínima + piloto auditável</span>
+              <span className={styles.heroMetaValue}>Sandbox → piloto → escala</span>
             </div>
           </motion.div>
           {!reduced && (
@@ -1189,6 +1252,35 @@ export default function ItauExperience() {
           </div>
         </Reveal>
 
+        {/* ─────────── BASE SERVICENOW ─────────── */}
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>checado na base ServiceNow</span>
+            <h2 className={styles.sectionTitle}>O que podemos afirmar sem forçar a barra.</h2>
+            <p className={styles.sectionSub}>
+              A recomendação abaixo foi ajustada para não prometer mais do que a documentação sustenta:
+              AI Control Tower dá inventário, discovery, governança, risk/compliance, observabilidade e valor;
+              a qualidade do resultado ainda depende de source IDs, IRE, relacionamentos e processo.
+            </p>
+          </div>
+
+          <div className={styles.sourceGrid}>
+            {sourceChecks.map((source) => (
+              <a
+                key={source.title}
+                className={styles.sourceCard}
+                href={source.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className={styles.sourceLabel}>ServiceNow Docs</span>
+                <h3 className={styles.sourceTitle}>{source.title}</h3>
+                <p className={styles.sourceFact}>{source.fact}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+
         {/* ─────────── VEREDITO CONCEITUAL ─────────── */}
         <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
@@ -1211,12 +1303,13 @@ export default function ItauExperience() {
             <h3 className={styles.verdictHeadline}>
               Usar classes nativas sempre que possível: AI Digital Asset para governança,
               AI Function ou AI & Model Application para CI operacional, e Service Instance
-              para contexto CSDM.
+              para contexto CSDM. AI Control Tower entra como camada de discovery, lifecycle,
+              risk/compliance, observabilidade e valor.
             </h3>
             <ul className={styles.verdictList}>
               <li className={styles.verdictItem}>
                 <p className={styles.verdictItemTitle}>Ativo de IA</p>
-                <p className={styles.verdictItemDesc}>Declara uso, dono, propósito, dados, risco, provedor, revisão e ciclo de vida.</p>
+                <p className={styles.verdictItemDesc}>Declara uso, dono, propósito, dados, risco, provedor, revisão e ciclo de vida em <code>alm_ai_system_digital_asset</code>.</p>
               </li>
               <li className={styles.verdictItem}>
                 <p className={styles.verdictItemTitle}>CI operacional</p>
@@ -1224,7 +1317,7 @@ export default function ItauExperience() {
               </li>
               <li className={styles.verdictItem}>
                 <p className={styles.verdictItemTitle}>CSDM</p>
-                <p className={styles.verdictItemDesc}>Conecta o CI ao Service Instance, aplicação, serviço, owner e impacto operacional.</p>
+                <p className={styles.verdictItemDesc}>Conecta o CI ao Service Instance, aplicação, serviço, owner, impacto operacional e reconciliação via IRE.</p>
               </li>
             </ul>
           </motion.article>
@@ -1471,7 +1564,7 @@ export default function ItauExperience() {
             </table>
           </div>
           <p className={styles.matrixNote}>
-            O objetivo é governança acionável agora, sem bloquear descoberta, runtime, AI Control Tower e evolução nativa futura.
+            O objetivo é governança acionável agora, sem bloquear descoberta, runtime, AI Control Tower, IRE e evolução nativa futura.
           </p>
         </Reveal>
 

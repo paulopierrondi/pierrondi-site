@@ -2011,6 +2011,68 @@
   z-index: 1;
 }
 
+/* ─────────── SERVICE NOW SOURCE CHECKS ─────────── */
+
+.sourceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.sourceCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 220px;
+  padding: 24px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: inherit;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.045), rgba(0, 59, 113, 0.16)),
+    linear-gradient(90deg, rgba(236, 112, 0, 0.16), transparent 52%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  overflow-wrap: anywhere;
+}
+
+.sourceCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 184, 112, 0.48);
+  background:
+    linear-gradient(160deg, rgba(236, 112, 0, 0.10), rgba(0, 59, 113, 0.18)),
+    linear-gradient(90deg, rgba(236, 112, 0, 0.18), transparent 58%);
+}
+
+.sourceLabel {
+  align-self: flex-start;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #8AD8B0;
+  border: 1px solid rgba(74, 184, 130, 0.32);
+  background: rgba(74, 184, 130, 0.12);
+}
+
+.sourceTitle {
+  margin: 0;
+  color: #ffffff;
+  font-size: 17px;
+  line-height: 1.25;
+  font-weight: 750;
+}
+
+.sourceFact {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 /* ─────────── COMMIT BANNER ─────────── */
 
 .commitBanner {
