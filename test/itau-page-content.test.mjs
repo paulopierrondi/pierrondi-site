@@ -23,3 +23,18 @@ test('Itaú page anchors AI governance guidance in ServiceNow-supported terms', 
     assert.match(source, new RegExp(term, 'i'), `Expected Itaú page to mention ${term}`)
   }
 })
+
+test('Itaú page ships the 3D CSDM architecture blueprint pitch', () => {
+  const requiredTerms = [
+    '@react-three/fiber',
+    'CSDMArchitectureScene',
+    'ServiceNow CSDM Architecture Blueprint',
+    'data-itau-architecture-canvas',
+    'Architecture Sprint',
+    'Reference Pack',
+  ]
+
+  for (const term of requiredTerms) {
+    assert.match(source, new RegExp(term, 'i'), `Expected Itaú architecture page to mention ${term}`)
+  }
+})

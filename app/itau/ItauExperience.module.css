@@ -50,6 +50,20 @@
   padding: clamp(96px, 14vh, 160px) 0 clamp(72px, 10vh, 120px);
 }
 
+.heroBlueprintGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.94fr) minmax(420px, 1.06fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+  min-height: min(780px, calc(100svh - 120px));
+}
+
+.heroCopy {
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+}
+
 .heroBadges {
   display: flex;
   gap: 12px;
@@ -96,9 +110,9 @@
   font-size: clamp(40px, 6.5vw, 84px);
   font-weight: 700;
   line-height: 1.02;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   margin: 0 0 28px;
-  max-width: 18ch;
+  max-width: 14ch;
   background: linear-gradient(120deg, #FFFFFF 0%, #FFFFFF 55%, #FFB870 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -146,6 +160,311 @@
   font-size: 15px;
   font-weight: 600;
   color: #ffffff;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.heroPrimaryAction,
+.heroSecondaryAction {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+}
+
+.heroPrimaryAction {
+  background: #EC7000;
+  color: #0A0F1C;
+  border: 1px solid rgba(255, 204, 0, 0.4);
+}
+
+.heroSecondaryAction {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.heroPrimaryAction:hover,
+.heroSecondaryAction:hover {
+  transform: translateY(-2px);
+}
+
+.heroReferencePack {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px dashed rgba(138, 216, 176, 0.38);
+  color: #8AD8B0;
+  background: rgba(74, 184, 130, 0.08);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.heroSceneWrap {
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.architectureScene {
+  position: relative;
+  width: 100%;
+  min-height: clamp(460px, 52vw, 690px);
+  border-radius: 8px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    radial-gradient(circle at 52% 36%, rgba(236, 112, 0, 0.22), transparent 46%),
+    linear-gradient(140deg, rgba(0, 59, 113, 0.38), rgba(10, 15, 28, 0.72));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 34px 100px rgba(0, 0, 0, 0.36),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.architectureScene::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: linear-gradient(180deg, black, rgba(0, 0, 0, 0.35), transparent);
+  -webkit-mask-image: linear-gradient(180deg, black, rgba(0, 0, 0, 0.35), transparent);
+  z-index: 1;
+}
+
+.architectureCanvas {
+  position: absolute;
+  inset: 0;
+}
+
+.architectureCanvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.sceneHud,
+.sceneFooter {
+  position: absolute;
+  z-index: 2;
+  left: clamp(16px, 3vw, 28px);
+  right: clamp(16px, 3vw, 28px);
+  pointer-events: none;
+}
+
+.sceneHud {
+  top: clamp(16px, 3vw, 28px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 0.76fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.sceneHud span,
+.sceneFooter span {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 800;
+}
+
+.sceneHud strong {
+  display: block;
+  margin-top: 8px;
+  color: #ffffff;
+  font-size: clamp(19px, 2.2vw, 28px);
+  line-height: 1.05;
+}
+
+.sceneHud ul {
+  margin: 0;
+  padding: 12px;
+  list-style: none;
+  display: grid;
+  gap: 7px;
+  border-radius: 8px;
+  background: rgba(5, 7, 13, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.sceneHud li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.sceneHud i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 14px currentColor;
+}
+
+.sceneHud li span {
+  letter-spacing: 0;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.78);
+  overflow-wrap: anywhere;
+}
+
+.sceneFooter {
+  bottom: clamp(16px, 3vw, 28px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sceneFooter span {
+  display: inline-flex;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(10, 15, 28, 0.62);
+  border: 1px solid rgba(255, 184, 112, 0.22);
+  color: #FFB870;
+  backdrop-filter: blur(10px);
+}
+
+.blueprintSection {
+  padding-top: 0;
+}
+
+.blueprintIntro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.86fr);
+  gap: clamp(20px, 4vw, 44px);
+  align-items: end;
+  margin-bottom: 22px;
+}
+
+.blueprintIntro p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.blueprintPitchGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.blueprintPitchCard {
+  min-width: 0;
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(160deg, rgba(236, 112, 0, 0.12), rgba(0, 59, 113, 0.15));
+}
+
+.blueprintPitchCard span {
+  display: inline-flex;
+  margin-bottom: 14px;
+  color: #FFCC00;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.blueprintPitchCard h3 {
+  margin: 0 0 10px;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.blueprintPitchCard p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  line-height: 1.56;
+}
+
+.referencePackCallout {
+  margin-top: 16px;
+  padding: 18px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(138, 216, 176, 0.25);
+  background: rgba(74, 184, 130, 0.08);
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.referencePackCallout strong {
+  color: #8AD8B0;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.referencePackCallout p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+@media (max-width: 1060px) {
+  .heroBlueprintGrid,
+  .blueprintIntro {
+    grid-template-columns: 1fr;
+  }
+
+  .heroBlueprintGrid {
+    min-height: 0;
+  }
+
+  .architectureScene {
+    min-height: 520px;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    padding-top: 72px;
+  }
+
+  .architectureScene {
+    min-height: 430px;
+  }
+
+  .sceneHud {
+    grid-template-columns: 1fr;
+  }
+
+  .sceneHud ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .blueprintPitchGrid,
+  .referencePackCallout {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ─────────── DIAGNÓSTICO ─────────── */

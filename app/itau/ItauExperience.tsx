@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import type { ReactNode } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
 import {
   motion,
   useReducedMotion,
@@ -10,6 +11,7 @@ import {
   useTransform,
 } from 'framer-motion'
 import type { Variants } from 'framer-motion'
+import type { Group } from 'three'
 import {
   Activity,
   Bot,
@@ -845,6 +847,100 @@ const officialSources: Array<{
   },
 ]
 
+type BlueprintLayer = {
+  label: string
+  table: string
+  color: string
+  position: [number, number, number]
+  width: number
+  depth: number
+}
+
+type BlueprintSignal = {
+  label: string
+  color: string
+  position: [number, number, number]
+}
+
+const blueprintLayers: BlueprintLayer[] = [
+  {
+    label: 'Business Service',
+    table: 'business_service',
+    color: '#55B8D9',
+    position: [0, 1.6, -1.15],
+    width: 3.8,
+    depth: 1.9,
+  },
+  {
+    label: 'Service Instance',
+    table: 'cmdb_ci_service_auto',
+    color: '#82B8FF',
+    position: [0, 0.68, -0.45],
+    width: 3.35,
+    depth: 1.7,
+  },
+  {
+    label: 'AI Digital Asset',
+    table: 'alm_ai_system_digital_asset',
+    color: '#8AD8B0',
+    position: [-1.32, -0.28, 0.2],
+    width: 1.72,
+    depth: 1.35,
+  },
+  {
+    label: 'AI Function',
+    table: 'cmdb_ci_function_ai',
+    color: '#FFB870',
+    position: [0.05, -0.45, 0.42],
+    width: 1.62,
+    depth: 1.28,
+  },
+  {
+    label: 'AI & Model Application',
+    table: 'cmdb_ci_appl_ai_application',
+    color: '#FFD83A',
+    position: [1.42, -0.28, 0.2],
+    width: 1.88,
+    depth: 1.35,
+  },
+  {
+    label: 'AI Control Tower',
+    table: 'AI inventory · discovery · risk',
+    color: '#C7A2FF',
+    position: [0, -1.35, 1.02],
+    width: 3.05,
+    depth: 1.18,
+  },
+]
+
+const blueprintSignals: BlueprintSignal[] = [
+  { label: 'owner', color: '#FFB870', position: [-2.3, 0.15, 1.05] },
+  { label: 'risk', color: '#FF7782', position: [2.28, 0.1, 1.0] },
+  { label: 'IRE', color: '#8AD8B0', position: [-1.1, -1.78, 1.7] },
+  { label: 'SGC', color: '#94D0FF', position: [1.08, -1.78, 1.7] },
+]
+
+const architecturePitchCards = [
+  {
+    kicker: 'Tese',
+    title: 'Architecture Blueprint, não cadastro de tabela.',
+    copy:
+      'O site orienta a conversa para uma arquitetura de governança: onde o agente mora, quem responde, que serviço ele impacta e como vira operação segura.',
+  },
+  {
+    kicker: 'CSDM',
+    title: 'Valor, serviço, ativo e runtime ficam separados.',
+    copy:
+      'Business Service e Service Instance explicam impacto; AI Digital Asset governa risco; AI Function ou AI & Model Application representam deployment.',
+  },
+  {
+    kicker: 'Próximo passo',
+    title: 'Architecture Sprint com 3 a 5 agentes reais.',
+    copy:
+      'Validar owner, data classification, source_unique_id, relação Asset-CI, Service Instance e readiness para AI Control Tower antes de carga em escala.',
+  },
+]
+
 const motionEase = [0.16, 1, 0.3, 1] as const
 const revealViewport = { once: true, amount: 0.2 } as const
 
@@ -881,6 +977,144 @@ const layerItem: Variants = {
     filter: 'blur(0px)',
     transition: { duration: 0.6, ease: motionEase },
   },
+}
+
+function CSDMBlueprintMesh({ reduced }: { reduced: boolean | null }) {
+  const groupRef = useRef<Group | null>(null)
+  const layerConnectors = useMemo(
+    () => [
+      { position: [0, 1.12, -0.82] as [number, number, number], width: 0.08, height: 0.82 },
+      { position: [0, 0.15, -0.15] as [number, number, number], width: 0.08, height: 0.9 },
+      { position: [-0.7, -0.88, 0.76] as [number, number, number], width: 0.06, height: 0.82 },
+      { position: [0.7, -0.88, 0.76] as [number, number, number], width: 0.06, height: 0.82 },
+    ],
+    [],
+  )
+
+  useFrame(({ clock }) => {
+    if (reduced || !groupRef.current) return
+    const time = clock.getElapsedTime()
+    groupRef.current.rotation.y = Math.sin(time * 0.34) * 0.18
+    groupRef.current.rotation.x = -0.35 + Math.sin(time * 0.22) * 0.035
+    groupRef.current.position.y = Math.sin(time * 0.58) * 0.08
+  })
+
+  return (
+    <group ref={groupRef} rotation={[-0.35, 0.18, 0.02]} position={[0, -0.02, 0]}>
+      <mesh position={[0, -1.95, 0.38]} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[2.85, 0.018, 16, 120]} />
+        <meshStandardMaterial color="#EC7000" emissive="#EC7000" emissiveIntensity={0.32} />
+      </mesh>
+      <mesh position={[0, -1.95, 0.38]} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[1.82, 0.012, 16, 96]} />
+        <meshStandardMaterial color="#8AD8B0" emissive="#8AD8B0" emissiveIntensity={0.26} />
+      </mesh>
+
+      {layerConnectors.map((connector, index) => (
+        <mesh key={index} position={connector.position}>
+          <boxGeometry args={[connector.width, connector.height, 0.045]} />
+          <meshStandardMaterial
+            color={index > 1 ? '#8AD8B0' : '#FFB870'}
+            emissive={index > 1 ? '#8AD8B0' : '#FFB870'}
+            emissiveIntensity={0.18}
+            roughness={0.55}
+          />
+        </mesh>
+      ))}
+
+      {blueprintLayers.map((layer, index) => (
+        <group key={layer.label} position={layer.position}>
+          <mesh castShadow receiveShadow>
+            <boxGeometry args={[layer.width, 0.18, layer.depth]} />
+            <meshStandardMaterial
+              color={layer.color}
+              emissive={layer.color}
+              emissiveIntensity={index === 5 ? 0.36 : 0.16}
+              metalness={0.22}
+              roughness={0.42}
+            />
+          </mesh>
+          <mesh position={[0, 0.16, 0]}>
+            <boxGeometry args={[layer.width * 0.86, 0.055, layer.depth * 0.78]} />
+            <meshStandardMaterial
+              color="#ffffff"
+              transparent
+              opacity={0.18}
+              roughness={0.18}
+              metalness={0.08}
+            />
+          </mesh>
+          <mesh position={[-layer.width * 0.38, 0.31, -layer.depth * 0.24]}>
+            <sphereGeometry args={[0.105, 24, 24]} />
+            <meshStandardMaterial
+              color="#ffffff"
+              emissive={layer.color}
+              emissiveIntensity={0.7}
+              roughness={0.32}
+            />
+          </mesh>
+        </group>
+      ))}
+
+      {blueprintSignals.map((signal, index) => (
+        <mesh key={signal.label} position={signal.position}>
+          <sphereGeometry args={[index < 2 ? 0.12 : 0.1, 28, 28]} />
+          <meshStandardMaterial
+            color={signal.color}
+            emissive={signal.color}
+            emissiveIntensity={0.75}
+            roughness={0.2}
+          />
+        </mesh>
+      ))}
+    </group>
+  )
+}
+
+function CSDMArchitectureScene({ reduced }: { reduced: boolean | null }) {
+  return (
+    <div
+      className={styles.architectureScene}
+      data-itau-architecture-canvas="ServiceNow CSDM Architecture Blueprint"
+      aria-label="ServiceNow CSDM Architecture Blueprint 3D para agentes de IA no Itaú"
+    >
+      <div className={styles.architectureCanvas}>
+        <Canvas
+          camera={{ position: [0, 2.65, 6.15], fov: 42 }}
+          dpr={[1, 1.55]}
+          frameloop={reduced ? 'demand' : 'always'}
+          gl={{ antialias: true, alpha: true }}
+        >
+          <ambientLight intensity={0.72} />
+          <directionalLight position={[3.6, 4.2, 3.8]} intensity={1.55} />
+          <pointLight position={[-3.2, 1.2, 2.1]} color="#EC7000" intensity={2.4} />
+          <pointLight position={[2.8, -0.4, 3.2]} color="#8AD8B0" intensity={1.6} />
+          <CSDMBlueprintMesh reduced={reduced} />
+        </Canvas>
+      </div>
+
+      <div className={styles.sceneHud} aria-hidden="true">
+        <div>
+          <span>ServiceNow CSDM Architecture Blueprint</span>
+          <strong>Itaú AI governance room</strong>
+        </div>
+        <ul>
+          {blueprintLayers.slice(0, 5).map((layer) => (
+            <li key={layer.label}>
+              <i style={{ backgroundColor: layer.color }} />
+              <span>{layer.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className={styles.sceneFooter} aria-hidden="true">
+        {blueprintSignals.map((signal) => (
+          <span key={signal.label}>{signal.label}</span>
+        ))}
+      </div>
+    </div>
+  )
 }
 
 function Reveal({
@@ -975,37 +1209,54 @@ export default function ItauExperience() {
             initial={reduced ? false : 'hidden'}
             animate="visible"
             variants={stagger}
+            className={styles.heroBlueprintGrid}
           >
-          <motion.div className={styles.heroBadges} variants={fadeUp}>
-            <span className={styles.brandChip}>
-              <span className={styles.brandDot} /> Itaú Unibanco
-            </span>
-            <span className={`${styles.brandChip} ${styles.sn}`}>
-              <span className={styles.brandDot} /> ServiceNow
-            </span>
-            <span className={`${styles.brandChip} ${styles.opr}`}>OPR-2025-0162762</span>
-          </motion.div>
-          <motion.h1 className={styles.heroTitle} variants={fadeUp}>
-            AI Agent Governance: <em>CMDB</em> + AI Control Tower.
-          </motion.h1>
-          <motion.p className={styles.heroLede} variants={fadeUp}>
-            Resposta objetiva para o alinhamento com o Itaú: como cadastrar agentes de IA sem criar
-            inventário paralelo, quando usar AI Digital Asset, quando criar CI operacional e como preparar
-            o desenho para discovery, IRE e carga em escala.
-          </motion.p>
-          <motion.div className={styles.heroMeta} variants={fadeUp}>
-            <div className={styles.heroMetaItem}>
-              <span className={styles.heroMetaLabel}>Audience</span>
-              <span className={styles.heroMetaValue}>Squad Gaia + Governança</span>
+            <div className={styles.heroCopy}>
+              <motion.div className={styles.heroBadges} variants={fadeUp}>
+                <span className={styles.brandChip}>
+                  <span className={styles.brandDot} /> Itaú Unibanco
+                </span>
+                <span className={`${styles.brandChip} ${styles.sn}`}>
+                  <span className={styles.brandDot} /> ServiceNow
+                </span>
+                <span className={`${styles.brandChip} ${styles.opr}`}>OPR-2025-0162762</span>
+              </motion.div>
+              <motion.h1 className={styles.heroTitle} variants={fadeUp}>
+                ServiceNow CSDM Architecture Blueprint para agentes de IA no Itaú.
+              </motion.h1>
+              <motion.p className={styles.heroLede} variants={fadeUp}>
+                O pitch muda de “qual tabela usar” para um site de arquitetura: onde o agente
+                mora no CSDM, qual ativo de IA governa risco, qual CI representa runtime e como o
+                AI Control Tower descobre, reconcilia e aciona a operação.
+              </motion.p>
+              <motion.div className={styles.heroMeta} variants={fadeUp}>
+                <div className={styles.heroMetaItem}>
+                  <span className={styles.heroMetaLabel}>Audience</span>
+                  <span className={styles.heroMetaValue}>Squad Gaia + Arquitetura + Governança</span>
+                </div>
+                <div className={styles.heroMetaItem}>
+                  <span className={styles.heroMetaLabel}>Blueprint</span>
+                  <span className={styles.heroMetaValue}>CSDM 5 · CMDB · AI Control Tower</span>
+                </div>
+                <div className={styles.heroMetaItem}>
+                  <span className={styles.heroMetaLabel}>Decision</span>
+                  <span className={styles.heroMetaValue}>Architecture Sprint → piloto → escala</span>
+                </div>
+              </motion.div>
+              <motion.div className={styles.heroActions} variants={fadeUp}>
+                <a href="#architecture-blueprint" className={styles.heroPrimaryAction}>
+                  Ver blueprint 3D
+                </a>
+                <a href="#mapa-csdm-itau" className={styles.heroSecondaryAction}>
+                  Diagrama CSDM
+                </a>
+                <span className={styles.heroReferencePack}>Reference Pack DOCX/PDF</span>
+              </motion.div>
             </div>
-            <div className={styles.heroMetaItem}>
-              <span className={styles.heroMetaLabel}>Scope</span>
-              <span className={styles.heroMetaValue}>CSDM 5 forward-compatible</span>
-            </div>
-            <div className={styles.heroMetaItem}>
-              <span className={styles.heroMetaLabel}>Decision</span>
-              <span className={styles.heroMetaValue}>Sandbox → piloto → escala</span>
-            </div>
+
+            <motion.aside className={styles.heroSceneWrap} variants={fadeUp}>
+              <CSDMArchitectureScene reduced={reduced} />
+            </motion.aside>
           </motion.div>
           {!reduced && (
             <motion.div
@@ -1014,12 +1265,52 @@ export default function ItauExperience() {
               animate={{ y: [0, 8, 0], opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <span>role para a aula</span>
+              <span>role para o blueprint</span>
               <span className={styles.scrollCueArrow}>↓</span>
             </motion.div>
           )}
-          </motion.div>
         </motion.section>
+
+        {/* ─────────── ARCHITECTURE BLUEPRINT ─────────── */}
+        <Reveal className={`${styles.section} ${styles.blueprintSection}`} reduced={reduced}>
+          <div id="architecture-blueprint" />
+          <div className={styles.blueprintIntro}>
+            <div>
+              <span className={styles.sectionKicker}>site de arquitetura</span>
+              <h2 className={styles.sectionTitle}>A conversa certa é arquitetura, não cadastro.</h2>
+            </div>
+            <p>
+              O material para o Itaú precisa funcionar como uma decision room: mostra a arquitetura
+              ServiceNow CSDM, explica onde o agente vive, e entrega um Architecture Sprint com
+              critérios para piloto em banco regulado.
+            </p>
+          </div>
+
+          <motion.div
+            className={styles.blueprintPitchGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.18 }}
+          >
+            {architecturePitchCards.map((card) => (
+              <motion.article key={card.title} className={styles.blueprintPitchCard} variants={cardItem}>
+                <span>{card.kicker}</span>
+                <h3>{card.title}</h3>
+                <p>{card.copy}</p>
+              </motion.article>
+            ))}
+          </motion.div>
+
+          <div className={styles.referencePackCallout}>
+            <strong>Reference Pack</strong>
+            <p>
+              O DOCX/PDF acompanha essa narrativa: tese executiva, diagrama ServiceNow CSDM,
+              modelo de dados, checklist do piloto, fontes oficiais e guardrails para não quebrar
+              o Control Tower operacional do pierrondi.dev.
+            </p>
+          </div>
+        </Reveal>
 
         {/* ─────────── AULA: CAMADAS CSDM 5 ─────────── */}
         <Reveal className={styles.section} reduced={reduced}>
@@ -1096,8 +1387,8 @@ export default function ItauExperience() {
         <Reveal className={styles.section} reduced={reduced}>
           <div id="mapa-csdm-itau" />
           <div className={styles.sectionHeader}>
-            <span className={styles.sectionKicker}>mapa CSDM 5 preenchido</span>
-            <h2 className={styles.sectionTitle}>Como o desenho fica para agentes de IA no Itaú.</h2>
+            <span className={styles.sectionKicker}>ServiceNow CSDM Reference Diagram</span>
+            <h2 className={styles.sectionTitle}>Como o diagrama CSDM fica para agentes de IA no Itaú.</h2>
             <p className={styles.sectionSub}>
               Abaixo está a leitura prática do CSDM 5: cada domínio recebe os registros, owners e
               decisões necessários para resolver o cadastro de agentes de IA sem criar uma CMDB paralela.
