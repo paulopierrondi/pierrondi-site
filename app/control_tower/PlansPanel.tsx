@@ -104,31 +104,31 @@ export default function PlansPanel({
   const queue = summarizePlanQueue(plans, approvals)
   const visible = queue.visible.filter((p) => !resolved(rows[p.planId]?.state))
   const pending = queue.pending
-  const resolvedPlans = [
-    ...queue.resolved.map(({ plan, approval }) => ({
+  const resolvedPlansById = new Map<string, { plan: PlanQueueItem; hint: string }>()
+  queue.resolved.forEach(({ plan, approval }) => {
+    resolvedPlansById.set(plan.planId, {
       plan,
-      state: approval.status,
       hint:
         approval.status === 'approved'
           ? `aprovado · gate expira em ${APPROVAL_TTL_HOURS}h`
           : approval.status === 'deferred'
             ? 'adiado · sai da fila até o próximo run'
             : 'rejeitado · não vira gate',
-    })),
-    ...pending
-      .filter((p) => resolved(rows[p.planId]?.state))
-      .map((plan) => {
-        const state = rows[plan.planId]?.state as Exclude<
-          RowState,
-          'idle' | 'pending' | 'error'
-        >
-        return {
-          plan,
-          state,
-          hint: STATE_HINT[state],
-        }
-      }),
-  ]
+    })
+  })
+  pending
+    .filter((p) => resolved(rows[p.planId]?.state))
+    .forEach((plan) => {
+      const state = rows[plan.planId]?.state as Exclude<
+        RowState,
+        'idle' | 'pending' | 'error'
+      >
+      resolvedPlansById.set(plan.planId, {
+        plan,
+        hint: STATE_HINT[state],
+      })
+    })
+  const resolvedPlans = Array.from(resolvedPlansById.values())
   const lowRisk = queue.lowRiskCount
   const mediumRisk = queue.mediumRiskCount
 
