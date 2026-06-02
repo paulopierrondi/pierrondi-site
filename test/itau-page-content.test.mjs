@@ -24,17 +24,21 @@ test('Itaú page anchors AI governance guidance in ServiceNow-supported terms', 
   }
 })
 
-test('Itaú page ships the 3D CSDM architecture blueprint pitch', () => {
+test('Itaú page ships architectural notation diagrams instead of the weak 3D scene', () => {
   const requiredTerms = [
-    '@react-three/fiber',
-    'CSDMArchitectureScene',
-    'ServiceNow CSDM Architecture Blueprint',
-    'data-itau-architecture-canvas',
-    'Architecture Sprint',
+    'ServiceNow Architectural Notation',
+    'data-itau-architecture-notation',
+    'ArchitecturalNotationDiagram',
+    'TargetArchitectureView',
+    'AI Control Tower Operating Model',
+    'data-itau-target-architecture',
     'Reference Pack',
   ]
 
   for (const term of requiredTerms) {
     assert.match(source, new RegExp(term, 'i'), `Expected Itaú architecture page to mention ${term}`)
   }
+
+  assert.doesNotMatch(source, /@react-three\/fiber/)
+  assert.doesNotMatch(source, /CSDMArchitectureScene/)
 })

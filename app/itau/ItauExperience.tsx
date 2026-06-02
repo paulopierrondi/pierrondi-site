@@ -1,8 +1,7 @@
 'use client'
 
-import { useMemo, useRef } from 'react'
+import { useRef } from 'react'
 import type { ReactNode } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
 import {
   motion,
   useReducedMotion,
@@ -11,7 +10,6 @@ import {
   useTransform,
 } from 'framer-motion'
 import type { Variants } from 'framer-motion'
-import type { Group } from 'three'
 import {
   Activity,
   Bot,
@@ -847,77 +845,87 @@ const officialSources: Array<{
   },
 ]
 
-type BlueprintLayer = {
-  label: string
+const architecturalNotationSteps: Array<{
+  id: string
+  lane: string
+  title: string
   table: string
-  color: string
-  position: [number, number, number]
-  width: number
-  depth: number
-}
-
-type BlueprintSignal = {
-  label: string
-  color: string
-  position: [number, number, number]
-}
-
-const blueprintLayers: BlueprintLayer[] = [
+  decision: string
+  owner: string
+  toneClass: string
+}> = [
   {
-    label: 'Business Service',
-    table: 'business_service',
-    color: '#55B8D9',
-    position: [0, 1.6, -1.15],
-    width: 3.8,
-    depth: 1.9,
+    id: '01',
+    lane: 'Negócio',
+    title: 'Business capability / aplicação consumidora',
+    table: 'Business Capability · Business Application · Digital Product',
+    decision: 'Explica valor, jornada impactada e criticidade antes de qualquer CI de IA.',
+    owner: 'Enterprise Architecture + Product Owner',
+    toneClass: styles.notationBusiness,
   },
   {
-    label: 'Service Instance',
+    id: '02',
+    lane: 'Serviço',
+    title: 'Service Instance como ponto operacional',
     table: 'cmdb_ci_service_auto',
-    color: '#82B8FF',
-    position: [0, 0.68, -0.45],
-    width: 3.35,
-    depth: 1.7,
+    decision: 'Onde incidente, mudança, health, suporte e impacto ficam visíveis no CSDM.',
+    owner: 'Service Owner + Operação',
+    toneClass: styles.notationService,
   },
   {
-    label: 'AI Digital Asset',
-    table: 'alm_ai_system_digital_asset',
-    color: '#8AD8B0',
-    position: [-1.32, -0.28, 0.2],
-    width: 1.72,
-    depth: 1.35,
+    id: '03',
+    lane: 'Governança',
+    title: 'AI Digital Asset governa o uso',
+    table: 'alm_ai_system_digital_asset · cmdb_ai_system_product_model',
+    decision: 'Registra finalidade, risco, dados, lifecycle, modelo, prompt, dataset e revisão.',
+    owner: 'AI Governance + Data Steward',
+    toneClass: styles.notationGovernance,
   },
   {
-    label: 'AI Function',
-    table: 'cmdb_ci_function_ai',
-    color: '#FFB870',
-    position: [0.05, -0.45, 0.42],
-    width: 1.62,
-    depth: 1.28,
+    id: '04',
+    lane: 'Runtime',
+    title: 'CI só quando existe deployment',
+    table: 'cmdb_ci_function_ai · cmdb_ci_appl_ai_application',
+    decision: 'SaaS/cloud/terceiro vira AI Function; Itaú-managed vira AI & Model Application.',
+    owner: 'Technical Owner + Support Group',
+    toneClass: styles.notationRuntime,
   },
   {
-    label: 'AI & Model Application',
-    table: 'cmdb_ci_appl_ai_application',
-    color: '#FFD83A',
-    position: [1.42, -0.28, 0.2],
-    width: 1.88,
-    depth: 1.35,
-  },
-  {
-    label: 'AI Control Tower',
-    table: 'AI inventory · discovery · risk',
-    color: '#C7A2FF',
-    position: [0, -1.35, 1.02],
-    width: 3.05,
-    depth: 1.18,
+    id: '05',
+    lane: 'Controle',
+    title: 'AI Control Tower consolida e aciona',
+    table: 'AI inventory · discovery · risk · runtime · workflows',
+    decision: 'Descobre ativos, classifica risco, observa runtime e dispara revisão/remediation.',
+    owner: 'AI Governance + Platform Ops',
+    toneClass: styles.notationControl,
   },
 ]
 
-const blueprintSignals: BlueprintSignal[] = [
-  { label: 'owner', color: '#FFB870', position: [-2.3, 0.15, 1.05] },
-  { label: 'risk', color: '#FF7782', position: [2.28, 0.1, 1.0] },
-  { label: 'IRE', color: '#8AD8B0', position: [-1.1, -1.78, 1.7] },
-  { label: 'SGC', color: '#94D0FF', position: [1.08, -1.78, 1.7] },
+const controlTowerOperatingModel: Array<{
+  phase: string
+  input: string
+  output: string
+}> = [
+  {
+    phase: 'Discover',
+    input: 'Service Graph Connectors, Now Assist, hyperscalers, SaaS e esteira Itaú',
+    output: 'AI systems, agents, models, prompts, datasets, tools e MCP servers entram no inventário.',
+  },
+  {
+    phase: 'Govern',
+    input: 'Owner, risco, dados, lifecycle, approval state e managed/unmanaged',
+    output: 'Steward review e política de governança deixam de ser planilha.',
+  },
+  {
+    phase: 'Relate',
+    input: 'cmdb_rel_asset_ci, Service Instance, Business Application e source_unique_id',
+    output: 'AI asset, CI, serviço e runtime ficam reconciliáveis por IRE e auditáveis.',
+  },
+  {
+    phase: 'Act',
+    input: 'Mudança de modelo, prompt, permissão, dataset, postura ou runtime',
+    output: 'Change, remediation, recertificação, exceção, kill switch ou decommission.',
+  },
 ]
 
 const architecturePitchCards = [
@@ -979,141 +987,128 @@ const layerItem: Variants = {
   },
 }
 
-function CSDMBlueprintMesh({ reduced }: { reduced: boolean | null }) {
-  const groupRef = useRef<Group | null>(null)
-  const layerConnectors = useMemo(
-    () => [
-      { position: [0, 1.12, -0.82] as [number, number, number], width: 0.08, height: 0.82 },
-      { position: [0, 0.15, -0.15] as [number, number, number], width: 0.08, height: 0.9 },
-      { position: [-0.7, -0.88, 0.76] as [number, number, number], width: 0.06, height: 0.82 },
-      { position: [0.7, -0.88, 0.76] as [number, number, number], width: 0.06, height: 0.82 },
-    ],
-    [],
-  )
-
-  useFrame(({ clock }) => {
-    if (reduced || !groupRef.current) return
-    const time = clock.getElapsedTime()
-    groupRef.current.rotation.y = Math.sin(time * 0.34) * 0.18
-    groupRef.current.rotation.x = -0.35 + Math.sin(time * 0.22) * 0.035
-    groupRef.current.position.y = Math.sin(time * 0.58) * 0.08
-  })
-
+function ArchitecturalNotationDiagram({ reduced }: { reduced: boolean | null }) {
   return (
-    <group ref={groupRef} rotation={[-0.35, 0.18, 0.02]} position={[0, -0.02, 0]}>
-      <mesh position={[0, -1.95, 0.38]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[2.85, 0.018, 16, 120]} />
-        <meshStandardMaterial color="#EC7000" emissive="#EC7000" emissiveIntensity={0.32} />
-      </mesh>
-      <mesh position={[0, -1.95, 0.38]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[1.82, 0.012, 16, 96]} />
-        <meshStandardMaterial color="#8AD8B0" emissive="#8AD8B0" emissiveIntensity={0.26} />
-      </mesh>
+    <motion.div
+      className={styles.notationBoard}
+      data-itau-architecture-notation="ServiceNow Architectural Notation"
+      aria-label="ServiceNow Architectural Notation para CSDM e AI Control Tower no Itaú"
+      initial={reduced ? false : { opacity: 0, y: 24, scale: 0.98 }}
+      animate={reduced ? undefined : { opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.7, ease: motionEase }}
+    >
+      <div className={styles.notationHeader}>
+        <div>
+          <span>ServiceNow Architectural Notation</span>
+          <strong>CSDM + AI Control Tower decision model</strong>
+        </div>
+        <p>Leitura-alvo para discutir com arquitetura: camada, registro, decisão e owner.</p>
+      </div>
 
-      {layerConnectors.map((connector, index) => (
-        <mesh key={index} position={connector.position}>
-          <boxGeometry args={[connector.width, connector.height, 0.045]} />
-          <meshStandardMaterial
-            color={index > 1 ? '#8AD8B0' : '#FFB870'}
-            emissive={index > 1 ? '#8AD8B0' : '#FFB870'}
-            emissiveIntensity={0.18}
-            roughness={0.55}
-          />
-        </mesh>
-      ))}
+      <div className={styles.notationFlow}>
+        {architecturalNotationSteps.map((step, index) => (
+          <motion.article
+            key={step.id}
+            className={`${styles.notationNode} ${step.toneClass}`}
+            variants={cardItem}
+            initial={reduced ? false : 'hidden'}
+            animate="visible"
+            transition={{ delay: reduced ? 0 : index * 0.06 }}
+          >
+            <div className={styles.notationNodeTop}>
+              <span>{step.id}</span>
+              <strong>{step.lane}</strong>
+            </div>
+            <h3>{step.title}</h3>
+            <code>{step.table}</code>
+            <p>{step.decision}</p>
+            <small>{step.owner}</small>
+            {index < architecturalNotationSteps.length - 1 && (
+              <i className={styles.notationArrow} aria-hidden="true">→</i>
+            )}
+          </motion.article>
+        ))}
+      </div>
 
-      {blueprintLayers.map((layer, index) => (
-        <group key={layer.label} position={layer.position}>
-          <mesh castShadow receiveShadow>
-            <boxGeometry args={[layer.width, 0.18, layer.depth]} />
-            <meshStandardMaterial
-              color={layer.color}
-              emissive={layer.color}
-              emissiveIntensity={index === 5 ? 0.36 : 0.16}
-              metalness={0.22}
-              roughness={0.42}
-            />
-          </mesh>
-          <mesh position={[0, 0.16, 0]}>
-            <boxGeometry args={[layer.width * 0.86, 0.055, layer.depth * 0.78]} />
-            <meshStandardMaterial
-              color="#ffffff"
-              transparent
-              opacity={0.18}
-              roughness={0.18}
-              metalness={0.08}
-            />
-          </mesh>
-          <mesh position={[-layer.width * 0.38, 0.31, -layer.depth * 0.24]}>
-            <sphereGeometry args={[0.105, 24, 24]} />
-            <meshStandardMaterial
-              color="#ffffff"
-              emissive={layer.color}
-              emissiveIntensity={0.7}
-              roughness={0.32}
-            />
-          </mesh>
-        </group>
-      ))}
-
-      {blueprintSignals.map((signal, index) => (
-        <mesh key={signal.label} position={signal.position}>
-          <sphereGeometry args={[index < 2 ? 0.12 : 0.1, 28, 28]} />
-          <meshStandardMaterial
-            color={signal.color}
-            emissive={signal.color}
-            emissiveIntensity={0.75}
-            roughness={0.2}
-          />
-        </mesh>
-      ))}
-    </group>
+      <div className={styles.operatingModel} aria-label="AI Control Tower Operating Model">
+        <div className={styles.operatingModelTitle}>
+          <span>AI Control Tower Operating Model</span>
+          <strong>Descobrir · Governar · Relacionar · Acionar</strong>
+        </div>
+        <ol>
+          {controlTowerOperatingModel.map((phase) => (
+            <li key={phase.phase}>
+              <strong>{phase.phase}</strong>
+              <span>{phase.input}</span>
+              <p>{phase.output}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </motion.div>
   )
 }
 
-function CSDMArchitectureScene({ reduced }: { reduced: boolean | null }) {
+function TargetArchitectureView({ reduced }: { reduced: boolean | null }) {
+  const hover = reduced ? undefined : { y: -5, borderColor: 'rgba(236, 112, 0, 0.5)' }
+
   return (
-    <div
-      className={styles.architectureScene}
-      data-itau-architecture-canvas="ServiceNow CSDM Architecture Blueprint"
-      aria-label="ServiceNow CSDM Architecture Blueprint 3D para agentes de IA no Itaú"
+    <motion.div
+      className={styles.architectureBoard}
+      data-itau-target-architecture="AI Control Tower Operating Model target architecture"
+      variants={stagger}
+      initial={reduced ? false : 'hidden'}
+      whileInView={reduced ? undefined : 'visible'}
+      viewport={{ once: true, amount: 0.12 }}
     >
-      <div className={styles.architectureCanvas}>
-        <Canvas
-          camera={{ position: [0, 2.65, 6.15], fov: 42 }}
-          dpr={[1, 1.55]}
-          frameloop={reduced ? 'demand' : 'always'}
-          gl={{ antialias: true, alpha: true }}
-        >
-          <ambientLight intensity={0.72} />
-          <directionalLight position={[3.6, 4.2, 3.8]} intensity={1.55} />
-          <pointLight position={[-3.2, 1.2, 2.1]} color="#EC7000" intensity={2.4} />
-          <pointLight position={[2.8, -0.4, 3.2]} color="#8AD8B0" intensity={1.6} />
-          <CSDMBlueprintMesh reduced={reduced} />
-        </Canvas>
+      <div className={styles.targetArchitectureHeader}>
+        <span>Target Architecture</span>
+        <strong>Visão final: CSDM como sistema de registro, AI Control Tower como sistema de controle.</strong>
+        <p>
+          A decisão consolidada: AI Digital Asset governa uso e risco; AI CI representa runtime
+          quando existe deployment; Service Instance conecta impacto operacional; AI Control Tower
+          descobre, observa, mede risco e aciona workflows.
+        </p>
       </div>
 
-      <div className={styles.sceneHud} aria-hidden="true">
-        <div>
-          <span>ServiceNow CSDM Architecture Blueprint</span>
-          <strong>Itaú AI governance room</strong>
-        </div>
-        <ul>
-          {blueprintLayers.slice(0, 5).map((layer) => (
-            <li key={layer.label}>
-              <i style={{ backgroundColor: layer.color }} />
-              <span>{layer.label}</span>
-            </li>
-          ))}
-        </ul>
+      <div className={styles.architectureNodes}>
+        {architectureNodes.map((node) => {
+          const Icon = node.icon
+          return (
+            <motion.article
+              key={node.title}
+              className={`${styles.archNode} ${node.toneClass}`}
+              variants={cardItem}
+              whileHover={hover}
+            >
+              <div className={styles.archNodeTop}>
+                <span className={styles.nowIcon} aria-hidden="true">
+                  <span>SN</span>
+                  <Icon size={20} strokeWidth={1.8} />
+                </span>
+                <span className={styles.archLayer}>{node.layer}</span>
+              </div>
+              <h3 className={styles.archTitle}>{node.title}</h3>
+              <p className={styles.archTable}>{node.table}</p>
+              <p className={styles.archDesc}>{node.desc}</p>
+            </motion.article>
+          )
+        })}
       </div>
 
-      <div className={styles.sceneFooter} aria-hidden="true">
-        {blueprintSignals.map((signal) => (
-          <span key={signal.label}>{signal.label}</span>
+      <motion.ul className={styles.architectureEdges} variants={stagger}>
+        {architectureEdges.map((edge) => (
+          <motion.li key={`${edge.from}-${edge.to}`} variants={cardItem}>
+            <div className={styles.edgeLine}>
+              <span>{edge.from}</span>
+              <strong>{edge.verb}</strong>
+              <span>{edge.to}</span>
+            </div>
+            <p>{edge.reason}</p>
+          </motion.li>
         ))}
-      </div>
-    </div>
+      </motion.ul>
+    </motion.div>
   )
 }
 
@@ -1222,12 +1217,12 @@ export default function ItauExperience() {
                 <span className={`${styles.brandChip} ${styles.opr}`}>OPR-2025-0162762</span>
               </motion.div>
               <motion.h1 className={styles.heroTitle} variants={fadeUp}>
-                ServiceNow CSDM Architecture Blueprint para agentes de IA no Itaú.
+                ServiceNow Architectural Notation para governar AI Agents no Itaú.
               </motion.h1>
               <motion.p className={styles.heroLede} variants={fadeUp}>
-                O pitch muda de “qual tabela usar” para um site de arquitetura: onde o agente
-                mora no CSDM, qual ativo de IA governa risco, qual CI representa runtime e como o
-                AI Control Tower descobre, reconcilia e aciona a operação.
+                O pitch sai do 3D e vira notação arquitetural: camadas CSDM, decisão de classe,
+                governança do ativo, runtime, relações e uma visão final para o AI Control Tower
+                descobrir, reconciliar, observar e acionar a operação.
               </motion.p>
               <motion.div className={styles.heroMeta} variants={fadeUp}>
                 <div className={styles.heroMetaItem}>
@@ -1245,7 +1240,7 @@ export default function ItauExperience() {
               </motion.div>
               <motion.div className={styles.heroActions} variants={fadeUp}>
                 <a href="#architecture-blueprint" className={styles.heroPrimaryAction}>
-                  Ver blueprint 3D
+                  Ver diagramas
                 </a>
                 <a href="#mapa-csdm-itau" className={styles.heroSecondaryAction}>
                   Diagrama CSDM
@@ -1266,7 +1261,7 @@ export default function ItauExperience() {
             </div>
 
             <motion.aside className={styles.heroSceneWrap} variants={fadeUp}>
-              <CSDMArchitectureScene reduced={reduced} />
+              <ArchitecturalNotationDiagram reduced={reduced} />
             </motion.aside>
           </motion.div>
           {!reduced && (
@@ -1288,12 +1283,12 @@ export default function ItauExperience() {
           <div className={styles.blueprintIntro}>
             <div>
               <span className={styles.sectionKicker}>site de arquitetura</span>
-              <h2 className={styles.sectionTitle}>A conversa certa é arquitetura, não cadastro.</h2>
+              <h2 className={styles.sectionTitle}>A conversa certa é notação arquitetural, não efeito 3D.</h2>
             </div>
             <p>
               O material para o Itaú precisa funcionar como uma decision room: mostra a arquitetura
-              ServiceNow CSDM, explica onde o agente vive, e entrega um Architecture Sprint com
-              critérios para piloto em banco regulado.
+              ServiceNow CSDM, explica onde o agente vive, consolida as decisões e prepara o
+              AI Control Tower para operar descoberta, risco, runtime e lifecycle.
             </p>
           </div>
 
@@ -1643,51 +1638,7 @@ export default function ItauExperience() {
             </p>
           </div>
 
-          <motion.div
-            className={styles.architectureBoard}
-            variants={stagger}
-            initial={reduced ? false : 'hidden'}
-            whileInView={reduced ? undefined : 'visible'}
-            viewport={{ once: true, amount: 0.12 }}
-          >
-            <div className={styles.architectureNodes}>
-              {architectureNodes.map((node) => {
-                const Icon = node.icon
-                return (
-                  <motion.article
-                    key={node.title}
-                    className={`${styles.archNode} ${node.toneClass}`}
-                    variants={cardItem}
-                    whileHover={cardHover}
-                  >
-                    <div className={styles.archNodeTop}>
-                      <span className={styles.nowIcon} aria-hidden="true">
-                        <span>SN</span>
-                        <Icon size={20} strokeWidth={1.8} />
-                      </span>
-                      <span className={styles.archLayer}>{node.layer}</span>
-                    </div>
-                    <h3 className={styles.archTitle}>{node.title}</h3>
-                    <p className={styles.archTable}>{node.table}</p>
-                    <p className={styles.archDesc}>{node.desc}</p>
-                  </motion.article>
-                )
-              })}
-            </div>
-
-            <motion.ul className={styles.architectureEdges} variants={stagger}>
-              {architectureEdges.map((edge) => (
-                <motion.li key={`${edge.from}-${edge.to}`} variants={cardItem}>
-                  <div className={styles.edgeLine}>
-                    <span>{edge.from}</span>
-                    <strong>{edge.verb}</strong>
-                    <span>{edge.to}</span>
-                  </div>
-                  <p>{edge.reason}</p>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
+          <TargetArchitectureView reduced={reduced} />
         </Reveal>
 
         {/* ─────────── ALINHAMENTO CSDM 5 ─────────── */}

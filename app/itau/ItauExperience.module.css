@@ -227,23 +227,26 @@
   z-index: 1;
 }
 
-.architectureScene {
+.notationBoard {
   position: relative;
   width: 100%;
-  min-height: clamp(460px, 52vw, 690px);
+  min-height: clamp(620px, 58vw, 760px);
   border-radius: 8px;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
-    radial-gradient(circle at 52% 36%, rgba(236, 112, 0, 0.22), transparent 46%),
-    linear-gradient(140deg, rgba(0, 59, 113, 0.38), rgba(10, 15, 28, 0.72));
+    linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025)),
+    linear-gradient(120deg, rgba(0, 59, 113, 0.38), rgba(10, 15, 28, 0.78));
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow:
     0 34px 100px rgba(0, 0, 0, 0.36),
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  padding: clamp(18px, 3vw, 28px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 18px;
 }
 
-.architectureScene::before {
+.notationBoard::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -254,39 +257,27 @@
   background-size: 36px 36px;
   mask-image: linear-gradient(180deg, black, rgba(0, 0, 0, 0.35), transparent);
   -webkit-mask-image: linear-gradient(180deg, black, rgba(0, 0, 0, 0.35), transparent);
+  z-index: 0;
+}
+
+.notationHeader,
+.notationFlow,
+.operatingModel {
+  position: relative;
   z-index: 1;
 }
 
-.architectureCanvas {
-  position: absolute;
-  inset: 0;
-}
-
-.architectureCanvas canvas {
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
-}
-
-.sceneHud,
-.sceneFooter {
-  position: absolute;
-  z-index: 2;
-  left: clamp(16px, 3vw, 28px);
-  right: clamp(16px, 3vw, 28px);
-  pointer-events: none;
-}
-
-.sceneHud {
-  top: clamp(16px, 3vw, 28px);
+.notationHeader {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(180px, 0.76fr);
-  gap: 18px;
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 0.72fr);
+  gap: 20px;
+  align-items: end;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.sceneHud span,
-.sceneFooter span {
+.notationHeader span,
+.operatingModelTitle span {
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -294,63 +285,212 @@
   font-weight: 800;
 }
 
-.sceneHud strong {
+.notationHeader strong {
   display: block;
   margin-top: 8px;
+  padding-bottom: 2px;
   color: #ffffff;
-  font-size: clamp(19px, 2.2vw, 28px);
-  line-height: 1.05;
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.08;
 }
 
-.sceneHud ul {
+.notationHeader p {
   margin: 0;
-  padding: 12px;
-  list-style: none;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.notationFlow {
   display: grid;
-  gap: 7px;
-  border-radius: 8px;
-  background: rgba(5, 7, 13, 0.52);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(14px);
+  grid-template-columns: 1fr;
+  gap: 10px;
+  align-items: stretch;
 }
 
-.sceneHud li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.notationNode {
+  position: relative;
   min-width: 0;
+  min-height: 106px;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: rgba(5, 7, 13, 0.58);
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr) minmax(150px, 0.74fr);
+  grid-template-areas:
+    "meta title code"
+    "meta body code"
+    "meta owner code";
+  gap: 7px 12px;
+  align-items: center;
+  overflow: visible;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-.sceneHud i {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  box-shadow: 0 0 14px currentColor;
+.notationNode::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  border-radius: 10px 10px 0 0;
+  background: currentColor;
 }
 
-.sceneHud li span {
-  letter-spacing: 0;
-  text-transform: none;
+.notationBusiness { color: #94D0FF; }
+.notationService { color: #82B8FF; }
+.notationGovernance { color: #8AD8B0; }
+.notationRuntime { color: #FFB870; }
+.notationControl { color: #C7A2FF; }
+
+.notationNodeTop {
+  grid-area: meta;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  height: 100%;
+  margin-bottom: 0;
+  padding-right: 10px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.notationNodeTop span {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 18px;
+  font-weight: 900;
+  color: currentColor;
+}
+
+.notationNodeTop strong {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+  text-align: left;
+}
+
+.notationNode h3 {
+  grid-area: title;
+  margin: 0;
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 1.24;
+}
+
+.notationNode code {
+  grid-area: code;
+  display: block;
+  min-height: 0;
+  margin-bottom: 0;
+  padding: 8px;
+  border-radius: 7px;
   color: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  line-height: 1.38;
+  white-space: normal;
   overflow-wrap: anywhere;
 }
 
-.sceneFooter {
-  bottom: clamp(16px, 3vw, 28px);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.notationNode p {
+  grid-area: body;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12.2px;
+  line-height: 1.48;
 }
 
-.sceneFooter span {
+.notationNode small {
+  grid-area: owner;
+  color: currentColor;
+  font-size: 10.5px;
+  line-height: 1.34;
+  font-weight: 800;
+}
+
+.notationArrow {
+  position: absolute;
+  right: 50%;
+  top: auto;
+  bottom: -18px;
+  z-index: 3;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  transform: translateX(50%) rotate(90deg);
   display: inline-flex;
-  padding: 7px 10px;
-  border-radius: 999px;
-  background: rgba(10, 15, 28, 0.62);
-  border: 1px solid rgba(255, 184, 112, 0.22);
-  color: #FFB870;
-  backdrop-filter: blur(10px);
+  align-items: center;
+  justify-content: center;
+  background: #EC7000;
+  color: #0A0F1C;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 900;
+  box-shadow: 0 10px 30px rgba(236, 112, 0, 0.34);
+}
+
+.operatingModel {
+  padding: 16px;
+  border-radius: 10px;
+  background: rgba(10, 15, 28, 0.72);
+  border: 1px solid rgba(138, 216, 176, 0.28);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.2);
+}
+
+.operatingModelTitle {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.operatingModelTitle strong {
+  color: #8AD8B0;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.operatingModel ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.operatingModel li {
+  min-width: 0;
+  padding: 11px;
+  border-radius: 8px;
+  background: rgba(138, 216, 176, 0.08);
+  border: 1px solid rgba(138, 216, 176, 0.16);
+}
+
+.operatingModel li strong {
+  display: block;
+  color: #8AD8B0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 7px;
+}
+
+.operatingModel li span {
+  display: block;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 11px;
+  line-height: 1.38;
+}
+
+.operatingModel li p {
+  margin: 8px 0 0;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 10.8px;
+  line-height: 1.38;
 }
 
 .blueprintSection {
@@ -467,8 +607,16 @@
     min-height: 0;
   }
 
-  .architectureScene {
+  .notationBoard {
     min-height: 520px;
+  }
+
+  .notationFlow {
+    grid-template-columns: 1fr;
+  }
+
+  .operatingModel ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -477,16 +625,40 @@
     padding-top: 72px;
   }
 
-  .architectureScene {
-    min-height: 430px;
-  }
-
-  .sceneHud {
+  .notationHeader {
     grid-template-columns: 1fr;
+    padding-right: 78px;
   }
 
-  .sceneHud ul {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .notationBoard {
+    min-height: 0;
+  }
+
+  .notationNode {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "meta"
+      "title"
+      "code"
+      "body"
+      "owner";
+    align-items: start;
+  }
+
+  .notationNodeTop {
+    flex-direction: row;
+    align-items: center;
+    border-right: none;
+    padding-right: 0;
+    height: auto;
+  }
+
+  .notationNodeTop strong {
+    text-align: right;
+  }
+
+  .operatingModel ol {
+    grid-template-columns: 1fr;
   }
 
   .blueprintPitchGrid,
@@ -1434,6 +1606,43 @@
   display: grid;
   gap: 22px;
   min-width: 0;
+}
+
+.targetArchitectureHeader {
+  min-width: 0;
+  padding: clamp(20px, 3vw, 30px);
+  border-radius: 14px;
+  border: 1px solid rgba(138, 216, 176, 0.24);
+  background:
+    linear-gradient(135deg, rgba(74, 184, 130, 0.12), rgba(0, 59, 113, 0.14)),
+    rgba(0, 0, 0, 0.24);
+}
+
+.targetArchitectureHeader span {
+  display: inline-flex;
+  margin-bottom: 10px;
+  color: #8AD8B0;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.targetArchitectureHeader strong {
+  display: block;
+  max-width: 22ch;
+  color: #ffffff;
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.targetArchitectureHeader p {
+  max-width: 82ch;
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  line-height: 1.58;
 }
 
 .architectureNodes {

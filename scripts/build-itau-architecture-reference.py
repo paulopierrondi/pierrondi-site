@@ -85,6 +85,48 @@ CSDM_LAYERS = [
     ),
 ]
 
+OPERATING_MODEL = [
+    (
+        "Discover",
+        "Service Graph Connectors, Now Assist, hyperscalers, SaaS e esteira Itaú",
+        "AI systems, agents, models, prompts, datasets, tools e MCP servers entram no inventário.",
+    ),
+    (
+        "Govern",
+        "Owner, risco, dados, lifecycle, approval state e managed/unmanaged",
+        "Steward review e política de governança deixam de ser planilha.",
+    ),
+    (
+        "Relate",
+        "cmdb_rel_asset_ci, Service Instance, Business Application e source_unique_id",
+        "AI asset, CI, serviço e runtime ficam reconciliáveis por IRE e auditáveis.",
+    ),
+    (
+        "Act",
+        "Mudança de modelo, prompt, permissão, dataset, postura ou runtime",
+        "Change, remediation, recertificação, exceção, kill switch ou decommission.",
+    ),
+]
+
+TARGET_DECISIONS = [
+    (
+        "Sistema de registro",
+        "CMDB/CSDM continua sendo a base de impacto, serviço, relacionamento e operação.",
+    ),
+    (
+        "Sistema de controle",
+        "AI Control Tower governa inventário, descoberta, risco, runtime, valor e workflows.",
+    ),
+    (
+        "Regra de CI",
+        "Sem deployment visível não há CI operacional; com deployment, classe depende do hosting model.",
+    ),
+    (
+        "Correlação",
+        "source_unique_id/external_id é obrigatório para reconciliar runtime, CMDB e AICT.",
+    ),
+]
+
 PILOT_STEPS = [
     ("1", "Taxonomia", "Fechar critério de classe: SaaS/cloud/terceiro versus Itaú-managed."),
     ("2", "Intake mínimo", "Owner, support_group, risk_tier, dados, provider, autonomy e source_unique_id."),
@@ -202,10 +244,17 @@ def build_document_xml() -> str:
     ]
 
     body: list[str] = []
+    operating_rows = [["Fase", "Entrada", "Saída governada"]] + [
+        [phase, input_text, output_text] for phase, input_text, output_text in OPERATING_MODEL
+    ]
+    decision_rows = [["Decisão", "Arquitetura consolidada"]] + [
+        [decision, rationale] for decision, rationale in TARGET_DECISIONS
+    ]
+
     body.append(paragraph("Itaú AI Governance", style="Label", bold=True, color=ORANGE, size=22))
     body.append(
         paragraph(
-            "ServiceNow CSDM Architecture Blueprint",
+            "ServiceNow Architectural Notation & Target Architecture",
             style="Title",
             bold=True,
             color=NAVY,
@@ -216,8 +265,9 @@ def build_document_xml() -> str:
     body.append(
         paragraph(
             "Reference Pack para alinhar Squad Gaia, Arquitetura, CMDB Owner e Governança: "
-            "o problema não é escolher uma tabela, é desenhar onde cada agente vive, quem responde, "
-            "qual serviço ele impacta e como AI Control Tower opera descoberta, risco e lifecycle.",
+            "o problema não é escolher uma tabela nem criar um efeito visual; é consolidar decisões "
+            "de arquitetura sobre onde cada agente vive, quem responde, qual serviço ele impacta e "
+            "como AI Control Tower opera descoberta, risco, runtime e lifecycle.",
             size=24,
             after=220,
         )
@@ -225,8 +275,8 @@ def build_document_xml() -> str:
     body.append(
         table(
             [
-                ["Tese executiva", "Architecture Blueprint, não cadastro de tabela."],
-                ["Decisão", "Architecture Sprint com 3 a 5 agentes reais antes de carga em escala."],
+                ["Tese executiva", "Architectural Notation, não showcase 3D."],
+                ["Decisão", "Visão final: CSDM como sistema de registro; AI Control Tower como sistema de controle."],
                 ["Guardrail", "Não tocar no Control Tower operacional; validar por diff, build, smoke e rota privada."],
             ],
             fills=["FFF1E6", "F1F7FF"],
@@ -239,7 +289,9 @@ def build_document_xml() -> str:
         paragraph(
             "O Itaú não precisa apenas registrar agentes de IA. Precisa de um blueprint para "
             "governar ativo, runtime, serviço impactado, dados, ownership e mudança. Isso preserva "
-            "CSDM, evita CMDB decorativa e prepara discovery enterprise via AI Control Tower.",
+            "CSDM, evita CMDB decorativa e prepara discovery enterprise via AI Control Tower. A "
+            "forma correta de apresentação é notação arquitetural: camadas, decisões, owners e "
+            "relações, não uma visualização 3D difícil de explicar em reunião.",
             size=22,
         )
     )
@@ -258,7 +310,7 @@ def build_document_xml() -> str:
     )
     body.append(page_break())
 
-    body.append(paragraph("2. ServiceNow CSDM Reference Diagram", style="Heading1", bold=True, color=NAVY, size=34))
+    body.append(paragraph("2. ServiceNow Architectural Notation", style="Heading1", bold=True, color=NAVY, size=34))
     body.append(paragraph("Diagrama lógico para a conversa com o Itaú.", style="Heading2", bold=True, color=ORANGE, size=24))
     body.append(table(csdm_rows, fills=["F6FAFF", "FFF7ED", "F2FBF6", "F8FAFC"]))
     body.append(
@@ -272,7 +324,13 @@ def build_document_xml() -> str:
     )
     body.append(page_break())
 
-    body.append(paragraph("3. Modelo de Dados Mínimo", style="Heading1", bold=True, color=NAVY, size=34))
+    body.append(paragraph("3. Target Architecture + AI Control Tower Operating Model", style="Heading1", bold=True, color=NAVY, size=34))
+    body.append(table(decision_rows, fills=["F6FAFF", "FFF7ED"]))
+    body.append(paragraph("Operating model para sustentar AI Control Tower.", style="Heading2", bold=True, color=ORANGE, size=24))
+    body.append(table(operating_rows, fills=["F6FAFF", "FFF7ED", "F2FBF6"]))
+    body.append(page_break())
+
+    body.append(paragraph("4. Modelo de Dados Mínimo", style="Heading1", bold=True, color=NAVY, size=34))
     body.append(
         table(
             [
@@ -288,7 +346,7 @@ def build_document_xml() -> str:
     )
     body.append(page_break())
 
-    body.append(paragraph("4. Architecture Sprint", style="Heading1", bold=True, color=NAVY, size=34))
+    body.append(paragraph("5. Architecture Sprint", style="Heading1", bold=True, color=NAVY, size=34))
     body.append(table(pilot_rows, fills=["FFFFFF", "FFF7ED", "F6FAFF"]))
     body.append(
         paragraph(
@@ -301,7 +359,7 @@ def build_document_xml() -> str:
     )
     body.append(page_break())
 
-    body.append(paragraph("5. Fontes e Guardrails", style="Heading1", bold=True, color=NAVY, size=34))
+    body.append(paragraph("6. Fontes e Guardrails", style="Heading1", bold=True, color=NAVY, size=34))
     for note in SOURCE_NOTES:
         body.append(paragraph(f"• {note}", size=21, before=40, after=80))
     body.append(
@@ -382,7 +440,7 @@ def write_docx() -> None:
   xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:dcmitype="http://purl.org/dc/dcmitype/"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <dc:title>Itaú AI Governance Architecture Reference</dc:title>
+  <dc:title>Itaú AI Governance Architectural Notation Reference</dc:title>
   <dc:creator>Paulo Pierrondi / ServiceNow architecture reference</dc:creator>
   <cp:lastModifiedBy>Codex</cp:lastModifiedBy>
   <dcterms:created xsi:type="dcterms:W3CDTF">{now}</dcterms:created>
@@ -465,11 +523,11 @@ def new_page(title: str, kicker: str) -> tuple[Image.Image, ImageDraw.ImageDraw]
 def build_pdf_pages() -> list[Image.Image]:
     pages: list[Image.Image] = []
 
-    page, draw = new_page("ServiceNow CSDM Architecture Blueprint", "Itaú AI Governance")
+    page, draw = new_page("ServiceNow Architectural Notation & Target Architecture", "Itaú AI Governance")
     draw_wrapped(
         draw,
         "Reference Pack para alinhar Squad Gaia, Arquitetura, CMDB Owner e Governança. "
-        "O objetivo é sair da pergunta 'qual tabela?' para uma arquitetura auditável de agente, serviço, ativo, runtime e AI Control Tower.",
+        "O objetivo é sair da pergunta 'qual tabela?' e de uma visualização 3D fraca para uma arquitetura auditável de agente, serviço, ativo, runtime e AI Control Tower.",
         (72, 285),
         load_font(31),
         (45, 55, 72),
@@ -480,14 +538,14 @@ def build_pdf_pages() -> list[Image.Image]:
         draw,
         (72, 510, 1168, 720),
         "Tese",
-        "Architecture Blueprint, não cadastro de tabela. Governar agente de IA exige valor, owner, risco, dados, service instance e runtime correlacionado.",
+        "Architectural Notation, não showcase 3D. Governar agente de IA exige valor, owner, risco, dados, service instance e runtime correlacionado.",
         (236, 112, 0),
     )
     draw_card(
         draw,
         (72, 760, 1168, 970),
-        "Decisão",
-        "Aprovar Architecture Sprint com 3 a 5 agentes reais: SaaS/cloud, Itaú-managed e um caso sem runtime visível.",
+        "Visão final",
+        "CSDM como sistema de registro; AI Control Tower como sistema de controle para discovery, risk, runtime, value e workflows.",
         (31, 157, 85),
     )
     draw_card(
@@ -499,7 +557,7 @@ def build_pdf_pages() -> list[Image.Image]:
     )
     pages.append(page)
 
-    page, draw = new_page("ServiceNow CSDM Reference Diagram", "Diagrama CSDM")
+    page, draw = new_page("ServiceNow Architectural Notation", "Diagrama CSDM")
     y = 270
     colors = [(230, 242, 252), (255, 241, 230), (235, 248, 240), (246, 248, 252), (255, 248, 222), (242, 236, 255)]
     for index, layer in enumerate(CSDM_LAYERS):
@@ -512,6 +570,29 @@ def build_pdf_pages() -> list[Image.Image]:
         if index < len(CSDM_LAYERS) - 1:
             draw.line((620, y + 176, 620, y + 205), fill=(236, 112, 0), width=5)
         y += 205
+    pages.append(page)
+
+    page, draw = new_page("Target Architecture + AI Control Tower Operating Model", "Visão final")
+    y = 292
+    for title, rationale in TARGET_DECISIONS:
+        draw_card(draw, (72, y, 594, y + 178), title, rationale, (236, 112, 0))
+        y += 202
+        if y > 1050:
+            break
+    y = 292
+    for phase, input_text, output_text in OPERATING_MODEL:
+        draw.rounded_rectangle((648, y, 1168, y + 178), radius=18, fill=(247, 250, 252), outline=(218, 226, 235), width=2)
+        draw.text((678, y + 22), phase, font=load_font(29, bold=True), fill=(0, 59, 113))
+        draw_wrapped(draw, input_text, (678, y + 64), load_font(20), (45, 55, 72), 440, 5)
+        draw_wrapped(draw, output_text, (678, y + 116), load_font(19), (31, 157, 85), 440, 5)
+        y += 202
+    draw_card(
+        draw,
+        (72, 1215, 1168, 1490),
+        "Decisão consolidada",
+        "AI Digital Asset governa uso e risco; AI CI representa runtime quando existe deployment; Service Instance conecta impacto operacional; AI Control Tower descobre, observa, mede risco e aciona workflows.",
+        (0, 59, 113),
+    )
     pages.append(page)
 
     page, draw = new_page("Architecture Sprint", "Piloto governado")
