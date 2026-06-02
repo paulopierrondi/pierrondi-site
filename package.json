@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "lint": "eslint .",
+    "control:tower:dev": "node scripts/control-tower-dev.mjs",
     "automation:collect": "/opt/homebrew/bin/python3 scripts/automation-control-snapshot.py",
     "automation:push": "/opt/homebrew/bin/python3 scripts/automation-control-snapshot.py --post",
     "design:sync-21st": "node scripts/design-vault-sync.mjs",
