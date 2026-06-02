@@ -1250,7 +1250,18 @@ export default function ItauExperience() {
                 <a href="#mapa-csdm-itau" className={styles.heroSecondaryAction}>
                   Diagrama CSDM
                 </a>
-                <span className={styles.heroReferencePack}>Reference Pack DOCX/PDF</span>
+                <a
+                  href="/itau/itau-ai-governance-architecture-reference.pdf"
+                  className={styles.heroReferencePack}
+                >
+                  Reference Pack PDF
+                </a>
+                <a
+                  href="/itau/itau-ai-governance-architecture-reference.docx"
+                  className={styles.heroReferencePack}
+                >
+                  DOCX
+                </a>
               </motion.div>
             </div>
 
@@ -1304,11 +1315,17 @@ export default function ItauExperience() {
 
           <div className={styles.referencePackCallout}>
             <strong>Reference Pack</strong>
-            <p>
-              O DOCX/PDF acompanha essa narrativa: tese executiva, diagrama ServiceNow CSDM,
-              modelo de dados, checklist do piloto, fontes oficiais e guardrails para não quebrar
-              o Control Tower operacional do pierrondi.dev.
-            </p>
+            <div>
+              <p>
+                O DOCX/PDF acompanha essa narrativa: tese executiva, diagrama ServiceNow CSDM,
+                modelo de dados, checklist do piloto, fontes oficiais e guardrails para não quebrar
+                o Control Tower operacional do pierrondi.dev.
+              </p>
+              <div className={styles.referencePackLinks}>
+                <a href="/itau/itau-ai-governance-architecture-reference.pdf">Abrir PDF</a>
+                <a href="/itau/itau-ai-governance-architecture-reference.docx">Baixar DOCX</a>
+              </div>
+            </div>
           </div>
         </Reveal>
 

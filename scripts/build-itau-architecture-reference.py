@@ -11,6 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
+from shutil import copyfile
 import textwrap
 from typing import Iterable
 from xml.sax.saxutils import escape
@@ -24,6 +25,9 @@ OUT_DIR = ROOT / "docs" / "itau"
 RENDER_DIR = ROOT / "test-results" / "itau-reference-pack-rendered"
 DOCX_PATH = OUT_DIR / "itau-ai-governance-architecture-reference.docx"
 PDF_PATH = OUT_DIR / "itau-ai-governance-architecture-reference.pdf"
+PUBLIC_DIR = ROOT / "public" / "itau"
+PUBLIC_DOCX_PATH = PUBLIC_DIR / DOCX_PATH.name
+PUBLIC_PDF_PATH = PUBLIC_DIR / PDF_PATH.name
 
 ORANGE = "EC7000"
 NAVY = "0A0F1C"
@@ -547,8 +551,13 @@ def write_pdf_and_pngs() -> None:
 def main() -> None:
     write_docx()
     write_pdf_and_pngs()
+    PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
+    copyfile(DOCX_PATH, PUBLIC_DOCX_PATH)
+    copyfile(PDF_PATH, PUBLIC_PDF_PATH)
     print(DOCX_PATH)
     print(PDF_PATH)
+    print(PUBLIC_DOCX_PATH)
+    print(PUBLIC_PDF_PATH)
     print(RENDER_DIR)
 
 
