@@ -568,7 +568,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: flex-start;
+  justify-content: space-between;
   border: 1px solid var(--ink);
   border-radius: 6px;
   background:
@@ -579,15 +579,30 @@
 }
 
 .planActionRail .approveButton {
-  flex: 0 1 auto;
-  min-width: min(100%, 244px);
+  flex: 0 0 auto;
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
   padding-inline: 14px;
+  white-space: nowrap;
 }
 
 .planActionRail small {
+  flex: 1 1 280px;
   color: var(--muted);
   font-size: 12px;
   line-height: 1.35;
+}
+
+.planActionStatus {
+  margin: -6px 0 12px;
+  border: 1px solid rgba(22, 22, 17, 0.22);
+  border-radius: 6px;
+  background: #fffdf7;
+  color: rgba(22, 22, 17, 0.72);
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 900;
 }
 
 .commandRail code {

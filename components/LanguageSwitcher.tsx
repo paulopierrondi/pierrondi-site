@@ -3,17 +3,28 @@
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { getCurrentLanguage, resolveLocalizedPath, siteLanguages } from '@/lib/i18n/site-language'
+import {
+  getCurrentLanguage,
+  resolveLocalizedPath,
+  siteLanguages,
+} from '@/lib/i18n/site-language'
 import styles from './LanguageSwitcher.module.css'
 
 export default function LanguageSwitcher() {
   const pathname = usePathname() || '/'
   const currentLanguage = getCurrentLanguage(pathname)
   const hasTopNav = pathname === '/' || pathname === '/en' || pathname === '/about' || pathname === '/en/about'
+  const hiddenOnPrivateOpsRoute =
+    pathname === '/control_tower' ||
+    pathname.startsWith('/control_tower/') ||
+    pathname === '/automacoes' ||
+    pathname.startsWith('/automacoes/')
 
   useEffect(() => {
     document.documentElement.lang = currentLanguage === 'en' ? 'en-US' : 'pt-BR'
   }, [currentLanguage])
+
+  if (hiddenOnPrivateOpsRoute) return null
 
   return (
     <nav

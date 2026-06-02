@@ -16,6 +16,8 @@ import {
 
 import type { AutomationControlSnapshot } from '@/lib/automation-control/types'
 import type { CreativeControlSnapshot } from '@/lib/creative-control/types'
+import type { PlanApprovalView } from '@/lib/control-tower/plan-view'
+import ControlTowerAutoRefresh from './ControlTowerAutoRefresh'
 import DevotionalsPanel from './DevotionalsPanel'
 import PlansPanel, { type PlanQueueItem } from './PlansPanel'
 import LooksPanel from './LooksPanel'
@@ -25,6 +27,7 @@ interface ControlTowerProps {
   snapshot: AutomationControlSnapshot | null
   creative: CreativeControlSnapshot | null
   plans: PlanQueueItem[]
+  planApprovals: Record<string, PlanApprovalView>
 }
 
 const baseline = {
@@ -262,7 +265,12 @@ function scoreRows(snapshot: AutomationControlSnapshot | null) {
   ] as const
 }
 
-export default function ControlTower({ snapshot, creative, plans }: ControlTowerProps) {
+export default function ControlTower({
+  snapshot,
+  creative,
+  plans,
+  planApprovals,
+}: ControlTowerProps) {
   const metrics = metricData(snapshot)
   const p0 = lanes[0].items.length
   const topAutomations = snapshot?.automations.slice(0, 12) ?? []
@@ -279,6 +287,7 @@ export default function ControlTower({ snapshot, creative, plans }: ControlTower
 
   return (
     <main className={styles.shell}>
+      <ControlTowerAutoRefresh />
       <aside className={styles.rail}>
         <div className={styles.brand}>
           <strong>Agent Ops Control Tower</strong>
@@ -552,6 +561,7 @@ export default function ControlTower({ snapshot, creative, plans }: ControlTower
 
         <PlansPanel
           plans={plans}
+          approvals={planApprovals}
           freshnessLabel={automationFreshness.label}
           freshnessTone={automationFreshness.status}
         />

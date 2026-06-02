@@ -1,24 +1,22 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { Check, Clock, FileCode, ListTodo, ShieldAlert, X } from 'lucide-react'
 
+import { chunkPlanActionIds } from '@/lib/control-tower/plan-action-limits'
+import {
+  summarizePlanQueue,
+  type PlanApprovalView,
+  type PlanQueueItem,
+} from '@/lib/control-tower/plan-view'
 import styles from './ControlTower.module.css'
 
-// Mirrors the PLANS QUEUE JSON .plans[] contract emitted by the hourly Kimi planner.
-export interface PlanQueueItem {
-  planId: string
-  project: string
-  title: string
-  summary: string
-  status: string
-  risk_class: string
-  scope_files: string[]
-  created_at_utc: string
-}
+export type { PlanQueueItem } from '@/lib/control-tower/plan-view'
 
 interface PlansPanelProps {
   plans: PlanQueueItem[]
+  approvals?: Record<string, PlanApprovalView>
   freshnessLabel?: string
   freshnessTone?: 'green' | 'amber' | 'red' | 'unknown'
 }
@@ -33,30 +31,20 @@ interface RowStatus {
 
 const APPROVAL_TTL_HOURS = 24
 
-async function postAction(action: PlanAction, planId: string) {
-  const response = await fetch('/api/control-tower/plan-action', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action, planIds: [planId] }),
-    cache: 'no-store',
-  })
-  const payload = await response.json().catch(() => ({}))
-  if (!response.ok) {
-    const msg = typeof payload?.error === 'string' ? payload.error : `http_${response.status}`
-    throw new Error(msg)
-  }
-  return payload
-}
-
 const ERROR_LABELS: Record<string, string> = {
+  invalid_payload: 'lote inválido — recarregue o snapshot e tente de novo',
   rate_limited: 'limite de aprovações atingido — aguarde ~1min e tente de novo',
   unauthorized: 'sessão expirada — recarregue a página e entre de novo',
 }
+
 function humanError(msg: string) {
-  return ERROR_LABELS[msg] ?? msg
+  const [code, detail] = msg.split(': ', 2)
+  const label = ERROR_LABELS[code]
+  if (!label) return msg
+  return detail ? `${label} (${detail})` : label
 }
 
-async function postBatch(action: PlanAction, planIds: string[]) {
+async function postAction(action: PlanAction, planIds: string[]) {
   const response = await fetch('/api/control-tower/plan-action', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -65,7 +53,18 @@ async function postBatch(action: PlanAction, planIds: string[]) {
   })
   const payload = await response.json().catch(() => ({}))
   if (!response.ok) {
-    const msg = typeof payload?.error === 'string' ? payload.error : `http_${response.status}`
+    const detail = Array.isArray(payload?.issues)
+      ? payload.issues
+          .map((issue: { path?: string; message?: string }) =>
+            [issue.path, issue.message].filter(Boolean).join(': '),
+          )
+          .filter(Boolean)
+          .join('; ')
+      : ''
+    const msg =
+      typeof payload?.error === 'string'
+        ? [payload.error, detail].filter(Boolean).join(': ')
+        : `http_${response.status}`
     throw new Error(msg)
   }
   return payload
@@ -88,71 +87,110 @@ const STATE_HINT: Record<Exclude<RowState, 'idle' | 'pending' | 'error'>, string
   rejected: 'rejeitado · não vira gate',
 }
 
-export default function PlansPanel({ plans, freshnessLabel, freshnessTone }: PlansPanelProps) {
+export default function PlansPanel({
+  plans,
+  approvals = {},
+  freshnessLabel,
+  freshnessTone,
+}: PlansPanelProps) {
+  const router = useRouter()
   const [rows, setRows] = useState<Record<string, RowStatus>>({})
-  const [isPending, startTransition] = useTransition()
+  const [bulkBusy, setBulkBusy] = useState(false)
+  const [actionMessage, setActionMessage] = useState<string | null>(null)
 
-  const pending = plans.filter((p) => p.status === 'pending_approval' || p.status === 'proposed')
   const resolved = (state: RowState | undefined) =>
     state === 'approved' || state === 'deferred' || state === 'rejected'
-  const visible = pending.filter((p) => !resolved(rows[p.planId]?.state))
 
-  const lowRisk = pending.filter((p) => p.risk_class === 'low').length
-  const mediumRisk = pending.filter((p) => p.risk_class === 'medium').length
+  const queue = summarizePlanQueue(plans, approvals)
+  const visible = queue.visible.filter((p) => !resolved(rows[p.planId]?.state))
+  const pending = queue.pending
+  const resolvedPlans = [
+    ...queue.resolved.map(({ plan, approval }) => ({
+      plan,
+      state: approval.status,
+      hint:
+        approval.status === 'approved'
+          ? `aprovado · gate expira em ${APPROVAL_TTL_HOURS}h`
+          : approval.status === 'deferred'
+            ? 'adiado · sai da fila até o próximo run'
+            : 'rejeitado · não vira gate',
+    })),
+    ...pending
+      .filter((p) => resolved(rows[p.planId]?.state))
+      .map((plan) => {
+        const state = rows[plan.planId]?.state as Exclude<
+          RowState,
+          'idle' | 'pending' | 'error'
+        >
+        return {
+          plan,
+          state,
+          hint: STATE_HINT[state],
+        }
+      }),
+  ]
+  const lowRisk = queue.lowRiskCount
+  const mediumRisk = queue.mediumRiskCount
 
-  function handleAction(action: PlanAction, planId: string) {
-    setRows((current) => ({ ...current, [planId]: { state: 'pending' } }))
-    startTransition(() => {
-      postAction(action, planId)
-        .then(() => {
-          setRows((current) => ({
-            ...current,
-            [planId]: {
-              state:
-                action === 'approve' ? 'approved' : action === 'defer' ? 'deferred' : 'rejected',
-            },
-          }))
-        })
-        .catch((err: Error) => {
-          setRows((current) => ({
-            ...current,
-            [planId]: { state: 'error', message: humanError(err.message) },
-          }))
-        })
-    })
-  }
-
-  function handleBatchApprove() {
-    const ids = visible.filter((p) => p.risk_class === 'low').map((p) => p.planId)
-    if (ids.length === 0) return
+  function markRows(ids: string[], state: RowState, message?: string) {
     setRows((current) => {
       const next = { ...current }
       ids.forEach((id) => {
-        next[id] = { state: 'pending' }
+        next[id] = { state, message }
       })
       return next
     })
-    startTransition(() => {
-      postBatch('approve', ids)
-        .then(() => {
-          setRows((current) => {
-            const next = { ...current }
-            ids.forEach((id) => {
-              next[id] = { state: 'approved' }
-            })
-            return next
-          })
-        })
-        .catch((err: Error) => {
-          setRows((current) => {
-            const next = { ...current }
-            ids.forEach((id) => {
-              next[id] = { state: 'error', message: humanError(err.message) }
-            })
-            return next
-          })
-        })
-    })
+  }
+
+  async function handleAction(action: PlanAction, planId: string) {
+    setActionMessage(null)
+    markRows([planId], 'pending')
+    try {
+      await postAction(action, [planId])
+      markRows(
+        [planId],
+        action === 'approve' ? 'approved' : action === 'defer' ? 'deferred' : 'rejected',
+      )
+      setActionMessage(`Plano ${action === 'approve' ? 'aprovado' : action === 'defer' ? 'adiado' : 'rejeitado'}.`)
+      router.refresh()
+    } catch (err) {
+      const message = err instanceof Error ? humanError(err.message) : 'falha'
+      markRows([planId], 'error', message)
+    }
+  }
+
+  async function handleBatchApprove() {
+    const ids = visible
+      .filter((p) => p.risk_class === 'low')
+      .map((p) => p.planId)
+    if (ids.length === 0) return
+
+    setBulkBusy(true)
+    setActionMessage(`Aprovando ${ids.length} planos low risk...`)
+    markRows(ids, 'pending')
+
+    let processed = 0
+    let failed = 0
+    for (const batch of chunkPlanActionIds(ids)) {
+      setActionMessage(`Aprovando ${processed + 1}-${processed + batch.length} de ${ids.length}...`)
+      try {
+        await postAction('approve', batch)
+        markRows(batch, 'approved')
+      } catch (err) {
+        const message = err instanceof Error ? humanError(err.message) : 'falha'
+        markRows(batch, 'error', message)
+        failed += batch.length
+      }
+      processed += batch.length
+    }
+
+    setBulkBusy(false)
+    setActionMessage(
+      failed > 0
+        ? `${ids.length - failed} aprovados; ${failed} falharam.`
+        : `${ids.length} planos low risk aprovados.`,
+    )
+    router.refresh()
   }
 
   return (
@@ -160,15 +198,15 @@ export default function PlansPanel({ plans, freshnessLabel, freshnessTone }: Pla
       <div className={styles.panelHeader}>
         <h2>Autodev plan queue</h2>
         <span data-tone={freshnessTone}>
-          {pending.length} pendente{pending.length === 1 ? '' : 's'}
+          {queue.pendingCount} pendente{queue.pendingCount === 1 ? '' : 's'}
           {freshnessLabel ? ` · ${freshnessLabel}` : ''}
         </span>
       </div>
 
       <div className={styles.creativeStatsRow}>
-        <article data-tone={pending.length > 0 ? 'amber' : 'green'}>
+        <article data-tone={queue.pendingCount > 0 ? 'amber' : 'green'}>
           <span>Planos pendentes</span>
-          <strong>{pending.length}</strong>
+          <strong>{queue.pendingCount}</strong>
           <small>hourly Kimi planner</small>
         </article>
         <article data-tone="blue">
@@ -183,19 +221,23 @@ export default function PlansPanel({ plans, freshnessLabel, freshnessTone }: Pla
         </article>
       </div>
 
-      {visible.some((p) => p.risk_class === 'low') && (
-        <div className={styles.commandRail}>
+      {lowRisk > 0 && (
+        <div className={styles.planActionRail}>
           <button
             type="button"
-            onClick={handleBatchApprove}
-            disabled={isPending}
+            onClick={() => void handleBatchApprove()}
+            disabled={bulkBusy}
             className={styles.approveButton}
             aria-label="Aprovar todos os planos low risk de uma vez"
           >
-            <Check size={14} /> Aprovar todos low risk ({visible.filter((p) => p.risk_class === 'low').length})
+            <Check size={14} /> Aprovar {lowRisk} low risk
           </button>
+          <small>
+            chunks de 50 · {mediumRisk} medium ficam para revisão manual · gate expira em {APPROVAL_TTL_HOURS}h
+          </small>
         </div>
       )}
+      {actionMessage && <p className={styles.planActionStatus}>{actionMessage}</p>}
 
       {visible.length === 0 ? (
         <div className={styles.emptyState}>
@@ -209,7 +251,7 @@ export default function PlansPanel({ plans, freshnessLabel, freshnessTone }: Pla
         <div className={styles.devotionalGrid}>
           {visible.map((item) => {
             const status = rows[item.planId]
-            const busy = status?.state === 'pending' || isPending
+            const busy = status?.state === 'pending' || bulkBusy
             return (
               <article
                 key={item.planId}
@@ -243,7 +285,7 @@ export default function PlansPanel({ plans, freshnessLabel, freshnessTone }: Pla
                 <footer>
                   <button
                     type="button"
-                    onClick={() => handleAction('approve', item.planId)}
+                    onClick={() => void handleAction('approve', item.planId)}
                     disabled={busy}
                     className={styles.approveButton}
                     aria-label={`Aprovar plano ${item.planId}`}
@@ -252,7 +294,7 @@ export default function PlansPanel({ plans, freshnessLabel, freshnessTone }: Pla
                   </button>
                   <button
                     type="button"
-                    onClick={() => handleAction('defer', item.planId)}
+                    onClick={() => void handleAction('defer', item.planId)}
                     disabled={busy}
                     className={styles.rejectButton}
                     aria-label={`Adiar plano ${item.planId}`}
@@ -261,7 +303,7 @@ export default function PlansPanel({ plans, freshnessLabel, freshnessTone }: Pla
                   </button>
                   <button
                     type="button"
-                    onClick={() => handleAction('reject', item.planId)}
+                    onClick={() => void handleAction('reject', item.planId)}
                     disabled={busy}
                     className={styles.rejectButton}
                     aria-label={`Rejeitar plano ${item.planId}`}
@@ -278,22 +320,15 @@ export default function PlansPanel({ plans, freshnessLabel, freshnessTone }: Pla
         </div>
       )}
 
-      {(() => {
-        const justResolved = pending.filter((p) => resolved(rows[p.planId]?.state))
-        if (justResolved.length === 0) return null
-        return (
-          <div className={styles.langChips}>
-            {justResolved.map((p) => {
-              const state = rows[p.planId]?.state as Exclude<RowState, 'idle' | 'pending' | 'error'>
-              return (
-                <span key={p.planId} className={styles.langChip}>
-                  {p.planId} <em>{STATE_HINT[state]}</em>
-                </span>
-              )
-            })}
-          </div>
-        )
-      })()}
+      {resolvedPlans.length > 0 && (
+        <div className={styles.langChips}>
+          {resolvedPlans.map(({ plan, hint }) => (
+            <span key={plan.planId} className={styles.langChip}>
+              {plan.planId} <em>{hint}</em>
+            </span>
+          ))}
+        </div>
+      )}
     </section>
   )
 }
