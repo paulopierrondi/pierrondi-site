@@ -9,13 +9,17 @@ import styles from './LanguageSwitcher.module.css'
 export default function LanguageSwitcher() {
   const pathname = usePathname() || '/'
   const currentLanguage = getCurrentLanguage(pathname)
+  const hasTopNav = pathname === '/' || pathname === '/en' || pathname === '/about' || pathname === '/en/about'
 
   useEffect(() => {
     document.documentElement.lang = currentLanguage === 'en' ? 'en-US' : 'pt-BR'
   }, [currentLanguage])
 
   return (
-    <nav className={styles.switcher} aria-label="Language selector">
+    <nav
+      className={`${styles.switcher}${hasTopNav ? ` ${styles.withTopNav}` : ''}`}
+      aria-label="Language selector"
+    >
       {siteLanguages.map((language) => {
         const isActive = language.code === currentLanguage
 
