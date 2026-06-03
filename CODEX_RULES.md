@@ -25,7 +25,7 @@ Required local council handoff:
 - exact next action.
 - prompt_cache strategy and cache telemetry when a provider exposes `cached_tokens` or equivalent.
 
-Registry id: `pierrondi-site`.
+Registry id: `pierrondi-site-recovery`.
 <!-- PROJECT_LOCAL_COUNCIL_END -->
 
 <!-- HIGH_CRAFT_VISUAL_GATE_START -->

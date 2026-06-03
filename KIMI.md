@@ -25,7 +25,7 @@ Required local council handoff:
 - exact next action.
 - prompt_cache strategy and cache telemetry when a provider exposes `cached_tokens` or equivalent.
 
-Registry id: `pierrondi-site`.
+Registry id: `pierrondi-site-recovery`.
 <!-- PROJECT_LOCAL_COUNCIL_END -->
 
 <!-- BACKGROUND_CODERS_START -->
@@ -180,7 +180,7 @@ Leia tambem:
 # Obsidian Second Brain - Required Preflight
 
 Primary vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
-Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
+Repository: `/Users/paulopierrondi/Projects/pierrondi-site-recovery`
 
 This repository is part of Paulo's Obsidian second brain. For AI coding agents, this is a required workflow, not optional context.
 

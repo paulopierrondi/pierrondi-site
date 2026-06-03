@@ -1,9 +1,9 @@
 # Project Brain Context
 
-Generated: `2026-05-28 09:25:57`
+Generated: `2026-06-02 23:38:21`
 Tool: `sync`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
-Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
+Repository: `/Users/paulopierrondi/Projects/pierrondi-site-recovery`
 
 This is a non-secret snapshot of the local Obsidian second brain for this repository.
 
@@ -146,7 +146,7 @@ Every Bradesco Now Assist material must explicitly connect:
 ---
 type: policy
 status: generated
-generated_at: "2026-05-28 09:25:03"
+generated_at: "2026-06-02 23:37:30"
 tags:
   - ai-agents
   - policy
@@ -655,6 +655,7 @@ Antes de implementar, revisar ou desenhar arquitetura, escolha os guias relevant
 
 - App/Web quality: [[04_Areas/Coding/Best Practices/App Web Quality Best Practices]]
 - High-craft frontend visual standard: [[04_Areas/Coding/Best Practices/High Craft Frontend Visual Standard]]
+- Guided tour UX: [[04_Areas/Coding/Best Practices/Guided Tour UX Standard]]
 - Mobile opening motion: [[04_Areas/Coding/Best Practices/Mobile App Opening Motion Standard]]
 - Mobile privacy/consent: [[04_Areas/Coding/Best Practices/Mobile App Privacy Consent Standard]]
 - iOS QA/TestFlight closure: [[04_Areas/Coding/Best Practices/iOS Functional QA And TestFlight Closure Standard]]
@@ -668,8 +669,10 @@ Antes de implementar, revisar ou desenhar arquitetura, escolha os guias relevant
 - AI/LLM apps: [[04_Areas/Coding/Best Practices/AI LLM Best Practices]]
 - DevOps/Railway: [[04_Areas/Coding/Best Practices/DevOps Railway Best Practices]]
 - Testing/QA: [[04_Areas/Coding/Best Practices/Testing QA Best Practices]]
+- **Cyclomatic complexity (mandatory end-of-activity gate): [[99_System/Cyclomatic Complexity Policy]]**
 - Agent workflow: [[04_Areas/Coding/Best Practices/Agent Workflow Best Practices]]
 - Security baseline: [[04_Areas/Coding/Checklists/Security Checklist]]
+- Authorized security testing / bug bounty engine: [[04_Areas/Coding/Best Practices/Authorized Security Testing Engine]]
 - Platform checklists: [[04_Areas/Coding/Checklists/Project Checklist Hub]]
 
 ## Como aprender automaticamente
@@ -678,6 +681,17 @@ Todo coder deve registrar aprendizados reutilizaveis em:
 
 - [[04_Areas/Coding/Best Practices/Learning Inbox]]
 - [[04_Areas/Coding/Best Practices/Patterns To Promote]]
+
+## Padrões recentemente promovidos
+
+- Authorized security testing: gated request harness (default-deny scope, ≤1 req/s, auto-redacted evidence, no active request without human gate), self-evolution loop (outcomes → lessons → behavior, EV-ranked targets), adversarial self-audit of safety tooling. Ver [[04_Areas/Coding/Best Practices/Authorized Security Testing Engine]].
+
+- Prompt caching e workflow layout: separar prefixo estável de delta dinâmico, registrar `prompt_cache.strategy`, `prefix_version` e telemetria quando houver.
+- CLI/headless orchestration: comandos batch devem ter modo não-interativo explícito; quando o CLI default for TUI, usar flag headless/documentada antes de integrar em automação.
+- iOS/Android/App Store/Play submissions: smoke real no runtime alvo continua sendo gate obrigatório, mesmo quando lint/build/health check passam.
+- Screenshot/release QA: assets de loja e marketing precisam composição final, dimensão exata e validação lado a lado antes do submit.
+- Guided tours: cada rota/funcionalidade relevante precisa tour contextual com spotlight correto, persistencia por usuario e validacao desktop/mobile/producao antes de release.
+- Complexidade ciclomatica: gate obrigatorio de fim-de-atividade via `complexity-guard.py scan --changed`; nada com funcao acima do teto HARD (CCN 15) fecha sem refator ou waiver logado. Engine universal `lizard` + nativo (`ruff C901`, eslint `complexity`). Ver [[99_System/Cyclomatic Complexity Policy]].
 
 Aprendizado reutilizavel e algo que deve guiar projetos futuros:
 
@@ -716,11 +730,8 @@ Itens do Learning Inbox viram melhores praticas quando:
 
 - [[04_Areas/Coding/AI Coding Operating System]]
 - [[04_Areas/Coding/Checklists/Project Checklist Hub]]
-- [[04_Areas/Coding/Checklists/App Web Preflight Checklist]]
-- [[04_Areas/Coding/Checklists/Screenshots Visual QA Checklist]]
-- [[04_Areas/Coding/Best Practices/High Craft Frontend Visual Standard]]
-- [[99_System/AI Agent Vault Policy]]
-- [[99_System/Security And Secrets Policy]]
+- [[04_Areas/Coding/Checkli
+...[truncated]
 
 ## 04_Areas/Coding/Best Practices/App Web Quality Best Practices.md
 
@@ -2364,27 +2375,27 @@ O arquivo temporario nao deve entrar em Obsidian, Git, Linear, email ou screensh
 
 ---
 type: project
-repo_name: "pierrondi-site"
-repo_path: "/Users/paulopierrondi/Projects/pierrondi-site"
+repo_name: "pierrondi-site-recovery"
+repo_path: "/Users/paulopierrondi/Projects/pierrondi-site-recovery"
 repo_kind: "repo"
-branch: "main"
-dirty_files: 5
+branch: "site-evolution"
+dirty_files: 8
 remote: "https://github.com/paulopierrondi/pierrondi-site.git"
-generated_at: "2026-05-28 09:25:03"
+generated_at: "2026-06-02 23:37:30"
 tags:
   - project
   - git
 ---
-# pierrondi-site
+# pierrondi-site-recovery
 
 ## Estado rapido
 
-- Path: `/Users/paulopierrondi/Projects/pierrondi-site`
+- Path: `/Users/paulopierrondi/Projects/pierrondi-site-recovery`
 - Tipo: `node`
 - Repo kind: `repo`
-- Branch: `main`
-- Arquivos alterados agora: `5`
-- Ultimo commit: `7fbe412 2026-05-28 feat: add bilingual executive home`
+- Branch: `site-evolution`
+- Arquivos alterados agora: `8`
+- Ultimo commit: `18685f0 2026-05-29 feat(whypaulo): reposition pitch to lead with FSI/Brazil (per Paulo: "liderar com Brasil/FSI")`
 - Remote: `https://github.com/paulopierrondi/pierrondi-site.git`
 - Marcadores encontrados: `package.json, README.md, CLAUDE.md, AGENTS.md, GEMINI.md`
 
@@ -2392,7 +2403,7 @@ tags:
 
 - Indice de projetos: [[02_Projects/Projects Index]]
 - Mapa de projetos: [[07_MOCs/Projects MOC]]
-- Historico AI deste projeto: [[03_AI-Chats/Projects/pierrondi-site - AI History]]
+- Historico AI deste projeto: [[03_AI-Chats/Projects/pierrondi-site-recovery - AI History]]
 - Mapa de agentes: [[07_MOCs/AI Agents MOC]]
 - Politica dos agentes: [[99_System/AI Agent Vault Policy]]
 - Linear/Git tracking: [[04_Areas/Coding/Linear/Linear Git Development Tracking OS]]
@@ -2432,60 +2443,37 @@ Stack enxuto: **Next.js 16 + React 19 + Tailwind v4 + Formspree**. Zero banco, z
 
 ---
 type: project-ai-history
-project: "pierrondi-site"
+project: "pierrondi-site-recovery"
 status: generated
-generated_at: "2026-05-28 09:25:03"
+generated_at: "2026-06-02 23:37:30"
 tags:
   - ai-history
   - project-history
   - generated
 ---
-# pierrondi-site - AI History
+# pierrondi-site-recovery - AI History
 
-Projeto: [[02_Projects/pierrondi-site|pierrondi-site]]
+Projeto: [[02_Projects/pierrondi-site-recovery|pierrondi-site-recovery]]
 
-- Path: `/Users/paulopierrondi/Projects/pierrondi-site`
-- Codex relacionado: `2`
-- Claude Code relacionado: `6`
-- Kimi relacionado: `1`
-- Claude-Mem observations relacionadas: `68`
+- Path: `/Users/paulopierrondi/Projects/pierrondi-site-recovery`
+- Codex relacionado: `0`
+- Claude Code relacionado: `0`
+- Kimi relacionado: `0`
+- Claude-Mem observations relacionadas: `0`
 - Claude-Mem summaries relacionados: `0`
 
 ## Codex
 
-| Atualizado | Titulo | Primeiro pedido | Fonte |
-| --- | --- | --- | --- |
-[REDACTED SECRET LINE]
-[REDACTED SECRET LINE]
+_Nenhuma sessao Codex relacionada encontrada._
 
 ## Claude Code
 
-| Atualizado | Titulo | Primeiro pedido | Fonte |
-| --- | --- | --- | --- |
-| 2026-05-28T09:50:37.372Z | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (876384d3b58db575da1acc03fddfd77d9503ec91). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-876384d ...[truncated] | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (876384d3b58db575da1acc03fddfd77d9503ec91). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-876384d ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/758a618a-05d2-4418-bf47-df16b7d4eb42.jsonl |
-| 2026-05-28T09:50:10.486Z | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (b557f84d980be3ed84067a9ba8143acc61ba5a0c). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-b557f84 ...[truncated] | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (b557f84d980be3ed84067a9ba8143acc61ba5a0c). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-b557f84 ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/fa270f64-8922-4e4c-acae-057e3bd6d2c7.jsonl |
-| 2026-05-28T04:37:29 | -Users-paulopierrondi-Projects-pierrondi-site |  | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/fa02996c-9d32-4317-bf8a-fe14ea845a8d.jsonl |
-| 2026-05-28T01:03:20.713Z | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (33ee9815351b25bf043a7fa6e8473832dd7ea6e0). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-33ee981 ...[truncated] | Use o agente pierrondi-quality-reviewer. Em /Users/paulopierrondi/Projects/pierrondi-site, revise o commit HEAD (33ee9815351b25bf043a7fa6e8473832dd7ea6e0). Foque em BLOCK/NIT/PRAISE. Salve achados em /Users/paulopierrondi/Projects/pierrondi-site/.brain/agent_reviews/post-commit-33ee981 ...[truncated] | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/d783913a-f0c3-4c36-b5f2-e9237cd4f814.jsonl |
-| 2026-05-24T19:31:56 | -Users-paulopierrondi-Projects-pierrondi-site |  | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/7ea700d3-df0c-4f6b-8d5a-2a9e2c412404.jsonl |
-| 2026-05-24T19:27:55 | -Users-paulopierrondi-Projects-pierrondi-site |  | /Users/paulopierrondi/.claude/projects/-Users-paulopierrondi-Projects-pierrondi-site/6f55a0aa-0bfb-44cb-9a7b-7832474d981f.jsonl |
+_Nenhuma sessao Claude Code relacionada encontrada._
 
 ## Kimi
 
-| Atualizado | Titulo | Prompts | Fonte |
-| --- | --- | --- | --- |
-| 2026-05-28T09:02:30 | <git-context> Working directory:… |  | /Users/paulopierrondi/.kimi/sessions/37a3f6aa06af4012258660ad163eb5b1/8e49ec6a-dfde-4367-8a74-7353c4a7c89d |
+_Nenhuma sessao Kimi relacionada encontrada._
 
 ## Claude-Mem
 
-| Criado | Tipo | Titulo | Resumo |
-| --- | --- | --- | --- |
-| 2026-05-22T01:16:41.881Z | discovery | Bradesco26Experience.tsx — Full React Component Already Exists in pierrondi-site | ["File path: /Users/paulopierrondi/Downloads/pierrondi-site/app/bradesco-26/Bradesco26Experience.tsx","Component is a full-page interactive React experience with lens switching (Executivo / Técnico / Valor) ...[truncated] |
-| 2026-05-22T01:16:41.881Z | discovery | pierrondi-site Project Council Touchpoint — Yellow Status, 13 Dirty Files | ["Project: pierrondi-site, path /Users/paulopierrondi/Downloads/pierrondi-site, branch main, 13 dirty files.","Last commit: 861d797 2026-05-20 \"fix: add app legal fallback pages\".","Linear project ticket: ...[truncated] |
-| 2026-05-22T00:06:18.182Z | discovery | pierrondi-site Hosts App Store Legal Pages for Multiple iOS Apps | ["iOS App Preflight Checklist specifies: \"Se o domínio do produto não estiver pronto, usar `https://www.pierrondi.dev/apps/<app-slug>/support`, `/privacy` e `/terms` como fallback oficial.\"","App Store Co ...[truncated] |
-| 2026-05-22T00:00:45.911Z | bugfix | Canonical URL Fix Deployed to Production — pierrondi-site Now Fully Complete | ["Railway CLI exited with code 0 and printed \"Deploy complete\" for deployment `66f25fd3-c5b0-4f8c-80cd-638336635463`.","Second deploy duration: ~1 min 40s (from upload to \"Deploy complete\") — faster tha ...[truncated] |
-| 2026-05-21T23:58:01.145Z | discovery | Product Council Finish Gate: pierrondi-site Yellow, pierrondi-ia Red — Worktree Cleanup Needed | ["`pierrondi-site` council status: **yellow** — Release Lead verdict \"not-ready\" due to 13 dirty files and missing formal test evidence.","Council script read stale commit `861d797` for pierrondi-site (th ...[truncated] |
-| 2026-05-21T23:57:21.716Z | discovery | pierrondi-site Uses Multi-Agent Governance with Hub de Agentes Product Council | ["Active coder workflow: Kimi CLI (triage/reports), Codex (patch/test/integration), Claude Code (architecture/compliance/hard bugs).","Cursor Background Agent is dormant by choice — Paulo avoids opening Cur ...[truncated] |
-| 2026-05-21T23:54:24.504Z | feature | pierrondi-site Container Image Built and Exported Successfully | ["Container image config digest: `sha256:7afb6a9286875dc7eb20e87f3714ba2e7f456a97c65343367265ef9f10fecadf`.","Container image manifest digest: `sha256:179e1ac8908ae6c44e5a8fc11f1d78b2bf48cb397f3514f737393af ...[truncated] |
-| 2026-05-21T23:52:34.269Z | security_note | 2 npm Vulnerabilities Found in pierrondi-site Dependencies | ["382 packages installed via `npm ci`; 383 packages audited total.","2 vulnerabilities found: 1 moderate, 1 high severity.","npm suggests `npm audit fix --force` to resolve all issues.","Build did not fail ...[truncated] |
-| 2026-05-21T23:52:20.053Z | discovery | pierrondi-site Production Runtime: Node 22.22.3 / npm 10.9.8 on Debian Bookworm | ["Node.js version: `22.22.3` (installed via mise from `node-v22.22.3-linux-x64.tar.gz`).","npm version: `10.9.8`.","Base OS: Debian Bookworm (amd64), runtime image `ghcr.io/railwayapp/railpack-runtime:mi
-...[truncated]
+_Nenhuma observation relacionada encontrada._
