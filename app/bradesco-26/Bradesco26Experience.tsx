@@ -12,16 +12,6 @@ import {
   useTransform,
 } from 'framer-motion'
 import {
-  AnimatePresence,
-  motion,
-  type MotionStyle,
-  useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from 'framer-motion'
-import {
   ArrowUpRight,
   Bot,
   Boxes,
@@ -968,17 +958,6 @@ function useRadarSelection(
         : announcements.filter((item) => item.theme === activeTheme),
     [activeTheme],
   )
-  const lensCopyKey: 'executive' | 'technical' | 'value' =
-    activeLens === 'executivo'
-      ? 'executive'
-      : activeLens === 'tecnico'
-        ? 'technical'
-        : 'value'
-  const activeItem =
-    filtered.find((item) => item.id === selectedId) ?? filtered[0]
-  const deepDiveItem =
-    announcements.find((item) => item.id === deepDiveId) ?? activeItem
-
   const lensCopyKey =
     activeLens === 'executivo'
       ? 'executive'
