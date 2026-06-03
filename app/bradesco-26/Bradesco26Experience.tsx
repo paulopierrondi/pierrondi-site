@@ -1,6 +1,16 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type RefObject } from 'react'
+import {
+  AnimatePresence,
+  motion,
+  type MotionStyle,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'framer-motion'
 import {
   AnimatePresence,
   motion,
@@ -906,6 +916,51 @@ export default function Bradesco26Experience() {
       ? undefined
       : ({ opacity: scrollArtOpacity } as MotionStyle)
 
+  useEffect(() => {
+    return () => {
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel()
+    }
+  }, [])
+
+  return (item: Announcement) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
+
+    const synth = window.speechSynthesis
+    if (speakingId === item.id) {
+      synth.cancel()
+      setSpeakingId(null)
+      return
+    }
+
+    synth.cancel()
+    const utterance = new SpeechSynthesisUtterance(
+      composeAudioBrief(item, deepDives[item.id], activeLens),
+    )
+    const voices = synth.getVoices()
+    const ptVoice =
+      voices.find((voice) => voice.lang.toLowerCase().startsWith('pt-br')) ??
+      voices.find((voice) => voice.lang.toLowerCase().startsWith('pt'))
+
+    if (ptVoice) utterance.voice = ptVoice
+    utterance.lang = 'pt-BR'
+    utterance.rate = 0.94
+    utterance.pitch = 0.88
+    utterance.volume = 1
+    utterance.onend = () => setSpeakingId(null)
+    utterance.onerror = () => setSpeakingId(null)
+
+    speechRef.current = utterance
+    setSpeakingId(item.id)
+    synth.speak(utterance)
+  }
+}
+
+function useRadarSelection(
+  activeLens: Lens,
+  activeTheme: Theme,
+  selectedId: string,
+  deepDiveId: string | null,
+) {
   const filtered = useMemo(
     () =>
       activeTheme === 'all'
@@ -913,6 +968,16 @@ export default function Bradesco26Experience() {
         : announcements.filter((item) => item.theme === activeTheme),
     [activeTheme],
   )
+  const lensCopyKey: 'executive' | 'technical' | 'value' =
+    activeLens === 'executivo'
+      ? 'executive'
+      : activeLens === 'tecnico'
+        ? 'technical'
+        : 'value'
+  const activeItem =
+    filtered.find((item) => item.id === selectedId) ?? filtered[0]
+  const deepDiveItem =
+    announcements.find((item) => item.id === deepDiveId) ?? activeItem
 
   const lensCopyKey =
     activeLens === 'executivo'
@@ -1068,9 +1133,6 @@ export default function Bradesco26Experience() {
 
     return () => {
       window.removeEventListener('keydown', onKeyDown)
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel()
-      }
     }
   }, [])
 
@@ -1101,38 +1163,9 @@ export default function Bradesco26Experience() {
       return
     }
 
-    const synth = window.speechSynthesis
-
-    if (speakingId === item.id) {
-      synth.cancel()
-      setSpeakingId(null)
-      return
-    }
-
-    synth.cancel()
-
-    const utterance = new SpeechSynthesisUtterance(
-      composeAudioBrief(item, deepDives[item.id], activeLens),
-    )
-    const voices = synth.getVoices()
-    const ptVoice =
-      voices.find((voice) => voice.lang.toLowerCase().startsWith('pt-br')) ??
-      voices.find((voice) => voice.lang.toLowerCase().startsWith('pt'))
-
-    if (ptVoice) {
-      utterance.voice = ptVoice
-    }
-
-    utterance.lang = 'pt-BR'
-    utterance.rate = 0.94
-    utterance.pitch = 0.88
-    utterance.volume = 1
-    utterance.onend = () => setSpeakingId(null)
-    utterance.onerror = () => setSpeakingId(null)
-
-    speechRef.current = utterance
-    setSpeakingId(item.id)
-    synth.speak(utterance)
+    setActiveTheme(item.theme as Theme)
+    setSelectedId(item.id)
+    setDeepDiveId(item.id)
   }
 
   return (
@@ -1993,5 +2026,528 @@ export default function Bradesco26Experience() {
         </span>
       </footer>
     </main>
+  )
+}
+
+function ScrollArt({ style }: { style?: MotionStyle }) {
+  return (
+    <motion.div className={styles.scrollArt} style={style} aria-hidden="true">
+      <span className={`${styles.scrollPlane} ${styles.scrollPlaneOne}`} />
+      <span className={`${styles.scrollPlane} ${styles.scrollPlaneTwo}`} />
+      <span className={styles.scrollVectorField} />
+      <span className={styles.scrollScanBand} />
+      <span className={styles.scrollConstellation} />
+      <span className={styles.scrollProgressRail} />
+    </motion.div>
+  )
+}
+
+function MaterialNav() {
+  return (
+    <nav className={styles.nav} aria-label="Navegação do material">
+      <a href="#top" className={styles.navBrand}>
+        <span>ServiceNow</span>
+        <span>Bradesco</span>
+      </a>
+      <div className={styles.navLinks}>
+        <a href="#flow">Roteiro</a>
+        <a href="#radar">Radar</a>
+        <a href="#architecture">Arquitetura</a>
+        <a href="#use-cases">Casos</a>
+      </div>
+      <a href="#sources" className={styles.navCta}>
+        Fontes
+        <ArrowUpRight size={14} aria-hidden="true" />
+      </a>
+    </nav>
+  )
+}
+
+function HeroSection({ heroStudioStyle }: { heroStudioStyle?: MotionStyle }) {
+  return (
+    <section id="top" className={styles.hero} aria-labelledby="bradesco-26-title">
+      <div className={styles.heroTexture} aria-hidden="true" />
+      <HeroMotionFrame />
+      <HeroSculpture />
+      <div className={styles.heroShell}>
+        <div className={styles.heroTopline}>
+          <span>Knowledge 2026</span>
+          <span>K26 oficial 05-07 mai</span>
+          <span>Atualizado em 31 mai 2026</span>
+        </div>
+        <div className={styles.heroLayout}>
+          <HeroCopy />
+          <HeroStudio heroStudioStyle={heroStudioStyle} />
+        </div>
+      </div>
+      <div className={styles.scrollCue} aria-hidden="true">
+        <span />
+        <span />
+      </div>
+    </section>
+  )
+}
+
+function HeroMotionFrame() {
+  return (
+    <div className={styles.motionFrame} aria-hidden="true">
+      <span className={styles.frameRailTop} />
+      <span className={styles.frameRailRight} />
+      <span className={styles.frameRailBottom} />
+      <span className={styles.frameRailLeft} />
+      <span className={`${styles.frameCorner} ${styles.frameCornerTopLeft}`} />
+      <span className={`${styles.frameCorner} ${styles.frameCornerTopRight}`} />
+      <span className={`${styles.frameCorner} ${styles.frameCornerBottomLeft}`} />
+      <span className={`${styles.frameCorner} ${styles.frameCornerBottomRight}`} />
+      <span className={styles.frameScanner} />
+      <span className={`${styles.frameSignal} ${styles.frameSignalOne}`} />
+      <span className={`${styles.frameSignal} ${styles.frameSignalTwo}`} />
+    </div>
+  )
+}
+
+function HeroSculpture() {
+  return (
+    <div className={styles.heroSculpture} aria-hidden="true">
+      <span className={styles.sculptureGrid} />
+      <span className={`${styles.sculptureRing} ${styles.sculptureRingOne}`} />
+      <span className={`${styles.sculptureRing} ${styles.sculptureRingTwo}`} />
+      <span className={styles.sculpturePlane} />
+      <span className={styles.sculptureScan} />
+      <span className={styles.sculptureNodeOne} />
+      <span className={styles.sculptureNodeTwo} />
+      <span className={styles.sculptureNodeThree} />
+      <div className={styles.heroBarcode}>
+        {Array.from({ length: 14 }).map((_, index) => <span key={index} />)}
+      </div>
+    </div>
+  )
+}
+
+function HeroCopy() {
+  return (
+    <div className={styles.heroCopy}>
+      <p className={styles.eyebrow}>De assistente a agente corporativo</p>
+      <h1 id="bradesco-26-title">Bradesco no ciclo da IA governada.</h1>
+      <p className={styles.heroLead}>
+        Material executivo e técnico sobre o que o Knowledge 2026 muda para bancos: governança de IA,
+        contexto operacional, agentes, risco, dados e execução ponta a ponta. Atualizado com a trilha
+        oficial de anúncios de 05/05 e 06/05.
+      </p>
+      <div className={styles.heroProofLine} aria-label="Temas principais">
+        <span>AI governance</span>
+        <span>Contexto operacional</span>
+        <span>Execução governada</span>
+      </div>
+      <div className={styles.heroActions} aria-label="Ações principais">
+        <a href="#flow" className={styles.primaryAction}>
+          <Play size={16} aria-hidden="true" />
+          Abrir roteiro
+        </a>
+        <a href="#radar" className={styles.secondaryAction}>
+          Ver radar K26
+          <ArrowUpRight size={15} aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+  )
+}
+
+function HeroStudio({ heroStudioStyle }: { heroStudioStyle?: MotionStyle }) {
+  return (
+    <motion.aside className={styles.heroStudio} style={heroStudioStyle} aria-label="Mapa executivo da conversa">
+      <div className={styles.systemMap} aria-hidden="true">
+        <div className={styles.mapChrome}>
+          <span>Strategy room</span>
+          <span>K26 / Bradesco</span>
+        </div>
+        <span className={styles.depthFloor} />
+        <span className={`${styles.depthStack} ${styles.depthStackOne}`} />
+        <span className={`${styles.depthStack} ${styles.depthStackTwo}`} />
+        <span className={`${styles.depthStack} ${styles.depthStackThree}`} />
+        <span className={styles.depthBeam} />
+        <div className={styles.mapTraceOne} />
+        <div className={styles.mapTraceTwo} />
+        <div className={styles.mapCore}>
+          <strong>AI</strong>
+          <span>governada</span>
+        </div>
+        <div className={`${styles.mapNode} ${styles.nodeOne}`}>Govern</div>
+        <div className={`${styles.mapNode} ${styles.nodeTwo}`}>Context</div>
+        <div className={`${styles.mapNode} ${styles.nodeThree}`}>Act</div>
+        <div className={`${styles.mapNode} ${styles.nodeFour}`}>Measure</div>
+        <div className={styles.mapPulse} />
+      </div>
+      <div className={styles.commandPanel}>
+        <div className={styles.panelHeader}>
+          <CircleDot size={15} aria-hidden="true" />
+          <span>Tese central</span>
+        </div>
+        <p>
+          O diferencial não é ter mais IA. É colocar IA para trabalhar com contexto real, permissões
+          corretas, trilha auditável e governança operacional.
+        </p>
+        <div className={styles.signalGrid}>
+          {thesis.map((item) => {
+            const Icon = item.icon
+            return (
+              <div key={item.title} className={styles.signalCard}>
+                <Icon size={18} aria-hidden="true" />
+                <strong>{item.title}</strong>
+                <small>{item.copy}</small>
+              </div>
+            )
+          })}
+        </div>
+        <div className={styles.modelFlow} aria-label="Modelo operacional">
+          <span>Papel claro</span>
+          <span>Telemetria</span>
+          <span>Guardrails</span>
+          <span>Indicadores</span>
+        </div>
+      </div>
+    </motion.aside>
+  )
+}
+
+function BriefStrip() {
+  return (
+    <section className={styles.briefStrip} aria-label="Resumo do briefing">
+      <div className={styles.briefInner}>
+        <div className={styles.briefGrid}>
+          <article><span>Objetivo</span><strong>Traduzir os anúncios do Knowledge 2026 para prioridades práticas.</strong></article>
+          <article><span>Formato</span><strong>Material executivo e técnico, com arquitetura e casos de uso.</strong></article>
+          <article><span>Resultado</span><strong>Dois domínios priorizados, responsável claro e próximo workshop técnico.</strong></article>
+        </div>
+        <div className={styles.kineticMarquee} aria-hidden="true">
+          <div>{[...motionTicker, ...motionTicker].map((item, index) => <span key={`${item}-${index}`}>{item}</span>)}</div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+type FlowSectionProps = {
+  flowSectionStyle?: MotionStyle
+  prefersReducedMotion: boolean | null
+  openDeepDive: (id: string) => void
+}
+
+function FlowSection({ flowSectionStyle, prefersReducedMotion, openDeepDive }: FlowSectionProps) {
+  return (
+    <motion.section id="flow" className={styles.flowSection} style={flowSectionStyle} aria-labelledby="flow-title">
+      <div className={styles.sectionFrame}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.eyebrow}>Roteiro de trabalho</p>
+          <h2 id="flow-title">Seis blocos para orientar decisão.</h2>
+          <p>O material sai de anúncio de produto e entra em arquitetura: plataforma, domínios, risco, desenvolvedores e casos de uso aplicáveis ao Bradesco.</p>
+        </div>
+        <div className={styles.k26UpdateRail} aria-label="Detalhes atualizados do Knowledge 2026">
+          {updatedSignals.map((signal) => <article key={signal.label}><span>{signal.label}</span><strong>{signal.value}</strong><p>{signal.detail}</p></article>)}
+        </div>
+        <div className={styles.flowGrid}>
+          {chapters.map((chapter, index) => (
+            <motion.button
+              key={chapter.title}
+              type="button"
+              className={styles.flowCard}
+              onClick={() => openDeepDive(chapter.targetId)}
+              aria-label={`Abrir detalhes do bloco ${chapter.number}: ${chapter.title}`}
+              whileHover={prefersReducedMotion ? undefined : { y: -4, scale: 1.006, rotateX: -2.4, rotateY: index % 2 === 0 ? 1.4 : -1.4, z: 8 }}
+              whileTap={prefersReducedMotion ? undefined : { scale: 0.985 }}
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 30 }}
+              whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.34 }}
+              transition={{ duration: 0.48, delay: index * 0.045, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <span className={styles.flowNumber}>{chapter.number}</span>
+              <h3>{chapter.title}</h3>
+              <p>{chapter.copy}</p>
+              <div>{chapter.items.map((item) => <small key={item}>{item}</small>)}</div>
+              <span className={styles.flowCta}>Mais detalhes<ArrowUpRight size={15} aria-hidden="true" /></span>
+            </motion.button>
+          ))}
+        </div>
+      </div>
+    </motion.section>
+  )
+}
+
+function PlatformSection() {
+  return (
+    <section className={styles.platformSection} aria-labelledby="platform-title">
+      <div className={styles.sectionFrame}>
+        <div className={styles.platformGrid}>
+          <div>
+            <p className={styles.eyebrow}>Contexto Bradesco</p>
+            <h2 id="platform-title">Conectar capacidades conhecidas a uma arquitetura de IA governada.</h2>
+            <p>A leitura organiza o que o K26 trouxe de novo em IA, dados e execução dentro de uma jornada clara de governança, adoção e valor operacional.</p>
+          </div>
+          <div className={styles.capabilityCloud} aria-label="Capacidades em foco">
+            {capabilitySet.map((item) => <span key={item}>{item}</span>)}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+type RadarSectionProps = {
+  activeLens: Lens
+  activeTheme: Theme
+  selectedId: string
+  speakingId: string | null
+  filtered: Announcement[]
+  activeItem: Announcement
+  activeLensInfo: (typeof lenses)[number]
+  activeThemeInfo: (typeof themes)[number]
+  activeDiscussion: string
+  activeDeepDive: DeepDive
+  lensCopyKey: 'executive' | 'technical' | 'value'
+  setActiveLens: (lens: Lens) => void
+  setSelectedId: (id: string) => void
+  selectTheme: (theme: Theme) => void
+  openDeepDive: (id: string) => void
+  speakBrief: (item: Announcement) => void
+}
+
+function RadarSection(props: RadarSectionProps) {
+  return (
+    <section id="radar" className={styles.radarSection} aria-labelledby="radar-title">
+      <div className={styles.sectionFrame}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.eyebrow}>Radar K26</p>
+          <h2 id="radar-title">Selecione a lente de leitura.</h2>
+          <p>A mesma novidade pode ser lida pela decisão executiva, pela profundidade técnica ou pelo valor operacional para Bradesco.</p>
+        </div>
+        <RadarSlidesCallout />
+        <RadarControls {...props} />
+        <RadarInsightStrip {...props} />
+        <RadarBoard {...props} />
+      </div>
+    </section>
+  )
+}
+
+function RadarSlidesCallout() {
+  return (
+    <a href="/bradesco-26/slides" className={styles.radarSlidesCallout}>
+      <span><MonitorPlay size={18} aria-hidden="true" />Apresentação executiva</span>
+      <strong>Abrir material K26</strong>
+      <small>Mesmas informações em uma versão ampla e objetiva para reunião.</small>
+      <ArrowUpRight size={16} aria-hidden="true" />
+    </a>
+  )
+}
+
+function RadarControls({ activeLens, activeTheme, setActiveLens, selectTheme }: RadarSectionProps) {
+  return (
+    <div className={styles.radarControls} aria-label="Controles de visualização">
+      <div className={styles.lensSwitch}>
+        {lenses.map((lens) => <button key={lens.id} type="button" className={activeLens === lens.id ? styles.lensActive : styles.lensButton} onClick={() => setActiveLens(lens.id)}><span>{lens.label}</span><small>{lens.helper}</small></button>)}
+      </div>
+      <div className={styles.themeRail}>
+        {themes.map((theme) => <button key={theme.id} type="button" className={activeTheme === theme.id ? styles.themeActive : styles.themeButton} onClick={() => selectTheme(theme.id)}>{theme.label}</button>)}
+      </div>
+    </div>
+  )
+}
+
+function RadarInsightStrip({ activeLensInfo, activeItem, lensCopyKey }: RadarSectionProps) {
+  return (
+    <div className={styles.radarInsightStrip} aria-label="Resumo da leitura selecionada">
+      <article><span>Lente ativa</span><strong>{activeLensInfo.label}</strong><p>{activeItem[lensCopyKey]}</p></article>
+      <article><span>Aplicação Bradesco</span><strong>{activeItem.bradescoAngle}</strong></article>
+      <article><span>Próxima decisão</span><strong>{activeItem.nextMove}</strong></article>
+    </div>
+  )
+}
+
+function RadarBoard(props: RadarSectionProps) {
+  return (
+    <div className={styles.radarBoard}>
+      <RadarList {...props} />
+      <RadarDetail {...props} />
+    </div>
+  )
+}
+
+function RadarList({ filtered, activeItem, activeThemeInfo, setSelectedId, openDeepDive }: RadarSectionProps) {
+  return (
+    <div className={styles.radarList}>
+      {filtered.map((item) => {
+        const Icon = item.icon
+        const selected = activeItem.id === item.id
+        return (
+          <button key={item.id} type="button" className={selected ? styles.radarItemActive : styles.radarItem} onClick={() => setSelectedId(item.id)} onDoubleClick={() => openDeepDive(item.id)} title="Selecionar tema">
+            <span>{item.number}</span><Icon size={18} aria-hidden="true" /><strong>{item.title}</strong><small>Tema</small>
+          </button>
+        )
+      })}
+      <div className={styles.radarListMeta}><span>Trilha ativa</span><strong>{activeThemeInfo.label}</strong><small>{filtered.length} temas para explorar</small></div>
+    </div>
+  )
+}
+
+function RadarDetail(props: RadarSectionProps) {
+  const { activeItem, activeLens, activeLensInfo, activeDiscussion, activeDeepDive, lensCopyKey, speakingId, openDeepDive, speakBrief } = props
+
+  return (
+    <article key={`${activeItem.id}-${activeLens}`} className={styles.radarDetail}>
+      <div className={styles.detailSweep} aria-hidden="true" />
+      <div className={styles.radarDetailTop}>
+        <div className={styles.radarDetailMeta}><span>{activeItem.number}</span><small>Análise completa disponível</small></div>
+        <RadarDetailActions activeItem={activeItem} speakingId={speakingId} openDeepDive={openDeepDive} speakBrief={speakBrief} />
+      </div>
+      <div className={styles.detailHero}>
+        <div><small>{activeLensInfo.helper}</small><h3>{activeItem.title}</h3><p className={styles.radarSubtitle}>{activeItem.subtitle}</p></div>
+        <div className={styles.detailSignal} aria-label="Sinal da lente ativa"><span>{activeLensInfo.label}</span><strong>{activeItem.number}</strong></div>
+      </div>
+      <p className={styles.radarCopy}>{activeItem[lensCopyKey]}</p>
+      <div className={styles.studioCue}><Headphones size={14} aria-hidden="true" /><p>{activeDeepDive.premise}</p></div>
+      <div className={styles.decisionGrid}>
+        <article><span>Arquitetura</span><p>{activeItem.architecture}</p></article>
+        <article><span>Modelo operacional</span><p>{activeItem.operatingModel}</p></article>
+        <article><span>Próximo movimento</span><p>{activeItem.nextMove}</p></article>
+      </div>
+      <div className={styles.proofRail} aria-label="Elementos de prova">{activeItem.proofPoints.map((point) => <span key={point}>{point}</span>)}</div>
+      <div className={styles.discussionBox}><span>{activeLens === 'executivo' ? 'Decisão para a sala' : activeLens === 'tecnico' ? 'Critério técnico' : 'Workshop de valor'}</span><strong>{activeDiscussion}</strong></div>
+      <div className={styles.detailActions}>
+        <button type="button" onClick={() => openDeepDive(activeItem.id)}><Maximize2 size={14} aria-hidden="true" />Abrir análise</button>
+        <button type="button" onClick={() => speakBrief(activeItem)} aria-pressed={speakingId === activeItem.id}>{speakingId === activeItem.id ? <Pause size={14} aria-hidden="true" /> : <Volume2 size={14} aria-hidden="true" />}{speakingId === activeItem.id ? 'Pausar áudio' : 'Ouvir resumo'}</button>
+      </div>
+    </article>
+  )
+}
+
+type RadarDetailActionsProps = Pick<RadarSectionProps, 'speakingId' | 'openDeepDive' | 'speakBrief'> & {
+  activeItem: Announcement
+}
+
+function RadarDetailActions({ activeItem, speakingId, openDeepDive, speakBrief }: RadarDetailActionsProps) {
+  const ActiveIcon = activeItem.icon
+  return (
+    <div className={styles.detailTopActions}>
+      <button type="button" className={speakingId === activeItem.id ? styles.audioChipActive : styles.audioChip} onClick={() => speakBrief(activeItem)} aria-pressed={speakingId === activeItem.id}>
+        {speakingId === activeItem.id ? <Pause size={14} aria-hidden="true" /> : <Volume2 size={14} aria-hidden="true" />}<span>{speakingId === activeItem.id ? 'Pausar' : 'Áudio'}</span>
+      </button>
+      <button type="button" className={styles.iconAction} onClick={() => openDeepDive(activeItem.id)} aria-label={`Abrir deep dive de ${activeItem.title}`}><Maximize2 size={15} aria-hidden="true" /></button>
+      <div className={styles.detailIcon}><ActiveIcon size={30} aria-hidden="true" /></div>
+    </div>
+  )
+}
+
+type DeepDiveOverlayProps = {
+  deepDiveId: string | null
+  deepDiveItem: Announcement
+  selectedDeepDive: DeepDive
+  speakingId: string | null
+  prefersReducedMotion: boolean | null
+  setDeepDiveId: (id: string | null) => void
+  speakBrief: (item: Announcement) => void
+}
+
+function DeepDiveOverlay(props: DeepDiveOverlayProps) {
+  if (!props.deepDiveId) return null
+  return (
+    <AnimatePresence>
+      <DeepDiveDialog {...props} />
+    </AnimatePresence>
+  )
+}
+
+function DeepDiveDialog({ deepDiveItem, selectedDeepDive, speakingId, prefersReducedMotion, setDeepDiveId, speakBrief }: DeepDiveOverlayProps) {
+  const DeepDiveIcon = deepDiveItem.icon
+  return (
+    <motion.div className={styles.deepDiveOverlay} role="dialog" aria-modal="true" aria-labelledby="deep-dive-title" initial={prefersReducedMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} exit={prefersReducedMotion ? undefined : { opacity: 0 }} transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}>
+      <button type="button" className={styles.deepDiveBackdrop} onClick={() => setDeepDiveId(null)} aria-label="Fechar deep dive" />
+      <motion.article className={styles.deepDivePanel} initial={prefersReducedMotion ? false : { opacity: 0, y: 58, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={prefersReducedMotion ? undefined : { opacity: 0, y: 28, scale: 0.98 }} transition={{ duration: 0.48, ease: [0.16, 1, 0.3, 1] }}>
+        <div className={styles.deepDiveScanner} aria-hidden="true" />
+        <DeepDiveHeader deepDiveItem={deepDiveItem} speakingId={speakingId} setDeepDiveId={setDeepDiveId} speakBrief={speakBrief} />
+        <DeepDiveHero deepDiveItem={deepDiveItem} selectedDeepDive={selectedDeepDive} speakBrief={speakBrief} />
+        <DeepDiveBody deepDiveItem={deepDiveItem} selectedDeepDive={selectedDeepDive} />
+        <div className={styles.deepDiveColumns}>
+          <section><div className={styles.deepDiveSectionTitle}><DeepDiveIcon size={17} aria-hidden="true" /><h3>Pontos de cuidado</h3></div><ul>{selectedDeepDive.watchouts.map((item) => <li key={item}>{item}</li>)}</ul></section>
+          <section><div className={styles.deepDiveSectionTitle}><Workflow size={17} aria-hidden="true" /><h3>Workshop sugerido</h3></div><ol>{selectedDeepDive.workshop.map((item) => <li key={item}>{item}</li>)}</ol></section>
+        </div>
+        <footer className={styles.deepDiveFooter}>
+          <div><span>Próximo movimento</span><strong>{deepDiveItem.nextMove}</strong></div>
+          <div className={styles.deepDiveProof}>{deepDiveItem.proofPoints.map((point) => <small key={point}>{point}</small>)}</div>
+        </footer>
+      </motion.article>
+    </motion.div>
+  )
+}
+
+function DeepDiveHeader({ deepDiveItem, speakingId, setDeepDiveId, speakBrief }: Pick<DeepDiveOverlayProps, 'deepDiveItem' | 'speakingId' | 'setDeepDiveId' | 'speakBrief'>) {
+  return (
+    <header className={styles.deepDiveHeader}>
+      <div><p className={styles.deepDiveKicker}>Análise K26</p><h2 id="deep-dive-title">{deepDiveItem.title}</h2><p>{deepDiveItem.subtitle}</p></div>
+      <div className={styles.deepDiveHeaderActions}>
+        <button type="button" className={speakingId === deepDiveItem.id ? styles.deepDiveAudioActive : styles.deepDiveAudio} onClick={() => speakBrief(deepDiveItem)} aria-pressed={speakingId === deepDiveItem.id}>{speakingId === deepDiveItem.id ? <Pause size={16} aria-hidden="true" /> : <Volume2 size={16} aria-hidden="true" />}{speakingId === deepDiveItem.id ? 'Pausar áudio' : 'Áudio resumo'}</button>
+        <button type="button" className={styles.deepDiveClose} onClick={() => setDeepDiveId(null)} aria-label="Fechar"><X size={18} aria-hidden="true" /></button>
+      </div>
+    </header>
+  )
+}
+
+function DeepDiveHero({ deepDiveItem, selectedDeepDive, speakBrief }: Pick<DeepDiveOverlayProps, 'deepDiveItem' | 'selectedDeepDive' | 'speakBrief'>) {
+  return (
+    <div className={styles.deepDiveHero}>
+      <div className={styles.deepDiveThesis}><span>Leitura para Bradesco</span><strong>{selectedDeepDive.premise}</strong></div>
+      <div className={styles.sonicConsole} aria-label="Controle de áudio">
+        <div className={styles.sonicWave} aria-hidden="true">{Array.from({ length: 14 }).map((_, index) => <span key={index} />)}</div>
+        <button type="button" onClick={() => speakBrief(deepDiveItem)}><Headphones size={16} aria-hidden="true" />Roteiro narrado</button>
+      </div>
+    </div>
+  )
+}
+
+function DeepDiveBody({ deepDiveItem, selectedDeepDive }: Pick<DeepDiveOverlayProps, 'deepDiveItem' | 'selectedDeepDive'>) {
+  return (
+    <div className={styles.deepDiveBody}>
+      <section className={styles.deepDiveStory}><span>O duplo clique</span><p>{selectedDeepDive.doubleClick}</p></section>
+      <section className={styles.deepDiveStory}><span>Linha de discussão</span><p>{selectedDeepDive.talkTrack}</p></section>
+      <section className={styles.deepDiveStack}><span>Arquitetura</span><p>{deepDiveItem.architecture}</p></section>
+      <section className={styles.deepDiveStack}><span>Modelo operacional</span><p>{deepDiveItem.operatingModel}</p></section>
+    </div>
+  )
+}
+
+function ArchitectureSection() {
+  return (
+    <section id="architecture" className={styles.architectureSection} aria-labelledby="architecture-title">
+      <div className={styles.sectionFrame}>
+        <div className={styles.architectureHeader}><p className={styles.eyebrow}>Arquitetura Pós-K26</p><h2 id="architecture-title">Agente só gera valor quando sabe onde agir.</h2><p>A ponte entre anúncio e desenho técnico: canais, IA, workflows, dados, segurança e integração operando como sistema de ação.</p></div>
+        <div className={styles.architectureMap}>{architectureLayers.map((layer, index) => <article key={layer.title} className={styles.architectureLayer}><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{layer.title}</h3><p>{layer.copy}</p></div><div className={styles.layerNodes}>{layer.nodes.map((node) => <small key={node}>{node}</small>)}</div></article>)}</div>
+      </div>
+    </section>
+  )
+}
+
+function UseCasesSection() {
+  return (
+    <section id="use-cases" className={styles.useCaseSection} aria-labelledby="use-cases-title">
+      <div className={styles.sectionFrame}>
+        <div className={styles.sectionHeader}><p className={styles.eyebrow}>Casos de uso Bradesco</p><h2 id="use-cases-title">Seis frentes para sair da sala com próximo passo.</h2><p>A sessão ajuda a priorizar domínio, responsável de negócio, responsável técnico e pré-requisitos para avançar com segurança.</p></div>
+        <div className={styles.useCaseGrid}>{useCases.map((useCase, index) => <article key={useCase.title} className={styles.useCaseCard}><span>{String(index + 1).padStart(2, '0')}</span><h3>{useCase.title}</h3><p>{useCase.outcome}</p><small>{useCase.stack}</small></article>)}</div>
+      </div>
+    </section>
+  )
+}
+
+function CloseSection() {
+  return (
+    <section className={styles.closeSection} aria-labelledby="close-title">
+      <div className={styles.sectionFrame}><div className={styles.closeGrid}><div><p className={styles.eyebrow}>Roteiro de 03 de junho</p><h2 id="close-title">Da inspiração à decisão operacional.</h2><p>Primeiro a tese, depois a arquitetura, então os casos de uso. O objetivo é sair com uma decisão clara sobre onde aprofundar valor, dados, governança e execução.</p></div><ol className={styles.roadmapList}>{roadmap.map((item, index) => <li key={item.title}><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.detail}</p></div></li>)}</ol></div></div>
+    </section>
+  )
+}
+
+function SourcesSection() {
+  return (
+    <section id="sources" className={styles.sources} aria-labelledby="sources-title">
+      <div className={styles.sectionFrame}><div className={styles.sourcesGrid}><div><p className={styles.eyebrow}>Fontes verificadas</p><h2 id="sources-title">Baseado em anúncios oficiais do Knowledge 2026.</h2></div><div className={styles.sourceLinks}>{sources.map((source) => <a key={source.href} href={source.href} target="_blank" rel="noreferrer">{source.label}<ArrowUpRight size={15} aria-hidden="true" /></a>)}</div></div></div>
+    </section>
   )
 }

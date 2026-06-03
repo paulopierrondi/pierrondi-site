@@ -1,3 +1,33 @@
+'use client'
+
+import { useRef } from 'react'
+import type { ReactNode } from 'react'
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'framer-motion'
+import type { Variants } from 'framer-motion'
+import {
+  Activity,
+  Bot,
+  Boxes,
+  Building2,
+  Cloud,
+  Database,
+  FileCheck2,
+  Gauge,
+  GitBranch,
+  Link2,
+  Network,
+  ScrollText,
+  Server,
+  ShieldCheck,
+  Workflow,
+} from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import styles from './ItauExperience.module.css'
 
 type VerdictKind = 'approved' | 'adjust' | 'reject'
@@ -343,8 +373,32 @@ always:
   return HTTP 400 for validation errors, never HTTP 500`
 
 export default function ItauExperience() {
+  const reduced = useReducedMotion()
+  const heroRef = useRef<HTMLElement | null>(null)
+
+  const { scrollYProgress } = useScroll()
+  const progressScale = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  })
+
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  })
+  const heroY = useTransform(heroProgress, [0, 1], [0, reduced ? 0 : 90])
+  const heroFade = useTransform(heroProgress, [0, 1], [1, reduced ? 1 : 0])
+
+  const cardHover = reduced ? undefined : { y: -5, borderColor: 'rgba(236, 112, 0, 0.5)' }
+
   return (
     <main className={styles.shell}>
+      <motion.div
+        className={styles.scrollProgress}
+        style={{ scaleX: reduced ? 1 : progressScale }}
+        aria-hidden="true"
+      />
       <div className={styles.container}>
         {/* ─────────── HERO ─────────── */}
         <section className={styles.hero}>
@@ -396,9 +450,237 @@ export default function ItauExperience() {
             </p>
           </div>
 
-          <div className={styles.verdictTable}>
+          <motion.div
+            className={styles.blueprintPitchGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.18 }}
+          >
+            {architecturePitchCards.map((card) => (
+              <motion.article key={card.title} className={styles.blueprintPitchCard} variants={cardItem}>
+                <span>{card.kicker}</span>
+                <h3>{card.title}</h3>
+                <p>{card.copy}</p>
+              </motion.article>
+            ))}
+          </motion.div>
+
+          <div className={styles.referencePackCallout}>
+            <strong>Reference Pack</strong>
+            <div>
+              <p>
+                O DOCX/PDF acompanha essa narrativa: tese executiva, diagrama ServiceNow CSDM,
+                modelo de dados, checklist do piloto, fontes oficiais e guardrails para não quebrar
+                o Control Tower operacional do pierrondi.dev.
+              </p>
+              <div className={styles.referencePackLinks}>
+                <a href="/itau/itau-ai-governance-architecture-reference.pdf">Abrir PDF</a>
+                <a href="/itau/itau-ai-governance-architecture-reference.docx">Baixar DOCX</a>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* ─────────── AULA: CAMADAS CSDM 5 ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>aula · onde o agente mora</span>
+            <h2 className={styles.sectionTitle}>CSDM 5 em camadas — e por que isso importa.</h2>
+            <p className={styles.sectionSub}>
+              Antes de qualquer campo ou relacionamento: CSDM é um mapa de camadas. Cada decisão de
+              governança fica fácil quando o AI Agent está na camada certa. Role e veja onde ele entra.
+            </p>
+          </div>
+
+          <div className={styles.csdmGrid}>
+            <motion.div
+              className={styles.csdmStack}
+              variants={stagger}
+              initial={reduced ? false : 'hidden'}
+              whileInView={reduced ? undefined : 'visible'}
+              viewport={revealViewport}
+            >
+              {csdmLayers.map((layer) => (
+                <motion.div
+                  key={layer.tier}
+                  className={`${styles.csdmLayer} ${layer.toneClass} ${
+                    layer.highlight ? styles.csdmLayerHighlight : ''
+                  }`}
+                  variants={layerItem}
+                  whileHover={reduced ? undefined : { x: 6 }}
+                  animate={
+                    reduced || !layer.highlight
+                      ? undefined
+                      : {
+                          boxShadow: [
+                            '0 0 0 rgba(236,112,0,0)',
+                            '0 0 32px rgba(236,112,0,0.35)',
+                            '0 0 0 rgba(236,112,0,0)',
+                          ],
+                        }
+                  }
+                  transition={
+                    layer.highlight
+                      ? { duration: 3.4, repeat: Infinity, ease: 'easeInOut' }
+                      : undefined
+                  }
+                >
+                  <span className={styles.csdmTier}>{layer.tier}</span>
+                  <div className={styles.csdmLayerBody}>
+                    <p className={styles.csdmLayerName}>{layer.name}</p>
+                    <span className={styles.csdmLayerMeta}>{layer.meta}</span>
+                  </div>
+                  {layer.highlight && <span className={styles.csdmYouAreHere}>aqui</span>}
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.ul
+              className={styles.csdmLessons}
+              variants={stagger}
+              initial={reduced ? false : 'hidden'}
+              whileInView={reduced ? undefined : 'visible'}
+              viewport={revealViewport}
+            >
+              {csdmLessons.map((lesson, i) => (
+                <motion.li key={i} variants={cardItem}>
+                  <span className={styles.csdmLessonNum}>{String(i + 1).padStart(2, '0')}</span>
+                  <p>{lesson}</p>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </div>
+        </Reveal>
+
+        {/* ─────────── VEREDITO ITEM-POR-ITEM ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div id="mapa-csdm-itau" />
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>ServiceNow CSDM Reference Diagram</span>
+            <h2 className={styles.sectionTitle}>Como o diagrama CSDM fica para agentes de IA no Itaú.</h2>
+            <p className={styles.sectionSub}>
+              Abaixo está a leitura prática do CSDM 5: cada domínio recebe os registros, owners e
+              decisões necessários para resolver o cadastro de agentes de IA sem criar uma CMDB paralela.
+            </p>
+          </div>
+
+          <motion.div
+            className={styles.csdmMapViewport}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.08 }}
+          >
+            <div className={styles.csdmMapCanvas} aria-label="Mapa CSDM 5 preenchido para agentes de IA no Itaú">
+              <div className={styles.csdmMapTopline}>
+                <div>
+                  <span className={styles.csdmMark}>CSDM 5</span>
+                  <h3>AI Agent Governance · Itaú</h3>
+                </div>
+                <p>
+                  Regra central: primeiro governar o ativo de IA; depois criar CI somente quando há
+                  runtime visível; sempre relacionar ao Service Instance.
+                </p>
+              </div>
+
+              {csdmMapDomains.map((domain) => (
+                <section
+                  key={domain.key}
+                  className={`${styles.mapDomain} ${styles[`mapDomain_${domain.key}`]}`}
+                >
+                  <div className={styles.mapDomainHeader}>
+                    <h3>{domain.title}</h3>
+                    <span>{domain.owner}</span>
+                  </div>
+                  <div className={styles.mapDomainBlocks}>
+                    {domain.blocks.map((block) => (
+                      <MapBlock key={`${domain.key}-${block.title}`} block={block} reduced={reduced} />
+                    ))}
+                  </div>
+                </section>
+              ))}
+
+              <section className={styles.mapPortfolio}>
+                <span className={styles.portfolioIcon} aria-hidden="true">
+                  <ShieldCheck size={24} strokeWidth={1.8} />
+                </span>
+                <h3>Manage Portfolio</h3>
+                <p>AI Governance Board prioriza, aprova risco e decide entrada no piloto.</p>
+              </section>
+
+              <section className={styles.aiOverlayPanel}>
+                {aiOverlayBlocks.map((item) => (
+                  <article key={item.title}>
+                    <strong>{item.title}</strong>
+                    <code>{item.table}</code>
+                    <p>{item.desc}</p>
+                  </article>
+                ))}
+              </section>
+
+              <section className={styles.mapRelationsPanel}>
+                <h3>Relações que resolvem o problema</h3>
+                <ol>
+                  {csdmMapRelations.map((relation) => (
+                    <li key={relation}>{relation}</li>
+                  ))}
+                </ol>
+              </section>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className={styles.resolutionGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            {resolutionSteps.map((step) => (
+              <motion.article
+                key={step.step}
+                className={styles.resolutionCard}
+                variants={cardItem}
+                whileHover={cardHover}
+              >
+                <span>{step.step}</span>
+                <h3>{step.title}</h3>
+                <p>{step.desc}</p>
+              </motion.article>
+            ))}
+          </motion.div>
+        </Reveal>
+
+        {/* ─────────── VEREDITO ITEM-POR-ITEM ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>resposta direta</span>
+            <h2 className={styles.sectionTitle}>
+              Não escolha a tabela só pelo nome “AI Agent”.
+            </h2>
+            <p className={styles.sectionSub}>
+              O desenho mais seguro é separar três camadas: governança do ativo de IA,
+              deployment operacional na CMDB e contexto CSDM de negócio/serviço. A partir
+              daí, a escolha entre <code>cmdb_ci_function_ai</code> e{' '}
+              <code>cmdb_ci_appl_ai_application</code> fica simples.
+            </p>
+          </div>
+
+          <motion.div
+            className={styles.verdictTable}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.08 }}
+          >
             {verdictItems.map((v, i) => (
-              <div key={i} className={styles.verdictRow}>
+              <motion.div
+                key={i}
+                className={styles.verdictRow}
+                variants={cardItem}
+                whileHover={reduced ? undefined : { backgroundColor: 'rgba(236, 112, 0, 0.06)' }}
+              >
                 <span className={`${styles.verdictBadge} ${verdictBadgeClass[v.kind]}`}>
                   {verdictBadgeLabel[v.kind]}
                 </span>
@@ -407,9 +689,9 @@ export default function ItauExperience() {
                   {v.meta && <span className={styles.verdictItemMeta}>{v.meta}</span>}
                 </div>
                 <p className={styles.verdictItemBody}>{v.reason}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           <div className={styles.commitBanner}>
             <div>
@@ -428,6 +710,35 @@ export default function ItauExperience() {
               <br />
               <span style={{ color: '#FFCC00' }}>→ SaaS/cloud: AI Function · Itaú-managed: AI & Model Application.</span>
             </div>
+          </div>
+        </Reveal>
+
+        {/* ─────────── BASE SERVICENOW ─────────── */}
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>checado na base ServiceNow</span>
+            <h2 className={styles.sectionTitle}>O que podemos afirmar sem forçar a barra.</h2>
+            <p className={styles.sectionSub}>
+              A recomendação abaixo foi ajustada para não prometer mais do que a documentação sustenta:
+              AI Control Tower dá inventário, discovery, governança, risk/compliance, observabilidade e valor;
+              a qualidade do resultado ainda depende de source IDs, IRE, relacionamentos e processo.
+            </p>
+          </div>
+
+          <div className={styles.sourceGrid}>
+            {sourceChecks.map((source) => (
+              <a
+                key={source.title}
+                className={styles.sourceCard}
+                href={source.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className={styles.sourceLabel}>ServiceNow Docs</span>
+                <h3 className={styles.sourceTitle}>{source.title}</h3>
+                <p className={styles.sourceFact}>{source.fact}</p>
+              </a>
+            ))}
           </div>
         </section>
 
@@ -461,7 +772,7 @@ export default function ItauExperience() {
         </section>
 
         {/* ─────────── VEREDITO CONCEITUAL ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>racional</span>
             <h2 className={styles.sectionTitle}>O agente não substitui aplicação, serviço ou capability.</h2>
@@ -471,7 +782,13 @@ export default function ItauExperience() {
               Change, Incident e governança.
             </p>
           </div>
-          <article className={styles.verdictCard}>
+          <motion.article
+            className={styles.verdictCard}
+            variants={cardItem}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={revealViewport}
+          >
             <span className={styles.verdictStamp}>Recomendação</span>
             <h3 className={styles.verdictHeadline}>
               Usar classes nativas sempre que possível: AI Digital Asset para governança,
@@ -493,18 +810,80 @@ export default function ItauExperience() {
                 <p className={styles.verdictItemDesc}>Conecta o CI ao Service Instance, aplicação, serviço, owner, impacto operacional e reconciliação via IRE.</p>
               </li>
             </ul>
-          </article>
-        </section>
+          </motion.article>
+        </Reveal>
+
+        {/* ─────────── DESENHO ALVO ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>desenho alvo</span>
+            <h2 className={styles.sectionTitle}>Arquitetura recomendada para o Itaú.</h2>
+            <p className={styles.sectionSub}>
+              A notação abaixo segue o raciocínio CSDM: separar contexto de negócio, ponto
+              operacional, governança do ativo de IA, deployment e dependências. Isso evita
+              cadastrar agente como “coisa solta” na CMDB.
+            </p>
+          </div>
+
+          <TargetArchitectureView reduced={reduced} />
+        </Reveal>
+
+        {/* ─────────── ALINHAMENTO CSDM 5 ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>por que é CSDM 5</span>
+            <h2 className={styles.sectionTitle}>O racional arquitetural em quatro regras.</h2>
+            <p className={styles.sectionSub}>
+              A decisão não é “qual tabela parece mais moderna”. A decisão é preservar a
+              semântica do CSDM e deixar cada registro explicar valor, impacto, risco e operação.
+            </p>
+          </div>
+
+          <motion.div
+            className={styles.alignmentGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.16 }}
+          >
+            {csdmAlignment.map((item) => {
+              const Icon = item.icon
+              return (
+                <motion.article
+                  key={item.title}
+                  className={styles.alignmentCard}
+                  variants={cardItem}
+                  whileHover={cardHover}
+                >
+                  <Icon className={styles.alignmentIcon} size={24} strokeWidth={1.8} aria-hidden="true" />
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
+                </motion.article>
+              )
+            })}
+          </motion.div>
+        </Reveal>
 
         {/* ─────────── 5 RISCOS CRÍTICOS ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>como fazer</span>
             <h2 className={styles.sectionTitle}>Cinco passos para sair da dúvida e virar piloto governado.</h2>
           </div>
-          <div className={styles.criticalGrid}>
+          <motion.div
+            className={styles.criticalGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.15 }}
+          >
             {criticalItems.map((item, index) => (
-              <article key={item.title} className={styles.criticalCard}>
+              <motion.article
+                key={item.title}
+                className={styles.criticalCard}
+                variants={cardItem}
+                whileHover={cardHover}
+              >
                 <span className={styles.criticalNum}>{index + 1}</span>
                 <span className={`${styles.criticalSeverity} ${item.severityClass}`}>{item.severity}</span>
                 <h3 className={styles.criticalTitle}>{item.title}</h3>
@@ -513,13 +892,13 @@ export default function ItauExperience() {
                   <span className={styles.criticalActionLabel}>Ação</span>
                   {item.action}
                 </p>
-              </article>
+              </motion.article>
             ))}
-          </div>
-        </section>
+          </motion.div>
+        </Reveal>
 
         {/* ─────────── CÓDIGO CORRIGIDO ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>modelo mínimo</span>
             <h2 className={styles.sectionTitle}>
@@ -602,10 +981,10 @@ export default function ItauExperience() {
               </div>
             </div>
           </div>
-        </section>
+        </Reveal>
 
         {/* ─────────── RELEASE MAP ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>evolução</span>
             <h2 className={styles.sectionTitle}>Como manter o desenho compatível com AI Control Tower.</h2>
@@ -633,12 +1012,12 @@ export default function ItauExperience() {
           <p className={styles.matrixNote}>
             O objetivo é governança acionável agora, sem bloquear descoberta, runtime, AI Control Tower, IRE e evolução nativa futura.
           </p>
-        </section>
+        </Reveal>
 
         {/* ─────────── COMO AJUDAMOS ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
-            <span className={styles.sectionKicker}>como ajudamos a entregar</span>
+            <span className={styles.sectionKicker}>condução da reunião</span>
             <h2 className={styles.sectionTitle}>
               ServiceNow ajuda a fechar a modelagem, não só a apresentar tabela.
             </h2>
@@ -648,54 +1027,190 @@ export default function ItauExperience() {
             </p>
           </div>
 
-          <div className={styles.helpGrid}>
+          <motion.div
+            className={styles.helpGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.15 }}
+          >
             {helpItems.map((h) => (
-              <article key={h.title} className={styles.helpCard}>
+              <motion.article
+                key={h.title}
+                className={styles.helpCard}
+                variants={cardItem}
+                whileHover={reduced ? undefined : { y: -5, borderColor: 'rgba(255, 184, 112, 0.55)' }}
+              >
                 <span className={styles.helpIcon}>{h.icon}</span>
                 <h3 className={styles.helpTitle}>{h.title}</h3>
                 <p className={styles.helpDesc}>{h.desc}</p>
                 <span className={styles.helpEffort}>{h.effort}</span>
-              </article>
+              </motion.article>
             ))}
-          </div>
-        </section>
+          </motion.div>
+        </Reveal>
 
         {/* ─────────── ROADMAP ─────────── */}
-        <section id="roadmap" className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
+          <div id="roadmap" />
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>execução</span>
             <h2 className={styles.sectionTitle}>Roadmap de quatro semanas para piloto auditável.</h2>
           </div>
-          <div className={styles.roadmap}>
+          <motion.div
+            className={styles.roadmap}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {roadmap.map(([when, title, desc, owner], index) => (
-              <article key={title} className={`${styles.roadmapItem} ${index === 0 ? styles.done : ''}`}>
+              <motion.article
+                key={title}
+                className={`${styles.roadmapItem} ${index === 0 ? styles.done : ''}`}
+                variants={cardItem}
+              >
                 <p className={styles.roadmapWhen}>{when}</p>
                 <h3 className={styles.roadmapTitle}>{title}</h3>
                 <p className={styles.roadmapDesc}>{desc}</p>
                 <span className={styles.roadmapOwner}>{owner}</span>
-              </article>
+              </motion.article>
             ))}
-          </div>
-        </section>
+          </motion.div>
+        </Reveal>
 
         {/* ─────────── PERGUNTAS ─────────── */}
-        <section className={styles.section}>
+        <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionKicker}>perguntas de controle</span>
             <h2 className={styles.sectionTitle}>O checklist que evita CMDB decorativa.</h2>
           </div>
-          <div className={styles.questionGrid}>
+          <motion.div
+            className={styles.questionGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.15 }}
+          >
             {questions.map((question, index) => (
-              <article key={question} className={styles.questionCard}>
+              <motion.article
+                key={question}
+                className={styles.questionCard}
+                variants={cardItem}
+                whileHover={reduced ? undefined : { y: -4, borderColor: 'rgba(236, 112, 0, 0.4)' }}
+              >
                 <span className={styles.questionNum}>{String(index + 1).padStart(2, '0')}</span>
                 <p className={styles.questionText}>{question}</p>
-              </article>
+              </motion.article>
             ))}
+          </motion.div>
+        </Reveal>
+
+        {/* ─────────── FONTES OFICIAIS ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div id="fontes-oficiais" />
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>fontes oficiais</span>
+            <h2 className={styles.sectionTitle}>Links para sustentar a conversa com o cliente.</h2>
+            <p className={styles.sectionSub}>
+              Use estes materiais como base de validação com arquitetura, CMDB owner e governança.
+              A instância do Itaú ainda deve confirmar plugins ativos, nomes de relacionamento e
+              release aplicável.
+            </p>
           </div>
-        </section>
+
+          <motion.div
+            className={styles.sourcesGrid}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            {officialSources.map((source) => (
+              <motion.a
+                key={source.href}
+                className={styles.sourceCard}
+                href={source.href}
+                target="_blank"
+                rel="noreferrer"
+                variants={cardItem}
+                whileHover={cardHover}
+              >
+                <span className={styles.sourceTag}>{source.tag}</span>
+                <h3>{source.title}</h3>
+                <p>{source.desc}</p>
+                <span className={styles.sourceLink}>
+                  Abrir fonte oficial <Link2 size={14} strokeWidth={2} aria-hidden="true" />
+                </span>
+              </motion.a>
+            ))}
+          </motion.div>
+        </Reveal>
+
+        {/* ─────────── AI CONTROL TOWER FLOW ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div id="ai-control-tower-flow" />
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionKicker}>AI Control Tower</span>
+            <h2 className={styles.sectionTitle}>Como o AI Control Tower fortalece essa arquitetura.</h2>
+            <p className={styles.sectionSub}>
+              O desenho proposto já prepara os registros para uma camada de controle central:
+              descoberta, inventário, risco, runtime, valor e workflows ServiceNow conectados
+              ao CSDM.
+            </p>
+          </div>
+
+          <motion.div
+            className={styles.controlTower}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.12 }}
+          >
+            {aiControlTowerFlow.map((step, index) => {
+              const Icon = step.icon
+              return (
+                <motion.article
+                  key={step.step}
+                  className={styles.controlStep}
+                  variants={cardItem}
+                  whileHover={cardHover}
+                >
+                  <div className={styles.controlStepTop}>
+                    <span className={styles.controlStepNum}>{step.step}</span>
+                    <span className={styles.controlIcon}>
+                      <Icon size={22} strokeWidth={1.8} aria-hidden="true" />
+                    </span>
+                  </div>
+                  <h3>{step.title}</h3>
+                  <p>{step.desc}</p>
+                  <strong>{step.outcome}</strong>
+                  {index < aiControlTowerFlow.length - 1 && (
+                    <span className={styles.controlConnector} aria-hidden="true">→</span>
+                  )}
+                </motion.article>
+              )
+            })}
+          </motion.div>
+
+          <div className={styles.controlTowerSummary}>
+            <Bot size={28} strokeWidth={1.8} aria-hidden="true" />
+            <p>
+              Para o Itaú, o ganho é sair de cadastro manual para controle contínuo: todo agente
+              tem owner, risco, runtime, dependências, serviço impactado e ação operacional quando
+              algo muda.
+            </p>
+          </div>
+        </Reveal>
 
         {/* ─────────── CTA ─────────── */}
-        <section className={styles.cta}>
+        <motion.section
+          className={styles.cta}
+          initial={reduced ? false : { opacity: 0, y: 40, scale: 0.97 }}
+          whileInView={reduced ? undefined : { opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: motionEase }}
+        >
           <div className={styles.ctaInner}>
             <div>
               <p className={styles.ctaKicker}>próxima decisão</p>
@@ -707,14 +1222,15 @@ export default function ItauExperience() {
             </div>
             <div className={styles.ctaActions}>
               <a className={styles.ctaActionPrimary} href="#roadmap">Ver execução</a>
-              <a className={styles.ctaActionSecondary} href="/tech-partner">Contexto ServiceNow</a>
+              <a className={styles.ctaActionSecondary} href="#fontes-oficiais">Fontes oficiais</a>
+              <a className={styles.ctaActionSecondary} href="#ai-control-tower-flow">Flow AICT</a>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         <footer className={styles.confidential}>
-          <span>Material executivo reservado</span>
-          <span className={styles.confidentialAuthor}>Preparado por <strong>Paulo Pierrondi</strong></span>
+          <span>Material executivo reservado · Itaú × ServiceNow</span>
+          <span className={styles.confidentialAuthor}>CSDM 5 · CMDB · AI Control Tower</span>
         </footer>
       </div>
     </main>

@@ -38,25 +38,11 @@ const ffmpegTracingIncludes = Object.fromEntries(
   FFMPEG_TRACED_ROUTES.map((route) => [route, FFMPEG_BINARY_GLOBS])
 )
 
-const RETIRED_PUBLIC_ROUTES = [
-  '/agentes',
-  '/blog',
-  '/blog/:path*',
-  '/calculadora',
-  '/faq',
-  '/feed.xml',
-  '/marketing-os',
-  '/marketing-os/:path*',
-  '/obrigado',
-  '/portfolio',
-  '/precos',
-  '/privacy-policy',
-  '/policy',
-  '/produto-digital',
-  '/quiz',
-  '/sobre',
-  '/tech-partner',
-  '/terms-of-service',
+const CANONICAL_REDIRECTS = [
+  { source: '/agentes', destination: '/portfolio', permanent: true },
+  { source: '/privacy-policy', destination: '/privacy', permanent: true },
+  { source: '/policy', destination: '/privacy', permanent: true },
+  { source: '/terms-of-service', destination: '/terms', permanent: true },
 ]
 
 const nextConfig: NextConfig = {
@@ -113,13 +99,7 @@ const nextConfig: NextConfig = {
     ]
   },
   async redirects() {
-    return [
-      ...RETIRED_PUBLIC_ROUTES.map((source) => ({
-        source,
-        destination: '/',
-        permanent: false,
-      })),
-    ]
+    return CANONICAL_REDIRECTS
   },
 }
 

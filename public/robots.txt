@@ -1,27 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /_next/
-Disallow: /agentes
 Disallow: /automacoes
-Disallow: /blog
-Disallow: /calculadora
-Disallow: /en
-Disallow: /faq
-Disallow: /marketing-os
-Disallow: /portfolio
-Disallow: /precos
-Disallow: /privacy
-Disallow: /privacy-policy
-Disallow: /policy
-Disallow: /privacidade
-Disallow: /produto-digital
-Disallow: /quiz
-Disallow: /sobre
-Disallow: /tech-partner
-Disallow: /terms
-Disallow: /terms-of-service
-Disallow: /termos
 Disallow: /studio
 Disallow: /studio/
 Disallow: /login
@@ -29,24 +9,21 @@ Disallow: /login-v2
 Disallow: /obrigado
 Disallow: /ai-command-center
 Disallow: /bradesco-26
+Disallow: /control_tower
+Disallow: /itau
 Disallow: /lp/
 Disallow: /portal/
 Disallow: /share/
+Disallow: /whypaulo
 
-# Block aggressive AI/SEO crawlers
+# Block training crawlers. User-triggered discovery crawlers follow the public rules above.
 User-agent: GPTBot
 Disallow: /
 
 User-agent: ClaudeBot
 Disallow: /
 
-User-agent: ChatGPT-User
-Disallow: /
-
 User-agent: CCBot
-Disallow: /
-
-User-agent: PerplexityBot
 Disallow: /
 
 Sitemap: https://www.pierrondi.dev/sitemap.xml

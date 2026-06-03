@@ -10,6 +10,7 @@
     "control:tower:dev": "node scripts/control-tower-dev.mjs",
     "automation:collect": "/opt/homebrew/bin/python3 scripts/automation-control-snapshot.py",
     "automation:push": "/opt/homebrew/bin/python3 scripts/automation-control-snapshot.py --post",
+    "authority:validate": "node scripts/authority/validate-content.mjs",
     "design:sync-21st": "node scripts/design-vault-sync.mjs",
     "design:install": "node scripts/design-vault-install.mjs",
     "test:apps": "node scripts/check-apps-urls.mjs",

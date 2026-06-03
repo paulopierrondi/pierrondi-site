@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export const metadata: Metadata = {
-  title: 'Itaú × ServiceNow — AI Agent Governance no CMDB (CSDM 5)',
+  title: 'Itaú × ServiceNow — CSDM Architecture Blueprint para AI Agents',
   description:
     'Resposta executiva para Squad Gaia (Itaú) sobre como cadastrar e governar agentes de IA no CMDB, escolhendo entre AI Function e AI & Model Application com racional CSDM 5.',
   keywords: [
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.pierrondi.dev/itau',
   },
   openGraph: {
-    title: 'Itaú × ServiceNow — AI Agent Governance no CMDB (CSDM 5)',
+    title: 'Itaú × ServiceNow — CSDM Architecture Blueprint para AI Agents',
     description:
       'Como cadastrar agentes de IA no CMDB do Itaú: AI Function, AI & Model Application, AI Digital Asset e CSDM 5.',
     url: 'https://www.pierrondi.dev/itau',

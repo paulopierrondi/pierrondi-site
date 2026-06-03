@@ -1,0 +1,209 @@
+{
+  "version": "2026-05-30",
+  "budgetUsd": 40,
+  "budgetPlan": [
+    {
+      "item": "AuthoredUp Individual",
+      "monthlyUsd": 19.95,
+      "use": "LinkedIn drafting, snippets, structure review, reuse and native performance tracking."
+    },
+    {
+      "item": "Free research stack",
+      "monthlyUsd": 0,
+      "use": "Google Search Console, Google Trends, LinkedIn native analytics and manual SERP review."
+    },
+    {
+      "item": "LowFruits PAYG",
+      "monthlyUsd": 25,
+      "use": "Optional first-month keyword research only if Paulo approves going above the strict USD 40 cap."
+    }
+  ],
+  "guardrails": {
+    "linkedInScope": "ServiceNow-only until Paulo explicitly changes the policy.",
+    "publishingMode": "manual_approval_only",
+    "runtimeWrites": false,
+    "autopublish": false,
+    "clientClaims": "No client names, client metrics, roadmap, budget, incident, screenshot or stakeholder claims.",
+    "officialEndorsement": "Never imply official ServiceNow endorsement."
+  },
+  "positioning": {
+    "pt": {
+      "statement": "Eu ajudo organizacoes complexas a transformar ServiceNow + IA em sistema operacional de adocao, governanca e expansao de valor.",
+      "short": "ServiceNow, IA governada e sistemas operacionais de agentes para execucao enterprise."
+    },
+    "en": {
+      "statement": "I help complex organizations turn ServiceNow + AI into an operating system for adoption, governance and value expansion.",
+      "short": "ServiceNow, governed AI and agent operating systems for enterprise execution."
+    }
+  },
+  "pages": {
+    "pt": {
+      "slug": "/about",
+      "metadataTitle": "Paulo Pierrondi - ServiceNow, IA governada e AgentOps",
+      "metadataDescription": "Perfil executivo de Paulo Pierrondi: ServiceNow, IA governada, Now Assist, AI Agents, CSDM, CMDB, AgentOps e execucao enterprise sem expor informacao confidencial.",
+      "hero": {
+        "kicker": "Perfil executivo / ServiceNow / IA governada",
+        "title": "Eu desenho a camada operacional que faz IA virar trabalho governado.",
+        "lead": "Minha tese e simples: IA corporativa nao escala por modelo, escala por contexto, governanca, workflow e evidencia. Trabalho na intersecao entre ServiceNow, FSI, dados operacionais, Now Assist, AI Agents e sistemas de agentes com human gates.",
+        "primaryCta": "Conversar no LinkedIn",
+        "secondaryCta": "Ver arquitetura"
+      },
+      "proofStrip": [
+        "ServiceNow + FSI",
+        "Now Assist + AI Agents",
+        "CSDM / CMDB / Service Graph",
+        "AgentOps + governanca",
+        "Produto e go-to-market"
+      ],
+      "sections": [
+        {
+          "eyebrow": "Tese operacional",
+          "title": "O gargalo deixou de ser IA. Agora e o modelo operacional.",
+          "body": "Empresas complexas nao precisam apenas de prompts melhores. Precisam decidir onde agentes podem atuar, quais dados podem usar, quem aprova excecoes, como custo e qualidade sao medidos e como valor aparece no workflow real."
+        },
+        {
+          "eyebrow": "Como eu penso",
+          "title": "Modelo operacional -> velocidade de adocao -> expansao de valor.",
+          "body": "Esse e o encadeamento que uso para estruturar conversas executivas: sem operating model, pilotos ficam presos; com governanca, contexto e evidencia, a plataforma ganha velocidade de adocao e abre novas frentes de valor."
+        },
+        {
+          "eyebrow": "Territorio",
+          "title": "ServiceNow como system of action para IA governada.",
+          "body": "A conversa que me interessa conecta CSDM, CMDB, Service Graph, workflow, Now Assist, AI Agents, AI Control Tower, avaliacao, permissao e rastreabilidade. Nao e hype de IA; e arquitetura para delegar trabalho com controle."
+        }
+      ],
+      "capabilities": [
+        {
+          "label": "Platform Strategy",
+          "title": "Traduzir IA em arquitetura de plataforma",
+          "body": "Conectar estrategia, dados operacionais, governanca e workflow para que IA nao vire uma camada paralela sem dono."
+        },
+        {
+          "label": "Agent Governance",
+          "title": "Projetar agentes com trilha, politica e gate",
+          "body": "Definir contexto, permissoes, avaliacao, custo, fallback e aprovacao humana para autonomia auditavel."
+        },
+        {
+          "label": "Executive Narrative",
+          "title": "Criar narrativa executiva que vende adoção",
+          "body": "Transformar arquitetura tecnica em historia clara para decisores: por que agora, por que governado, por que na plataforma."
+        },
+        {
+          "label": "Product Execution",
+          "title": "Construir sistemas que provam capacidade",
+          "body": "Usar software, automacao, content ops e experimentos reais para transformar tese em prova publica."
+        }
+      ],
+      "operatingSystem": [
+        "Owned authority surface in pierrondi.dev",
+        "Manual LinkedIn drafting and approval",
+        "Build-time content registry",
+        "Guardrail validation before build",
+        "No runtime write, no autopublish, no sensitive claims"
+      ],
+      "cta": {
+        "title": "Quero conversas que exijam estrategia, plataforma e execucao.",
+        "body": "O melhor uso deste site e abrir conversas sobre ServiceNow, IA governada, AgentOps, operating model, produto, carreira global e parcerias executivas. O conteudo aqui e pessoal, nao oficial, e evita informacao confidencial.",
+        "primary": "Abrir LinkedIn",
+        "secondary": "Ver portfolio"
+      }
+    },
+    "en": {
+      "slug": "/en/about",
+      "metadataTitle": "Paulo Pierrondi - ServiceNow, governed AI and AgentOps",
+      "metadataDescription": "Executive profile for Paulo Pierrondi: ServiceNow, governed AI, Now Assist, AI Agents, CSDM, CMDB, AgentOps and enterprise execution without confidential claims.",
+      "hero": {
+        "kicker": "Executive profile / ServiceNow / governed AI",
+        "title": "I design the operating layer that turns AI into governed work.",
+        "lead": "My thesis is simple: enterprise AI does not scale through models alone. It scales through context, governance, workflow and evidence. I work at the intersection of ServiceNow, FSI, operational data, Now Assist, AI Agents and agent systems with human gates.",
+        "primaryCta": "Connect on LinkedIn",
+        "secondaryCta": "See architecture"
+      },
+      "proofStrip": [
+        "ServiceNow + FSI",
+        "Now Assist + AI Agents",
+        "CSDM / CMDB / Service Graph",
+        "AgentOps + governance",
+        "Product and go-to-market"
+      ],
+      "sections": [
+        {
+          "eyebrow": "Operating thesis",
+          "title": "AI is no longer the bottleneck. The operating model is.",
+          "body": "Complex organizations do not only need better prompts. They need to decide where agents can act, which data they can use, who approves exceptions, how cost and quality are measured and how value shows up inside real workflows."
+        },
+        {
+          "eyebrow": "How I think",
+          "title": "Operating model -> adoption velocity -> value expansion.",
+          "body": "This is the chain I use for executive conversations: without an operating model, pilots stall; with governance, context and evidence, the platform gains adoption velocity and opens new value expansion paths."
+        },
+        {
+          "eyebrow": "Territory",
+          "title": "ServiceNow as the system of action for governed AI.",
+          "body": "The conversation I care about connects CSDM, CMDB, Service Graph, workflow, Now Assist, AI Agents, AI Control Tower, evaluation, permissioning and traceability. Not AI hype, but architecture for delegating work with control."
+        }
+      ],
+      "capabilities": [
+        {
+          "label": "Platform Strategy",
+          "title": "Translate AI into platform architecture",
+          "body": "Connect strategy, operational data, governance and workflow so AI does not become a parallel layer without ownership."
+        },
+        {
+          "label": "Agent Governance",
+          "title": "Design agents with trail, policy and gate",
+          "body": "Define context, permissions, evaluation, cost, fallback and human approval for auditable autonomy."
+        },
+        {
+          "label": "Executive Narrative",
+          "title": "Create executive narrative that sells adoption",
+          "body": "Turn technical architecture into a clear story for decision makers: why now, why governed, why on the platform."
+        },
+        {
+          "label": "Product Execution",
+          "title": "Build systems that prove capability",
+          "body": "Use software, automation, content ops and real experiments to turn a thesis into public proof."
+        }
+      ],
+      "operatingSystem": [
+        "Owned authority surface in pierrondi.dev",
+        "Manual LinkedIn drafting and approval",
+        "Build-time content registry",
+        "Guardrail validation before build",
+        "No runtime write, no autopublish, no sensitive claims"
+      ],
+      "cta": {
+        "title": "I want conversations that require strategy, platform and execution.",
+        "body": "The best use of this site is to open conversations about ServiceNow, governed AI, AgentOps, operating model, product, global career paths and executive partnerships. This content is personal, unofficial and avoids confidential information.",
+        "primary": "Open LinkedIn",
+        "secondary": "See portfolio"
+      }
+    }
+  },
+  "contentQueue": [
+    {
+      "id": "sn-ai-operating-model",
+      "channel": "linkedin",
+      "status": "draft_only",
+      "theme": "ServiceNow AI operating model",
+      "hook": "Pilotos de IA travam quando a empresa tenta escalar autonomia antes de definir contexto, politica e evidencia.",
+      "cta": "Levar para /about"
+    },
+    {
+      "id": "now-assist-governance",
+      "channel": "linkedin",
+      "status": "draft_only",
+      "theme": "Now Assist governance",
+      "hook": "Now Assist fica mais forte quando a conversa deixa de ser feature e vira modelo operacional.",
+      "cta": "Levar para /about"
+    },
+    {
+      "id": "csdm-agent-foundation",
+      "channel": "linkedin",
+      "status": "draft_only",
+      "theme": "CSDM and CMDB for AI agents",
+      "hook": "Agentes de IA precisam de Service Graph confiavel antes de executar trabalho de forma governada.",
+      "cta": "Levar para /about"
+    }
+  ]
+}
