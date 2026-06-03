@@ -1,6 +1,6 @@
 # Project Brain Context
 
-Generated: `2026-06-03 08:21:10`
+Generated: `2026-06-03 09:14:51`
 Tool: `claude`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
@@ -146,7 +146,7 @@ Every Bradesco Now Assist material must explicitly connect:
 ---
 type: policy
 status: generated
-generated_at: "2026-06-02 23:37:30"
+generated_at: "2026-06-03 09:07:43"
 tags:
   - ai-agents
   - policy
