@@ -35,6 +35,13 @@ type SlideCard = {
   icon?: LucideIcon
 }
 
+type ProductReference = {
+  name: string
+  href: string
+  label: string
+  description: string
+}
+
 type Slide = {
   id: string
   number: string
@@ -47,6 +54,7 @@ type Slide = {
   bullets: string[]
   cards: SlideCard[]
   tags: string[]
+  product: ProductReference
 }
 
 const slides: Slide[] = [
@@ -79,13 +87,19 @@ const slides: Slide[] = [
         icon: MonitorPlay,
       },
       {
-        title: '6 blocos',
-        copy: 'Plataforma, developers, autonomous IT, FSI, risco e arquitetura.',
+        title: '9 telas',
+        copy: 'Cada tela ancora um produto ou anúncio oficial da ServiceNow para orientar a conversa.',
         meta: 'Navegação',
         icon: Layers3,
       },
     ],
     tags: ['AI governance', 'Contexto operacional', 'Execução governada'],
+    product: {
+      name: 'ServiceNow AI Platform',
+      href: 'https://www.servicenow.com/now-platform.html',
+      label: 'Produto base K26',
+      description: 'AI, dados, workflows e segurança em uma única plataforma para transformar intenção em execução.',
+    },
   },
   {
     id: 'tese',
@@ -123,14 +137,20 @@ const slides: Slide[] = [
       },
     ],
     tags: ['Modelo operacional', 'Adoção', 'Receita expandida'],
+    product: {
+      name: 'ServiceNow AI Control Tower',
+      href: 'https://www.servicenow.com/products/ai-control-tower.html',
+      label: 'Produto K26',
+      description: 'Governar qualquer agente, modelo, identidade e workflow com inventário, risco, telemetria e valor.',
+    },
   },
   {
     id: 'mapa',
     number: '02',
-    kicker: 'Mapa do radar',
-    title: 'Seis blocos para orientar decisão.',
+    kicker: 'Mapa de produtos',
+    title: 'Produtos K26 para orientar decisão.',
     subtitle:
-      'Os temas abaixo organizam a discussão em prioridades de plataforma, dados, risco, desenvolvimento, operação e arquitetura.',
+      'Os temas abaixo deixam claro qual produto ou anúncio sustenta cada conversa: plataforma, agentes, experiência, desenvolvimento, dados, risco e arquitetura.',
     accent: 'blue',
     signal: 'Roteiro executivo',
     icon: Radar,
@@ -178,6 +198,12 @@ const slides: Slide[] = [
       },
     ],
     tags: ['Roteiro', 'Capítulos', 'Decisão'],
+    product: {
+      name: 'ServiceNow AI Agents',
+      href: 'https://www.servicenow.com/products/ai-agents.html',
+      label: 'Produto K26',
+      description: 'Agentes nativos e conectados para executar trabalho em IT, CRM, RH, segurança, risco e desenvolvimento.',
+    },
   },
   {
     id: 'plataforma',
@@ -215,6 +241,12 @@ const slides: Slide[] = [
       },
     ],
     tags: ['Discover', 'Observe', 'Govern', 'Secure', 'Measure'],
+    product: {
+      name: 'ServiceNow Otto',
+      href: 'https://www.servicenow.com/platform/otto.html',
+      label: 'Produto K26',
+      description: 'Experiência conversacional unificada para transformar intenção em trabalho concluído em chat, voz, web e mobile.',
+    },
   },
   {
     id: 'developers',
@@ -252,6 +284,12 @@ const slides: Slide[] = [
       },
     ],
     tags: ['Build Agent', 'App Engine', 'Git', 'Review'],
+    product: {
+      name: 'ServiceNow Build Agent',
+      href: 'https://www.servicenow.com/products/vibe-coding.html',
+      label: 'Produto K26',
+      description: 'Desenvolvimento agentic governado para criar apps enterprise-ready nos ambientes que o time já usa.',
+    },
   },
   {
     id: 'operacoes',
@@ -289,6 +327,12 @@ const slides: Slide[] = [
       },
     ],
     tags: ['CMDB', 'CSDM', 'Knowledge Graph', 'Lineage'],
+    product: {
+      name: 'Workflow Data Fabric',
+      href: 'https://www.servicenow.com/platform/workflow-data-fabric.html',
+      label: 'Produto K26',
+      description: 'Dados acionáveis e prontos para IA, com conexão, contexto e governança sem mover tudo para uma única base.',
+    },
   },
   {
     id: 'risco',
@@ -326,6 +370,12 @@ const slides: Slide[] = [
       },
     ],
     tags: ['Non-human identity', 'Least privilege', 'Asset context'],
+    product: {
+      name: 'ServiceNow Security Operations',
+      href: 'https://www.servicenow.com/products/security-operations.html',
+      label: 'Produto relacionado K26',
+      description: 'Segurança, exposição, vulnerabilidade e resposta conectadas a ativos, identidades e workflows.',
+    },
   },
   {
     id: 'arquitetura',
@@ -363,43 +413,55 @@ const slides: Slide[] = [
       },
     ],
     tags: ['Otto', 'Now Assist', 'WDF', 'MCP', 'IAM'],
+    product: {
+      name: 'MCP Server Console',
+      href: 'https://www.servicenow.com/docs/r/intelligent-experiences/mcp-platform-manager-landing.html',
+      label: 'Produto relacionado K26',
+      description: 'Superfície oficial para publicar e governar ferramentas MCP que conectam agentes externos ao sistema de ação.',
+    },
   },
   {
     id: 'fechamento',
     number: '08',
-    kicker: 'Próximo movimento',
-    title: 'Sair com três decisões, não com uma lista de produtos.',
+    kicker: 'Aprofundamento conjunto',
+    title: 'Vamos aprofundar juntos os temas que mais importam para o Bradesco.',
     subtitle:
-      'A reunião de 03 de junho deve fechar domínio piloto, responsáveis e workshop técnico de arquitetura.',
+      'A ideia não é encerrar com uma lista de produtos. É escolher, com as pessoas certas, onde vale detalhar arquitetura, modelo operacional, riscos e próximos passos.',
     accent: 'red',
-    signal: '03 junho',
+    signal: 'Próximas conversas',
     icon: CheckCircle2,
     bullets: [
-      'Escolher um domínio piloto para IA governada com métrica operacional clara.',
-      'Definir dono executivo, dono técnico e ritual de aprovação/exceção.',
-      'Agendar workshop para mapear contexto, ações permitidas, dados e evidência.',
+      'Priorizar 2 ou 3 temas para aprofundamento: governança de IA, dados/contexto, atendimento, risco ou desenvolvimento.',
+      'Trabalhar em conjunto com negócio, arquitetura, segurança e operação para separar inspiração de plano executável.',
+      'Sair com agenda de conversas técnicas e executivas, respeitando maturidade, riscos e prioridades do Bradesco.',
     ],
     cards: [
       {
-        title: '1. Domínio',
-        copy: 'Onde IA governada tem volume, contexto e risco controlável?',
-        meta: 'Escolha',
-        icon: Radar,
+        title: 'Aprofundar',
+        copy: 'Sessões por tema com perguntas de negócio, arquitetura, dados, segurança e adoção.',
+        meta: 'Conversa',
+        icon: Presentation,
       },
       {
-        title: '2. Responsáveis',
-        copy: 'Quem aprova agente, permissão, exceção, métrica e entrada em produção?',
-        meta: 'Operating model',
-        icon: ShieldCheck,
+        title: 'Conectar',
+        copy: 'Contexto Bradesco, roadmap ServiceNow e prioridades reais da operação.',
+        meta: 'Trabalho conjunto',
+        icon: Network,
       },
       {
-        title: '3. Workshop',
-        copy: 'Como conectar CMDB/CSDM, WDF, Action Fabric e controles para o piloto?',
-        meta: 'Execução',
-        icon: Workflow,
+        title: 'Construir juntos',
+        copy: 'Próximos passos com responsáveis, evidência e critérios de sucesso.',
+        meta: 'Próximo passo',
+        icon: CheckCircle2,
       },
     ],
-    tags: ['Decisão', 'Responsável', 'Workshop técnico'],
+    tags: ['Pessoas certas', 'Aprofundamento', 'Plano conjunto'],
+    product: {
+      name: 'Autonomous Workforce',
+      href: 'https://www.servicenow.com/platform/autonomous-workforce.html',
+      label: 'Produto K26',
+      description: 'Especialistas digitais apoiam times humanos com escopo, permissões e contexto definidos para executar processos de ponta a ponta.',
+    },
   },
 ]
 
@@ -568,6 +630,7 @@ function SlideStage({ activeSlide, activeIndex, prefersReducedMotion }: SlideSta
             <div><p>{activeSlide.kicker}</p><h1>{activeSlide.title}</h1></div>
             <div className={styles.slideSignal}><ActiveIcon size={28} aria-hidden="true" /><span>{activeSlide.signal}</span></div>
           </header>
+          <ProductStrip product={activeSlide.product} />
           <div className={styles.slideBody}>
             <SlideMessage activeSlide={activeSlide} />
             <SlideCards activeSlide={activeSlide} />
@@ -579,6 +642,22 @@ function SlideStage({ activeSlide, activeIndex, prefersReducedMotion }: SlideSta
         </motion.article>
       </AnimatePresence>
     </div>
+  )
+}
+
+function ProductStrip({ product }: { product: ProductReference }) {
+  return (
+    <aside className={styles.productStrip} aria-label="Produto ServiceNow relacionado">
+      <div>
+        <span>{product.label}</span>
+        <strong>{product.name}</strong>
+        <p>{product.description}</p>
+      </div>
+      <a href={product.href} target="_blank" rel="noreferrer">
+        ServiceNow
+        <ArrowUpRight size={14} aria-hidden="true" />
+      </a>
+    </aside>
   )
 }
 
