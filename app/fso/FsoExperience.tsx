@@ -530,11 +530,12 @@ export default function FsoExperience() {
         {/* ─────────── THE AGENT TEAM ─────────── */}
         <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHead}>
-            <span className={styles.kicker}>the implementation team</span>
+            <span className={styles.kicker}>the council</span>
             <h2 className={styles.sectionTitle}>Nine agents. One governed build.</h2>
             <p className={styles.sectionSub}>
-              Each agent has a responsibility, a concrete ServiceNow output artifact, and an explicit human
-              gate — a real implementation team, expressed as agents.
+              The council that reasons over your context graph: each agent owns a slice — a responsibility,
+              a concrete ServiceNow output artifact, and an explicit human gate. A specialized team, not a
+              generalist.
             </p>
           </div>
 

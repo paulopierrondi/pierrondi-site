@@ -7,19 +7,32 @@ import { createNoise3D } from 'simplex-noise'
 import * as THREE from 'three'
 
 /**
- * FsoAgentSwarm — a ServiceNow-recolored agent swarm.
+ * FsoAgentSwarm — a ServiceNow-recolored KNOWLEDGE GRAPH.
  *
- * An instanced-sphere field where ~9 brighter "hub" nodes evoke the
- * implementation-agent roster, connected by live link-segments that
- * redraw as the swarm drifts (noise) and reacts to the cursor (repel).
- * Self-contained, reduced-motion aware, transparent background so the
- * hero gradient shows through.
+ * Instead of a uniform cloud, nodes are generated as COMMUNITIES (clusters) —
+ * like a second-brain / Obsidian graph: dense colored clusters, a big "index"
+ * blob, and sparse bridge-edges between them. The distance-based link pass then
+ * renders dense intra-cluster edges + a few inter-cluster bridges, drifting with
+ * noise and reacting to the cursor. The metaphor: your ServiceNow context graph,
+ * with a council of agents reasoning over it.
  */
 
-const NODE_COUNT = 72
-const HUB_COUNT = 9 // the nine implementation agents
-const MAX_CONNECTIONS = 240
-const CONNECTION_DISTANCE = 2.25
+type Palette = 'ink' | 'cyan' | 'blue' | 'indigo' | 'green'
+
+const CLUSTERS: Array<{ cx: number; cy: number; cz: number; r: number; n: number; palette: Palette; tight: number }> = [
+  { cx: 4.7, cy: -0.2, cz: 0.0, r: 1.7, n: 44, palette: 'ink', tight: 0.62 }, // big index blob (right)
+  { cx: -3.9, cy: 2.4, cz: 0.6, r: 1.7, n: 20, palette: 'cyan', tight: 0.85 },
+  { cx: -4.9, cy: -1.9, cz: -0.6, r: 1.5, n: 17, palette: 'blue', tight: 0.85 },
+  { cx: -1.4, cy: -3.0, cz: 0.4, r: 1.4, n: 16, palette: 'green', tight: 0.85 },
+  { cx: 0.9, cy: 3.0, cz: -0.5, r: 1.4, n: 15, palette: 'indigo', tight: 0.85 },
+  { cx: 2.5, cy: -2.6, cz: 0.3, r: 1.3, n: 13, palette: 'green', tight: 0.9 },
+  { cx: -0.6, cy: 0.4, cz: 0.0, r: 1.1, n: 12, palette: 'cyan', tight: 0.95 }, // central bridge
+]
+const LOOSE_COUNT = 16
+const NODE_COUNT = CLUSTERS.reduce((a, c) => a + c.n, 0) + LOOSE_COUNT
+
+const MAX_CONNECTIONS = 460
+const CONNECTION_DISTANCE = 1.85
 const MOUSE_REPEL_RADIUS = 2.4
 const MOUSE_REPEL_STRENGTH = 0.8
 
@@ -53,33 +66,50 @@ function SwarmNodes({
   const noise3D = useMemo(() => createNoise3D(seededRandom(20260603)), [])
 
   const { colors, initialPositions, scales, isHub } = useMemo(() => {
-    const random = seededRandom(420691)
-    const ink = new THREE.Color('#dff6ff')
-    const cyan = new THREE.Color('#23c2cf') // ServiceNow green/cyan
+    const random = seededRandom(771)
+    const ink = new THREE.Color('#e9f7ff')
+    const cyan = new THREE.Color('#23c2cf')
     const blue = new THREE.Color('#52b8ff')
     const indigo = new THREE.Color('#5873f7')
+    const green = new THREE.Color('#34d399')
+    const paletteMap: Record<Palette, THREE.Color> = { ink, cyan, blue, indigo, green }
+
     const positions = new Float32Array(NODE_COUNT * 3)
     const nodeColors: THREE.Color[] = []
     const nodeScales = new Float32Array(NODE_COUNT)
     const hubFlags = new Uint8Array(NODE_COUNT)
 
-    for (let i = 0; i < NODE_COUNT; i += 1) {
-      // Spread the hubs deterministically across the field.
-      const hub = i % Math.floor(NODE_COUNT / HUB_COUNT) === 0 && hubFlags.reduce((a, b) => a + b, 0) < HUB_COUNT
-      const x = (random() - 0.5) * 13.2
-      const y = (random() - 0.5) * 8.0
-      const z = (random() - 0.5) * 5.6
-      const centerBias = Math.min(Math.hypot(x, y, z) / 7.4, 1)
-      const palette = i % 3 === 0 ? blue : i % 3 === 1 ? cyan : indigo
-      const color = hub ? cyan : lerpColor(ink, palette, centerBias * 0.78)
+    let i = 0
+    for (const cluster of CLUSTERS) {
+      const base = paletteMap[cluster.palette]
+      for (let k = 0; k < cluster.n; k += 1, i += 1) {
+        // gaussian-ish offset within the cluster (sum of two randoms)
+        const spread = cluster.r * cluster.tight
+        const ox = ((random() + random()) - 1) * spread
+        const oy = ((random() + random()) - 1) * spread
+        const oz = ((random() + random()) - 1) * spread * 0.7
+        const offset = i * 3
+        positions[offset] = cluster.cx + ox
+        positions[offset + 1] = cluster.cy + oy
+        positions[offset + 2] = cluster.cz + oz
+        const isCenterHub = k === 0 || (k === 1 && cluster.n > 18)
+        const color = isCenterHub
+          ? (cluster.palette === 'ink' ? cyan : base)
+          : lerpColor(cluster.palette === 'ink' ? ink : base, ink, 0.25 + random() * 0.3)
+        nodeColors.push(color)
+        nodeScales[i] = isCenterHub ? 0.2 + random() * 0.06 : 0.05 + random() * 0.07
+        hubFlags[i] = isCenterHub ? 1 : 0
+      }
+    }
+    // loose satellite nodes scattered between clusters
+    for (let k = 0; k < LOOSE_COUNT; k += 1, i += 1) {
       const offset = i * 3
-
-      positions[offset] = x
-      positions[offset + 1] = y
-      positions[offset + 2] = z
-      nodeColors.push(color)
-      nodeScales[i] = hub ? 0.2 + random() * 0.05 : 0.05 + random() * 0.08
-      hubFlags[i] = hub ? 1 : 0
+      positions[offset] = (random() - 0.5) * 13.5
+      positions[offset + 1] = (random() - 0.5) * 8.5
+      positions[offset + 2] = (random() - 0.5) * 5
+      nodeColors.push(lerpColor(green, ink, random() * 0.5))
+      nodeScales[i] = 0.045 + random() * 0.05
+      hubFlags[i] = 0
     }
 
     return { colors: nodeColors, initialPositions: positions, scales: nodeScales, isHub: hubFlags }
@@ -111,10 +141,10 @@ function SwarmNodes({
       const ox = originalPositionsRef.current[offset]
       const oy = originalPositionsRef.current[offset + 1]
       const oz = originalPositionsRef.current[offset + 2]
-      const driftTime = t * 0.16
-      const nx = noise3D(ox * 0.16, oy * 0.16, driftTime) * 0.32 * motionScale
-      const ny = noise3D(oy * 0.16, oz * 0.16, driftTime + 100) * 0.32 * motionScale
-      const nz = noise3D(oz * 0.16, ox * 0.16, driftTime + 200) * 0.22 * motionScale
+      const driftTime = t * 0.14
+      const nx = noise3D(ox * 0.16, oy * 0.16, driftTime) * 0.28 * motionScale
+      const ny = noise3D(oy * 0.16, oz * 0.16, driftTime + 100) * 0.28 * motionScale
+      const nz = noise3D(oz * 0.16, ox * 0.16, driftTime + 200) * 0.18 * motionScale
 
       const px = ox + displacementsRef.current[offset] + nx
       const py = oy + displacementsRef.current[offset + 1] + ny
@@ -140,7 +170,6 @@ function SwarmNodes({
       positionsRef.current[offset + 1] = fy
       positionsRef.current[offset + 2] = fz
 
-      // Hubs pulse gently.
       const pulse = isHub[i] && !reducedMotion ? 1 + Math.sin(t * 1.6 + i) * 0.12 : 1
       dummy.position.set(fx, fy, fz)
       dummy.scale.setScalar(scales[i] * pulse)
@@ -179,8 +208,8 @@ function SwarmNodes({
     }
 
     if (!reducedMotion && meshRef.current.parent) {
-      meshRef.current.parent.rotation.y += delta * 0.022
-      meshRef.current.parent.rotation.x = Math.sin(t * 0.08) * 0.016
+      meshRef.current.parent.rotation.y += delta * 0.018
+      meshRef.current.parent.rotation.x = Math.sin(t * 0.08) * 0.014
     }
   })
 
@@ -194,7 +223,7 @@ function SwarmNodes({
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[linePositions, 3]} />
         </bufferGeometry>
-        <lineBasicMaterial color="#23c2cf" transparent opacity={0.2} />
+        <lineBasicMaterial color="#23c2cf" transparent opacity={0.16} />
       </lineSegments>
     </group>
   )
@@ -232,7 +261,7 @@ export default function FsoAgentSwarm() {
   return (
     <div className="fso-swarm-canvas" onPointerMove={handlePointerMove} aria-hidden="true">
       <Canvas
-        camera={{ position: [0, 0, 8.4], fov: 56 }}
+        camera={{ position: [0, 0, 8.6], fov: 56 }}
         dpr={[1, 1.6]}
         frameloop={reducedMotion ? 'demand' : 'always'}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
