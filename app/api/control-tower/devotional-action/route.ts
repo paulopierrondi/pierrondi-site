@@ -19,7 +19,8 @@ export const runtime = 'nodejs'
 
 // Private, session-gated human review endpoint. Keep abuse protection, but
 // allow reviewing a full pending snapshot without tripping after a few clicks.
-const RATE_LIMIT_MAX = 60
+const MAX_BULK_DEVOTIONAL_ACTION_IDS = 250
+const RATE_LIMIT_MAX = MAX_BULK_DEVOTIONAL_ACTION_IDS * 2
 const RATE_LIMIT_WINDOW_MS = 60_000
 
 const bucket = new Map<string, { count: number; resetAt: number }>()
@@ -38,7 +39,7 @@ function checkRateLimit(key: string, cost = 1) {
 
 const ActionPayloadSchema = z.object({
   action: z.enum(['approve', 'reject']),
-  docIds: z.array(z.string().min(1).max(120)).min(1).max(50),
+  docIds: z.array(z.string().min(1).max(120)).min(1).max(MAX_BULK_DEVOTIONAL_ACTION_IDS),
 })
 
 export async function POST(request: Request) {
@@ -112,9 +113,7 @@ export async function POST(request: Request) {
   }
 
   const baseUrl = faithschoolMagicBaseUrl()
-  const results: Array<{ docId: string; status: number; ok: boolean }> = []
-
-  for (const { docId, token } of tokens) {
+  const results = await Promise.all(tokens.map(async ({ docId, token }) => {
     try {
       const upstream = await fetch(
         `${baseUrl}?token=${encodeURIComponent(token)}`,
@@ -124,11 +123,11 @@ export async function POST(request: Request) {
           signal: AbortSignal.timeout(15_000),
         },
       )
-      results.push({ docId, status: upstream.status, ok: upstream.ok })
+      return { docId, status: upstream.status, ok: upstream.ok }
     } catch {
-      results.push({ docId, status: 599, ok: false })
+      return { docId, status: 599, ok: false }
     }
-  }
+  }))
 
   const overallOk = results.every((r) => r.ok)
 

@@ -15,12 +15,17 @@ export default function LanguageSwitcher() {
   const pathname = usePathname() || '/'
   const currentLanguage = getCurrentLanguage(pathname)
   const hiddenOnClientRoute = shouldHideLanguageSwitcher(pathname)
+  const hiddenOnPrivateOpsRoute =
+    pathname === '/control_tower' ||
+    pathname.startsWith('/control_tower/') ||
+    pathname === '/automacoes' ||
+    pathname.startsWith('/automacoes/')
 
   useEffect(() => {
     document.documentElement.lang = currentLanguage === 'en' ? 'en-US' : 'pt-BR'
   }, [currentLanguage])
 
-  if (hiddenOnClientRoute) return null
+  if (hiddenOnClientRoute || hiddenOnPrivateOpsRoute) return null
 
   return (
     <nav className={styles.switcher} aria-label="Language selector">

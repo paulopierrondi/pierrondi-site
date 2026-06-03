@@ -50,9 +50,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 function SupportContent({ app }: { app: AppEntry }) {
   const localOnly = app.privacyMode === 'localOnly'
+  const aiPhotoTryOn = app.privacyMode === 'aiPhotoTryOn'
   return (
     <div className={styles.prose}>
-      <p className={styles.meta}>Last updated: May 20, 2026</p>
+      <p className={styles.meta}>Last updated: {aiPhotoTryOn ? 'June 2, 2026' : 'May 20, 2026'}</p>
       <section>
         <h2>Contact</h2>
         <p>
@@ -63,7 +64,13 @@ function SupportContent({ app }: { app: AppEntry }) {
       </section>
       <section>
         <h2>Account and data requests</h2>
-        {localOnly ? (
+        {aiPhotoTryOn ? (
+          <p>
+            {app.name} version 1.0 is free and does not require a paid subscription. If an app account or session is created
+            to operate the service, you can request deletion or correction by emailing the address above with the app name
+            and enough information to identify the account or support case.
+          </p>
+        ) : localOnly ? (
           <p>
             {app.name} does not require an account. Gameplay progress is stored on the device. If you need support, email the
             address above with the app name, device model and iOS version.
@@ -75,18 +82,76 @@ function SupportContent({ app }: { app: AppEntry }) {
           </p>
         )}
       </section>
+      {aiPhotoTryOn ? (
+        <section>
+          <h2>AI photo processing</h2>
+          <p>
+            To generate a try-on, {app.name} processes the user photo, clothing photo and description through the ProvadorIA
+            API and Google Gemini only to create the requested result. The app requires explicit consent before generation.
+            This data is not sold, not used for tracking and not used by ProvadorIA to train models. Transient processing
+            storage is discarded within 24 hours.
+          </p>
+        </section>
+      ) : null}
       <section>
         <h2>Purchases</h2>
-        <p>
-          If the app offers subscriptions or in-app purchases, billing is handled by Apple through the App Store. Refunds and
-          subscription management are available in the user&apos;s Apple account settings.
-        </p>
+        {aiPhotoTryOn ? (
+          <p>
+            {app.name} version 1.0 is free. It does not offer subscriptions, external purchases or paid digital content. If
+            paid functionality is added in a future version, it will use Apple In-App Purchase.
+          </p>
+        ) : (
+          <p>
+            If the app offers subscriptions or in-app purchases, billing is handled by Apple through the App Store. Refunds
+            and subscription management are available in the user&apos;s Apple account settings.
+          </p>
+        )}
       </section>
     </div>
   )
 }
 
 function PrivacyContent({ app }: { app: AppEntry }) {
+  if (app.privacyMode === 'aiPhotoTryOn') {
+    return (
+      <div className={styles.prose}>
+        <p className={styles.meta}>Last updated: June 2, 2026</p>
+        <section>
+          <h2>Information collected</h2>
+          <p>
+            {app.name} collects the photos and text you choose to provide for a try-on request, including your body photo,
+            clothing photo and optional clothing description. The app may also process the generated try-on result, app
+            session information, support messages and limited diagnostics needed to operate and troubleshoot the service.
+          </p>
+        </section>
+        <section>
+          <h2>How information is used</h2>
+          <ul>
+            <li>Create the try-on result requested by the user.</li>
+            <li>Operate, secure and troubleshoot the ProvadorIA API.</li>
+            <li>Respond to support, correction and deletion requests.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>AI processing providers</h2>
+          <p>
+            The body photo, clothing photo and description are processed by the ProvadorIA API and Google Gemini only to
+            generate the requested try-on. This data is not sold, not used for tracking and not used by ProvadorIA to train
+            models. Transient processing storage is discarded within 24 hours.
+          </p>
+        </section>
+        <section>
+          <h2>Your choices</h2>
+          <p>
+            You can avoid AI photo processing by not submitting a try-on request. You can delete local app data from your
+            device and contact <a href="mailto:pierrondi@gmail.com">pierrondi@gmail.com</a> to request access, correction or
+            deletion of app-related data.
+          </p>
+        </section>
+      </div>
+    )
+  }
+
   if (app.privacyMode === 'localOnly') {
     return (
       <div className={styles.prose}>
@@ -154,9 +219,10 @@ function PrivacyContent({ app }: { app: AppEntry }) {
 }
 
 function TermsContent({ app }: { app: AppEntry }) {
+  const aiPhotoTryOn = app.privacyMode === 'aiPhotoTryOn'
   return (
     <div className={styles.prose}>
-      <p className={styles.meta}>Last updated: May 20, 2026</p>
+      <p className={styles.meta}>Last updated: {aiPhotoTryOn ? 'June 2, 2026' : 'May 20, 2026'}</p>
       <section>
         <h2>Use of the app</h2>
         <p>
@@ -165,18 +231,35 @@ function TermsContent({ app }: { app: AppEntry }) {
         </p>
       </section>
       <section>
-        <h2>Subscriptions and purchases</h2>
-        <p>
-          Paid features, when available, are sold through Apple in-app purchase. Pricing, renewal and cancellation terms are
-          shown by Apple before purchase and can be managed in the App Store account settings.
-        </p>
+        <h2>{aiPhotoTryOn ? 'Payments' : 'Subscriptions and purchases'}</h2>
+        {aiPhotoTryOn ? (
+          <p>
+            {app.name} version 1.0 is free. It does not offer subscriptions, external purchases or paid digital content. If
+            paid functionality is added in a future version, it will use Apple In-App Purchase.
+          </p>
+        ) : (
+          <p>
+            Paid features, when available, are sold through Apple in-app purchase. Pricing, renewal and cancellation terms are
+            shown by Apple before purchase and can be managed in the App Store account settings.
+          </p>
+        )}
       </section>
       <section>
         <h2>AI-generated content</h2>
-        <p>
-          AI-assisted output can be incomplete or incorrect. Review generated text, images, audio, plans or recommendations
-          before relying on them or sharing them.
-        </p>
+        {aiPhotoTryOn ? (
+          <p>
+            Try-on images are AI-generated simulations and may be incomplete or inaccurate. Generation requires explicit
+            consent to process the user photo, clothing photo and description through the ProvadorIA API and Google Gemini
+            only to create the requested result. Transient processing storage is discarded within 24 hours. You are
+            responsible for submitting photos you have the right to use and for reviewing generated results before relying on
+            them or sharing them.
+          </p>
+        ) : (
+          <p>
+            AI-assisted output can be incomplete or incorrect. Review generated text, images, audio, plans or recommendations
+            before relying on them or sharing them.
+          </p>
+        )}
       </section>
       <section>
         <h2>Contact</h2>

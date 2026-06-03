@@ -1,8 +1,10 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { Check, Clock, FileCode, ListTodo, ShieldAlert, X } from 'lucide-react'
 
+import { chunkPlanActionIds } from '@/lib/control-tower/plan-action-limits'
 import {
   summarizePlanQueue,
   type PlanApprovalView,
@@ -36,12 +38,16 @@ interface RowStatus {
 const APPROVAL_TTL_HOURS = 24
 
 const ERROR_LABELS: Record<string, string> = {
+  invalid_payload: 'lote inválido — recarregue o snapshot e tente de novo',
   rate_limited: 'limite de aprovações atingido — aguarde ~1min e tente de novo',
   unauthorized: 'sessão expirada — recarregue a página e entre de novo',
 }
 
 function humanError(msg: string) {
-  return ERROR_LABELS[msg] ?? msg
+  const [code, detail] = msg.split(': ', 2)
+  const label = ERROR_LABELS[code]
+  if (!label) return msg
+  return detail ? `${label} (${detail})` : label
 }
 
 async function postAction(action: PlanAction, planIds: string[]) {
@@ -53,9 +59,17 @@ async function postAction(action: PlanAction, planIds: string[]) {
   })
   const payload = await response.json().catch(() => ({}))
   if (!response.ok) {
+    const detail = Array.isArray(payload?.issues)
+      ? payload.issues
+          .map((issue: { path?: string; message?: string }) =>
+            [issue.path, issue.message].filter(Boolean).join(': '),
+          )
+          .filter(Boolean)
+          .join('; ')
+      : ''
     const msg =
       typeof payload?.error === 'string'
-        ? payload.error
+        ? [payload.error, detail].filter(Boolean).join(': ')
         : `http_${response.status}`
     throw new Error(msg)
   }
@@ -88,8 +102,10 @@ export default function PlansPanel({
   freshnessLabel,
   freshnessTone,
 }: PlansPanelProps) {
+  const router = useRouter()
   const [rows, setRows] = useState<Record<string, RowStatus>>({})
-  const [isPending, startTransition] = useTransition()
+  const [bulkBusy, setBulkBusy] = useState(false)
+  const [actionMessage, setActionMessage] = useState<string | null>(null)
 
   const resolved = (state: RowState | undefined) =>
     state === 'approved' || state === 'deferred' || state === 'rejected'
@@ -119,67 +135,65 @@ export default function PlansPanel({
   const lowRisk = queue.lowRiskCount
   const mediumRisk = queue.mediumRiskCount
 
-  function handleAction(action: PlanAction, planId: string) {
-    setRows((current) => ({ ...current, [planId]: { state: 'pending' } }))
-    startTransition(() => {
-      postAction(action, [planId])
-        .then(() => {
-          setRows((current) => ({
-            ...current,
-            [planId]: {
-              state:
-                action === 'approve'
-                  ? 'approved'
-                  : action === 'defer'
-                    ? 'deferred'
-                    : 'rejected',
-            },
-          }))
-        })
-        .catch((err: Error) => {
-          setRows((current) => ({
-            ...current,
-            [planId]: { state: 'error', message: humanError(err.message) },
-          }))
-        })
+  function markRows(ids: string[], state: RowState, message?: string) {
+    setRows((current) => {
+      const next = { ...current }
+      ids.forEach((id) => {
+        next[id] = { state, message }
+      })
+      return next
     })
   }
 
-  function handleBatchApprove() {
+  async function handleAction(action: PlanAction, planId: string) {
+    setActionMessage(null)
+    markRows([planId], 'pending')
+    try {
+      await postAction(action, [planId])
+      markRows(
+        [planId],
+        action === 'approve' ? 'approved' : action === 'defer' ? 'deferred' : 'rejected',
+      )
+      setActionMessage(`Plano ${action === 'approve' ? 'aprovado' : action === 'defer' ? 'adiado' : 'rejeitado'}.`)
+      router.refresh()
+    } catch (err) {
+      const message = err instanceof Error ? humanError(err.message) : 'falha'
+      markRows([planId], 'error', message)
+    }
+  }
+
+  async function handleBatchApprove() {
     const ids = visible
       .filter((p) => p.risk_class === 'low')
       .map((p) => p.planId)
     if (ids.length === 0) return
 
-    setRows((current) => {
-      const next = { ...current }
-      ids.forEach((id) => {
-        next[id] = { state: 'pending' }
-      })
-      return next
-    })
+    setBulkBusy(true)
+    setActionMessage(`Aprovando ${ids.length} planos low risk...`)
+    markRows(ids, 'pending')
 
-    startTransition(() => {
-      postAction('approve', ids)
-        .then(() => {
-          setRows((current) => {
-            const next = { ...current }
-            ids.forEach((id) => {
-              next[id] = { state: 'approved' }
-            })
-            return next
-          })
-        })
-        .catch((err: Error) => {
-          setRows((current) => {
-            const next = { ...current }
-            ids.forEach((id) => {
-              next[id] = { state: 'error', message: humanError(err.message) }
-            })
-            return next
-          })
-        })
-    })
+    let processed = 0
+    let failed = 0
+    for (const batch of chunkPlanActionIds(ids)) {
+      setActionMessage(`Aprovando ${processed + 1}-${processed + batch.length} de ${ids.length}...`)
+      try {
+        await postAction('approve', batch)
+        markRows(batch, 'approved')
+      } catch (err) {
+        const message = err instanceof Error ? humanError(err.message) : 'falha'
+        markRows(batch, 'error', message)
+        failed += batch.length
+      }
+      processed += batch.length
+    }
+
+    setBulkBusy(false)
+    setActionMessage(
+      failed > 0
+        ? `${ids.length - failed} aprovados; ${failed} falharam.`
+        : `${ids.length} planos low risk aprovados.`,
+    )
+    router.refresh()
   }
 
   return (
@@ -210,20 +224,23 @@ export default function PlansPanel({
         </article>
       </div>
 
-      {visible.some((p) => p.risk_class === 'low') && (
+      {lowRisk > 0 && (
         <div className={styles.planActionRail}>
           <button
             type="button"
-            onClick={handleBatchApprove}
-            disabled={isPending}
+            onClick={() => void handleBatchApprove()}
+            disabled={bulkBusy}
             className={styles.approveButton}
             aria-label="Aprovar todos os planos low risk de uma vez"
           >
-            <Check size={14} /> Aprovar todos low risk (
-            {visible.filter((p) => p.risk_class === 'low').length})
+            <Check size={14} /> Aprovar {lowRisk} low risk
           </button>
+          <small>
+            chunks de 50 · {mediumRisk} medium ficam para revisão manual · gate expira em {APPROVAL_TTL_HOURS}h
+          </small>
         </div>
       )}
+      {actionMessage && <p className={styles.planActionStatus}>{actionMessage}</p>}
 
       {visible.length === 0 ? (
         <div className={styles.emptyState}>
@@ -237,7 +254,7 @@ export default function PlansPanel({
         <div className={styles.devotionalGrid}>
           {visible.map((item) => {
             const status = rows[item.planId]
-            const busy = status?.state === 'pending' || isPending
+            const busy = status?.state === 'pending' || bulkBusy
             return (
               <article
                 key={item.planId}
@@ -271,7 +288,7 @@ export default function PlansPanel({
                 <footer>
                   <button
                     type="button"
-                    onClick={() => handleAction('approve', item.planId)}
+                    onClick={() => void handleAction('approve', item.planId)}
                     disabled={busy}
                     className={styles.approveButton}
                     aria-label={`Aprovar plano ${item.planId}`}
@@ -280,7 +297,7 @@ export default function PlansPanel({
                   </button>
                   <button
                     type="button"
-                    onClick={() => handleAction('defer', item.planId)}
+                    onClick={() => void handleAction('defer', item.planId)}
                     disabled={busy}
                     className={styles.rejectButton}
                     aria-label={`Adiar plano ${item.planId}`}
@@ -289,7 +306,7 @@ export default function PlansPanel({
                   </button>
                   <button
                     type="button"
-                    onClick={() => handleAction('reject', item.planId)}
+                    onClick={() => void handleAction('reject', item.planId)}
                     disabled={busy}
                     className={styles.rejectButton}
                     aria-label={`Rejeitar plano ${item.planId}`}

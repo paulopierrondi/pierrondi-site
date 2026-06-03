@@ -1,6 +1,14 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
+import {
+  PLAN_ACTION_CLIENT_CHUNK_SIZE,
+  chunkPlanActionIds,
+} from '../lib/control-tower/plan-action-limits.ts'
+import {
+  PLAN_ACTION_MAX_IDS,
+  planActionPayloadSchema,
+} from '../lib/control-tower/plan-types.ts'
 import { summarizePlanQueue } from '../lib/control-tower/plan-view.ts'
 
 const now = Date.parse('2026-05-31T20:00:00.000Z')
@@ -76,4 +84,34 @@ test('expired approvals become pending again so the operator can re-approve', ()
   assert.equal(summary.pendingCount, 1)
   assert.equal(summary.lowRiskCount, 1)
   assert.equal(summary.resolved.length, 0)
+})
+
+test('plan action payload accepts production-sized bulk approvals', () => {
+  const result = planActionPayloadSchema.safeParse({
+    action: 'approve',
+    planIds: Array.from({ length: PLAN_ACTION_MAX_IDS }, (_, index) => `plan-${index}`),
+  })
+
+  assert.equal(result.success, true)
+})
+
+test('plan action payload accepts a full snapshot-sized approval batch', () => {
+  const result = planActionPayloadSchema.safeParse({
+    action: 'approve',
+    planIds: Array.from({ length: 500 }, (_, index) => `plan-${index}`),
+  })
+
+  assert.equal(result.success, true)
+})
+
+test('client bulk approval chunks requests to the legacy-safe API size', () => {
+  const chunks = chunkPlanActionIds(
+    Array.from({ length: 60 }, (_, index) => `plan-${index}`),
+  )
+
+  assert.deepEqual(
+    chunks.map((chunk) => chunk.length),
+    [PLAN_ACTION_CLIENT_CHUNK_SIZE, 10],
+  )
+  assert.ok(chunks.every((chunk) => chunk.length <= 50))
 })

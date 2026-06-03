@@ -8,7 +8,7 @@ export interface AppEntry {
   tagline?: string
   description?: string
   appStoreUrl?: string
-  privacyMode?: 'standard' | 'localOnly'
+  privacyMode?: 'standard' | 'localOnly' | 'aiPhotoTryOn'
 }
 
 export const APPS = {
@@ -21,6 +21,10 @@ export const APPS = {
     name: 'ProvadorIA',
     category: 'AI-assisted outfit preview and style planning app',
     contactSubject: 'ProvadorIA Support',
+    tagline: 'Virtual try-on with AI photo processing consent.',
+    description:
+      'ProvadorIA lets you preview clothing with AI before buying. Upload your photo, a clothing photo and an optional description; the ProvadorIA API and Google Gemini generate a simulated try-on result for that request.',
+    privacyMode: 'aiPhotoTryOn',
   },
   voudeque: {
     name: 'VouDeQue',

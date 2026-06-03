@@ -17,6 +17,7 @@ import {
 import type { AutomationControlSnapshot } from '@/lib/automation-control/types'
 import type { CreativeControlSnapshot } from '@/lib/creative-control/types'
 import type { PlanApprovalView } from '@/lib/control-tower/plan-view'
+import ControlTowerAutoRefresh from './ControlTowerAutoRefresh'
 import DevotionalsPanel from './DevotionalsPanel'
 import PlansPanel, { type PlanQueueItem } from './PlansPanel'
 import LooksPanel from './LooksPanel'
@@ -286,6 +287,7 @@ export default function ControlTower({
 
   return (
     <main className={styles.shell}>
+      <ControlTowerAutoRefresh />
       <aside className={styles.rail}>
         <div className={styles.brand}>
           <strong>Agent Ops Control Tower</strong>

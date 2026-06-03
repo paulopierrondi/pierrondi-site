@@ -1,6 +1,6 @@
 # Project Brain Context
 
-Generated: `2026-05-31 21:24:36`
+Generated: `2026-06-02 08:47:21`
 Tool: `railway-run`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
@@ -146,7 +146,7 @@ Every Bradesco Now Assist material must explicitly connect:
 ---
 type: policy
 status: generated
-generated_at: "2026-05-31 09:25:02"
+generated_at: "2026-06-01 09:25:06"
 tags:
   - ai-agents
   - policy
@@ -669,8 +669,10 @@ Antes de implementar, revisar ou desenhar arquitetura, escolha os guias relevant
 - AI/LLM apps: [[04_Areas/Coding/Best Practices/AI LLM Best Practices]]
 - DevOps/Railway: [[04_Areas/Coding/Best Practices/DevOps Railway Best Practices]]
 - Testing/QA: [[04_Areas/Coding/Best Practices/Testing QA Best Practices]]
+- **Cyclomatic complexity (mandatory end-of-activity gate): [[99_System/Cyclomatic Complexity Policy]]**
 - Agent workflow: [[04_Areas/Coding/Best Practices/Agent Workflow Best Practices]]
 - Security baseline: [[04_Areas/Coding/Checklists/Security Checklist]]
+- Authorized security testing / bug bounty engine: [[04_Areas/Coding/Best Practices/Authorized Security Testing Engine]]
 - Platform checklists: [[04_Areas/Coding/Checklists/Project Checklist Hub]]
 
 ## Como aprender automaticamente
@@ -682,11 +684,14 @@ Todo coder deve registrar aprendizados reutilizaveis em:
 
 ## Padrões recentemente promovidos
 
+- Authorized security testing: gated request harness (default-deny scope, ≤1 req/s, auto-redacted evidence, no active request without human gate), self-evolution loop (outcomes → lessons → behavior, EV-ranked targets), adversarial self-audit of safety tooling. Ver [[04_Areas/Coding/Best Practices/Authorized Security Testing Engine]].
+
 - Prompt caching e workflow layout: separar prefixo estável de delta dinâmico, registrar `prompt_cache.strategy`, `prefix_version` e telemetria quando houver.
 - CLI/headless orchestration: comandos batch devem ter modo não-interativo explícito; quando o CLI default for TUI, usar flag headless/documentada antes de integrar em automação.
 - iOS/Android/App Store/Play submissions: smoke real no runtime alvo continua sendo gate obrigatório, mesmo quando lint/build/health check passam.
 - Screenshot/release QA: assets de loja e marketing precisam composição final, dimensão exata e validação lado a lado antes do submit.
 - Guided tours: cada rota/funcionalidade relevante precisa tour contextual com spotlight correto, persistencia por usuario e validacao desktop/mobile/producao antes de release.
+- Complexidade ciclomatica: gate obrigatorio de fim-de-atividade via `complexity-guard.py scan --changed`; nada com funcao acima do teto HARD (CCN 15) fecha sem refator ou waiver logado. Engine universal `lizard` + nativo (`ruff C901`, eslint `complexity`). Ver [[99_System/Cyclomatic Complexity Policy]].
 
 Aprendizado reutilizavel e algo que deve guiar projetos futuros:
 
@@ -725,11 +730,8 @@ Itens do Learning Inbox viram melhores praticas quando:
 
 - [[04_Areas/Coding/AI Coding Operating System]]
 - [[04_Areas/Coding/Checklists/Project Checklist Hub]]
-- [[04_Areas/Coding/Checklists/App Web Preflight Checklist]]
-- [[04_Areas/Coding/Checklists/Screenshots Visual QA Checklist]]
-- [[04_Areas/Coding/Best Practices/High Craft Frontend Visual Standard]]
-- [[99_System/AI Agent Vault Policy]]
-- [[99_System/Security And Secrets Policy]]
+- [[04_Areas/Coding/Checkli
+...[truncated]
 
 ## 04_Areas/Coding/Best Practices/App Web Quality Best Practices.md
 
@@ -2401,7 +2403,7 @@ project_type: web-app
 monetization: SaaS/ad-supported (unconfirmed)
 git: sim
 path: "/Users/paulopierrondi/Projects/pierrondi-site"
-last_analyzed: "2026-05-29"
+last_analyzed: "2026-06-01"
 tags:
   - project
   - web-app
@@ -2452,7 +2454,7 @@ tags:
 
 ---
 
-## 📊 UX & Sales Analysis (2026-05-29)
+## 📊 UX & Sales Analysis (2026-06-01)
 
 | Métrica | Score | Status |
 |---------|-------|--------|
@@ -2529,7 +2531,7 @@ tags:
 
 ---
 
-## 🔬 Pesquisa de Mercado (2026-05-29)
+## 🔬 Pesquisa de Mercado (2026-06-01)
 
 #### 🔍 RESEARCH: skipped
 
@@ -2541,9 +2543,9 @@ _Pesquisa pulada_
 
 ## 📁 Detalhes do Projeto
 
-- Commits (30d): `47`
-- Branches: `6`
-- Último: `f354e3f feat(itau): clarify CSDM AI agent registration model`
+- Commits (30d): `49`
+- Branches: `15`
+- Último: `e7d162a fix(bradesco): improve k26 material viewport fit`
 
 
 ### Tech Stack Completo
@@ -2578,43 +2580,37 @@ Landing page pública de [pierrondi.dev](https://pierrondi.dev) — agência de 
 - Repo local: `file:///Users/paulopierrondi/Projects/pierrondi-site`
 - [[Dashboard]]
 - [[Projects Index]]
-- [[2026-05-29-All-Projects-Intelligence]]
+- [[2026-06-01-All-Projects-Intelligence]]
 
 ---
 
-*Última análise automática: 2026-05-29 12:00:53*
+*Última análise automática: 2026-06-01 12:00:46*
 
----
+## Registro operacional - 2026-06-01 - Página Itaú AI governance
 
-## Sessão Codex — `/itau` CSDM 5 / AI Control Tower — 2026-05-29
+- Pedido: melhorar `/itau` com base na conversa com o Itaú e checar contra base ServiceNow para evitar afirmação frágil.
+- Decisão: ajustar a página para separar `AI System Digital Asset` (`alm_ai_system_digital_asset`), `AI System Product Model` (`cmdb_ai_system_product_model`), CI operacional (`cmdb_ci_function_ai` ou `cmdb_ci_appl_ai_application`), vínculo `cmdb_rel_asset_ci`, CSDM/Service Instance, discovery/Service Graph Connectors e IRE.
+- Fontes verificadas: ServiceNow Docs para CMDB CI Class Models, AI Asset Inventory, Enterprise AI discovery, Microsoft Foundry pattern/Asset-CI Relationship e Identification/Reconciliation Engine.
+- Arquivos alterados: `app/itau/ItauExperience.tsx`, `app/itau/ItauExperience.module.css`, `test/itau-page-content.test.mjs`.
+- Evidência local inicial: `node --test test/itau-page-content.test.mjs`, `npm run lint`, `npm run build`.
+- QA visual local inicial: screenshots em `test-results/itau-page/desktop-1440x1200.png` e `test-results/itau-page/mobile-390x1200.png`; Playwright confirmou `overflowX=false`, 0 textos cortados e 6 links ServiceNow renderizados.
+- Risco residual: recomendações dependem da release/plugins ativos na instância Itaú; nomes de relacionamento devem ser confirmados no CI Class Manager antes de virar configuração final.
+- Deploy/push: executado em 2026-06-01 após comando explícito "move to production"; produção Railway `pierrondi-site`, deployment final `f8dd2ab6-dd24-477c-88a9-4803e04b6050`, commit/push `a049a52 feat(itau): validate AI governance production page`.
+- Evidência de produção: `https://www.pierrondi.dev/itau` respondeu 200; HTML contém `AI Agent Governance: CMDB + AI Control Tower`, `cmdb_rel_asset_ci`, `Service Graph Connectors` e `IRE`; `/api/health` respondeu 200.
+- QA visual produção: screenshots em `test-results/itau-production/desktop-1440x1200.png` e `test-results/itau-production/mobile-390x1200.png`; Playwright confirmou `overflowX=false`, 0 textos cortados, 12 links ServiceNow e mapa CSDM presente.
+- Smoke portfolio produção: `npm run test:apps:prod` confirmou 129 rotas esperadas.
 
-- Publicado em produção: `https://www.pierrondi.dev/itau`
-- Commits: `50b7db0`, `58b2fd3`, `52f18b9`
-- Escopo: adicionado diagrama alvo CSDM, bloco de fontes oficiais ServiceNow, flow final de AI Control Tower e encerramento neutro sem autopromo.
+## Registro operacional - 2026-06-01 - Control Tower visual polish
 
-## Sessão Codex — Control Tower queue/rate limit — 2026-05-30
-
-- Escopo: corrigido `/control_tower` para reduzir falsos `rate_limited` na aprovação de planos, adicionar aprovação em lote para planos `low`, esconder o seletor PT/EN em rotas operacionais e ajustar layout do painel/lock screen.
-- Arquivos alterados: `app/api/control-tower/plan-action/route.ts`, `app/api/control-tower/devotional-action/route.ts`, `app/control_tower/PlansPanel.tsx`, `components/LanguageSwitcher.tsx`, `app/control_tower/ControlTower.module.css`.
-- Validação: `npx eslint app/api/control-tower/plan-action/route.ts app/api/control-tower/devotional-action/route.ts app/control_tower/PlansPanel.tsx components/LanguageSwitcher.tsx` passou.
-- Visual QA: Browser em `http://localhost:3029/control_tower` confirmou lock screen sem seletor PT/EN e sem overlap; evidência em `/Users/paulopierrondi/Documents/Codex/2026-05-30/files-mentioned-by-the-user-captura/outputs/control-tower-locked-no-switcher-20260531.png`.
-- Pendências externas: `npm run lint` ainda falha por `.claude/worktrees/.../.next` gerado; `npx tsc --noEmit` ainda falha porque `components/WhatsApp.tsx` está deletado enquanto páginas públicas ainda importam o componente. Sem deploy/push nesta sessão.
-- Follow-up: adicionado mapa CSDM 5 preenchido no estilo do modelo oficial, com domínios, owners, registros/tabelas, relações e passos de resolução para agentes de IA do Itaú.
-- Arquivos alterados: `app/itau/ItauExperience.tsx`, `app/itau/ItauExperience.module.css`
-- Validação: ESLint, `npm run build`, QA Playwright desktop/mobile em localhost e produção.
-- Evidência: `outputs/manual-20260529-itau-csdm5/production-qa/desktop-aict.png`; `outputs/manual-20260529-itau-csdm5/production-qa/desktop-csdm-map.png`
-
-## Sessão Codex — Soro vs pierrondi.dev authority surface — 2026-05-30
-
-- Pedido: avaliar `https://trysoro.com/about` e planejar algo melhor para promover Paulo com apoio multiagente.
-- Preflight: Agent Hub `pass`; Product Council start registrado em `085958-pierrondi-site-product-council-start.md`.
-- Fontes inspecionadas: Soro `/about`, `/`, `/pricing`, `/blog`; site público `pierrondi.dev`; repo vivo `/Users/paulopierrondi/Projects/pierrondi-site`; checkout recovery `/Users/paulopierrondi/Projects/pierrondi-site-recovery`.
-- Consenso multiagente: não usar Soro como autopilot nem como casa da reputação. Construir primeiro uma superfície própria em `pierrondi.dev`; se Soro entrar, usar apenas como keyword map/rascunho com autopublish desligado e revisão humana.
-- Rota recomendada: criar `/about` e `/en/about` como página pública indexável de autoridade/prova operacional; manter `/whypaulo` `noindex` para pitch estratégico específico; preservar `/paulo` como portfólio/alias ou consolidar depois.
-- Posicionamento: Paulo como operador de IA corporativa governada em ServiceNow/FSI, conectando `modelo operacional -> velocidade de adoção -> expansão de receita`.
-- Guardrails P0: não citar Bradesco como case, resultado, stakeholder, roadmap, budget, incidente, métrica ou screenshot sem aprovação formal; não sugerir endosso oficial da ServiceNow; não vender consultoria independente conflitante de ServiceNow/Now Assist/FSI; LinkedIn segue exclusivo para ServiceNow; sem autopublish SEO/AEO em temas sensíveis.
-- Assets planejados: página flagship, framework visual próprio, proof library redigida, cluster SEO/AEO curado, lead magnet executivo.
-- Observação técnica: worktree vivo
+- Pedido: melhorar a tela `/control_tower#devotionais` a partir de screenshot do painel privado.
+- Decisão: manter a linguagem editorial/brutalist existente, reduzir ruído visual no primeiro viewport, melhorar status card, densidade dos cards, rail mobile e hierarquia dos devotionais sem tocar em deploy/prod.
+- Arquivos alterados: `app/control_tower/ControlTower.module.css`, `app/control_tower/DevotionalsPanel.tsx`.
+- Refactor técnico: `DevotionalsPanel.tsx` foi dividido em `DevotionalStatsSummary`, `LanguageChips`, `BatchApproveRail` e `DevotionalCard` para reduzir HARD do complexity guard no arquivo tocado.
+- Evidência local: `npm run lint` passou; `npm run build` passou; `complexity-guard.py scan app/control_tower/DevotionalsPanel.tsx app/control_tower/ControlTower.module.css scripts/control-tower-dev.mjs package.json` passou sem HARD.
+[REDACTED SECRET LINE]
+- Browser QA: desktop 1280x720, mobile 390x844 e devotionais 1280x900 confirmaram `overflowX=false`.
+- Risco residual: `complexity-guard.py scan --changed` continua bloqueado por dívida preexistente em arquivos já sujos (`scripts/creative-control-snapshot.py`, `app/bradesco-26/Bradesco26Experience.tsx`, `app/control_tower/PlansPanel.tsx`, `app/itau/ItauExperience.tsx`). Não foi refatorado por estar fora do pedido.
+- Deploy/push: executado em 2026-06-01 após comando explícito "faca" para enviar a prod. `origin/main` avançou antes do push; commit final foi cherry-pickado em worktree limpa sobre `origin/main`. Commit remoto `2b1e6ed fix(control-tower): stabilize ops das
 ...[truncated]
 
 ## AI History Snapshot

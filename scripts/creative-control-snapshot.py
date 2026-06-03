@@ -103,6 +103,83 @@ def category_group(category: str | None) -> str:
     return "other"
 
 
+def _mentions(text: str, tokens: tuple[str, ...]) -> bool:
+    return bool(text) and any(token in text.lower() for token in tokens)
+
+
+def _category_groups(items: list[dict[str, Any]]) -> set[str]:
+    return {category_group(item.get("category")) for item in items}
+
+
+def _formalities(items: list[dict[str, Any]]) -> list[str]:
+    return [(item.get("formality") or "").lower() for item in items if item.get("formality")]
+
+
+def score_color(items: list[dict[str, Any]], accent: str, notes_text: str) -> int:
+    if not items:
+        color = 18
+    else:
+        families = [color_family(item.get("dominant_color")) for item in items]
+        non_neutral = {f for f in families if f not in {"neutral", "metallic", "unknown"}}
+        color = 22 if len(non_neutral) <= 1 else 18 if len(non_neutral) == 2 else 14
+    if _mentions(notes_text, ("cor", "paleta", "tom", "contraste")):
+        color = min(25, color + 1)
+    if any(t in (accent or "").upper() for t in ("HOT", "BOLD", "DRAMA", "DARK")):
+        color = min(25, color + 1)
+    return color
+
+
+def score_proportion(items: list[dict[str, Any]]) -> int:
+    if not items:
+        return 15
+    groups = _category_groups(items)
+    if "dress" in groups:
+        proportion = 17
+    elif "top" in groups and "bottom" in groups:
+        proportion = 16
+    elif "top" in groups or "bottom" in groups:
+        proportion = 13
+    else:
+        proportion = 12
+    proportion += 2 if "shoe" in groups else 0
+    proportion += 1 if "outerwear" in groups else 0
+    return min(20, proportion)
+
+
+def score_fit(items: list[dict[str, Any]], notes_text: str) -> int:
+    fit = 16
+    if _mentions(notes_text, ("fit", "caimento", "silhueta")):
+        fit += 2
+    if items and len(set(_formalities(items))) == 1:
+        fit += 1
+    return min(20, fit)
+
+
+def score_coherence(items: list[dict[str, Any]]) -> int:
+    if not items:
+        return 15
+    unique_formalities = set(_formalities(items))
+    if len(unique_formalities) <= 1:
+        return 19
+    return 16 if len(unique_formalities) == 2 else 12
+
+
+def score_accessories(items: list[dict[str, Any]]) -> int:
+    if not items:
+        return 7
+    accessory_count = sum(1 for item in items if category_group(item.get("category")) == "accessory")
+    if accessory_count == 0:
+        return 5
+    return 8 if accessory_count == 1 else 10
+
+
+def score_details(accent: str, notes_text: str) -> int:
+    details = 4 if notes_text and notes_text.strip() else 3
+    if any(t in (accent or "").upper() for t in ("CLEAN", "SOFT POWER", "EDITORIAL", "SHARP")):
+        details = min(5, details + 1)
+    return details
+
+
 def score_look(
     *,
     items: list[dict[str, Any]],
@@ -110,90 +187,14 @@ def score_look(
     notes_text: str = "",
 ) -> dict[str, int]:
     """Port of the deterministic LookScorer. Returns dict matching breakdown shape (0..100 scale)."""
-    has_items = bool(items)
-
-    if has_items:
-        families = [color_family(item.get("dominant_color")) for item in items]
-        non_neutral = {f for f in families if f not in {"neutral", "metallic", "unknown"}}
-        if len(non_neutral) <= 1:
-            color = 22
-        elif len(non_neutral) == 2:
-            color = 18
-        else:
-            color = 14
-    else:
-        color = 18
-    if notes_text and any(t in notes_text.lower() for t in ("cor", "paleta", "tom", "contraste")):
-        color = min(25, color + 1)
-
-    if has_items:
-        groups = {category_group(item.get("category")) for item in items}
-        if "dress" in groups:
-            proportion = 17
-        elif "top" in groups and "bottom" in groups:
-            proportion = 16
-        elif "top" in groups or "bottom" in groups:
-            proportion = 13
-        else:
-            proportion = 12
-        if "shoe" in groups:
-            proportion += 2
-        if "outerwear" in groups:
-            proportion += 1
-        proportion = min(20, proportion)
-    else:
-        proportion = 15
-
-    fit = 16
-    if notes_text and any(t in notes_text.lower() for t in ("fit", "caimento", "silhueta")):
-        fit += 2
-    if has_items:
-        formalities = {(item.get("formality") or "").lower() for item in items if item.get("formality")}
-        if len(formalities) == 1:
-            fit += 1
-    fit = min(20, fit)
-
-    if has_items:
-        formalities_list = [(item.get("formality") or "").lower() for item in items if item.get("formality")]
-        unique_f = set(formalities_list)
-        if len(unique_f) <= 1:
-            coherence = 19
-        elif len(unique_f) == 2:
-            coherence = 16
-        else:
-            coherence = 12
-    else:
-        coherence = 15
-
-    if has_items:
-        accessory_count = sum(1 for item in items if category_group(item.get("category")) == "accessory")
-        if accessory_count == 0:
-            accessories = 5
-        elif accessory_count == 1:
-            accessories = 8
-        else:
-            accessories = 10
-    else:
-        accessories = 7
-
-    details = 3
-    if notes_text and notes_text.strip():
-        details += 1
-    accent_upper = (accent or "").upper()
-    if any(t in accent_upper for t in ("CLEAN", "SOFT POWER", "EDITORIAL", "SHARP")):
-        details = min(5, details + 1)
-    if any(t in accent_upper for t in ("HOT", "BOLD", "DRAMA", "DARK")):
-        color = min(25, color + 1)
-
-    breakdown = {
-        "color": color,
-        "proportion": proportion,
-        "fit": fit,
-        "coherence": coherence,
-        "accessories": accessories,
-        "details": details,
+    return {
+        "color": score_color(items, accent, notes_text),
+        "proportion": score_proportion(items),
+        "fit": score_fit(items, notes_text),
+        "coherence": score_coherence(items),
+        "accessories": score_accessories(items),
+        "details": score_details(accent, notes_text),
     }
-    return breakdown
 
 
 def total_from_breakdown(breakdown: dict[str, int]) -> int:
@@ -221,107 +222,177 @@ def load_db(db_path: Path) -> dict[str, Any]:
         return {"closet_items": [], "saved_looks": [], "look_reviews": []}
 
 
-def build_looks_section(db: dict[str, Any], max_looks: int) -> dict[str, Any]:
-    closet_items: list[dict[str, Any]] = db.get("closet_items", []) or []
-    closet_by_id = {item["id"]: item for item in closet_items if isinstance(item, dict) and "id" in item}
+def _source_counts(
+    closet_items: list[dict[str, Any]],
+    saved_looks: list[dict[str, Any]],
+    look_reviews: list[dict[str, Any]],
+) -> dict[str, int]:
+    return {
+        "closetItems": len(closet_items),
+        "savedLooks": len(saved_looks),
+        "lookReviews": len(look_reviews),
+    }
 
-    saved_looks: list[dict[str, Any]] = db.get("saved_looks", []) or []
-    look_reviews: list[dict[str, Any]] = db.get("look_reviews", []) or []
 
+def _source_mode(
+    closet_items: list[dict[str, Any]],
+    saved_looks: list[dict[str, Any]],
+    look_reviews: list[dict[str, Any]],
+) -> str:
+    if saved_looks or look_reviews:
+        return "looks"
+    return "closet_items_fallback" if closet_items else "empty"
+
+
+def _summary_from_score(
+    *,
+    breakdown: dict[str, int],
+    created_at: str,
+    item_count: int,
+    look_id: str,
+    occasion: Any,
+    style_goal: Any,
+    thumbnail_path: Any,
+) -> dict[str, Any]:
+    total = total_from_breakdown(breakdown)
+    return {
+        "id": look_id,
+        "createdAt": created_at,
+        "occasion": occasion,
+        "styleGoal": style_goal,
+        "totalScore": total,
+        "tier": tier_for(total),
+        "breakdown": breakdown,
+        "itemCount": item_count,
+        "thumbnailPath": thumbnail_path,
+    }
+
+
+def _closet_item_summaries(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     summaries: list[dict[str, Any]] = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        summaries.append(_summary_from_score(
+            breakdown=score_look(items=[item], accent="", notes_text=""),
+            created_at=str(item.get("created_at") or item.get("added_at") or ""),
+            item_count=1,
+            look_id=str(item.get("id") or ""),
+            occasion=item.get("category"),
+            style_goal=item.get("dominant_color"),
+            thumbnail_path=item.get("image_url") or item.get("photo_url") or None,
+        ))
+    return summaries
 
-    # Fallback: ingest closet_items as single-item looks when no saved_looks exist
-    if not saved_looks and closet_items:
-        for item in closet_items:
-            if not isinstance(item, dict):
-                continue
-            breakdown = score_look(items=[item], accent="", notes_text="")
-            total = total_from_breakdown(breakdown)
-            summaries.append({
-                "id": str(item.get("id") or ""),
-                "createdAt": str(item.get("created_at") or item.get("added_at") or ""),
-                "occasion": item.get("category"),
-                "styleGoal": item.get("dominant_color"),
-                "totalScore": total,
-                "tier": tier_for(total),
-                "breakdown": breakdown,
-                "itemCount": 1,
-                "thumbnailPath": item.get("image_url") or item.get("photo_url") or None,
-            })
 
+def _saved_look_summaries(
+    saved_looks: list[dict[str, Any]],
+    closet_by_id: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    summaries: list[dict[str, Any]] = []
     for look in saved_looks:
         item_ids = look.get("item_ids") or []
         items = [closet_by_id[i] for i in item_ids if i in closet_by_id]
-        notes_text = " ".join(look.get("notes") or []) if isinstance(look.get("notes"), list) else (look.get("notes") or "")
-        breakdown = score_look(items=items, accent=look.get("accent") or "", notes_text=notes_text)
-        total = total_from_breakdown(breakdown)
-        summaries.append({
-            "id": str(look.get("id") or ""),
-            "createdAt": str(look.get("created_at") or ""),
-            "occasion": look.get("vibe"),
-            "styleGoal": look.get("accent"),
-            "totalScore": total,
-            "tier": tier_for(total),
-            "breakdown": breakdown,
-            "itemCount": len(items),
-            "thumbnailPath": look.get("hero_image_url") or None,
-        })
+        notes = look.get("notes") or []
+        notes_text = " ".join(notes) if isinstance(notes, list) else notes
+        summaries.append(_summary_from_score(
+            breakdown=score_look(items=items, accent=look.get("accent") or "", notes_text=notes_text),
+            created_at=str(look.get("created_at") or ""),
+            item_count=len(items),
+            look_id=str(look.get("id") or ""),
+            occasion=look.get("vibe"),
+            style_goal=look.get("accent"),
+            thumbnail_path=look.get("hero_image_url") or None,
+        ))
+    return summaries
 
+
+def _review_summaries(look_reviews: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    summaries: list[dict[str, Any]] = []
     for idx, review in enumerate(look_reviews):
-        breakdown = score_look(items=[], accent="", notes_text=review.get("notes") or "")
-        total = total_from_breakdown(breakdown)
-        summaries.append({
-            "id": f"review-{idx}",
-            "createdAt": str(review.get("created_at") or ""),
-            "occasion": review.get("occasion"),
-            "styleGoal": review.get("style_goal"),
-            "totalScore": total,
-            "tier": tier_for(total),
-            "breakdown": breakdown,
-            "itemCount": 0,
-            "thumbnailPath": review.get("image_filename") or None,
-        })
+        summaries.append(_summary_from_score(
+            breakdown=score_look(items=[], accent="", notes_text=review.get("notes") or ""),
+            created_at=str(review.get("created_at") or ""),
+            item_count=0,
+            look_id=f"review-{idx}",
+            occasion=review.get("occasion"),
+            style_goal=review.get("style_goal"),
+            thumbnail_path=review.get("image_filename") or None,
+        ))
+    return summaries
 
-    summaries.sort(key=lambda s: s["createdAt"], reverse=True)
 
-    total = len(summaries)
-    scored = [s["totalScore"] for s in summaries]
-    avg = round(sum(scored) / total, 1) if scored else 0.0
-    p95 = 0.0
-    if scored:
-        sorted_scores = sorted(scored)
-        p95_idx = max(0, int(round(0.95 * (len(sorted_scores) - 1))))
-        p95 = float(sorted_scores[p95_idx])
-    by_tier = {"A": 0, "B": 0, "C": 0, "D": 0}
-    for s in summaries:
-        by_tier[s["tier"]] = by_tier.get(s["tier"], 0) + 1
+def _looks_summaries(
+    closet_items: list[dict[str, Any]],
+    saved_looks: list[dict[str, Any]],
+    look_reviews: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    closet_by_id = {item["id"]: item for item in closet_items if isinstance(item, dict) and "id" in item}
+    summaries = _saved_look_summaries(saved_looks, closet_by_id) + _review_summaries(look_reviews)
+    if not summaries and closet_items:
+        summaries = _closet_item_summaries(closet_items)
+    return sorted(summaries, key=lambda s: s["createdAt"], reverse=True)
 
+
+def _percentile_95(scores: list[int]) -> float:
+    if not scores:
+        return 0.0
+    sorted_scores = sorted(scores)
+    p95_idx = max(0, int(round(0.95 * (len(sorted_scores) - 1))))
+    return float(sorted_scores[p95_idx])
+
+
+def _tier_counts(summaries: list[dict[str, Any]]) -> dict[str, int]:
+    counts = {"A": 0, "B": 0, "C": 0, "D": 0}
+    for summary in summaries:
+        counts[summary["tier"]] = counts.get(summary["tier"], 0) + 1
+    return counts
+
+
+def _occasion_counts(summaries: list[dict[str, Any]]) -> list[dict[str, Any]]:
     occasions: dict[str, int] = {}
-    for s in summaries:
-        occ = s.get("occasion")
-        if isinstance(occ, str) and occ.strip():
-            occasions[occ.strip()] = occasions.get(occ.strip(), 0) + 1
-    by_occasion = sorted(
-        [{"occasion": k, "count": v} for k, v in occasions.items()],
+    for summary in summaries:
+        occasion = summary.get("occasion")
+        if isinstance(occasion, str) and occasion.strip():
+            occasions[occasion.strip()] = occasions.get(occasion.strip(), 0) + 1
+    return sorted(
+        [{"occasion": key, "count": count} for key, count in occasions.items()],
         key=lambda x: x["count"],
         reverse=True,
     )[:8]
 
-    last_created = summaries[0]["createdAt"] if summaries else None
 
+def _looks_stats(
+    summaries: list[dict[str, Any]],
+    source_counts: dict[str, int],
+    source_mode: str,
+) -> dict[str, Any]:
+    total = len(summaries)
+    scores = [summary["totalScore"] for summary in summaries]
     stats = {
         "total": total,
         "totalScored": total,
-        "avgScore": avg,
-        "p95Score": p95,
-        "byTier": by_tier,
-        "byOccasion": by_occasion,
+        "avgScore": round(sum(scores) / total, 1) if scores else 0.0,
+        "p95Score": _percentile_95(scores),
+        "byTier": _tier_counts(summaries),
+        "byOccasion": _occasion_counts(summaries),
+        "sourceMode": source_mode,
+        "sourceCounts": source_counts,
     }
-    if last_created:
-        stats["lastCreatedAt"] = last_created
+    if summaries:
+        stats["lastCreatedAt"] = summaries[0]["createdAt"]
+    return stats
 
+
+def build_looks_section(db: dict[str, Any], max_looks: int) -> dict[str, Any]:
+    closet_items: list[dict[str, Any]] = db.get("closet_items", []) or []
+    saved_looks: list[dict[str, Any]] = db.get("saved_looks", []) or []
+    look_reviews: list[dict[str, Any]] = db.get("look_reviews", []) or []
+    summaries = _looks_summaries(closet_items, saved_looks, look_reviews)
+    source_counts = _source_counts(closet_items, saved_looks, look_reviews)
+    source_mode = _source_mode(closet_items, saved_looks, look_reviews)
     return {
-        "stats": stats,
+        "stats": _looks_stats(summaries, source_counts, source_mode),
         "recent": summaries[:max_looks],
     }
 
@@ -382,83 +453,91 @@ def age_label(iso: str | None, now: datetime) -> str | None:
     return f"{days}d"
 
 
-def build_devotionals_section(payload: dict[str, Any], max_pending: int) -> dict[str, Any]:
-    now = datetime.now(timezone.utc)
-    items_raw = payload.get("items") or []
+def _mock_devotional_item(now: datetime) -> dict[str, Any]:
+    return {
+        "id": "mock-devotional-001",
+        "date": now.strftime("%Y-%m-%d"),
+        "language": "pt-BR",
+        "scriptureRef": "João 3:16",
+        "title": "O amor incondicional de Deus",
+        "body": "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna. Esta é a promessa que nos sustenta em todos os momentos.",
+        "source": "youversion-votd",
+        "generatedAt": now.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
+    }
 
-    # Fallback mock devotional when API returns empty (no credentials or no pending items)
-    if not items_raw and os.environ.get("CREATIVE_CONTROL_DEVOTIONAL_MOCK", "1") != "0":
-        items_raw = [{
-            "id": "mock-devotional-001",
-            "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-            "language": "pt-BR",
-            "scriptureRef": "João 3:16",
-            "title": "O amor incondicional de Deus",
-            "body": "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna. Esta é a promessa que nos sustenta em todos os momentos.",
-            "source": "youversion-votd",
-            "generatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z"),
-        }]
 
-    pending: list[dict[str, Any]] = []
+def _devotional_items(payload: dict[str, Any], now: datetime) -> list[Any]:
+    items = payload.get("items") or []
+    # Optional local demo data. Production snapshots must never invent pending
+    # review items, because Control Tower approval forwards docIds to
+    # FaithSchool and mock ids cannot be confirmed upstream.
+    if not items and os.environ.get("CREATIVE_CONTROL_DEVOTIONAL_MOCK", "0") == "1":
+        return [_mock_devotional_item(now)]
+    return items
 
-    for item in items_raw:
-        if not isinstance(item, dict):
-            continue
-        body = (
-            item.get("body")
-            or item.get("content")
-            or item.get("reflection")
-            or item.get("text")
-            or ""
-        )
-        snippet = body.strip().replace("\n", " ")
-        if len(snippet) > 140:
-            snippet = snippet[:137].rstrip() + "..."
 
-        generated_at = item.get("generatedAt") or item.get("createdAt") or item.get("date")
-        scripture = (
-            item.get("scriptureRef")
-            or item.get("scripture")
-            or item.get("verseRef")
-            or "—"
-        )
-        source = item.get("source")
-        if source not in ("youversion-votd", "manual", "other"):
-            source = "youversion-votd"
+def _devotional_snippet(item: dict[str, Any]) -> str:
+    body = item.get("body") or item.get("content") or item.get("reflection") or item.get("text") or ""
+    snippet = body.strip().replace("\n", " ")
+    if len(snippet) > 140:
+        return snippet[:137].rstrip() + "..."
+    return snippet or "(sem conteúdo)"
 
-        pending.append({
-            "docId": str(item.get("id") or item.get("docId") or ""),
-            "date": str(item.get("date") or ""),
-            "language": str(item.get("language") or item.get("lang") or "pt-BR"),
-            "scriptureRef": str(scripture),
-            "title": item.get("title"),
-            "snippet": snippet or "(sem conteúdo)",
-            "source": source,
-            "generatedAt": generated_at,
-            "ageLabel": age_label(generated_at, now),
-        })
 
-    pending = [p for p in pending if p["docId"]]
-    pending.sort(key=lambda p: p["date"])
+def _devotional_source(item: dict[str, Any]) -> str:
+    source = item.get("source")
+    return source if source in ("youversion-votd", "manual", "other") else "youversion-votd"
 
+
+def _devotional_scripture(item: dict[str, Any]) -> str:
+    return str(item.get("scriptureRef") or item.get("scripture") or item.get("verseRef") or "—")
+
+
+def _pending_devotional(item: dict[str, Any], now: datetime) -> dict[str, Any]:
+    generated_at = item.get("generatedAt") or item.get("createdAt") or item.get("date")
+    return {
+        "docId": str(item.get("id") or item.get("docId") or ""),
+        "date": str(item.get("date") or ""),
+        "language": str(item.get("language") or item.get("lang") or "pt-BR"),
+        "scriptureRef": _devotional_scripture(item),
+        "title": item.get("title"),
+        "snippet": _devotional_snippet(item),
+        "source": _devotional_source(item),
+        "generatedAt": generated_at,
+        "ageLabel": age_label(generated_at, now),
+    }
+
+
+def _pending_devotionals(items: list[Any], now: datetime) -> list[dict[str, Any]]:
+    pending = [_pending_devotional(item, now) for item in items if isinstance(item, dict)]
+    return sorted([item for item in pending if item["docId"]], key=lambda p: p["date"])
+
+
+def _language_counts(pending: list[dict[str, Any]]) -> dict[str, int]:
     by_language: dict[str, int] = {}
-    for p in pending:
-        by_language[p["language"]] = by_language.get(p["language"], 0) + 1
+    for item in pending:
+        by_language[item["language"]] = by_language.get(item["language"], 0) + 1
+    return by_language
 
-    oldest = pending[0]["generatedAt"] if pending else None
-    newest = max((p["generatedAt"] for p in pending if p.get("generatedAt")), default=None)
 
+def _devotional_stats(pending: list[dict[str, Any]]) -> dict[str, Any]:
     stats: dict[str, Any] = {
         "totalPending": len(pending),
-        "byLanguage": by_language,
+        "byLanguage": _language_counts(pending),
     }
-    if oldest:
-        stats["oldestPendingAt"] = oldest
+    if pending:
+        stats["oldestPendingAt"] = pending[0]["generatedAt"]
+    newest = max((item["generatedAt"] for item in pending if item.get("generatedAt")), default=None)
     if newest:
         stats["lastGeneratedAt"] = newest
+    return stats
 
+
+def build_devotionals_section(payload: dict[str, Any], max_pending: int) -> dict[str, Any]:
+    now = datetime.now(timezone.utc)
+    pending = _pending_devotionals(_devotional_items(payload, now), now)
     return {
-        "stats": stats,
+        "stats": _devotional_stats(pending),
         "pending": pending[:max_pending],
     }
 

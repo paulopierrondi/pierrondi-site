@@ -1091,7 +1091,7 @@ export default function Bradesco26Experience() {
       return
     }
 
-    setActiveTheme(item.theme)
+    setActiveTheme(item.theme as Theme)
     setSelectedId(item.id)
     setDeepDiveId(item.id)
   }

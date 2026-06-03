@@ -43,6 +43,14 @@ const looksStatsSchema = z.object({
     )
     .max(16),
   lastCreatedAt: z.string().max(80).optional(),
+  sourceMode: z.enum(['looks', 'closet_items_fallback', 'empty']).optional(),
+  sourceCounts: z
+    .object({
+      closetItems: z.number().int().nonnegative(),
+      savedLooks: z.number().int().nonnegative(),
+      lookReviews: z.number().int().nonnegative(),
+    })
+    .optional(),
 })
 
 const devotionalSourceSchema = z.enum(['youversion-votd', 'manual', 'other'])

@@ -83,9 +83,11 @@ export const planActionSchema = z.enum(['approve', 'defer', 'reject'])
 
 export type PlanAction = z.infer<typeof planActionSchema>
 
+export const PLAN_ACTION_MAX_IDS = 500
+
 export const planActionPayloadSchema = z.object({
   action: planActionSchema,
-  planIds: z.array(z.string().min(1).max(160)).min(1).max(50),
+  planIds: z.array(z.string().min(1).max(160)).min(1).max(PLAN_ACTION_MAX_IDS),
 })
 
 export type PlanActionPayload = z.infer<typeof planActionPayloadSchema>

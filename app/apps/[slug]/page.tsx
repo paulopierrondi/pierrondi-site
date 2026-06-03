@@ -44,6 +44,19 @@ export default async function AppLandingPage({ params }: Props) {
 
   const heroTagline = app.tagline ?? app.category
   const description = app.description ?? `${app.name} — ${app.category}.`
+  const highlights =
+    app.privacyMode === 'aiPhotoTryOn'
+      ? [
+          'Uses the ProvadorIA API and Google Gemini to generate the requested try-on from the user photo, clothing photo and description.',
+          'Requires explicit AI photo-processing consent before generation.',
+          'Version 1.0 is free: no subscription, no external purchase and no paid digital content.',
+          'Photo-processing data is not sold, not used for tracking, not used by ProvadorIA to train models and is discarded from transient processing storage within 24 hours.',
+        ]
+      : [
+          'Private by design — core features work on-device.',
+          'No mandatory account, no telemetry on personal content.',
+          'Optional paid features, when offered, go through Apple In-App Purchase.',
+        ]
 
   return (
     <>
@@ -72,9 +85,9 @@ export default async function AppLandingPage({ params }: Props) {
             <p>{description}</p>
             <h2>What you get</h2>
             <ul>
-              <li>Private by design — core features work on-device.</li>
-              <li>No mandatory account, no telemetry on personal content.</li>
-              <li>Optional paid features, when offered, go through Apple In-App Purchase.</li>
+              {highlights.map((highlight) => (
+                <li key={highlight}>{highlight}</li>
+              ))}
             </ul>
             <h2>Help & legal</h2>
             <ul className={styles.linkList}>

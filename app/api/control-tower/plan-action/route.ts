@@ -6,7 +6,10 @@ import {
   verifySessionCookie,
 } from '@/lib/automation-control/auth'
 import { hashSession } from '@/lib/creative-control/auth'
-import { planActionPayloadSchema } from '@/lib/control-tower/plan-types'
+import {
+  PLAN_ACTION_MAX_IDS,
+  planActionPayloadSchema,
+} from '@/lib/control-tower/plan-types'
 import {
   applyPlanAction,
   appendPlanAudit,
@@ -16,9 +19,9 @@ export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
 // Private, session-gated human review endpoint. The queue can legitimately
-// have dozens of low-risk plans, so the limiter protects bursts without
-// blocking normal review of one snapshot.
-const RATE_LIMIT_MAX = 120
+// have hundreds of low/medium-risk plans after a backlog run, so the limiter
+// protects abuse without blocking a human-approved snapshot drain.
+const RATE_LIMIT_MAX = PLAN_ACTION_MAX_IDS * 2
 const RATE_LIMIT_WINDOW_MS = 60_000
 
 const bucket = new Map<string, { count: number; resetAt: number }>()

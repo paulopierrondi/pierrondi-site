@@ -26,6 +26,14 @@ export interface OccasionTally {
   count: number
 }
 
+export type LooksSourceMode = 'looks' | 'closet_items_fallback' | 'empty'
+
+export interface LooksSourceCounts {
+  closetItems: number
+  savedLooks: number
+  lookReviews: number
+}
+
 export interface LooksStats {
   total: number
   totalScored: number
@@ -34,6 +42,8 @@ export interface LooksStats {
   byTier: Record<LookScoreTier, number>
   byOccasion: OccasionTally[]
   lastCreatedAt?: string
+  sourceMode?: LooksSourceMode
+  sourceCounts?: LooksSourceCounts
 }
 
 export type DevotionalSource = 'youversion-votd' | 'manual' | 'other'
