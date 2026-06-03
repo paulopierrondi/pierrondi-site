@@ -63,7 +63,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.92;
+  opacity: 0.55;
 }
 
 .heroGlow {
@@ -88,7 +88,19 @@
 
 .heroInner {
   position: relative;
+  z-index: 2;
   max-width: 780px;
+}
+
+/* Dark scrim so the hero copy stays legible over the 3D swarm. */
+.heroInner::before {
+  content: '';
+  position: absolute;
+  inset: -52px -140px -52px -110px;
+  z-index: -1;
+  border-radius: 48px;
+  background: radial-gradient(78% 86% at 24% 44%, rgba(2, 8, 11, 0.88), rgba(2, 8, 11, 0.5) 50%, transparent 76%);
+  pointer-events: none;
 }
 
 .heroChips {
@@ -123,15 +135,18 @@
 
 .heroTitle {
   font-size: clamp(2.6rem, 7vw, 5rem);
-  line-height: 1.02;
+  line-height: 1.08;
   letter-spacing: -0.03em;
   font-weight: 700;
   margin: 0 0 1.2rem;
+  padding-bottom: 0.08em;
   color: #fff;
 }
 
 .heroTitle em {
   font-style: normal;
+  display: inline-block;
+  padding-bottom: 0.12em;
   background: linear-gradient(100deg, var(--sn-cyan), var(--sn-blue) 55%, var(--sn-indigo));
   -webkit-background-clip: text;
   background-clip: text;
@@ -716,10 +731,67 @@
 }
 .confidentialMeta { font-family: var(--font-mono), monospace; }
 
+/* ───────────── CONTEXT + COUNCIL ───────────── */
+.contextGrid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+.contextFigure {
+  position: relative;
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(35, 194, 207, 0.24);
+  background: #06141c;
+  min-height: 340px;
+}
+.contextFigure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.contextFigure figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 2.2rem 1.3rem 1.1rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: rgba(232, 244, 247, 0.9);
+  background: linear-gradient(0deg, rgba(2, 8, 11, 0.94), rgba(2, 8, 11, 0.5) 60%, transparent);
+}
+.contextPoints { display: flex; flex-direction: column; gap: 0.9rem; }
+.contextPoints article {
+  padding: 1.25rem 1.4rem;
+  background: var(--sn-card);
+  border: 1px solid var(--sn-line);
+  border-radius: 14px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.contextPoints article:hover { border-color: var(--sn-line-strong); background: var(--sn-card-hover); }
+.contextPoints span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sn-cyan); }
+.contextPoints h3 { font-size: 1.05rem; font-weight: 700; color: #fff; margin: 0.4rem 0 0.4rem; }
+.contextPoints p { font-size: 0.88rem; line-height: 1.5; color: rgba(232, 244, 247, 0.68); margin: 0; }
+.contextPunch {
+  margin: 1.4rem 0 0;
+  padding: 1.1rem 1.5rem;
+  text-align: center;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 600;
+  color: #eef5f7;
+  background: rgba(35, 194, 207, 0.06);
+  border: 1px solid rgba(35, 194, 207, 0.2);
+  border-radius: 14px;
+}
+.contextPunch strong { color: var(--sn-cyan); }
+
 /* ───────────── RESPONSIVE ───────────── */
 @media (max-width: 980px) {
   .statGrid { grid-template-columns: repeat(2, 1fr); }
-  .laneGrid, .govGrid { grid-template-columns: 1fr; }
+  .laneGrid, .govGrid, .contextGrid { grid-template-columns: 1fr; }
+  .contextFigure { min-height: 260px; }
   .agentGrid { grid-template-columns: repeat(2, 1fr); }
   .loopRow { grid-template-columns: 1fr 1fr; }
   .loopArrow { display: none; }

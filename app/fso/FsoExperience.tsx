@@ -357,6 +357,52 @@ export default function FsoExperience() {
           </motion.div>
         </header>
 
+        {/* ─────────── CONTEXT + COUNCIL ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div className={styles.sectionHead}>
+            <span className={styles.kicker}>why this works</span>
+            <h2 className={styles.sectionTitle}>Agents are only as good as the context they stand on.</h2>
+            <p className={styles.sectionSub}>
+              I don&apos;t just propose this — I run it every day. A <strong>council of specialized agents</strong> works
+              over my own second brain: a living knowledge graph of thousands of connected notes. The same operating
+              model maps directly onto a ServiceNow instance.
+            </p>
+          </div>
+
+          <div className={styles.contextGrid}>
+            <figure className={styles.contextFigure}>
+              <img
+                src="/fso/context-graph.jpg"
+                alt="A living knowledge graph — thousands of connected notes, the context a council of agents reasons over"
+                loading="lazy"
+              />
+              <figcaption>My second brain — the context a council of agents reasons over, every day.</figcaption>
+            </figure>
+
+            <div className={styles.contextPoints}>
+              <article>
+                <span>01 · Context</span>
+                <h3>Your ServiceNow graph is the moat</h3>
+                <p>CMDB · CSDM · FSDM, the dependency map, the live data and the validator&apos;s encoded rules become a rich context graph — the same shape as the knowledge graph beside this.</p>
+              </article>
+              <article>
+                <span>02 · Council</span>
+                <h3>A council of specialized agents</h3>
+                <p>Not one generalist — a roster (architect, config, flow, migration, ATF, validator, docs) where each owns a slice and hands off, governed end to end.</p>
+              </article>
+              <article>
+                <span>03 · Any dev LLM</span>
+                <h3>Codex, Claude Code, or whatever&apos;s best</h3>
+                <p>Context + council are model-agnostic. Point Codex, Claude Code or any dev LLM at the graph and implementation accelerates — without losing governance.</p>
+              </article>
+            </div>
+          </div>
+
+          <p className={styles.contextPunch}>
+            My ServiceNow context + a council of agents → any dev LLM ships FSO faster. <strong>That is the unlock.</strong>
+          </p>
+        </Reveal>
+
         {/* ─────────── THE SHIFT ─────────── */}
         <Reveal className={styles.section} reduced={reduced}>
           <div className={styles.sectionHead}>
