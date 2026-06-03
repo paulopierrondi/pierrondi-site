@@ -1,7 +1,7 @@
 # Project Brain Context
 
-Generated: `2026-06-02 08:47:21`
-Tool: `railway-run`
+Generated: `2026-06-03 08:18:00`
+Tool: `claude`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
 
@@ -146,7 +146,7 @@ Every Bradesco Now Assist material must explicitly connect:
 ---
 type: policy
 status: generated
-generated_at: "2026-06-01 09:25:06"
+generated_at: "2026-06-02 23:37:30"
 tags:
   - ai-agents
   - policy
@@ -302,6 +302,396 @@ Provider docs agree that cache invalidation is usually caused by changing the pr
 - Keep always-needed tools and structured output schemas stable.
 - Put optional or discovered tools after the cacheable prefix when the runtime supports deferred tool loading.
 - Do not toggle web search
+...[truncated]
+
+## 99_System/Chat Context 60 Percent Guard.md
+
+---
+type: policy
+status: active
+updated: 2026-05-25
+tags: [ai-agents, context, continuity, handoff, prompt-caching]
+---
+
+# Chat Context 60 Percent Guard
+
+## Regra
+
+Nenhum chat operacional deve passar de 60% de contexto sem checkpoint. Aos 60%, o agente para de expandir escopo, grava um resume pack e recomenda continuar em uma nova conversa.
+
+## Por que
+
+- Contexto cheio aumenta perda de detalhes, alucinacao de estado e esquecimento de gates.
+- Compactacao automatica ajuda, mas nao substitui um resumo controlado com evidencias.
+- O objetivo e preservar continuidade: decisoes, arquivos, comandos, riscos e proxima acao.
+
+## Thresholds
+
+| Contexto | Acao |
+| --- | --- |
+| 0-40% | Trabalhar normal, registrar decisoes relevantes no vault. |
+| 40-50% | Criar checkpoint leve se a tarefa tiver mais de uma etapa. |
+| 50-55% | Criar checkpoint obrigatorio antes de novas edicoes grandes. |
+| 55-60% | Fechar unidade de trabalho atual, validar, escrever resume pack. |
+| >=60% | Nao iniciar nova frente; abrir novo chat com o resume prompt. |
+
+## Gatilhos sem medidor
+
+Se a UI ou CLI nao mostrar percentual, usar estes gatilhos:
+
+- Mais de 30 minutos de trabalho com terminal/patch.
+- Mais de 3 arquivos alterados.
+- Mais de 10 tool calls relevantes.
+- Primeiro erro de validacao que exige investigacao longa.
+- Mudanca de fase: diagnostico -> patch, patch -> validacao, validacao -> release/handoff.
+- Qualquer trabalho envolvendo automacao, multi-agent, Linear, App Store, ads, deploy, secrets ou producao.
+
+## Comandos
+
+```bash
+chat-context-guard doctor
+chat-context-guard checkpoint --title "nome" --project "projeto" --context-percent 55 --summary "estado atual" --next "proxima acao"
+chat-context-guard protocol
+```
+
+## Resume Pack minimo
+
+Todo checkpoint precisa conter:
+
+- Objetivo original.
+- Estado atual.
+- Decisoes tomadas.
+- Arquivos tocados.
+- Comandos/testes rodados.
+- Riscos e bloqueios.
+- Proxima acao exata.
+- Prompt de retomada para novo chat.
+
+## Frase padrao para o Paulo
+
+Quando quiser preservar contexto, escreva:
+
+> checkpoint 60: gere resume pack, salve no vault e me diga o prompt exato para abrir novo chat
+
+## Regra para agentes
+
+Ao perceber contexto perto de 55%, o agente deve dizer explicitamente: `Contexto perto do limite. Vou gerar checkpoint antes de continuar.`
+
+Ao passar de 60%, o agente deve parar de iniciar novas tarefas e produzir apenas o resume pack.
+
+## Prompt Cache
+
+- strategy: `stable-context-prefix-dynamic-task-suffix`
+- prefix_version: `chat-context-60-guard-v1`
+- cache key/tag por checkpoint: `chat-context:<checkpoint_id>`
+- cached_tokens: `null` quando o CLI nao expuser metrica.
+- policy: `/Users/paulopierrondi/Documents/Obsidian Vault/99_System/Prompt Caching Workflow Policy.md`
+
+## 99_System/Central Env File Operating Model.md
+
+---
+type: policy
+status: active
+tags:
+  - security
+  - secrets
+  - env
+  - automation
+  - second-brain
+---
+# Central Env File Operating Model
+
+## Answer First
+
+`/Users/paulopierrondi/Projects/.keys.env` e a **fonte unica** de variaveis de ambiente para todos os files do vault e automacoes locais de Paulo. O carregamento e feito por `/Users/paulopierrondi/.local/bin/brain-env-run`.
+
+O vault continua **inventario** ([[99_System/Credential Vault Operating Model]]), o `.env` central continua **runtime local**, e provider env vars (Railway, Vercel, GitHub Actions) continuam **producao**. Nenhum dos tres armazena o mesmo papel.
+
+## Precedence (last wins)
+
+```text
+1. shell environment (variaveis ja exportadas no shell)
+2. /Users/paulopierrondi/Projects/.keys.env       <- central, fonte unica
+3. ./.env in cwd                              <- project override quando existe
+```
+
+Se a mesma variavel aparece em mais de um local, o ultimo a ser carregado vence. Projetos com necessidade especifica (ex: `DATABASE_URL` diferente por app) sobrescrevem via `.env` local do projeto.
+
+## Permitido no arquivo central
+
+- Variaveis compartilhadas entre projetos (`OPENAI_API_KEY`, `GEMINI_API_KEY`, `ELEVENLABS_API_KEY`, `LINEAR_API_KEY`, `GITHUB_PAT`, `VERCEL_TOKEN`, `RAILWAY_*_TOKEN`, `ASC_KEY_ID`, `ASC_ISSUER_ID`, `APPLE_DEVELOPER_TEAM_ID`).
+- Defaults locais validos para dev (nao para producao).
+- Comentarios marcando grupo (`# === AI image ===`).
+
+## Proibido no arquivo central
+
+- Valores de producao que devam viver em Railway/Vercel/GitHub Actions Secrets.
+- Conteudo de `.p8`, `.pem`, `.key`, `.p12` (esses arquivos continuam em disco, paths absolutos).
+- Cookies de sessao, refresh tokens curtos, OAuth state.
+- Senhas de usuario humano (continuam em Apple Passwords / 1Password).
+- Qualquer key marcada `ROTATE_REQUIRED` em [[04_Areas/Coding/Checklists/Secrets And API Keys Register]] antes da rotacao.
+
+## File hygiene
+
+- `chmod 600` obrigatorio. `brain-env-run` avisa se a permissao for diferente.
+- Nunca commitar. `/Users/paulopierrondi/Projects/.gitignore` protege caso `Projects/` vire repo.
+- Nunca abrir em chat, Markdown do vault, Linear, screenshot, log de automacao ou email. Hard gate da [[99_System/Security And Secrets Policy]].
+- Rotacao: a cada 90 dias ou apos incidente. Atualizar `Secrets And API Keys Register` na mesma operacao.
+- Backups: nao copiar para iCloud Drive, Dropbox, Google Drive, Obsidian Sync. Se backup local for necessario, copiar para volume cifrado e apagar apos restore.
+
+## Como usar via `brain-env-run`
+
+```bash
+# Rodar um comando com o env central + override local aplicados:
+brain-env-run -- npm run dev
+brain-env-run -- python3 scripts/factory.py
+
+# Listar nomes de variaveis definidas (sem mostrar valores):
+brain-env-run list
+
+# Diagnostico de permissoes/keys:
+brain-env-run check
+
+# Exportar variaveis especificas para o shell corrente (uso pontual):
+eval "$(brain-env-run export -- OPENAI_API_KEY GEMINI_API_KEY)"
+```
+
+Override do path central para casos especiais (ex: testes isolados):
+
+```bash
+BRAIN_CENTRAL_ENV=/tmp/test.env brain-env-run -- pytest
+```
+
+## Relacao com os outros wrappers
+
+| Wrapper | Quando usar | Fonte do valor |
+| --- | --- | --- |
+| `brain-env-run` | Default para qualquer script/automacao local que precise das variaveis globais ou do override por projeto. | `/Users/paulopierrondi/Projects/.keys.env` + `./.env`. |
+| `brain-load-secrets` | Quando o valor durable vive **so** no Apple Keychain (caso ainda nao migrado para o `.env` central) ou para regerar/sincronizar o `.env` a partir do Keychain. | Apple Keychain (`paulo-second-brain` namespace). |
+| `brain-railway-run` | Quando o valor real vive em Railway Variables e o script roda dentro de um repo linkado. | Railway Provider env vars. |
+| `op run` (futuro) | Apos migrar para 1Password CLI multi-machine. | 1Password vault (`op://...`). |
+
+`brain-env-run` e `brain-load-secrets` sao composables: para regenerar o `.env` central a partir do Keychain, usar a recipe abaixo.
+
+## Recipes operacionais
+
+### Regerar `.env` central a partir do Apple Keychain
+
+```bash
+# Backup do .env atual:
+cp /Users/paulopierrondi/Projects/.keys.env /Users/paulopierrondi/Projects/.keys.env.bak.$(date +%Y%m%d-%H%M%S)
+chmod 600 /Users/paulopierrondi/Projects/.keys.env.bak.*
+
+# Escrever as keys presentes do Keychain para o .env central (sem ecoar valores no terminal):
+{
+  cat /Users/paulopierrondi/Projects/.keys.env | grep -E '^[[:space:]]*#' # preserva comentarios
+  echo ""
+  brain-load-secrets --all export
+} > /tmp/.env.new
+chmod 600 /tmp/.env.new
+mv /tmp/.env.new /Users/paulopierrondi/Projects/.keys.env
+chmod 600 /Users/paulopierrondi/Projects/.keys.env
+
+# Conferencia (so nomes):
+brain-env-run list
+```
+
+Apagar o backup quando confirmar que o novo arquivo funciona em pelo menos um script (`brain-env-run -- python3 -c 'import os; print(bool(os.environ.get("OPENAI_API_KEY")))'`).
+
+### Adicionar uma key nova
+
+1. Adicionar a linha em `/Users/paulopierrondi/Projects/.k
+...[truncated]
+
+## 99_System/Session Journal Continuity Policy.md
+
+---
+type: policy
+status: active
+created: 2026-05-25
+tags: [ai-agents, continuity, session-journal, handoff, vault]
+---
+
+# Session Journal Continuity Policy
+
+## Regra
+
+Todo trabalho operacional de coder deve deixar rastros incrementais no vault. Handoff final continua obrigatorio, mas nao pode ser o unico ponto de persistencia.
+
+## Objetivo
+
+Se a internet cair, o app fechar, o chat sumir ou o coder nao fizer handoff final, o Paulo ainda precisa conseguir recuperar:
+
+- o objetivo da sessao;
+- o que ja foi feito;
+- arquivos tocados;
+- comandos/testes rodados;
+- riscos e blockers;
+- proxima acao exata;
+- prompt de retomada.
+
+## Ferramenta
+
+```bash
+session-journal start --surface Codex --cwd "$PWD" --summary "inicio"
+session-journal heartbeat --surface Codex --cwd "$PWD" --summary "estado" --done "..." --next "..."
+session-journal close --surface Codex --cwd "$PWD" --summary "fechamento"
+session-journal recover
+session-journal doctor
+```
+
+O arquivo canonico fica em:
+
+`/Users/paulopierrondi/Documents/Obsidian Vault/Hub_Agentes/06_Runtime/session_journal/YYYY-MM-DD/<session_id>.md`
+
+## Cadencia obrigatoria
+
+- Start: no primeiro preflight ou antes da primeira edicao.
+- Heartbeat: a cada 10 minutos de trabalho ativo.
+- Heartbeat: depois de qualquer patch relevante.
+- Heartbeat: depois de falha de teste/build/validacao.
+- Heartbeat: antes de qualquer human gate.
+- Heartbeat: ao chegar em 50-55% de contexto.
+- Close: antes da resposta final ou handoff.
+
+## Enforcement
+
+- `agent-preflight.py` escreve um evento `preflight` automaticamente no session journal.
+- Se o journal nao puder ser escrito em trabalho com `workspace_write` ou risco maior, o preflight deve falhar.
+- Contextos globais dos coders devem carregar `SESSION_JOURNAL_GUARD_START`.
+
+## Handoff vs Journal
+
+- Session journal e caixa preta incremental.
+- Handoff e fechamento sintetico.
+- Se houver os dois, o handoff aponta para o journal.
+- Se nao houver handoff, o journal e a fonte de recuperacao.
+
+## Secrets
+
+Nunca escrever valores reais de secrets, tokens, API keys, cookies, OAuth, senhas ou private keys. O journal redige padroes comuns, mas o agente continua responsavel por nao incluir segredo.
+
+## Prompt Cache
+
+- strategy: `stable-context-prefix-dynamic-task-suffix`
+- prefix_version: `session-journal-v1`
+- cache_key_or_tag: `session-journal:<session_id>`
+- cached_tokens: `null` quando o CLI nao expuser metrica.
+- policy: `/Users/paulopierrondi/Documents/Obsidian Vault/99_System/Prompt Caching Workflow Policy.md`
+
+## 99_System/Multi-LLM Auto-Improvement Routing Policy.md
+
+---
+type: policy
+status: active
+created: 2026-05-27
+source_artifact: /Users/paulopierrondi/Downloads/Kimi_Agent_Prompt for Auto-Improving Agents.zip
+tags:
+  - ai-agents
+  - multi-llm
+  - routing
+  - auto-improvement
+  - agent-hub
+---
+# Multi-LLM Auto-Improvement Routing Policy
+
+This policy installs the usable part of the Kimi Swarm Auto-Improve prompt across Codex, Claude Code, Gemini CLI and Kimi CLI while preserving Paulo's existing Agent Hub contract.
+
+## Non-Negotiable Correction
+
+No LLM CLI is the central orchestrator. Agent Hub remains the source of truth for registry, scheduler, handoffs, state, health and human gates.
+
+Codex, Claude Code, Gemini and Kimi may classify, recommend, validate and log routing decisions, but they must not bypass Agent Hub preflight, human gates, security policy, Linear policy, session journal or Obsidian durable records.
+
+## Tier Model
+
+Use three execution tiers for every meaningful task.
+
+| Tier | Name | Default Use | Examples |
+| --- | --- | --- | --- |
+| T1 | ECONOMICO | Fast, low-risk, repeatable work | summaries, formatting, initial triage, health checks, known-pattern docs |
+| T2 | BALANCEADO | Medium complexity or multi-system work | code review, integration planning, MCP/API work, handoffs, focused debugging |
+| T3 | PREMIUM | High-risk, irreversible or expensive-error work | production, deploys, secrets, App Store, paid ads, architecture, compliance, destructive migrations |
+
+## Automatic Classification
+
+Classify as `PREMIUM` if any condition applies:
+
+- Production, deploy, paid ads, App Store/TestFlight, user data, financial impact or reputation risk.
+- Secrets, credentials, env vars, provider config or production settings.
+- Compliance, privacy, GDPR/LGPD, App Store policy or security-sensitive behavior.
+- Irreversible architecture decision or first execution of a new operational pattern.
+- User explicitly asks for final validation, maximum quality or "faz direito".
+
+Classify as `ECONOMICO` only when all conditions apply:
+
+- Pattern is known and previously successful.
+- No production, sensitive data, external mutation, secrets or human-gated operation.
+- Result is easy to review later.
+- Tool use is simple and bounded.
+
+Otherwise classify as `BALANCEADO`.
+
+## Canonical LLM Routing
+
+| Surface | Primary Role | Tier Bias |
+| --- | --- | --- |
+| Codex | Patch, local integration, tests, technical closure | T2/T3 for code changes |
+| Claude Code | Architecture, compliance, security, iOS/App Store/release risk | T3 for high-risk reasoning; automated Claude must not use Sonnet |
+| Claude Linear Swarm | Multiple independent Linear issues in one repo, isolated by Git worktree | T2/T3 bounded execution; local commits only, no push/merge |
+| Kimi CLI | Broad research, portfolio scans, backlog triage, report-only sweeps | T1/T2, report-only unless explicitly approved |
+| Gemini CLI | Independent validation, MCP/terminal checks, second opinion | T2/T3 validation |
+| Google Antigravity | Browser, visual QA, screenshots, worktree and artifacts | T2 validation surface |
+
+## Parallel Coder Concurrency
+
+Complex work should fan out only when subtasks are independent and a single coordinator can join the result. The canonical config is:
+
+`/Users/paulopierrondi/agents-hub/configs/coder_concurrency.yaml`
+
+Defaults:
+
+| Limit | Value |
+| --- | ---: |
+| Global soft cap | 6 |
+| Global hard cap | 16 |
+| Write soft cap | 2 |
+| Write hard cap | 3 |
+| Per-repo write cap | 1 |
+| Premium hard cap | 2 |
+| Research swarm soft/hard | 8 / 16 |
+
+Rules:
+
+- `16` is a burst hard cap, not default.
+- One writer per repo unless isolated worktrees are explicitly declared.
+- `claude-linear-swarm <ids>` is the canonical isolated-worktree exception for multiple independent Linear issues in one repo; it creates `.swarm/worktrees/<issue>` and local branches `swarm/<issue>`.
+- Kimi/Kimi Swarm should fan out research; Codex integrates; Gemini validates; Antigravity captures browser/visual evidence; Claude handles architecture/compliance/release risk.
+- Any child task that needs a human gate makes the whole group gated.
+- Use `/Users/paulopierrondi/agents-hub/scripts/coder-parallel-coordinator.py plan` before nontrivial fan-out.
+
+## Human Gates
+
+Always require Paulo's explicit command before:
+
+- Production deploys, production config changes or destructive migrations.
+- App Store/TestFlight/Google Play submission.
+- Paid ads, campaign budget, campaign state or tracking changes.
+- Git push, merge, force-push or release tagging.
+- Secret rotation, credential changes or exposing real secret values.
+- Bulk Linear/Jira close, archive, delete, relabel, reassign or move operations.
+
+## Auto-Improvement Log
+
+After meaningful multi-LLM or routing work, record a redacted log in the relevant vault note, session journal or handoff:
+
+```yaml
+swarm_log:
+  task_id: null
+  task_summary: ""
+  tier_assigned: "ECONOMICO | BALANCEADO | PREMIUM"
+  surface_used: "Codex | Claude Code | Gemini CLI | Kimi CLI | Antigravity | mixed"
+  routi
 ...[truncated]
 
 ## 04_Areas/Coding/Linear/Linear Git Development Tracking OS.md
@@ -2593,6 +2983,17 @@ Landing page pública de [pierrondi.dev](https://pierrondi.dev) — agência de 
 - Fontes verificadas: ServiceNow Docs para CMDB CI Class Models, AI Asset Inventory, Enterprise AI discovery, Microsoft Foundry pattern/Asset-CI Relationship e Identification/Reconciliation Engine.
 - Arquivos alterados: `app/itau/ItauExperience.tsx`, `app/itau/ItauExperience.module.css`, `test/itau-page-content.test.mjs`.
 - Evidência local inicial: `node --test test/itau-page-content.test.mjs`, `npm run lint`, `npm run build`.
+
+## Registro operacional - 2026-06-02 - FashionCore looks no Control Tower
+
+- Pedido: investigar por que os looks não propagam/evoluem automaticamente no site.
+- Causa confirmada: `creative-control-snapshot.py` propaga para `https://www.pierrondi.dev/api/creative-control/snapshot` com `200`, mas a fonte local FashionCore está parada: `/Users/paulopierrondi/Projects/fashioncore/services/api/.data/db.json` tem `closet_items=30`, `saved_looks=0`, `look_reviews=0`, newest `2026-05-21T17:06:01.488328+00:00`.
+[REDACTED SECRET LINE]
+- Decisão técnica: o painel não deve mascarar `closet_items` como looks reais. Snapshot agora inclui `sourceMode` e `sourceCounts`; UI mostra `Fonte FashionCore: fallback`, `0 saved · 0 reviews · 30 closet` e alerta stale.
+- Arquivos alterados: `scripts/creative-control-snapshot.py`, `lib/creative-control/schema.ts`, `lib/creative-control/types.ts`, `app/control_tower/LooksPanel.tsx`, `app/control_tower/ControlTower.module.css`, `test/creative-control-snapshot.test.mjs`.
+- Evidência: `node --test test/*.test.mjs`, `npm run lint`, `npm run build`, `complexity-guard.py scan app/control_tower/LooksPanel.tsx scripts/creative-control-snapshot.py` sem hard blockers.
+- Screenshot QA: `/Users/paulopierrondi/Projects/pierrondi-site/test-results/control-tower-looks-fallback-2026-06-02.png`.
+- Risco/gate: corrigir/recarregar LaunchAgents ou `run_muse_catalog_local.sh` exige aprovação explícita do Paulo por ser mutação de automação/LaunchAgent. Não houve deploy/push.
 - QA visual local inicial: screenshots em `test-results/itau-page/desktop-1440x1200.png` e `test-results/itau-page/mobile-390x1200.png`; Playwright confirmou `overflowX=false`, 0 textos cortados e 6 links ServiceNow renderizados.
 - Risco residual: recomendações dependem da release/plugins ativos na instância Itaú; nomes de relacionamento devem ser confirmados no CI Class Manager antes de virar configuração final.
 - Deploy/push: executado em 2026-06-01 após comando explícito "move to production"; produção Railway `pierrondi-site`, deployment final `f8dd2ab6-dd24-477c-88a9-4803e04b6050`, commit/push `a049a52 feat(itau): validate AI governance production page`.
@@ -2602,15 +3003,7 @@ Landing page pública de [pierrondi.dev](https://pierrondi.dev) — agência de 
 
 ## Registro operacional - 2026-06-01 - Control Tower visual polish
 
-- Pedido: melhorar a tela `/control_tower#devotionais` a partir de screenshot do painel privado.
-- Decisão: manter a linguagem editorial/brutalist existente, reduzir ruído visual no primeiro viewport, melhorar status card, densidade dos cards, rail mobile e hierarquia dos devotionais sem tocar em deploy/prod.
-- Arquivos alterados: `app/control_tower/ControlTower.module.css`, `app/control_tower/DevotionalsPanel.tsx`.
-- Refactor técnico: `DevotionalsPanel.tsx` foi dividido em `DevotionalStatsSummary`, `LanguageChips`, `BatchApproveRail` e `DevotionalCard` para reduzir HARD do complexity guard no arquivo tocado.
-- Evidência local: `npm run lint` passou; `npm run build` passou; `complexity-guard.py scan app/control_tower/DevotionalsPanel.tsx app/control_tower/ControlTower.module.css scripts/control-tower-dev.mjs package.json` passou sem HARD.
-[REDACTED SECRET LINE]
-- Browser QA: desktop 1280x720, mobile 390x844 e devotionais 1280x900 confirmaram `overflowX=false`.
-- Risco residual: `complexity-guard.py scan --changed` continua bloqueado por dívida preexistente em arquivos já sujos (`scripts/creative-control-snapshot.py`, `app/bradesco-26/Bradesco26Experience.tsx`, `app/control_tower/PlansPanel.tsx`, `app/itau/ItauExperience.tsx`). Não foi refatorado por estar fora do pedido.
-- Deploy/push: executado em 2026-06-01 após comando explícito "faca" para enviar a prod. `origin/main` avançou antes do push; commit final foi cherry-pickado em worktree limpa sobre `origin/main`. Commit remoto `2b1e6ed fix(control-tower): stabilize ops das
+- Pedido: melhorar a tela `/control_tower#devot
 ...[truncated]
 
 ## AI History Snapshot
