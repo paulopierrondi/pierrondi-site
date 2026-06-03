@@ -813,6 +813,68 @@ const updatedSignals = [
   },
 ]
 
+const eventFacts = [
+  {
+    label: 'Onde',
+    value: 'Las Vegas',
+    detail: 'The Venetian Resort + Wynn Las Vegas, Nevada.',
+  },
+  {
+    label: 'Quando',
+    value: '05–07 mai 2026',
+    detail: 'Três dias de keynotes, sessões técnicas e Expo.',
+  },
+  {
+    label: 'Público',
+    value: '~25 mil',
+    detail: 'Clientes, parceiros, analistas e líderes de tecnologia — o maior evento do ano da ServiceNow.',
+  },
+  {
+    label: 'Ecossistema',
+    value: 'Centenas de parceiros',
+    detail: 'DXC (Diamond), Capgemini (Platinum) e Atos (Elite) entre os principais; o Expo é o coração do evento.',
+  },
+]
+
+const eventHighlights = [
+  {
+    title: 'A tese do palco',
+    copy: 'Bill McDermott chamou a ServiceNow de "a empresa de software enterprise que mais cresce no mundo" e prometeu dobrar de tamanho. Mensagem central: IA virou commodity — o diferencial é orquestração, governança e execução.',
+  },
+  {
+    title: 'Action Fabric + agentes externos',
+    copy: 'A plataforma foi aberta a agentes de IA de terceiros via Action Fabric — com a Anthropic (Claude) como launch partner. É a base do modelo "agente externo aciona trabalho governado".',
+  },
+  {
+    title: 'Convidados de peso',
+    copy: 'Jensen Huang (NVIDIA) no palco sobre agentes e o Project Arc; FedEx demonstrando o AI Control Tower ao vivo. Afterparty com Idris Elba, Mindy Kaling e Backstreet Boys.',
+  },
+  {
+    title: 'O que mudou em 2026',
+    copy: 'Autonomous CRM, Autonomous Security & Risk, Otto como interface única, AI Control Tower em 5 dimensões e 30 novas integrações (AWS, Google Cloud, Azure, SAP, Oracle, Workday).',
+  },
+]
+
+function EventContextSection() {
+  return (
+    <section id="evento" className={styles.flowSection} aria-labelledby="evento-title">
+      <div className={styles.sectionFrame}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.eyebrow}>Contexto do evento</p>
+          <h2 id="evento-title">Como foi o Knowledge 2026.</h2>
+          <p>O maior evento da ServiceNow no ano — a base de tudo que este material traduz para o Bradesco.</p>
+        </div>
+        <div className={styles.k26UpdateRail} aria-label="Dados do Knowledge 2026">
+          {eventFacts.map((fact) => <article key={fact.label}><span>{fact.label}</span><strong>{fact.value}</strong><p>{fact.detail}</p></article>)}
+        </div>
+        <div className={styles.k26UpdateRail} aria-label="Destaques do Knowledge 2026">
+          {eventHighlights.map((item) => <article key={item.title}><span>Destaque</span><strong>{item.title}</strong><p>{item.copy}</p></article>)}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 const sources = [
   {
     label: 'Knowledge 2026 on demand',
@@ -1117,6 +1179,7 @@ export default function Bradesco26Experience() {
       <MaterialNav />
       <HeroSection heroStudioStyle={heroStudioStyle} />
       <BriefStrip />
+      <EventContextSection />
       <FlowSection
         flowSectionStyle={flowSectionStyle}
         prefersReducedMotion={prefersReducedMotion}
