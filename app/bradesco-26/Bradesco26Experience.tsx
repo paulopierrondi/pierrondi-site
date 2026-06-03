@@ -839,19 +839,19 @@ const eventFacts = [
 const eventHighlights = [
   {
     title: 'A tese do palco',
-    copy: 'Bill McDermott chamou a ServiceNow de "a empresa de software enterprise que mais cresce no mundo" e prometeu dobrar de tamanho. Mensagem central: IA virou commodity — o diferencial é orquestração, governança e execução.',
+    copy: 'Bill McDermott posicionou a ServiceNow como "a empresa de software enterprise que mais cresce no mundo" e cravou a meta de dobrar de tamanho. A mensagem central: a IA virou commodity — o que diferencia é orquestração, governança e execução. É a mesma tese de IA governada que sustenta esta conversa com o Bradesco.',
   },
   {
-    title: 'Action Fabric + agentes externos',
-    copy: 'A plataforma foi aberta a agentes de IA de terceiros via Action Fabric — com a Anthropic (Claude) como launch partner. É a base do modelo "agente externo aciona trabalho governado".',
+    title: 'Action Fabric: agentes externos com governança',
+    copy: 'A ServiceNow abriu a plataforma a agentes de IA de terceiros via Action Fabric — com a Anthropic (Claude) como launch partner. Na prática: agentes externos passam a acionar trabalho no banco com permissão, aprovação e auditoria nativas.',
   },
   {
-    title: 'Convidados de peso',
-    copy: 'Jensen Huang (NVIDIA) no palco sobre agentes e o Project Arc; FedEx demonstrando o AI Control Tower ao vivo. Afterparty com Idris Elba, Mindy Kaling e Backstreet Boys.',
+    title: 'Quem subiu ao palco',
+    copy: 'Jensen Huang (NVIDIA) sobre agentes e o Project Arc; a FedEx demonstrando o AI Control Tower ao vivo. No encerramento, Idris Elba, Mindy Kaling e Backstreet Boys — a escala do maior evento enterprise do ano.',
   },
   {
     title: 'O que mudou em 2026',
-    copy: 'Autonomous CRM, Autonomous Security & Risk, Otto como interface única, AI Control Tower em 5 dimensões e 30 novas integrações (AWS, Google Cloud, Azure, SAP, Oracle, Workday).',
+    copy: 'Autonomous CRM, Autonomous Security & Risk, Otto como interface única de trabalho, AI Control Tower em cinco dimensões (Discover, Govern, Secure, Observe, Measure) e 30 novas integrações com AWS, Google Cloud, Azure, SAP, Oracle e Workday.',
   },
 ]
 
@@ -862,13 +862,36 @@ function EventContextSection() {
         <div className={styles.sectionHeader}>
           <p className={styles.eyebrow}>Contexto do evento</p>
           <h2 id="evento-title">Como foi o Knowledge 2026.</h2>
-          <p>O maior evento da ServiceNow no ano — a base de tudo que este material traduz para o Bradesco.</p>
+          <p>O contexto do maior evento da ServiceNow no ano — e por que ele define a agenda de IA governada para o Bradesco.</p>
         </div>
         <div className={styles.k26UpdateRail} aria-label="Dados do Knowledge 2026">
           {eventFacts.map((fact) => <article key={fact.label}><span>{fact.label}</span><strong>{fact.value}</strong><p>{fact.detail}</p></article>)}
         </div>
         <div className={styles.k26UpdateRail} aria-label="Destaques do Knowledge 2026">
           {eventHighlights.map((item) => <article key={item.title}><span>Destaque</span><strong>{item.title}</strong><p>{item.copy}</p></article>)}
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
+          <button
+            type="button"
+            onClick={exportHighlightsPdf}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '12px 20px',
+              borderRadius: '999px',
+              cursor: 'pointer',
+              fontSize: '13px',
+              fontWeight: 650,
+              letterSpacing: '0.01em',
+              color: '#ffffff',
+              background: 'linear-gradient(100deg, #e21f2b, #b3121d)',
+              border: '1px solid rgba(226, 31, 43, 0.55)',
+              boxShadow: '0 8px 26px -12px rgba(226, 31, 43, 0.7)',
+            }}
+          >
+            <MonitorPlay size={16} aria-hidden="true" /> Exportar PDF dos highlights
+          </button>
         </div>
       </div>
     </section>
@@ -1585,8 +1608,73 @@ function RadarList({ filtered, activeItem, activeThemeInfo, setSelectedId, openD
   )
 }
 
+function lensDetailCards(item: Announcement, lens: Lens) {
+  if (lens === 'tecnico') {
+    return [
+      { label: 'Arquitetura', text: item.architecture },
+      { label: 'Modelo operacional', text: item.operatingModel },
+      { label: 'Critério técnico', text: item.discussion.tecnico },
+    ]
+  }
+  if (lens === 'valor') {
+    return [
+      { label: 'Onde acelera valor', text: item.bradescoAngle },
+      { label: 'Próximo movimento', text: item.nextMove },
+      { label: 'Workshop de valor', text: item.discussion.valor },
+    ]
+  }
+  return [
+    { label: 'Aplicação no Bradesco', text: item.bradescoAngle },
+    { label: 'Próximo movimento', text: item.nextMove },
+    { label: 'Decisão para a sala', text: item.discussion.executivo },
+  ]
+}
+
+function exportHighlightsPdf() {
+  if (typeof window === 'undefined') return
+  const win = window.open('', '_blank', 'noopener,width=960,height=1200')
+  if (!win) return
+  const esc = (s: string) =>
+    s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  const factsRows = eventFacts
+    .map((f) => `<tr><td class="k">${esc(f.label)}</td><td><strong>${esc(f.value)}</strong><div class="d">${esc(f.detail)}</div></td></tr>`)
+    .join('')
+  const highCards = eventHighlights
+    .map((h) => `<div class="card"><h3>${esc(h.title)}</h3><p>${esc(h.copy)}</p></div>`)
+    .join('')
+  const annCards = announcements
+    .map((a) => `<div class="ann"><h4>${esc(a.title)}</h4><p>${esc(a.executive)}</p><small>${esc(a.bradescoAngle)}</small></div>`)
+    .join('')
+  win.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8" />
+<title>Knowledge 2026 — Highlights para o time (Bradesco)</title>
+<style>
+  *{box-sizing:border-box} body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#15161a;background:#fff;padding:40px 48px}
+  .top{border-bottom:3px solid #e21f2b;padding-bottom:16px;margin-bottom:22px}
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#e21f2b;font-weight:700;margin:0}
+  h1{font-size:26px;margin:6px 0 4px;letter-spacing:-.01em} .sub{color:#5a5d66;margin:0;font-size:13px}
+  h2{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:#9a9ca3;margin:26px 0 12px;font-weight:700}
+  table{width:100%;border-collapse:collapse} td{padding:8px 10px;border-bottom:1px solid #eceef1;vertical-align:top;font-size:13px}
+  td.k{width:120px;color:#9a9ca3;text-transform:uppercase;font-size:11px;letter-spacing:.06em;font-weight:700} td .d{color:#5a5d66;font-size:12px;margin-top:2px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px} .card{border:1px solid #eceef1;border-left:3px solid #e21f2b;border-radius:8px;padding:12px 14px}
+  .card h3{margin:0 0 6px;font-size:13px} .card p{margin:0;font-size:12px;color:#42454d;line-height:1.45}
+  .anns{display:grid;grid-template-columns:1fr 1fr;gap:10px} .ann{border:1px solid #eceef1;border-radius:8px;padding:10px 12px}
+  .ann h4{margin:0 0 4px;font-size:12px} .ann p{margin:0 0 4px;font-size:11px;color:#42454d;line-height:1.4} .ann small{font-size:10px;color:#e21f2b;font-weight:600}
+  .foot{margin-top:26px;border-top:1px solid #eceef1;padding-top:12px;color:#9a9ca3;font-size:11px;display:flex;justify-content:space-between}
+  @media print{body{padding:24px 28px} .card,.ann{break-inside:avoid}}
+</style></head><body>
+  <div class="top"><p class="eyebrow">ServiceNow · Knowledge 2026 · Bradesco</p><h1>Highlights do Knowledge 2026</h1><p class="sub">Resumo executivo do evento e do que muda para o banco — preparado para envio ao time.</p></div>
+  <h2>Contexto do evento</h2><table>${factsRows}</table>
+  <h2>Destaques</h2><div class="grid">${highCards}</div>
+  <h2>O que foi anunciado</h2><div class="anns">${annCards}</div>
+  <div class="foot"><span>Bradesco no ciclo da IA governada</span><span>pierrondi.dev/bradesco-26</span></div>
+</body></html>`)
+  win.document.close()
+  win.focus()
+  win.setTimeout(() => win.print(), 400)
+}
+
 function RadarDetail(props: RadarSectionProps) {
-  const { activeItem, activeLens, activeLensInfo, activeDiscussion, activeDeepDive, lensCopyKey, speakingId, openDeepDive, speakBrief } = props
+  const { activeItem, activeLens, activeLensInfo, activeDeepDive, lensCopyKey, speakingId, openDeepDive, speakBrief } = props
 
   return (
     <article key={`${activeItem.id}-${activeLens}`} className={styles.radarDetail}>
@@ -1602,12 +1690,11 @@ function RadarDetail(props: RadarSectionProps) {
       <p className={styles.radarCopy}>{activeItem[lensCopyKey]}</p>
       <div className={styles.studioCue}><Headphones size={14} aria-hidden="true" /><p>{activeDeepDive.premise}</p></div>
       <div className={styles.decisionGrid}>
-        <article><span>Arquitetura</span><p>{activeItem.architecture}</p></article>
-        <article><span>Modelo operacional</span><p>{activeItem.operatingModel}</p></article>
-        <article><span>Próximo movimento</span><p>{activeItem.nextMove}</p></article>
+        {lensDetailCards(activeItem, activeLens).map((card) => (
+          <article key={card.label}><span>{card.label}</span><p>{card.text}</p></article>
+        ))}
       </div>
       <div className={styles.proofRail} aria-label="Elementos de prova">{activeItem.proofPoints.map((point) => <span key={point}>{point}</span>)}</div>
-      <div className={styles.discussionBox}><span>{activeLens === 'executivo' ? 'Decisão para a sala' : activeLens === 'tecnico' ? 'Critério técnico' : 'Workshop de valor'}</span><strong>{activeDiscussion}</strong></div>
       <div className={styles.detailActions}>
         <button type="button" onClick={() => openDeepDive(activeItem.id)}><Maximize2 size={14} aria-hidden="true" />Abrir análise</button>
         <button type="button" onClick={() => speakBrief(activeItem)} aria-pressed={speakingId === activeItem.id}>{speakingId === activeItem.id ? <Pause size={14} aria-hidden="true" /> : <Volume2 size={14} aria-hidden="true" />}{speakingId === activeItem.id ? 'Pausar áudio' : 'Ouvir resumo'}</button>
