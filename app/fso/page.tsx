@@ -36,13 +36,11 @@ export const metadata: Metadata = {
     siteName: 'pierrondi.dev',
     type: 'website',
     locale: 'en_US',
-    images: [{ url: '/og', width: 1200, height: 630, alt: 'ServiceNow Implementation Agents — AI-built FSO' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: TITLE,
     description: 'An AI implementation team that builds ServiceNow FSO end to end — coding agents author, native Now Assist reasons, every change governed.',
-    images: ['/og'],
   },
 }
 

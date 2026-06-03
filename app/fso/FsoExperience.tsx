@@ -204,7 +204,7 @@ const agents: Agent[] = [
 const loop: Array<{ step: string; name: string; desc: string }> = [
   { step: '1', name: 'Spec', desc: 'Assessment engine turns the instance state + requirements into a typed spec.' },
   { step: '2', name: 'Build', desc: 'Agents author Fluent / rules / ATF — deterministic, version-controlled artifacts.' },
-  { step: '3', name: 'Apply', desc: 'Only through the write-gate: PDI auto · sub-prod approval · prod blocked.' },
+  { step: '3', name: 'Apply', desc: 'Through Action Fabric + the write-gate: PDI auto · sub-prod approval · prod blocked.' },
   { step: '4', name: 'Validate', desc: 'The rule engine + ATF + Instance Scan re-run as the acceptance gate.' },
   { step: '5', name: 'Document', desc: 'Auto change narrative, traceability and durable rollback.' },
 ]
@@ -426,9 +426,58 @@ export default function FsoExperience() {
             <span className={styles.seamLabel}>composition seams ServiceNow shipped</span>
             <div className={styles.seamChips}>
               <span className={styles.seamChip}>Fluent SDK <i>build-time</i></span>
-              <span className={styles.seamChip}>Native MCP server / client + A2A <i>runtime</i></span>
+              <span className={styles.seamChip}>Action Fabric + MCP / A2A <i>runtime · actions</i></span>
               <span className={styles.seamChip}>AI Control Tower <i>governs both</i></span>
             </div>
+          </div>
+        </Reveal>
+
+        {/* ─────────── ACTION FABRIC — execution seam ─────────── */}
+        <Reveal className={styles.section} reduced={reduced}>
+          <div className={styles.sectionHead}>
+            <span className={styles.kicker}>the execution seam</span>
+            <h2 className={styles.sectionTitle}>Action Fabric — how the agents actually act.</h2>
+            <p className={styles.sectionSub}>
+              Authoring is half the story. <strong>Action Fabric</strong> is ServiceNow&apos;s governed
+              system of action — the seam through which external agents (Codex, Claude Code) and the
+              Demo Forge brain invoke real work on the instance: provision, write back, remediate, trigger
+              FSO flows — with RBAC, identity, approvals, audit and rollback native to the platform.
+            </p>
+          </div>
+
+          <div className={styles.laneGrid}>
+            <article className={styles.laneCard}>
+              <div className={styles.laneHead}>
+                <span className={styles.laneTag}>Author → Act</span>
+                <h3 className={styles.laneTitle}>Agents don&apos;t just write — they execute</h3>
+              </div>
+              <ul className={styles.laneList}>
+                <li>Fluent SDK builds the config (sys_update_xml).</li>
+                <li>Action Fabric runs the actions — governed, metered, audited.</li>
+                <li>Both lanes, one control plane.</li>
+              </ul>
+              <p className={styles.laneFoot}>The write-gate (PDI auto · sub-prod approval · prod blocked) becomes a native governed action — not just app logic.</p>
+            </article>
+            <article className={styles.laneCard}>
+              <div className={styles.laneHead}>
+                <span className={styles.laneTag}>Demo Forge, upgraded</span>
+                <h3 className={styles.laneTitle}>Provisioning governed by default</h3>
+              </div>
+              <ul className={styles.laneList}>
+                <li>Route provisioning &amp; fix-engine write-back through Action Fabric.</li>
+                <li>RBAC + approval + audit + rollback come from the platform.</li>
+                <li>External agents act least-privilege, never raw admin.</li>
+              </ul>
+              <p className={styles.laneFoot}>Build-time = Fluent · run-time / actions = Action Fabric + MCP · governance over both = AI Control Tower.</p>
+            </article>
+          </div>
+
+          <div className={styles.honestBox}>
+            <span className={styles.honestKicker}><Sparkles size={14} strokeWidth={2} /> proof it&apos;s real — Knowledge 2026</span>
+            <ul className={styles.honestList}>
+              <li>At Knowledge 2026, ServiceNow opened its full system of action to third-party AI agents via <strong>Action Fabric</strong> — with <strong>Anthropic (Claude) as a launch partner</strong>.</li>
+              <li>The seam this blueprint relies on isn&apos;t hypothetical: ServiceNow shipped it. External coding agents acting on the platform is the sanctioned direction, not a workaround.</li>
+            </ul>
           </div>
         </Reveal>
 

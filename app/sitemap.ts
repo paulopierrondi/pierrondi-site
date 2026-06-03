@@ -16,6 +16,7 @@ const staticRoutes: Array<{
   { path: '/produto-digital', priority: 0.94, changeFrequency: 'monthly' },
   { path: '/tech-partner', priority: 0.93, changeFrequency: 'monthly' },
   { path: '/marketing-os', priority: 0.92, changeFrequency: 'weekly' },
+  { path: '/fso', priority: 0.92, changeFrequency: 'monthly' },
   { path: '/marketing-os/numeros', priority: 0.86, changeFrequency: 'daily' },
   { path: '/calculadora', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/blog', priority: 0.89, changeFrequency: 'weekly' },
