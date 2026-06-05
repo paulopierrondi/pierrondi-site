@@ -469,6 +469,123 @@
 .gateAuto { color: #7af0c0; background: rgba(22, 196, 86, 0.1); border: 1px solid rgba(22, 196, 86, 0.3); }
 .gateApproval { color: #ffd76a; background: rgba(242, 200, 46, 0.1); border: 1px solid rgba(242, 200, 46, 0.3); }
 .gateBlocked { color: #ff8a93; background: rgba(255, 71, 86, 0.1); border: 1px solid rgba(255, 71, 86, 0.3); }
+.gateIrm { color: #b9d0ff; background: rgba(88, 115, 247, 0.12); border: 1px solid rgba(88, 115, 247, 0.34); }
+
+/* ───────────── DISCOVERY OPERATING MODEL ───────────── */
+.discoveryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.discoveryCard {
+  position: relative;
+  min-height: 270px;
+  display: flex;
+  flex-direction: column;
+  padding: 1.35rem;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(35, 194, 207, 0.055), rgba(255, 255, 255, 0.012)),
+    radial-gradient(90% 70% at 20% 0%, rgba(88, 115, 247, 0.16), transparent 72%);
+  border: 1px solid var(--sn-line);
+  border-radius: 18px;
+}
+
+.discoveryCard::after {
+  content: '';
+  position: absolute;
+  inset: auto 1.1rem 1.1rem 1.1rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(35, 194, 207, 0.5), transparent);
+  opacity: 0.72;
+}
+
+.discoveryIcon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 1.1rem;
+  border-radius: 12px;
+  color: #03121a;
+  background: linear-gradient(135deg, var(--sn-cyan), var(--sn-blue));
+  box-shadow: 0 14px 38px -20px rgba(35, 194, 207, 0.9);
+}
+
+.discoveryTag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.43);
+}
+
+.discoveryCard h3 {
+  font-size: 1.08rem;
+  line-height: 1.2;
+  font-weight: 730;
+  color: #fff;
+  margin: 0.45rem 0 0.7rem;
+}
+
+.discoveryCard p {
+  font-size: 0.86rem;
+  line-height: 1.52;
+  color: rgba(232, 244, 247, 0.68);
+  margin: 0;
+}
+
+.brainStrip {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin-top: 1.2rem;
+  overflow: hidden;
+  border: 1px solid rgba(35, 194, 207, 0.24);
+  border-radius: 18px;
+  background: rgba(35, 194, 207, 0.18);
+}
+
+.brainStrip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(35, 194, 207, 0.16), transparent 30%, rgba(88, 115, 247, 0.14) 74%, transparent),
+    linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.035));
+}
+
+.brainStep {
+  position: relative;
+  padding: 1.15rem 1.25rem;
+  background: rgba(3, 18, 26, 0.9);
+}
+
+.brainLabel {
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--sn-cyan);
+  margin-bottom: 0.35rem;
+}
+
+.brainStep strong {
+  display: block;
+  font-size: 0.98rem;
+  color: #fff;
+  margin-bottom: 0.35rem;
+}
+
+.brainStep p {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: rgba(232, 244, 247, 0.62);
+  margin: 0;
+}
 
 /* ───────────── PHASE PLAYBOOK ───────────── */
 .phaseList { display: flex; flex-direction: column; border: 1px solid var(--sn-line); border-radius: 16px; overflow: hidden; }
@@ -793,6 +910,7 @@
   .laneGrid, .govGrid, .contextGrid { grid-template-columns: 1fr; }
   .contextFigure { min-height: 260px; }
   .agentGrid { grid-template-columns: repeat(2, 1fr); }
+  .discoveryGrid, .brainStrip { grid-template-columns: repeat(2, 1fr); }
   .loopRow { grid-template-columns: 1fr 1fr; }
   .loopArrow { display: none; }
   .metricRow { grid-template-columns: repeat(2, 1fr); }
@@ -806,8 +924,39 @@
 }
 
 @media (max-width: 560px) {
-  .statGrid, .agentGrid, .loopRow, .metricRow { grid-template-columns: 1fr; }
+  .statGrid, .agentGrid, .discoveryGrid, .brainStrip, .loopRow, .metricRow { grid-template-columns: 1fr; }
+  .hero {
+    align-items: flex-start;
+    min-height: auto;
+    padding-top: 6.1rem;
+    padding-bottom: 4.6rem;
+  }
+  .heroInner::before {
+    inset: -28px -34px -34px -34px;
+    border-radius: 30px;
+  }
+  .heroChips { margin-bottom: 1.15rem; }
+  .chip { padding: 0.32rem 0.68rem; font-size: 0.7rem; }
+  .heroTitle {
+    font-size: clamp(2.35rem, 11.5vw, 3.2rem);
+    line-height: 1.05;
+    margin-bottom: 0.95rem;
+  }
+  .heroLede {
+    font-size: 0.98rem;
+    line-height: 1.48;
+    margin-bottom: 1.2rem;
+  }
   .heroMeta { gap: 1rem 1.6rem; }
+  .heroMeta {
+    padding: 0.85rem 0 1rem;
+    margin-bottom: 1.15rem;
+  }
+  .heroCtas { gap: 0.55rem; }
+  .ctaPrimary, .ctaGhost {
+    padding: 0.76rem 1rem;
+    font-size: 0.9rem;
+  }
   .phaseRow { grid-template-columns: 1fr; grid-template-areas: none; }
 }
 

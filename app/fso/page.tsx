@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import FsoExperience from './FsoExperience'
 
-const TITLE = 'ServiceNow Implementation Agents — AI-built FSO, end to end'
+const TITLE = 'Automation-first ServiceNow implementation — FSO, IRM and AI Control Tower'
 const DESCRIPTION =
-  'A blueprint for using LLM coding agents (Claude Code / Codex) + the ServiceNow Fluent SDK and MCP to implement Financial Services Operations (FSO) end to end — an AI implementation team that authors the build while native Now Assist reasons at runtime, every change governed.'
+  'A blueprint for using LLM coding agents, Fluent SDK, MCP, Action Fabric, IRM and AI Control Tower to implement Financial Services Operations end to end — automation-first, risk-governed, and evidence-ready.'
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     'FSDM',
     'Fluent SDK',
     'ServiceNow MCP',
+    'Action Fabric',
+    'IRM',
+    'Integrated Risk Management',
     'Claude Code',
     'OpenAI Codex',
     'AI Agents',
@@ -40,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: TITLE,
-    description: 'An AI implementation team that builds ServiceNow FSO end to end — coding agents author, native Now Assist reasons, every change governed.',
+    description: 'FSO brings the work. IRM brings the permission. Action Fabric brings the hands. AI Control Tower governs the operating room.',
   },
 }
 

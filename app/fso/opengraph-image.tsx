@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 // Node runtime (Railway) — no edge. Mirrors app/og/route.tsx conventions.
-export const alt = 'ServiceNow Implementation Agents — AI-built FSO, end to end'
+export const alt = 'Automation-first ServiceNow implementation — FSO, IRM and AI Control Tower'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -48,7 +48,7 @@ export default function Image() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', position: 'relative' }}>
           <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#23c2cf', display: 'flex' }} />
           <div style={{ fontSize: '22px', fontWeight: 600, letterSpacing: '0.02em', color: '#cfe9ee', display: 'flex' }}>
-            ServiceNow · FSO · Fluent SDK · Claude Code + Codex
+            ServiceNow · FSO · IRM · Action Fabric · AI Control Tower
           </div>
         </div>
 
@@ -65,10 +65,10 @@ export default function Image() {
             }}
           >
             <span style={{ display: 'flex' }}>ServiceNow</span>
-            <span style={{ display: 'flex', color: '#23c2cf' }}>Implementation Agents</span>
+            <span style={{ display: 'flex', color: '#23c2cf' }}>Automation-first implementation</span>
           </div>
           <div style={{ display: 'flex', fontSize: '30px', lineHeight: 1.35, color: 'rgba(232,244,247,0.76)', maxWidth: '920px' }}>
-            An AI implementation team that builds Financial Services Operations end to end — agents author, native AI acts, every change governed.
+            FSO brings the work. IRM brings the permission. Action Fabric brings the hands. Every action leaves evidence.
           </div>
         </div>
 
