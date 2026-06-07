@@ -3,6 +3,7 @@ import { cookies } from 'next/headers'
 
 import {
   AUTOMATION_CONTROL_COOKIE,
+  publicControlTowerActionsEnabled,
   verifySessionCookie,
 } from '@/lib/automation-control/auth'
 import { readAutomationSnapshot } from '@/lib/automation-control/storage'
@@ -34,7 +35,7 @@ export default async function ControlTowerPage() {
     readPlanApprovals(),
   ])
   const session = cookieStore.get(AUTOMATION_CONTROL_COOKIE)?.value
-  const actionsEnabled = verifySessionCookie(session)
+  const actionsEnabled = verifySessionCookie(session) || publicControlTowerActionsEnabled()
   const planApprovals = Object.fromEntries(
     Object.entries(approvals).map(([planId, record]) => [
       planId,

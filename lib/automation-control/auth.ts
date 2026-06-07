@@ -49,3 +49,9 @@ export function verifySessionCookie(value: string | undefined) {
   if (Date.now() - issuedAtMs > SESSION_TTL_MS) return false
   return safeEqual(signature, sign(issuedAt))
 }
+
+export function publicControlTowerActionsEnabled() {
+  return ['1', 'true', 'yes'].includes(
+    (process.env.CONTROL_TOWER_PUBLIC_ACTIONS ?? '').toLowerCase(),
+  )
+}

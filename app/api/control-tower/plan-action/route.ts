@@ -3,6 +3,7 @@ import { cookies } from 'next/headers'
 
 import {
   AUTOMATION_CONTROL_COOKIE,
+  publicControlTowerActionsEnabled,
   verifySessionCookie,
 } from '@/lib/automation-control/auth'
 import { hashSession } from '@/lib/creative-control/auth'
@@ -41,14 +42,17 @@ function checkRateLimit(key: string, cost = 1) {
 export async function POST(request: Request) {
   const cookieStore = await cookies()
   const sessionValue = cookieStore.get(AUTOMATION_CONTROL_COOKIE)?.value
-  if (!verifySessionCookie(sessionValue)) {
+  const hasSession = verifySessionCookie(sessionValue)
+  if (!hasSession && !publicControlTowerActionsEnabled()) {
     return NextResponse.json(
       { ok: false, error: 'unauthorized' },
       { status: 401 },
     )
   }
 
-  const sessionHash = hashSession(sessionValue ?? '')
+  const sessionHash = hashSession(
+    hasSession ? sessionValue ?? '' : 'public-control-tower-actions',
+  )
 
   let body: unknown
   try {
