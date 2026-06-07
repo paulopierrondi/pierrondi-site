@@ -14,6 +14,14 @@ const devotionalActionRoute = await readFile(
   new URL('../app/api/control-tower/devotional-action/route.ts', import.meta.url),
   'utf8',
 )
+const controlTowerComponent = await readFile(
+  new URL('../app/control_tower/ControlTower.tsx', import.meta.url),
+  'utf8',
+)
+const devotionalsPanel = await readFile(
+  new URL('../app/control_tower/DevotionalsPanel.tsx', import.meta.url),
+  'utf8',
+)
 const authModule = await readFile(
   new URL('../lib/automation-control/auth.ts', import.meta.url),
   'utf8',
@@ -53,6 +61,16 @@ test('Control Tower devotional actions remain guarded by session or public actio
   assert.match(devotionalActionRoute, /public-control-tower-actions/)
   assert.match(devotionalActionRoute, /RATE_LIMIT_MAX/)
   assert.match(devotionalActionRoute, /mintMagicTokens/)
+})
+
+test('Control Tower uses PT-BR devotional labels and anchors', () => {
+  assert.match(controlTowerComponent, /href="#devocionais">Devocionais</)
+  assert.match(controlTowerComponent, /id="devocionais"/)
+  assert.match(controlTowerComponent, /FaithSchool devocionais/)
+  assert.match(devotionalsPanel, /id="devocionais"/)
+  assert.match(devotionalsPanel, /Devocionais FaithSchool/)
+  assert.match(devotionalsPanel, /Aprovar todos os devocionais pendentes de uma vez/)
+  assert.doesNotMatch(`${controlTowerComponent}\n${devotionalsPanel}`, /Devotionais|devotionais/)
 })
 
 test('Control Tower public actions require an explicit env flag', () => {

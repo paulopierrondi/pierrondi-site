@@ -302,7 +302,7 @@ export default function ControlTower({
           <a href="#llm">LLM</a>
           <a href="#automacoes">Automações</a>
           <a href="#looks">Looks</a>
-          <a href="#devotionais">Devotionais</a>
+          <a href="#devocionais">Devocionais</a>
           <a href="#planos">Planos</a>
           <a href="#governanca">Governança</a>
         </nav>
@@ -548,9 +548,9 @@ export default function ControlTower({
             actionsEnabled={actionsEnabled}
           />
         ) : (
-          <section id="devotionais" className={styles.panel}>
+          <section id="devocionais" className={styles.panel}>
             <div className={styles.panelHeader}>
-              <h2>FaithSchool devotionals</h2>
+              <h2>FaithSchool devocionais</h2>
               <span>sem snapshot</span>
             </div>
             <div className={styles.emptyState}>

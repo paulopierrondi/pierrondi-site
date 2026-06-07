@@ -185,7 +185,7 @@ function BatchApproveRail({ count, isPending, actionsEnabled, onApprove }: Batch
         onClick={onApprove}
         disabled={isPending || !actionsEnabled}
         className={styles.approveButton}
-        aria-label="Aprovar todos os devotionais pendentes de uma vez"
+        aria-label="Aprovar todos os devocionais pendentes de uma vez"
       >
         <Check size={14} /> Aprovar pendentes ({count})
       </button>
@@ -327,9 +327,9 @@ export default function DevotionalsPanel({
   }
 
   return (
-    <section id="devotionais" className={styles.panel}>
+    <section id="devocionais" className={styles.panel}>
       <div className={styles.panelHeader}>
-        <h2>Devotionais FaithSchool</h2>
+        <h2>Devocionais FaithSchool</h2>
         <span data-tone={freshnessTone}>
           {stats.totalPending} pendente{stats.totalPending === 1 ? '' : 's'}
           {freshnessLabel ? ` · ${freshnessLabel}` : ''}
