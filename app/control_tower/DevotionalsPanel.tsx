@@ -70,6 +70,26 @@ function isMockDevotional(item: DevotionalPending) {
   return item.docId.startsWith('mock-')
 }
 
+function formatDevotionalDate(value: string | undefined) {
+  if (!value) return '—'
+  const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value)
+  if (dateOnly) return `${dateOnly[3]}/${dateOnly[2]}/${dateOnly[1]}`
+  return new Intl.DateTimeFormat('pt-BR', {
+    timeZone: 'America/Sao_Paulo',
+  }).format(new Date(value))
+}
+
+function formatDevotionalTime(value: string | undefined) {
+  if (!value) return 'sem ingestão'
+  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) return 'data diária'
+  return new Intl.DateTimeFormat('pt-BR', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    timeZone: 'America/Sao_Paulo',
+  }).format(new Date(value))
+}
+
 interface DevotionalStatsSummaryProps {
   stats: DevotionalsStats
   languages: [string, number][]
@@ -102,8 +122,8 @@ function DevotionalStatsSummary({ stats, languages, publishedLanguages }: Devoti
       </article>
       <article data-tone={stats.totalPending > 0 ? 'amber' : 'green'}>
         <span>Última geração</span>
-        <strong>{stats.lastGeneratedAt ? new Date(stats.lastGeneratedAt).toLocaleDateString('pt-BR') : '—'}</strong>
-        <small>{stats.lastGeneratedAt ? new Date(stats.lastGeneratedAt).toLocaleTimeString('pt-BR') : 'sem ingestão'}</small>
+        <strong>{formatDevotionalDate(stats.lastGeneratedAt)}</strong>
+        <small>{formatDevotionalTime(stats.lastGeneratedAt)}</small>
       </article>
     </div>
   )
