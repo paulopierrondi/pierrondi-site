@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { cookies } from 'next/headers'
-import { LockKeyhole } from 'lucide-react'
 
 import {
   AUTOMATION_CONTROL_COOKIE,
@@ -14,7 +13,6 @@ import {
 } from '@/lib/control-tower/plan-storage'
 import type { PlanApprovalView } from '@/lib/control-tower/plan-view'
 import ControlTower from './ControlTower'
-import styles from './ControlTower.module.css'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -22,62 +20,21 @@ export const runtime = 'nodejs'
 export const metadata: Metadata = {
   title: 'Agent Ops Control Tower',
   description:
-    'Painel privado para controlar agentes, automações, worktrees, handoffs, riscos e próximas ações operacionais.',
+    'Painel operacional para acompanhar agentes, automações, worktrees, handoffs, riscos e próximas ações.',
   robots: { index: false, follow: false, nocache: true },
   alternates: { canonical: '/control_tower' },
 }
 
-interface ControlTowerPageProps {
-  searchParams: Promise<{ auth?: string }>
-}
-
-function LockedControlTower({ invalid }: { invalid: boolean }) {
-  return (
-    <main className={styles.lockShell}>
-      <section className={styles.lockPanel} aria-labelledby="control-tower-lock-title">
-        <div className={styles.lockIcon} aria-hidden="true">
-          <LockKeyhole size={22} />
-        </div>
-        <p className={styles.kicker}>pierrondi.dev / control_tower</p>
-        <h1 id="control-tower-lock-title">Control Tower privado.</h1>
-        <p>
-          A rota consolida agentes, automações, repos, handoffs e gates.
-          Use o token operacional configurado no provider.
-        </p>
-        <form className={styles.lockForm} method="post" action="/api/automation-control/session">
-          <input type="hidden" name="next" value="/control_tower" />
-          <label htmlFor="token">Token de acesso</label>
-          <div className={styles.lockInputRow}>
-            <input
-              id="token"
-              name="token"
-              type="password"
-              autoComplete="current-password"
-              placeholder="AUTOMATION_CONTROL_VIEW_TOKEN"
-              required
-            />
-            <button type="submit">Entrar</button>
-          </div>
-          {invalid && <span className={styles.lockError}>Token inválido ou ausente.</span>}
-        </form>
-      </section>
-    </main>
-  )
-}
-
-export default async function ControlTowerPage({ searchParams }: ControlTowerPageProps) {
-  const [cookieStore, params] = await Promise.all([cookies(), searchParams])
-  const session = cookieStore.get(AUTOMATION_CONTROL_COOKIE)?.value
-  const authorized = verifySessionCookie(session)
-
-  if (!authorized) return <LockedControlTower invalid={params.auth === 'invalid'} />
-
-  const [snapshot, creative, plansSnapshot, approvals] = await Promise.all([
+export default async function ControlTowerPage() {
+  const [cookieStore, snapshot, creative, plansSnapshot, approvals] = await Promise.all([
+    cookies(),
     readAutomationSnapshot(),
     readCreativeSnapshot(),
     readPlansSnapshot(),
     readPlanApprovals(),
   ])
+  const session = cookieStore.get(AUTOMATION_CONTROL_COOKIE)?.value
+  const actionsEnabled = verifySessionCookie(session)
   const planApprovals = Object.fromEntries(
     Object.entries(approvals).map(([planId, record]) => [
       planId,
@@ -95,6 +52,7 @@ export default async function ControlTowerPage({ searchParams }: ControlTowerPag
       creative={creative}
       plans={plansSnapshot?.plans ?? []}
       planApprovals={planApprovals}
+      actionsEnabled={actionsEnabled}
     />
   )
 }

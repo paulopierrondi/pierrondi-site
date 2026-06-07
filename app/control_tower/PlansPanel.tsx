@@ -19,6 +19,7 @@ interface PlansPanelProps {
   approvals?: Record<string, PlanApprovalView>
   freshnessLabel?: string
   freshnessTone?: 'green' | 'amber' | 'red' | 'unknown'
+  actionsEnabled: boolean
 }
 
 type PlanAction = 'approve' | 'defer' | 'reject'
@@ -101,6 +102,7 @@ export default function PlansPanel({
   approvals = {},
   freshnessLabel,
   freshnessTone,
+  actionsEnabled,
 }: PlansPanelProps) {
   const router = useRouter()
   const [rows, setRows] = useState<Record<string, RowStatus>>({})
@@ -229,14 +231,16 @@ export default function PlansPanel({
           <button
             type="button"
             onClick={() => void handleBatchApprove()}
-            disabled={bulkBusy}
+            disabled={bulkBusy || !actionsEnabled}
             className={styles.approveButton}
             aria-label="Aprovar todos os planos low risk de uma vez"
           >
             <Check size={14} /> Aprovar {lowRisk} low risk
           </button>
           <small>
-            chunks de 50 · {mediumRisk} medium ficam para revisão manual · gate expira em {APPROVAL_TTL_HOURS}h
+            {actionsEnabled
+              ? `chunks de 50 · ${mediumRisk} medium ficam para revisão manual · gate expira em ${APPROVAL_TTL_HOURS}h`
+              : 'visualização pública; aprovação de planos exige sessão operacional'}
           </small>
         </div>
       )}
@@ -255,6 +259,7 @@ export default function PlansPanel({
           {visible.map((item) => {
             const status = rows[item.planId]
             const busy = status?.state === 'pending' || bulkBusy
+            const disabled = busy || !actionsEnabled
             return (
               <article
                 key={item.planId}
@@ -289,7 +294,7 @@ export default function PlansPanel({
                   <button
                     type="button"
                     onClick={() => void handleAction('approve', item.planId)}
-                    disabled={busy}
+                    disabled={disabled}
                     className={styles.approveButton}
                     aria-label={`Aprovar plano ${item.planId}`}
                   >
@@ -298,7 +303,7 @@ export default function PlansPanel({
                   <button
                     type="button"
                     onClick={() => void handleAction('defer', item.planId)}
-                    disabled={busy}
+                    disabled={disabled}
                     className={styles.rejectButton}
                     aria-label={`Adiar plano ${item.planId}`}
                   >
@@ -307,7 +312,7 @@ export default function PlansPanel({
                   <button
                     type="button"
                     onClick={() => void handleAction('reject', item.planId)}
-                    disabled={busy}
+                    disabled={disabled}
                     className={styles.rejectButton}
                     aria-label={`Rejeitar plano ${item.planId}`}
                   >
@@ -317,6 +322,11 @@ export default function PlansPanel({
                 {status?.state === 'error' && (
                   <p className={styles.devotionalError}>
                     Erro: {status.message ?? 'falha'}
+                  </p>
+                )}
+                {!actionsEnabled && (
+                  <p className={styles.devotionalError}>
+                    Leitura pública: ações de plano continuam protegidas por sessão.
                   </p>
                 )}
               </article>

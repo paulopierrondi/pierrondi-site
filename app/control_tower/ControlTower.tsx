@@ -28,6 +28,7 @@ interface ControlTowerProps {
   creative: CreativeControlSnapshot | null
   plans: PlanQueueItem[]
   planApprovals: Record<string, PlanApprovalView>
+  actionsEnabled: boolean
 }
 
 const baseline = {
@@ -270,6 +271,7 @@ export default function ControlTower({
   creative,
   plans,
   planApprovals,
+  actionsEnabled,
 }: ControlTowerProps) {
   const metrics = metricData(snapshot)
   const p0 = lanes[0].items.length
@@ -316,7 +318,7 @@ export default function ControlTower({
             <p className={styles.kicker}>pierrondi.dev / control_tower</p>
             <h1>Gerencie a operação agentica por risco, não por ruído.</h1>
             <p>
-              Painel privado para decidir o que para, o que corrige, qual modelo roda
+              Painel operacional para decidir o que para, o que corrige, qual modelo roda
               cada workflow e o que pode escalar com evidência operacional.
             </p>
           </div>
@@ -542,6 +544,7 @@ export default function ControlTower({
             pending={creative.devotionals.pending}
             freshnessLabel={creativeFreshness.label}
             freshnessTone={creativeFreshness.status}
+            actionsEnabled={actionsEnabled}
           />
         ) : (
           <section id="devotionais" className={styles.panel}>
@@ -564,6 +567,7 @@ export default function ControlTower({
           approvals={planApprovals}
           freshnessLabel={automationFreshness.label}
           freshnessTone={automationFreshness.status}
+          actionsEnabled={actionsEnabled}
         />
 
         <section id="governanca" className={styles.guardrailBand}>

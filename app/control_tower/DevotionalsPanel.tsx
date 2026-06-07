@@ -15,6 +15,7 @@ interface DevotionalsPanelProps {
   pending: DevotionalPending[]
   freshnessLabel?: string
   freshnessTone?: 'green' | 'amber' | 'red' | 'unknown'
+  actionsEnabled: boolean
 }
 
 type RowState = 'idle' | 'pending' | 'approved' | 'rejected' | 'error'
@@ -112,10 +113,11 @@ function LanguageChips({ languages }: { languages: [string, number][] }) {
 interface BatchApproveRailProps {
   count: number
   isPending: boolean
+  actionsEnabled: boolean
   onApprove: () => void
 }
 
-function BatchApproveRail({ count, isPending, onApprove }: BatchApproveRailProps) {
+function BatchApproveRail({ count, isPending, actionsEnabled, onApprove }: BatchApproveRailProps) {
   if (count === 0) return null
 
   return (
@@ -123,13 +125,17 @@ function BatchApproveRail({ count, isPending, onApprove }: BatchApproveRailProps
       <button
         type="button"
         onClick={onApprove}
-        disabled={isPending}
+        disabled={isPending || !actionsEnabled}
         className={styles.approveButton}
         aria-label="Aprovar todos os devotionais pendentes de uma vez"
       >
         <Check size={14} /> Aprovar pendentes ({count})
       </button>
-      <small>aprovação em lote com auditoria no FaithSchool</small>
+      <small>
+        {actionsEnabled
+          ? 'aprovação em lote com auditoria no FaithSchool'
+          : 'visualização pública; aprovação exige sessão operacional'}
+      </small>
     </div>
   )
 }
@@ -138,12 +144,14 @@ interface DevotionalCardProps {
   item: DevotionalPending
   status?: RowStatus
   isPending: boolean
+  actionsEnabled: boolean
   onAction: (action: DevotionalAction, docId: string) => void
 }
 
-function DevotionalCard({ item, status, isPending, onAction }: DevotionalCardProps) {
+function DevotionalCard({ item, status, isPending, actionsEnabled, onAction }: DevotionalCardProps) {
   const busy = status?.state === 'pending' || isPending
   const mock = isMockDevotional(item)
+  const disabled = busy || mock || !actionsEnabled
 
   return (
     <article className={styles.devotionalCard} data-state={status?.state ?? 'idle'}>
@@ -159,7 +167,7 @@ function DevotionalCard({ item, status, isPending, onAction }: DevotionalCardPro
         <button
           type="button"
           onClick={() => onAction('approve', item.docId)}
-          disabled={busy || mock}
+          disabled={disabled}
           className={styles.approveButton}
           aria-label={`Aprovar devotional ${item.docId}`}
         >
@@ -168,7 +176,7 @@ function DevotionalCard({ item, status, isPending, onAction }: DevotionalCardPro
         <button
           type="button"
           onClick={() => onAction('reject', item.docId)}
-          disabled={busy || mock}
+          disabled={disabled}
           className={styles.rejectButton}
           aria-label={`Rejeitar devotional ${item.docId}`}
         >
@@ -183,11 +191,22 @@ function DevotionalCard({ item, status, isPending, onAction }: DevotionalCardPro
           Snapshot mockado: rode o coletor real antes de aprovar.
         </p>
       )}
+      {!actionsEnabled && !mock && (
+        <p className={styles.devotionalError}>
+          Leitura pública: ações de aprovação continuam protegidas por sessão.
+        </p>
+      )}
     </article>
   )
 }
 
-export default function DevotionalsPanel({ stats, pending, freshnessLabel, freshnessTone }: DevotionalsPanelProps) {
+export default function DevotionalsPanel({
+  stats,
+  pending,
+  freshnessLabel,
+  freshnessTone,
+  actionsEnabled,
+}: DevotionalsPanelProps) {
   const [rows, setRows] = useState<Record<string, RowStatus>>({})
   const [isPending, startTransition] = useTransition()
 
@@ -259,7 +278,12 @@ export default function DevotionalsPanel({ stats, pending, freshnessLabel, fresh
 
       <DevotionalStatsSummary stats={stats} languages={languages} />
       <LanguageChips languages={languages} />
-      <BatchApproveRail count={actionable.length} isPending={isPending} onApprove={handleBatchApprove} />
+      <BatchApproveRail
+        count={actionable.length}
+        isPending={isPending}
+        actionsEnabled={actionsEnabled}
+        onApprove={handleBatchApprove}
+      />
 
       {visible.length === 0 ? (
         <div className={styles.emptyState}>
@@ -277,6 +301,7 @@ export default function DevotionalsPanel({ stats, pending, freshnessLabel, fresh
               item={item}
               status={rows[item.docId]}
               isPending={isPending}
+              actionsEnabled={actionsEnabled}
               onAction={handleAction}
             />
           ))}
