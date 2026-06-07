@@ -86,6 +86,48 @@ test('expired approvals become pending again so the operator can re-approve', ()
   assert.equal(summary.resolved.length, 0)
 })
 
+test('low risk pending plans are captured into the daily Kimi Code queue', () => {
+  const summary = summarizePlanQueue(
+    [
+      {
+        planId: 'aura-audio-20260607-01',
+        project: 'aura-audio',
+        title: 'Remove unused imports',
+        summary: 'Keep the patch scoped and mechanical.',
+        status: 'pending_approval',
+        risk_class: 'low',
+        owner_cli: 'kimi',
+        executor: 'kimi-code',
+        scope_files: ['src/app/page.tsx'],
+        created_at_utc: '2026-06-07T10:00:00.000Z',
+      },
+      {
+        planId: 'creative-forge-20260607-01',
+        project: 'creative-forge',
+        title: 'Review upload auth',
+        summary: 'Needs a human security pass.',
+        status: 'pending_approval',
+        risk_class: 'medium',
+        owner_cli: 'kimi',
+        executor: 'kimi-code',
+        scope_files: ['app/api/upload/route.ts'],
+        created_at_utc: '2026-06-07T10:00:00.000Z',
+      },
+    ],
+    {},
+    now,
+  )
+
+  assert.equal(summary.kimiCodeDailyQueue.executor, 'kimi-code')
+  assert.equal(summary.kimiCodeDailyQueue.cadence, 'daily')
+  assert.equal(summary.kimiCodeDailyQueue.target, 'complete_all_low_risk')
+  assert.deepEqual(
+    summary.kimiCodeDailyQueue.items.map((plan) => plan.planId),
+    ['aura-audio-20260607-01'],
+  )
+  assert.equal(summary.kimiCodeDailyQueue.blockedMediumCount, 1)
+})
+
 test('plan action payload accepts production-sized bulk approvals', () => {
   const result = planActionPayloadSchema.safeParse({
     action: 'approve',

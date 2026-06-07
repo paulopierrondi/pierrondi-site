@@ -5,6 +5,9 @@ export interface PlanQueueItem {
   summary: string
   status: string
   risk_class: string
+  owner_cli?: string
+  executor?: string
+  execution_cadence?: string
   scope_files: string[]
   created_at_utc: string
 }
@@ -29,6 +32,14 @@ export interface PlanQueueSummary {
   pendingCount: number
   lowRiskCount: number
   mediumRiskCount: number
+  kimiCodeDailyQueue: {
+    executor: 'kimi-code'
+    cadence: 'daily'
+    target: 'complete_all_low_risk'
+    items: PlanQueueItem[]
+    count: number
+    blockedMediumCount: number
+  }
 }
 
 function isPendingPlan(plan: PlanQueueItem) {
@@ -72,5 +83,13 @@ export function summarizePlanQueue(
     pendingCount: visible.length,
     lowRiskCount: visible.filter((plan) => plan.risk_class === 'low').length,
     mediumRiskCount: visible.filter((plan) => plan.risk_class === 'medium').length,
+    kimiCodeDailyQueue: {
+      executor: 'kimi-code',
+      cadence: 'daily',
+      target: 'complete_all_low_risk',
+      items: visible.filter((plan) => plan.risk_class === 'low'),
+      count: visible.filter((plan) => plan.risk_class === 'low').length,
+      blockedMediumCount: visible.filter((plan) => plan.risk_class === 'medium').length,
+    },
   }
 }

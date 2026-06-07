@@ -136,6 +136,7 @@ export default function PlansPanel({
   const visible = queue.visible
   const lowRisk = queue.lowRiskCount
   const mediumRisk = queue.mediumRiskCount
+  const kimiDailyCount = queue.kimiCodeDailyQueue.count
 
   function markRows(ids: string[], state: RowState, message?: string) {
     setRows((current) => {
@@ -224,6 +225,11 @@ export default function PlansPanel({
           <strong>{mediumRisk}</strong>
           <small>exige revisão antes do gate</small>
         </article>
+        <article data-tone={kimiDailyCount > 0 ? 'blue' : 'green'}>
+          <span>Kimi Code diário</span>
+          <strong>{kimiDailyCount}</strong>
+          <small>captura todos low risk</small>
+        </article>
       </div>
 
       {lowRisk > 0 && (
@@ -239,7 +245,7 @@ export default function PlansPanel({
           </button>
           <small>
             {actionsEnabled
-              ? `chunks de 50 · ${mediumRisk} medium ficam para revisão manual · gate expira em ${APPROVAL_TTL_HOURS}h`
+              ? `Kimi Code captura low risk diariamente · chunks de 50 · ${mediumRisk} medium ficam para revisão manual · gate expira em ${APPROVAL_TTL_HOURS}h`
               : 'visualização pública; aprovação de planos exige sessão operacional'}
           </small>
         </div>

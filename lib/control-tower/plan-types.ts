@@ -31,6 +31,9 @@ export const planSummarySchema = z.object({
   summary: z.string().max(2000),
   status: planStatusSchema,
   risk_class: planRiskClassSchema,
+  owner_cli: z.string().min(1).max(80).optional(),
+  executor: z.string().min(1).max(80).optional(),
+  execution_cadence: z.string().min(1).max(80).optional(),
   scope_files: z.array(z.string().min(1).max(400)).max(5),
   created_at_utc: z.string().datetime(),
 })
