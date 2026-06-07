@@ -56,3 +56,59 @@ test('creative collector marks closet item fallback when no saved looks exist', 
     lookReviews: 0,
   })
 })
+
+test('creative collector surfaces approved published devotionals separately from pending queue', () => {
+  const result = spawnSync(
+    'python3',
+    [
+      '-c',
+      `
+import importlib.util
+import json
+
+spec = importlib.util.spec_from_file_location(
+    "creative_control_snapshot",
+    "scripts/creative-control-snapshot.py",
+)
+mod = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+
+section = mod.build_devotionals_section(
+    {"items": []},
+    max_pending=24,
+    published_payload={
+        "items": [
+            {
+                "id": "2026-06-07_pt-BR_ARA",
+                "date": "2026-06-07",
+                "locale": "pt-BR",
+                "bibleTranslation": "ARA",
+                "scriptureRef": "Joao 3:16",
+                "title": "O amor de Deus",
+                "body": "Porque Deus amou o mundo.",
+                "reviewStatus": "approved",
+                "generatedAt": "2026-06-07T06:00:00.000Z",
+            }
+        ]
+    },
+)
+print(json.dumps(section))
+      `,
+    ],
+    {
+      cwd: process.cwd(),
+      encoding: 'utf8',
+    },
+  )
+
+  assert.equal(result.status, 0, result.stderr)
+  const section = JSON.parse(result.stdout)
+
+  assert.equal(section.stats.totalPending, 0)
+  assert.equal(section.pending.length, 0)
+  assert.equal(section.stats.totalPublished, 1)
+  assert.deepEqual(section.stats.byPublishedLanguage, { 'pt-BR': 1 })
+  assert.equal(section.published[0].docId, '2026-06-07_pt-BR_ARA')
+  assert.equal(section.published[0].bibleTranslation, 'ARA')
+  assert.equal(section.published[0].reviewStatus, 'approved')
+})

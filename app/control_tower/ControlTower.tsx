@@ -542,6 +542,7 @@ export default function ControlTower({
           <DevotionalsPanel
             stats={creative.devotionals.stats}
             pending={creative.devotionals.pending}
+            published={creative.devotionals.published ?? []}
             freshnessLabel={creativeFreshness.label}
             freshnessTone={creativeFreshness.status}
             actionsEnabled={actionsEnabled}

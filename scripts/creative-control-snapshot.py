@@ -23,6 +23,7 @@ import socket
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -54,6 +55,11 @@ ACCESSORY_TOKENS = (
 SHOE_TOKENS = ("shoe", "sapato", "tenis", "tênis", "sandalia", "sandália", "boot", "bota", "salto")
 TOP_TOKENS = ("top", "blouse", "blusa", "shirt", "camisa", "tshirt", "t-shirt", "regata", "camiseta")
 BOTTOM_TOKENS = ("bottom", "pants", "calca", "calça", "skirt", "saia", "short", "jeans", "trouser")
+
+PUBLIC_DEVOTIONAL_TRANSLATIONS = {
+    "pt-BR": ("ARA", "NVI"),
+    "en": ("KJV",),
+}
 
 
 def color_family(color: str | None) -> str:
@@ -430,6 +436,63 @@ def fetch_devotionals(url: str, magic_secret: str, timeout: int = 15) -> dict[st
         return {"items": [], "error": "network"}
 
 
+def fetch_published_devotionals(
+    base_url: str,
+    dates: list[str],
+    timeout: int = 15,
+) -> dict[str, Any]:
+    if not base_url:
+        return {"items": []}
+
+    items: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    base = base_url.rstrip("/")
+
+    for date in dates:
+        for locale, translations in PUBLIC_DEVOTIONAL_TRANSLATIONS.items():
+            for bible_translation in translations:
+                params = urllib.parse.urlencode({
+                    "date": date,
+                    "locale": locale,
+                    "bibleTranslation": bible_translation,
+                })
+                url = f"{base}/api/devotionals/?{params}"
+                req = urllib.request.Request(url, method="GET")
+                req.add_header("Accept", "application/json")
+                try:
+                    with urllib.request.urlopen(req, timeout=timeout) as resp:
+                        payload = json.loads(resp.read().decode("utf-8"))
+                except urllib.error.HTTPError as err:
+                    print(
+                        f"[creative-control] published devotional fetch HTTP {err.code} for {date}/{locale}/{bible_translation}",
+                        file=sys.stderr,
+                    )
+                    continue
+                except Exception as err:
+                    print(
+                        f"[creative-control] published devotional fetch failed for {date}/{locale}/{bible_translation}: {err}",
+                        file=sys.stderr,
+                    )
+                    continue
+
+                for item in payload.get("items") or []:
+                    if not isinstance(item, dict):
+                        continue
+                    doc_id = str(item.get("id") or item.get("docId") or "")
+                    if not doc_id or doc_id in seen:
+                        continue
+                    seen.add(doc_id)
+                    items.append({
+                        **item,
+                        "id": doc_id,
+                        "locale": item.get("locale") or locale,
+                        "bibleTranslation": item.get("bibleTranslation") or bible_translation,
+                        "reviewStatus": item.get("reviewStatus") or "approved",
+                    })
+
+    return {"items": items}
+
+
 def age_label(iso: str | None, now: datetime) -> str | None:
     if not iso:
         return None
@@ -498,11 +561,13 @@ def _pending_devotional(item: dict[str, Any], now: datetime) -> dict[str, Any]:
     return {
         "docId": str(item.get("id") or item.get("docId") or ""),
         "date": str(item.get("date") or ""),
-        "language": str(item.get("language") or item.get("lang") or "pt-BR"),
+        "language": str(item.get("language") or item.get("lang") or item.get("locale") or "pt-BR"),
+        **({"bibleTranslation": str(item.get("bibleTranslation"))} if item.get("bibleTranslation") else {}),
         "scriptureRef": _devotional_scripture(item),
         "title": item.get("title"),
         "snippet": _devotional_snippet(item),
         "source": _devotional_source(item),
+        **({"reviewStatus": str(item.get("reviewStatus"))} if item.get("reviewStatus") else {}),
         "generatedAt": generated_at,
         "ageLabel": age_label(generated_at, now),
     }
@@ -513,6 +578,17 @@ def _pending_devotionals(items: list[Any], now: datetime) -> list[dict[str, Any]
     return sorted([item for item in pending if item["docId"]], key=lambda p: p["date"])
 
 
+def _published_devotionals(items: list[Any], now: datetime) -> list[dict[str, Any]]:
+    published = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        devotional = _pending_devotional({**item, "reviewStatus": "approved"}, now)
+        if devotional["docId"]:
+            published.append(devotional)
+    return sorted(published, key=lambda p: (p["date"], p.get("language", ""), p.get("bibleTranslation", "")))
+
+
 def _language_counts(pending: list[dict[str, Any]]) -> dict[str, int]:
     by_language: dict[str, int] = {}
     for item in pending:
@@ -520,25 +596,44 @@ def _language_counts(pending: list[dict[str, Any]]) -> dict[str, int]:
     return by_language
 
 
-def _devotional_stats(pending: list[dict[str, Any]]) -> dict[str, Any]:
+def _devotional_stats(
+    pending: list[dict[str, Any]],
+    published: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    published = published or []
     stats: dict[str, Any] = {
         "totalPending": len(pending),
+        "totalPublished": len(published),
         "byLanguage": _language_counts(pending),
+        "byPublishedLanguage": _language_counts(published),
     }
     if pending:
         stats["oldestPendingAt"] = pending[0]["generatedAt"]
-    newest = max((item["generatedAt"] for item in pending if item.get("generatedAt")), default=None)
+    newest = max(
+        (item["generatedAt"] for item in [*pending, *published] if item.get("generatedAt")),
+        default=None,
+    )
     if newest:
         stats["lastGeneratedAt"] = newest
+    newest_published = max((item["generatedAt"] for item in published if item.get("generatedAt")), default=None)
+    if newest_published:
+        stats["lastPublishedAt"] = newest_published
     return stats
 
 
-def build_devotionals_section(payload: dict[str, Any], max_pending: int) -> dict[str, Any]:
+def build_devotionals_section(
+    payload: dict[str, Any],
+    max_pending: int,
+    published_payload: dict[str, Any] | None = None,
+    max_published: int = 12,
+) -> dict[str, Any]:
     now = datetime.now(timezone.utc)
     pending = _pending_devotionals(_devotional_items(payload, now), now)
+    published = _published_devotionals((published_payload or {}).get("items") or [], now)
     return {
-        "stats": _devotional_stats(pending),
+        "stats": _devotional_stats(pending, published),
         "pending": pending[:max_pending],
+        "published": published[:max_published],
     }
 
 
@@ -550,7 +645,14 @@ def build_snapshot(args: argparse.Namespace) -> dict[str, Any]:
     devotional_url = args.devotional_url or os.environ.get("FAITHSCHOOL_PENDING_URL", "")
     magic_secret = os.environ.get("FAITHSCHOOL_MAGIC_LINK_SECRET", "")
     devotional_payload = fetch_devotionals(devotional_url, magic_secret) if devotional_url else {"items": []}
-    devotionals_section = build_devotionals_section(devotional_payload, max_pending=args.max_devotionals)
+    public_dates = [datetime.now(timezone.utc).strftime("%Y-%m-%d")]
+    published_payload = fetch_published_devotionals(args.faithschool_public_url, public_dates)
+    devotionals_section = build_devotionals_section(
+        devotional_payload,
+        max_pending=args.max_devotionals,
+        published_payload=published_payload,
+        max_published=args.max_published_devotionals,
+    )
 
     return {
         "schemaVersion": "1.0",
@@ -615,8 +717,13 @@ def main(argv: Iterable[str] | None = None) -> int:
         "--site-url",
         default=os.environ.get("PIERRONDI_SITE_URL", "https://www.pierrondi.dev"),
     )
+    parser.add_argument(
+        "--faithschool-public-url",
+        default=os.environ.get("FAITHSCHOOL_PUBLIC_URL", "https://faithschool.app"),
+    )
     parser.add_argument("--max-looks", type=int, default=12)
     parser.add_argument("--max-devotionals", type=int, default=24)
+    parser.add_argument("--max-published-devotionals", type=int, default=12)
     parser.add_argument("--dry-run", action="store_true", help="Do not POST")
     parser.add_argument("--output", default="", help="Write snapshot JSON to this path (in addition to POST)")
     args = parser.parse_args(list(argv) if argv is not None else None)

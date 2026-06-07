@@ -52,19 +52,28 @@ export interface DevotionalPending {
   docId: string
   date: string
   language: string
+  bibleTranslation?: string
   scriptureRef: string
   title?: string
   snippet: string
   source: DevotionalSource
+  reviewStatus?: 'approved' | 'pending' | 'rejected'
   generatedAt?: string
   ageLabel?: string
 }
 
+export type DevotionalPublished = DevotionalPending & {
+  reviewStatus?: 'approved'
+}
+
 export interface DevotionalsStats {
   totalPending: number
+  totalPublished?: number
   byLanguage: Record<string, number>
+  byPublishedLanguage?: Record<string, number>
   oldestPendingAt?: string
   lastGeneratedAt?: string
+  lastPublishedAt?: string
 }
 
 export interface CreativeControlMachine {
@@ -83,5 +92,6 @@ export interface CreativeControlSnapshot {
   devotionals: {
     stats: DevotionalsStats
     pending: DevotionalPending[]
+    published?: DevotionalPublished[]
   }
 }

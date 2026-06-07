@@ -59,19 +59,30 @@ const devotionalPendingSchema = z.object({
   docId: z.string().min(1).max(120),
   date: z.string().min(1).max(40),
   language: z.string().min(1).max(20),
+  bibleTranslation: z.string().max(20).optional(),
   scriptureRef: z.string().min(1).max(160),
   title: z.string().max(200).optional(),
   snippet: z.string().max(400),
   source: devotionalSourceSchema,
+  reviewStatus: z.enum(['approved', 'pending', 'rejected']).optional(),
   generatedAt: z.string().max(80).optional(),
   ageLabel: z.string().max(40).optional(),
 })
 
+const devotionalPublishedSchema = devotionalPendingSchema.extend({
+  reviewStatus: z.literal('approved').optional(),
+})
+
 const devotionalsStatsSchema = z.object({
   totalPending: z.number().int().nonnegative(),
+  totalPublished: z.number().int().nonnegative().optional(),
   byLanguage: z.record(z.string().min(1).max(20), z.number().int().nonnegative()),
+  byPublishedLanguage: z
+    .record(z.string().min(1).max(20), z.number().int().nonnegative())
+    .optional(),
   oldestPendingAt: z.string().max(80).optional(),
   lastGeneratedAt: z.string().max(80).optional(),
+  lastPublishedAt: z.string().max(80).optional(),
 })
 
 export const creativeControlSnapshotSchema = z.object({
@@ -88,6 +99,7 @@ export const creativeControlSnapshotSchema = z.object({
   devotionals: z.object({
     stats: devotionalsStatsSchema,
     pending: z.array(devotionalPendingSchema).max(96),
+    published: z.array(devotionalPublishedSchema).max(96).optional(),
   }),
 })
 

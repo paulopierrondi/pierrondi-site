@@ -5,6 +5,7 @@ import { BookOpenText, Check, Languages, X } from 'lucide-react'
 
 import type {
   DevotionalPending,
+  DevotionalPublished,
   DevotionalsStats,
 } from '@/lib/creative-control/types'
 
@@ -13,6 +14,7 @@ import styles from './ControlTower.module.css'
 interface DevotionalsPanelProps {
   stats: DevotionalsStats
   pending: DevotionalPending[]
+  published: DevotionalPublished[]
   freshnessLabel?: string
   freshnessTone?: 'green' | 'amber' | 'red' | 'unknown'
   actionsEnabled: boolean
@@ -71,9 +73,16 @@ function isMockDevotional(item: DevotionalPending) {
 interface DevotionalStatsSummaryProps {
   stats: DevotionalsStats
   languages: [string, number][]
+  publishedLanguages: [string, number][]
 }
 
-function DevotionalStatsSummary({ stats, languages }: DevotionalStatsSummaryProps) {
+function DevotionalStatsSummary({ stats, languages, publishedLanguages }: DevotionalStatsSummaryProps) {
+  const totalPublished = stats.totalPublished ?? 0
+  const activeLanguageCount = new Set([
+    ...languages.map(([language]) => language),
+    ...publishedLanguages.map(([language]) => language),
+  ]).size
+
   return (
     <div className={styles.creativeStatsRow}>
       <article data-tone="amber">
@@ -81,9 +90,14 @@ function DevotionalStatsSummary({ stats, languages }: DevotionalStatsSummaryProp
         <strong>{stats.totalPending}</strong>
         <small>Âncora YouVersion VOTD</small>
       </article>
+      <article data-tone={totalPublished > 0 ? 'green' : 'amber'}>
+        <span>Publicados hoje</span>
+        <strong>{totalPublished}</strong>
+        <small>ARA / NVI / KJV aprovados</small>
+      </article>
       <article data-tone="blue">
         <span>Idiomas ativos</span>
-        <strong>{languages.length}</strong>
+        <strong>{activeLanguageCount}</strong>
         <small>pt-BR / en / es</small>
       </article>
       <article data-tone={stats.totalPending > 0 ? 'amber' : 'green'}>
@@ -107,6 +121,30 @@ function LanguageChips({ languages }: { languages: [string, number][] }) {
         </span>
       ))}
     </div>
+  )
+}
+
+function PublishedDevotionalCard({ item }: { item: DevotionalPublished }) {
+  return (
+    <article className={styles.devotionalCard} data-state="approved">
+      <header>
+        <span className={styles.langChip}>
+          {item.language}
+          {item.bibleTranslation ? <em>{item.bibleTranslation}</em> : null}
+        </span>
+        <strong>{item.date || '—'}</strong>
+        {item.ageLabel && <em>{item.ageLabel}</em>}
+      </header>
+      <p className={styles.scriptureRef}>{item.scriptureRef}</p>
+      {item.title && <p className={styles.devotionalTitle}>{item.title}</p>}
+      <p className={styles.devotionalSnippet}>{item.snippet}</p>
+      <footer>
+        <span className={styles.approveButton}>
+          <Check size={14} /> Publicado
+        </span>
+        <span className={styles.langChip}>{item.source}</span>
+      </footer>
+    </article>
   )
 }
 
@@ -203,6 +241,7 @@ function DevotionalCard({ item, status, isPending, actionsEnabled, onAction }: D
 export default function DevotionalsPanel({
   stats,
   pending,
+  published,
   freshnessLabel,
   freshnessTone,
   actionsEnabled,
@@ -211,6 +250,7 @@ export default function DevotionalsPanel({
   const [isPending, startTransition] = useTransition()
 
   const languages = Object.entries(stats.byLanguage)
+  const publishedLanguages = Object.entries(stats.byPublishedLanguage ?? {})
   const visible = pending.filter((d) => rows[d.docId]?.state !== 'approved' && rows[d.docId]?.state !== 'rejected')
   const actionable = visible.filter((d) => !isMockDevotional(d))
 
@@ -276,8 +316,8 @@ export default function DevotionalsPanel({
         </span>
       </div>
 
-      <DevotionalStatsSummary stats={stats} languages={languages} />
-      <LanguageChips languages={languages} />
+      <DevotionalStatsSummary stats={stats} languages={languages} publishedLanguages={publishedLanguages} />
+      <LanguageChips languages={languages.length > 0 ? languages : publishedLanguages} />
       <BatchApproveRail
         count={actionable.length}
         isPending={isPending}
@@ -289,8 +329,8 @@ export default function DevotionalsPanel({
         <div className={styles.emptyState}>
           <BookOpenText size={20} />
           <p>
-            Nenhum devocional pendente neste snapshot. Aprovados/rejeitados nesta sessão somem da lista.
-            Próximo run do coletor renova a fila.
+            Nenhum devocional pendente para aprovação. O cron do FaithSchool está
+            publicando itens aprovados automaticamente; revise os publicados abaixo.
           </p>
         </div>
       ) : (
@@ -304,6 +344,14 @@ export default function DevotionalsPanel({
               actionsEnabled={actionsEnabled}
               onAction={handleAction}
             />
+          ))}
+        </div>
+      )}
+
+      {published.length > 0 && (
+        <div className={styles.devotionalGrid} aria-label="Devocionais publicados hoje">
+          {published.map((item) => (
+            <PublishedDevotionalCard key={item.docId} item={item} />
           ))}
         </div>
       )}
