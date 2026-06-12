@@ -10,7 +10,7 @@ export default function BlogCta() {
       eyebrow="Pronto para aplicar?"
       headline="Diagnóstico gratuito em 30 minutos."
       ctas={
-        <PillButton href="/#contato" variant="primary">
+        <PillButton href="/#contact" variant="primary">
           Falar com a equipe
         </PillButton>
       }

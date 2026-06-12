@@ -60,7 +60,7 @@ export default function AutomacoesContent() {
         tagline="Automação com integrações sob medida: CRM, planilhas, e-mail, WhatsApp, ERPs, APIs e IA no mesmo workflow — menos cópia manual, mais velocidade para vendas, financeiro e operações."
         ctas={
           <>
-            <PillButton variant="primary" href="/#contato">Diagnóstico gratuito</PillButton>
+            <PillButton variant="primary" href="/#contact">Diagnóstico gratuito</PillButton>
             <PillButton variant="ghost" href="/precos">Ver preços</PillButton>
           </>
         }
@@ -166,7 +166,7 @@ export default function AutomacoesContent() {
         tagline="Agende uma conversa de 30 min sem compromisso. Conte onde está o gargalo — a gente desenha o caminho."
         ctas={
           <>
-            <PillButton variant="primary" href="/#contato">Diagnóstico gratuito</PillButton>
+            <PillButton variant="primary" href="/#contact">Diagnóstico gratuito</PillButton>
             <PillButton variant="ghost" href="/">Ver todos os serviços</PillButton>
           </>
         }

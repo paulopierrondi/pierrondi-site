@@ -4,19 +4,19 @@
   /* ── Kimi Platform Design System ── */
 
   /* Brand & Accent */
-  --color-primary:                 #1a88ff;
-  --color-primary-active:          #1474e1;
-  --color-primary-glow:            rgba(26, 136, 255, 0.25);
-  --color-accent-cyan:             #1a88ff;
-  --color-accent-violet:           #a965c2;
+  --color-primary:                 #c8ff2e;
+  --color-primary-active:          #aeea22;
+  --color-primary-glow:            rgba(200, 255, 46, 0.28);
+  --color-accent-cyan:             #55b8d9;
+  --color-accent-violet:           #d6b45d;
 
   /* Surface */
-  --color-canvas:                  #141414;
-  --color-canvas-deep:             #0a0a0a;
-  --color-surface-card:            #1e1e1e;
-  --color-surface-card-elevated:   #262626;
-  --color-surface-strong:          #2e2e2e;
-  --color-surface-hover:           #333333;
+  --color-canvas:                  #050607;
+  --color-canvas-deep:             #030303;
+  --color-surface-card:            #101416;
+  --color-surface-card-elevated:   #151a1f;
+  --color-surface-strong:          #1d252a;
+  --color-surface-hover:           #202a2f;
 
   /* Hairlines */
   --color-hairline:                rgba(255, 255, 255, 0.08);
@@ -25,11 +25,11 @@
 
   /* Text */
   --color-ink:                     #ffffff;
-  --color-body:                    hsla(0, 0%, 100%, 0.65);
+  --color-body:                    rgba(247, 245, 238, 0.68);
   --color-body-strong:             #ffffff;
-  --color-muted:                   hsla(0, 0%, 100%, 0.45);
-  --color-muted-soft:              hsla(0, 0%, 100%, 0.30);
-  --color-on-primary:              #ffffff;
+  --color-muted:                   rgba(247, 245, 238, 0.48);
+  --color-muted-soft:              rgba(247, 245, 238, 0.30);
+  --color-on-primary:              #061006;
 
   /* Semantic */
   --color-success:                 #16c456;
@@ -43,8 +43,8 @@
   --color-surface-pearl:           #1e1e1e;
   --color-ink-muted-80:            hsla(0, 0%, 100%, 0.65);
   --color-ink-muted-48:            hsla(0, 0%, 100%, 0.45);
-  --color-primary-focus:           #1a88ff;
-  --color-primary-on-dark:         #1a88ff;
+  --color-primary-focus:           #c8ff2e;
+  --color-primary-on-dark:         #c8ff2e;
   --color-on-dark:                 #ffffff;
   --color-divider-soft:            rgba(255, 255, 255, 0.06);
   --color-surface-black:           #0a0a0a;
@@ -55,7 +55,7 @@
 
   /* Elevation */
   --shadow-product: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -8px rgba(0, 0, 0, 0.6);
-  --shadow-glow-blue: 0 0 40px rgba(26, 136, 255, 0.12);
+  --shadow-glow-blue: 0 0 40px rgba(200, 255, 46, 0.12);
 
   /* ── Type scale (Kimi / Developer-tool) ── */
   --font-size-hero:          72px;
@@ -122,8 +122,8 @@ body {
 
 /* ── Selection ── */
 ::selection {
-  background: rgba(26, 136, 255, 0.3);
-  color: var(--color-ink);
+  background: rgba(200, 255, 46, 0.28);
+  color: #061006;
 }
 
 /* ── Scrollbar ── */
@@ -164,7 +164,7 @@ input, textarea, select {
 }
 input:focus, textarea:focus, select:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(26, 136, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(200, 255, 46, 0.15);
 }
 input::placeholder, textarea::placeholder {
   color: var(--color-muted);

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import BrandSignature from '@/components/BrandSignature'
 import {
   ArrowUpRight,
   Boxes,
@@ -51,9 +52,7 @@ export default function DesignVaultPage() {
   return (
     <main className={styles.page} data-swarm-root>
       <nav className={styles.nav} aria-label="Navegacao do Design Vault">
-        <Link href="/" className={styles.brand} aria-label="Voltar para pierrondi.dev">
-          PIERRONDI
-        </Link>
+        <BrandSignature href="/" className={styles.brand} ariaLabel="Voltar para pierrondi.dev" subtitle="Design Vault" />
         <div className={styles.navLinks}>
           <a href="#catalogo">Catalogo</a>
           <Link href="/design/library">Library</Link>

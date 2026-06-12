@@ -44,7 +44,7 @@ export default function TechPartnerContent() {
         tagline="Presença técnica contínua sem vínculo CLT. Arquitetura, code review, roadmap e execução parcial — para negócios que precisam de liderança técnica sem contratar um CTO full-time."
         ctas={
           <>
-            <PillButton variant="primary" href="/#contato">Agendar conversa</PillButton>
+            <PillButton variant="primary" href="/#contact">Agendar conversa</PillButton>
             <PillButton variant="ghost" href="/precos">Ver preços</PillButton>
           </>
         }
@@ -105,7 +105,7 @@ export default function TechPartnerContent() {
         tagline="Agende uma conversa de 30 min. Entenda se o Tech Partner é o formato certo para o seu momento."
         ctas={
           <>
-            <PillButton variant="primary" href="/#contato">Agendar conversa</PillButton>
+            <PillButton variant="primary" href="/#contact">Agendar conversa</PillButton>
             <PillButton variant="ghost" href="/produto-digital">Ver produto digital</PillButton>
           </>
         }

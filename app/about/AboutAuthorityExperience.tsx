@@ -13,14 +13,106 @@ const icons = [CircuitBoard, ShieldCheck, Network, LockKeyhole]
 export default function AboutAuthorityExperience({ lang }: { lang: AuthorityLang }) {
   const page = getAuthorityPage(lang)
   const positioning = authorityOps.positioning[lang]
-  const portfolioHref = lang === 'pt' ? '/paulo' : '/en'
+  const portfolioHref = '/paulo'
   const architectureLabel = lang === 'pt' ? 'Arquitetura de operacao' : 'Operating architecture'
-  const budgetLabel = lang === 'pt' ? 'Uso dos USD 40' : 'USD 40 use'
-  const queueLabel = lang === 'pt' ? 'Fila editorial manual' : 'Manual editorial queue'
   const disclaimer =
     lang === 'pt'
       ? 'Conteudo pessoal. Nao e canal oficial da ServiceNow e nao usa informacao confidencial.'
       : 'Personal content. Not an official ServiceNow channel and does not use confidential information.'
+  const publicOperatingItems =
+    lang === 'pt'
+      ? [
+          'Tese executiva antes de ferramenta',
+          'Contexto, politica, permissao e evidencia antes de autonomia',
+          'Guardrails humanos para qualquer publicacao externa',
+          'Nenhum nome de cliente, roadmap, incidente, budget ou print confidencial',
+          'Prova por arquitetura, sistemas e execucao real',
+        ]
+      : [
+          'Executive thesis before tooling',
+          'Context, policy, permission and evidence before autonomy',
+          'Human guardrails for any external publication',
+          'No client names, roadmap, incident, budget or confidential screenshots',
+          'Proof through architecture, systems and real execution',
+        ]
+  const evidenceItems =
+    lang === 'pt'
+      ? [
+          {
+            label: 'ServiceNow + FSI',
+            title: 'Contexto enterprise real',
+            body: 'Experiencia em conta grande, governanca, plataforma, CSDM/CMDB e discussao executiva sem expor informacao sensivel.',
+          },
+          {
+            label: 'AgentOps',
+            title: 'IA com sistema de operacao',
+            body: 'Preflight, handoffs, memoria, human gates, validacao, automacao e rastreabilidade como parte do metodo.',
+          },
+          {
+            label: 'Produto',
+            title: 'Execucao publica verificavel',
+            body: 'Site, portfolio, rotas de arquitetura, Marketing OS e provas visuais funcionando como demonstracao de capacidade aplicada.',
+          },
+        ]
+      : [
+          {
+            label: 'ServiceNow + FSI',
+            title: 'Real enterprise context',
+            body: 'Experience with large-account governance, platform strategy, CSDM/CMDB and executive discussion without sensitive disclosure.',
+          },
+          {
+            label: 'AgentOps',
+            title: 'AI with an operating system',
+            body: 'Preflight, handoffs, memory, human gates, validation, automation and traceability as part of the method.',
+          },
+          {
+            label: 'Product',
+            title: 'Publicly verifiable execution',
+            body: 'Site, portfolio, architecture routes, Marketing OS and visual proof operating as applied capability evidence.',
+          },
+        ]
+  const guardrailItems =
+    lang === 'pt'
+      ? [
+          {
+            label: 'Sem overclaim',
+            theme: 'Nada de ranking inventado',
+            hook: 'O posicionamento usa maturidade aplicada, evidencias e sistemas reais, nao percentis pessoais dificeis de auditar.',
+            cta: 'Autoridade sem arrogancia.',
+          },
+          {
+            label: 'Sem confidencial',
+            theme: 'Clientes protegidos',
+            hook: 'O site evita nomes, prints, metricas, incidentes, roadmap e qualquer material que pareca canal oficial.',
+            cta: 'Credibilidade sem risco.',
+          },
+          {
+            label: 'Sem venda fria',
+            theme: 'Conversa por tese',
+            hook: 'A CTA certa para executivos e pedir critica sobre a arquitetura, nao empurrar servico nem parecer campanha.',
+            cta: 'Promocao simples e respeitosa.',
+          },
+        ]
+      : [
+          {
+            label: 'No overclaim',
+            theme: 'No invented ranking',
+            hook: 'The positioning uses applied maturity, evidence and real systems, not personal percentiles that are hard to audit.',
+            cta: 'Authority without arrogance.',
+          },
+          {
+            label: 'No confidential content',
+            theme: 'Clients protected',
+            hook: 'The site avoids names, screenshots, metrics, incidents, roadmap and anything that could look official.',
+            cta: 'Credibility without risk.',
+          },
+          {
+            label: 'No cold pitch',
+            theme: 'Conversation through thesis',
+            hook: 'The right CTA for executives is to ask for critique on the architecture, not push a service.',
+            cta: 'Simple, respectful promotion.',
+          },
+        ]
 
   return (
     <main className={styles.page}>
@@ -111,12 +203,12 @@ export default function AboutAuthorityExperience({ lang }: { lang: AuthorityLang
           <p className={styles.kicker}>Authority Ops</p>
           <h2 id="ops-title">
             {lang === 'pt'
-              ? 'A operacao no Railway fica simples: conteudo build-time, aprovacao humana e zero escrita em runtime.'
-              : 'The Railway operation stays simple: build-time content, human approval and zero runtime writes.'}
+              ? 'Minha autoridade publica precisa provar maturidade sem vazar contexto sensivel.'
+              : 'My public authority needs to prove maturity without leaking sensitive context.'}
           </h2>
         </div>
         <div className={styles.opsGrid}>
-          {page.operatingSystem.map((item) => (
+          {publicOperatingItems.map((item) => (
             <div key={item} className={styles.opsItem}>
               <CheckCircle2 size={18} aria-hidden="true" />
               <span>{item}</span>
@@ -125,21 +217,21 @@ export default function AboutAuthorityExperience({ lang }: { lang: AuthorityLang
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="budget-title">
+      <section className={styles.section} aria-labelledby="evidence-title">
         <div className={styles.sectionHeader}>
-          <p className={styles.kicker}>{budgetLabel}</p>
-          <h2 id="budget-title">
+          <p className={styles.kicker}>{lang === 'pt' ? 'Evidencia publica' : 'Public evidence'}</p>
+          <h2 id="evidence-title">
             {lang === 'pt'
-              ? 'Dinheiro compra consistencia, nao substitui a casa propria.'
-              : 'The budget buys consistency, not a replacement for the owned surface.'}
+              ? 'O perfil precisa mostrar prova operacional, nao apenas curriculo.'
+              : 'The profile needs to show operational proof, not just a resume.'}
           </h2>
         </div>
         <div className={styles.budgetGrid}>
-          {authorityOps.budgetPlan.map((item) => (
-            <article key={item.item}>
-              <span>{item.monthlyUsd ? `USD ${item.monthlyUsd}` : 'Free'}</span>
-              <h3>{item.item}</h3>
-              <p>{item.use}</p>
+          {evidenceItems.map((item) => (
+            <article key={item.title}>
+              <span>{item.label}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
             </article>
           ))}
         </div>
@@ -147,17 +239,17 @@ export default function AboutAuthorityExperience({ lang }: { lang: AuthorityLang
 
       <section className={styles.section} aria-labelledby="queue-title">
         <div className={styles.sectionHeader}>
-          <p className={styles.kicker}>{queueLabel}</p>
+          <p className={styles.kicker}>{lang === 'pt' ? 'Guardrails publicos' : 'Public guardrails'}</p>
           <h2 id="queue-title">
             {lang === 'pt'
-              ? 'A primeira campanha e ServiceNow-only e fica em rascunho ate aprovacao.'
-              : 'The first campaign is ServiceNow-only and stays draft-only until approval.'}
+              ? 'A forma de me promover tambem precisa ser governada.'
+              : 'The way I promote myself also needs to be governed.'}
           </h2>
         </div>
         <div className={styles.queueGrid}>
-          {authorityOps.contentQueue.map((item) => (
-            <article key={item.id}>
-              <span>{item.status.replace('_', ' ')}</span>
+          {guardrailItems.map((item) => (
+            <article key={item.theme}>
+              <span>{item.label}</span>
               <h3>{item.theme}</h3>
               <p>{item.hook}</p>
               <small>{item.cta}</small>

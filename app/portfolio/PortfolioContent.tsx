@@ -70,7 +70,7 @@ const portfolioEntries = [
   },
   {
     title: 'Motor de marketing com IA',
-    href: '/#contato',
+    href: '/#contact',
     image: '/assets/content.png',
     service: 'Marketing técnico',
     result: 'Organiza tese, conteúdo, tracking e handoff comercial.',
@@ -105,7 +105,7 @@ export default function PortfolioContent() {
             </PillButton>
             <PillButton
               variant="ghost"
-              href="/#contato"
+              href="/#contact"
               onClick={() =>
                 trackEvent('PortfolioCTA_Clicked', {
                   asset: 'portfolio-page-contact',
@@ -179,7 +179,7 @@ export default function PortfolioContent() {
         ctas={
           <PillButton
             variant="primary"
-            href="/#contato"
+            href="/#contact"
             onClick={() =>
               trackEvent('PortfolioCTA_Clicked', {
                 asset: 'portfolio-page-final-cta',

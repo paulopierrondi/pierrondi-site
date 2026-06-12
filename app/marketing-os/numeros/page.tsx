@@ -39,7 +39,7 @@ export default function PublicNumbersPage() {
             <PillButton href="/marketing-os" variant="primary">
               ← Voltar para Marketing OS
             </PillButton>
-            <PillButton href="/#contato" variant="ghost">
+            <PillButton href="/#contact" variant="ghost">
               Falar com o time
             </PillButton>
           </div>

@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import type { ReactNode } from 'react'
+import BrandSignature from '@/components/BrandSignature'
 import {
   motion,
   useReducedMotion,
@@ -949,6 +950,33 @@ const architecturePitchCards = [
   },
 ]
 
+const executiveShareCards = [
+  {
+    kicker: 'Por que mandar',
+    title: 'A conversa é governança operacional, não hype de IA.',
+    copy:
+      'O link mostra como eu penso AI Agents em banco: dado, risco, owner, runtime, Service Instance, AI Control Tower e evidência antes de escala.',
+  },
+  {
+    kicker: 'Como me posiciona',
+    title: 'Uso avançado de IA aplicado a arquitetura enterprise.',
+    copy:
+      'A mensagem não tenta provar ranking pessoal. Ela mostra maturidade prática: transformar IA em modelo operacional, com controle e execução.',
+  },
+  {
+    kicker: 'Pedido certo',
+    title: 'Abrir crítica executiva, não pedir favor.',
+    copy:
+      'O convite é simples: “queria tua leitura”. Isso preserva relação, evita autopromoção agressiva e cria espaço para uma conversa de alto nível.',
+  },
+]
+
+const forwardMessage = [
+  'Fala, [nome]. Queria te mandar uma página curta com minha leitura sobre governança de AI Agents em ambiente bancário usando ServiceNow/CSDM.',
+  'Não é material oficial nem confidencial. É uma forma de organizar onde vejo valor real: AI Digital Asset, CMDB, Service Instance, AI Control Tower, owner, risco, runtime e evidência operacional.',
+  'Estou tentando posicionar meu trabalho como AI Operating Model aplicado, não só “uso de IA”. Se puder olhar com olhar crítico, queria muito tua opinião.',
+]
+
 const motionEase = [0.16, 1, 0.3, 1] as const
 const revealViewport = { once: true, amount: 0.2 } as const
 
@@ -1193,6 +1221,10 @@ export default function ItauExperience() {
         style={{ scaleX: reduced ? 1 : progressScale }}
         aria-hidden="true"
       />
+      <header className={styles.reservedHeader} aria-label="pierrondi.dev">
+        <BrandSignature href="/" className={styles.reservedBrand} tone="amber" subtitle="Reserved System" />
+        <p>Material pessoal reservado · AI Operating Model · ServiceNow Architecture</p>
+      </header>
       <div className={styles.container}>
         {/* ─────────── HERO ─────────── */}
         <motion.section
@@ -1214,15 +1246,15 @@ export default function ItauExperience() {
                 <span className={`${styles.brandChip} ${styles.sn}`}>
                   <span className={styles.brandDot} /> ServiceNow
                 </span>
-                <span className={`${styles.brandChip} ${styles.opr}`}>OPR-2025-0162762</span>
+                <span className={`${styles.brandChip} ${styles.opr}`}>Material pessoal · noindex</span>
               </motion.div>
               <motion.h1 className={styles.heroTitle} variants={fadeUp}>
-                ServiceNow Architectural Notation para governar AI Agents no Itaú.
+                Uma leitura executiva para governar AI Agents no Itaú.
               </motion.h1>
               <motion.p className={styles.heroLede} variants={fadeUp}>
-                O pitch sai do 3D e vira notação arquitetural: camadas CSDM, decisão de classe,
-                governança do ativo, runtime, relações e uma visão final para o AI Control Tower
-                descobrir, reconciliar, observar e acionar a operação.
+                O objetivo não é vender hype. É transformar AI Agents em modelo operacional:
+                camadas CSDM, decisão de classe, governança do ativo, runtime, relações,
+                owners e uma visão final para o AI Control Tower operar descoberta, risco e evidência.
               </motion.p>
               <motion.div className={styles.heroMeta} variants={fadeUp}>
                 <div className={styles.heroMetaItem}>
@@ -1277,6 +1309,43 @@ export default function ItauExperience() {
           )}
         </motion.section>
 
+        {/* ─────────── EXECUTIVE SHARE PACK ─────────── */}
+        <Reveal className={`${styles.section} ${styles.shareSection}`} reduced={reduced}>
+          <div className={styles.sharePanel}>
+            <div className={styles.shareIntro}>
+              <span className={styles.sectionKicker}>para encaminhar sem soar abusivo</span>
+              <h2 className={styles.sectionTitle}>A melhor promoção aqui é mostrar raciocínio aplicado.</h2>
+              <p>
+                Para um superintendente, a mensagem precisa ser curta, respeitosa e tecnicamente séria.
+                O ponto forte é posicionar Paulo como operador de AI Operating Model: alguém que liga
+                IA, governança, plataforma e execução real.
+              </p>
+            </div>
+            <div className={styles.forwardMessage} aria-label="Mensagem sugerida para encaminhar">
+              <span>Mensagem sugerida</span>
+              {forwardMessage.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+            </div>
+          </div>
+
+          <motion.div
+            className={styles.shareCards}
+            variants={stagger}
+            initial={reduced ? false : 'hidden'}
+            whileInView={reduced ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.18 }}
+          >
+            {executiveShareCards.map((card) => (
+              <motion.article key={card.title} variants={cardItem}>
+                <span>{card.kicker}</span>
+                <h3>{card.title}</h3>
+                <p>{card.copy}</p>
+              </motion.article>
+            ))}
+          </motion.div>
+        </Reveal>
+
         {/* ─────────── ARCHITECTURE BLUEPRINT ─────────── */}
         <Reveal className={`${styles.section} ${styles.blueprintSection}`} reduced={reduced}>
           <div id="architecture-blueprint" />
@@ -1314,7 +1383,7 @@ export default function ItauExperience() {
               <p>
                 O DOCX/PDF acompanha essa narrativa: tese executiva, diagrama ServiceNow CSDM,
                 modelo de dados, checklist do piloto, fontes oficiais e guardrails para não quebrar
-                o Control Tower operacional do pierrondi.dev.
+                o desenho operacional de governança.
               </p>
               <div className={styles.referencePackLinks}>
                 <a href="/itau/itau-ai-governance-architecture-reference.pdf">Abrir PDF</a>

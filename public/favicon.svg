@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="pierrondi.dev mark">
+  <defs>
+    <radialGradient id="bg" cx="68%" cy="22%" r="82%">
+      <stop offset="0%" stop-color="#14363f"/>
+      <stop offset="40%" stop-color="#071112"/>
+      <stop offset="100%" stop-color="#020303"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="175" y1="187" x2="835" y2="812">
+      <stop offset="0%" stop-color="#7ee7ff" stop-opacity="0.75"/>
+      <stop offset="48%" stop-color="#c8ff2e" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#f7f5ee" stop-opacity="0.58"/>
+    </linearGradient>
+    <filter id="softGlow" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" rx="184" fill="url(#bg)"/>
+  <circle cx="650" cy="312" r="348" fill="#c8ff2e" opacity="0.12"/>
+  <g transform="translate(512 512)">
+    <circle r="342" fill="none" stroke="#f7f5ee" stroke-opacity="0.14" stroke-width="8"/>
+    <ellipse rx="372" ry="142" fill="none" stroke="url(#ring)" stroke-width="18" opacity="0.92" transform="rotate(-18)" filter="url(#softGlow)"/>
+    <ellipse rx="278" ry="104" fill="none" stroke="#7ee7ff" stroke-width="7" opacity="0.46" transform="rotate(24)"/>
+    <circle cx="268" cy="-86" r="34" fill="#c8ff2e" filter="url(#softGlow)"/>
+    <path d="M-152 -226 H-38 V226 H-152 Z" fill="#ffffff"/>
+    <path d="M-80 -226 H90 C210 -226 284 -151 284 -35 C284 82 210 154 92 154 H-80 V44 H82 C136 44 170 14 170 -35 C170 -86 136 -116 82 -116 H-80 Z" fill="#ffffff"/>
+    <rect x="182" y="128" width="86" height="86" rx="13" fill="#c8ff2e" filter="url(#softGlow)"/>
+  </g>
+</svg>

@@ -55,7 +55,7 @@ export default function ProdutoContent() {
         tagline="App web, micro SaaS ou ferramenta interna — com stack moderna, deploy em produção e código que você pode continuar. A partir de R$5.000."
         ctas={
           <>
-            <PillButton variant="primary" href="/#contato">Diagnóstico gratuito</PillButton>
+            <PillButton variant="primary" href="/#contact">Diagnóstico gratuito</PillButton>
             <PillButton variant="ghost" href="/automacoes">Ver automações</PillButton>
           </>
         }
@@ -135,7 +135,7 @@ export default function ProdutoContent() {
         tagline="Diagnóstico gratuito de 30 min. Saímos com escopo, prazo e valor — sem compromisso."
         ctas={
           <>
-            <PillButton variant="primary" href="/#contato">Agendar diagnóstico</PillButton>
+            <PillButton variant="primary" href="/#contact">Agendar diagnóstico</PillButton>
             <PillButton variant="ghost" href="/">Ver todos os serviços</PillButton>
           </>
         }

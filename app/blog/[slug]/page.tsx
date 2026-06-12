@@ -88,7 +88,7 @@ export default async function PostPage({ params }: Props) {
     },
   }
   const offer = offerByCategory[post.category] ?? {
-    href: '/#contato',
+    href: '/#contact',
     label: 'Falar com a equipe',
     eyebrow: 'Quer implementar isso?',
   }
@@ -186,7 +186,7 @@ export default async function PostPage({ params }: Props) {
               <PillButton variant="primary" href={offer.href}>
                 {offer.label}
               </PillButton>
-              <PillButton variant="ghost" href="/#contato">
+              <PillButton variant="ghost" href="/#contact">
                 Falar com a equipe
               </PillButton>
             </>

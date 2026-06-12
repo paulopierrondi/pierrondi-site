@@ -45,10 +45,9 @@
 }
 
 .brand {
-  font-size: 13px;
-  font-weight: 950;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .navLinks {
@@ -733,7 +732,7 @@
   }
 
   .brand {
-    font-size: 11px;
+    gap: 8px;
   }
 
   .navLinks a:first-child,

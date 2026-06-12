@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import BrandSignature from '@/components/BrandSignature'
 import KimiHomeHero from '@/components/KimiHomeHero'
 import LangSync from '@/components/LangSync'
 import HomeContactForm from './HomeContactForm'
@@ -29,9 +30,7 @@ export default function HomeExperience({ lang }: { lang: HomeLang }) {
       <LangSync lang={lang} />
 
       <nav className={styles.nav} aria-label={t.nav.aria}>
-        <a href="#top" className={styles.brand} aria-label="Paulo Pierrondi">
-          PIERRONDI
-        </a>
+        <BrandSignature href="#top" className={styles.brand} ariaLabel="Paulo Pierrondi" mobileCompact />
         <div className={styles.navLinks}>
           <a href="#top">{t.nav.home}</a>
           <Link href={lang === 'pt' ? '/about' : '/en/about'}>{t.nav.about}</Link>
@@ -240,7 +239,7 @@ export default function HomeExperience({ lang }: { lang: HomeLang }) {
       </section>
 
       <footer className={styles.footer}>
-        <span>{t.footer.site}</span>
+        <BrandSignature className={styles.footerBrand} size="sm" compact />
         <span>
           <FooterDisclaimer text={t.footer.disclaimer} />
         </span>

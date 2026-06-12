@@ -1,0 +1,23 @@
+{
+  "name": "pierrondi.dev",
+  "short_name": "pierrondi.dev",
+  "description": "Paulo Pierrondi — AI Operating Model, ServiceNow and AgentOps.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050607",
+  "theme_color": "#c8ff2e",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

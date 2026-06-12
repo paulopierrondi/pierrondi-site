@@ -123,7 +123,7 @@ export default function SobreContent() {
         tagline="Conta sua ideia. Em 24h a gente te diz se é viável e como chegar lá."
         ctas={
           <>
-            <PillButton variant="primary" href="/#contato">Diagnóstico gratuito</PillButton>
+            <PillButton variant="primary" href="/#contact">Diagnóstico gratuito</PillButton>
             <PillButton variant="ghost" href="/precos">Ver preços</PillButton>
           </>
         }

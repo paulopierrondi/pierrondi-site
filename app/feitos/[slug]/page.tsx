@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import BrandSignature from '@/components/BrandSignature'
 import { feitos, getFeito, type Feito } from '../feitos-data'
 import styles from './page.module.css'
 
@@ -133,9 +134,7 @@ export default async function FeitoPage({ params }: Props) {
   return (
     <main className={styles.page} data-swarm-root>
       <nav className={styles.nav} aria-label="Navegacao de feitos">
-        <Link href="/#top" className={styles.brand}>
-          Paulo Pierrondi
-        </Link>
+        <BrandSignature href="/#top" className={styles.brand} ariaLabel="Voltar para pierrondi.dev" subtitle="Proof System" />
         <div className={styles.navLinks}>
           <Link href="/#themes">Temas</Link>
           <Link href="/#feitos">Feitos</Link>

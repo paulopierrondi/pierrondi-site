@@ -176,7 +176,7 @@ export default function MarketingOsContent() {
           <>
             <PillButton
               variant="primary"
-              href="/#contato"
+              href="/#contact"
               className="plausible-event-name=marketing-os-cta-primary"
             >
               Quero implementar
@@ -340,7 +340,7 @@ export default function MarketingOsContent() {
           <>
             <PillButton
               variant="primary"
-              href="/#contato"
+              href="/#contact"
               className="plausible-event-name=marketing-os-cta-bottom"
             >
               Agendar diagnóstico

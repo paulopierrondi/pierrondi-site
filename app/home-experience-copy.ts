@@ -109,7 +109,7 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
     nav: {
       aria: 'Navegação principal',
       home: 'Início',
-      about: 'About',
+      about: 'Sobre',
       design: 'Design',
       sada: 'SADA',
       agents: 'Agentes',
@@ -165,9 +165,9 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
       },
       promotion: {
         eyebrow: 'Posicionamento executivo',
-        title: 'De usuário avançado de IA para operador de AI Operating Model.',
+        title: 'De usuário avançado de IA para operador aplicado de AI Operating Model.',
         copy:
-          'A narrativa que importa para carreira, parceria e autoridade pública: transformar IA em capacidade repetível para acelerar adoção, reduzir risco operacional e abrir expansão de plataforma em contas enterprise.',
+          'A narrativa defensável: maturidade prática acima da média em IA aplicada, convertida em capacidade repetível para acelerar adoção, reduzir risco operacional e abrir expansão de plataforma em contas enterprise.',
       },
       themes: {
         eyebrow: 'Temas que importam agora',
@@ -390,9 +390,9 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
       },
       promotion: {
         eyebrow: 'Executive positioning',
-        title: 'From advanced AI user to AI Operating Model operator.',
+        title: 'From advanced AI user to applied AI Operating Model operator.',
         copy:
-          'The career, partnership and public-authority narrative that matters: turn AI into repeatable capability that accelerates adoption, lowers operational risk and opens platform expansion in enterprise accounts.',
+          'The defensible narrative: above-average practical maturity in applied AI, converted into repeatable capability that accelerates adoption, lowers operational risk and opens platform expansion in enterprise accounts.',
       },
       themes: {
         eyebrow: 'What matters now',

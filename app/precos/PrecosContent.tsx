@@ -182,7 +182,7 @@ export default function PrecosContent() {
         tagline="Conta o problema. A gente mostra como resolver — com prazo e preço antes de começar."
         ctas={
           <>
-            <PillButton variant="primary" href="/#contato">Agendar diagnóstico</PillButton>
+            <PillButton variant="primary" href="/#contact">Agendar diagnóstico</PillButton>
             <PillButton variant="ghost" href="/">Ver todos os serviços</PillButton>
           </>
         }

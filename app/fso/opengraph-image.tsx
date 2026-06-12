@@ -60,7 +60,7 @@ export default function Image() {
               fontSize: '78px',
               fontWeight: 800,
               lineHeight: 1.02,
-              letterSpacing: '-0.03em',
+              letterSpacing: 0,
               color: '#ffffff',
             }}
           >

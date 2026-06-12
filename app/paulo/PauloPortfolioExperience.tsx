@@ -508,7 +508,7 @@ export default function PauloPortfolioExperience() {
 
   useEffect(() => {
     const previousLang = document.documentElement.lang
-    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en'
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en-US'
 
     return () => {
       document.documentElement.lang = previousLang || 'pt-BR'

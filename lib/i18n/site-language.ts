@@ -24,6 +24,7 @@ const localizedRoutes: Record<string, Record<HomeLang, string>> = {
 const languageSwitcherHiddenPrefixes = [
   '/bradesco-26',
   '/fso',
+  '/itau',
   '/paulo',
   '/whypaulo',
   '/control_tower',

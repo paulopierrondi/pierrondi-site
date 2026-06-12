@@ -229,7 +229,7 @@ export default function CalculadoraContent() {
         headline="Gostou do resultado?"
         tagline="Vamos converter esta economia em realidade. Diagnóstico gratuito em 30 minutos."
         ctas={
-          <PillButton href="/#contato" variant="primary">
+          <PillButton href="/#contact" variant="primary">
             Quero uma proposta
           </PillButton>
         }

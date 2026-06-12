@@ -47,11 +47,11 @@ export async function GET() {
               fontSize: '18px',
               fontWeight: 700,
               color: '#e6e6e6',
-              letterSpacing: '2px',
-              textTransform: 'uppercase',
-            }}
-          >
-            PAULO PIERRONDI
+            letterSpacing: '2px',
+            textTransform: 'uppercase',
+          }}
+        >
+            PIERRONDI.DEV
           </span>
         </div>
 
@@ -63,10 +63,10 @@ export async function GET() {
               fontWeight: 800,
               color: '#e6e6e6',
               lineHeight: 0.9,
-              letterSpacing: '-3px',
+              letterSpacing: 0,
             }}
           >
-            ServiceNow.
+            AI Operating Model.
           </div>
           <div
             style={{
@@ -74,10 +74,10 @@ export async function GET() {
               fontWeight: 800,
               color: '#62d84e',
               lineHeight: 0.9,
-              letterSpacing: '-3px',
+              letterSpacing: 0,
             }}
           >
-            IA governada.
+            ServiceNow + AgentOps.
           </div>
         </div>
 

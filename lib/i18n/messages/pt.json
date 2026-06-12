@@ -10,8 +10,8 @@
         "href": "/marketing-os"
       },
       {
-        "label": "Serviços",
-        "href": "/#servicos"
+        "label": "Temas",
+        "href": "/#themes"
       },
       {
         "label": "Blog",
@@ -373,31 +373,31 @@
     }
   },
   "footer": {
-    "desc": "Software, automação, agentes e páginas que ajudam seu negócio a vender com mais clareza.",
+    "desc": "Site pessoal de Paulo Pierrondi sobre AI Operating Model, ServiceNow, AgentOps e execução governada. Sem nomes de clientes ou informação confidencial.",
     "links": [
       {
-        "label": "Portfólio",
-        "href": "/portfolio"
+        "label": "Início",
+        "href": "/"
+      },
+      {
+        "label": "Sobre",
+        "href": "/about"
+      },
+      {
+        "label": "Paulo",
+        "href": "/paulo"
+      },
+      {
+        "label": "Provas",
+        "href": "/feitos/sada-servicenow"
       },
       {
         "label": "Marketing OS",
         "href": "/marketing-os"
       },
       {
-        "label": "Serviços",
-        "href": "/#servicos"
-      },
-      {
-        "label": "Contato",
-        "href": "/#contato"
-      },
-      {
-        "label": "Blog",
-        "href": "/blog"
-      },
-      {
-        "label": "FAQ",
-        "href": "/faq"
+        "label": "LinkedIn",
+        "href": "https://br.linkedin.com/in/paulopierrondi"
       },
       {
         "label": "Privacidade",
@@ -408,7 +408,7 @@
         "href": "/termos"
       }
     ],
-    "location": "São Paulo · remoto",
+    "location": "São José dos Campos · São Paulo",
     "copyright": "© 2026 pierrondi.dev"
   },
   "mobileCta": "Diagnóstico gratuito →",

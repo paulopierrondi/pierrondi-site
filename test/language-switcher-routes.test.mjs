@@ -39,7 +39,7 @@ test('global language picker keeps accessible names and URL suffixes', () => {
 })
 
 test('global language picker is hidden on single-language or page-managed experiences', () => {
-  const hiddenPrefixes = ["'/bradesco-26'", "'/fso'", "'/paulo'", "'/whypaulo'", "'/control_tower'", "'/automacoes'"]
+  const hiddenPrefixes = ["'/bradesco-26'", "'/fso'", "'/itau'", "'/paulo'", "'/whypaulo'", "'/control_tower'", "'/automacoes'"]
 
   for (const prefix of hiddenPrefixes) {
     assert.ok(siteLanguageSource.includes(prefix), `Expected hidden language switcher prefix: ${prefix}`)

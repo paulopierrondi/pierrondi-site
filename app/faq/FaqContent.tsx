@@ -77,7 +77,7 @@ export default function FaqContent() {
         tagline="Sem formulário, sem fila. Uma conversa de 30 min resolve."
         ctas={
           <>
-            <PillButton variant="primary" href="/#contato">Falar com a pierrondi.dev</PillButton>
+            <PillButton variant="primary" href="/#contact">Falar com a pierrondi.dev</PillButton>
             <PillButton variant="ghost" href="/precos">Ver preços</PillButton>
           </>
         }
