@@ -4,24 +4,27 @@ export const siteLanguages: Array<{
   code: HomeLang
   label: string
   locale: string
+  name: string
 }> = [
-  { code: 'pt', label: 'PT', locale: 'pt-BR' },
-  { code: 'en', label: 'EN', locale: 'en-US' },
+  { code: 'pt', label: 'PT', locale: 'pt-BR', name: 'Português' },
+  { code: 'en', label: 'EN', locale: 'en-US', name: 'English' },
 ]
 
 const localizedRoutes: Record<string, Record<HomeLang, string>> = {
   '/': { pt: '/', en: '/en' },
   '/en': { pt: '/', en: '/en' },
+  '/about': { pt: '/about', en: '/en/about' },
+  '/en/about': { pt: '/about', en: '/en/about' },
   '/privacidade': { pt: '/privacidade', en: '/privacy' },
   '/privacy': { pt: '/privacidade', en: '/privacy' },
   '/termos': { pt: '/termos', en: '/terms' },
   '/terms': { pt: '/termos', en: '/terms' },
-  '/paulo': { pt: '/paulo', en: '/paulo' },
 }
 
 const languageSwitcherHiddenPrefixes = [
   '/bradesco-26',
   '/fso',
+  '/paulo',
   '/whypaulo',
   '/control_tower',
   '/automacoes',
@@ -44,17 +47,24 @@ export function shouldHideLanguageSwitcher(pathname: string) {
 export function resolveLocalizedPath(
   pathname: string,
   targetLanguage: HomeLang,
+  search = '',
+  hash = '',
 ) {
   const normalizedPath = pathname || '/'
   const mappedRoute = localizedRoutes[normalizedPath]
+  const normalizedSearch = search ? `?${search.replace(/^\?/, '')}` : ''
+  const normalizedHash = hash ? `#${hash.replace(/^#/, '')}` : ''
+  const suffix = `${normalizedSearch}${normalizedHash}`
 
   if (mappedRoute) {
-    return mappedRoute[targetLanguage]
+    return `${mappedRoute[targetLanguage]}${suffix}`
   }
 
   if (targetLanguage === 'pt') {
-    return normalizedPath === '/en' ? '/' : normalizedPath
+    const ptPath = normalizedPath === '/en' ? '/' : normalizedPath.startsWith('/en/') ? normalizedPath.slice(3) || '/' : normalizedPath
+    return `${ptPath}${suffix}`
   }
 
-  return '/en'
+  const enPath = normalizedPath === '/' ? '/en' : normalizedPath.startsWith('/en/') ? normalizedPath : `/en${normalizedPath}`
+  return `${enPath}${suffix}`
 }

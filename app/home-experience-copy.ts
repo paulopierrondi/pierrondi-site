@@ -21,7 +21,9 @@ export interface HomeExperienceCopy {
     lead: string
     note: string
     linkedIn: string
-    email: string
+    proofCta: string
+    proofIntro: string
+    proofStrip: Array<{ label: string; title: string; copy: string }>
     agentPanelLabel: string
     agentSignals: Array<[string, string]>
   }
@@ -32,6 +34,11 @@ export interface HomeExperienceCopy {
       copy: string
     }
     operating: {
+      eyebrow: string
+      title: string
+      copy: string
+    }
+    promotion: {
       eyebrow: string
       title: string
       copy: string
@@ -64,6 +71,7 @@ export interface HomeExperienceCopy {
   themes: Array<{ label: string; title: string; copy: string }>
   focusAreas: Array<{ number: string; title: string; copy: string }>
   operatingLayers: Array<{ label: string; title: string; copy: string }>
+  promotionOutcomes: Array<{ label: string; title: string; copy: string }>
   form: {
     serviceValue: string
     subject: string
@@ -111,40 +119,55 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
       linkedinAria: 'LinkedIn de Paulo Pierrondi',
     },
     hero: {
-      kicker: 'ServiceNow / IA corporativa / Estratégia de plataforma',
-      ariaLabel: 'IA corporativa não escala só por modelos.',
+      kicker: 'AI Operating Model | AgentOps | FSI',
+      ariaLabel: 'Transformo IA enterprise em modelo operacional.',
       headlineLines: [
-        [{ text: 'IA' }, { text: 'corporativa' }],
-        [{ text: 'não' }, { text: 'escala' }, { text: 'só' }],
-        [{ text: 'por' }, { text: 'modelos.', accent: true }],
+        [{ text: 'Transformo' }, { text: 'IA' }],
+        [{ text: 'enterprise' }, { text: 'em' }],
+        [{ text: 'modelo' }, { text: 'operacional.', accent: true }],
       ],
       lead:
-        'Ela escala quando governança, contexto operacional e execução em workflow andam juntos. Sou Technical Account Executive na ServiceNow, trabalhando na interseção entre estratégia, plataforma, dados e adoção.',
+        'ServiceNow TAE / Enterprise Architect construindo AgentOps, fluxos de delivery acceleration, AI control towers e sistemas de implementação para ambientes enterprise regulados.',
       note:
-        'Este é meu site pessoal, baseado em materiais públicos, frameworks próprios e na minha perspectiva profissional. Não é um canal oficial da ServiceNow e não inclui informação confidencial.',
+        'Opero na interseção de estratégia, plataforma, dados e execução. Este é meu site pessoal; não é canal oficial da ServiceNow e não inclui informação confidencial.',
       linkedIn: 'Conectar no LinkedIn',
-      email: 'Enviar email',
-      agentPanelLabel: 'Modelo operacional de agentes',
+      proofCta: 'Ver modelo operacional',
+      proofIntro: 'Operating model -> adoption velocity -> revenue expansion.',
+      proofStrip: [
+        { label: 'AI Operating Model', title: 'Categoria própria', copy: 'Método antes da ferramenta' },
+        { label: 'Adoption Velocity', title: 'Piloto para ritual', copy: 'Cadência, ownership e métrica' },
+        { label: 'AgentOps', title: 'Governed agents', copy: 'Policies, evals and gates' },
+        { label: 'CSDM / CMDB', title: 'Operational backbone', copy: 'Context before action' },
+        { label: 'LLMOps', title: 'Model orchestration', copy: 'Cost, fallback and trace' },
+        { label: 'Revenue Expansion', title: 'Valor de plataforma', copy: 'Roadmap, execucao e prova' },
+      ],
+      agentPanelLabel: 'AI Operating Model: pilot to governed execution',
       agentSignals: [
-        ['Intenção', 'porta de entrada'],
-        ['Contexto', 'service graph'],
-        ['Política', 'controle de IA'],
-        ['Ação', 'workflow'],
-        ['Evidência', 'trilha auditável'],
+        ['Intent', 'usuário / sistema'],
+        ['Context', 'Service Graph / CMDB'],
+        ['Policy', 'acesso / risco / aprovação'],
+        ['Action', 'workflow automation'],
+        ['Evidence', 'audit trail / KPIs'],
       ],
     },
     sections: {
       lens: {
-        eyebrow: 'Minha lente',
-        title: 'A conversa deixou de ser sobre IA. Agora é sobre trabalho delegado.',
+        eyebrow: 'Proof systems',
+        title: 'A tese pública: IA só cria vantagem quando vira modelo operacional.',
         copy:
-          'O ponto crítico não é quantos agentes existem. É se a organização sabe onde eles podem atuar, quais dados podem usar, quem aprova exceções, como evidenciam valor e como aprendem sem perder controle.',
+          'O posicionamento não é "sei usar IA". É saber converter estratégia em sistemas operacionais: agentes governados, aceleradores de implementação, modelos de adoção e trilhas de evidência para ambientes enterprise.',
       },
       operating: {
         eyebrow: 'Modelo operacional',
-        title: 'Agente autônomo exige base operacional: contexto, permissão, ação e evidência.',
+        title: 'Autonomia só entra em produção quando contexto, permissão, ação e evidência estão desenhados.',
         copy:
-          'Essa é a forma como eu estruturo a conversa: antes de escalar autonomia, desenhar a cadeia que conecta intenção, dados, controle, workflow e resultado mensurável.',
+          'Essa é a forma como estruturo a conversa com executivos, arquitetos e times de entrega: antes de escalar agentes, desenhar a cadeia que conecta intenção, dados, controle, workflow, adoção e resultado mensurável.',
+      },
+      promotion: {
+        eyebrow: 'Posicionamento executivo',
+        title: 'De usuário avançado de IA para operador de AI Operating Model.',
+        copy:
+          'A narrativa que importa para carreira, parceria e autoridade pública: transformar IA em capacidade repetível para acelerar adoção, reduzir risco operacional e abrir expansão de plataforma em contas enterprise.',
       },
       themes: {
         eyebrow: 'Temas que importam agora',
@@ -154,10 +177,10 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
         identity: 'leitura executiva + arquitetura operacional',
       },
       achievements: {
-        eyebrow: 'Feitos aplicados',
-        title: 'Arquiteturas de valor que já construí, refinei e transformei em sistema.',
+        eyebrow: 'Sistemas aplicados',
+        title: 'Não é portfólio decorativo. São sistemas que viram conversa executiva, demo e execução.',
         copy:
-          'Sem expor nomes: minha experiência inclui apoiar grandes enterprises e indústrias como FSI, Energy e Retail a avançarem na era da IA, dados e agentes. Abaixo estão os sistemas de pensamento e execução que eu levo para conversas de investimento, contratação e parceria.',
+          'Sem expor nomes: minha experiência inclui apoiar grandes enterprises e indústrias como FSI, Energy e Retail a avançarem em IA, dados e agentes. Abaixo estão os sistemas de pensamento e execução que levo para contratação, mobilidade interna, parceria e investimento.',
         cta: 'Abrir arquitetura',
         cards: {
           'sada-servicenow': {
@@ -229,23 +252,23 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
     focusAreas: [
       {
         number: '01',
-        title: 'Estratégia para plataforma',
-        copy: 'Traduzir prioridades executivas em arquitetura, roadmap, governança e adoção real da ServiceNow.',
+        title: 'Agentes governados',
+        copy: 'Desenhar agentes com escopo, contexto, guardrails, avaliação e auditoria antes de entregar autonomia.',
       },
       {
         number: '02',
-        title: 'Agentes para operação',
-        copy: 'Separar assistência, autonomia e controle: qual trabalho pode ser delegado, em que escopo e com qual evidência.',
+        title: 'Delivery acceleration',
+        copy: 'Transformar demanda em artefatos, templates, critérios de qualidade e handoffs repetíveis para implementação.',
       },
       {
         number: '03',
-        title: 'Dados para contexto',
-        copy: 'Conectar CMDB, Service Graph, CSDM e dados externos para reduzir decisão baseada em fragmentos.',
+        title: 'Operating model de IA',
+        copy: 'Construir cadência, ownership, métricas e governança para IA sair do piloto e entrar no ritual de execução.',
       },
       {
         number: '04',
-        title: 'Adoção para valor',
-        copy: 'Fazer inovação virar ritual operacional: ownership, processo, métrica, segurança e melhoria contínua.',
+        title: 'Arquitetura ServiceNow',
+        copy: 'Conectar CSDM, CMDB, Workflow Data Fabric, Now Assist e Action Fabric em narrativa de valor mensurável.',
       },
     ],
     operatingLayers: [
@@ -254,6 +277,26 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
       { label: '03', title: 'Control', copy: 'Permissão, política, limite e aprovação definem onde autonomia termina.' },
       { label: '04', title: 'Action', copy: 'Execução acontece no workflow, não em uma conversa solta.' },
       { label: '05', title: 'Evidence', copy: 'Valor e confiança dependem de log, métrica, auditoria e aprendizado.' },
+    ],
+    promotionOutcomes: [
+      {
+        label: 'Adoption velocity',
+        title: 'Acelerar adoção sem vender hype',
+        copy:
+          'Converter tese executiva em casos de uso, artefatos, owners, cadência e critérios de avanço para sair de piloto isolado.',
+      },
+      {
+        label: 'Governed execution',
+        title: 'Levar IA para o workflow com controle',
+        copy:
+          'Definir onde agentes podem agir, quando precisam de aprovação, quais dados usam e qual evidência deixam para auditoria.',
+      },
+      {
+        label: 'Revenue expansion',
+        title: 'Amarrar IA a valor de plataforma',
+        copy:
+          'Transformar adoção governada em roadmap, expansão, serviços, confiança executiva e novas conversas de valor.',
+      },
     ],
     form: {
       serviceValue: 'portfolio-executivo-ai',
@@ -301,40 +344,55 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
       linkedinAria: 'Paulo Pierrondi on LinkedIn',
     },
     hero: {
-      kicker: 'ServiceNow / Enterprise AI / Platform strategy',
-      ariaLabel: 'Enterprise AI does not scale on models alone.',
+      kicker: 'AI Operating Model | AgentOps | FSI',
+      ariaLabel: 'I turn enterprise AI into an operating model.',
       headlineLines: [
-        [{ text: 'Enterprise' }, { text: 'AI' }],
-        [{ text: 'does' }, { text: 'not' }, { text: 'scale' }],
-        [{ text: 'on' }, { text: 'models', accent: true }, { text: 'alone.', accent: true }],
+        [{ text: 'I' }, { text: 'turn' }, { text: 'enterprise' }],
+        [{ text: 'AI' }, { text: 'into' }, { text: 'an' }],
+        [{ text: 'operating' }, { text: 'model.', accent: true }],
       ],
       lead:
-        'It scales when governance, operational context and workflow execution move together. I am a Technical Account Executive at ServiceNow, working at the intersection of strategy, platform, data and adoption.',
+        'ServiceNow TAE / Enterprise Architect building AgentOps, delivery acceleration workflows, AI control towers and implementation systems for regulated enterprise environments.',
       note:
-        'This is my personal site, based on public material, my own frameworks and my professional perspective. It is not an official ServiceNow channel and it does not include confidential information.',
+        'I operate at the intersection of strategy, platform, data and execution. This is my personal site, not an official ServiceNow channel, and it does not include confidential information.',
       linkedIn: 'Connect on LinkedIn',
-      email: 'Send email',
-      agentPanelLabel: 'Agent operating model',
+      proofCta: 'See operating model',
+      proofIntro: 'Operating model -> adoption velocity -> revenue expansion.',
+      proofStrip: [
+        { label: 'AI Operating Model', title: 'Owned category', copy: 'Method before tooling' },
+        { label: 'Adoption Velocity', title: 'Pilot to ritual', copy: 'Cadence, ownership and metrics' },
+        { label: 'AgentOps', title: 'Governed agents', copy: 'Policies, evals and gates' },
+        { label: 'CSDM / CMDB', title: 'Operational backbone', copy: 'Context before action' },
+        { label: 'LLMOps', title: 'Model orchestration', copy: 'Cost, fallback and trace' },
+        { label: 'Revenue Expansion', title: 'Platform value', copy: 'Roadmap, execution and proof' },
+      ],
+      agentPanelLabel: 'AI Operating Model: pilot to governed execution',
       agentSignals: [
-        ['Intent', 'front door'],
-        ['Context', 'service graph'],
-        ['Policy', 'AI control'],
-        ['Action', 'workflow'],
-        ['Evidence', 'audit trail'],
+        ['Intent', 'user / system'],
+        ['Context', 'Service Graph / CMDB'],
+        ['Policy', 'access / risk / approval'],
+        ['Action', 'workflow automation'],
+        ['Evidence', 'audit trail / KPIs'],
       ],
     },
     sections: {
       lens: {
-        eyebrow: 'My lens',
-        title: 'The conversation stopped being about AI. It is now about delegated work.',
+        eyebrow: 'Proof systems',
+        title: 'The public thesis: AI creates advantage when it becomes an operating model.',
         copy:
-          'The critical question is not how many agents exist. It is whether the organization knows where they can act, which data they can use, who approves exceptions, how they prove value and how they learn without losing control.',
+          'The positioning is not "I know how to use AI." It is the ability to turn strategy into operating systems: governed agents, implementation accelerators, adoption models and evidence trails for enterprise environments.',
       },
       operating: {
         eyebrow: 'Operating model',
-        title: 'Autonomous agents need an operating base: context, permission, action and evidence.',
+        title: 'Autonomy reaches production only when context, permission, action and evidence are designed.',
         copy:
-          'This is how I structure the conversation: before scaling autonomy, design the chain that connects intent, data, control, workflow and measurable outcomes.',
+          'This is how I structure the conversation with executives, architects and delivery teams: before scaling agents, design the chain that connects intent, data, control, workflow, adoption and measurable outcomes.',
+      },
+      promotion: {
+        eyebrow: 'Executive positioning',
+        title: 'From advanced AI user to AI Operating Model operator.',
+        copy:
+          'The career, partnership and public-authority narrative that matters: turn AI into repeatable capability that accelerates adoption, lowers operational risk and opens platform expansion in enterprise accounts.',
       },
       themes: {
         eyebrow: 'What matters now',
@@ -344,10 +402,10 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
         identity: 'executive reading + operating architecture',
       },
       achievements: {
-        eyebrow: 'Applied work',
-        title: 'Value architectures I have built, refined and turned into systems.',
+        eyebrow: 'Applied systems',
+        title: 'This is not a decorative portfolio. These are systems for executive conversation, demos and execution.',
         copy:
-          'Without exposing names: my experience includes supporting large enterprises and industries such as FSI, Energy and Retail as they advance into AI, data and agents. Below are the thinking and execution systems I bring into investment, hiring and partnership conversations.',
+          'Without exposing names: my experience includes supporting large enterprises and industries such as FSI, Energy and Retail as they advance into AI, data and agents. Below are the thinking and execution systems I bring into hiring, internal mobility, partnership and investment conversations.',
         cta: 'Open architecture',
         cards: {
           'sada-servicenow': {
@@ -419,23 +477,23 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
     focusAreas: [
       {
         number: '01',
-        title: 'Platform strategy',
-        copy: 'Translate executive priorities into architecture, roadmap, governance and real ServiceNow adoption.',
+        title: 'Governed agents',
+        copy: 'Design agents with scope, context, guardrails, evaluation and auditability before handing them autonomy.',
       },
       {
         number: '02',
-        title: 'Agents for operations',
-        copy: 'Separate assistance, autonomy and control: which work can be delegated, in which scope and with which evidence.',
+        title: 'Delivery acceleration',
+        copy: 'Turn demand into artifacts, templates, quality criteria and repeatable handoffs for implementation.',
       },
       {
         number: '03',
-        title: 'Data for context',
-        copy: 'Connect CMDB, Service Graph, CSDM and external data to reduce decisions based on fragments.',
+        title: 'AI operating model',
+        copy: 'Build cadence, ownership, metrics and governance so AI leaves pilot mode and enters execution rituals.',
       },
       {
         number: '04',
-        title: 'Adoption for value',
-        copy: 'Turn innovation into an operating ritual: ownership, process, metrics, security and continuous improvement.',
+        title: 'ServiceNow architecture',
+        copy: 'Connect CSDM, CMDB, Workflow Data Fabric, Now Assist and Action Fabric into measurable value narratives.',
       },
     ],
     operatingLayers: [
@@ -444,6 +502,26 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
       { label: '03', title: 'Control', copy: 'Permission, policy, limits and approval define where autonomy ends.' },
       { label: '04', title: 'Action', copy: 'Execution happens in the workflow, not in a loose conversation.' },
       { label: '05', title: 'Evidence', copy: 'Value and trust depend on logs, metrics, auditability and learning.' },
+    ],
+    promotionOutcomes: [
+      {
+        label: 'Adoption velocity',
+        title: 'Accelerate adoption without selling hype',
+        copy:
+          'Convert executive thesis into use cases, artifacts, owners, cadence and advancement criteria to move beyond isolated pilots.',
+      },
+      {
+        label: 'Governed execution',
+        title: 'Move AI into workflow with control',
+        copy:
+          'Define where agents can act, when they need approval, what data they use and what evidence they leave behind.',
+      },
+      {
+        label: 'Revenue expansion',
+        title: 'Tie AI to platform value',
+        copy:
+          'Turn governed adoption into roadmap, expansion, services, executive confidence and new value conversations.',
+      },
     ],
     form: {
       serviceValue: 'executive-ai-portfolio',

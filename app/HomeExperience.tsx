@@ -98,6 +98,27 @@ export default function HomeExperience({ lang }: { lang: HomeLang }) {
         </div>
       </section>
 
+      <section id="positioning" className={styles.promotionSection} aria-labelledby="positioning-title">
+        <div className={styles.sectionInner}>
+          <div className={styles.promotionLayout}>
+            <div className={styles.promotionStatement} data-swarm-reveal>
+              <p className={styles.eyebrow}>{t.sections.promotion.eyebrow}</p>
+              <h2 id="positioning-title">{t.sections.promotion.title}</h2>
+              <p>{t.sections.promotion.copy}</p>
+            </div>
+            <div className={styles.promotionGrid}>
+              {t.promotionOutcomes.map((outcome, index) => (
+                <article key={outcome.label} data-swarm-reveal data-swarm-tilt data-reveal-delay={index + 1}>
+                  <span>{outcome.label}</span>
+                  <h3>{outcome.title}</h3>
+                  <p>{outcome.copy}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="themes" className={styles.themeSection} aria-labelledby="themes-title">
         <div className={styles.sectionInner}>
           <div className={`${styles.sectionHeader} ${styles.themeHeader}`} data-swarm-reveal>

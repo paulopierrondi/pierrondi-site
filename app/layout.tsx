@@ -19,18 +19,27 @@ const CookieBanner = dynamic(() => import('@/components/CookieBanner'))
 
 export const metadata: Metadata = {
   title: {
-    default: 'Paulo Pierrondi - IA governada, ServiceNow, AgentOps e LLM inference',
+    default: 'Paulo Pierrondi - AI Operating Model, ServiceNow, AgentOps e Enterprise AI',
     template: '%s | pierrondi.dev',
   },
   description:
-    'Portfólio executivo de Paulo Pierrondi sobre IA governada, ServiceNow, SADA, AgentOps, LLM inference, agentes autônomos com governança e workflows corporativos.',
+    'ServiceNow TAE / Enterprise Architect transformando IA enterprise em AI Operating Model: AgentOps, adoption velocity, AI control towers e execução governada.',
   keywords: [
     'Paulo Pierrondi',
     'ServiceNow',
+    'Enterprise AI Operator',
+    'AI Operating Model',
+    'adoption velocity',
+    'revenue expansion',
     'IA governada',
     'SADA ServiceNow',
     'ServiceNow AI-Driven Architecture',
+    'AI Delivery Acceleration',
+    'Delivery Acceleration AI Specialist',
+    'Forward Deployed Engineering',
+    'Applied AI Architect',
     'AI Control Tower',
+    'Action Fabric',
     'Now Assist',
     'AI Agents',
     'AgentOps',
@@ -64,9 +73,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi - IA governada, ServiceNow, AgentOps e LLM inference',
+    title: 'Paulo Pierrondi - AI Operating Model, ServiceNow e AgentOps',
     description:
-      'Portfólio executivo sobre ServiceNow, SADA, agentes governados, LLM inference, AgentOps, dados e execução corporativa.',
+      'ServiceNow TAE / Enterprise Architect transformando IA enterprise em modelo operacional, adoption velocity e execução governada.',
     url: '/',
     siteName: 'pierrondi.dev',
     type: 'website',
@@ -75,8 +84,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Paulo Pierrondi - IA governada, ServiceNow e AgentOps',
-    description: 'Portfólio executivo sobre ServiceNow, SADA, agentes governados, LLM inference e workflows corporativos.',
+    title: 'Paulo Pierrondi - AI Operating Model e AgentOps',
+    description: 'ServiceNow, AgentOps, AI Operating Model, adoption velocity e implementação governada em ambientes enterprise.',
     images: ['/og'],
   },
   alternates: {

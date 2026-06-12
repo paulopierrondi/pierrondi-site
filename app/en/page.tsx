@@ -4,18 +4,31 @@ import { SITE_URL } from '@/lib/site'
 import HomeExperience from '../HomeExperience'
 
 export const metadata: Metadata = {
-  title: 'Paulo Pierrondi - governed AI, ServiceNow, AgentOps and LLM inference',
+  title: 'Paulo Pierrondi - AI Operating Model, ServiceNow, AgentOps and Enterprise AI',
   description:
-    'Executive portfolio by Paulo Pierrondi on governed AI, ServiceNow, SADA, autonomous agents with governance, LLM inference, AgentOps and enterprise automation platforms.',
+    'ServiceNow TAE / Enterprise Architect turning enterprise AI into an AI Operating Model: AgentOps, adoption velocity, AI control towers and governed execution.',
   keywords: [
     'Paulo Pierrondi',
+    'Enterprise AI Operator',
     'governed AI',
     'ServiceNow',
     'SADA ServiceNow',
     'ServiceNow AI-Driven Architecture',
+    'AI Delivery Acceleration',
+    'Delivery Acceleration AI Specialist',
+    'Forward Deployed Engineering',
+    'Forward Deployed Engineer',
+    'Applied AI Architect',
     'Now Assist',
     'AI Agents',
     'AgentOps',
+    'AI Control Tower',
+    'Action Fabric',
+    'Workflow Data Fabric',
+    'Enterprise AI Operating Model',
+    'AI Operating Model',
+    'adoption velocity',
+    'revenue expansion',
     'LLM inference',
     'LLMOps',
     'CSDM',
@@ -35,9 +48,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi - governed AI, ServiceNow, AgentOps and LLM inference',
+    title: 'Paulo Pierrondi - AI Operating Model, ServiceNow and AgentOps',
     description:
-      'Executive portfolio on ServiceNow, SADA, governed agents, LLM inference, AgentOps, data and enterprise execution.',
+      'ServiceNow TAE / Enterprise Architect turning enterprise AI into an operating model, adoption velocity and governed execution.',
     url: '/en',
     siteName: 'pierrondi.dev',
     locale: 'en_US',
@@ -47,9 +60,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Paulo Pierrondi - governed AI, AgentOps and ServiceNow',
+    title: 'Paulo Pierrondi - AI Operating Model and AgentOps',
     description:
-      'Executive portfolio on ServiceNow, SADA, governed agents, LLM inference and enterprise workflows.',
+      'ServiceNow, AgentOps, AI Operating Model, adoption velocity and governed implementation in enterprise environments.',
     images: ['/og'],
   },
 }
@@ -59,9 +72,9 @@ const enWebPageSchema = {
   '@type': 'WebPage',
   '@id': `${SITE_URL}/en`,
   url: `${SITE_URL}/en`,
-  name: 'Paulo Pierrondi - governed AI, ServiceNow, AgentOps and LLM inference',
+  name: 'Paulo Pierrondi - AI Operating Model, ServiceNow, AgentOps and Enterprise AI',
   description:
-    'Executive portfolio by Paulo Pierrondi on governed AI, ServiceNow, autonomous agents, LLM inference and enterprise workflow execution.',
+    'Executive profile by Paulo Pierrondi on AI Operating Model, Enterprise AI, ServiceNow, AgentOps, adoption velocity, AI control towers and governed implementation systems.',
   inLanguage: 'en-US',
   isPartOf: { '@id': `${SITE_URL}/#website` },
   about: { '@id': `${SITE_URL}/#person` },
