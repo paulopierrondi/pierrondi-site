@@ -9,6 +9,7 @@ import {
   useSpring,
   type Variants,
 } from 'framer-motion'
+import Image from 'next/image'
 import {
   Activity,
   ArrowRight,
@@ -31,7 +32,7 @@ import {
   Workflow,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import FsoAgentSwarm from './FsoAgentSwarm'
+import FsoAgentSwarmLoader from './FsoAgentSwarmLoader'
 import styles from './FsoExperience.module.css'
 
 const LIVE_APP = 'https://csdm-validator-production.up.railway.app'
@@ -370,7 +371,7 @@ function HeroSection({ reduced }: ReducedProps) {
   return (
     <header className={styles.hero}>
       <div className={styles.heroBg}>
-        <FsoAgentSwarm />
+        <FsoAgentSwarmLoader />
         <div className={styles.heroGlow} aria-hidden="true" />
         <div className={styles.heroGrid} aria-hidden="true" />
       </div>
@@ -436,7 +437,13 @@ function ContextSection({ reduced }: ReducedProps) {
       </div>
       <div className={styles.contextGrid}>
         <figure className={styles.contextFigure}>
-          <img src="/fso/context-graph.jpg" alt="A living knowledge graph — thousands of connected notes, the context a council of agents reasons over" loading="lazy" />
+          <Image
+            src="/fso/context-graph.jpg"
+            alt="A living knowledge graph — thousands of connected notes, the context a council of agents reasons over"
+            fill
+            sizes="(max-width: 980px) 100vw, 50vw"
+            className={styles.contextImage}
+          />
           <figcaption>My second brain — the context a council of agents reasons over, every day.</figcaption>
         </figure>
         <div className={styles.contextPoints}>

@@ -3,9 +3,11 @@
 import { Fragment, useLayoutEffect, useRef, useState, type PointerEvent, type RefObject } from 'react'
 import gsap from 'gsap'
 import { motion, useReducedMotion } from 'framer-motion'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import KimiNeuralNetwork from '@/components/KimiNeuralNetwork'
-import PortraitHologram from '@/components/PortraitHologram'
+
+const KimiNeuralNetwork = dynamic(() => import('@/components/KimiNeuralNetwork'), { ssr: false })
+const PortraitHologram = dynamic(() => import('@/components/PortraitHologram'), { ssr: false })
 import type { HomeExperienceCopy } from '@/app/home-experience-copy'
 import styles from '@/app/page.module.css'
 
@@ -220,6 +222,9 @@ function HeroActions({
       </a>
       <a href="#thesis" data-swarm-magnetic>
         {copy.proofCta}
+      </a>
+      <a href="#contact" className={styles.ctaWarm} data-swarm-magnetic>
+        {copy.proofCta === 'Ver modelo operacional' ? 'Conversar agora' : 'Talk now'}
       </a>
     </div>
   )

@@ -13,7 +13,7 @@
   background-color: var(--color-canvas);
   color: var(--color-ink);
   --tile-link-color: var(--color-accent-cyan);
-  --tile-eyebrow-color: var(--color-ink-muted-48);
+  --tile-eyebrow-color: var(--color-ink-muted-80);
   --tile-tagline-color: var(--color-ink-muted-80);
   --tile-card-bg: var(--color-canvas-parchment);
   --tile-card-border: var(--color-hairline);

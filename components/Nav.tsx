@@ -11,7 +11,7 @@ import styles from './Nav.module.css'
 const NAV_COPY = {
   pt: {
     aria: 'Navegação principal',
-    logoAria: 'pierrondi.dev — página inicial',
+    logoAria: 'P. pierrondi.dev — página inicial',
     home: 'Início',
     about: 'Sobre',
     paulo: 'Paulo',
@@ -22,7 +22,7 @@ const NAV_COPY = {
   },
   en: {
     aria: 'Main navigation',
-    logoAria: 'pierrondi.dev — home',
+    logoAria: 'P. pierrondi.dev — home',
     home: 'Home',
     about: 'About',
     paulo: 'Paulo',

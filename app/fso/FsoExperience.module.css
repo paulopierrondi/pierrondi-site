@@ -864,7 +864,8 @@
   background: #06141c;
   min-height: 340px;
 }
-.contextFigure img {
+.contextFigure img,
+.contextImage {
   display: block;
   width: 100%;
   height: 100%;

@@ -52,7 +52,7 @@ export default function LanguageSwitcher() {
             key={language.code}
             href={resolveLocalizedPath(pathname, language.code, locationSuffix.search, locationSuffix.hash)}
             hrefLang={language.locale}
-            aria-label={`Switch to ${language.name}`}
+            aria-label={`${language.label} — ${language.name}`}
             aria-current={isActive ? 'page' : undefined}
             className={isActive ? styles.active : undefined}
           >
