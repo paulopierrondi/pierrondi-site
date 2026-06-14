@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Check, Clock, FileCode, ListTodo, ShieldAlert, X } from 'lucide-react'
 
-import { chunkPlanActionIds } from '@/lib/control-tower/plan-action-limits'
+import { chunkPlanActionIds } from '@/lib/control-tower/plan-action-limits.mjs'
 import {
   summarizePlanQueue,
   type PlanApprovalView,

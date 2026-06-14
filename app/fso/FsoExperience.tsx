@@ -32,7 +32,7 @@ import {
   Workflow,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import FsoAgentSwarmLoader from './FsoAgentSwarmLoader'
+import FsoHeroServer from './FsoHeroServer'
 import styles from './FsoExperience.module.css'
 
 const LIVE_APP = 'https://csdm-validator-production.up.railway.app'
@@ -366,62 +366,6 @@ const openingLine =
 /* ─────────────────────────── component ─────────────────────────── */
 
 type ReducedProps = { reduced: boolean | null }
-
-function HeroSection({ reduced }: ReducedProps) {
-  return (
-    <header className={styles.hero}>
-      <div className={styles.heroBg}>
-        <FsoAgentSwarmLoader />
-        <div className={styles.heroGlow} aria-hidden="true" />
-        <div className={styles.heroGrid} aria-hidden="true" />
-      </div>
-
-      <motion.div
-        className={styles.heroInner}
-        initial={reduced ? false : { opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease }}
-      >
-        <div className={styles.heroChips}>
-          <span className={styles.chip}><span className={styles.chipDot} /> ServiceNow</span>
-          <span className={styles.chip}>FSO · Financial Services Operations</span>
-          <span className={styles.chip}>IRM · risk by design</span>
-          <span className={styles.chip}>Action Fabric · MCP · Fluent SDK</span>
-        </div>
-        <h1 className={styles.heroTitle}>Automation-first <em>ServiceNow implementation</em></h1>
-        <p className={styles.heroLede}>
-          The future arrived: <strong>FSO, IRM and AI Control Tower</strong> running as one governed
-          operating model. External coding agents author the build; native Now Assist and Action Fabric
-          execute at runtime; IRM decides how much autonomy each action is allowed to have.
-        </p>
-        <HeroMeta />
-        <div className={styles.heroCtas}>
-          <a className={styles.ctaPrimary} href={LIVE_APP} target="_blank" rel="noreferrer">
-            Open live example <ArrowRight size={16} strokeWidth={2.2} />
-          </a>
-          <a className={styles.ctaGhost} href="#pilot">90-day pilot</a>
-        </div>
-      </motion.div>
-    </header>
-  )
-}
-
-function HeroMeta() {
-  return (
-    <div className={styles.heroMeta}>
-      {[
-        ['Audience', 'ServiceNow internal'],
-        ['Product', 'FSO + IRM'],
-        ['Outcome', 'Governed automation'],
-      ].map(([label, value]) => (
-        <div key={label} className={styles.heroMetaItem}>
-          <span className={styles.heroMetaLabel}>{label}</span>
-          <span className={styles.heroMetaValue}>{value}</span>
-        </div>
-      ))}
-    </div>
-  )
-}
 
 function ContextSection({ reduced }: ReducedProps) {
   return (
@@ -858,7 +802,7 @@ export default function FsoExperience() {
     <main className={styles.shell} ref={containerRef}>
       <motion.div className={styles.scrollProgress} style={{ scaleX: reduced ? 1 : progressScaleX }} aria-hidden="true" />
       <div className={styles.container}>
-        <HeroSection reduced={reduced} />
+        <FsoHeroServer />
         <ContextSection reduced={reduced} />
         <DiscoveriesSection reduced={reduced} />
         <ShiftSection reduced={reduced} />

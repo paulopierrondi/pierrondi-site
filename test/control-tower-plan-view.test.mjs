@@ -4,7 +4,7 @@ import test from 'node:test'
 import {
   PLAN_ACTION_CLIENT_CHUNK_SIZE,
   chunkPlanActionIds,
-} from '../lib/control-tower/plan-action-limits.ts'
+} from '../lib/control-tower/plan-action-limits.mjs'
 import {
   PLAN_ACTION_MAX_IDS,
   planActionPayloadSchema,

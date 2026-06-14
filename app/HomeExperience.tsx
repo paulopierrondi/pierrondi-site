@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import BrandSignature from '@/components/BrandSignature'
-import KimiHomeHero from '@/components/KimiHomeHero'
+import HomeHeroServer from '@/components/HomeHeroServer'
 import LangSync from '@/components/LangSync'
 import HomeContactForm from './HomeContactForm'
 import { feitos } from './feitos/feitos-data'
@@ -33,12 +33,13 @@ export default function HomeExperience({ lang }: { lang: HomeLang }) {
         <BrandSignature href="#top" className={styles.brand} ariaLabel="Paulo Pierrondi" mobileCompact />
         <div className={styles.navLinks}>
           <a href="#top">{t.nav.home}</a>
-          <Link href={lang === 'pt' ? '/about' : '/en/about'}>{t.nav.about}</Link>
-          <Link href="/design">{t.nav.design}</Link>
-          <Link href="/feitos/sada-servicenow">{t.nav.sada}</Link>
-          <Link href="/feitos/agentes-governados">{t.nav.agents}</Link>
-          <Link href="/feitos/llm-inferencia">{t.nav.llm}</Link>
-          <Link href="/feitos/plataformas-automacao-ia">{t.nav.automation}</Link>
+          <Link href={lang === 'pt' ? '/about' : '/en/about'} prefetch>{t.nav.about}</Link>
+          <Link href="/design" prefetch>{t.nav.design}</Link>
+          <a href="#about">{lang === 'pt' ? 'Perfil' : 'Profile'}</a>
+          <Link href="/feitos/sada-servicenow" prefetch>{t.nav.sada}</Link>
+          <Link href="/feitos/agentes-governados" prefetch>{t.nav.agents}</Link>
+          <Link href="/feitos/llm-inferencia" prefetch>{t.nav.llm}</Link>
+          <Link href="/feitos/plataformas-automacao-ia" prefetch>{t.nav.automation}</Link>
           <a href="#contact">{t.nav.contact}</a>
           <a
             href="https://br.linkedin.com/in/paulopierrondi"
@@ -53,7 +54,7 @@ export default function HomeExperience({ lang }: { lang: HomeLang }) {
         </div>
       </nav>
 
-      <KimiHomeHero copy={t.hero} />
+      <HomeHeroServer copy={t.hero} />
 
       <section id="thesis" className={styles.focusSection} aria-labelledby="thesis-title">
         <div className={styles.sectionInner}>
@@ -211,6 +212,76 @@ export default function HomeExperience({ lang }: { lang: HomeLang }) {
                 </a>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" className={styles.aboutSection} aria-labelledby="about-title">
+        <div className={styles.sectionInner}>
+          <div className={styles.aboutLayout}>
+            <div className={styles.aboutPortrait} data-swarm-reveal>
+              <div className={styles.aboutPortraitFrame}>
+                <Image
+                  src="/assets/paulo-pierrondi-executive-neural.jpg"
+                  alt="Paulo Pierrondi"
+                  fill
+                  sizes="(max-width: 960px) 280px, 380px"
+                  className={styles.aboutPortraitImage}
+                  priority
+                />
+              </div>
+            </div>
+            <div className={styles.aboutContent} data-swarm-reveal data-reveal-delay="1">
+              <p className={styles.eyebrow}>{t.sections.about.eyebrow}</p>
+              <h2 id="about-title">{t.sections.about.title}</h2>
+              <p className={styles.aboutCopy}>{t.sections.about.copy}</p>
+              <ul className={styles.aboutCredentials}>
+                {t.sections.about.credentials.map((cred) => (
+                  <li key={cred}>
+                    <span className={styles.aboutCredentialDot} aria-hidden="true" />
+                    {cred}
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.aboutCta}>
+                <Link href={t.sections.about.ctaHref} className={styles.aboutCtaLink}>
+                  {t.sections.about.cta}
+                  <span aria-hidden="true"> →</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.socialProofSection} aria-labelledby="social-proof-title">
+        <div className={styles.sectionInner}>
+          <div className={styles.socialProofHeader} data-swarm-reveal>
+            <p className={styles.eyebrow}>{t.sections.socialProof.eyebrow}</p>
+            <h2 id="social-proof-title">{t.sections.socialProof.title}</h2>
+            <p className={styles.socialProofCopy}>{t.sections.socialProof.copy}</p>
+          </div>
+
+          <div className={styles.metricsRow}>
+            {t.sections.socialProof.metrics.map((metric, index) => (
+              <div key={metric.label} className={styles.metricCard} data-swarm-reveal data-reveal-delay={index + 1}>
+                <span className={styles.metricLabel}>{metric.label}</span>
+                <strong className={styles.metricValue}>{metric.value}</strong>
+                {metric.suffix && <span className={styles.metricSuffix}>{metric.suffix}</span>}
+              </div>
+            ))}
+          </div>
+
+          <div className={styles.testimonialsGrid}>
+            {t.sections.socialProof.testimonials.map((tItem, index) => (
+              <blockquote key={index} className={styles.testimonialCard} data-swarm-reveal data-reveal-delay={index + 1}>
+                <p className={styles.testimonialQuote}>“{tItem.quote}”</p>
+                <footer className={styles.testimonialFooter}>
+                  <span className={styles.testimonialRole}>{tItem.role}</span>
+                  <span className={styles.testimonialContext}>{tItem.context}</span>
+                </footer>
+              </blockquote>
+            ))}
           </div>
         </div>
       </section>
