@@ -161,6 +161,7 @@ export default function QuizContent() {
         variant="dark"
         eyebrow="Quiz"
         headline="Precisa automatizar?"
+        headlineLevel="h1"
         tagline="4 perguntas rápidas. Sem cadastro. No final você sai sabendo qual serviço faz sentido para o seu estágio — e por quê."
         ctas={
           <PillButton variant="primary" size="large" onClick={() => setStep(1)}>

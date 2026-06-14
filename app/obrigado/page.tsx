@@ -20,6 +20,7 @@ export default function Obrigado() {
       <ProductTile
         variant="dark"
         headline="Recebemos."
+        headlineLevel="h1"
         tagline="Em até 24h a gente entra em contato com próximos passos."
         ctas={
           <PillButton href="/" variant="primary">

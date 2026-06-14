@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
+    "test": "node --test test/**/*.test.mjs",
     "lint": "eslint .",
     "control:tower:dev": "node scripts/control-tower-dev.mjs",
     "automation:collect": "/opt/homebrew/bin/python3 scripts/automation-control-snapshot.py",

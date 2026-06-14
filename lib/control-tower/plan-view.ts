@@ -76,20 +76,33 @@ export function summarizePlanQueue(
     }
   }
 
+  let lowRiskCount = 0
+  let mediumRiskCount = 0
+  const lowRiskItems: PlanQueueItem[] = []
+
+  for (const plan of visible) {
+    if (plan.risk_class === 'low') {
+      lowRiskCount += 1
+      lowRiskItems.push(plan)
+    } else if (plan.risk_class === 'medium') {
+      mediumRiskCount += 1
+    }
+  }
+
   return {
     pending,
     visible,
     resolved,
     pendingCount: visible.length,
-    lowRiskCount: visible.filter((plan) => plan.risk_class === 'low').length,
-    mediumRiskCount: visible.filter((plan) => plan.risk_class === 'medium').length,
+    lowRiskCount,
+    mediumRiskCount,
     kimiCodeDailyQueue: {
       executor: 'kimi-code',
       cadence: 'daily',
       target: 'complete_all_low_risk',
-      items: visible.filter((plan) => plan.risk_class === 'low'),
-      count: visible.filter((plan) => plan.risk_class === 'low').length,
-      blockedMediumCount: visible.filter((plan) => plan.risk_class === 'medium').length,
+      items: lowRiskItems,
+      count: lowRiskItems.length,
+      blockedMediumCount: mediumRiskCount,
     },
   }
 }

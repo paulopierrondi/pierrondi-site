@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Footer from '@/components/Footer'
 import Nav from '@/components/Nav'
+import WhatsApp from '@/components/WhatsApp'
 import { ProductTile } from '@/components/ui/ProductTile'
 import { APPS, getApp, isAppSlug } from './_apps'
 import styles from './AppLanding.module.css'
@@ -60,12 +61,13 @@ export default async function AppLandingPage({ params }: Props) {
 
   return (
     <>
-      <Nav />
+      <Nav lang="en" />
       <main>
         <ProductTile
           variant="dark"
           eyebrow={app.name}
           headline={`${app.name}.`}
+          headlineLevel="h1"
           tagline={heroTagline}
           ctas={
             app.appStoreUrl ? (
@@ -111,7 +113,8 @@ export default async function AppLandingPage({ params }: Props) {
           </div>
         </ProductTile>
       </main>
-      <Footer />
+      <Footer lang="en" />
+      <WhatsApp lang="en" />
     </>
   )
 }

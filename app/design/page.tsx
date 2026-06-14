@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import BrandSignature from '@/components/BrandSignature'
+import SwarmEffectsLoader from '@/components/SwarmEffectsLoader'
 import {
   ArrowUpRight,
   Boxes,
@@ -51,6 +52,7 @@ const fitLabels = {
 export default function DesignVaultPage() {
   return (
     <main className={styles.page} data-swarm-root>
+      <SwarmEffectsLoader />
       <nav className={styles.nav} aria-label="Navegacao do Design Vault">
         <BrandSignature href="/" className={styles.brand} ariaLabel="Voltar para pierrondi.dev" subtitle="Design Vault" />
         <div className={styles.navLinks}>

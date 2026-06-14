@@ -52,11 +52,12 @@ export default function ProdutoContent() {
         variant="dark"
         eyebrow="MVP & Produto Digital"
         headline="Do zero ao produto funcional."
+        headlineLevel="h1"
         tagline="App web, micro SaaS ou ferramenta interna — com stack moderna, deploy em produção e código que você pode continuar. A partir de R$5.000."
         ctas={
           <>
             <PillButton variant="primary" href="/#contact">Diagnóstico gratuito</PillButton>
-            <PillButton variant="ghost" href="/automacoes">Ver automações</PillButton>
+            <PillButton variant="ghost" href="/calculadora">Ver calculadora</PillButton>
           </>
         }
       />

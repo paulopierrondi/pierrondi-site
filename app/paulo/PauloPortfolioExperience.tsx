@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, BrainCircuit, Cpu, Languages, Network, Pause, Play, ShieldCheck } from 'lucide-react'
+import { ArrowUpRight, BrainCircuit, Cpu, Network, Pause, Play, ShieldCheck } from 'lucide-react'
 import ArchitectureDiagram from './ArchitectureDiagram'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useMemo, useRef, useState } from 'react'
@@ -476,7 +476,7 @@ function NeuralField({
 }
 
 export default function PauloPortfolioExperience() {
-  const [lang, setLang] = useState<Lang>('pt')
+  const lang: Lang = 'pt'
   const [motionOverride, setMotionOverride] = useState<boolean | null>(null)
   const [portraitSrc, setPortraitSrc] = useState(portrait.primary)
   const [mounted, setMounted] = useState(false)
@@ -506,24 +506,10 @@ export default function PauloPortfolioExperience() {
     return () => window.cancelAnimationFrame(frame)
   }, [])
 
-  useEffect(() => {
-    const previousLang = document.documentElement.lang
-    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en-US'
-
-    return () => {
-      document.documentElement.lang = previousLang || 'pt-BR'
-    }
-  }, [lang])
-
   const resetNavScroll = () => {
     window.requestAnimationFrame(() => {
       navRef.current?.scrollTo({ left: 0, behavior: shouldAnimate ? 'smooth' : 'auto' })
     })
-  }
-
-  const toggleLanguage = () => {
-    setLang(lang === 'pt' ? 'en' : 'pt')
-    resetNavScroll()
   }
 
   const toggleMotion = () => {
@@ -543,10 +529,6 @@ export default function PauloPortfolioExperience() {
         <a href="#work">{t.nav.work}</a>
         <a href="#motion">{t.nav.motion}</a>
         <a href="#contact">{t.nav.contact}</a>
-        <button type="button" onClick={toggleLanguage} aria-label={t.nav.languageLabel}>
-          <Languages size={15} aria-hidden="true" />
-          <span className={styles.localNavText}>{t.nav.language}</span>
-        </button>
         <button
           type="button"
           onClick={toggleMotion}

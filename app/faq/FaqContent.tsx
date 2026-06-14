@@ -55,6 +55,7 @@ export default function FaqContent() {
         variant="dark"
         eyebrow="FAQ"
         headline="Perguntas frequentes."
+        headlineLevel="h1"
         tagline="Tudo que você precisa saber antes de contratar. Se sua dúvida não estiver aqui, fale com a gente."
       />
 

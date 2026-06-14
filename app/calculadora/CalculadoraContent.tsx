@@ -57,6 +57,7 @@ export default function CalculadoraContent() {
         variant="dark"
         eyebrow="Ferramenta"
         headline="Calculadora de ROI de Automação."
+        headlineLevel="h1"
         tagline="Veja quanto você economiza automatizando um processo manual."
       />
 

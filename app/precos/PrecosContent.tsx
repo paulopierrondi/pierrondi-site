@@ -97,6 +97,7 @@ export default function PrecosContent() {
         variant="dark"
         eyebrow="Preços"
         headline="Transparência total."
+        headlineLevel="h1"
         tagline='Sem surpresa. Sem hora extra. Sem "depende". Escopo fechado, prazo definido, preço fixo.'
       />
 

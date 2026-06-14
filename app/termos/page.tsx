@@ -26,6 +26,7 @@ export default function TermosPage() {
           variant="dark"
           eyebrow="Legal"
           headline="Termos de Serviço."
+          headlineLevel="h1"
           tagline="Atualizado em abril de 2026"
         />
 

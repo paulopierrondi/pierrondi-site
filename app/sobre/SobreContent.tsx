@@ -37,6 +37,7 @@ export default function SobreContent() {
         variant="dark"
         eyebrow="Sobre nós"
         headline="Quem somos."
+        headlineLevel="h1"
         tagline="A pierrondi.dev nasceu da frustração com agências lentas, orçamentos inflados e entregas que nunca chegam. Operada por um founder solo com histórico enterprise em ServiceNow, Oracle e Novartis."
       >
         <div className={styles.statsBar} data-animate>

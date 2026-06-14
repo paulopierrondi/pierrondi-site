@@ -53,6 +53,7 @@ export default function BlogPage() {
           variant="dark"
           eyebrow="Blog"
           headline="Insights."
+          headlineLevel="h1"
           tagline="Automação, produto digital e IA aplicados a negócios reais. Sem hype — só o que funciona."
         />
 

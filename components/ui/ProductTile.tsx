@@ -5,6 +5,7 @@ export interface ProductTileProps {
   variant?: "light" | "parchment" | "dark"
   eyebrow?: string
   headline?: string
+  headlineLevel?: "h1" | "h2"
   tagline?: string
   ctas?: React.ReactNode
   image?: React.ReactNode
@@ -18,6 +19,7 @@ export function ProductTile({
   variant = "light",
   eyebrow,
   headline,
+  headlineLevel: HeadlineTag = "h2",
   tagline,
   ctas,
   image,
@@ -39,7 +41,7 @@ export function ProductTile({
       <div className={styles.inner}>
         {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
 
-        {headline && <h2 className={styles.headline}>{headline}</h2>}
+        {headline && <HeadlineTag className={styles.headline}>{headline}</HeadlineTag>}
 
         {tagline && <p className={styles.tagline}>{tagline}</p>}
 

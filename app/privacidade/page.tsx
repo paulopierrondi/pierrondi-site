@@ -26,6 +26,7 @@ export default function PrivacidadePage() {
           variant="dark"
           eyebrow="Legal"
           headline="Política de Privacidade."
+          headlineLevel="h1"
           tagline="Atualizada em abril de 2026 · Em conformidade com a LGPD"
         />
 

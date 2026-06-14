@@ -27,8 +27,8 @@
   --color-ink:                     #ffffff;
   --color-body:                    rgba(247, 245, 238, 0.68);
   --color-body-strong:             #ffffff;
-  --color-muted:                   rgba(247, 245, 238, 0.48);
-  --color-muted-soft:              rgba(247, 245, 238, 0.30);
+  --color-muted:                   rgba(247, 245, 238, 0.70);
+  --color-muted-soft:              rgba(247, 245, 238, 0.55);
   --color-on-primary:              #061006;
 
   /* Semantic */

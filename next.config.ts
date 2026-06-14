@@ -40,6 +40,8 @@ const ffmpegTracingIncludes = Object.fromEntries(
 
 const CANONICAL_REDIRECTS = [
   { source: '/agentes', destination: '/portfolio', permanent: true },
+  { source: '/app-store-connect', destination: '/precos', permanent: true },
+  { source: '/sobre', destination: '/about', permanent: true },
   { source: '/privacy-policy', destination: '/privacy', permanent: true },
   { source: '/policy', destination: '/privacy', permanent: true },
   { source: '/terms-of-service', destination: '/terms', permanent: true },
@@ -50,11 +52,9 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion', '@base-ui/react'],
   },
-  // CI runs `tsc --noEmit` and `eslint` as separate steps, so skip Next's
-  // duplicate TypeScript pass during `next build`. This trims ~30–60s off
-  // Railway builds and avoids OOM kills on the Metal builder. (Next 16
-  // already dropped the built-in eslint pass.)
-  typescript: { ignoreBuildErrors: true },
+  // CI runs `tsc --noEmit` and `eslint` as separate steps. Next 16 already
+  // dropped the built-in eslint pass, so we rely on the CI steps for validation.
+  // Do NOT disable TypeScript errors here — they are real build defects.
   outputFileTracingIncludes: ffmpegTracingIncludes,
   images: {
     formats: ['image/avif', 'image/webp'],

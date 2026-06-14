@@ -3,9 +3,9 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import Script from 'next/script'
 import dynamic from 'next/dynamic'
-import KimiSwarmEffects from '@/components/KimiSwarmEffects'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
-import SiteJsonLd from '@/components/SiteJsonLd'
+import SiteJsonLdWrapper from '@/components/SiteJsonLdWrapper'
+import DocumentLangSync from '@/components/DocumentLangSync'
 import { SITE_URL } from '@/lib/site'
 import './globals.css'
 import './animations.css'
@@ -137,8 +137,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       </head>
       <body className={`${sans.variable} ${mono.variable} antialiased`}>
-        <SiteJsonLd />
-        <KimiSwarmEffects />
+        <DocumentLangSync />
+        <SiteJsonLdWrapper />
         <LanguageSwitcher />
         {children}
         <CookieBanner />

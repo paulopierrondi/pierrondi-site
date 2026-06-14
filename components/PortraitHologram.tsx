@@ -161,9 +161,40 @@ function HologramRings({ active, reducedMotion }: { active: boolean; reducedMoti
   )
 }
 
+function RibbonLine({
+  ribbon,
+  onLine,
+}: {
+  ribbon: {
+    geometry: THREE.BufferGeometry
+    color: string
+    opacity: number
+    rotation: [number, number, number]
+  }
+  onLine: (line: THREE.Line | null) => void
+}) {
+  const line = useMemo(() => {
+    const material = new THREE.LineBasicMaterial({
+      color: ribbon.color,
+      transparent: true,
+      opacity: ribbon.opacity,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    })
+    return new THREE.Line(ribbon.geometry, material)
+  }, [ribbon])
+
+  useEffect(() => {
+    onLine(line)
+    return () => onLine(null)
+  }, [line, onLine])
+
+  return <primitive object={line} rotation={ribbon.rotation} />
+}
+
 function EnergyRibbons({ active, reducedMotion }: { active: boolean; reducedMotion: boolean }) {
   const groupRef = useRef<THREE.Group>(null)
-  const materialRefs = useRef<THREE.LineBasicMaterial[]>([])
+  const lineRefs = useRef<THREE.Line[]>([])
   const activeRef = useRef(0)
   const ribbons = useMemo(() => {
     return [0, 1, 2].map((ribbonIndex) => {
@@ -198,8 +229,10 @@ function EnergyRibbons({ active, reducedMotion }: { active: boolean; reducedMoti
     activeRef.current += ((active ? 1 : 0) - activeRef.current) * (reducedMotion ? 1 : 0.09)
     const intensity = activeRef.current
     groupRef.current.scale.setScalar(0.96 + intensity * 0.18)
-    materialRefs.current.forEach((material, index) => {
-      material.opacity = ribbons[index].opacity + intensity * (0.18 + index * 0.04)
+    lineRefs.current.forEach((line, index) => {
+      if (line?.material && !Array.isArray(line.material)) {
+        line.material.opacity = ribbons[index].opacity + intensity * (0.18 + index * 0.04)
+      }
     })
     if (reducedMotion) return
     groupRef.current.rotation.y += delta * (0.1 + intensity * 0.62)
@@ -209,18 +242,17 @@ function EnergyRibbons({ active, reducedMotion }: { active: boolean; reducedMoti
   return (
     <group ref={groupRef} position={[0.08, -0.04, 0.18]}>
       {ribbons.map((ribbon, index) => (
-        <line key={ribbon.color} geometry={ribbon.geometry} rotation={ribbon.rotation}>
-          <lineBasicMaterial
-            ref={(material) => {
-              if (material) materialRefs.current[index] = material
-            }}
-            color={ribbon.color}
-            transparent
-            opacity={ribbon.opacity}
-            depthWrite={false}
-            blending={THREE.AdditiveBlending}
-          />
-        </line>
+        <RibbonLine
+          key={ribbon.color}
+          ribbon={ribbon}
+          onLine={(line) => {
+            if (line) {
+              lineRefs.current[index] = line
+            } else {
+              delete lineRefs.current[index]
+            }
+          }}
+        />
       ))}
     </group>
   )

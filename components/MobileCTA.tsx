@@ -11,7 +11,7 @@ interface MobileCTAProps {
 export default function MobileCTA({ lang = 'pt' }: MobileCTAProps) {
   const text = home[lang].mobileCta
   const contactAnchor = lang === 'en' ? '/en#contact' : '/#contact'
-  const contactId = lang === 'en' ? 'contact' : 'contato'
+  const contactId = 'contact'
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {

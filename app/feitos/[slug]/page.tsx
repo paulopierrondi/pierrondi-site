@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import BrandSignature from '@/components/BrandSignature'
+import SwarmEffectsLoader from '@/components/SwarmEffectsLoader'
 import { feitos, getFeito, type Feito } from '../feitos-data'
 import styles from './page.module.css'
 
@@ -133,6 +134,7 @@ export default async function FeitoPage({ params }: Props) {
 
   return (
     <main className={styles.page} data-swarm-root>
+      <SwarmEffectsLoader />
       <nav className={styles.nav} aria-label="Navegacao de feitos">
         <BrandSignature href="/#top" className={styles.brand} ariaLabel="Voltar para pierrondi.dev" subtitle="Proof System" />
         <div className={styles.navLinks}>

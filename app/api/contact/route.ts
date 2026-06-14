@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
+import { createRateLimit, getClientIp } from '@/lib/rate-limit'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
+
+const contactRateLimit = createRateLimit(5, 15 * 60 * 1000)
 
 const FORMSPREE_URL =
   process.env.FORMSPREE_URL ??
@@ -69,6 +72,14 @@ function redirectToContact(request: Request, status: 'ok' | 'invalid' | 'error')
 
 export async function POST(request: Request): Promise<Response> {
   const wantsJson = wantsJsonResponse(request)
+
+  const ip = getClientIp(request)
+  const rateLimit = contactRateLimit.check(ip)
+  if (!rateLimit.allowed) {
+    if (!wantsJson) return redirectToContact(request, 'error')
+    return NextResponse.json({ error: 'rate_limited', retryAfter: rateLimit.retryAfter }, { status: 429 })
+  }
+
   let payload: z.infer<typeof contactSchema>
 
   try {

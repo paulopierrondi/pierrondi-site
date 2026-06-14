@@ -41,6 +41,7 @@ export default function TechPartnerContent() {
         variant="dark"
         eyebrow="CTO as a Service"
         headline="Tech Partner. Fracionado."
+        headlineLevel="h1"
         tagline="Presença técnica contínua sem vínculo CLT. Arquitetura, code review, roadmap e execução parcial — para negócios que precisam de liderança técnica sem contratar um CTO full-time."
         ctas={
           <>

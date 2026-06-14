@@ -50,7 +50,7 @@ const portfolioEntries = [
   },
   {
     title: 'Automação de processos com IA',
-    href: '/automacoes',
+    href: '/calculadora',
     image: '/assets/ai.png',
     service: 'Automação Express',
     result: 'Menos trabalho manual em vendas, operação e atendimento.',
@@ -88,6 +88,7 @@ export default function PortfolioContent() {
         variant="dark"
         eyebrow="Portfólio"
         headline="Cada entrega existe para abrir uma conversa."
+        headlineLevel="h1"
         tagline="Páginas, ferramentas, automações e produtos digitais criados para vender melhor, qualificar leads e reduzir trabalho manual com tecnologia enxuta."
         ctas={
           <>

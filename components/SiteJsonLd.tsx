@@ -1,6 +1,3 @@
-'use client'
-
-import { usePathname } from 'next/navigation'
 import JsonLd from '@/components/JsonLd'
 import { SITE_URL } from '@/lib/site'
 
@@ -78,11 +75,5 @@ const siteSchema = {
 }
 
 export default function SiteJsonLd() {
-  const pathname = usePathname()
-
-  if (pathname?.startsWith('/bradesco-26')) {
-    return null
-  }
-
   return <JsonLd data={siteSchema} />
 }

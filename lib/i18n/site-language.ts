@@ -34,6 +34,8 @@ const languageSwitcherHiddenPrefixes = [
 export function getCurrentLanguage(pathname: string): HomeLang {
   if (pathname === '/en' || pathname.startsWith('/en/')) return 'en'
   if (pathname === '/privacy' || pathname === '/terms') return 'en'
+  if (pathname === '/fso' || pathname.startsWith('/fso/')) return 'en'
+  if (pathname === '/apps' || pathname.startsWith('/apps/')) return 'en'
   return 'pt'
 }
 

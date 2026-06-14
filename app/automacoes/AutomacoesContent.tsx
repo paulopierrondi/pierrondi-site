@@ -57,6 +57,7 @@ export default function AutomacoesContent() {
         variant="dark"
         eyebrow="Automação de Processos"
         headline="Processos que rodam sozinhos."
+        headlineLevel="h1"
         tagline="Automação com integrações sob medida: CRM, planilhas, e-mail, WhatsApp, ERPs, APIs e IA no mesmo workflow — menos cópia manual, mais velocidade para vendas, financeiro e operações."
         ctas={
           <>

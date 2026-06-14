@@ -26,6 +26,7 @@ export default function TermsOfServicePage() {
           variant="dark"
           eyebrow="Legal"
           headline="Terms of Service."
+          headlineLevel="h1"
           tagline="Updated April 2026"
         />
 

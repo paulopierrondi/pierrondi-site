@@ -146,6 +146,7 @@ export default async function PostPage({ params }: Props) {
           variant="dark"
           eyebrow={post.category}
           headline={post.title}
+          headlineLevel="h1"
           tagline={post.excerpt}
         >
           <div className={styles.metaRow}>

@@ -5,9 +5,12 @@ import {
   createSessionCookieValue,
   isValidViewToken,
 } from '@/lib/automation-control/auth'
+import { createRateLimit, getClientIp } from '@/lib/rate-limit'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
+
+const sessionRateLimit = createRateLimit(10, 15 * 60 * 1000)
 
 const ALLOWED_NEXT_PATHS = new Set(['/automacoes', '/control_tower'])
 
@@ -38,6 +41,11 @@ function setSessionCookie(response: NextResponse) {
 }
 
 export async function GET(request: Request) {
+  const rateLimit = sessionRateLimit.check(getClientIp(request))
+  if (!rateLimit.allowed) {
+    return NextResponse.json({ error: 'rate_limited', retryAfter: rateLimit.retryAfter }, { status: 429 })
+  }
+
   const url = new URL(request.url)
   const token = url.searchParams.get('token')
   const nextPath = safeNextPath(url.searchParams.get('next'))
@@ -49,6 +57,11 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  const rateLimit = sessionRateLimit.check(getClientIp(request))
+  if (!rateLimit.allowed) {
+    return NextResponse.json({ error: 'rate_limited', retryAfter: rateLimit.retryAfter }, { status: 429 })
+  }
+
   const formData = await request.formData()
   const token = formData.get('token')
   const nextPath = safeNextPath(formData.get('next'))

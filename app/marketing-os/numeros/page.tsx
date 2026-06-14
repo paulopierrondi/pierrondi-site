@@ -25,6 +25,7 @@ export default function PublicNumbersPage() {
           variant="dark"
           eyebrow="Operação real · pierrondi.dev"
           headline="Os números do nosso Marketing OS."
+          headlineLevel="h1"
           tagline="A própria pierrondi.dev opera o marketing nesta plataforma. Estes números vêm direto do Postgres da operação, atualizados a cada hora. Sem dashboards bonitos: é a operação real, agora."
         />
 

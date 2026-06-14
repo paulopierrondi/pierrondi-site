@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import JsonLd from '@/components/JsonLd'
 import { SITE_URL } from '@/lib/site'
 import HomeExperience from './HomeExperience'
+import SwarmEffectsLoader from '@/components/SwarmEffectsLoader'
 
 export const metadata: Metadata = {
   title: 'Paulo Pierrondi - AI Operating Model, ServiceNow, AgentOps e Enterprise AI',
@@ -83,6 +84,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={homeWebPageSchema} />
+      <SwarmEffectsLoader />
       <HomeExperience lang="pt" />
     </>
   )

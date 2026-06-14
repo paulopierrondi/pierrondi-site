@@ -26,6 +26,7 @@ export default function PrivacyPolicyPage() {
           variant="dark"
           eyebrow="Legal"
           headline="Privacy Policy."
+          headlineLevel="h1"
           tagline="Updated April 2026 · LGPD compliant"
         />
 

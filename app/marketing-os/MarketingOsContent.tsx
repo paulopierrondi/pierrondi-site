@@ -171,6 +171,7 @@ export default function MarketingOsContent() {
         variant="dark"
         eyebrow="Marketing OS"
         headline="Marketing operado por agentes, com humano no controle."
+        headlineLevel="h1"
         tagline="Plataforma agentic que opera o marketing da sua empresa: agentes de IA geram drafts, você aprova, automações publicam. Sandbox por padrão, approval gates explícitos, logs auditáveis. A própria pierrondi.dev opera o próprio marketing aqui — você vê funcionar antes de comprar."
         ctas={
           <>

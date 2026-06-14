@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Footer from '@/components/Footer'
 import Nav from '@/components/Nav'
+import WhatsApp from '@/components/WhatsApp'
 import { ProductTile } from '@/components/ui/ProductTile'
 import { APPS, isAppSlug, type AppEntry } from '../_apps'
 import styles from './AppLegal.module.css'
@@ -283,19 +284,21 @@ export default async function AppLegalPage({ params }: Props) {
 
   return (
     <>
-      <Nav />
+      <Nav lang="en" />
       <main>
         <ProductTile
           variant="dark"
           eyebrow={app.name}
           headline={`${docTitle}.`}
+          headlineLevel="h1"
           tagline={`${app.name} · ${app.category}`}
         />
         <ProductTile variant="dark" as="div">
           {content}
         </ProductTile>
       </main>
-      <Footer />
+      <Footer lang="en" />
+      <WhatsApp lang="en" />
     </>
   )
 }
