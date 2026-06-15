@@ -2,8 +2,10 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ProductTile } from '@/components/ui/ProductTile'
-import { PillButton } from '@/components/ui/PillButton'
+import Link from 'next/link'
+import PageHeader from '@/components/PageHeader'
+import Reveal from '@/components/Reveal'
+import styles from './QuizContent.module.css'
 
 interface Answer {
   question: string
@@ -154,179 +156,107 @@ export default function QuizContent() {
     }
   }
 
-  // Intro
   if (step === 0 && answers.length === 0) {
     return (
-      <ProductTile
-        variant="dark"
-        eyebrow="Quiz"
-        headline="Precisa automatizar?"
-        headlineLevel="h1"
-        tagline="4 perguntas rápidas. Sem cadastro. No final você sai sabendo qual serviço faz sentido para o seu estágio — e por quê."
-        ctas={
-          <PillButton variant="primary" size="large" onClick={() => setStep(1)}>
-            Começar quiz →
-          </PillButton>
-        }
-      />
+      <>
+        <PageHeader
+          eyebrow="QUIZ"
+          title={<>Precisa <span className="text-primary">automatizar?</span></>}
+          lead="4 perguntas rápidas. Sem cadastro. No final você sai sabendo qual serviço faz sentido para o seu estágio — e por quê."
+        />
+        <main className={styles.main}>
+          <Reveal>
+            <button type="button" className={styles.btnPrimary} onClick={() => setStep(1)}>
+              Começar quiz →
+            </button>
+          </Reveal>
+        </main>
+      </>
     )
   }
 
-  // Questions
   if (step > 0 && step <= QUESTIONS.length) {
     const q = QUESTIONS[step - 1]
     const progress = Math.round(((step - 1) / QUESTIONS.length) * 100)
 
     return (
-      <ProductTile
-        variant="dark"
-        eyebrow={`Pergunta ${step} de ${QUESTIONS.length}`}
-        headline={q.question}
-      >
-        <div style={{ maxWidth: 560, margin: '0 auto' }}>
-          <div style={{ height: 4, background: 'var(--color-hairline)', borderRadius: 2, marginBottom: 32 }}>
-            <div style={{ width: `${progress}%`, height: '100%', background: 'var(--color-accent-cyan)', borderRadius: 2, transition: 'width 0.3s ease' }} />
+      <main className={styles.main}>
+        <Reveal>
+          <div className={styles.quizCard}>
+            <span className={styles.progressLabel}>Pergunta {step} de {QUESTIONS.length}</span>
+            <h1 className={styles.question}>{q.question}</h1>
+            <div className={styles.progressBar}>
+              <div className={styles.progressFill} style={{ width: `${progress}%` }} />
+            </div>
+            <div className={styles.options}>
+              {q.options.map((opt) => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => handleAnswer(opt)}
+                  className={styles.option}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {q.options.map((opt) => (
-              <button
-                key={opt.value}
-                onClick={() => handleAnswer(opt)}
-                style={{
-                  textAlign: 'left',
-                  padding: '16px 20px',
-                  borderRadius: 8,
-                  border: '1px solid var(--color-hairline-strong)',
-                  background: 'var(--color-surface-card)',
-                  color: 'var(--color-ink)',
-                  fontSize: 15,
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                  lineHeight: 1.5,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-accent-cyan)'
-                  e.currentTarget.style.background = 'var(--color-surface-card-elevated)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-hairline-strong)'
-                  e.currentTarget.style.background = 'var(--color-surface-card)'
-                }}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </ProductTile>
+        </Reveal>
+      </main>
     )
   }
 
-  // Result + capture
   const resultKey = calculateResult()
   const result = RESULTS[resultKey]
 
   if (submitOk) {
     return (
-      <ProductTile variant="dark" eyebrow="Quiz" headline="Obrigado!">
-        <p style={{ textAlign: 'center', color: 'var(--color-muted)', fontSize: 16 }}>Redirecionando...</p>
-      </ProductTile>
+      <main className={styles.main}>
+        <div className={styles.quizCard}>
+          <h1 className={styles.question}>Obrigado!</h1>
+          <p className={styles.redirect}>Redirecionando...</p>
+        </div>
+      </main>
     )
   }
 
   return (
-    <ProductTile
-      variant="dark"
-      eyebrow="Resultado"
-      headline={result.title}
-      tagline={result.description}
-    >
-      <div style={{ maxWidth: 480, margin: '0 auto' }}>
-        <div
-          style={{
-            background: 'var(--color-surface-card)',
-            border: '1px solid var(--color-hairline)',
-            borderRadius: 12,
-            padding: 24,
-            marginBottom: 32,
-          }}
-        >
-          <p style={{ color: 'var(--color-accent-cyan)', fontSize: 32, fontWeight: 700, margin: '0 0 8px 0' }}>
-            {result.price}
-          </p>
-          <p style={{ color: 'var(--color-muted)', fontSize: 14, margin: 0 }}>Preço estimado</p>
-        </div>
+    <main className={styles.main}>
+      <Reveal>
+        <div className={styles.quizCard}>
+          <span className={styles.progressLabel}>Resultado</span>
+          <h1 className={styles.question}>{result.title}</h1>
+          <p className={styles.resultDesc}>{result.description}</p>
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div>
-            <label style={{ display: 'block', color: 'var(--color-muted)', fontSize: 13, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Nome</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Seu nome"
-              required
-              style={{
-                width: '100%',
-                padding: '12px 14px',
-                borderRadius: 6,
-                border: '1px solid var(--color-hairline-strong)',
-                background: 'var(--color-canvas-deep)',
-                color: 'var(--color-ink)',
-                fontSize: 15,
-                outline: 'none',
-              }}
-            />
+          <div className={styles.priceBox}>
+            <p className={styles.price}>{result.price}</p>
+            <p className={styles.priceLabel}>Preço estimado</p>
           </div>
-          <div>
-            <label style={{ display: 'block', color: 'var(--color-muted)', fontSize: 13, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="seu@email.com"
-              required
-              style={{
-                width: '100%',
-                padding: '12px 14px',
-                borderRadius: 6,
-                border: '1px solid var(--color-hairline-strong)',
-                background: 'var(--color-canvas-deep)',
-                color: 'var(--color-ink)',
-                fontSize: 15,
-                outline: 'none',
-              }}
-            />
-          </div>
-          <div>
-            <label style={{ display: 'block', color: 'var(--color-muted)', fontSize: 13, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Empresa (opcional)</label>
-            <input
-              type="text"
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-              placeholder="Nome da empresa"
-              style={{
-                width: '100%',
-                padding: '12px 14px',
-                borderRadius: 6,
-                border: '1px solid var(--color-hairline-strong)',
-                background: 'var(--color-canvas-deep)',
-                color: 'var(--color-ink)',
-                fontSize: 15,
-                outline: 'none',
-              }}
-            />
-          </div>
-          <div style={{ display: 'flex', gap: 12, marginTop: 8, flexWrap: 'wrap' }}>
-            <PillButton variant="primary" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Enviando...' : 'Receber proposta por email'}
-            </PillButton>
-            <PillButton variant="ghost" href={result.href}>
-              Saber mais sobre {result.title}
-            </PillButton>
-          </div>
-        </form>
-      </div>
-    </ProductTile>
+
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <label>
+              <span>Nome</span>
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Seu nome" required />
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="seu@email.com" required />
+            </label>
+            <label>
+              <span>Empresa (opcional)</span>
+              <input type="text" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Nome da empresa" />
+            </label>
+            <div className={styles.formActions}>
+              <button type="submit" className={styles.btnPrimary} disabled={isSubmitting}>
+                {isSubmitting ? 'Enviando...' : 'Receber proposta por email'}
+              </button>
+              <Link href={result.href} className={styles.btnGhost}>
+                Saber mais sobre {result.title}
+              </Link>
+            </div>
+          </form>
+        </div>
+      </Reveal>
+    </main>
   )
 }

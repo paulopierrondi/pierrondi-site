@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { ProductTile } from '@/components/ui/ProductTile'
-import { PillButton } from '@/components/ui/PillButton'
+import PageHeader from '@/components/PageHeader'
+import Reveal, { RevealStagger, RevealStaggerItem } from '@/components/Reveal'
 import styles from './MarketingOsContent.module.css'
 
 const layers = [
@@ -79,283 +79,125 @@ const packages = [
     featured: true,
     items: [
       'Tudo do Setup',
-      '60 dias de operação assistida pelo Paulo',
-      'Tuning semanal de prompts baseado em métricas',
-      '2 campanhas implementadas no studio',
-      'Calls quinzenais de revisão',
-      'Handover documentado',
+      '60 dias de acompanhamento operacional',
+      'Reuniões semanais de 30 min',
+      'Ajuste de prompts e agentes com base em resultados',
+      'Relatório de adoção, qualidade e ROI',
     ],
-  },
-  {
-    tag: 'Tech Partner',
-    price: 'R$3.500/mês',
-    desc: 'Marketing OS + tech partner contínuo.',
-    featured: false,
-    items: [
-      'Setup incluso',
-      'Operação contínua do studio com você',
-      'Evolução de agentes conforme necessidades',
-      '~20h/mês de execução técnica',
-      'Mínimo 3 meses',
-    ],
-  },
-]
-
-const faqs = [
-  {
-    q: 'Posso ver isso rodando antes de comprar?',
-    a: (
-      <>
-        Sim. <Link href="/marketing-os/numeros">/marketing-os/numeros</Link> mostra métricas reais vindas do
-        Postgres da operação. Posso também mostrar o studio real da pierrondi.dev em call.
-      </>
-    ),
-  },
-  {
-    q: 'Vocês publicam sozinhos nas redes?',
-    a: (
-      <>
-        Não. Tudo que vai pra fora passa por approval humano. <code>AUTO_PUBLISH</code> existe como flag, mas vem
-        desligada e exige <code>kill_switch</code> off + 2-step manual pra ativar. Padrão é: agente gera draft,
-        você aprova, integração externa publica.
-      </>
-    ),
-  },
-  {
-    q: 'Quanto custa de tokens IA por mês?',
-    a: (
-      <>
-        Operação típica (4 posts blog + 12 posts LinkedIn + 4 análises semanais) custa R$15-40/mês. Modelos:
-        Opus 4.7 só pro Orchestrator (decisões), Sonnet 4.6 pra escrita, Haiku 4.5 pra análise. Cap diário
-        configurável bloqueia surpresa. Cost ledger fica auditável em <code>/studio/settings</code>.
-      </>
-    ),
-  },
-  {
-    q: 'E se eu quiser parar?',
-    a: (
-      <>
-        Schema Postgres é seu, prompts são seus, código é open-source no seu repositório. Migration scripts
-        versionados. Kill switch (<code>MARKETING_OS_HALT=true</code>) pausa tudo em &lt;1s. Sem lock-in
-        proprietário — é Next.js, Drizzle, Anthropic SDK.
-      </>
-    ),
-  },
-  {
-    q: 'E sobre segurança? LGPD?',
-    a: (
-      <>
-        Auth.js com Google OAuth ou magic link. Audit log immutable de toda ação sensível com IP e user agent.
-        Webhooks com HMAC signature. Sentry para incidentes. Sem dados de leads no contexto dos agentes — você
-        controla o que entra. LGPD: rota /privacidade documentada.
-      </>
-    ),
-  },
-  {
-    q: 'Preciso ter time técnico?',
-    a: (
-      <>
-        Não. O setup é nosso. Você opera o studio (cliques, aprovações, edição). A camada técnica (Postgres,
-        prompts, integrações) fica com a pierrondi.dev ou com você se quiser tomar conta depois — o repositório
-        é seu.
-      </>
-    ),
   },
 ]
 
 export default function MarketingOsContent() {
   return (
     <>
-      {/* Hero */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Marketing OS"
-        headline="Marketing operado por agentes, com humano no controle."
-        headlineLevel="h1"
-        tagline="Plataforma agentic que opera o marketing da sua empresa: agentes de IA geram drafts, você aprova, automações publicam. Sandbox por padrão, approval gates explícitos, logs auditáveis. A própria pierrondi.dev opera o próprio marketing aqui — você vê funcionar antes de comprar."
-        ctas={
-          <>
-            <PillButton
-              variant="primary"
-              href="/#contact"
-              className="plausible-event-name=marketing-os-cta-primary"
-            >
-              Quero implementar
-            </PillButton>
-            <PillButton
-              variant="ghost"
-              href="/portfolio"
-              className="plausible-event-name=marketing-os-cta-secondary"
-            >
-              Ver portfólio
-            </PillButton>
-          </>
-        }
-      >
-        <div className={styles.statusPill} aria-label="Status: produto em produção assistida">
-          <span className={styles.statusDot} aria-hidden="true" />
-          Produto final em produção assistida
-        </div>
-      </ProductTile>
-
-      {/* Layers */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Arquitetura"
-        headline="Quatro camadas, cada uma com escopo claro."
-        tagline="Studio + Agentes + Governança + Automação. Não é uma ferramenta de IA genérica. É uma operação completa onde cada camada existe antes da próxima — e a próxima só liga depois que a anterior provou estar segura."
-      >
-        <div className={styles.layersGrid}>
-          {layers.map((layer, i) => (
-            <article
-              key={layer.title}
-              className={`${styles.layerCard} reveal-anim-fast`}
-              style={{ animationDelay: `${i * 0.08}s` }}
-            >
-              <span className={styles.layerTag}>{layer.tag}</span>
-              <h3 className={styles.layerTitle}>{layer.title}</h3>
-              <p className={styles.layerDesc}>{layer.desc}</p>
-              <ul className={styles.layerItems} aria-label={`Recursos de ${layer.title}`}>
-                {layer.items.map((item) => (
-                  <li key={item} className={styles.layerItem}>
-                    <span className={styles.layerItemArrow} aria-hidden="true">&#8594;</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </ProductTile>
-
-      {/* Principles */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Princípios"
-        headline="Quatro regras que não negociamos."
-        tagline="IA sem controle vira passivo. Estes princípios estão no código, não em slide."
-      >
-        <div className={styles.principlesGrid}>
-          {principles.map((p, i) => (
-            <article
-              key={p.title}
-              className={`${styles.principleCard} reveal-anim-fast`}
-              style={{ animationDelay: `${i * 0.08}s` }}
-            >
-              <h3 className={styles.principleTitle}>{p.title}</h3>
-              <p className={styles.principleDesc}>{p.desc}</p>
-            </article>
-          ))}
-        </div>
-      </ProductTile>
-
-      {/* Personas */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Para quem"
-        headline="Três encaixes claros."
-        tagline="Não é para todo mundo. Funciona melhor quando o problema é marketing consistente sem time grande."
-      >
-        <div className={styles.personasGrid}>
-          {personas.map((persona, i) => (
-            <article
-              key={persona.title}
-              className={`${styles.personaCard} reveal-anim-fast`}
-              style={{ animationDelay: `${i * 0.08}s` }}
-            >
-              <h3 className={styles.personaTitle}>{persona.title}</h3>
-              <div className={styles.personaBlock}>
-                <span className={styles.personaLabel}>Dor</span>
-                <p className={styles.personaText}>{persona.pain}</p>
-              </div>
-              <div className={styles.personaBlock}>
-                <span className={`${styles.personaLabel} ${styles.personaLabelFit}`}>Encaixe</span>
-                <p className={styles.personaText}>{persona.fit}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </ProductTile>
-
-      {/* Pricing */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Pacotes"
-        headline="Três caminhos pra implementar."
-        tagline="Setup é trabalho técnico real (Postgres, Auth, agentes, prompts versionados). Os pacotes diferem em quanto da operação a pierrondi.dev roda junto depois que está no ar."
-      >
-        <div className={styles.pricingGrid}>
-          {packages.map((pkg, i) => (
-            <article
-              key={pkg.tag}
-              className={`${styles.pricingCard} ${pkg.featured ? styles.pricingCardFeatured : ''} reveal-anim-fast`}
-              style={{ animationDelay: `${i * 0.08}s` }}
-            >
-              <span className={`${styles.pricingTag} ${pkg.featured ? styles.pricingTagFeatured : ''}`}>
-                {pkg.tag}
-              </span>
-              <div className={styles.pricingPrice}>{pkg.price}</div>
-              <p className={styles.pricingDesc}>{pkg.desc}</p>
-              <ul className={styles.pricingItems} aria-label={`Incluso no pacote ${pkg.tag}`}>
-                {pkg.items.map((item) => (
-                  <li key={item} className={styles.pricingItem}>
-                    <span className={styles.pricingCheck} aria-hidden="true">&#10003;</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-        <p className={styles.pricingNote}>
-          Tokens de IA não inclusos — em uso normal, R$15–40/mês. Cap diário configurável bloqueia runaway.
-        </p>
-      </ProductTile>
-
-      {/* FAQ */}
-      <ProductTile
-        variant="dark"
-        eyebrow="FAQ"
-        headline="Objeções honestas."
-      >
-        <div className={styles.faqList}>
-          {faqs.map((faq) => (
-            <details key={faq.q} className={styles.faqItem}>
-              <summary className={styles.faqSummary}>
-                {faq.q}
-                <span className={styles.faqToggle} aria-hidden="true">+</span>
-              </summary>
-              <div className={styles.faqAnswer}>{faq.a}</div>
-            </details>
-          ))}
-        </div>
-      </ProductTile>
-
-      {/* Final CTA */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Diagnóstico gratuito"
-        headline="30 minutos. Escopo fechado. Saída real."
-        tagline="Mostramos o studio rodando. Discutimos onde a sua operação encaixa. Saída: proposta com escopo fechado e prazo real — ou recomendação de não implementar agora, se for o caso."
-        ctas={
-          <>
-            <PillButton
-              variant="primary"
-              href="/#contact"
-              className="plausible-event-name=marketing-os-cta-bottom"
-            >
-              Agendar diagnóstico
-            </PillButton>
-            <PillButton
-              variant="ghost"
-              href="/marketing-os/numeros"
-              className="plausible-event-name=marketing-os-cta-numbers"
-            >
-              Ver números reais
-            </PillButton>
-          </>
-        }
+      <PageHeader
+        eyebrow="MARKETING OS"
+        title={<>Marketing operado por agentes, sob <span className="text-primary">controle humano.</span></>}
+        lead="Plataforma agentic que opera o marketing da sua empresa com agentes de IA, governança humana e automações controladas. Estamos construindo em público — você vê a operação real."
+        chips={['Agentes', 'Sandbox', 'Approval Gates', 'n8n']}
       />
+
+      <main className={styles.main}>
+        <section className={styles.layers} aria-labelledby="layers-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>Arquitetura</span>
+              <h2 id="layers-title">Quatro camadas, nenhuma atalho.</h2>
+            </div>
+          </Reveal>
+          <RevealStagger className={styles.layerGrid} staggerDelay={0.06}>
+            {layers.map((layer) => (
+              <RevealStaggerItem key={layer.tag}>
+                <article className={styles.card}>
+                  <span className={styles.tag}>{layer.tag}</span>
+                  <h3 className={styles.cardTitle}>{layer.title}</h3>
+                  <p className={styles.cardDesc}>{layer.desc}</p>
+                  <ul className={styles.cardList}>
+                    {layer.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </article>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </section>
+
+        <section className={styles.principles} aria-labelledby="principles-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>Princípios</span>
+              <h2 id="principles-title">Regras que não negociamos.</h2>
+            </div>
+          </Reveal>
+          <RevealStagger className={styles.principleGrid} staggerDelay={0.05}>
+            {principles.map((p) => (
+              <RevealStaggerItem key={p.title}>
+                <article className={styles.principleCard}>
+                  <h3>{p.title}</h3>
+                  <p>{p.desc}</p>
+                </article>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </section>
+
+        <section className={styles.personas} aria-labelledby="personas-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>Para quem é</span>
+              <h2 id="personas-title">Quem resolve com isso.</h2>
+            </div>
+          </Reveal>
+          <RevealStagger className={styles.personaGrid} staggerDelay={0.05}>
+            {personas.map((p) => (
+              <RevealStaggerItem key={p.title}>
+                <article className={styles.personaCard}>
+                  <h3>{p.title}</h3>
+                  <p className={styles.pain}><strong>Dor:</strong> {p.pain}</p>
+                  <p className={styles.fit}><strong>Fit:</strong> {p.fit}</p>
+                </article>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </section>
+
+        <section className={styles.packages} aria-labelledby="packages-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>Investimento</span>
+              <h2 id="packages-title">Pacotes.</h2>
+            </div>
+          </Reveal>
+          <RevealStagger className={styles.packageGrid} staggerDelay={0.06}>
+            {packages.map((pkg) => (
+              <RevealStaggerItem key={pkg.tag}>
+                <article className={`${styles.packageCard} ${pkg.featured ? styles.packageFeatured : ''}`}>
+                  <span className={`${styles.packageTag} ${pkg.featured ? styles.packageTagFeatured : ''}`}>{pkg.tag}</span>
+                  <p className={styles.packagePrice}>{pkg.price}</p>
+                  <p className={styles.packageDesc}>{pkg.desc}</p>
+                  <ul className={styles.packageList}>
+                    {pkg.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </article>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </section>
+
+        <section className={styles.ctaSection}>
+          <Reveal>
+            <h2>Quer ver a operação real?</h2>
+            <p>A pierrondi.dev opera o próprio marketing nesta plataforma. Números, posts e decisões reais.</p>
+            <div className={styles.ctaActions}>
+              <Link href="/marketing-os/numeros" className={styles.btnPrimary}>Ver os números</Link>
+              <Link href="/contato" className={styles.btnGhost}>Conversar sobre implementação</Link>
+            </div>
+          </Reveal>
+        </section>
+      </main>
     </>
   )
 }

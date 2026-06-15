@@ -70,9 +70,7 @@ export default function FaqPage() {
   return (
     <>
       <JsonLd data={[faqSchema, faqBreadcrumb]} />
-      <main>
-        <FaqContent />
-      </main>
+      <FaqContent />
       <WhatsApp />
     </>
   )

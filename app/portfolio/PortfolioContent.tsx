@@ -2,8 +2,8 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { ProductTile } from '@/components/ui/ProductTile'
-import { PillButton } from '@/components/ui/PillButton'
+import PageHeader from '@/components/PageHeader'
+import Reveal, { RevealStagger, RevealStaggerItem } from '@/components/Reveal'
 import { trackEvent } from '@/lib/analytics'
 import styles from './PortfolioContent.module.css'
 
@@ -30,7 +30,7 @@ const portfolioEntries = [
   },
   {
     title: 'Base comercial da pierrondi.dev',
-    href: '/precos',
+    href: '/atuacao',
     image: '/assets/development.png',
     service: 'Landing e conversão',
     result: 'Oferta, prova, preço e contato no mesmo caminho.',
@@ -68,130 +68,90 @@ const portfolioEntries = [
       'Apps web, ferramentas internas e micro SaaS com interface, regra de negócio, deploy e base para evoluir sem depender de uma agência grande.',
     proof: ['Next.js', 'Deploy', 'MVP'],
   },
-  {
-    title: 'Motor de marketing com IA',
-    href: '/#contact',
-    image: '/assets/content.png',
-    service: 'Marketing técnico',
-    result: 'Organiza tese, conteúdo, tracking e handoff comercial.',
-    description:
-      'Estrutura para transformar repertório técnico em ativos de venda: tracking, plano de conteúdo, outbound consultivo, CRO e leitura de sinais do funil.',
-    proof: ['Tracking', 'CRO', 'Handoff'],
-  },
 ]
 
 export default function PortfolioContent() {
   return (
     <>
-      {/* 1 — Hero tile */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Portfólio"
-        headline="Cada entrega existe para abrir uma conversa."
-        headlineLevel="h1"
-        tagline="Páginas, ferramentas, automações e produtos digitais criados para vender melhor, qualificar leads e reduzir trabalho manual com tecnologia enxuta."
-        ctas={
-          <>
-            <PillButton
-              variant="primary"
-              href="#portfolio-vitrine"
+      <PageHeader
+        eyebrow="PORTFÓLIO"
+        title={<>Cada entrega abre uma <span className="text-primary">conversa.</span></>}
+        lead="Páginas, ferramentas, automações e produtos digitais criados para vender melhor, qualificar leads e reduzir trabalho manual com tecnologia enxuta."
+      />
+
+      <main className={styles.main}>
+        <section aria-labelledby="vitrine-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>Vitrine de entregas</span>
+              <h2 id="vitrine-title">Do primeiro contato ao pipeline.</h2>
+              <p className={styles.lead}>O portfólio foi organizado como uma entrada comercial: primeiro a dor, depois a prova, depois o próximo passo.</p>
+            </div>
+          </Reveal>
+
+          <RevealStagger className={styles.grid} staggerDelay={0.06}>
+            {portfolioEntries.map((entry, index) => (
+              <RevealStaggerItem key={entry.title}>
+                <Link
+                  href={entry.href}
+                  className={styles.card}
+                  onClick={() =>
+                    trackEvent('PortfolioCTA_Clicked', {
+                      asset: entry.title,
+                      service: entry.service,
+                    })
+                  }
+                >
+                  <div className={styles.cardMedia}>
+                    <Image
+                      src={entry.image}
+                      alt={entry.title}
+                      fill
+                      priority={index === 0}
+                      loading={index === 0 ? 'eager' : undefined}
+                      sizes="(max-width: 960px) 100vw, 33vw"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+
+                  <div className={styles.cardBody}>
+                    <p className={styles.cardService}>{entry.service}</p>
+                    <h3 className={styles.cardTitle}>{entry.title}</h3>
+                    <p className={styles.cardResult}>{entry.result}</p>
+                    <p className={styles.cardDesc}>{entry.description}</p>
+                    <div className={styles.proofList}>
+                      {entry.proof.map((item) => (
+                        <span key={item} className={styles.proofChip}>
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Link>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </section>
+
+        <section className={styles.ctaSection}>
+          <Reveal>
+            <h2>Quer uma vitrine assim para o seu negócio?</h2>
+            <p>Me mande o contexto do que você vende, onde o lead trava e qual processo ainda depende de trabalho manual. Devolvo um caminho claro: página, automação, MVP ou direção técnica.</p>
+            <Link
+              href="/contato"
+              className={styles.btnPrimary}
               onClick={() =>
                 trackEvent('PortfolioCTA_Clicked', {
-                  asset: 'portfolio-page-hero',
-                  service: 'portfolio',
-                })
-              }
-            >
-              Ver entregas
-            </PillButton>
-            <PillButton
-              variant="ghost"
-              href="/#contact"
-              onClick={() =>
-                trackEvent('PortfolioCTA_Clicked', {
-                  asset: 'portfolio-page-contact',
+                  asset: 'portfolio-page-final-cta',
                   service: 'diagnostico',
                 })
               }
             >
-              Pedir diagnóstico
-            </PillButton>
-          </>
-        }
-      />
-
-      {/* 2 — Portfolio grid tile */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Vitrine de entregas"
-        headline="Do primeiro contato ao pipeline."
-        tagline="O portfólio foi organizado como uma entrada comercial: primeiro a dor, depois a prova, depois o próximo passo."
-        id="portfolio-vitrine"
-      >
-        <div className={styles.grid}>
-          {portfolioEntries.map((entry, index) => (
-            <Link
-              key={entry.title}
-              href={entry.href}
-              className={styles.card}
-              onClick={() =>
-                trackEvent('PortfolioCTA_Clicked', {
-                  asset: entry.title,
-                  service: entry.service,
-                })
-              }
-            >
-              <div className={styles.cardMedia}>
-                <Image
-                  src={entry.image}
-                  alt={entry.title}
-                  fill
-                  priority={index === 0}
-                  loading={index === 0 ? 'eager' : undefined}
-                  sizes="(max-width: 960px) 100vw, 33vw"
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-
-              <div className={styles.cardBody}>
-                <p className={styles.cardService}>{entry.service}</p>
-                <h3 className={styles.cardTitle}>{entry.title}</h3>
-                <p className={styles.cardResult}>{entry.result}</p>
-                <p className={styles.cardDesc}>{entry.description}</p>
-                <div className={styles.proofList}>
-                  {entry.proof.map((item) => (
-                    <span key={item} className={styles.proofChip}>
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              Quero meu diagnóstico
             </Link>
-          ))}
-        </div>
-      </ProductTile>
-
-      {/* 3 — CTA tile */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Próximo passo"
-        headline="Quer uma vitrine assim para o seu negócio?"
-        tagline="Me mande o contexto do que você vende, onde o lead trava e qual processo ainda depende de trabalho manual. Devolvo um caminho claro: página, automação, MVP ou direção técnica."
-        ctas={
-          <PillButton
-            variant="primary"
-            href="/#contact"
-            onClick={() =>
-              trackEvent('PortfolioCTA_Clicked', {
-                asset: 'portfolio-page-final-cta',
-                service: 'diagnostico',
-              })
-            }
-          >
-            Quero meu diagnóstico
-          </PillButton>
-        }
-      />
+          </Reveal>
+        </section>
+      </main>
     </>
   )
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import WhatsApp from '@/components/WhatsApp'
-import { ProductTile } from '@/components/ui/ProductTile'
+import PageHeader from '@/components/PageHeader'
+import Reveal from '@/components/Reveal'
 import { APPS, isAppSlug, type AppEntry } from '../_apps'
 import styles from './AppLegal.module.css'
 
@@ -282,17 +283,17 @@ export default async function AppLegalPage({ params }: Props) {
 
   return (
     <>
-      <main>
-        <ProductTile
-          variant="dark"
-          eyebrow={app.name}
-          headline={`${docTitle}.`}
-          headlineLevel="h1"
-          tagline={`${app.name} · ${app.category}`}
-        />
-        <ProductTile variant="dark" as="div">
-          {content}
-        </ProductTile>
+      <PageHeader
+        eyebrow={app.name.toUpperCase()}
+        title={<>{docTitle}.</>}
+        lead={`${app.name} · ${app.category}`}
+      />
+      <main className={styles.main}>
+        <Reveal>
+          <div className={styles.card}>
+            {content}
+          </div>
+        </Reveal>
       </main>
       <WhatsApp lang="en" />
     </>

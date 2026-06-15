@@ -73,9 +73,7 @@ export default function PauloPage() {
   return (
     <>
       <JsonLd data={personSchema} />
-      <main>
-        <PauloPortfolioExperience />
-      </main>
+      <PauloPortfolioExperience />
     </>
   )
 }

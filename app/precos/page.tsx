@@ -94,10 +94,8 @@ const breadcrumb = {
 export default function PrecosPage() {
   return (
     <>
-      <main>
-        <JsonLd data={[...priceJsonLd, breadcrumb]} />
-        <PrecosContent />
-      </main>
+      <JsonLd data={[...priceJsonLd, breadcrumb]} />
+      <PrecosContent />
       <WhatsApp />
     </>
   )

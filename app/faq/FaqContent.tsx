@@ -1,9 +1,9 @@
 'use client'
 
-import { ProductTile } from '@/components/ui/ProductTile'
-import { PillButton } from '@/components/ui/PillButton'
-import { FaqAccordion } from '@/components/ui/FaqAccordion'
-import { useScrollReveal } from '@/hooks/useScrollReveal'
+import Link from 'next/link'
+import PageHeader from '@/components/PageHeader'
+import Reveal, { RevealStagger, RevealStaggerItem } from '@/components/Reveal'
+import styles from './FaqContent.module.css'
 
 const categories = [
   {
@@ -46,43 +46,41 @@ const categories = [
 ]
 
 export default function FaqContent() {
-  useScrollReveal()
-
   return (
     <>
-      {/* Hero */}
-      <ProductTile
-        variant="dark"
+      <PageHeader
         eyebrow="FAQ"
-        headline="Perguntas frequentes."
-        headlineLevel="h1"
-        tagline="Tudo que você precisa saber antes de contratar. Se sua dúvida não estiver aqui, fale com a gente."
+        title={<>Perguntas <span className="text-primary">frequentes.</span></>}
+        lead="Tudo que você precisa saber antes de contratar. Se sua dúvida não estiver aqui, fale com a gente."
       />
 
-      {/* Categories */}
-      {categories.map((cat, i) => (
-        <ProductTile
-          key={cat.label}
-          variant={i % 2 === 0 ? 'light' : 'parchment'}
-          eyebrow={cat.label}
-        >
-          <FaqAccordion items={cat.items} />
-        </ProductTile>
-      ))}
+      <main className={styles.main}>
+        {categories.map((cat) => (
+          <section key={cat.label} className={styles.category} aria-labelledby={`cat-${cat.label}`}>
+            <Reveal>
+              <h2 id={`cat-${cat.label}`} className={styles.categoryTitle}>{cat.label}</h2>
+            </Reveal>
+            <RevealStagger staggerDelay={0.04}>
+              {cat.items.map((item) => (
+                <RevealStaggerItem key={item.q}>
+                  <details className={styles.faq}>
+                    <summary>{item.q}</summary>
+                    <p>{item.a}</p>
+                  </details>
+                </RevealStaggerItem>
+              ))}
+            </RevealStagger>
+          </section>
+        ))}
 
-      {/* CTA */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Não encontrou sua dúvida"
-        headline="Fale direto com a gente."
-        tagline="Sem formulário, sem fila. Uma conversa de 30 min resolve."
-        ctas={
-          <>
-            <PillButton variant="primary" href="/#contact">Falar com a pierrondi.dev</PillButton>
-            <PillButton variant="ghost" href="/precos">Ver preços</PillButton>
-          </>
-        }
-      />
+        <section className={styles.ctaSection}>
+          <Reveal>
+            <h2>Não encontrou sua dúvida?</h2>
+            <p>Fale direto com a gente. Sem formulário, sem fila. Uma conversa de 30 min resolve.</p>
+            <Link href="/contato" className={styles.btnPrimary}>Falar com a gente</Link>
+          </Reveal>
+        </section>
+      </main>
     </>
   )
 }

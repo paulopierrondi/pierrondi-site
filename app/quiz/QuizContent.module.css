@@ -1,0 +1,213 @@
+.main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-inline: clamp(20px, 5vw, 64px);
+  padding-bottom: clamp(90px, 13vh, 160px);
+}
+
+.quizCard {
+  border: 1px solid var(--color-hairline);
+  border-radius: 20px;
+  padding: clamp(28px, 5vw, 48px);
+  background: linear-gradient(180deg, var(--color-surface), var(--color-canvas));
+}
+
+.progressLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.question {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+  color: var(--color-ink);
+  margin-top: 14px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.progressBar {
+  height: 4px;
+  background: var(--color-hairline);
+  border-radius: 2px;
+  margin-top: 24px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-cyan);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.option {
+  text-align: left;
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--color-hairline-strong);
+  background: var(--color-canvas-deep);
+  color: var(--color-ink);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  line-height: 1.5;
+  font-family: var(--font-body);
+}
+
+.option:hover {
+  border-color: var(--color-cyan);
+  background: var(--color-surface-2);
+}
+
+.resultDesc {
+  margin-top: 16px;
+  color: var(--color-body);
+  line-height: 1.55;
+}
+
+.priceBox {
+  border: 1px solid var(--color-hairline);
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 28px;
+  background: var(--color-canvas);
+  text-align: center;
+}
+
+.price {
+  color: var(--color-cyan);
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+
+.priceLabel {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form label span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--color-body-strong);
+}
+
+.form input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--color-hairline);
+  background: var(--color-canvas-deep);
+  color: var(--color-ink);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: var(--font-body);
+}
+
+.form input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(200, 255, 46, 0.15);
+}
+
+.formActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.btnPrimary,
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 14px 22px;
+  border-radius: 10px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btnPrimary {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: var(--color-primary-active);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px -12px var(--color-primary-glow);
+}
+
+.btnPrimary:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.btnGhost {
+  background: transparent;
+  border-color: var(--color-hairline-strong);
+  color: var(--color-ink);
+}
+
+.btnGhost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.redirect {
+  text-align: center;
+  color: var(--color-muted);
+  margin-top: 16px;
+}
+
+@media (max-width: 680px) {
+  .formActions {
+    flex-direction: column;
+  }
+
+  .formActions a,
+  .formActions button {
+    width: 100%;
+  }
+}

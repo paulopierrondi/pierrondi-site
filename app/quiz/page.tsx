@@ -11,9 +11,7 @@ export const metadata: Metadata = {
 export default function QuizPage() {
   return (
     <>
-      <main>
-        <QuizContent />
-      </main>
+      <QuizContent />
       <WhatsApp />
     </>
   )

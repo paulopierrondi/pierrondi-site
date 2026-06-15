@@ -47,9 +47,7 @@ export default function PortfolioPage() {
   return (
     <>
       <JsonLd data={breadcrumb} />
-      <main>
-        <PortfolioContent />
-      </main>
+      <PortfolioContent />
       <WhatsApp />
       <MobileCTA />
     </>

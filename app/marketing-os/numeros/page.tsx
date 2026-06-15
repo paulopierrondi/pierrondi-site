@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import { ProductTile } from '@/components/ui/ProductTile'
-import { PillButton } from '@/components/ui/PillButton'
+import Link from 'next/link'
+import PageHeader from '@/components/PageHeader'
+import Reveal from '@/components/Reveal'
 import styles from './NumeroContent.module.css'
 import { SITE_URL } from '@/lib/site'
 
@@ -17,31 +18,31 @@ export const metadata: Metadata = {
 export default function PublicNumbersPage() {
   return (
     <>
-      <main>
-        <ProductTile
-          variant="dark"
-          eyebrow="Operação real · pierrondi.dev"
-          headline="Os números do nosso Marketing OS."
-          headlineLevel="h1"
-          tagline="A própria pierrondi.dev opera o marketing nesta plataforma. Estes números vêm direto do Postgres da operação, atualizados a cada hora. Sem dashboards bonitos: é a operação real, agora."
-        />
+      <PageHeader
+        eyebrow="OPERAÇÃO REAL"
+        title={<>Os números do nosso <span className="text-primary">Marketing OS.</span></>}
+        lead="A própria pierrondi.dev opera o marketing nesta plataforma. Estes números vêm direto do Postgres da operação, atualizados a cada hora. Sem dashboards bonitos: é a operação real, agora."
+      />
 
-        <ProductTile variant="dark" as="div">
-          <div className={styles.errorBox}>
-            Operação em fase de migração. Os números reais voltam aqui assim que o
-            Marketing OS interno reconectar o pipeline de publicação. Enquanto isso,
-            veja o sistema na página principal.
-          </div>
+      <main className={styles.main}>
+        <Reveal>
+          <div className={styles.card}>
+            <div className={styles.errorBox}>
+              Operação em fase de migração. Os números reais voltam aqui assim que o
+              Marketing OS interno reconectar o pipeline de publicação. Enquanto isso,
+              veja o sistema na página principal.
+            </div>
 
-          <div className={styles.ctaRow}>
-            <PillButton href="/marketing-os" variant="primary">
-              ← Voltar para Marketing OS
-            </PillButton>
-            <PillButton href="/#contact" variant="ghost">
-              Falar com o time
-            </PillButton>
+            <div className={styles.ctaRow}>
+              <Link href="/marketing-os" className={styles.btnPrimary}>
+                ← Voltar para Marketing OS
+              </Link>
+              <Link href="/contato" className={styles.btnGhost}>
+                Falar com o time
+              </Link>
+            </div>
           </div>
-        </ProductTile>
+        </Reveal>
       </main>
     </>
   )

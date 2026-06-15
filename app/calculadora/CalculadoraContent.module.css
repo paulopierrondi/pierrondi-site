@@ -1,154 +1,171 @@
-/* ── Calculator form grid ── */
+.main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-inline: clamp(20px, 5vw, 64px);
+  padding-bottom: clamp(90px, 13vh, 160px);
+}
+
+.card {
+  border: 1px solid var(--color-hairline);
+  border-radius: 20px;
+  padding: clamp(28px, 5vw, 48px);
+  background: linear-gradient(180deg, var(--color-surface), var(--color-canvas));
+}
+
 .formGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-xl);
-  margin-top: var(--space-xxl);
-  width: 100%;
-  text-align: left;
+  gap: 24px;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xxs);
+  gap: 8px;
 }
 
 .label {
-  font-family: var(--font-system);
-  font-size: var(--font-size-caption);
-  font-weight: 600;
-  color: var(--color-ink-muted-80);
-  letter-spacing: -0.224px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--color-body-strong);
 }
 
 .input {
-  font-family: var(--font-system);
-  font-size: var(--font-size-body);
-  font-weight: 400;
-  color: var(--color-ink);
-  background: var(--color-canvas-parchment);
-  border: 1px solid var(--color-hairline);
-  border-radius: var(--radius-sm);
-  padding: 11px 14px;
-  outline: none;
-  transition: border-color 0.15s var(--ease-out), box-shadow 0.15s var(--ease-out);
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
-  appearance: none;
   width: 100%;
-}
-
-.input::-webkit-outer-spin-button,
-.input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+  background: var(--color-canvas-deep);
+  color: var(--color-body-strong);
+  border: 1px solid var(--color-hairline);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: var(--font-body);
 }
 
 .input:focus {
-  border-color: var(--color-accent-cyan);
-  box-shadow: 0 0 0 3px var(--color-primary-focus, rgba(0, 102, 204, 0.18));
-  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(200, 255, 46, 0.15);
 }
 
 .helperText {
-  font-family: var(--font-system);
-  font-size: var(--font-size-fine-print);
-  color: var(--color-ink-muted-48);
-  line-height: 1.4;
-  margin-top: var(--space-xxs);
+  font-size: 0.85rem;
+  color: var(--color-muted);
 }
 
-/* ── Results grid ── */
 .resultsGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-md);
-  margin-top: var(--space-xxl);
-  width: 100%;
-  text-align: left;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 32px;
 }
 
 .resultCard {
-  background: var(--color-canvas-parchment);
   border: 1px solid var(--color-hairline);
-  border-radius: var(--radius-md);
-  padding: var(--space-xl);
+  border-radius: 16px;
+  padding: 24px;
+  background: var(--color-canvas);
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
-  transition: border-color 0.15s var(--ease-out);
+  gap: 8px;
 }
 
 .resultCardWarning {
-  border-color: rgba(255, 59, 48, 0.35);
-  background: rgba(255, 59, 48, 0.04);
+  border-color: color-mix(in oklab, var(--color-error) 45%, transparent);
 }
 
 .resultLabel {
-  font-family: var(--font-system);
-  font-size: var(--font-size-fine-print);
-  font-weight: 600;
-  color: var(--color-ink-muted-48);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  color: var(--color-muted);
 }
 
 .resultValue {
-  font-family: var(--font-system);
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 600;
-  letter-spacing: -0.5px;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800;
   color: var(--color-ink);
-  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 
 .resultValueUnit {
-  font-size: 0.55em;
-  font-weight: 600;
-  letter-spacing: 0;
-  margin-left: 2px;
-  color: var(--color-ink-muted-48);
+  font-size: 0.5em;
+  color: var(--color-muted);
+  margin-left: 4px;
 }
 
 .resultWarning {
-  font-family: var(--font-system);
-  font-size: var(--font-size-fine-print);
+  font-size: 0.85rem;
   color: var(--color-error);
   line-height: 1.4;
-  margin-top: var(--space-xxs);
 }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  .formGrid {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-  }
+.ctaSection {
+  margin-top: clamp(80px, 12vh, 140px);
+  text-align: center;
+  padding: clamp(60px, 8vw, 110px) clamp(20px, 5vw, 64px);
+  border: 1px solid var(--color-hairline);
+  border-radius: 20px;
+  background: linear-gradient(180deg, var(--color-surface), var(--color-canvas));
+}
 
+.ctaSection h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--color-ink);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.ctaSection p {
+  margin-top: 16px;
+  color: var(--color-body);
+  max-width: 54ch;
+  margin-inline: auto;
+  font-size: 1.05rem;
+}
+
+.btnPrimary {
+  margin-top: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 14px 22px;
+  border-radius: 10px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btnPrimary:hover {
+  background: var(--color-primary-active);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px -12px var(--color-primary-glow);
+}
+
+@media (max-width: 980px) {
+  .resultsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .formGrid,
   .resultsGrid {
     grid-template-columns: 1fr;
-  }
-
-  .resultCard {
-    padding: var(--space-lg);
-  }
-}
-
-@media (max-width: 640px) {
-  .formGrid {
-    margin-top: var(--space-xl);
-  }
-
-  .resultsGrid {
-    margin-top: var(--space-xl);
-  }
-}
-
-/* ── Reduced motion ── */
-@media (prefers-reduced-motion: reduce) {
-  .input,
-  .resultCard {
-    transition: none;
   }
 }

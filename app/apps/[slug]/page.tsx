@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import WhatsApp from '@/components/WhatsApp'
-import { ProductTile } from '@/components/ui/ProductTile'
+import PageHeader from '@/components/PageHeader'
+import Reveal from '@/components/Reveal'
 import { APPS, getApp, isAppSlug } from './_apps'
 import styles from './AppLanding.module.css'
 
@@ -59,15 +60,17 @@ export default async function AppLandingPage({ params }: Props) {
 
   return (
     <>
-      <main>
-        <ProductTile
-          variant="dark"
-          eyebrow={app.name}
-          headline={`${app.name}.`}
-          headlineLevel="h1"
-          tagline={heroTagline}
-          ctas={
-            app.appStoreUrl ? (
+      <PageHeader
+        eyebrow={app.category.toUpperCase()}
+        title={<>{app.name}.</>}
+        lead={heroTagline}
+      />
+
+      <main className={styles.main}>
+        <Reveal>
+          <div className={styles.card}>
+            <p className={styles.lead}>{description}</p>
+            {app.appStoreUrl && (
               <a
                 href={app.appStoreUrl}
                 target="_blank"
@@ -76,19 +79,16 @@ export default async function AppLandingPage({ params }: Props) {
               >
                 Download on the App Store
               </a>
-            ) : undefined
-          }
-        />
-        <ProductTile variant="dark" as="div">
-          <div className={styles.prose}>
-            <p>{description}</p>
-            <h2>What you get</h2>
-            <ul>
+            )}
+
+            <h2 className={styles.h2}>What you get</h2>
+            <ul className={styles.list}>
               {highlights.map((highlight) => (
                 <li key={highlight}>{highlight}</li>
               ))}
             </ul>
-            <h2>Help & legal</h2>
+
+            <h2 className={styles.h2}>Help & legal</h2>
             <ul className={styles.linkList}>
               <li>
                 <Link href={`/apps/${slug}/support`}>Support</Link>
@@ -108,7 +108,7 @@ export default async function AppLandingPage({ params }: Props) {
               .
             </p>
           </div>
-        </ProductTile>
+        </Reveal>
       </main>
       <WhatsApp lang="en" />
     </>

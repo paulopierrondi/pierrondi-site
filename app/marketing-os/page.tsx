@@ -95,9 +95,7 @@ export default function MarketingOsPage() {
   return (
     <>
       <JsonLd data={schema} />
-      <main>
-        <MarketingOsContent />
-      </main>
+      <MarketingOsContent />
       <WhatsApp />
     </>
   )

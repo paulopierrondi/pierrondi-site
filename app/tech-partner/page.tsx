@@ -71,9 +71,7 @@ export default function TechPartnerPage() {
   return (
     <>
       <JsonLd data={[schema, breadcrumb]} />
-      <main>
-        <TechPartnerContent />
-      </main>
+      <TechPartnerContent />
       <WhatsApp />
     </>
   )

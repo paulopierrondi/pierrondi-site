@@ -1,10 +1,9 @@
 'use client'
 
 import type { CSSProperties } from 'react'
-import { ProductTile } from '@/components/ui/ProductTile'
-import { PillButton } from '@/components/ui/PillButton'
-import { FaqAccordion } from '@/components/ui/FaqAccordion'
-import { useScrollReveal } from '@/hooks/useScrollReveal'
+import Link from 'next/link'
+import PageHeader from '@/components/PageHeader'
+import Reveal, { RevealStagger, RevealStaggerItem } from '@/components/Reveal'
 import styles from './PrecosContent.module.css'
 
 const plans = [
@@ -88,106 +87,110 @@ const faqs = [
 ]
 
 export default function PrecosContent() {
-  useScrollReveal()
-
   return (
     <>
-      {/* Hero */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Preços"
-        headline="Transparência total."
-        headlineLevel="h1"
-        tagline='Sem surpresa. Sem hora extra. Sem "depende". Escopo fechado, prazo definido, preço fixo.'
+      <PageHeader
+        eyebrow="PREÇOS"
+        title={<>Transparência <span className="text-primary">total.</span></>}
+        lead='Sem surpresa. Sem hora extra. Sem "depende". Escopo fechado, prazo definido, preço fixo.'
       />
 
-      {/* Plans */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Planos"
-        headline="Escolha o que faz sentido agora."
-      >
-        <div className={styles.plansGrid}>
+      <main className={styles.main}>
+        <RevealStagger className={styles.plansGrid} staggerDelay={0.08}>
           {plans.map((plan, i) => (
-            <article
-              key={plan.title}
-              className={`${styles.planCard} ${plan.featured ? styles.planCardFeatured : ''}`}
-              data-animate
-              style={{ '--delay': `${i * 0.1}s` } as CSSProperties}
-            >
-              <span className={`${styles.planTag} ${plan.featured ? styles.planTagFeatured : ''}`}>{plan.tag}</span>
-              <h3 className={styles.planTitle}>{plan.title}</h3>
-              <div className={styles.planPrice}>{plan.price}</div>
-              <div className={styles.planPeriod}>{plan.period}</div>
-              <ul className={styles.planItems}>
-                {plan.items.map((item) => (
-                  <li key={item} className={styles.planItem}>
-                    <span className={styles.planCheck} aria-hidden="true">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className={styles.planCta}>
-                <PillButton variant={plan.featured ? 'primary' : 'ghost'} href={plan.href}>
-                  Saiba mais
-                </PillButton>
-              </div>
-            </article>
-          ))}
-        </div>
-      </ProductTile>
-
-      {/* Comparison */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Comparativo"
-        headline="Por que a pierrondi.dev?"
-      >
-        <div className={styles.tableWrap} data-animate>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                {comparison.headers.map((h, i) => (
-                  <th key={h || 'empty'} className={`${styles.th} ${i === 1 ? styles.thHighlight : ''} ${i === 0 ? styles.thFirst : ''}`}>
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {comparison.rows.map((row) => (
-                <tr key={row.label}>
-                  <td className={`${styles.td} ${styles.tdLabel}`}>{row.label}</td>
-                  {row.values.map((val, i) => (
-                    <td key={`${row.label}-${i}`} className={`${styles.td} ${i === 0 ? styles.tdHighlight : ''}`}>
-                      {val}
-                    </td>
+            <RevealStaggerItem key={plan.title}>
+              <article
+                className={`${styles.planCard} ${plan.featured ? styles.planCardFeatured : ''}`}
+                style={{ '--delay': `${i * 0.1}s` } as CSSProperties}
+              >
+                <span className={`${styles.planTag} ${plan.featured ? styles.planTagFeatured : ''}`}>{plan.tag}</span>
+                <h3 className={styles.planTitle}>{plan.title}</h3>
+                <div className={styles.planPrice}>{plan.price}</div>
+                <div className={styles.planPeriod}>{plan.period}</div>
+                <ul className={styles.planItems}>
+                  {plan.items.map((item) => (
+                    <li key={item} className={styles.planItem}>
+                      <span className={styles.planCheck} aria-hidden="true">✓</span>
+                      {item}
+                    </li>
                   ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </ProductTile>
+                </ul>
+                <div className={styles.planCta}>
+                  <Link href={plan.href} className={plan.featured ? styles.btnPrimary : styles.btnGhost}>
+                    Saiba mais
+                  </Link>
+                </div>
+              </article>
+            </RevealStaggerItem>
+          ))}
+        </RevealStagger>
 
-      {/* FAQ */}
-      <ProductTile variant="dark" eyebrow="Dúvidas comuns" headline="Perguntas frequentes.">
-        <FaqAccordion items={faqs} />
-      </ProductTile>
+        <section className={styles.comparison} aria-labelledby="comparison-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>Comparativo</span>
+              <h2 id="comparison-title">Por que a pierrondi.dev?</h2>
+            </div>
+          </Reveal>
+          <Reveal>
+            <div className={styles.tableWrap}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    {comparison.headers.map((h, i) => (
+                      <th key={h || 'empty'} className={`${styles.th} ${i === 1 ? styles.thHighlight : ''} ${i === 0 ? styles.thFirst : ''}`}>
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparison.rows.map((row) => (
+                    <tr key={row.label}>
+                      <td className={`${styles.td} ${styles.tdLabel}`}>{row.label}</td>
+                      {row.values.map((val, i) => (
+                        <td key={`${row.label}-${i}`} className={`${styles.td} ${i === 0 ? styles.tdHighlight : ''}`}>
+                          {val}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Reveal>
+        </section>
 
-      {/* CTA */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Pronto para começar"
-        headline="Diagnóstico gratuito em 30 minutos."
-        tagline="Conta o problema. A gente mostra como resolver — com prazo e preço antes de começar."
-        ctas={
-          <>
-            <PillButton variant="primary" href="/#contact">Agendar diagnóstico</PillButton>
-            <PillButton variant="ghost" href="/">Ver todos os serviços</PillButton>
-          </>
-        }
-      />
+        <section className={styles.faqSection} aria-labelledby="faq-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>Dúvidas comuns</span>
+              <h2 id="faq-title">Perguntas frequentes.</h2>
+            </div>
+          </Reveal>
+          <RevealStagger staggerDelay={0.04}>
+            {faqs.map((faq) => (
+              <RevealStaggerItem key={faq.q}>
+                <details className={styles.faq}>
+                  <summary>{faq.q}</summary>
+                  <p>{faq.a}</p>
+                </details>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </section>
+
+        <section className={styles.ctaSection}>
+          <Reveal>
+            <h2>Pronto para começar?</h2>
+            <p>Diagnóstico gratuito em 30 minutos. Conta o problema. A gente mostra como resolver — com prazo e preço antes de começar.</p>
+            <div className={styles.ctaActions}>
+              <Link href="/contato" className={styles.btnPrimary}>Agendar diagnóstico</Link>
+              <Link href="/atuacao" className={styles.btnGhost}>Ver todos os serviços</Link>
+            </div>
+          </Reveal>
+        </section>
+      </main>
     </>
   )
 }

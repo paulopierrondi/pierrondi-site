@@ -1,10 +1,9 @@
 'use client'
 
 import type { CSSProperties } from 'react'
-import { ProductTile } from '@/components/ui/ProductTile'
-import { PillButton } from '@/components/ui/PillButton'
-import { FaqAccordion } from '@/components/ui/FaqAccordion'
-import { useScrollReveal } from '@/hooks/useScrollReveal'
+import Link from 'next/link'
+import PageHeader from '@/components/PageHeader'
+import Reveal, { RevealStagger, RevealStaggerItem } from '@/components/Reveal'
 import styles from './ProdutoContent.module.css'
 
 const deliverables = [
@@ -43,104 +42,107 @@ const faqs = [
 ]
 
 export default function ProdutoContent() {
-  useScrollReveal()
-
   return (
     <>
-      {/* Hero */}
-      <ProductTile
-        variant="dark"
-        eyebrow="MVP & Produto Digital"
-        headline="Do zero ao produto funcional."
-        headlineLevel="h1"
-        tagline="App web, micro SaaS ou ferramenta interna — com stack moderna, deploy em produção e código que você pode continuar. A partir de R$5.000."
-        ctas={
-          <>
-            <PillButton variant="primary" href="/#contact">Diagnóstico gratuito</PillButton>
-            <PillButton variant="ghost" href="/calculadora">Ver calculadora</PillButton>
-          </>
-        }
+      <PageHeader
+        eyebrow="MVP & PRODUTO DIGITAL"
+        title={<>Do zero ao produto <span className="text-primary">funcional.</span></>}
+        lead="App web, micro SaaS ou ferramenta interna — com stack moderna, deploy em produção e código que você pode continuar. A partir de R$5.000."
       />
 
-      {/* Entregas */}
-      <ProductTile
-        variant="dark"
-        eyebrow="O que entregamos"
-        headline="Produto completo, não protótipo."
-      >
-        <div className={styles.deliverableGrid}>
-          {deliverables.map((d, i) => (
-            <article
-              key={d.title}
-              className={styles.deliverableCard}
-              data-animate
-              style={{ '--delay': `${i * 0.08}s` } as CSSProperties}
-            >
-              <h3 className={styles.deliverableTitle}>{d.title}</h3>
-              <p className={styles.deliverableDesc}>{d.desc}</p>
-            </article>
-          ))}
-        </div>
-      </ProductTile>
-
-      {/* Stack */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Stack padrão"
-        headline="Moderno, escalável, seu."
-      >
-        <div className={styles.stackGrid} data-animate>
-          {stack.map((s) => (
-            <div key={s.name} className={styles.stackCell}>
-              <span className={styles.stackName}>{s.name}</span>
-              <span className={styles.stackLabel}>{s.label}</span>
+      <main className={styles.main}>
+        <section className={styles.deliverables} aria-labelledby="deliverables-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>O que entregamos</span>
+              <h2 id="deliverables-title">Produto completo, não protótipo.</h2>
             </div>
-          ))}
-        </div>
-      </ProductTile>
+          </Reveal>
+          <RevealStagger className={styles.deliverableGrid} staggerDelay={0.06}>
+            {deliverables.map((d, i) => (
+              <RevealStaggerItem key={d.title}>
+                <article className={styles.deliverableCard} style={{ '--delay': `${i * 0.08}s` } as CSSProperties}>
+                  <h3 className={styles.deliverableTitle}>{d.title}</h3>
+                  <p className={styles.deliverableDesc}>{d.desc}</p>
+                </article>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </section>
 
-      {/* Processo */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Como funciona"
-        headline="Processo claro, entrega em semanas."
-      >
-        <ol className={styles.stepList}>
-          {steps.map((s, i) => (
-            <li
-              key={s.number}
-              className={styles.stepRow}
-              data-animate
-              style={{ '--delay': `${i * 0.08}s` } as CSSProperties}
-            >
-              <span className={styles.stepNum}>{s.number}</span>
-              <div>
-                <h3 className={styles.stepTitle}>{s.title}</h3>
-                <p className={styles.stepDesc}>{s.desc}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </ProductTile>
+        <section className={styles.stack} aria-labelledby="stack-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>Stack padrão</span>
+              <h2 id="stack-title">Moderno, escalável, seu.</h2>
+            </div>
+          </Reveal>
+          <RevealStagger className={styles.stackGrid} staggerDelay={0.04}>
+            {stack.map((s) => (
+              <RevealStaggerItem key={s.name}>
+                <div className={styles.stackCell}>
+                  <span className={styles.stackName}>{s.name}</span>
+                  <span className={styles.stackLabel}>{s.label}</span>
+                </div>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </section>
 
-      {/* FAQ */}
-      <ProductTile variant="dark" eyebrow="Dúvidas comuns" headline="Sem surpresa.">
-        <FaqAccordion items={faqs} />
-      </ProductTile>
+        <section className={styles.steps} aria-labelledby="steps-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>Como funciona</span>
+              <h2 id="steps-title">Processo claro, entrega em semanas.</h2>
+            </div>
+          </Reveal>
+          <RevealStagger staggerDelay={0.05}>
+            <ol className={styles.stepList}>
+              {steps.map((s, i) => (
+                <RevealStaggerItem key={s.number}>
+                  <li className={styles.stepRow} style={{ '--delay': `${i * 0.08}s` } as CSSProperties}>
+                    <span className={styles.stepNum}>{s.number}</span>
+                    <div>
+                      <h3 className={styles.stepTitle}>{s.title}</h3>
+                      <p className={styles.stepDesc}>{s.desc}</p>
+                    </div>
+                  </li>
+                </RevealStaggerItem>
+              ))}
+            </ol>
+          </RevealStagger>
+        </section>
 
-      {/* CTA */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Pronto para começar"
-        headline="Sua ideia merece ser real."
-        tagline="Diagnóstico gratuito de 30 min. Saímos com escopo, prazo e valor — sem compromisso."
-        ctas={
-          <>
-            <PillButton variant="primary" href="/#contact">Agendar diagnóstico</PillButton>
-            <PillButton variant="ghost" href="/">Ver todos os serviços</PillButton>
-          </>
-        }
-      />
+        <section className={styles.faqSection} aria-labelledby="faq-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>Dúvidas comuns</span>
+              <h2 id="faq-title">Sem surpresa.</h2>
+            </div>
+          </Reveal>
+          <RevealStagger staggerDelay={0.04}>
+            {faqs.map((faq) => (
+              <RevealStaggerItem key={faq.q}>
+                <details className={styles.faq}>
+                  <summary>{faq.q}</summary>
+                  <p>{faq.a}</p>
+                </details>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </section>
+
+        <section className={styles.ctaSection}>
+          <Reveal>
+            <h2>Sua ideia merece ser real.</h2>
+            <p>Diagnóstico gratuito de 30 min. Saímos com escopo, prazo e valor — sem compromisso.</p>
+            <div className={styles.ctaActions}>
+              <Link href="/contato" className={styles.btnPrimary}>Agendar diagnóstico</Link>
+              <Link href="/atuacao" className={styles.btnGhost}>Ver todos os serviços</Link>
+            </div>
+          </Reveal>
+        </section>
+      </main>
     </>
   )
 }

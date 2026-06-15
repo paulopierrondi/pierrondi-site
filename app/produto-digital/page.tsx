@@ -61,9 +61,7 @@ export default function ProdutoPage() {
   return (
     <>
       <JsonLd data={[schema, breadcrumb]} />
-      <main>
-        <ProdutoContent />
-      </main>
+      <ProdutoContent />
       <WhatsApp />
     </>
   )

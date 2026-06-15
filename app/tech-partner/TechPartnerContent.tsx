@@ -1,10 +1,9 @@
 'use client'
 
 import type { CSSProperties } from 'react'
-import { ProductTile } from '@/components/ui/ProductTile'
-import { PillButton } from '@/components/ui/PillButton'
-import { FaqAccordion } from '@/components/ui/FaqAccordion'
-import { useScrollReveal } from '@/hooks/useScrollReveal'
+import Link from 'next/link'
+import PageHeader from '@/components/PageHeader'
+import Reveal, { RevealStagger, RevealStaggerItem } from '@/components/Reveal'
 import styles from './TechPartnerContent.module.css'
 
 const includes = [
@@ -32,85 +31,90 @@ const fit = [
 ]
 
 export default function TechPartnerContent() {
-  useScrollReveal()
-
   return (
     <>
-      {/* Hero */}
-      <ProductTile
-        variant="dark"
-        eyebrow="CTO as a Service"
-        headline="Tech Partner. Fracionado."
-        headlineLevel="h1"
-        tagline="Presença técnica contínua sem vínculo CLT. Arquitetura, code review, roadmap e execução parcial — para negócios que precisam de liderança técnica sem contratar um CTO full-time."
-        ctas={
-          <>
-            <PillButton variant="primary" href="/#contact">Agendar conversa</PillButton>
-            <PillButton variant="ghost" href="/precos">Ver preços</PillButton>
-          </>
-        }
-      >
-        <div className={styles.heroPricing} data-animate>
-          <span className={styles.heroPrice}>R$2.500<span className={styles.heroPeriod}>/mês</span></span>
-          <span className={styles.heroNote}>Contrato mensal · Sem fidelidade</span>
-        </div>
-      </ProductTile>
-
-      {/* O que inclui */}
-      <ProductTile
-        variant="dark"
-        eyebrow="O que inclui"
-        headline="Presença técnica de verdade."
-      >
-        <div className={styles.includesGrid}>
-          {includes.map((item, i) => (
-            <article
-              key={item.title}
-              className={styles.includeCard}
-              data-animate
-              style={{ '--delay': `${i * 0.08}s` } as CSSProperties}
-            >
-              <h3 className={styles.includeTitle}>{item.title}</h3>
-              <p className={styles.includeDesc}>{item.desc}</p>
-            </article>
-          ))}
-        </div>
-      </ProductTile>
-
-      {/* Para quem é */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Para quem é"
-        headline="Ideal para negócios que crescem."
-      >
-        <div className={styles.fitGrid} data-animate>
-          {fit.map((f) => (
-            <div key={f.label} className={styles.fitCard}>
-              <strong className={styles.fitLabel}>{f.label}</strong>
-              <p className={styles.fitDesc}>{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </ProductTile>
-
-      {/* FAQ */}
-      <ProductTile variant="dark" eyebrow="Dúvidas comuns" headline="Sem letra miúda.">
-        <FaqAccordion items={faqs} />
-      </ProductTile>
-
-      {/* CTA */}
-      <ProductTile
-        variant="dark"
-        eyebrow="Pronto para começar"
-        headline="Liderança técnica quando você precisa."
-        tagline="Agende uma conversa de 30 min. Entenda se o Tech Partner é o formato certo para o seu momento."
-        ctas={
-          <>
-            <PillButton variant="primary" href="/#contact">Agendar conversa</PillButton>
-            <PillButton variant="ghost" href="/produto-digital">Ver produto digital</PillButton>
-          </>
-        }
+      <PageHeader
+        eyebrow="CTO AS A SERVICE"
+        title={<>Tech Partner. <span className="text-primary">Fracionado.</span></>}
+        lead="Presença técnica contínua sem vínculo CLT. Arquitetura, code review, roadmap e execução parcial — para negócios que precisam de liderança técnica sem contratar um CTO full-time."
       />
+
+      <main className={styles.main}>
+        <Reveal>
+          <div className={styles.heroPricing}>
+            <span className={styles.heroPrice}>R$2.500<span className={styles.heroPeriod}>/mês</span></span>
+            <span className={styles.heroNote}>Contrato mensal · Sem fidelidade</span>
+          </div>
+        </Reveal>
+
+        <section className={styles.includes} aria-labelledby="includes-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>O que inclui</span>
+              <h2 id="includes-title">Presença técnica de verdade.</h2>
+            </div>
+          </Reveal>
+          <RevealStagger className={styles.includesGrid} staggerDelay={0.06}>
+            {includes.map((item, i) => (
+              <RevealStaggerItem key={item.title}>
+                <article className={styles.includeCard} style={{ '--delay': `${i * 0.08}s` } as CSSProperties}>
+                  <h3 className={styles.includeTitle}>{item.title}</h3>
+                  <p className={styles.includeDesc}>{item.desc}</p>
+                </article>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </section>
+
+        <section className={styles.fit} aria-labelledby="fit-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>Para quem é</span>
+              <h2 id="fit-title">Ideal para negócios que crescem.</h2>
+            </div>
+          </Reveal>
+          <RevealStagger className={styles.fitGrid} staggerDelay={0.05}>
+            {fit.map((f) => (
+              <RevealStaggerItem key={f.label}>
+                <div className={styles.fitCard}>
+                  <strong className={styles.fitLabel}>{f.label}</strong>
+                  <p className={styles.fitDesc}>{f.desc}</p>
+                </div>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </section>
+
+        <section className={styles.faqSection} aria-labelledby="faq-title">
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>Dúvidas comuns</span>
+              <h2 id="faq-title">Sem letra miúda.</h2>
+            </div>
+          </Reveal>
+          <RevealStagger staggerDelay={0.04}>
+            {faqs.map((faq) => (
+              <RevealStaggerItem key={faq.q}>
+                <details className={styles.faq}>
+                  <summary>{faq.q}</summary>
+                  <p>{faq.a}</p>
+                </details>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </section>
+
+        <section className={styles.ctaSection}>
+          <Reveal>
+            <h2>Liderança técnica quando você precisa.</h2>
+            <p>Agende uma conversa de 30 min. Entenda se o Tech Partner é o formato certo para o seu momento.</p>
+            <div className={styles.ctaActions}>
+              <Link href="/contato" className={styles.btnPrimary}>Agendar conversa</Link>
+              <Link href="/produto-digital" className={styles.btnGhost}>Ver produto digital</Link>
+            </div>
+          </Reveal>
+        </section>
+      </main>
     </>
   )
 }

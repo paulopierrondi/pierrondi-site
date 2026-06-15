@@ -1,6 +1,6 @@
 # Project Brain Context
 
-Generated: `2026-06-14 14:48:56`
+Generated: `2026-06-14 22:15:50`
 Tool: `claude`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
@@ -1111,6 +1111,14 @@ Qualidade de app/web e uma combinacao de produto, design, estado, performance, a
   3. Tags `<link rel="icon">`, `<link rel="apple-touch-icon">` e `<link rel="manifest">` em **todas** as paginas HTML, sem excecao.
   4. O favicon deve ser derivado do logo oficial; nunca favicon generico de framework, nunca inline SVG de baixa resolucao como unico favicon.
   5. Smoke test deve validar favicon.ico e webmanifest acessiveis.
+- **REGRA FIXA - Footer publico e paginas de confianca:** toda web, mobile web, PWA, landing publica e app shell acessivel no browser deve ter um footer/top-footer serio como parte do produto, nao como acabamento opcional:
+  1. O top-footer deve incluir marca/wordmark, uma frase curta de proposito do produto, seletor ou links de idioma quando o app for bilingue, e navegacao de confianca escaneavel.
+  2. Links minimos: About, Mission, How It Works/How To Use, Compliance, Legal, Privacy Policy, Terms of Use, Contact e Support.
+  3. Links condicionais obrigatorios quando aplicavel: Cookies, Accessibility, Security, Data Deletion, Refunds/Cancellation, Subscription Terms, Community Guidelines e Status.
+  4. Cada pagina publica essencial deve existir em ingles e portugues (`en` e `pt-BR`/`pt`) com roteamento/locale explicito; nao misturar PT/EN por fallback de browser, string hardcoded ou asset antigo.
+  5. Contact e Support devem usar alias/formulario do produto ou dominio do app, por exemplo `support@<app-domain>` ou uma chave de configuracao equivalente. Nunca usar email pessoal, telefone, endereco, empregador, dados familiares, localizacao privada ou outros detalhes pessoais do Paulo como fallback publico.
+  6. Se o projeto ainda nao tiver alias de suporte, implementar a UI com placeholder/config nao pessoal e registrar a pendencia; nao substituir por dado pessoal.
+  7. QA antes de release, review, campanha paga ou launch deve validar links do footer, mobile wrapping, nomes acessiveis, consistencia privacy/terms/compliance e ausencia de dados pessoais.
 - App icon nunca pode ser placeholder. Antes de review, TestFlight, launch, deck ou paid campaign, validar o icone dentro do build/app instalado, no asset catalog completo da plataforma e na landing/favicons/OG image.
 - Landing page publica nunca pode ser resposta JSON, pagina generica ou placeholder. `GET /` deve entregar HTML responsivo, branded, com proposta de valor clara, visual real do produto, CTA, links de suporte/privacy/terms e metadata social/SEO.
 - Interfaces operacionais devem ser claras, densas e rapidas.
@@ -1120,31 +1128,7 @@ Qualidade de app/web e uma combinacao de produto, design, estado, performance, a
 - Em app iOS, modificacao significativa so fecha depois de teste funcional no app instalado e upload do novo build para TestFlight/App Store Connect, salvo excecao explicita.
 - Screenshots sao deliverable de primeira classe, nao "depois". Submission, release, post, deck, anuncio ou pagina nova so e "feito" quando os arquivos finais artisticos existem, validados e registrados.
 - Privacidade e consentimento tambem sao deliverable de primeira classe. Todo app novo precisa ter tela padrao de primeira abertura, links legais vivos e tracking desligado por padrao antes de qualquer SDK/evento de marketing.
-- Toda tela importante precisa lidar com loading, erro, vazio e permissao.
-- Classificar cada screenshot por finalidade antes da QA final: produto real, store review, marketing, deck preview, teste visual ou dependencia. Screenshot de `node_modules`, fixture ou snapshot de pacote nao prova qualidade do app.
-
-## Privacy and consent
-
-Regra maxima: app sem clareza de privacidade nao esta pronto para TestFlight externo, review, campanha ou launch.
-
-Padrao:
-- Primeiro launch deve explicar uso funcional de dados, oferecer links legais e permitir continuar sem tracking.
-- Tracking entre apps/sites, IDFA, ads SDK, MMP e medicao de marketing ficam desligados por padrao e exigem decisao explicita de produto.
-- Se nao houver tracking, remover SDKs de ads/attribution, SKAdNetwork IDs e chaves client-side do binario final.
-- Se houver tracking, ATT/privacy labels/termos/eventos precisam estar coerentes antes do upload.
-- Screenshot da tela de consentimento por idioma principal vira evidencia obrigatoria do release.
-
-Guia canonico: [[04_Areas/Coding/Best Practices/Mobile App Privacy Consent Standard]]
-
-## Opening motion
-
-Regra maxima: todo app mobile precisa de uma assinatura curta de abertura, contextual ao produto, local/offline e respeitando acessibilidade.
-
-Padrao:
-- Launch screen nativo fica estatico; a animacao acontece dentro do app apos o primeiro frame.
-- A animacao usa a metafora real do produto: musica, financas, devocional, escola, saude, foto/video, SaaS etc.
-- Primeiro uso pode durar ate `1.6s`; cold start recorrente deve ser mais curto, idealmente `0.4s-0.9s`; nunca passar de `2s`.
-- Deve respeitar Reduce Mot
+- Toda tela importante precisa lidar com loading, erro, vaz
 ...[truncated]
 
 ## 04_Areas/Coding/Best Practices/Recent App Web Screenshot Learnings.md
@@ -1466,6 +1450,9 @@ Este e o preflight mais importante antes de criar, alterar ou revisar qualquer a
 - [ ] Mobile app tem opening motion contextual ao dominio do produto, curto, offline, sem spinner generico e sem bloquear o uso.
 - [ ] `GET /` do dominio publico entrega landing HTML responsiva, nao JSON cru, pagina vazia ou placeholder.
 - [ ] Landing inclui nome do app, promessa clara, visual real/screenshot, CTA, support/privacy/terms, favicon/app icon e Open Graph/Twitter metadata.
+- [ ] Footer/top-footer serio existe em desktop e mobile web, com About, Mission, How It Works/How To Use, Compliance, Legal, Privacy Policy, Terms of Use, Contact e Support.
+- [ ] Paginas publicas essenciais existem em ingles e portugues com locale explicito; nao ha mistura PT/EN por fallback.
+- [ ] Contact/Support usa alias ou formulario do produto, nunca email pessoal, telefone, endereco, empregador, localizacao privada ou outros dados pessoais do Paulo.
 - [ ] Fluxo principal tem inicio, acao, feedback, erro e conclusao.
 - [ ] Se for app iOS com mudanca significativa, fechamento inclui QA funcional no app instalado e upload TestFlight/App Store Connect.
 - [ ] Estados vazios, loading, erro, offline e permissao negada foram tratados.
@@ -1475,11 +1462,7 @@ Este e o preflight mais importante antes de criar, alterar ou revisar qualquer a
 
 ## 4. Qualidade visual
 
-> **Regra zero:** screenshots para loja, marketing ou release sao deliverable de primeira classe, sempre "super awesome", sempre iguais ou melhores que a versao anterior. Ver [[04_Areas/Coding/Checklists/Screenshots Visual QA Checklist]] e [[04_Areas/Coding/Best Practices/App Web Quality Best Practices]].
-
-- [ ] App icon foi validado como final, forte e reconhecivel; nao e placeholder, template cru ou asset generico.
-- [ ] App icon esta consistente entre build instalado, App Store/Play, landing, favicon e OG image.
-- [ ] Screenshot
+> **Regra zero:** screenshots para loja, marketing ou release sao deliverabl
 ...[truncated]
 
 ## 04_Areas/Coding/Checklists/Screenshots Visual QA Checklist.md

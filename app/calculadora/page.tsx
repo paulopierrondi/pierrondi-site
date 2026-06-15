@@ -47,10 +47,8 @@ const breadcrumb = {
 export default function CalculadoraPage() {
   return (
     <>
-      <main>
-        <JsonLd data={[roiJsonLd, breadcrumb]} />
-        <CalculadoraContent />
-      </main>
+      <JsonLd data={[roiJsonLd, breadcrumb]} />
+      <CalculadoraContent />
       <WhatsApp />
     </>
   )
