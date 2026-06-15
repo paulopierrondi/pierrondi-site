@@ -1,0 +1,34 @@
+.canvas,
+.placeholder {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.canvas canvas,
+.placeholder {
+  opacity: 1;
+}
+
+.bgGrade {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 78% 14%, rgba(200, 255, 46, 0.06), transparent 60%),
+    radial-gradient(80% 60% at 10% 90%, rgba(85, 184, 217, 0.05), transparent 60%);
+}
+
+.bgVignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(130% 100% at 50% 38%, transparent 52%, rgba(3, 3, 3, 0.55) 100%);
+}

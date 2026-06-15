@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import WhatsApp from '@/components/WhatsApp'
 import JsonLd from '@/components/JsonLd'
 import ProdutoContent from './ProdutoContent'
@@ -63,11 +61,9 @@ export default function ProdutoPage() {
   return (
     <>
       <JsonLd data={[schema, breadcrumb]} />
-      <Nav />
       <main>
         <ProdutoContent />
       </main>
-      <Footer />
       <WhatsApp />
     </>
   )

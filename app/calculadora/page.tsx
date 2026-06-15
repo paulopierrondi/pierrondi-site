@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import WhatsApp from '@/components/WhatsApp'
 import JsonLd from '@/components/JsonLd'
 import CalculadoraContent from './CalculadoraContent'
@@ -49,12 +47,10 @@ const breadcrumb = {
 export default function CalculadoraPage() {
   return (
     <>
-      <Nav />
       <main>
         <JsonLd data={[roiJsonLd, breadcrumb]} />
         <CalculadoraContent />
       </main>
-      <Footer />
       <WhatsApp />
     </>
   )

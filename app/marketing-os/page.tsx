@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import WhatsApp from '@/components/WhatsApp'
 import JsonLd from '@/components/JsonLd'
 import MarketingOsContent from './MarketingOsContent'
@@ -97,11 +95,9 @@ export default function MarketingOsPage() {
   return (
     <>
       <JsonLd data={schema} />
-      <Nav />
       <main>
         <MarketingOsContent />
       </main>
-      <Footer />
       <WhatsApp />
     </>
   )

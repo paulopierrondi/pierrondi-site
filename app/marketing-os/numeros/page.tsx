@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import { ProductTile } from '@/components/ui/ProductTile'
 import { PillButton } from '@/components/ui/PillButton'
 import styles from './NumeroContent.module.css'
@@ -19,7 +17,6 @@ export const metadata: Metadata = {
 export default function PublicNumbersPage() {
   return (
     <>
-      <Nav />
       <main>
         <ProductTile
           variant="dark"
@@ -46,7 +43,6 @@ export default function PublicNumbersPage() {
           </div>
         </ProductTile>
       </main>
-      <Footer />
     </>
   )
 }

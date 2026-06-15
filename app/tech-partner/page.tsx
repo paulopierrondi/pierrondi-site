@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import WhatsApp from '@/components/WhatsApp'
 import JsonLd from '@/components/JsonLd'
 import TechPartnerContent from './TechPartnerContent'
@@ -73,11 +71,9 @@ export default function TechPartnerPage() {
   return (
     <>
       <JsonLd data={[schema, breadcrumb]} />
-      <Nav />
       <main>
         <TechPartnerContent />
       </main>
-      <Footer />
       <WhatsApp />
     </>
   )

@@ -1,6 +1,6 @@
 # Project Brain Context
 
-Generated: `2026-06-03 09:14:51`
+Generated: `2026-06-14 14:48:56`
 Tool: `claude`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
@@ -146,7 +146,7 @@ Every Bradesco Now Assist material must explicitly connect:
 ---
 type: policy
 status: generated
-generated_at: "2026-06-03 09:07:43"
+generated_at: "2026-06-14 09:25:07"
 tags:
   - ai-agents
   - policy
@@ -419,7 +419,7 @@ Se a mesma variavel aparece em mais de um local, o ultimo a ser carregado vence.
 
 ## Permitido no arquivo central
 
-- Variaveis compartilhadas entre projetos (`OPENAI_API_KEY`, `GEMINI_API_KEY`, `ELEVENLABS_API_KEY`, `LINEAR_API_KEY`, `GITHUB_PAT`, `VERCEL_TOKEN`, `RAILWAY_*_TOKEN`, `ASC_KEY_ID`, `ASC_ISSUER_ID`, `APPLE_DEVELOPER_TEAM_ID`).
+- Variaveis compartilhadas entre projetos (`OPENAI_API_KEY`, `GEMINI_API_KEY`, `ELEVENLABS_API_KEY`, `LINEAR_API_KEY`, `GITHUB_PAT`, `VERCEL_TOKEN`, `RAILWAY_*_TOKEN`, `ASC_KEY_ID`, `ASC_ISSUER_ID`, `APPLE_DEVELOPER_TEAM_ID`, `AGENT_HUB_SLACK_WEBHOOK_URL`, `SLACK_BOT_TOKEN`, `SLACK_APP_TOKEN`, `AGENT_HUB_SLACK_CHANNEL`).
 - Defaults locais validos para dev (nao para producao).
 - Comentarios marcando grupo (`# === AI image ===`).
 
@@ -496,11 +496,7 @@ chmod 600 /Users/paulopierrondi/Projects/.keys.env
 brain-env-run list
 ```
 
-Apagar o backup quando confirmar que o novo arquivo funciona em pelo menos um script (`brain-env-run -- python3 -c 'import os; print(bool(os.environ.get("OPENAI_API_KEY")))'`).
-
-### Adicionar uma key nova
-
-1. Adicionar a linha em `/Users/paulopierrondi/Projects/.k
+Apagar o backup quando confirmar que o novo arquivo funciona em pelo menos um script (`brain-env-run -- python3 -c 'import os; print(bool(os.environ.get("OPENAI_API_KEY
 ...[truncated]
 
 ## 99_System/Session Journal Continuity Policy.md
@@ -659,14 +655,17 @@ Defaults:
 | Write hard cap | 3 |
 | Per-repo write cap | 1 |
 | Premium hard cap | 2 |
-| Research swarm soft/hard | 8 / 16 |
+| kimi_cli soft/hard | 12 / 24 |
+| kimi_agent_swarm soft/hard | 16 / 32 |
+| Research swarm soft/hard | 16 / 32 |
 
 Rules:
 
-- `16` is a burst hard cap, not default.
+- `16`/`32` are burst hard caps, not defaults — but Kimi is intentionally loose: **Kimi sem economia** (cheap report-only; spawn freely, the limit is CPU/RAM not cost).
 - One writer per repo unless isolated worktrees are explicitly declared.
 - `claude-linear-swarm <ids>` is the canonical isolated-worktree exception for multiple independent Linear issues in one repo; it creates `.swarm/worktrees/<issue>` and local branches `swarm/<issue>`.
-- Kimi/Kimi Swarm should fan out research; Codex integrates; Gemini validates; Antigravity captures browser/visual evidence; Claude handles architecture/compliance/release risk.
+- Parallelize complex work BY DEFAULT via the capability router (`lib.llm.route_by_capability`) + entrypoints `brain-swarm` / Workflow / `claude-linear-swarm`. Deep rule: [[Agentic Operations OS]].
+- Kimi/Kimi Swarm fan out research/triage/scaffold (no throttle); Codex integrates; Gemini validates; Antigravity captures browser/visual evidence; Claude handles architecture/compliance/release risk.
 - Any child task that needs a human gate makes the whole group gated.
 - Use `/Users/paulopierrondi/agents-hub/scripts/coder-parallel-coordinator.py plan` before nontrivial fan-out.
 
@@ -679,19 +678,7 @@ Always require Paulo's explicit command before:
 - Paid ads, campaign budget, campaign state or tracking changes.
 - Git push, merge, force-push or release tagging.
 - Secret rotation, credential changes or exposing real secret values.
-- Bulk Linear/Jira close, archive, delete, relabel, reassign or move operations.
-
-## Auto-Improvement Log
-
-After meaningful multi-LLM or routing work, record a redacted log in the relevant vault note, session journal or handoff:
-
-```yaml
-swarm_log:
-  task_id: null
-  task_summary: ""
-  tier_assigned: "ECONOMICO | BALANCEADO | PREMIUM"
-  surface_used: "Codex | Claude Code | Gemini CLI | Kimi CLI | Antigravity | mixed"
-  routi
+- B
 ...[truncated]
 
 ## 04_Areas/Coding/Linear/Linear Git Development Tracking OS.md
@@ -795,7 +782,7 @@ tags:
 ---
 # Linear Project Map
 
-Updated: 2026-05-28
+Updated: 2026-06-06
 
 This map links Linear projects to local repos and Obsidian project notes. It is mapping metadata only.
 
@@ -803,6 +790,7 @@ Important: this note is not the Linear source of truth. Always verify live proje
 
 | Linear project | Status | Priority | Repo / path hint | Obsidian note hint | Notes |
 | --- | --- | --- | --- | --- | --- |
+| ServiceNow Implementation OS - Bruno PDI Demo | In Progress | High | vault + PDI + ServiceNow demo artifacts | `ServiceNow Implementation OS` | New live project created `2026-06-04`; immediate queue is `AGE-1628` PDI readiness, `AGE-1629` FSO pack, `AGE-1630` IRM pack, `AGE-1631` demo script and `AGE-1632` rehearsal. `AGE-1627` command center is Done. |
 | Itaú NowMobile ServiceNow | Backlog | High | `itau-nowmobile-servicenow` | search Projects Index | New live project from 2026-05-21; repo appears in local sync as `/Users/paulopierrondi/Projects/itau-nowmobile-servicenow` on `codex/AGE-1517-vibe-code-integration` and as `/Users/paulopierrondi/Documents/itau-nowmobile-servicenow` in the project description. |
 | nowassistdemo | Planned | High | `nowassistdemo` | search Projects Index | ServiceNow AI demo control plane. Newest project in Linear. |
 | Pierrondi.ia - Apple Design Redesign | Backlog | High | `pierrondi-ia` | `pierrondi-ia` | Design-system redesign track for public site and Studio. |
@@ -827,9 +815,7 @@ Important: this note is not the Linear source of truth. Always verify live proje
 | InvestCoach.AI | Todo via issue | Urgent | `investcoach_ai` | `investcoach_ai` | Live issue AGE-1482 gates paid scale on Test Events and Apple Ads export. |
 | Muse Edit Growth | Todo via issue | High | `fashioncore` | search Projects Index | Live issue AGE-1481 separates current Muse Edit growth from historical Fashion Stylist AI. |
 | MyTone - AI Ringtone Studio | Todo via issue | High | `mytone-app`, `mytone-ringtone` | search Projects Index | Live issue AGE-1476 covers StoreKit smoke test and post-approval hooks. |
-| Parabens IA BR | Todo via issue | High | `parabens-ai-br` | search Projects Index | Live issue AGE-1479 covers App Review/resubmit and BR creative proof. |
-| pierrondi.dev Public Site | Todo via issue | High | `pierrondi-site` | search Projects Index | Live issue AGE-1486 covers proof page and analytics readiness. Canonical production is Railway (`www.pierrondi.dev` / `pierrondi-site-production.up.railway.app`); Vercel aliases are legacy/non-official. |
-| Ser
+| Parabens IA BR | Todo via issue | High | `parabens-ai-br` | search Projects Index | Live issue AGE-1479 c
 ...[truncated]
 
 ## 99_System/Automation Email Policy.md
@@ -1078,49 +1064,22 @@ Todo coder deve registrar aprendizados reutilizaveis em:
 
 - Prompt caching e workflow layout: separar prefixo estável de delta dinâmico, registrar `prompt_cache.strategy`, `prefix_version` e telemetria quando houver.
 - CLI/headless orchestration: comandos batch devem ter modo não-interativo explícito; quando o CLI default for TUI, usar flag headless/documentada antes de integrar em automação.
+- CLI batch verification: se a ferramenta puder cair para TUI/interactive shell mode, tratar isso como falha do pipeline até provar `--print`/headless/stream-json em execução real.
+- Live-source gap reporting: antes de afirmar gap/falha em produção, validar o arquivo/config/source atual e citar a evidência viva; nota antiga, summary ou memory não bastam.
+- Verification over assertion: agentes persona/decision/summary nunca devem declarar "confirmei/rodei/chequei" sem prova de tool call ou leitura viva nesta mesma sessão.
+- Contracted workspace execution: qualquer LaunchAgent/workspace_write precisa de `cwd` contratual com `AGENTS.md` ou `.brain/PROJECT_CONTEXT.md`; `$HOME` e paths genéricos são inválidos.
 - iOS/Android/App Store/Play submissions: smoke real no runtime alvo continua sendo gate obrigatório, mesmo quando lint/build/health check passam.
 - Screenshot/release QA: assets de loja e marketing precisam composição final, dimensão exata e validação lado a lado antes do submit.
 - Guided tours: cada rota/funcionalidade relevante precisa tour contextual com spotlight correto, persistencia por usuario e validacao desktop/mobile/producao antes de release.
 - Complexidade ciclomatica: gate obrigatorio de fim-de-atividade via `complexity-guard.py scan --changed`; nada com funcao acima do teto HARD (CCN 15) fecha sem refator ou waiver logado. Engine universal `lizard` + nativo (`ruff C901`, eslint `complexity`). Ver [[99_System/Cyclomatic Complexity Policy]].
+- Journals/handoffs: `Done` + `Evidence` + `Next action` sao obrigatorios; checkpoints sem isso sao `partial`, nao entrega.
+- Prod gap reporting: antes de citar gap/falha/regressao em producao, ler a fonte viva atual e anexar evidência; nota antiga ou resumo de chat nao bastam.
+- Delivery semantics: separar `proposal_volume`, `dry-run` e `validated_delivery`; readiness pipeline nao equivale a entrega.
 
 Aprendizado reutilizavel e algo que deve guiar projetos futuros:
 
 - erro recorrente;
-- comando canonico melhor;
-- convencao de plataforma;
-- decisao de arquitetura que se repetiu;
-- checklist que faltava;
-- risco de seguranca percebido;
-- padrao de deploy ou rollback;
-- regra de UX/design que melhorou resultado;
-- falha visual detectada por screenshot ou viewport;
-- regra de store readiness para App Store ou Google Play.
-
-## Regra para agentes
-
-Quando uma sessao terminar, perguntar internamente:
-
-- "Isto ensina algo reutilizavel?"
-- "Algum checklist deve ganhar item novo?"
-- "Alguma pratica antiga deve ser corrigida?"
-- "Isso vale para uma plataforma especifica ou para todos os projetos?"
-
-Se sim, registrar no Learning Inbox ou em `.brain/SESSION_NOTES.md` quando o vault nao estiver acessivel.
-
-## Promocao
-
-Itens do Learning Inbox viram melhores praticas quando:
-
-- aconteceram em mais de um projeto;
-- evitaram bug, retrabalho, custo ou risco;
-- melhoraram qualidade visual, seguranca, performance ou deploy;
-- foram confirmados por teste, build, deploy ou revisao.
-
-## Links
-
-- [[04_Areas/Coding/AI Coding Operating System]]
-- [[04_Areas/Coding/Checklists/Project Checklist Hub]]
-- [[04_Areas/Coding/Checkli
+- comando canoni
 ...[truncated]
 
 ## 04_Areas/Coding/Best Practices/App Web Quality Best Practices.md
@@ -1146,6 +1105,12 @@ Qualidade de app/web e uma combinacao de produto, design, estado, performance, a
 - Construir a experiencia real primeiro.
 - Evitar landing generica quando o pedido e app/ferramenta.
 - Todo app precisa nascer com identidade publica completa: icone final forte, landing page publica de padrao superior e links legais vivos. Isso e parte do produto, nao acabamento.
+- **REGRA FIXA — Logo e favicon:** toda pagina/site/app web deve ter, no minimo:
+  1. **Logo no topo** (navbar/header), na maxima qualidade possivel (SVG preferencialmente), nunca placeholder, nunca distorcido, nunca pixelado.
+  2. **Favicon decente** em multipla resolucao: `favicon.ico` (16x16, 32x32), `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png` (180x180), `android-chrome-192x192.png`, `android-chrome-512x512.png`, mais `site.webmanifest`.
+  3. Tags `<link rel="icon">`, `<link rel="apple-touch-icon">` e `<link rel="manifest">` em **todas** as paginas HTML, sem excecao.
+  4. O favicon deve ser derivado do logo oficial; nunca favicon generico de framework, nunca inline SVG de baixa resolucao como unico favicon.
+  5. Smoke test deve validar favicon.ico e webmanifest acessiveis.
 - App icon nunca pode ser placeholder. Antes de review, TestFlight, launch, deck ou paid campaign, validar o icone dentro do build/app instalado, no asset catalog completo da plataforma e na landing/favicons/OG image.
 - Landing page publica nunca pode ser resposta JSON, pagina generica ou placeholder. `GET /` deve entregar HTML responsivo, branded, com proposta de valor clara, visual real do produto, CTA, links de suporte/privacy/terms e metadata social/SEO.
 - Interfaces operacionais devem ser claras, densas e rapidas.
@@ -1179,20 +1144,7 @@ Padrao:
 - Launch screen nativo fica estatico; a animacao acontece dentro do app apos o primeiro frame.
 - A animacao usa a metafora real do produto: musica, financas, devocional, escola, saude, foto/video, SaaS etc.
 - Primeiro uso pode durar ate `1.6s`; cold start recorrente deve ser mais curto, idealmente `0.4s-0.9s`; nunca passar de `2s`.
-- Deve respeitar Reduce Motion e nao depender de backend.
-- Nao pode inicializar tracking, ads SDK ou medicao de marketing antes do consentimento aplicavel.
-- Evidencia visual da animacao deve ser registrada na nota do projeto quando houver release visual/mobile.
-
-Guia canonico: [[04_Areas/Coding/Best Practices/Mobile App Opening Motion Standard]]
-
-## iOS QA and TestFlight closure
-
-Regra maxima: para app iOS, "feito" nao significa apenas codigo compilando. Significa app testado, build incrementado, archive/export feito e upload TestFlight concluido.
-
-Padrao:
-- Ao fechar mudanca iOS significativa, testar no app instalado: cold start/opening motion, privacy/consent, auth/demo ou anonimo, Home, navegacao principal, feature alterada, links legais e APIs relevantes.
-- Incrementar build number antes do archive.
-- Usar lane/script
+- Deve respeitar Reduce Mot
 ...[truncated]
 
 ## 04_Areas/Coding/Best Practices/Recent App Web Screenshot Learnings.md
@@ -1336,8 +1288,10 @@ tags:
 
 - Nao deixar chat operacional passar de 60% de contexto sem checkpoint. Em 50-55%, rodar `chat-context-guard checkpoint`; em >=60%, produzir resume pack e continuar em novo chat.
 - Manter session journal vivo. Preflight escreve automaticamente, mas coders devem rodar `session-journal heartbeat` a cada 10 minutos de trabalho ativo, depois de patch relevante, falha de teste/build, mudanca de fase, human gate ou contexto em 50-55%.
+- Journals e handoffs precisam provar entrega: incluir sempre `Done`, `Evidence` e `Next action`. Se faltar um desses, tratar como `partial`, nunca como concluido.
 - Usar a superficie certa antes de chamar outro LLM: `llm-routing-guard route --task "..."` quando houver duvida. Codex integra; Claude resolve risco complexo; Kimi pesquisa/triage; Gemini valida; Antigravity faz browser/visual/worktree; Qwen faz draft isolado.
 - Usar a tool certa antes de executar: `tool-usage-guard route --task "..."` quando houver duvida. Obsidian registra memoria duravel; Linear registra realidade viva de produto; Git/GitHub registra codigo/PR/CI; CodeGraph responde estrutura de codigo; Browser/Antigravity prova visual/browser; secrets ficam fora de Markdown/chat/logs.
+- Antes de relatar gap, regressao ou falha em producao, ler o arquivo/config atual e anexar a evidencia viva. Handoff, nota antiga e memoria resumida nao bastam como prova do estado atual.
 - Preservar mudancas do usuario.
 - Evitar refactor fora do escopo.
 - Usar ferramentas seguras para secrets: Railway, provider env vars, 1Password/Keychain.
@@ -1358,9 +1312,7 @@ tags:
 
 - 2026-05-21: Cursor Background Agent deve entrar no Hub como worker remoto de branch/PR pequeno, nunca como integrador final. Ele usa snapshots `.brain` e `.cursor/rules`; Codex/Claude local valida e Obsidian/Linear registram a realidade.
 - 2026-05-21: Paulo decidiu nao abrir Cursor por ora. Background work deve ficar embutido nos coders atuais: Kimi para volume/triagem, Codex para patch/integracao, Claude Code para complexidade/compliance, Gemini CLI para validacao independente/MCP/terminal e Antigravity para orquestracao/browser/worktree/artefatos. Cursor fica dormente.
-- 2026-05-21: Gemini CLI e Google Antigravity entram como coders ativos no Hub. Gemini cobre validacao independente/MCP/terminal com `GEMINI.md`; Antigravity cobre orquestracao agent-first, browser/Chrome, worktrees, subagentes e artefatos com `AGENTS.md` + `GEMINI.md`.
-- 2026-05-25: Multi-agent work deve comecar por mission packet, nao por prompt solto. `agent-mastery.py` gera `mission.md`, `status.json` e handoff prompts com owner, artefato, stop condition, hard gates e prompt cache antes de qualquer dispatch.
-- 2026-05-25: Contexto de chat e recurso operacional finito. Em 50-55%, checkpoint obrigatorio;
+- 2026-05-21: Gemini CLI e Google Antigravity entram como coders ativos no Hub. Gemini cobre validacao independente/MCP/terminal com `GEMINI.md`; Antigravity cobre orquestracao agent-first, browser/Chrome, worktrees, subagentes e artefatos com `AGENTS.md` + `G
 ...[truncated]
 
 ## 04_Areas/Coding/Checklists/Project Checklist Hub.md
@@ -1635,8 +1587,10 @@ tags:
 ---
 # Web App Preflight Checklist
 
-## UX
+## UX / Brand
 
+- [ ] **Logo no topo (navbar/header) em SVG/maxima qualidade; nunca placeholder.**
+- [ ] **Favicon decente em todas as paginas: favicon.ico + PNGs + apple-touch-icon + site.webmanifest.**
 - [ ] O primeiro viewport mostra produto, estado real ou tarefa principal.
 - [ ] Para portfolio, landing premium, hero, animacao ou referencia visual, aplicar [[04_Areas/Coding/Best Practices/High Craft Frontend Visual Standard]].
 - [ ] Navegacao principal e retorno sao claros.
@@ -2037,6 +1991,10 @@ Este e o centro de operacao para criativos, videos curtos, campanhas, legendas, 
 
 ## App Marketing / ASA
 
+- [[04_Areas/Marketing/FaithSchool Ads Marketing Learnings 2026-06-13]]
+- [[04_Areas/Marketing/FaithSchool Google Ads Daily Report]]
+- [[04_Areas/Marketing/FaithSchool Google Ads Daily Measurement Runbook]]
+- [[04_Areas/Marketing/Paid War Room/2026-06-13-Google-Search-10USD-FaithSchool-CantuStudio]]
 - [[04_Areas/Marketing/Soro SEO App Distribution OS]]
 - [[04_Areas/Marketing/Soro SEO Automation - Claude Code Runbook]]
 - [[04_Areas/Marketing/Soro SEO Automation - Kimi Runbook]]
@@ -2101,9 +2059,7 @@ Todo pedido de criativo deve gerar um pacote, nao apenas uma peca:
 ### Regra de ouro — Paid marketing
 
 - Apple Ads / ASA, Meta, TikTok, YouTube, LinkedIn Ads ou qualquer canal pago podem gerar diagnostico e recomendacao diaria.
-- Nenhum agente pode pausar, aumentar budget, mudar bid, criar campanha, publicar criativo pago ou alterar target CPA sem aprovacao explicita do Paulo.
-- O vault guarda metricas agregadas, decisoes e hipoteses; segredos de API/OAuth ficam fora do vault.
-- Para apps financeiros ou IA financeira no TikTok, `TikTok Financial Ads Compliance Runbook` e preflight obrigatorio
+- Nenhum agente pode pausar, aumentar budget, mudar bid, criar campanha
 ...[truncated]
 
 ## 04_Areas/Marketing/Pierrondi.dev Creative Video OS.md
@@ -2774,7 +2730,7 @@ This project has a local council overlay in `.brain/PROJECT_COUNCIL.md`.
 | --- | --- | --- |
 | `local-product-owner` | [[agente_business_owner]] | `kimi` |
 | `local-technical-lead` | [[agente_technical_lead]] | `codex` |
-| `local-qa-test-agent` | [[agente_test_lead]] | `gemini` |
+| `local-qa-test-agent` | [[agente_test_lead]] | `antigravity` |
 | `local-release-guardian` | [[agente_release_lead]] | `claude` |
 | `local-automation-steward` | [[agente_automation_lead]] | `codex` |
 | `local-growth-operator` | [[agente_marketing_evolution]] | `kimi` |
@@ -2793,7 +2749,7 @@ project_type: web-app
 monetization: SaaS/ad-supported (unconfirmed)
 git: sim
 path: "/Users/paulopierrondi/Projects/pierrondi-site"
-last_analyzed: "2026-06-01"
+last_analyzed: "2026-06-08"
 tags:
   - project
   - web-app
@@ -2844,7 +2800,7 @@ tags:
 
 ---
 
-## 📊 UX & Sales Analysis (2026-06-01)
+## 📊 UX & Sales Analysis (2026-06-08)
 
 | Métrica | Score | Status |
 |---------|-------|--------|
@@ -2921,7 +2877,7 @@ tags:
 
 ---
 
-## 🔬 Pesquisa de Mercado (2026-06-01)
+## 🔬 Pesquisa de Mercado (2026-06-08)
 
 #### 🔍 RESEARCH: skipped
 
@@ -2933,9 +2889,9 @@ _Pesquisa pulada_
 
 ## 📁 Detalhes do Projeto
 
-- Commits (30d): `49`
-- Branches: `15`
-- Último: `e7d162a fix(bradesco): improve k26 material viewport fit`
+- Commits (30d): `92`
+- Branches: `21`
+- Último: `5fe867f fix(control-tower): route low risk plans to kimi cod`
 
 
 ### Tech Stack Completo
@@ -2970,40 +2926,69 @@ Landing page pública de [pierrondi.dev](https://pierrondi.dev) — agência de 
 - Repo local: `file:///Users/paulopierrondi/Projects/pierrondi-site`
 - [[Dashboard]]
 - [[Projects Index]]
-- [[2026-06-01-All-Projects-Intelligence]]
+- [[2026-06-08-All-Projects-Intelligence]]
 
 ---
 
-*Última análise automática: 2026-06-01 12:00:46*
+*Última análise automática: 2026-06-08 12:01:35*
 
-## Registro operacional - 2026-06-01 - Página Itaú AI governance
+<!-- PRODUCT_COUNCIL_PROJECT_START -->
+## Product Council
 
-- Pedido: melhorar `/itau` com base na conversa com o Itaú e checar contra base ServiceNow para evitar afirmação frágil.
-- Decisão: ajustar a página para separar `AI System Digital Asset` (`alm_ai_system_digital_asset`), `AI System Product Model` (`cmdb_ai_system_product_model`), CI operacional (`cmdb_ci_function_ai` ou `cmdb_ci_appl_ai_application`), vínculo `cmdb_rel_asset_ci`, CSDM/Service Instance, discovery/Service Graph Connectors e IRE.
-- Fontes verificadas: ServiceNow Docs para CMDB CI Class Models, AI Asset Inventory, Enterprise AI discovery, Microsoft Foundry pattern/Asset-CI Relationship e Identification/Reconciliation Engine.
-- Arquivos alterados: `app/itau/ItauExperience.tsx`, `app/itau/ItauExperience.module.css`, `test/itau-page-content.test.mjs`.
-- Evidência local inicial: `node --test test/itau-page-content.test.mjs`, `npm run lint`, `npm run build`.
+Este projeto e coberto pelo Hub de Agentes e deve acionar o Product Council em todo trabalho de coder.
 
-## Registro operacional - 2026-06-02 - FashionCore looks no Control Tower
+| Papel | Agente | Status |
+| --- | --- | --- |
+| Business Owner | [[agente_business_owner]] | ativo |
+| Technical Lead | [[agente_technical_lead]] | ativo |
+| Automation Lead | [[agente_automation_lead]] | ativo |
+| Test Lead | [[agente_test_lead]] | ativo |
+| Product User | [[agente_product_user]] | ativo |
+| Release Lead | [[agente_release_lead]] | ativo |
+| Delivery Lead | [[agente_delivery_lead]] | ativo |
 
-- Pedido: investigar por que os looks não propagam/evoluem automaticamente no site.
-- Causa confirmada: `creative-control-snapshot.py` propaga para `https://www.pierrondi.dev/api/creative-control/snapshot` com `200`, mas a fonte local FashionCore está parada: `/Users/paulopierrondi/Projects/fashioncore/services/api/.data/db.json` tem `closet_items=30`, `saved_looks=0`, `look_reviews=0`, newest `2026-05-21T17:06:01.488328+00:00`.
+**Start gate:** `/Users/paulopierrondi/agents-hub/scripts/project-council-touchpoint.py --project-id "pierrondi-site" --phase start`
+
+**Finish gate:** `/Users/paulopierrondi/agents-hub/scripts/project-council-touchpoint.py --project-id "pierrondi-site" --phase finish --summary "<resumo>"`
+
+**Reports:** [[Hub_Agentes/03_Outputs/council_reviews/2026-05-20-product-council-report]]
+<!-- PRODUCT_COUNCIL_PROJECT_END -->
+
+<!-- BACKGROUND_CODERS_PROJECT_START -->
+## Background Coders
+
+Modelo ativo: Codex + Claude Code + Kimi CLI + Qwen Code + Google Antigravity/AGY. Gemini CLI fica fallback explicito. Cursor Background Agent fica dormente.
+
+| Trabalho | Coder | Regra |
+| --- | --- | --- |
+| Varredura/triagem/relatorio | Kimi CLI | barato, report-first |
 [REDACTED SECRET LINE]
-- Decisão técnica: o painel não deve mascarar `closet_items` como looks reais. Snapshot agora inclui `sourceMode` e `sourceCounts`; UI mostra `Fonte FashionCore: fallback`, `0 saved · 0 reviews · 30 closet` e alerta stale.
-- Arquivos alterados: `scripts/creative-control-snapshot.py`, `lib/creative-control/schema.ts`, `lib/creative-control/types.ts`, `app/control_tower/LooksPanel.tsx`, `app/control_tower/ControlTower.module.css`, `test/creative-control-snapshot.test.mjs`.
-- Evidência: `node --test test/*.test.mjs`, `npm run lint`, `npm run build`, `complexity-guard.py scan app/control_tower/LooksPanel.tsx scripts/creative-control-snapshot.py` sem hard blockers.
-- Screenshot QA: `/Users/paulopierrondi/Projects/pierrondi-site/test-results/control-tower-looks-fallback-2026-06-02.png`.
-- Risco/gate: corrigir/recarregar LaunchAgents ou `run_muse_catalog_local.sh` exige aprovação explícita do Paulo por ser mutação de automação/LaunchAgent. Não houve deploy/push.
-- QA visual local inicial: screenshots em `test-results/itau-page/desktop-1440x1200.png` e `test-results/itau-page/mobile-390x1200.png`; Playwright confirmou `overflowX=false`, 0 textos cortados e 6 links ServiceNow renderizados.
-- Risco residual: recomendações dependem da release/plugins ativos na instância Itaú; nomes de relacionamento devem ser confirmados no CI Class Manager antes de virar configuração final.
-- Deploy/push: executado em 2026-06-01 após comando explícito "move to production"; produção Railway `pierrondi-site`, deployment final `f8dd2ab6-dd24-477c-88a9-4803e04b6050`, commit/push `a049a52 feat(itau): validate AI governance production page`.
-- Evidência de produção: `https://www.pierrondi.dev/itau` respondeu 200; HTML contém `AI Agent Governance: CMDB + AI Control Tower`, `cmdb_rel_asset_ci`, `Service Graph Connectors` e `IRE`; `/api/health` respondeu 200.
-- QA visual produção: screenshots em `test-results/itau-production/desktop-1440x1200.png` e `test-results/itau-production/mobile-390x1200.png`; Playwright confirmou `overflowX=false`, 0 textos cortados, 12 links ServiceNow e mapa CSDM presente.
-- Smoke portfolio produção: `npm run test:apps:prod` confirmou 129 rotas esperadas.
+| Patch/teste/integracao | Codex | executor principal |
+| Arquitetura/compliance/App Store/bug dificil | Claude Code | especialista senior |
+| Checagem independente/MCP/utilitario terminal/browser/artefatos | Google Antigravity / AGY | default; usar `AGENTS.md` + `GEMINI.md`; vault externo exige acesso explicito |
+| Fallback Gemini-specific | Gemini CLI | usar somente quando Paulo ou a tarefa pedir Gemini explicitamente |
 
-## Registro operacional - 2026-06-01 - Control Tower visual polish
+Budget gate: uma tarefa/issue por execução, owner explícito, artefato esperado e stop condition.
 
-- Pedido: melhorar a tela `/control_tower#devot
+Autonomous intake: pedido amplo do Paulo deve virar entrega segura e rastreavel; nao perguntar o obvio. Resolver projeto/superficie, ler fontes vivas, executar melhoria reversivel e separar human gates. `accepted`/heartbeat/handoff vazio nao contam como progresso sem artefato, validacao, Linear ref, fonte viva ou blocker com next action.
+
+Prompt cache: usar prefixo estavel + delta dinamico conforme `Prompt Caching Workflow Policy`; reportar strategy/prefix_version/cache telemetry quando houver.
+
+[REDACTED SECRET LINE]
+
+Registry id: `pierrondi-site`.
+<!-- BACKGROUND_CODERS_PROJECT_END -->
+
+## 2026-06-12 - AI Operating Model positioning
+
+Codex atualizou a home local do `pierrondi-site` para posicionar Paulo publicamente como operador de `AI Operating Model`, conectando uso avançado de IA a `adoption velocity`, `AgentOps`, execução governada e expansão de plataforma.
+
+- Escopo: copy PT/EN da home, nova seção `#positioning`, proof strip do hero, metadata/JSON-LD e contexto `.agents/product-marketing.md`.
+- Arquivos principais: `app/home-experience-copy.ts`, `app/HomeExperience.tsx`, `app/page.module.css`, `app/page.tsx`, `app/en/page.tsx`, `app/layout.tsx`, `.agents/product-marketing.md`.
+- Validação: `npm run lint` passou com 1 warning pré-existente em `app/fso/FsoExperience.tsx:439`; `git diff --check` passou; `npm run build` passou com 172 rotas geradas.
+- QA visual local: Playwright em `http://localhost:3107` validou desktop 1440px e mobile 390px sem overflow horizontal; o kicker mobile foi ajustado para não sobrepor o seletor PT/EN; cards da seção nova revelam com `blur(0px)` quando entram no viewport.
+- Evidências: `/Users/paulopierrondi/Projects/pierrondi-site/qa/ai-operating-model-2026-06-12/desktop-hero.png`, `desktop-positioning.png`, `mobile-hero.png`, `mobile-positioning.png`.
+- Gate: sem push, merge, deploy, produção, ads ou social publish nesta
 ...[truncated]
 
 ## AI History Snapshot

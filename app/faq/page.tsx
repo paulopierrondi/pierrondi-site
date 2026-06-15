@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import WhatsApp from '@/components/WhatsApp'
 import JsonLd from '@/components/JsonLd'
 import FaqContent from './FaqContent'
@@ -72,11 +70,9 @@ export default function FaqPage() {
   return (
     <>
       <JsonLd data={[faqSchema, faqBreadcrumb]} />
-      <Nav />
       <main>
         <FaqContent />
       </main>
-      <Footer />
       <WhatsApp />
     </>
   )

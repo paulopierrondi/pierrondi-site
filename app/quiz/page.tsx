@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import WhatsApp from '@/components/WhatsApp'
 import QuizContent from './QuizContent'
 
@@ -13,11 +11,9 @@ export const metadata: Metadata = {
 export default function QuizPage() {
   return (
     <>
-      <Nav />
       <main>
         <QuizContent />
       </main>
-      <Footer />
       <WhatsApp />
     </>
   )

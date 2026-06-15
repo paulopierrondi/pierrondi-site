@@ -42,6 +42,8 @@ const CANONICAL_REDIRECTS = [
   { source: '/agentes', destination: '/portfolio', permanent: true },
   { source: '/app-store-connect', destination: '/precos', permanent: true },
   { source: '/sobre', destination: '/about', permanent: true },
+  { source: '/servicos', destination: '/atuacao', permanent: true },
+  { source: '/services', destination: '/atuacao', permanent: true },
   { source: '/privacy-policy', destination: '/privacy', permanent: true },
   { source: '/policy', destination: '/privacy', permanent: true },
   { source: '/terms-of-service', destination: '/terms', permanent: true },

@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Footer from '@/components/Footer'
-import Nav from '@/components/Nav'
 import WhatsApp from '@/components/WhatsApp'
 import { ProductTile } from '@/components/ui/ProductTile'
 import { APPS, isAppSlug, type AppEntry } from '../_apps'
@@ -284,7 +282,6 @@ export default async function AppLegalPage({ params }: Props) {
 
   return (
     <>
-      <Nav lang="en" />
       <main>
         <ProductTile
           variant="dark"
@@ -297,7 +294,6 @@ export default async function AppLegalPage({ params }: Props) {
           {content}
         </ProductTile>
       </main>
-      <Footer lang="en" />
       <WhatsApp lang="en" />
     </>
   )

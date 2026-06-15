@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 import JsonLd from '@/components/JsonLd'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import { SITE_URL } from '@/lib/site'
 import PauloPortfolioExperience from './PauloPortfolioExperience'
 
@@ -75,11 +73,9 @@ export default function PauloPage() {
   return (
     <>
       <JsonLd data={personSchema} />
-      <Nav />
       <main>
         <PauloPortfolioExperience />
       </main>
-      <Footer />
     </>
   )
 }

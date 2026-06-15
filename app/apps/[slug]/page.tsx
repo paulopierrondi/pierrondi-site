@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import Footer from '@/components/Footer'
-import Nav from '@/components/Nav'
 import WhatsApp from '@/components/WhatsApp'
 import { ProductTile } from '@/components/ui/ProductTile'
 import { APPS, getApp, isAppSlug } from './_apps'
@@ -61,7 +59,6 @@ export default async function AppLandingPage({ params }: Props) {
 
   return (
     <>
-      <Nav lang="en" />
       <main>
         <ProductTile
           variant="dark"
@@ -113,7 +110,6 @@ export default async function AppLandingPage({ params }: Props) {
           </div>
         </ProductTile>
       </main>
-      <Footer lang="en" />
       <WhatsApp lang="en" />
     </>
   )

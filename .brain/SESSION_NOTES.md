@@ -47,42 +47,49 @@ Execução em 4 fases sequenciais.
 - **Botão de idioma removido de `/paulo`** — `/en/paulo` não existe.
 - **Contraste ajustado** — `--color-muted` de `0.48` para `0.70`; `--color-muted-soft` de `0.30` para `0.55`.
 
+## Fase 5 — Enterprise Bio redesign (internas)
+
+- **`/atuacao` redesenhada** — 4 blocos de atuação com sticky aside, itens numerados e CTA para `/feitos`.
+- **`/en/atuacao` criada** — versão EN reutilizando `AtuacaoContent`.
+- **`/about` alinhado aos tokens globais** — CSS atualizado para usar `--color-*` do `globals.css`.
+- **`/feitos` índice redesenhado** — 4 cards com mini-diagramas SVG, tags e abstract; componente `FeitosIndexContent` bilíngue.
+- **`/en/feitos` criada**.
+- **`/blog` layout handoff aplicado** — destaque + grid de 3 colunas; `BlogContent` bilíngue.
+- **`/en/blog` criada**.
+- **`/contato` integrado a `/api/contact`** — formulário movido para client component `ContatoForm`; página server component com `ContatoPageContent` bilíngue.
+- **`/en/contato` criada**.
+- **`/privacidade` e `/termos` redesenhadas** — novo layout tipográfico, sem `ProductTile`.
+- **`/privacy` e `/terms` redesenhadas** — equivalentes EN com conteúdo condensado e alinhado.
+- **Rotas i18n atualizadas em `lib/i18n/site-language.ts`** — `/atuacao`, `/contato`, `/blog`, `/feitos` e versões `/en/*` mapeadas no `localizedRoutes`.
+
 ## Verificação
 
-- `npx tsc --noEmit` ✅
-- `npm run lint` ✅ (1 warning pré-existente em `FsoExperience.tsx`)
+- `npm run lint` ✅
 - `npm test` ✅ (20/20)
-- `npm run build` ✅
+- `npm run build` ✅ (174 páginas, incluindo `/en/atuacao`, `/en/blog`, `/en/contato`, `/en/feitos`)
 
 ## Decisões pendentes
 
-- Commit/branch: o usuário precisa decidir se faz commit local ou cria branch.
-- Lighthouse: rodar para validar contraste e performance após deploy.
-- `/whypaulo`: mantido público; variáveis WHYPAULO removidas do `.env.example`.
+- Commit/branch: worktree continua suja (~50 arquivos novos/modificados). Requer aprovação explícita do Paulo para commit/push/deploy.
+- Páginas antigas (`/precos`, `/portfolio`, `/design`, `/paulo`, `/sobre`, `/tech-partner`, `/produto-digital`, `/calculadora`, `/faq`, `/quiz`, `/marketing-os`, `/apps/*`) mantêm novo nav/footer global, mas conteúdo não foi redesenhado.
+- Lighthouse/performance do Three.js full-page (`EnterpriseSwarm`) ainda precisa de validação real em deploy.
 
 ## Arquivos principais alterados
 
-- `next.config.ts`
-- `package.json`
-- `.github/workflows/ci.yml`
-- `.husky/pre-commit`
-- `.env.example`
-- `app/layout.tsx`
-- `app/page.tsx`
-- `app/sitemap.ts`
-- `components/PortraitHologram.tsx`
-- `components/ui/ProductTile.tsx`
-- `components/LanguageSwitcher.module.css`
-- `lib/rate-limit.ts`
-- `lib/control-tower/plan-view.ts`
+- `app/atuacao/*` (novo)
+- `app/en/atuacao/page.tsx` (novo)
+- `app/feitos/*` (novo/refatorado)
+- `app/en/feitos/page.tsx` (novo)
+- `app/blog/BlogContent.tsx` (novo)
+- `app/en/blog/page.tsx` (novo)
+- `app/contato/*` (novo/refatorado)
+- `app/en/contato/page.tsx` (novo)
+- `app/privacidade/*`, `app/privacy/*`, `app/termos/*`, `app/terms/*`
+- `app/about/AboutAuthorityExperience.module.css`
 - `lib/i18n/site-language.ts`
-- `app/api/contact/route.ts`
-- `app/api/automation-control/session/route.ts`
-- `app/paulo/PauloPortfolioExperience.tsx`
-- `app/globals.css`
 
 ## Riscos
 
-- Grande superfície de mudança (~60 arquivos). Recomendado revisar diff antes de commit.
+- Grande superfície de mudança. Recomendado revisar diff antes de commit.
+- `/en/blog` e `/en/feitos` reutilizam conteúdo PT nos cards; isso é aceitável por ora, mas pode ser melhorado com dados bilíngues completos no futuro.
 - `/sobre` ainda tem arquivo `page.tsx`, mas redirect 301 o torna inacessível.
-- `KimiSwarmEffects` agora só carrega em 4 páginas; scroll smooth (Lenis) só ativo nelas.

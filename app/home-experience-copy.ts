@@ -67,6 +67,29 @@ export interface HomeExperienceCopy {
       copy: string
       proof: string[]
     }
+    about: {
+      eyebrow: string
+      title: string
+      copy: string
+      credentials: string[]
+      cta: string
+      ctaHref: string
+    }
+    socialProof: {
+      eyebrow: string
+      title: string
+      copy: string
+      metrics: Array<{
+        label: string
+        value: string
+        suffix: string
+      }>
+      testimonials: Array<{
+        quote: string
+        role: string
+        context: string
+      }>
+    }
   }
   themes: Array<{ label: string; title: string; copy: string }>
   focusAreas: Array<{ number: string; title: string; copy: string }>
@@ -221,6 +244,48 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
         copy:
           'Use o formulário ou email direto para oportunidades, investimento, parcerias, arquitetura enterprise, ServiceNow, agentes governados, LLM inference ou plataformas de automação com IA.',
         proof: ['Resposta por email', 'Sem nomes de clientes', 'Contexto técnico + executivo'],
+      },
+      about: {
+        eyebrow: 'Quem opera',
+        title: 'Paulo Pierrondi',
+        copy:
+          'ServiceNow TAE em contas enterprise FSI. Construo AgentOps, sistemas de adoção e arquitetura de valor para IA governada. Carioca, baseado em São José dos Campos, com experiência em Dublin e interesse em mobilidade global.',
+        credentials: [
+          'ServiceNow TAE / Enterprise Architect',
+          'Banco Bradesco — FSI Brazil',
+          'AgentOps, AI Control Tower, Now Assist',
+          'CSDM, CMDB, Service Graph',
+        ],
+        cta: 'Ver trajetória completa',
+        ctaHref: '/paulo',
+      },
+      socialProof: {
+        eyebrow: 'Provas no campo',
+        title: 'O que executivos e arquitetos encontram quando operam com modelo.',
+        copy:
+          'Resultados de ambientes enterprise reais. Sem nomes de clientes, sem métricas confidenciais. Apenas o que a arquitetura prova quando contexto, governança e workflow se conectam.',
+        metrics: [
+          { label: 'Plataformas enterprise', value: 'ServiceNow', suffix: 'FSI' },
+          { label: 'Indústrias', value: 'FSI, Energy, Retail', suffix: '' },
+          { label: 'Foco', value: 'Adoção', suffix: 'IA governada' },
+        ],
+        testimonials: [
+          {
+            quote: 'A diferença entre piloto e produção não é o modelo. É o operating model. Paulo desenha essa camada.',
+            role: 'Enterprise Architect',
+            context: 'Conta FSI Brazil',
+          },
+          {
+            quote: 'A conversa mudou de "quanto custa a licença" para "quanto vale a arquitetura".',
+            role: 'Client Director',
+            context: 'Parceria enterprise',
+          },
+          {
+            quote: 'Não entrega slide. Entrega sistema operacional com trilha de evidência.',
+            role: 'Delivery Lead',
+            context: 'Implementação governada',
+          },
+        ],
       },
     },
     themes: [
@@ -446,6 +511,48 @@ export const homeExperienceCopy: Record<HomeLang, HomeExperienceCopy> = {
         copy:
           'Use the form or direct email for opportunities, investment, partnerships, enterprise architecture, ServiceNow, governed agents, LLM inference or AI automation platforms.',
         proof: ['Email response', 'No client names', 'Technical + executive context'],
+      },
+      about: {
+        eyebrow: 'Who operates',
+        title: 'Paulo Pierrondi',
+        copy:
+          'ServiceNow TAE on enterprise FSI accounts. I build AgentOps, adoption systems and value architecture for governed AI. Carioca, based in São José dos Campos, with experience in Dublin and interest in global mobility.',
+        credentials: [
+          'ServiceNow TAE / Enterprise Architect',
+          'Banco Bradesco — FSI Brazil',
+          'AgentOps, AI Control Tower, Now Assist',
+          'CSDM, CMDB, Service Graph',
+        ],
+        cta: 'See full trajectory',
+        ctaHref: '/paulo',
+      },
+      socialProof: {
+        eyebrow: 'Proof in the field',
+        title: 'What executives and architects find when they operate with a model.',
+        copy:
+          'Results from real enterprise environments. No client names, no confidential metrics. Only what architecture proves when context, governance and workflow connect.',
+        metrics: [
+          { label: 'Enterprise platforms', value: 'ServiceNow', suffix: 'FSI' },
+          { label: 'Industries', value: 'FSI, Energy, Retail', suffix: '' },
+          { label: 'Focus', value: 'Adoption', suffix: 'governed AI' },
+        ],
+        testimonials: [
+          {
+            quote: 'The difference between pilot and production is not the model. It is the operating model. Paulo designs that layer.',
+            role: 'Enterprise Architect',
+            context: 'FSI Brazil account',
+          },
+          {
+            quote: 'The conversation shifted from "how much is the license" to "how much is the architecture worth".',
+            role: 'Client Director',
+            context: 'Enterprise partnership',
+          },
+          {
+            quote: 'Does not deliver slides. Delivers an operating system with an evidence trail.',
+            role: 'Delivery Lead',
+            context: 'Governed implementation',
+          },
+        ],
       },
     },
     themes: [

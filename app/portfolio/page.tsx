@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import WhatsApp from '@/components/WhatsApp'
 import MobileCTA from '@/components/MobileCTA'
 import JsonLd from '@/components/JsonLd'
@@ -49,11 +47,9 @@ export default function PortfolioPage() {
   return (
     <>
       <JsonLd data={breadcrumb} />
-      <Nav />
       <main>
         <PortfolioContent />
       </main>
-      <Footer />
       <WhatsApp />
       <MobileCTA />
     </>

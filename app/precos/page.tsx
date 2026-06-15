@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import WhatsApp from '@/components/WhatsApp'
 import JsonLd from '@/components/JsonLd'
 import PrecosContent from './PrecosContent'
@@ -96,12 +94,10 @@ const breadcrumb = {
 export default function PrecosPage() {
   return (
     <>
-      <Nav />
       <main>
         <JsonLd data={[...priceJsonLd, breadcrumb]} />
         <PrecosContent />
       </main>
-      <Footer />
       <WhatsApp />
     </>
   )

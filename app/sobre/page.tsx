@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import WhatsApp from '@/components/WhatsApp'
 import JsonLd from '@/components/JsonLd'
 import SobreContent from './SobreContent'
@@ -48,11 +46,9 @@ export default function SobrePage() {
   return (
     <>
       <JsonLd data={personSchema} />
-      <Nav />
       <main>
         <SobreContent />
       </main>
-      <Footer />
       <WhatsApp />
     </>
   )

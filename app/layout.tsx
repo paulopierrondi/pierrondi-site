@@ -1,17 +1,37 @@
 import type { Metadata, Viewport } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
+import { Bricolage_Grotesque, Hanken_Grotesk, JetBrains_Mono } from 'next/font/google'
 import Script from 'next/script'
 import dynamic from 'next/dynamic'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import SiteJsonLdWrapper from '@/components/SiteJsonLdWrapper'
 import DocumentLangSync from '@/components/DocumentLangSync'
+import SiteNav from '@/components/SiteNav'
+import SiteFooter from '@/components/SiteFooter'
+import HomeBackground from '@/components/HomeBackground'
 import { SITE_URL } from '@/lib/site'
 import './globals.css'
 import './animations.css'
 
-const sans = GeistSans
-const mono = GeistMono
+const display = Bricolage_Grotesque({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
+})
+
+const body = Hanken_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+  weight: ['400', '500', '600'],
+})
+
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+  weight: ['400', '500', '600'],
+})
 
 const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN
 
@@ -136,11 +156,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </>
         )}
       </head>
-      <body className={`${sans.variable} ${mono.variable} antialiased`}>
+      <body className={`${display.variable} ${body.variable} ${mono.variable} antialiased`}>
         <DocumentLangSync />
         <SiteJsonLdWrapper />
+        <HomeBackground />
+        <SiteNav />
         <LanguageSwitcher />
         {children}
+        <SiteFooter />
         <CookieBanner />
       </body>
     </html>

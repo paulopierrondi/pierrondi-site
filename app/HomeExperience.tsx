@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import BrandSignature from '@/components/BrandSignature'
 import HomeHeroServer from '@/components/HomeHeroServer'
 import LangSync from '@/components/LangSync'
 import HomeContactForm from './HomeContactForm'
@@ -8,51 +7,12 @@ import { feitos } from './feitos/feitos-data'
 import { homeExperienceCopy, sourceLinks, type HomeLang } from './home-experience-copy'
 import styles from './page.module.css'
 
-const contactEmail = 'pierrondi@gmail.com'
-
-function FooterDisclaimer({ text }: { text: string }) {
-  const [beforeEmail, afterEmail] = text.split('<email>')
-
-  return (
-    <>
-      {beforeEmail}
-      <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-      {afterEmail}
-    </>
-  )
-}
-
 export default function HomeExperience({ lang }: { lang: HomeLang }) {
   const t = homeExperienceCopy[lang]
 
   return (
     <main className={styles.page} data-swarm-root>
       <LangSync lang={lang} />
-
-      <nav className={styles.nav} aria-label={t.nav.aria}>
-        <BrandSignature href="#top" className={styles.brand} ariaLabel="Paulo Pierrondi" mobileCompact />
-        <div className={styles.navLinks}>
-          <a href="#top">{t.nav.home}</a>
-          <Link href={lang === 'pt' ? '/about' : '/en/about'} prefetch>{t.nav.about}</Link>
-          <Link href="/design" prefetch>{t.nav.design}</Link>
-          <a href="#about">{lang === 'pt' ? 'Perfil' : 'Profile'}</a>
-          <Link href="/feitos/sada-servicenow" prefetch>{t.nav.sada}</Link>
-          <Link href="/feitos/agentes-governados" prefetch>{t.nav.agents}</Link>
-          <Link href="/feitos/llm-inferencia" prefetch>{t.nav.llm}</Link>
-          <Link href="/feitos/plataformas-automacao-ia" prefetch>{t.nav.automation}</Link>
-          <a href="#contact">{t.nav.contact}</a>
-          <a
-            href="https://br.linkedin.com/in/paulopierrondi"
-            target="_blank"
-            rel="noreferrer"
-            aria-label={t.nav.linkedinAria}
-          >
-            <span className={styles.navIcon} aria-hidden="true">
-              in
-            </span>
-          </a>
-        </div>
-      </nav>
 
       <HomeHeroServer copy={t.hero} />
 
@@ -309,12 +269,6 @@ export default function HomeExperience({ lang }: { lang: HomeLang }) {
         </div>
       </section>
 
-      <footer className={styles.footer}>
-        <BrandSignature className={styles.footerBrand} size="sm" compact />
-        <span>
-          <FooterDisclaimer text={t.footer.disclaimer} />
-        </span>
-      </footer>
     </main>
   )
 }

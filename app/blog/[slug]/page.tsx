@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import WhatsApp from '@/components/WhatsApp'
 import JsonLd from '@/components/JsonLd'
 import Link from 'next/link'
@@ -133,7 +131,6 @@ export default async function PostPage({ params }: Props) {
   return (
     <>
       <JsonLd data={[articleSchema, breadcrumbSchema]} />
-      <Nav />
 
       <main>
         {/* Back navigation — sits above all tiles */}
@@ -200,7 +197,6 @@ export default async function PostPage({ params }: Props) {
         </ProductTile>
       </main>
 
-      <Footer />
       <WhatsApp />
     </>
   )
