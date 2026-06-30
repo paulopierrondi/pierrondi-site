@@ -10,6 +10,15 @@ It returns two layers:
 
 - `sources[]`: provider request logs from Railway/Vercel. This is useful for uptime, bots, AI crawlers, 4xx/5xx, and rough traffic movement.
 - `analytics.sources[]`: best-effort Plausible, GA4 Data API, and Google Search Console probes. This is the layer needed for users, sessions, pageviews, search clicks, impressions, CTR, and average position.
+- `actionBoard`: a consolidated next-action board built from source logs plus analytics blockers. It highlights commercial demand, conversion-path demand, GEO discovery, AI crawler visits, broken URLs, and missing GA4/Search Console/Plausible access.
+
+Each source also includes `intent` and `opportunities`:
+
+- `intent.commercialRequests`: visits to product/sales/authority pages.
+- `intent.conversionRequests`: visits to lead, scorecard, checkout, signup, pricing or contact paths.
+- `intent.geoRequests`: visits to answer-engine surfaces such as `answers`, `answers.json`, `llms.txt`, `sitemap.xml`, and `robots.txt`.
+- `intent.topAiCrawlerPaths`: paths reached by known AI crawlers.
+- `intent.topErrorPaths`: recent 4xx/5xx paths to fix or redirect.
 
 ## Required Secure Config
 

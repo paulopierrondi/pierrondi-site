@@ -14,6 +14,41 @@ const GOOGLE_READONLY_SCOPES = [
   'https://www.googleapis.com/auth/analytics.readonly',
   'https://www.googleapis.com/auth/webmasters.readonly',
 ]
+const PRIORITY_ORDER = { high: 0, medium: 1, low: 2 }
+const COMMON_GEO_PATHS = [
+  /^\/answers(?:\/|$)/,
+  /^\/answers\.json$/,
+  /^\/llms\.txt$/,
+  /^\/sitemap\.xml$/,
+  /^\/robots\.txt$/,
+]
+const COMMON_TECHNICAL_PATHS = [
+  /^\/(?:_next|assets|static|images|img|fonts|api\/health|health)(?:\/|$)/,
+  /^\/(?:favicon\.ico|apple-touch-icon|site\.webmanifest|manifest\.json)$/,
+  /^\/\.well-known\//,
+]
+const COMMON_LEGAL_PATHS = [/^\/(?:privacy|privacidade|terms|termos)(?:\/|$)/]
+const PRODUCT_INTENT_RULES = {
+  pierrondi: {
+    commercial: [
+      /^\/$/,
+      /^\/(?:about|paulo|whypaulo|atuacao|en\/atuacao|fso|bradesco-26|itau|portfolio|precos|produto-digital|tech-partner|automacoes|marketing-os)(?:\/|$)/,
+    ],
+    conversion: [/^\/(?:contato|en\/contato|quiz|calculadora)(?:\/|$)/, /^\/api\/(?:contact|lead|automation-control|control-tower)(?:\/|$)/],
+  },
+  cantustudio: {
+    commercial: [/^\/$/, /^\/(?:guias|satb|musicxml|pricing|precos|choral|choir)(?:\/|$)/],
+    conversion: [/^\/(?:checkout|sign-up|signup|pricing|precos)(?:\/|$)/, /^\/api\/(?:checkout|lead|signup)(?:\/|$)/],
+  },
+  agenticoscore: {
+    commercial: [/^\/$/, /^\/(?:diagnostico|plano-de-acao-comercial|app|answers)(?:\/|$)/],
+    conversion: [/^\/(?:scorecard|checkout|checkout\.json|diagnostico)(?:\/|$)/, /^\/api\/(?:lead|scorecard|checkout)(?:\/|$)/],
+  },
+  faithschool: {
+    commercial: [/^\/$/, /^\/(?:registro-de-frequencia-homeschool|homeschool-laws|curriculum|planner|devotional|pricing)(?:\/|$)/],
+    conversion: [/^\/(?:checkout|signup|sign-up|pricing|subscribe)(?:\/|$)/, /^\/api\/(?:lead|checkout|signup|subscribe)(?:\/|$)/],
+  },
+}
 
 const SOURCES = [
   {
@@ -188,6 +223,95 @@ function topEntries(map, count = 10) {
     .map(([key, value]) => ({ key, value }))
 }
 
+function cleanPath(value) {
+  const pathOnly = String(value || '/').split('?')[0].split('#')[0] || '/'
+  return pathOnly.startsWith('/') ? pathOnly : `/${pathOnly}`
+}
+
+function matchesAny(pathValue, patterns = []) {
+  return patterns.some((pattern) => pattern.test(pathValue))
+}
+
+function rowIntent(source, row) {
+  const pathValue = cleanPath(row.path)
+  const rules = PRODUCT_INTENT_RULES[source.id] || {}
+
+  if (matchesAny(pathValue, rules.conversion)) return 'conversion'
+  if (matchesAny(pathValue, COMMON_GEO_PATHS)) return 'geo'
+  if (matchesAny(pathValue, rules.commercial)) return 'commercial'
+  if (matchesAny(pathValue, COMMON_LEGAL_PATHS)) return 'legal'
+  if (matchesAny(pathValue, COMMON_TECHNICAL_PATHS) || pathValue.includes('.')) return 'technical'
+  return 'other'
+}
+
+function buildSourceOpportunities(source, intent, result) {
+  const opportunities = []
+  const statusCounts = Object.fromEntries([...intent.statuses.entries()])
+  const errorCount = (statusCounts['4xx'] || 0) + (statusCounts['5xx'] || 0)
+
+  if (!result.ok) {
+    opportunities.push({
+      priority: 'high',
+      area: 'monitoring',
+      action: `Restore provider log access for ${source.label}.`,
+      why: 'Without provider logs the hourly monitor cannot detect crawl, traffic or production regressions.',
+    })
+  }
+
+  if (errorCount > 0) {
+    opportunities.push({
+      priority: 'high',
+      area: 'technical_seo',
+      action: `Fix or intentionally redirect ${errorCount} recent 4xx/5xx requests.`,
+      why: 'Broken URLs waste crawl budget and can block GEO/SEO pages from being trusted by search and answer engines.',
+      evidence: topEntries(intent.errorPaths, 5),
+    })
+  }
+
+  if (intent.aiCrawlerRequests > 0) {
+    opportunities.push({
+      priority: 'medium',
+      area: 'geo',
+      action: `Expand internal links from AI-visited pages into the strongest commercial pages for ${source.label}.`,
+      why: 'AI crawlers already reached the site; the next gain is making answer pages point clearly to product and conversion pages.',
+      evidence: topEntries(intent.aiCrawlerPaths, 5),
+    })
+  }
+
+  if (intent.geoRequests > 0 && intent.commercialRequests === 0) {
+    opportunities.push({
+      priority: 'medium',
+      area: 'seo_geo_bridge',
+      action: `Add stronger commercial CTAs and cross-links from GEO pages for ${source.label}.`,
+      why: 'Discovery traffic is arriving on answer/indexing surfaces, but the sampled window did not show commercial page demand.',
+      evidence: topEntries(intent.geoPaths, 5),
+    })
+  }
+
+  if (intent.conversionRequests > 0) {
+    opportunities.push({
+      priority: 'medium',
+      area: 'conversion_tracking',
+      action: `Audit lead/signup/checkout events on the active conversion paths for ${source.label}.`,
+      why: 'These paths are getting demand; every hit needs GA4/server-side event coverage before budget scales.',
+      evidence: topEntries(intent.conversionPaths, 5),
+    })
+  }
+
+  if (topEntries(intent.errorPaths, 3).some((item) => item.key.includes('/favicon.ico'))) {
+    opportunities.push({
+      priority: 'low',
+      area: 'technical_polish',
+      action: `Ship a valid favicon for ${source.label}.`,
+      why: 'It removes noisy 404s from logs and keeps health checks focused on real SEO/product issues.',
+    })
+  }
+
+  return opportunities
+    .sort((a, b) => PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority])
+    .slice(0, 6)
+}
+
 function summarize(source) {
   const result = runSource(source)
   const rows = result.lines.map((line) => normalize(source, line)).filter(Boolean)
@@ -197,13 +321,22 @@ function summarize(source) {
   const hosts = new Map()
   const agents = new Map()
   const unique = new Set()
+  const intentCounts = new Map()
+  const commercialPaths = new Map()
+  const conversionPaths = new Map()
+  const geoPaths = new Map()
+  const aiCrawlerPaths = new Map()
+  const errorPaths = new Map()
   let botRequests = 0
   let aiCrawlerRequests = 0
   let slowestMs = 0
 
   for (const row of rows) {
+    const pathValue = cleanPath(row.path)
+    const intent = rowIntent(source, row)
+    intentCounts.set(intent, (intentCounts.get(intent) || 0) + 1)
     statuses.set(statusBucket(row.status), (statuses.get(statusBucket(row.status)) || 0) + 1)
-    paths.set(`${row.status} ${row.path}`, (paths.get(`${row.status} ${row.path}`) || 0) + 1)
+    paths.set(`${row.status} ${pathValue}`, (paths.get(`${row.status} ${pathValue}`) || 0) + 1)
     if (row.host) hosts.set(row.host, (hosts.get(row.host) || 0) + 1)
     if (row.userAgent) {
       const agent = row.userAgent.slice(0, 90)
@@ -211,8 +344,30 @@ function summarize(source) {
     }
     if (row.uniqueKey) unique.add(row.uniqueKey)
     if (isBot(row.userAgent)) botRequests += 1
-    if (isAiCrawler(row.userAgent)) aiCrawlerRequests += 1
+    if (isAiCrawler(row.userAgent)) {
+      aiCrawlerRequests += 1
+      aiCrawlerPaths.set(pathValue, (aiCrawlerPaths.get(pathValue) || 0) + 1)
+    }
+    if (intent === 'commercial') commercialPaths.set(pathValue, (commercialPaths.get(pathValue) || 0) + 1)
+    if (intent === 'conversion') conversionPaths.set(pathValue, (conversionPaths.get(pathValue) || 0) + 1)
+    if (intent === 'geo') geoPaths.set(pathValue, (geoPaths.get(pathValue) || 0) + 1)
+    if (row.status >= 400) errorPaths.set(`${row.status} ${pathValue}`, (errorPaths.get(`${row.status} ${pathValue}`) || 0) + 1)
     if (row.durationMs && row.durationMs > slowestMs) slowestMs = row.durationMs
+  }
+
+  const intent = {
+    counts: Object.fromEntries([...intentCounts.entries()].sort()),
+    commercialRequests: intentCounts.get('commercial') || 0,
+    conversionRequests: intentCounts.get('conversion') || 0,
+    geoRequests: intentCounts.get('geo') || 0,
+    technicalRequests: intentCounts.get('technical') || 0,
+    aiCrawlerRequests,
+    statuses,
+    commercialPaths,
+    conversionPaths,
+    geoPaths,
+    aiCrawlerPaths,
+    errorPaths,
   }
 
   return {
@@ -231,6 +386,19 @@ function summarize(source) {
     topHosts: topEntries(hosts, 5),
     topPaths: topEntries(paths, 12),
     topUserAgents: topEntries(agents, 8),
+    intent: {
+      counts: intent.counts,
+      commercialRequests: intent.commercialRequests,
+      conversionRequests: intent.conversionRequests,
+      geoRequests: intent.geoRequests,
+      technicalRequests: intent.technicalRequests,
+      topCommercialPaths: topEntries(commercialPaths, 8),
+      topConversionPaths: topEntries(conversionPaths, 8),
+      topGeoPaths: topEntries(geoPaths, 8),
+      topAiCrawlerPaths: topEntries(aiCrawlerPaths, 8),
+      topErrorPaths: topEntries(errorPaths, 8),
+    },
+    opportunities: buildSourceOpportunities(source, intent, result),
   }
 }
 
@@ -735,20 +903,95 @@ async function sourceAnalyticsSnapshot(source) {
   }
 }
 
+function analyticsOpportunities(analyticsSources) {
+  return analyticsSources.flatMap((source) => {
+    const items = []
+
+    if (source.ga4?.status !== 'ok') {
+      items.push({
+        product: source.label,
+        priority: source.ga4?.status === 'blocked_no_ga4_property_id' ? 'high' : 'medium',
+        area: 'ga4',
+        action: source.ga4?.status === 'blocked_no_ga4_property_id'
+          ? `Configure the numeric GA4 property ID for ${source.label}.`
+          : `Restore GA4 Data API readback for ${source.label}.`,
+        why: 'GA4 is the baseline for users, sessions, events and paid traffic learning loops.',
+        status: source.ga4?.status || 'unknown',
+      })
+    }
+
+    if (source.searchConsole?.status !== 'ok' && source.searchConsole?.status !== 'csv') {
+      items.push({
+        product: source.label,
+        priority: 'high',
+        area: 'search_console',
+        action: `Grant Search Console access to the portfolio service account for ${source.label}.`,
+        why: 'Search Console is required to see organic queries, pages, impressions, CTR and indexing movement.',
+        status: source.searchConsole?.status || 'unknown',
+      })
+    }
+
+    if (source.plausible?.status !== 'ok') {
+      items.push({
+        product: source.label,
+        priority: 'medium',
+        area: 'plausible',
+        action: `Configure a Plausible API token for ${source.label}, or explicitly keep GA4 as the primary source.`,
+        why: 'Plausible can give fast lightweight traffic validation, but it should not block the GA4/Search Console path.',
+        status: source.plausible?.status || 'unknown',
+      })
+    }
+
+    return items
+  })
+}
+
+function buildActionBoard(sources, analyticsSources) {
+  const sourceItems = sources.flatMap((source) =>
+    source.opportunities.map((item) => ({
+      product: source.label,
+      ...item,
+    })),
+  )
+  const analyticsItems = analyticsOpportunities(analyticsSources)
+  const nextActions = [...sourceItems, ...analyticsItems]
+    .sort((a, b) => PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority] || a.product.localeCompare(b.product))
+    .slice(0, 20)
+
+  return {
+    summary: {
+      products: sources.length,
+      requests: sources.reduce((sum, source) => sum + source.requests, 0),
+      commercialRequests: sources.reduce((sum, source) => sum + (source.intent?.commercialRequests || 0), 0),
+      conversionRequests: sources.reduce((sum, source) => sum + (source.intent?.conversionRequests || 0), 0),
+      geoRequests: sources.reduce((sum, source) => sum + (source.intent?.geoRequests || 0), 0),
+      aiCrawlerRequests: sources.reduce((sum, source) => sum + source.aiCrawlerRequests, 0),
+      blockedAnalyticsItems: analyticsItems.length,
+    },
+    nextActions,
+  }
+}
+
+const sourceSummaries = SOURCES.map(summarize)
+const analyticsSources = includeAnalytics
+  ? (await Promise.all(SOURCES.map(sourceAnalyticsSnapshot))).filter(Boolean)
+  : []
+
 const report = {
   generatedAt: new Date().toISOString(),
   window: { since, limit },
   note: includeAnalytics
     ? 'Provider-log snapshot plus best-effort analytics probes. Provider request counts are still not a replacement for GA4/Plausible/Search Console users, sessions or search clicks when those APIs are blocked.'
     : 'Provider-log snapshot. Counts are request-level, not a replacement for GA4/Plausible/Search Console users, sessions or search clicks.',
-  sources: SOURCES.map(summarize),
+  sources: sourceSummaries,
   analytics: includeAnalytics
     ? {
         generatedAt: new Date().toISOString(),
         note: 'Read-only analytics probes. Secrets are never printed; missing credentials are reported as blockers with expected env names only.',
-        sources: (await Promise.all(SOURCES.map(sourceAnalyticsSnapshot))).filter(Boolean),
+        sources: analyticsSources,
       }
     : { status: 'skipped' },
+  actionBoard: buildActionBoard(sourceSummaries, analyticsSources),
 }
 
 const body = `${JSON.stringify(report, null, 2)}\n`
