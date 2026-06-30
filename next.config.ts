@@ -47,6 +47,15 @@ const CANONICAL_REDIRECTS = [
   { source: '/servicos', destination: '/atuacao', permanent: true },
   { source: '/services', destination: '/atuacao', permanent: true },
   { source: '/contact', destination: '/contato', permanent: true },
+  // App-slug aliases -> their App Store canonical slug (verified against each
+  // app's live asc.toml). Keeps legacy inbound links alive without shipping a
+  // duplicate indexable page or a second sitemap entry for the same app.
+  { source: '/apps/ammosort', destination: '/apps/ammosort-siege', permanent: true },
+  { source: '/apps/ammosort/:doc', destination: '/apps/ammosort-siege/:doc', permanent: true },
+  { source: '/apps/privytext', destination: '/apps/privytext-ai', permanent: true },
+  { source: '/apps/privytext/:doc', destination: '/apps/privytext-ai/:doc', permanent: true },
+  { source: '/apps/snapread-ai', destination: '/apps/snapread', permanent: true },
+  { source: '/apps/snapread-ai/:doc', destination: '/apps/snapread/:doc', permanent: true },
   { source: '/privacy-policy', destination: '/privacy', permanent: true },
   { source: '/policy', destination: '/privacy', permanent: true },
   { source: '/terms-of-service', destination: '/terms', permanent: true },
