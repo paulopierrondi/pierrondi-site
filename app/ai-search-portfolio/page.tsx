@@ -213,7 +213,7 @@ const structuredData = [
     inLanguage: 'pt-BR',
     isPartOf: { '@id': `${SITE_URL}/#website` },
     author: { '@id': `${SITE_URL}/#person` },
-    publisher: { '@id': `${SITE_URL}/#person` },
+    publisher: { '@id': `${SITE_URL}/#organization` },
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: answerItemList.length,

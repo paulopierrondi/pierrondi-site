@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import WhatsApp from '@/components/WhatsApp'
 import PageHeader from '@/components/PageHeader'
 import Reveal from '@/components/Reveal'
+import JsonLd from '@/components/JsonLd'
+import { SITE_URL } from '@/lib/site'
 import { APPS, getApp, isAppSlug } from './_apps'
 import styles from './AppLanding.module.css'
 
@@ -33,6 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonical,
       siteName: 'pierrondi.dev',
       type: 'website',
+      images: [{ url: '/og', width: 1200, height: 630, alt: `${app.name} — pierrondi.dev` }],
     },
   }
 }
@@ -58,8 +61,27 @@ export default async function AppLandingPage({ params }: Props) {
           'Optional paid features, when offered, go through Apple In-App Purchase.',
         ]
 
+  const isGame = /game|puzzle|wargame|quiz|mystery|card/i.test(app.category)
+  const appSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    '@id': `${SITE_URL}/apps/${slug}#app`,
+    name: app.name,
+    description,
+    url: `${SITE_URL}/apps/${slug}`,
+    applicationCategory: isGame ? 'GameApplication' : 'UtilitiesApplication',
+    operatingSystem: 'iOS',
+    image: `${SITE_URL}/og`,
+    author: { '@id': `${SITE_URL}/#person` },
+    publisher: { '@id': `${SITE_URL}/#organization` },
+    // Free to download on the App Store; optional paid features go through Apple IAP.
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    ...(app.appStoreUrl ? { downloadUrl: app.appStoreUrl, installUrl: app.appStoreUrl } : {}),
+  }
+
   return (
     <>
+      <JsonLd data={appSchema} />
       <PageHeader
         eyebrow={app.category.toUpperCase()}
         title={<>{app.name}.</>}

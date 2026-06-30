@@ -103,8 +103,10 @@ export const metadata: Metadata = {
     images: [{ url: '/og', width: 1200, height: 630, alt: 'Paulo Pierrondi - ServiceNow e IA governada' }],
   },
   twitter: {
+    // No static title here: Next derives twitter:title per route from each
+    // page's resolved title, so product/portfolio shares get page-specific
+    // cards instead of leaking the homepage's generic enterprise title.
     card: 'summary_large_image',
-    title: 'Paulo Pierrondi - AI Operating Model e AgentOps',
     description: 'ServiceNow, AgentOps, AI Operating Model, adoption velocity e implementação governada em ambientes enterprise.',
     images: ['/og'],
   },

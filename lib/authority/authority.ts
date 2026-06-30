@@ -88,27 +88,10 @@ export function authorityProfileJsonLd(lang: AuthorityLang) {
   const page = getAuthorityPage(lang)
   const language = lang === 'pt' ? 'pt-BR' : 'en-US'
 
+  // Reference the single canonical Person/#person and Organization/#website
+  // nodes emitted site-wide by SiteJsonLd instead of forking a second Person
+  // entity (#paulo-pierrondi), which fragmented the entity graph for answer engines.
   return [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      '@id': `${SITE_URL}/#paulo-pierrondi`,
-      name: 'Paulo Pierrondi',
-      url: `${SITE_URL}${page.slug}`,
-      image: `${SITE_URL}/assets/paulo-pierrondi-executive-neural.jpg`,
-      jobTitle: 'ServiceNow Technical Account Executive and governed AI operator',
-      knowsAbout: [
-        'ServiceNow',
-        'Now Assist',
-        'AI Agents',
-        'CSDM',
-        'CMDB',
-        'Service Graph',
-        'AgentOps',
-        'Enterprise AI governance',
-      ],
-      sameAs: ['https://br.linkedin.com/in/paulopierrondi'],
-    },
     {
       '@context': 'https://schema.org',
       '@type': 'ProfilePage',
@@ -117,7 +100,7 @@ export function authorityProfileJsonLd(lang: AuthorityLang) {
       name: page.metadataTitle,
       description: page.metadataDescription,
       inLanguage: language,
-      about: { '@id': `${SITE_URL}/#paulo-pierrondi` },
+      about: { '@id': `${SITE_URL}/#person` },
       isPartOf: { '@id': `${SITE_URL}/#website` },
     },
   ]

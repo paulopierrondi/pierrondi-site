@@ -39,11 +39,14 @@ const ffmpegTracingIncludes = Object.fromEntries(
 )
 
 const CANONICAL_REDIRECTS = [
-  { source: '/agentes', destination: '/portfolio', permanent: true },
-  { source: '/app-store-connect', destination: '/precos', permanent: true },
+  // Point straight at the final destination to avoid 2-hop redirect chains
+  // (/portfolio and /precos are themselves permanent redirects).
+  { source: '/agentes', destination: '/feitos', permanent: true },
+  { source: '/app-store-connect', destination: '/atuacao', permanent: true },
   { source: '/sobre', destination: '/about', permanent: true },
   { source: '/servicos', destination: '/atuacao', permanent: true },
   { source: '/services', destination: '/atuacao', permanent: true },
+  { source: '/contact', destination: '/contato', permanent: true },
   { source: '/privacy-policy', destination: '/privacy', permanent: true },
   { source: '/policy', destination: '/privacy', permanent: true },
   { source: '/terms-of-service', destination: '/terms', permanent: true },

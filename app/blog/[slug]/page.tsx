@@ -77,19 +77,8 @@ export default async function PostPage({ params }: Props) {
     image: [`${SITE_URL}/og`],
     datePublished: post.date,
     dateModified: post.date,
-    author: {
-      '@type': 'Person',
-      name: 'Paulo Pierrondi',
-      url: `${SITE_URL}/about`,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'pierrondi.dev',
-      logo: {
-        '@type': 'ImageObject',
-        url: `${SITE_URL}/pierrondi-logo-1024.png`,
-      },
-    },
+    author: { '@id': `${SITE_URL}/#person` },
+    publisher: { '@id': `${SITE_URL}/#organization` },
     mainEntityOfPage: { '@type': 'WebPage', '@id': articleUrl },
     articleSection: post.category,
     inLanguage: 'pt-BR',
