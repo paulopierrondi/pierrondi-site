@@ -16,6 +16,31 @@ Disallow: /portal/
 Disallow: /share/
 Disallow: /whypaulo
 
+# Allow answer-engine retrieval crawlers to discover the public GEO layer while
+# preserving the same private-route exclusions used for general crawlers.
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+Allow: /
+Disallow: /api/
+Disallow: /automacoes
+Disallow: /studio
+Disallow: /studio/
+Disallow: /login
+Disallow: /login-v2
+Disallow: /obrigado
+Disallow: /ai-command-center
+Disallow: /bradesco-26
+Disallow: /control_tower
+Disallow: /itau
+Disallow: /lp/
+Disallow: /portal/
+Disallow: /share/
+Disallow: /whypaulo
+
 # Block training crawlers. User-triggered discovery crawlers follow the public rules above.
 User-agent: GPTBot
 Disallow: /
