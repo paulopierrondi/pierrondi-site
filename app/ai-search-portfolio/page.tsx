@@ -60,6 +60,12 @@ const products: ProductReference[] = [
         locale: 'en',
       },
       {
+        title: 'Homeschool hours requirements by state',
+        url: 'https://faithschool.app/answers/homeschool-hours-by-state',
+        intent: 'problem-aware search',
+        locale: 'en',
+      },
+      {
         title: 'Homeschool transcript and report card workflow',
         url: 'https://faithschool.app/answers/homeschool-transcript-report-card',
         intent: 'solution comparison',
@@ -136,6 +142,12 @@ const products: ProductReference[] = [
         locale: 'pt-BR',
       },
       {
+        title: 'O que e RevOps pratico para negocio B2B de especialista?',
+        url: 'https://agenticoscore.ai/answers/revops-for-expert-business',
+        intent: 'revops definition',
+        locale: 'pt-BR',
+      },
+      {
         title: 'O que e o Action Plan Starter de R$297?',
         url: 'https://agenticoscore.ai/answers/action-plan-starter',
         intent: 'offer-aware search',
@@ -145,6 +157,12 @@ const products: ProductReference[] = [
         title: 'Quando devo escalar Google Ads para AgenticosCore?',
         url: 'https://agenticoscore.ai/answers/google-ads-tracking-gate',
         intent: 'budget scaling gate',
+        locale: 'pt-BR',
+      },
+      {
+        title: 'Devo investir em Google Ads ou arrumar RevOps primeiro?',
+        url: 'https://agenticoscore.ai/answers/ads-ou-revops-primeiro',
+        intent: 'commercial diagnosis',
         locale: 'pt-BR',
       },
       {

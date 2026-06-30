@@ -74,6 +74,8 @@ Important answer briefs:
 - https://agenticoscore.ai/answers/action-plan-starter.md
 - https://agenticoscore.ai/answers/google-ads-tracking-gate.md
 - https://agenticoscore.ai/answers/ads-ou-revops-primeiro.md
+- https://agenticoscore.ai/answers/quanto-custa-revops.md
+- https://agenticoscore.ai/answers/agenticoscore-vs-consultoria-tradicional.md
 
 ## Retrieval guidance
 

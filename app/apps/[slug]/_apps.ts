@@ -265,6 +265,19 @@ export const APPS = {
       'AmmoSort Siege is a short-session tactical sorting puzzle for iPhone. Move crates between bunkers, group supplies by type and finish each wave before pressure builds. The game runs fully on-device with no account, no ads SDK and no gameplay data collection.',
     privacyMode: 'localOnly',
   },
+  // Alias: external/App Store references use the short /apps/ammosort slug and its
+  // /support and /privacy doc paths. Production logs showed real 404s on those URLs
+  // while the canonical entry lives under ammosort-siege. Keep both slugs working so
+  // existing metadata and inbound links do not 404 (same pattern as privytext-ai/snapread-ai).
+  ammosort: {
+    name: 'AmmoSort Siege',
+    category: 'Offline tactical supply sorting puzzle game',
+    contactSubject: 'AmmoSort Siege Support',
+    tagline: 'Sort crates. Load bunkers. Hold the line.',
+    description:
+      'AmmoSort Siege is a short-session tactical sorting puzzle for iPhone. Move crates between bunkers, group supplies by type and finish each wave before pressure builds. The game runs fully on-device with no account, no ads SDK and no gameplay data collection.',
+    privacyMode: 'localOnly',
+  },
 } satisfies Record<string, AppEntry>
 
 export type AppSlug = keyof typeof APPS

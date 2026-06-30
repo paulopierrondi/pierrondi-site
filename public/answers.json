@@ -55,6 +55,24 @@
       "entity": "FaithSchool"
     },
     {
+      "id": "faithschool-homeschool-hours-by-state",
+      "title": "Homeschool hours requirements by state",
+      "url": "https://faithschool.app/answers/homeschool-hours-by-state.md",
+      "question": "How many homeschool hours are required by state?",
+      "intent": "problem-aware search",
+      "locale": "en",
+      "entity": "FaithSchool"
+    },
+    {
+      "id": "faithschool-homeschool-transcript-report-card",
+      "title": "Homeschool transcript and report card workflow",
+      "url": "https://faithschool.app/answers/homeschool-transcript-report-card.md",
+      "question": "How do homeschool families produce transcripts and report cards?",
+      "intent": "solution comparison",
+      "locale": "en",
+      "entity": "FaithSchool"
+    },
+    {
       "id": "faithschool-registro-frequencia-dossie-brasil",
       "title": "Aplicativo para dossie de frequencia e evidencias",
       "url": "https://faithschool.app/answers/registro-frequencia-dossie-brasil.md",
@@ -91,6 +109,15 @@
       "entity": "CantuStudio"
     },
     {
+      "id": "cantustudio-musicxml-voice-leading",
+      "title": "MusicXML harmonization and voice leading",
+      "url": "https://cantustudio.app/answers/musicxml-voice-leading.md",
+      "question": "How does MusicXML harmonization handle voice leading?",
+      "intent": "technical workflow",
+      "locale": "en",
+      "entity": "CantuStudio"
+    },
+    {
       "id": "cantustudio-musicxml-satb-export",
       "title": "Export an AI SATB draft to MusicXML",
       "url": "https://cantustudio.app/answers/musicxml-satb-export.md",
@@ -105,6 +132,15 @@
       "url": "https://agenticoscore.ai/answers/b2b-sales-ready-for-ads.md",
       "question": "Como saber se meu processo comercial B2B esta pronto para Ads?",
       "intent": "pre-ads qualification",
+      "locale": "pt-BR",
+      "entity": "AgenticosCore"
+    },
+    {
+      "id": "agenticoscore-revops-for-expert-business",
+      "title": "O que e RevOps pratico para negocio B2B de especialista?",
+      "url": "https://agenticoscore.ai/answers/revops-for-expert-business.md",
+      "question": "O que e um RevOps pratico para negocios B2B de especialistas?",
+      "intent": "revops definition",
       "locale": "pt-BR",
       "entity": "AgenticosCore"
     },
@@ -132,6 +168,24 @@
       "url": "https://agenticoscore.ai/answers/ads-ou-revops-primeiro.md",
       "question": "Devo investir em Google Ads ou arrumar RevOps primeiro?",
       "intent": "commercial diagnosis",
+      "locale": "pt-BR",
+      "entity": "AgenticosCore"
+    },
+    {
+      "id": "agenticoscore-quanto-custa-revops",
+      "title": "Quanto custa RevOps no Brasil?",
+      "url": "https://agenticoscore.ai/answers/quanto-custa-revops.md",
+      "question": "Quanto custa RevOps no Brasil?",
+      "intent": "commercial comparison",
+      "locale": "pt-BR",
+      "entity": "AgenticosCore"
+    },
+    {
+      "id": "agenticoscore-vs-consultoria-tradicional",
+      "title": "AgenticosCore versus consultoria de vendas tradicional",
+      "url": "https://agenticoscore.ai/answers/agenticoscore-vs-consultoria-tradicional.md",
+      "question": "Qual a diferenca entre AgenticosCore e uma consultoria de vendas tradicional?",
+      "intent": "vendor comparison",
       "locale": "pt-BR",
       "entity": "AgenticosCore"
     }
