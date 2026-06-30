@@ -40,7 +40,7 @@ function routeUrl(path: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const portfolioUpdatedAt = new Date('2026-05-30T00:00:00.000Z')
+  const portfolioUpdatedAt = new Date('2026-06-30T00:00:00.000Z')
 
   return [
     ...staticRoutes.map((route) => ({

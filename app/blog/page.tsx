@@ -3,7 +3,7 @@ import PageHeader from '@/components/PageHeader'
 import BlogContent from './BlogContent'
 
 export const metadata: Metadata = {
-  title: 'Ideias',
+  title: 'Ideias — IA enterprise, ServiceNow e AgentOps',
   description: 'Notas sobre IA enterprise, ServiceNow, AgentOps, modelo operacional e execução governada.',
   alternates: {
     canonical: '/blog',

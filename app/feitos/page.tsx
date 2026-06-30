@@ -3,7 +3,7 @@ import PageHeader from '@/components/PageHeader'
 import FeitosIndexContent from './FeitosIndexContent'
 
 export const metadata: Metadata = {
-  title: 'Feitos',
+  title: 'Feitos — sistemas enterprise de IA governada',
   description: 'Sistemas enterprise aplicados por Paulo Pierrondi: SADA, Agentes Governados, LLM Inference e AI Execution Platforms.',
   alternates: {
     canonical: '/feitos',
