@@ -15,6 +15,7 @@
     "authority:validate": "node scripts/authority/validate-content.mjs",
     "design:sync-21st": "node scripts/design-vault-sync.mjs",
     "design:install": "node scripts/design-vault-install.mjs",
+    "access:snapshot": "node scripts/access-snapshot.mjs",
     "test:apps": "node scripts/check-apps-urls.mjs",
     "test:apps:prod": "TARGET_URL=https://www.pierrondi.dev node scripts/check-apps-urls.mjs"
   },
