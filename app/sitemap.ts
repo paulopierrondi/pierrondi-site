@@ -8,23 +8,15 @@ const staticRoutes: Array<{
   path: string
   priority: number
   changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']
+  lastModified?: string
 }> = [
   { path: '/', priority: 1, changeFrequency: 'weekly' },
   { path: '/about', priority: 0.96, changeFrequency: 'monthly' },
-  { path: '/portfolio', priority: 0.95, changeFrequency: 'monthly' },
-  { path: '/precos', priority: 0.94, changeFrequency: 'monthly' },
-  { path: '/produto-digital', priority: 0.93, changeFrequency: 'monthly' },
-  { path: '/tech-partner', priority: 0.92, changeFrequency: 'monthly' },
-  { path: '/marketing-os', priority: 0.91, changeFrequency: 'weekly' },
-  { path: '/fso', priority: 0.9, changeFrequency: 'monthly' },
-  { path: '/calculadora', priority: 0.89, changeFrequency: 'monthly' },
   { path: '/blog', priority: 0.88, changeFrequency: 'weekly' },
-  { path: '/marketing-os/numeros', priority: 0.86, changeFrequency: 'daily' },
-  { path: '/faq', priority: 0.84, changeFrequency: 'monthly' },
+  { path: '/ai-search-portfolio', priority: 0.78, changeFrequency: 'weekly', lastModified: '2026-06-30T00:00:00.000Z' },
   { path: '/en', priority: 0.82, changeFrequency: 'monthly' },
   { path: '/en/about', priority: 0.81, changeFrequency: 'monthly' },
   { path: '/paulo', priority: 0.8, changeFrequency: 'monthly' },
-  { path: '/quiz', priority: 0.76, changeFrequency: 'monthly' },
   { path: '/design', priority: 0.72, changeFrequency: 'monthly' },
   { path: '/design/library', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/privacy', priority: 0.1, changeFrequency: 'yearly' },
@@ -46,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes.map((route) => ({
       url: routeUrl(route.path),
-      lastModified: portfolioUpdatedAt,
+      lastModified: route.lastModified ? new Date(route.lastModified) : portfolioUpdatedAt,
       changeFrequency: route.changeFrequency,
       priority: route.priority,
     })),
