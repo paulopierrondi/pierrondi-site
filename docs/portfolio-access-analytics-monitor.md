@@ -19,11 +19,16 @@ Use the secure environment provider, not Markdown, commits, screenshots, Linear 
 
 The monitor accepts one Google read-only auth path:
 
+- `PORTFOLIO_GOOGLE_APPLICATION_CREDENTIALS`: portfolio-specific path to a service account JSON file.
+- `PORTFOLIO_GOOGLE_SERVICE_ACCOUNT_JSON`: portfolio-specific raw service account JSON in a secure env provider.
+- `PORTFOLIO_GOOGLE_SERVICE_ACCOUNT_JSON_BASE64`: portfolio-specific base64 service account JSON in a secure env provider.
 - `GOOGLE_APPLICATION_CREDENTIALS`: path to a service account JSON file.
 - `GOOGLE_SERVICE_ACCOUNT_JSON`: raw service account JSON in a secure env provider.
 - `GOOGLE_SERVICE_ACCOUNT_JSON_BASE64`: base64 service account JSON in a secure env provider.
 - `GOOGLE_ACCESS_TOKEN`, `GOOGLE_API_ACCESS_TOKEN`, `GSC_ACCESS_TOKEN`, or `GA4_ACCESS_TOKEN`: short-lived token when intentionally injected by a wrapper.
 - `gcloud auth application-default print-access-token`: works after local ADC login with readonly scopes.
+
+Portfolio service-account env vars take priority over generic user access tokens. This avoids stale or Cloud-only user tokens causing GA4/Search Console `insufficient authentication scopes` responses.
 
 Recommended ADC command:
 
@@ -57,12 +62,16 @@ The service account or ADC user must have access to each GA4 property and Search
 
 Current discovery status on 2026-06-30:
 
-- FaithSchool GA4 UI access works in Chrome for property `527930560`.
-- CantuStudio GA4 UI access works in Chrome for property `543380598`.
+- Service account created: `portfolio-analytics-monitor@agentcore-499217.iam.gserviceaccount.com`.
+- Local secret path: `PORTFOLIO_GOOGLE_APPLICATION_CREDENTIALS=/Users/paulopierrondi/.brain/secrets/portfolio-analytics-monitor-agentcore-499217.json`.
+- FaithSchool GA4 UI access works in Chrome for property `527930560`; service account has Viewer access and GA4 Data API readback is `ok`.
+- CantuStudio GA4 UI access works in Chrome for property `543380598`; service account has Viewer access and GA4 Data API readback is `ok`.
 - AgenticosCore public GA4 measurement id is `G-C9XNT5S87W`, but its numeric GA4 property id is not visible in the current GA4 picker.
 - Search Console UI access works for `sc-domain:agenticoscore.ai`.
 - Search Console UI access is not available for `sc-domain:pierrondi.dev`, `sc-domain:cantustudio.app`, or `sc-domain:faithschool.app` under `pierrondi@gmail.com`.
-- Local ADC with `cloud-platform` exists, but GA4/Search Console API calls still return insufficient scopes. The default `gcloud` ADC client was blocked by Google when requesting `analytics.readonly` and `webmasters.readonly`; use a service account or approved custom OAuth client for recurring API reads.
+- Search Console API readback still returns permission errors for the service account until that account is added as a restricted/full user or verified owner on each property.
+- Local ADC with `cloud-platform` exists, but the default `gcloud` ADC client was blocked by Google when requesting `analytics.readonly` and `webmasters.readonly`; keep recurring reads on the service-account path.
+- Plausible API remains blocked until a Plausible token is configured in the secure env provider.
 
 ### Plausible
 

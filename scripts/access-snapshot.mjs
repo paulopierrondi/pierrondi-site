@@ -289,6 +289,9 @@ function googleTokenEnvNames() {
 
 function googleServiceAccountEnvNames() {
   return [
+    'PORTFOLIO_GOOGLE_APPLICATION_CREDENTIALS',
+    'PORTFOLIO_GOOGLE_SERVICE_ACCOUNT_JSON',
+    'PORTFOLIO_GOOGLE_SERVICE_ACCOUNT_JSON_BASE64',
     'GOOGLE_APPLICATION_CREDENTIALS',
     'GOOGLE_SERVICE_ACCOUNT_JSON',
     'GOOGLE_SERVICE_ACCOUNT_JSON_BASE64',
@@ -337,15 +340,17 @@ let googleTokenCache = null
 async function googleAccessToken() {
   if (googleTokenCache) return googleTokenCache
 
-  const explicit = envValue(googleTokenEnvNames())
-  if (explicit) {
-    googleTokenCache = { ok: true, source: 'env_access_token', token: explicit.value }
-    return googleTokenCache
-  }
-
+  // Prefer the portfolio service account when present. Generic user tokens can
+  // be scoped for Cloud only, which makes GA4/GSC return insufficient scopes.
   const serviceAccount = await serviceAccountAccessToken()
   if (serviceAccount.ok) {
     googleTokenCache = serviceAccount
+    return googleTokenCache
+  }
+
+  const explicit = envValue(googleTokenEnvNames())
+  if (explicit) {
+    googleTokenCache = { ok: true, source: 'env_access_token', token: explicit.value }
     return googleTokenCache
   }
 
@@ -370,7 +375,7 @@ async function serviceAccountAccessToken() {
 
   let raw = configured.value
   try {
-    if (configured.name === 'GOOGLE_APPLICATION_CREDENTIALS' && existsSync(raw)) {
+    if (configured.name.endsWith('APPLICATION_CREDENTIALS') && existsSync(raw)) {
       raw = readFileSync(raw, 'utf8')
     } else if (configured.name.endsWith('_BASE64')) {
       raw = Buffer.from(raw, 'base64').toString('utf8')
