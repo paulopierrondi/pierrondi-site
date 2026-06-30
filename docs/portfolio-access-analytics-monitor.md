@@ -35,9 +35,9 @@ gcloud auth application-default login \
 GA4 needs numeric property IDs, not public `G-...` measurement IDs:
 
 - `PIERRONDI_GA4_PROPERTY_ID`
-- `CANTUSTUDIO_GA4_PROPERTY_ID`
+- `CANTUSTUDIO_GA4_PROPERTY_ID` (default currently known: `543380598`)
 - `AGENTICOSCORE_GA4_PROPERTY_ID` or `AGENTCORE_GA4_PROPERTY_ID`
-- `FAITHSCHOOL_GA4_PROPERTY_ID`
+- `FAITHSCHOOL_GA4_PROPERTY_ID` (default currently known: `527930560`)
 
 Search Console defaults:
 
@@ -54,6 +54,15 @@ Override when needed with:
 - `FAITHSCHOOL_GSC_SITE_URL`
 
 The service account or ADC user must have access to each GA4 property and Search Console property.
+
+Current discovery status on 2026-06-30:
+
+- FaithSchool GA4 UI access works in Chrome for property `527930560`.
+- CantuStudio GA4 UI access works in Chrome for property `543380598`.
+- AgenticosCore public GA4 measurement id is `G-C9XNT5S87W`, but its numeric GA4 property id is not visible in the current GA4 picker.
+- Search Console UI access works for `sc-domain:agenticoscore.ai`.
+- Search Console UI access is not available for `sc-domain:pierrondi.dev`, `sc-domain:cantustudio.app`, or `sc-domain:faithschool.app` under `pierrondi@gmail.com`.
+- Local ADC with `cloud-platform` exists, but GA4/Search Console API calls still return insufficient scopes. The default `gcloud` ADC client was blocked by Google when requesting `analytics.readonly` and `webmasters.readonly`; use a service account or approved custom OAuth client for recurring API reads.
 
 ### Plausible
 

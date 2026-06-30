@@ -40,6 +40,7 @@ const SOURCES = [
       envPrefix: 'CANTUSTUDIO',
       baseUrl: 'https://cantustudio.app',
       plausibleSiteId: 'cantustudio.app',
+      ga4PropertyId: '543380598',
       gscSiteCandidates: ['sc-domain:cantustudio.app', 'https://cantustudio.app/', 'https://www.cantustudio.app/'],
       gscCsvDir: '/Users/paulopierrondi/Documents/Obsidian Vault/98_Attachments/marketing-data/search-console/cantustudio',
     },
@@ -70,6 +71,7 @@ const SOURCES = [
       envPrefix: 'FAITHSCHOOL',
       baseUrl: 'https://faithschool.app',
       plausibleSiteId: 'faithschool.app',
+      ga4PropertyId: '527930560',
       gscSiteCandidates: ['sc-domain:faithschool.app', 'https://faithschool.app/', 'https://www.faithschool.app/'],
       gscCsvDir: '/Users/paulopierrondi/Documents/Obsidian Vault/98_Attachments/marketing-data/search-console/faithschool',
     },
@@ -425,6 +427,10 @@ function gcloudAccessToken() {
     ['auth', 'application-default', 'print-access-token'],
     ['auth', 'print-access-token'],
   ]
+  const gcloudPython = process.env.CLOUDSDK_PYTHON || process.env.GCLOUD_PYTHON || (
+    existsSync('/opt/homebrew/bin/python3.14') ? '/opt/homebrew/bin/python3.14' : ''
+  )
+  const env = gcloudPython ? { ...process.env, CLOUDSDK_PYTHON: gcloudPython } : process.env
 
   for (const bin of bins) {
     if (bin.startsWith('/') && !existsSync(bin)) continue
@@ -433,6 +439,7 @@ function gcloudAccessToken() {
         const token = execFileSync(bin, args, {
           encoding: 'utf8',
           stdio: ['ignore', 'pipe', 'pipe'],
+          env,
           maxBuffer: 1024 * 1024,
         }).trim().split(/\r?\n/).pop()
         if (token) return { ok: true, source: args.includes('application-default') ? 'gcloud_adc' : 'gcloud_user', token }
@@ -452,7 +459,8 @@ function googleAuthBlocked(provider) {
 
 async function ga4Snapshot(source) {
   const property = envValue(ga4PropertyEnvNames(source))
-  if (!property) {
+  const propertyId = property?.value || source.analytics?.ga4PropertyId || ''
+  if (!propertyId) {
     return {
       status: 'blocked_no_ga4_property_id',
       expectedEnv: ga4PropertyEnvNames(source),
@@ -465,7 +473,7 @@ async function ga4Snapshot(source) {
 
   const dateRange = todayDateRange()
   try {
-    const { response, body } = await fetchJson(`https://analyticsdata.googleapis.com/v1beta/properties/${encodeURIComponent(property.value)}:runReport`, {
+    const { response, body } = await fetchJson(`https://analyticsdata.googleapis.com/v1beta/properties/${encodeURIComponent(propertyId)}:runReport`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${auth.token}`,
