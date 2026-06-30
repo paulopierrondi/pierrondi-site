@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
 
-export default function SobrePage() {
+export default function BioPage() {
   redirect('/about')
 }

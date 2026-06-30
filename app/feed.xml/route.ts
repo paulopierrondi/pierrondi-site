@@ -41,7 +41,7 @@ export async function GET() {
     <title>pierrondi.dev — Blog</title>
     <link>${BASE_URL}/blog</link>
     <atom:link href="${BASE_URL}/feed.xml" rel="self" type="application/rss+xml" />
-    <description>Guias práticos sobre automação com n8n, MVPs, CTO fracionado e IA aplicada para PMEs no Brasil.</description>
+    <description>Notas sobre IA enterprise, ServiceNow, AgentOps, modelo operacional e execução governada.</description>
     <language>pt-BR</language>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
 ${items}

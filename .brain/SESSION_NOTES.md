@@ -62,34 +62,64 @@ Execução em 4 fases sequenciais.
 - **`/privacy` e `/terms` redesenhadas** — equivalentes EN com conteúdo condensado e alinhado.
 - **Rotas i18n atualizadas em `lib/i18n/site-language.ts`** — `/atuacao`, `/contato`, `/blog`, `/feitos` e versões `/en/*` mapeadas no `localizedRoutes`.
 
+## Fase 6 — Redesign das páginas legadas
+
+- **`/precos`** — planos em grid 2×2, tabela comparativa e FAQ com `<details>`; sem `ProductTile`/`PillButton`.
+- **`/tech-partner`** — hero com preço, grid de entregas, personas e FAQ.
+- **`/produto-digital`** — entregas, stack, processo em 4 passos e FAQ.
+- **`/portfolio`** — grid de 6 cases com prova, tags e CTA final.
+- **`/paulo`** — CSS alinhado aos tokens globais (substituição sistemática de variáveis locais).
+- **`/calculadora`** — formulário e resultados em card único, layout limpo.
+- **`/faq`** — categorias com `<details>` e CTA final.
+- **`/quiz`** — fluxo de 4 perguntas, resultado com captura de lead e integração `/api/contact`.
+- **`/marketing-os`** — arquitetura em 4 camadas, princípios, personas, pacotes e CTA.
+- **`/marketing-os/numeros`** — página de placeholder com aviso de migração.
+- **`/apps/[slug]`** — landing de app com card limpo, highlights e links legais.
+- **`/apps/[slug]/[doc]`** — support/privacy/terms com novo layout tipográfico.
+- **`/obrigado`** — página de agradecimento redesenhada.
+- **`/design/page.module.css`** — cores fixas substituídas por tokens globais.
+
 ## Verificação
 
 - `npm run lint` ✅
 - `npm test` ✅ (20/20)
-- `npm run build` ✅ (174 páginas, incluindo `/en/atuacao`, `/en/blog`, `/en/contato`, `/en/feitos`)
+- `npm run build` ✅ (174 páginas)
+
+## Deploy
+
+- **Branch:** `codex/enterprise-bio-phase3`
+- **Commits:** 2 (`829ae09`, `a80f1b4`)
+- **Push:** ✅ enviado para `origin/codex/enterprise-bio-phase3`
+- **Railway:** ✅ deploy em produção concluído
+- **URL de produção:** https://www.pierrondi.dev
+- **Build status:** Online
+
+(Deploy Vercel de preview mencionado anteriormente foi descartado; a hospedagem real é Railway.)
 
 ## Decisões pendentes
 
-- Commit/branch: worktree continua suja (~50 arquivos novos/modificados). Requer aprovação explícita do Paulo para commit/push/deploy.
-- Páginas antigas (`/precos`, `/portfolio`, `/design`, `/paulo`, `/sobre`, `/tech-partner`, `/produto-digital`, `/calculadora`, `/faq`, `/quiz`, `/marketing-os`, `/apps/*`) mantêm novo nav/footer global, mas conteúdo não foi redesenhado.
-- Lighthouse/performance do Three.js full-page (`EnterpriseSwarm`) ainda precisa de validação real em deploy.
+- Merge do PR e deploy em produção requerem aprovação explícita.
+- `/en/blog` e `/en/feitos` reutilizam conteúdo PT nos cards; isso é aceitável por ora, mas pode ser melhorado com dados bilíngues completos no futuro.
+- `/sobre` ainda tem arquivo `page.tsx`, mas redirect 301 o torna inacessível.
 
 ## Arquivos principais alterados
 
-- `app/atuacao/*` (novo)
-- `app/en/atuacao/page.tsx` (novo)
-- `app/feitos/*` (novo/refatorado)
-- `app/en/feitos/page.tsx` (novo)
-- `app/blog/BlogContent.tsx` (novo)
-- `app/en/blog/page.tsx` (novo)
-- `app/contato/*` (novo/refatorado)
-- `app/en/contato/page.tsx` (novo)
+- `app/atuacao/*`, `app/en/atuacao/page.tsx`
+- `app/feitos/*`, `app/en/feitos/page.tsx`
+- `app/blog/BlogContent.tsx`, `app/en/blog/page.tsx`
+- `app/contato/*`, `app/en/contato/page.tsx`
 - `app/privacidade/*`, `app/privacy/*`, `app/termos/*`, `app/terms/*`
 - `app/about/AboutAuthorityExperience.module.css`
+- `app/precos/*`, `app/tech-partner/*`, `app/produto-digital/*`
+- `app/portfolio/*`, `app/paulo/PauloPortfolioExperience.module.css`, `app/paulo/page.tsx`
+- `app/calculadora/*`, `app/faq/*`, `app/quiz/*`
+- `app/marketing-os/*`, `app/marketing-os/numeros/*`
+- `app/apps/[slug]/*`, `app/apps/[slug]/[doc]/*`
+- `app/obrigado/*`, `app/design/page.module.css`
 - `lib/i18n/site-language.ts`
 
 ## Riscos
 
-- Grande superfície de mudança. Recomendado revisar diff antes de commit.
-- `/en/blog` e `/en/feitos` reutilizam conteúdo PT nos cards; isso é aceitável por ora, mas pode ser melhorado com dados bilíngues completos no futuro.
+- Grande superfície de mudança. Recomendado revisar diff antes de merge.
+- `/en/blog` e `/en/feitos` reutilizam conteúdo PT nos cards; melhorar no futuro.
 - `/sobre` ainda tem arquivo `page.tsx`, mas redirect 301 o torna inacessível.

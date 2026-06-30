@@ -141,13 +141,13 @@ function SwarmGroup({ scrollRef }: SwarmGroupProps) {
       depthWrite: false,
       blending: THREE.AdditiveBlending,
       sizeAttenuation: true,
-      opacity: 0.95,
+      opacity: 0.68,
     })
 
     const lMat = new THREE.LineBasicMaterial({
-      color: new THREE.Color('#3f6a1f'),
+      color: new THREE.Color('#33551e'),
       transparent: true,
-      opacity: 0.22,
+      opacity: 0.11,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     })
@@ -159,7 +159,7 @@ function SwarmGroup({ scrollRef }: SwarmGroupProps) {
       transparent: true,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
-      opacity: 0.95,
+      opacity: 0.68,
     })
 
     return { sprite, positions, colors, linePositions, edges, sigState, pGeo, lGeo, sigGeo, pMat, lMat, sigMat }
@@ -210,7 +210,7 @@ function SwarmGroup({ scrollRef }: SwarmGroupProps) {
     }
 
     if (pMatRef.current) {
-      pMatRef.current.opacity = 0.78 + Math.sin(t * 0.6) * 0.12
+      pMatRef.current.opacity = 0.55 + Math.sin(t * 0.6) * 0.07
     }
 
     camera.position.z = 17 + scroll * 5
@@ -248,7 +248,7 @@ function SwarmGroup({ scrollRef }: SwarmGroupProps) {
           color="#c8ff2e"
           wireframe
           transparent
-          opacity={0.12}
+          opacity={0.08}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -259,7 +259,7 @@ function SwarmGroup({ scrollRef }: SwarmGroupProps) {
           color="#55b8d9"
           wireframe
           transparent
-          opacity={0.2}
+          opacity={0.12}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -299,7 +299,7 @@ export default function EnterpriseSwarm({ className = '' }: EnterpriseSwarmProps
     <div className={`${className}`} aria-hidden="true">
       <Canvas
         camera={{ position: [0, 0, 17], fov: 46 }}
-        dpr={[1, 2]}
+        dpr={[1, 1.6]}
         frameloop={reduced ? 'demand' : 'always'}
         gl={{
           antialias: true,

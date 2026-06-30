@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Bradesco26Slides from './Bradesco26Slides'
+import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -36,5 +36,5 @@ export const metadata: Metadata = {
 }
 
 export default function Bradesco26SlidesPage() {
-  return <Bradesco26Slides />
+  redirect('/about')
 }

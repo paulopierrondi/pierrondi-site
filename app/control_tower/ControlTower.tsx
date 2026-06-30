@@ -276,6 +276,7 @@ export default function ControlTower({
   const metrics = metricData(snapshot)
   const p0 = lanes[0].items.length
   const topAutomations = snapshot?.automations.slice(0, 12) ?? []
+  const kimiCodeLanes = snapshot?.kimiCodeLanes ?? []
   const automationFreshness = freshness(snapshot?.collectedAt)
   const creativeFreshness = freshness(creative?.collectedAt)
   const statusTone =
@@ -316,7 +317,7 @@ export default function ControlTower({
         <header className={styles.hero}>
           <div>
             <p className={styles.kicker}>pierrondi.dev / control_tower</p>
-            <h1>Gerencie a operação agentica por risco, não por ruído.</h1>
+            <h1>Gerencie a operação agêntica por risco, não por ruído.</h1>
             <p>
               Painel operacional para decidir o que para, o que corrige, qual modelo roda
               cada workflow e o que pode escalar com evidência operacional.
@@ -494,6 +495,26 @@ export default function ControlTower({
             <h2>Automações recentes</h2>
             <span>{snapshot ? `${snapshot.automations.length} sinais` : 'aguardando ingestão'}</span>
           </div>
+          {kimiCodeLanes.length > 0 && (
+            <div className={styles.kimiCodeLanes}>
+              {kimiCodeLanes.map((lane) => (
+                <article key={lane.lane}>
+                  <div>
+                    <strong>{lane.lane === 'low' ? 'Kimi low code' : 'Kimi mid code'}</strong>
+                    <span>{lane.total} automações · loaded {lane.loaded} · dormant {lane.dormant} · gated {lane.gated}</span>
+                  </div>
+                  <p>{lane.description}</p>
+                  <div className={styles.kimiCodeItems}>
+                    {lane.items.slice(0, 6).map((item) => (
+                      <span key={item.id} data-risk={item.risk}>
+                        {item.id} · {item.status}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
           {topAutomations.length ? (
             <div className={styles.automationGrid}>
               {topAutomations.map((item) => (

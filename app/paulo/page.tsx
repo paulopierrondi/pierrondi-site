@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     'Portfólio executivo de Paulo Pierrondi: ServiceNow, IA governada, treinamento e inferência de LLMs, sistemas operacionais de agentes, produto digital e execução enterprise.',
   keywords: [
     'Paulo Pierrondi',
-    'portfolio executivo IA',
+    'portfólio executivo IA',
     'ServiceNow',
     'LLM inference',
     'LLM training',

@@ -52,18 +52,18 @@ export const feitos: Feito[] = [
     cardLabel: 'ServiceNow / SADA',
     cardTitle: 'SADA: arquitetura de valor para IA governada',
     cardCopy:
-      'Um framework prescritivo para conectar estrategia, decisoes de arquitetura, execucao em workflow e valor mensuravel.',
+      'Um framework prescritivo para conectar estratégia, decisões de arquitetura, execução em workflow e valor mensurável.',
     kicker: 'Feito 01 / ServiceNow AI-Driven Architecture',
     title: 'SADA: ServiceNow AI-Driven Architecture',
-    headline: 'Da visao executiva ao workflow medido.',
+    headline: 'Da visão executiva ao workflow medido.',
     lead:
-      'Construi uma linguagem de arquitetura para posicionar ServiceNow como plataforma de estrategia + execucao: contexto, governanca, CSDM, IA, agentes e medicao de valor no mesmo sistema.',
+      'Construí uma linguagem de arquitetura para posicionar ServiceNow como plataforma de estratégia + execução: contexto, governança, CSDM, IA, agentes e medição de valor no mesmo sistema.',
     englishAbstract:
       'A prescriptive enterprise architecture language for ServiceNow: strategic context, architecture decisions, execution model and measurable AI value acceleration.',
     marketLine:
-      'Aplicavel a grandes enterprises e industrias como FSI, Energy e Retail, sem depender de nomes publicos para provar valor.',
+      'Aplicável a grandes enterprises e indústrias como FSI, Energy e Retail, sem depender de nomes públicos para provar valor.',
     proof:
-      'A tese nasceu de um gap real: empresas precisam de uma metodologia repetivel para sair de iniciativas soltas de IA e entrar em arquitetura, governanca e resultados de plataforma.',
+      'A tese nasceu de um gap real: empresas precisam de uma metodologia repetível para sair de iniciativas soltas de IA e entrar em arquitetura, governança e resultados de plataforma.',
     diagram: {
       label: 'SADA value architecture',
       nodes: [
@@ -88,63 +88,63 @@ export const feitos: Feito[] = [
       {
         label: '01',
         title: 'Vision & Context',
-        copy: 'Objetivos estrategicos, maturidade, regulacao, estrategia de instancia e contexto operacional antes de escolher solucao.',
+        copy: 'Objetivos estratégicos, maturidade, regulação, estratégia de instância e contexto operacional antes de escolher solução.',
       },
       {
         label: '02',
         title: 'Architecture Decisions',
-        copy: 'Baseline CSDM, governanca, AI adoption, fit de licenca, integracoes e limites de autonomia.',
+        copy: 'Baseline CSDM, governança, AI adoption, fit de licença, integrações e limites de autonomia.',
       },
       {
         label: '03',
         title: 'Execution Model',
-        copy: 'ITSM, ITOM, SPM, CSM, ESG, AI Agents e automacao traduzidos em padroes reutilizaveis.',
+        copy: 'ITSM, ITOM, SPM, CSM, ESG, AI Agents e automação traduzidos em padrões reutilizáveis.',
       },
       {
         label: '04',
         title: 'Value Acceleration',
-        copy: 'Hipoteses de valor, KPIs, time-to-value, impacto em UX, melhoria continua e evidencia executiva.',
+        copy: 'Hipóteses de valor, KPIs, time-to-value, impacto em UX, melhoria contínua e evidência executiva.',
       },
     ],
     workflow: [
       {
-        title: 'Do contexto para principios',
-        copy: 'Transforma ambicao executiva em regras simples que times de negocio, arquitetura e plataforma conseguem repetir.',
+        title: 'Do contexto para princípios',
+        copy: 'Transforma ambição executiva em regras simples que times de negócio, arquitetura e plataforma conseguem repetir.',
       },
       {
-        title: 'Dos principios para patterns',
-        copy: 'Cria modelos de referencia para instancia, governanca, AI adoption, integracao e automacao.',
+        title: 'Dos princípios para patterns',
+        copy: 'Cria modelos de referência para instância, governança, AI adoption, integração e automação.',
       },
       {
         title: 'Dos patterns para valor',
-        copy: 'Cada decisao vira uma hipotese: se aplicamos X, a organizacao deve obter Y, medido por indicadores concretos.',
+        copy: 'Cada decisão vira uma hipótese: se aplicamos X, a organização deve obter Y, medido por indicadores concretos.',
       },
     ],
     methods: ['CSDM baseline', 'AI adoption patterns', 'Value hypotheses', 'KPI loops', 'Architecture principles'],
     outcomes: [
-      'Menos discussao abstrata e mais linguagem comum entre estrategia, arquitetura e execucao.',
-      'Um catalogo reutilizavel para acelerar decisoes sem perder rigor de governanca.',
-      'Conexao explicita entre modelo operacional, velocidade de adocao e expansao de valor.',
+      'Menos discussão abstrata e mais linguagem comum entre estratégia, arquitetura e execução.',
+      'Um catálogo reutilizável para acelerar decisões sem perder rigor de governança.',
+      'Conexão explícita entre modelo operacional, velocidade de adoção e expansão de valor.',
     ],
   },
   {
     slug: 'agentes-governados',
     navLabel: 'Agentes governados',
-    cardLabel: 'AgentOps / Governanca',
+    cardLabel: 'AgentOps / Governança',
     cardTitle: 'Agentes governados a partir de dados e contexto',
     cardCopy:
-      'Estudo de dados, inferencia contextual, politicas, avaliacao e human gates para autonomia que deixa rastro.',
+      'Estudo de dados, inferência contextual, políticas, avaliação e human gates para autonomia que deixa rastro.',
     kicker: 'Feito 02 / Governed agents',
     title: 'Agentes governados a partir de dados e contexto',
-    headline: 'Autonomia so escala quando o agente sabe o que pode fazer.',
+    headline: 'Autonomia só escala quando o agente sabe o que pode fazer.',
     lead:
-      'Desenho agentes como sistemas operacionais: contexto confiavel, escopo claro, permissao, avaliacao, memoria, runner e auditoria antes de qualquer acao sensivel.',
+      'Desenho agentes como sistemas operacionais: contexto confiável, escopo claro, permissão, avaliação, memória, runner e auditoria antes de qualquer ação sensível.',
     englishAbstract:
       'Governed agent systems built from operational data, inference boundaries, policy gates, evaluations and audit-ready execution.',
     marketLine:
       'Relevante para grandes enterprises, FSI, Energy e Retail, onde risco, escala e rastreabilidade importam tanto quanto produtividade.',
     proof:
-      'A melhoria veio de parar de tratar agente como chat e passar a tratar agente como trabalhador digital com identidade, job description, limite e evidencia.',
+      'A melhoria veio de parar de tratar agente como chat e passar a tratar agente como trabalhador digital com identidade, job description, limite e evidência.',
     diagram: {
       label: 'Governed agent loop',
       nodes: [
@@ -169,7 +169,7 @@ export const feitos: Feito[] = [
       {
         label: '01',
         title: 'Data study',
-        copy: 'Mapear fontes, qualidade, ownership, semantica operacional, eventos e entidades que sustentam decisao.',
+        copy: 'Mapear fontes, qualidade, ownership, semântica operacional, eventos e entidades que sustentam decisão.',
       },
       {
         label: '02',
@@ -179,53 +179,53 @@ export const feitos: Feito[] = [
       {
         label: '03',
         title: 'Policy and gates',
-        copy: 'Politicas, permissoes, thresholds, aprovacao humana e trilhas de auditoria para operacao regulada.',
+        copy: 'Políticas, permissões, thresholds, aprovação humana e trilhas de auditoria para operação regulada.',
       },
       {
         label: '04',
         title: 'Learning loop',
-        copy: 'Evals, telemetria, feedback e revisao de incidentes para melhorar sem abrir mao de controle.',
+        copy: 'Evals, telemetria, feedback e revisão de incidentes para melhorar sem abrir mão de controle.',
       },
     ],
     workflow: [
       {
         title: 'Observa o trabalho real',
-        copy: 'Antes do agente, entende-se a fila, a excecao, o risco, os dados e a decisao humana que existe hoje.',
+        copy: 'Antes do agente, entende-se a fila, a exceção, o risco, os dados e a decisão humana que existe hoje.',
       },
       {
         title: 'Cria uma fronteira de autonomia',
-        copy: 'A tarefa e quebrada por risco: sugerir, preparar, executar com gate ou executar sozinho.',
+        copy: 'A tarefa é quebrada por risco: sugerir, preparar, executar com gate ou executar sozinho.',
       },
       {
-        title: 'Opera com evidencia',
-        copy: 'Cada acao gera log, justificativa, input, output, policy result e proxima melhoria.',
+        title: 'Opera com evidência',
+        copy: 'Cada ação gera log, justificativa, input, output, policy result e próxima melhoria.',
       },
     ],
     methods: ['AgentOps', 'Policy gates', 'Eval suites', 'Audit trails', 'Context graphs'],
     outcomes: [
-      'Agentes mais uteis porque trabalham dentro do contexto real da empresa.',
-      'Menos risco operacional, pois autonomia vira contrato, nao improviso.',
-      'Maior confianca executiva para escalar agentes alem de demos controladas.',
+      'Agentes mais úteis porque trabalham dentro do contexto real da empresa.',
+      'Menos risco operacional, pois autonomia vira contrato, não improviso.',
+      'Maior confiança executiva para escalar agentes além de demos controladas.',
     ],
   },
   {
     slug: 'llm-inferencia',
     navLabel: 'LLM inference',
     cardLabel: 'LLMOps / Inference',
-    cardTitle: 'Criacao, avaliacao e inferencia de LLMs',
+    cardTitle: 'Criação, avaliação e inferência de LLMs',
     cardCopy:
-      'Pipelines de LLM com roteamento, RAG, prompt caching, evals, latencia, custo e qualidade observavel.',
+      'Pipelines de LLM com roteamento, RAG, prompt caching, evals, latência, custo e qualidade observável.',
     kicker: 'Feito 03 / LLM systems',
-    title: 'Criacao, avaliacao e inferencia de LLMs',
-    headline: 'O trabalho cientifico esta entre o modelo e a decisao.',
+    title: 'Criação, avaliação e inferência de LLMs',
+    headline: 'O trabalho científico está entre o modelo e a decisão.',
     lead:
-      'Meu foco nao e vender magia de modelo. E construir sistemas com LLMs: adaptacao, grounding, avaliacao, roteamento, inferencia, cache, observabilidade e limites de confianca.',
+      'Meu foco não é vender magia de modelo. É construir sistemas com LLMs: adaptação, grounding, avaliação, roteamento, inferência, cache, observabilidade e limites de confiança.',
     englishAbstract:
       'LLM systems for model adaptation, retrieval, routing, prompt caching, inference quality, latency/cost envelopes and evaluation-driven deployment.',
     marketLine:
-      'Para enterprise, FSI, Energy e Retail, o diferencial esta em saber quando usar modelo grande, modelo pequeno, RAG, tool use, cache ou bloqueio.',
+      'Para enterprise, FSI, Energy e Retail, o diferencial está em saber quando usar modelo grande, modelo pequeno, RAG, tool use, cache ou bloqueio.',
     proof:
-      'A evolucao foi sair de prompts artesanais para um laboratorio de decisao: datasets de teste, criterios de qualidade, ablation, rastreio de falha e custo por resultado.',
+      'A evolução foi sair de prompts artesanais para um laboratório de decisão: datasets de teste, critérios de qualidade, ablation, rastreio de falha e custo por resultado.',
     diagram: {
       label: 'LLM inference lab',
       nodes: [
@@ -255,58 +255,58 @@ export const feitos: Feito[] = [
       {
         label: '02',
         title: 'Inference architecture',
-        copy: 'Roteamento, prompt caching, streaming, fallback, guardrails e envelopes de latencia para operacao real.',
+        copy: 'Roteamento, prompt caching, streaming, fallback, guardrails e envelopes de latência para operação real.',
       },
       {
         label: '03',
         title: 'Evaluation science',
-        copy: 'Evals por tarefa, datasets anonimizados, testes adversariais, rubricas e curvas de qualidade por versao.',
+        copy: 'Evals por tarefa, datasets anonimizados, testes adversariais, rubricas e curvas de qualidade por versão.',
       },
       {
         label: '04',
         title: 'Operational telemetry',
-        copy: 'Observabilidade de custo, qualidade, contexto usado, decisao tomada, falha e impacto por workflow.',
+        copy: 'Observabilidade de custo, qualidade, contexto usado, decisão tomada, falha e impacto por workflow.',
       },
     ],
     workflow: [
       {
-        title: 'Define a tarefa mensuravel',
-        copy: 'Sem tarefa, nao existe benchmark. Cada experimento com LLM comeca com decisao, criterio e risco.',
+        title: 'Define a tarefa mensurável',
+        copy: 'Sem tarefa, não existe benchmark. Cada experimento com LLM começa com decisão, critério e risco.',
       },
       {
         title: 'Mede antes de escalar',
-        copy: 'Prompts, RAG, modelos e ferramentas entram em comparacao com datasets e rubricas estaveis.',
+        copy: 'Prompts, RAG, modelos e ferramentas entram em comparação com datasets e rubricas estáveis.',
       },
       {
         title: 'Publica com fallback',
-        copy: 'O sistema entra em producao com cache, limites, telemetria, fallback e criterio claro de rollback.',
+        copy: 'O sistema entra em produção com cache, limites, telemetria, fallback e critério claro de rollback.',
       },
     ],
     methods: ['LLMOps', 'RAG', 'Model routing', 'Prompt caching', 'Eval harnesses'],
     outcomes: [
-      'Decisoes de modelo baseadas em evidencia, nao em preferencia de fornecedor.',
-      'Melhor balanco entre qualidade, custo, latencia e risco operacional.',
-      'Um caminho tecnico claro para transformar prototipo em sistema confiavel.',
+      'Decisões de modelo baseadas em evidência, não em preferência de fornecedor.',
+      'Melhor balanço entre qualidade, custo, latência e risco operacional.',
+      'Um caminho técnico claro para transformar protótipo em sistema confiável.',
     ],
   },
   {
     slug: 'plataformas-automacao-ia',
     navLabel: 'AI platforms',
     cardLabel: 'Automation OS',
-    cardTitle: 'Plataformas para automacao e execucao com IA',
+    cardTitle: 'Plataformas para automação e execução com IA',
     cardCopy:
-      'Sistemas que coordenam agentes, coders, validadores, memoria, browser, runners, handoffs e aprovacao humana.',
+      'Sistemas que coordenam agentes, coders, validadores, memória, browser, runners, handoffs e aprovação humana.',
     kicker: 'Feito 04 / AI execution platforms',
-    title: 'Plataformas para automacao e execucao com IA',
-    headline: 'IA cria valor quando vira uma esteira de execucao confiavel.',
+    title: 'Plataformas para automação e execução com IA',
+    headline: 'IA cria valor quando vira uma esteira de execução confiável.',
     lead:
-      'Tenho construido plataformas onde IA nao fica isolada em chat: ela entra em backlog, codigo, validacao, browser, evidencia, handoff, governanca e entrega.',
+      'Tenho construído plataformas onde IA não fica isolada em chat: ela entra em backlog, código, validação, browser, evidência, handoff, governança e entrega.',
     englishAbstract:
       'AI execution platforms that coordinate agents, coders, validators, memory, browsers, runners, handoffs, human gates and delivery evidence.',
     marketLine:
-      'Esse tipo de plataforma serve para grandes enterprises e para times enxutos que precisam multiplicar execucao sem perder controle.',
+      'Esse tipo de plataforma serve para grandes enterprises e para times enxutos que precisam multiplicar execução sem perder controle.',
     proof:
-      'A melhoria ao longo do tempo foi transformar automacoes pontuais em um sistema com preflight, gates, scheduler, registry, memoria, QA e registro de aprendizado.',
+      'A melhoria ao longo do tempo foi transformar automações pontuais em um sistema com preflight, gates, scheduler, registry, memória, QA e registro de aprendizado.',
     diagram: {
       label: 'AI execution operating system',
       nodes: [
@@ -331,43 +331,43 @@ export const feitos: Feito[] = [
       {
         label: '01',
         title: 'Mission control',
-        copy: 'Backlog, contexto, prioridade, riscos, artefatos e criterios de aceite entram antes da execucao.',
+        copy: 'Backlog, contexto, prioridade, riscos, artefatos e critérios de aceite entram antes da execução.',
       },
       {
         label: '02',
         title: 'Multi-agent execution',
-        copy: 'Coders, pesquisadores, validadores e operadores trabalham com papeis separados e handoffs claros.',
+        copy: 'Coders, pesquisadores, validadores e operadores trabalham com papéis separados e handoffs claros.',
       },
       {
         label: '03',
         title: 'Validation pipeline',
-        copy: 'Lint, build, testes, browser QA, screenshots, smoke e revisao de seguranca antes de publicar.',
+        copy: 'Lint, build, testes, browser QA, screenshots, smoke e revisão de segurança antes de publicar.',
       },
       {
         label: '04',
         title: 'Operating memory',
-        copy: 'Decisoes, falhas, comandos, evidencias e proximos passos viram memoria reutilizavel.',
+        copy: 'Decisões, falhas, comandos, evidências e próximos passos viram memória reutilizável.',
       },
     ],
     workflow: [
       {
         title: 'Preflight antes de agir',
-        copy: 'Cada execucao sensivel checa contrato, risco, permissoes, contexto de projeto e gate humano quando necessario.',
+        copy: 'Cada execução sensível checa contrato, risco, permissões, contexto de projeto e gate humano quando necessário.',
       },
       {
         title: 'Agentes por especialidade',
-        copy: 'Pesquisa, implementacao, revisao, QA e deploy deixam de ser uma conversa unica e viram uma operacao coordenada.',
+        copy: 'Pesquisa, implementação, revisão, QA e deploy deixam de ser uma conversa única e viram uma operação coordenada.',
       },
       {
         title: 'Entrega com rastro',
-        copy: 'O resultado final inclui arquivos mudados, evidencias, riscos, deploy state e aprendizado para proxima rodada.',
+        copy: 'O resultado final inclui arquivos mudados, evidências, riscos, deploy state e aprendizado para a próxima rodada.',
       },
     ],
     methods: ['Agent Hub', 'Mission Control', 'Human gates', 'Browser QA', 'Execution memory'],
     outcomes: [
-      'Mais throughput sem transformar automacao em caixa-preta.',
-      'Menos retrabalho, porque cada entrega carrega criterio, evidencia e memoria.',
-      'Um modelo operacional que pode evoluir de portfolio pessoal para plataforma enterprise.',
+      'Mais throughput sem transformar automação em caixa-preta.',
+      'Menos retrabalho, porque cada entrega carrega critério, evidência e memória.',
+      'Um modelo operacional que pode evoluir de portfólio pessoal para plataforma enterprise.',
     ],
   },
 ]

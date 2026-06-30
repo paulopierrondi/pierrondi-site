@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Reveal from '@/components/Reveal'
 import styles from './BioSection.module.css'
 
@@ -22,24 +21,20 @@ export default function BioSection({
   return (
     <section className={styles.bio} id="bio" aria-labelledby="bio-title">
       <div className={styles.grid}>
-        <div className={styles.portrait}>
+        <div className={styles.identityPanel}>
           <Reveal>
-            <div className={styles.frame}>
-              <Image
-                src="/assets/paulo-pierrondi-executive-neural.jpg"
-                alt="Paulo Pierrondi"
-                fill
-                sizes="(max-width: 900px) 100vw, 42vw"
-                className={styles.image}
-                priority
-              />
-              <div className={styles.scan} />
+            <div className={styles.frame} aria-label={`${status}. ${loc}`}>
               <div className={styles.meta}>
                 <span className={styles.status}>
                   <span className={styles.live} aria-hidden="true" />
                   {status}
                 </span>
                 <span className={styles.loc}>{loc}</span>
+              </div>
+              <div className={styles.signalStack} aria-hidden="true">
+                {creds.slice(0, 3).map((cred) => (
+                  <span key={cred.k}>{cred.v}</span>
+                ))}
               </div>
             </div>
           </Reveal>

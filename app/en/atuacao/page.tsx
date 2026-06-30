@@ -4,7 +4,7 @@ import AtuacaoContent from '@/app/atuacao/AtuacaoContent'
 
 export const metadata: Metadata = {
   title: 'Work',
-  description: 'Where Paulo Pierrondi creates value: AI Operating Model, ServiceNow, AgentOps and enterprise strategy.',
+  description: 'Where Paulo Pierrondi creates value: AI Operating Model, ServiceNow, AgentOps, and enterprise strategy.',
   alternates: {
     canonical: '/en/atuacao',
     languages: {
@@ -29,7 +29,7 @@ export default function AtuacaoEnPage() {
       <PageHeader
         eyebrow="WORK"
         title={<>Where I <span className="text-primary">create value.</span></>}
-        lead="Four pillars to take enterprise AI from intent to governed execution — no pricing, no packages, no agency speak."
+        lead="Four pillars for taking enterprise AI from intent to governed execution — no pricing, no packages, no agency speak."
         chips={['AI Operating Model', 'ServiceNow', 'AgentOps', 'Strategy']}
       />
       <AtuacaoContent lang="en" />

@@ -77,6 +77,7 @@ export default function AutomationControlPane({ snapshot }: AutomationControlPan
 
   const p0 = snapshot.decisions.filter((item) => item.priority === 'P0')
   const topAutomations = snapshot.automations.slice(0, 36)
+  const kimiCodeLanes = snapshot.kimiCodeLanes ?? []
 
   return (
     <main className={styles.shell}>
@@ -209,6 +210,39 @@ export default function AutomationControlPane({ snapshot }: AutomationControlPan
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className={styles.panel}>
+        <div className={styles.panelHeader}>
+          <h2>Kimi code lanes</h2>
+          <span>{kimiCodeLanes.reduce((sum, lane) => sum + lane.total, 0)} automações</span>
+        </div>
+        <div className={styles.kimiLaneGrid}>
+          {kimiCodeLanes.map((lane) => (
+            <article key={lane.lane} className={styles.kimiLane}>
+              <div className={styles.kimiLaneTop}>
+                <div>
+                  <strong>{lane.lane === 'low' ? 'Low code' : 'Mid code'}</strong>
+                  <span>{lane.description}</span>
+                </div>
+                <b>{lane.total}</b>
+              </div>
+              <div className={styles.kimiLaneStats}>
+                <span>loaded {lane.loaded}</span>
+                <span>dormant {lane.dormant}</span>
+                <span>gated {lane.gated}</span>
+              </div>
+              <div className={styles.kimiLaneList}>
+                {lane.items.slice(0, 8).map((item) => (
+                  <div key={item.id} data-risk={item.risk}>
+                    <strong>{item.id}</strong>
+                    <span>{item.status} · {item.risk}</span>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 

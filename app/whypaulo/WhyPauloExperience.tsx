@@ -31,7 +31,7 @@ type Lang = 'pt' | 'en'
 const copy = {
   pt: {
     language: {
-      aria: 'Selecionar idioma da pagina',
+      aria: 'Selecionar idioma da página',
       short: 'PT-BR',
     },
     hero: {
@@ -48,13 +48,13 @@ const copy = {
       header: 'Leitura viva do mercado',
       items: [
         ['Clientes', 'já criando workflows de IA fora da plataforma'],
-        ['Competidores', 'empacotando construtores de apps agenticos'],
+        ['Competidores', 'empacotando construtores de apps agênticos'],
         ['ServiceNow', 'capaz de converter contexto de workflow em execução governada'],
       ],
     },
     market: {
       kicker: 'O panorama',
-      title: 'A virada agentica ja esta dentro das contas.',
+      title: 'A virada agêntica já está dentro das contas.',
       intro:
         'Esta é a leitura que eu levaria para a liderança no primeiro dia: IA já mudou como clientes imaginam software, a velocidade que esperam de protótipos e como um concorrente pode capturar silenciosamente fatias de valor de workflow. A janela para liderar, em vez de apenas defender, está aberta agora.',
       items: [
@@ -66,7 +66,7 @@ const copy = {
         },
         {
           icon: TerminalSquare,
-          title: 'Clientes agora constroem sem nos',
+          title: 'Clientes agora constroem sem nós',
           copy:
             'LLMs locais, ambientes de vibe-code e frameworks de agentes permitem que negócio e TI prototipem workflows antes mesmo da conversa de plataforma começar. Cada um desses workflows poderia ser ServiceNow.',
         },
@@ -74,7 +74,7 @@ const copy = {
           icon: Radar,
           title: 'Concorrentes atacam primeiro pelas bordas',
           copy:
-            'Ferramentas agenticas não substituem o estate inteiro no primeiro dia. Elas entram em intake, aprovações, requests, reporting e pequenos legados — depois expandem. É assim que bases instaladas erodem sem barulho.',
+            'Ferramentas agênticas não substituem o estate inteiro no primeiro dia. Elas entram em intake, aprovações, requests, reporting e pequenos legados — depois expandem. É assim que bases instaladas erodem sem barulho.',
         },
         {
           icon: Layers3,
@@ -86,18 +86,18 @@ const copy = {
     },
     agent: {
       kicker: 'Como eu rodaria a cadeira',
-      title: 'Nao mais uma demo de IA. Um movimento repetivel de modernizacao de clientes.',
+      title: 'Não mais uma demo de IA. Um movimento repetível de modernização de clientes.',
       intro:
         'Meu playbook é simples e escala: achar onde clientes estão construindo ao redor da ServiceNow, mostrar o que pode ser retirado e mover esse trabalho para agentes e workflows governados na plataforma. IA deixa de ser experimento e vira defesa de base instalada mais expansão — medida em pipeline, não em slides.',
-      metricsAria: 'Sinais de execucao',
-      theaterAria: 'Modelo visual de agentes executando modernizacao de clientes',
+      metricsAria: 'Sinais de execução',
+      theaterAria: 'Modelo visual de agentes executando modernização de clientes',
       queueAria: 'Fila de tarefas dos agentes',
     },
     serviceNow: {
-      kicker: 'Posicao ServiceNow',
+      kicker: 'Posição ServiceNow',
       title: 'A ServiceNow está vencendo. A peça que falta é tradução.',
       intro:
-        'A leitura equilibrada e direta: a ServiceNow é líder com uma base instalada séria e uma vantagem de workflow que ninguém mais tem. A exposição real é velocidade — competidores agenticos e IA criada pelos próprios clientes andam mais rápido que movimentos clássicos de transformação. Fechar esse gap depende menos de mais features e mais de alguém que traduza capacidade de IA em resultado enterprise.',
+        'A leitura equilibrada e direta: a ServiceNow é líder com uma base instalada séria e uma vantagem de workflow que ninguém mais tem. A exposição real é velocidade — competidores agênticos e IA criada pelos próprios clientes andam mais rápido que movimentos clássicos de transformação. Fechar esse gap depende menos de mais features e mais de alguém que traduza capacidade de IA em resultado enterprise.',
       items: [
         {
           icon: BadgeCheck,
@@ -136,7 +136,7 @@ const copy = {
           icon: Radar,
           title: 'Mapear a pressão',
           copy:
-            'Identificar onde cada cliente já está construindo ao redor da ServiceNow, quais apps legados ou SaaS estão vulneráveis e onde concorrentes agenticos podem entrar.',
+            'Identificar onde cada cliente já está construindo ao redor da ServiceNow, quais apps legados ou SaaS estão vulneráveis e onde concorrentes agênticos podem entrar.',
         },
         {
           phase: '02',
@@ -170,7 +170,7 @@ const copy = {
     },
     ninety: {
       kicker: 'Primeiros 90 dias',
-      title: 'O que voce veria de mim no primeiro trimestre.',
+      title: 'O que você veria de mim no primeiro trimestre.',
       intro:
         'Sem teatro de ramp-up. Um plano time-boxed que produz uma prova governada e um field motion repetível antes do trimestre fechar.',
       phases: [
@@ -197,7 +197,7 @@ const copy = {
           title: 'Virar motion repetível',
           points: [
             'Levar o play para uma segunda e terceira conta; medir velocidade de adoção e sinal de expansão.',
-            'Publicar o modelo operacional: como a ServiceNow posiciona, governa e expande trabalho agentico.',
+            'Publicar o modelo operacional: como a ServiceNow posiciona, governa e expande trabalho agêntico.',
             'Entregar ao campo um motion que defende base instalada e abre crescimento novo — reportado em termos de receita.',
           ],
         },
@@ -236,14 +236,14 @@ const copy = {
         'Defesa de base instalada',
         'Retirada de legado e SaaS fragmentado',
         'CSDM e CMDB como framing de valor',
-        'Modernizacao de workflows agenticos',
+        'Modernização de workflows agênticos',
         'Literacia em Llama e modelos locais',
         'Pensamento de gateway estilo LiteLLM',
         'Sistemas operacionais multiagente',
         'Prompt caching e controle de custo',
         'Governança human-in-the-loop',
         'Storytelling executivo de cliente',
-        'Demos de campo e plays de adocao',
+        'Demos de campo e plays de adoção',
         'Modelo operacional para expansão de receita',
       ],
     },
@@ -259,17 +259,17 @@ const copy = {
     agentNodes: [
       { label: 'Sinal da base', x: 12, y: 24, mobileX: 23, mobileY: 18, tone: 'cyan' },
       { label: 'LLMs locais + vibe-code', x: 28, y: 66, mobileX: 31, mobileY: 58, tone: 'danger' },
-      { label: 'Concorrentes agenticos', x: 43, y: 22, mobileX: 72, mobileY: 16, tone: 'danger' },
+      { label: 'Concorrentes agênticos', x: 43, y: 22, mobileX: 72, mobileY: 16, tone: 'danger' },
       { label: 'Contexto ServiceNow', x: 52, y: 52, mobileX: 50, mobileY: 43, tone: 'main' },
       { label: 'Agentes governados', x: 74, y: 29, mobileX: 74, mobileY: 29, tone: 'lime' },
       { label: 'Retirada legado/SaaS', x: 84, y: 67, mobileX: 74, mobileY: 58, tone: 'brass' },
     ],
     agentQueue: [
       'captura de sinais de cliente',
-      'analise de sprawl de apps',
-      'tese de substituicao ServiceNow',
-      'politica de agente e human gate',
-      'POV executivo e plano de adocao',
+      'análise de sprawl de apps',
+      'tese de substituição ServiceNow',
+      'política de agente e human gate',
+      'POV executivo e plano de adoção',
     ],
     metrics: [
       ['FSI', 'ServiceNow em escala de banco brasileiro top-tier'],
@@ -287,7 +287,7 @@ const copy = {
       title:
         'Every vendor has an AI story. The rare thing is someone who operates the system where the bar is highest.',
       lead:
-        'ServiceNow already has the install base, workflow context and enterprise trust to win the agentic era. What it needs now is governed speed: someone who can turn AI into real execution in a high-pressure environment — top-tier Brazilian FSI, scale pressure, BACEN and LGPD. I can speak with executives about value, translate that into platform strategy and operate agents/LLMs with guardrails, evidence and production discipline. That is the operating maturity the agentic shift needs.',
+        'ServiceNow already has the install base, workflow context, and enterprise trust to win the agentic era. What it needs now is governed speed: someone who can turn AI into real execution in a high-pressure environment — top-tier Brazilian FSI, scale pressure, BACEN, and LGPD. I can speak with executives about value, translate that into platform strategy, and operate agents/LLMs with guardrails, evidence, and production discipline. That is the operating maturity the agentic shift needs.',
       primaryCta: "See how I'd win",
       secondaryCta: 'Why me',
       signals: ['Operates AI daily', 'Speaks to the C-suite', 'Ships governed agents', 'Measured in revenue'],
@@ -345,13 +345,13 @@ const copy = {
       kicker: 'ServiceNow position',
       title: "You're winning. The one missing piece is a translator.",
       intro:
-        'Let me be balanced and honest: ServiceNow is a leader with a serious install base and a workflow advantage no one else has. The real exposure is speed — agentic competitors and customer-built AI move faster than classic transformation motions. Closing that gap is less about more AI features and more about someone who can translate AI capability into enterprise outcomes.',
+        'Let me be balanced and honest: ServiceNow is a leader with a serious install base and a workflow advantage no one else has. The real exposure is speed — agentic competitors and customer-built AI move faster than classic transformation motions. Closing that gap is less about more AI features and more about having someone who can translate AI capability into enterprise outcomes.',
       items: [
         {
           icon: BadgeCheck,
           title: 'A leader with a serious install base',
           copy:
-            'ServiceNow has enterprise trust, workflow depth, data context, executive relevance and a respected customer footprint. That is the foundation to win the agentic shift.',
+            'ServiceNow has enterprise trust, workflow depth, data context, executive relevance, and a respected customer footprint. That is the foundation to win the agentic shift.',
         },
         {
           icon: CircleGauge,
@@ -363,13 +363,13 @@ const copy = {
           icon: DatabaseZap,
           title: 'The moat is governed execution',
           copy:
-            'The winning story is not "more AI features." It is secure enterprise execution: data, workflow, identity, audit, human gates and measurable business outcomes.',
+            'The winning story is not "more AI features." It is secure enterprise execution: data, workflow, identity, audit, human gates, and measurable business outcomes.',
         },
         {
           icon: ChartNoAxesCombined,
           title: 'The field motion must change',
           copy:
-            'AI selling needs sharper discovery, stronger proofs, credible demos and a path from operating model to adoption velocity to revenue expansion.',
+            'AI selling needs sharper discovery, stronger proof, credible demos, and a path from operating model to adoption velocity to revenue expansion.',
         },
       ],
     },
@@ -391,21 +391,21 @@ const copy = {
           icon: Network,
           title: 'Pick the replacement plays',
           copy:
-            'Prioritize workflows that ServiceNow can absorb with platform data, governed agents and clearer business ownership.',
+            'Prioritize workflows that ServiceNow can absorb with platform data, governed agents, and clearer business ownership.',
         },
         {
           phase: '03',
           icon: BrainCircuit,
           title: 'Build credible proofs',
           copy:
-            'Turn customer-specific problems into agent demos, adoption narratives and executive POVs that feel real enough to move decisions.',
+            'Turn customer-specific problems into agent demos, adoption narratives, and executive POVs that feel real enough to move decisions.',
         },
         {
           phase: '04',
           icon: ShieldCheck,
           title: 'Govern the autonomy',
           copy:
-            'Design human gates, data boundaries, telemetry, audit evidence and recovery paths before promising autonomous execution.',
+            'Design human gates, data boundaries, telemetry, audit evidence, and recovery paths before promising autonomous execution.',
         },
         {
           phase: '05',
@@ -435,7 +435,7 @@ const copy = {
           window: 'Days 30-60',
           title: 'Ship proof that moves a deal',
           points: [
-            'Turn one real customer problem into a working governed agent — permitted real workflow, permitted real data and no slideware.',
+            'Turn one real customer problem into a working governed agent — permitted real workflow, permitted real data, and no slideware.',
             'Pair with AEs and SCs to put that proof in front of an economic buyer and tie it to pipeline.',
             'Codify the discovery and demo into a kit the field can run without me in the room.',
           ],
@@ -445,7 +445,7 @@ const copy = {
           title: 'Turn proof into a repeatable motion',
           points: [
             'Roll the play into a second and third account; track adoption velocity and the expansion signal.',
-            'Publish the operating model: how ServiceNow positions, governs and expands agentic work.',
+            'Publish the operating model: how ServiceNow positions, governs, and expands agentic work.',
             'Hand the field a motion that defends the install base and opens new growth — reported in revenue terms.',
           ],
         },
@@ -455,24 +455,24 @@ const copy = {
       kicker: 'How I actually operate AI',
       title: "I run governed AI every day — this is the discipline I'd bring in.",
       intro:
-        "I'm showing the operating pattern, not the confidential machinery. The point is that I treat AI the way an enterprise has to: context, routing, guardrails, evidence and business translation — not prompts and vibes.",
+        "I'm showing the operating pattern, not the confidential machinery. The point is that I treat AI the way an enterprise has to: context, routing, guardrails, evidence, and business translation — not prompts and vibes.",
       signals: [
-        { label: 'Context', copy: 'customer narrative, install-base pressure, project memory and reusable plays' },
-        { label: 'Routing', copy: 'right model, right agent, right tool and right risk boundary for each task' },
-        { label: 'Governance', copy: 'human approval gates, no-secret discipline, audit evidence and production boundaries' },
-        { label: 'Evidence', copy: 'working artifacts, tests, visual QA, notes and next actions before claiming done' },
+        { label: 'Context', copy: 'customer narrative, install-base pressure, project memory, and reusable plays' },
+        { label: 'Routing', copy: 'right model, right agent, right tool, and right risk boundary for each task' },
+        { label: 'Governance', copy: 'human approval gates, no-secret discipline, audit evidence, and production boundaries' },
+        { label: 'Evidence', copy: 'working artifacts, tests, visual QA, notes, and next actions before claiming done' },
       ],
     },
     proof: {
       kicker: 'Why me, specifically',
       title: 'The combination almost no one has — all four at once.',
       intro:
-        'Plenty of people have one or two of these. The value is in holding all four together: AI fluency, customer maturity, platform depth and delivery discipline. That intersection is exactly where ServiceNow needs to win the agentic era — and it is where I already operate.',
+        'Plenty of people have one or two of these. The value is in holding all four together: AI fluency, customer maturity, platform depth, and delivery discipline. That intersection is exactly where ServiceNow needs to win the agentic era — and it is where I already operate.',
       pillars: [
-        ['AI maturity', 'LLM behavior, Llama/local models, Kimi, GPT, Gemini, Claude, LiteLLM-style routing, evals, cost and context limits.'],
-        ['Customer maturity', 'Executive framing, discovery quality, adoption barriers, operating model design and value translation.'],
-        ['Platform maturity', 'Now Assist, AI Agents, CMDB/CSDM, workflow context, governance and modernization paths.'],
-        ['Execution maturity', 'Preflight, handoffs, evidence trails, visual QA, security boundaries and disciplined agent operations.'],
+        ['AI maturity', 'LLM behavior, Llama/local models, Kimi, GPT, Gemini, Claude, LiteLLM-style routing, evals, cost, and context limits.'],
+        ['Customer maturity', 'Executive framing, discovery quality, adoption barriers, operating model design, and value translation.'],
+        ['Platform maturity', 'Now Assist, AI Agents, CMDB/CSDM, workflow context, governance, and modernization paths.'],
+        ['Execution maturity', 'Preflight, handoffs, evidence trails, visual QA, security boundaries, and disciplined agent operations.'],
       ],
     },
     stack: {
@@ -499,7 +499,7 @@ const copy = {
       kicker: 'The ask',
       title: "Make me ServiceNow's AI person.",
       copy:
-        "I'm a ServiceNow Technical Account Executive in FSI Brazil with practical AI, LLM and agent operating depth. I do not want to sit beside the platform. I want to make the platform the place where governed agents create measurable enterprise value. Given the right role, I will turn AI urgency into adoption velocity, install-base defense and expansion — proven where the governance bar is highest.",
+        "I'm a ServiceNow Technical Account Executive in FSI Brazil with practical depth in AI, LLMs, and agent operations. I do not want to operate beside the platform. I want to make the platform the place where governed agents create measurable enterprise value. Given the right role, I will turn AI urgency into adoption velocity, install-base defense, and expansion — proven where the governance bar is highest.",
       cta: "Let's talk about the role",
       emailSubject: 'ServiceNow%20AI%20role%20conversation%20-%20FSI%2FBrazil-proven',
       badge: 'ServiceNow first. AI as leverage. Revenue as the test.',

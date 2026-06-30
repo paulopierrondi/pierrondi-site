@@ -1,6 +1,7 @@
 .model {
   position: relative;
   padding-block: clamp(90px, 13vh, 160px);
+  overflow: clip;
   background: linear-gradient(180deg, transparent, rgba(11, 15, 12, 0.5), transparent);
 }
 
@@ -189,5 +190,10 @@
     grid-column: 2;
     margin-top: 6px;
     max-width: none;
+  }
+
+  .flow {
+    margin-top: 60px;
+    text-align: center;
   }
 }

@@ -190,7 +190,7 @@ export default async function FeitoPage({ params }: Props) {
       <section className={styles.workflowSection} aria-labelledby="workflow-title">
         <div data-swarm-reveal>
           <p className={styles.eyebrow}>Workflow de valor</p>
-          <h2 id="workflow-title">Como a arquitetura vira execucao.</h2>
+          <h2 id="workflow-title">Como a arquitetura vira execução.</h2>
         </div>
         <div className={styles.workflowRail}>
           {feito.workflow.map((step, index) => (
@@ -207,8 +207,8 @@ export default async function FeitoPage({ params }: Props) {
 
       <section className={styles.methodsSection} aria-labelledby="methods-title">
         <div className={styles.methodsPanel} data-swarm-reveal data-swarm-tilt>
-          <p className={styles.eyebrow}>Metodo</p>
-          <h2 id="methods-title">Rigor tecnico sem perder narrativa executiva.</h2>
+          <p className={styles.eyebrow}>Método</p>
+          <h2 id="methods-title">Rigor técnico sem perder narrativa executiva.</h2>
           <div className={styles.methodTags}>
             {feito.methods.map((method) => (
               <span key={method}>{method}</span>

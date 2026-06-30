@@ -621,6 +621,66 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.kimiCodeLanes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.kimiCodeLanes article {
+  min-width: 0;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  background: #e8e4f4;
+  padding: 12px;
+}
+
+.kimiCodeLanes article > div:first-child {
+  display: grid;
+  gap: 5px;
+}
+
+.kimiCodeLanes strong,
+.kimiCodeLanes span {
+  display: block;
+}
+
+.kimiCodeLanes strong {
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.kimiCodeLanes span {
+  color: rgba(22, 22, 17, 0.58);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.kimiCodeLanes p {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.kimiCodeItems {
+  display: grid;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.kimiCodeItems span {
+  overflow-wrap: anywhere;
+  border-left: 3px solid #207a51;
+  background: #fffdf7;
+  padding: 6px 8px;
+}
+
+.kimiCodeItems span[data-risk='gated'] {
+  border-left-color: #b06b12;
+}
+
 .automationGrid article[data-status*='failed'],
 .automationGrid article[data-status*='error'] {
   background: #f7dfdb;
@@ -1135,6 +1195,7 @@
   .metrics,
   .llmOpsGrid,
   .aliasGrid,
+  .kimiCodeLanes,
   .automationGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -1215,6 +1276,7 @@
   .contextGrid,
   .llmOpsGrid,
   .aliasGrid,
+  .kimiCodeLanes,
   .automationGrid,
   .creativeStatsRow,
   .looksGrid,

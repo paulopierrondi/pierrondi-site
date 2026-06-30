@@ -323,7 +323,7 @@ const announcements = [
     technical:
       'Tratar fonte de verdade, autorização, latência, contratos de dados, lineage e observabilidade.',
     value:
-      'Escolher poucos dados externos que destravam decisões de IT, risco, atendimento ou portfolio.',
+      'Escolher poucos dados externos que destravam decisões de IT, risco, atendimento ou portfólio.',
     bradescoAngle:
       'Permite enriquecer workflows com dados externos sem replicar tudo.',
     architecture:
@@ -388,25 +388,25 @@ const announcements = [
     icon: Gauge,
     title: 'SPM com IA',
     subtitle:
-      'Portfolio, dependências e priorização conectados ao contexto operacional.',
+      'Portfólio, dependências e priorização conectados ao contexto operacional.',
     executive:
-      'Portfolio, demanda, execução e arquitetura deixam de ser silos de decisão.',
+      'Portfólio, demanda, execução e arquitetura deixam de ser silos de decisão.',
     technical:
       'Discutir modelo de dados, integrações, migração, qualidade de épicos e governança de mudança.',
     value:
-      'Evoluir de ferramenta de planejamento para sistema de decisão de portfolio.',
+      'Evoluir de ferramenta de planejamento para sistema de decisão de portfólio.',
     bradescoAngle:
-      'Conecta demanda, capacidade, risco e execução em uma visão única de portfolio.',
+      'Conecta demanda, capacidade, risco e execução em uma visão única de portfólio.',
     architecture:
       'Modelo de dados, integrações, migração, épicos, capacidade e mudanças.',
     operatingModel:
-      'Ritual de portfolio decide com dados, dependências e critérios comuns.',
+      'Ritual de portfólio decide com dados, dependências e critérios comuns.',
     nextMove:
-      'Selecionar um fluxo de decisão de portfolio para redesenhar com SPM.',
+      'Selecionar um fluxo de decisão de portfólio para redesenhar com SPM.',
     proofPoints: ['Demand', 'Capacity', 'Dependencies', 'Execution metrics'],
     discussion: {
       executivo:
-        'Qual decisão de portfolio hoje depende de planilhas paralelas?',
+        'Qual decisão de portfólio hoje depende de planilhas paralelas?',
       tecnico:
         'Quais objetos precisam ficar consistentes entre Jira, SPM e execução?',
       valor:
@@ -584,7 +584,7 @@ const deepDives: Record<string, DeepDive> = {
     doubleClick:
       'A discussão deve ser sobre contrato de dados: fonte de verdade, autorização, latência aceitável, lineage, observabilidade e quem responde quando um dado externo muda o comportamento do workflow.',
     talkTrack:
-      'Para Bradesco, WDF é mais forte quando destrava uma decisão operacional concreta em IT, risco, atendimento ou portfolio. A pergunta certa é qual dado externo muda a ação dentro do workflow.',
+      'Para Bradesco, WDF é mais forte quando destrava uma decisão operacional concreta em IT, risco, atendimento ou portfólio. A pergunta certa é qual dado externo muda a ação dentro do workflow.',
     watchouts: [
       'Dado externo sem contrato de uso',
       'Latência incompatível com decisão operacional',
@@ -620,19 +620,19 @@ const deepDives: Record<string, DeepDive> = {
   },
   spm: {
     premise:
-      'SPM com IA aproxima demanda, capacidade, dependência, risco e execução para melhorar a decisão de portfolio.',
+      'SPM com IA aproxima demanda, capacidade, dependência, risco e execução para melhorar a decisão de portfólio.',
     doubleClick:
-      'A oportunidade é sair de relatório de status e entrar em sistema de decisão. Para isso, o dado de portfolio precisa conversar com execução, arquitetura, mudança e capacidade de times.',
+      'A oportunidade é sair de relatório de status e entrar em sistema de decisão. Para isso, o dado de portfólio precisa conversar com execução, arquitetura, mudança e capacidade de times.',
     talkTrack:
       'Para Bradesco, SPM pode ser discutido como a mesa de decisão que reduz planilhas paralelas e conecta prioridade com capacidade real, dependência técnica e risco de mudança.',
     watchouts: [
-      'Portfolio decidido fora da plataforma',
+      'Portfólio decidido fora da plataforma',
       'Épicos com qualidade inconsistente',
       'Dependência técnica invisível',
       'Migração tratada como troca de ferramenta',
     ],
     workshop: [
-      'Selecionar uma decisão mensal de portfolio',
+      'Selecionar uma decisão mensal de portfólio',
       'Mapear objetos de dado obrigatórios',
       'Definir integração com execução atual',
       'Criar painel de decisão com critérios comuns',
@@ -751,7 +751,7 @@ const useCases = [
     stack: 'CMDB/CSDM + Context Engine + WDF',
   },
   {
-    title: 'Portfolio conectado',
+    title: 'Portfólio conectado',
     outcome: 'Ligar demanda, dependência, capacidade, risco e mudança em SPM.',
     stack: 'SPM + App Engine + métricas',
   },

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import WhatsApp from '@/components/WhatsApp'
 import JsonLd from '@/components/JsonLd'
 import Link from 'next/link'
 import { formatDate as formatDateUtil } from '@/lib/utils/date'
@@ -27,8 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt,
-    keywords: [post.category.toLowerCase(), 'pierrondi.dev', 'blog', 'guia prático', post.title.toLowerCase()],
-    authors: [{ name: 'Paulo Pierrondi', url: `${SITE_URL}/sobre` }],
+    keywords: [post.category.toLowerCase(), 'pierrondi.dev', 'ia enterprise', 'agentops', post.title.toLowerCase()],
+    authors: [{ name: 'Paulo Pierrondi', url: `${SITE_URL}/about` }],
     alternates: { canonical: url },
     openGraph: {
       title: post.title,
@@ -63,32 +62,10 @@ export default async function PostPage({ params }: Props) {
 
   const related = posts.filter((p) => p.slug !== post.slug)
 
-  const offerByCategory: Record<string, { href: string; label: string; eyebrow: string }> = {
-    Automação: {
-      href: '/automacoes',
-      label: 'Ver Automação Express',
-      eyebrow: 'Quer automatizar isso na sua empresa?',
-    },
-    'Produto Digital': {
-      href: '/produto-digital',
-      label: 'Ver Produto Digital (MVP)',
-      eyebrow: 'Quer construir um MVP assim?',
-    },
-    'Tech Partner': {
-      href: '/tech-partner',
-      label: 'Ver Tech Partner',
-      eyebrow: 'Precisa de direção técnica recorrente?',
-    },
-    IA: {
-      href: '/marketing-os',
-      label: 'Ver Marketing OS',
-      eyebrow: 'Quer IA aplicada com governança real?',
-    },
-  }
-  const offer = offerByCategory[post.category] ?? {
-    href: '/#contact',
-    label: 'Falar com a equipe',
-    eyebrow: 'Quer implementar isso?',
+  const offer = {
+    href: '/atuacao',
+    label: 'Ver atuação',
+    eyebrow: 'Quer transformar tese em execução governada?',
   }
 
   const articleUrl = `${SITE_URL}/blog/${post.slug}`
@@ -103,7 +80,7 @@ export default async function PostPage({ params }: Props) {
     author: {
       '@type': 'Person',
       name: 'Paulo Pierrondi',
-      url: `${SITE_URL}/sobre`,
+      url: `${SITE_URL}/about`,
     },
     publisher: {
       '@type': 'Organization',
@@ -178,26 +155,24 @@ export default async function PostPage({ params }: Props) {
         <ProductTile
           variant="dark"
           eyebrow={offer.eyebrow}
-          headline="Diagnóstico gratuito em 30 minutos — sem compromisso."
+          headline="Do modelo operacional à execução com evidência."
           ctas={
             <>
               <PillButton variant="primary" href={offer.href}>
                 {offer.label}
               </PillButton>
-              <PillButton variant="ghost" href="/#contact">
-                Falar com a equipe
+              <PillButton variant="ghost" href="/contato">
+                Abrir conversa
               </PillButton>
             </>
           }
         >
           <p className={styles.ctaText}>
-            Avaliamos o seu processo, identificamos o ponto de maior retorno e mostramos o que pode
-            ser automatizado ou desenvolvido — com prazo e custo reais.
+            O trabalho conecta estratégia, governança, plataforma, agentes e métricas para levar IA
+            enterprise além do piloto.
           </p>
         </ProductTile>
       </main>
-
-      <WhatsApp />
     </>
   )
 }

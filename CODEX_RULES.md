@@ -234,7 +234,7 @@ Pedidos amplos do Paulo como "olha tudo", "melhore", "resolva", "evolua diariame
 | Trabalho | Coder padrao | Regra |
 | --- | --- | --- |
 | Varredura ampla, triagem barata, relatorio, backlog, docs | Kimi CLI | read-only/report-first |
-| Prototipo, scaffold, dashboard/tool estatico, draft isolado de codigo | Qwen Code | usar modelos Qwen via `DASHSCOPE_API_KEY`; Codex revisa/integra antes de mudanca relevante |
+| Prototipo, scaffold, dashboard/tool estatico, draft isolado de codigo e sintese privada/local | Qwen-local / Qwen Code | Qwen-local (`qwen3:14b` via Ollama, `think=false`) para conteudo sensivel/high-volume; Qwen Code via `DASHSCOPE_API_KEY` para draft grande; Codex revisa/integra antes de mudanca relevante |
 | Patch seguro, testes, integracao, validacao local | Codex | executor principal |
 | Bug dificil, arquitetura, compliance, App Store/release risk | Claude Code | especialista senior |
 | Checagem independente, tarefas Google/MCP, utilitario CLI, validacao terminal | Gemini CLI | usar `GEMINI.md` como memoria hierarquica; manter paridade com `AGENTS.md` |
@@ -397,12 +397,14 @@ dashboards, handoffs or multi-coder routing.
 Canon:
 - Manifest: `/Users/paulopierrondi/agents-hub/configs/paulo_ops_skill_pack.yaml`
 - Vault note: `/Users/paulopierrondi/Documents/Obsidian Vault/Hub_Agentes/05_Configuracao/config_paulo_ops_skills.md`
-- Count: `30` operational skills.
+- Count: `32` operational skills (`30` installer-managed, `2` preserved local).
 - Antigravity/AGY is the default validator; Gemini is explicit fallback only.
 - Third-party skill/MCP repos are discovery/quarantine only until reviewed.
+- Relevance upgrade: use the smallest matching skill set; each skill must match
+  a current trigger, live source, artifact and stop condition.
 
 Installed skills:
-`paulo-ops-preflight-gate`, `paulo-ops-human-gates`, `paulo-ops-session-journal`, `paulo-ops-slack-outbox`, `paulo-ops-vault-memory`, `paulo-ops-linear-agent-ready`, `paulo-ops-linear-coding-session`, `paulo-ops-antigravity-validation`, `paulo-ops-skills-mcp-radar`, `paulo-ops-supply-chain-quarantine`, `paulo-ops-mcp-permission-review`, `paulo-ops-codegraph-impact`, `paulo-ops-route-learning`, `paulo-ops-automation-email`, `paulo-ops-launchagent-health`, `paulo-ops-agent-baseline`, `paulo-ops-product-revenue`, `paulo-ops-app-store-release-gate`, `paulo-ops-paid-growth-gate`, `paulo-ops-secrets-central-env`, `paulo-ops-browser-visual-qa`, `paulo-ops-webapp-smoke`, `paulo-ops-frontend-quality`, `paulo-ops-github-pr-diff`, `paulo-ops-multi-coder-swarm`, `paulo-ops-learning-retro`, `paulo-ops-repo-intake-router`, `paulo-ops-dirty-worktree-triage`, `paulo-ops-test-gap-map`, `paulo-ops-operations-dashboard`
+`paulo-ops-preflight-gate`, `paulo-ops-human-gates`, `paulo-ops-session-journal`, `paulo-ops-slack-outbox`, `paulo-ops-vault-memory`, `paulo-ops-linear-agent-ready`, `paulo-ops-linear-coding-session`, `paulo-ops-antigravity-validation`, `paulo-ops-skills-mcp-radar`, `paulo-ops-supply-chain-quarantine`, `paulo-ops-mcp-permission-review`, `paulo-ops-codegraph-impact`, `paulo-ops-route-learning`, `paulo-ops-automation-email`, `paulo-ops-launchagent-health`, `paulo-ops-agent-baseline`, `paulo-ops-product-revenue`, `paulo-ops-app-store-release-gate`, `paulo-ops-paid-growth-gate`, `paulo-ops-secrets-central-env`, `paulo-ops-browser-visual-qa`, `paulo-ops-webapp-smoke`, `paulo-ops-frontend-quality`, `paulo-ops-github-pr-diff`, `paulo-ops-multi-coder-swarm`, `paulo-ops-learning-retro`, `paulo-ops-repo-intake-router`, `paulo-ops-dirty-worktree-triage`, `paulo-ops-test-gap-map`, `paulo-ops-operations-dashboard`, `paulo-ops-agent-flow-validation`, `paulo-ops-evolve-lab`
 <!-- PAULO_OPS_SKILL_PACK_END -->
 
 <!-- EXTERNAL_MARKETING_WEBDESIGN_SKILLS_START -->

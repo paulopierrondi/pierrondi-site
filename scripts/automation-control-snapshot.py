@@ -30,6 +30,7 @@ AGENTS_HUB = HOME / "agents-hub"
 LOG_DIR = AGENTS_HUB / "logs" / "agent-jobs"
 LAUNCH_AGENTS = HOME / "Library" / "LaunchAgents"
 CODEX_AUTOMATIONS = HOME / ".codex" / "automations"
+KIMI_AUTOMATIONS = HOME / ".kimi_openclaw" / "workspace" / "automations"
 CODER_DASHBOARD = VAULT / "Hub_Agentes" / "04_Dashboards" / "dashboard_coder_activity.md"
 CODER_STATE = VAULT / "Hub_Agentes" / "06_Runtime" / "coder_activity_state.yaml"
 ORCHESTRATION_HEALTH = VAULT / "Hub_Agentes" / "03_Outputs" / "automation_reviews" / f"{datetime.now():%Y-%m-%d}-orchestration-health.md"
@@ -244,6 +245,166 @@ def codex_automation_count() -> int:
     return len(list(CODEX_AUTOMATIONS.glob("*/automation.toml"))) if CODEX_AUTOMATIONS.exists() else 0
 
 
+def read_plist(path: Path) -> dict[str, Any]:
+    try:
+        with path.open("rb") as handle:
+            data = plistlib.load(handle)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def launchctl_state(label: str) -> dict[str, Any]:
+    result = run(["launchctl", "print", f"gui/{os.getuid()}/{label}"], timeout=10)
+    loaded = result.returncode == 0
+    stdout = result.stdout or ""
+    return {
+        "loaded": loaded,
+        "running": loaded and "state = running" in stdout,
+        "lastExit": next(
+            (
+                line.split("=", 1)[1].strip()
+                for line in stdout.splitlines()
+                if "last exit code =" in line
+            ),
+            None,
+        ),
+    }
+
+
+LOW_CODE_PATTERNS = (
+    "ci-failure",
+    "code-review",
+    "dirty-worktree",
+    "frontend-visual",
+    "linear-pr",
+    "pr-body",
+    "pr-diff",
+    "pr-readiness",
+    "reviewer",
+    "security-pr",
+)
+
+MID_CODE_PATTERNS = (
+    "agent-budget",
+    "agent-intelligence",
+    "agent-orchestrator",
+    "cli-swarm",
+    "domain-ai-improvement",
+    "ops-portal",
+    "post-merge",
+    "product-foundry",
+    "release-pr",
+    "safe-patch",
+)
+
+GATED_CODE_PATTERNS = (
+    "app-store",
+    "asc",
+    "ios-factory",
+    "ios-monetization",
+    "paid-ads",
+    "post-merge",
+    "release-pr",
+    "safe-patch",
+)
+
+KIMI_LANE_DEFINITIONS = {
+    "low": {
+        "title": "Kimi low-code automations",
+        "description": "Report-only code review, triage, PR/readiness and failure-analysis automations.",
+    },
+    "mid": {
+        "title": "Kimi mid-code automations",
+        "description": "Patch queues, orchestrators, release verification and multi-step code operations.",
+    },
+}
+
+
+def kimi_code_lane_for(name: str) -> str | None:
+    if not name.startswith("kimi-"):
+        return None
+    if any(pattern in name for pattern in LOW_CODE_PATTERNS):
+        return "low"
+    if any(pattern in name for pattern in MID_CODE_PATTERNS):
+        return "mid"
+    return None
+
+
+def empty_kimi_code_lane(lane: str) -> dict[str, Any]:
+    definition = KIMI_LANE_DEFINITIONS[lane]
+    return {
+        "lane": lane,
+        "title": definition["title"],
+        "description": definition["description"],
+        "total": 0,
+        "loaded": 0,
+        "running": 0,
+        "dormant": 0,
+        "gated": 0,
+        "items": [],
+    }
+
+
+def kimi_code_folders() -> list[Path]:
+    if not KIMI_AUTOMATIONS.exists():
+        return []
+    return sorted(path for path in KIMI_AUTOMATIONS.iterdir() if path.is_dir())
+
+
+def kimi_code_status(state: dict[str, Any]) -> str:
+    if state["running"]:
+        return "running"
+    if state["loaded"]:
+        return "loaded"
+    return "dormant"
+
+
+def kimi_code_item(folder: Path) -> dict[str, Any]:
+    label = f"com.paulopierrondi.{folder.name}"
+    plist = LAUNCH_AGENTS / f"{label}.plist"
+    plist_exists = plist.exists()
+    plist_data = read_plist(plist)
+    state = launchctl_state(label) if plist_exists else {"loaded": False, "running": False, "lastExit": None}
+    disabled = bool(plist_data.get("Disabled", False)) if plist_data else True
+    gated = any(pattern in folder.name for pattern in GATED_CODE_PATTERNS)
+    return {
+        "id": folder.name,
+        "label": label,
+        "status": kimi_code_status(state),
+        "risk": "gated" if gated else "report_only",
+        "disabled": disabled,
+        "runAtLoad": bool(plist_data.get("RunAtLoad", False)) if plist_data else False,
+        "loaded": bool(state["loaded"]),
+        "running": bool(state["running"]),
+        "lastExit": state.get("lastExit"),
+        "plist": str(plist) if plist_exists else None,
+        "action": (
+            "human gate antes de executar"
+            if gated
+            else "ok para visibilidade/report-only; executar sob Agent Hub quando necessário"
+        ),
+    }
+
+
+def add_kimi_code_item(bucket: dict[str, Any], item: dict[str, Any]) -> None:
+    bucket["items"].append(item)
+    bucket["total"] += 1
+    bucket["loaded"] += 1 if item["loaded"] else 0
+    bucket["running"] += 1 if item["running"] else 0
+    bucket["dormant"] += 1 if item["disabled"] or not item["loaded"] else 0
+    bucket["gated"] += 1 if item["risk"] == "gated" else 0
+
+
+def kimi_code_lanes() -> list[dict[str, Any]]:
+    lanes = {lane: empty_kimi_code_lane(lane) for lane in KIMI_LANE_DEFINITIONS}
+    for folder in kimi_code_folders():
+        lane = kimi_code_lane_for(folder.name)
+        if lane:
+            add_kimi_code_item(lanes[lane], kimi_code_item(folder))
+    return list(lanes.values())
+
+
 def railway_status() -> dict[str, Any]:
     try:
         result = run(["railway", "status"], cwd=REPO, timeout=20)
@@ -378,6 +539,7 @@ def build_snapshot(skip_refresh: bool, skip_preflight: bool) -> dict[str, Any]:
     log_rows = recent_logs(dashboard)
     attention = attention_rows(dashboard)
     signals = automation_signals(log_rows, attention)
+    kimi_lanes = kimi_code_lanes()
     railway = railway_status()
 
     return {
@@ -411,6 +573,7 @@ def build_snapshot(skip_refresh: bool, skip_preflight: bool) -> dict[str, Any]:
             llm_runtime("Antigravity", ["antigravity"], log_rows),
         ],
         "automations": signals,
+        "kimiCodeLanes": kimi_lanes,
         "decisions": decisions(signals, attention, counts),
         "reports": reports(),
     }

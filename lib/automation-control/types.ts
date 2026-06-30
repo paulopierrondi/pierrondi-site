@@ -35,6 +35,7 @@ export interface AutomationControlSnapshot {
   coders: CoderActivity[]
   llms: LlmRuntime[]
   automations: AutomationSignal[]
+  kimiCodeLanes?: KimiCodeLane[]
   decisions: ControlDecision[]
   reports: ControlReport[]
 }
@@ -69,6 +70,32 @@ export interface AutomationSignal {
   ageLabel?: string
   signal: string
   evidence?: string
+  action: string
+}
+
+export interface KimiCodeLane {
+  lane: 'low' | 'mid'
+  title: string
+  description: string
+  total: number
+  loaded: number
+  running: number
+  dormant: number
+  gated: number
+  items: KimiCodeAutomation[]
+}
+
+export interface KimiCodeAutomation {
+  id: string
+  label: string
+  status: string
+  risk: 'report_only' | 'gated'
+  disabled: boolean
+  runAtLoad: boolean
+  loaded: boolean
+  running: boolean
+  lastExit?: string | null
+  plist?: string | null
   action: string
 }
 

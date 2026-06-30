@@ -1,4 +1,4 @@
-import type { HomeLang } from '@/app/home-experience-copy'
+export type HomeLang = 'pt' | 'en'
 
 export const siteLanguages: Array<{
   code: HomeLang

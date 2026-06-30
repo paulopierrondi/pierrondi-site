@@ -4,7 +4,7 @@ import ContatoPageContent from '@/app/contato/ContatoPageContent'
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Get in touch with Paulo Pierrondi to talk about enterprise AI, ServiceNow, AgentOps and operating model.',
+  description: 'Get in touch with Paulo Pierrondi to talk about enterprise AI, ServiceNow, AgentOps, and operating models.',
   alternates: {
     canonical: '/en/contato',
     languages: {
@@ -29,7 +29,7 @@ export default function ContatoEnPage() {
       <PageHeader
         eyebrow="CONTACT"
         title={<>Let&apos;s <span className="text-primary">talk.</span></>}
-        lead="About AI strategy, ServiceNow, governed agents and operating model. No sales agenda — a good conversation is always welcome."
+        lead="About AI strategy, ServiceNow, governed agents, and operating models. No sales agenda — a good conversation is always welcome."
         chips={['Reply by email', 'No client names', 'Technical + executive context']}
       />
       <ContatoPageContent lang="en" />

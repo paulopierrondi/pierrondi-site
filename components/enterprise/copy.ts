@@ -55,7 +55,7 @@ export const homeCopy: Record<HomeLang, {
     hero: {
       eyebrow: 'AI OPERATING MODEL · AGENTOPS · FSI',
       title: ['Transformo IA', 'enterprise em', 'modelo operacional.'],
-      lead: 'ServiceNow TAE / Enterprise Architect. Construo AgentOps, fluxos de delivery acceleration, AI control towers e sistemas de implementação para ambientes enterprise regulados.',
+      lead: 'ServiceNow TAE / Enterprise Architect. Construo AgentOps, fluxos de aceleração de delivery, AI control towers e sistemas de implementação para ambientes enterprise regulados.',
       primaryCta: 'Conectar no LinkedIn',
       secondaryCta: 'Ver o modelo',
       micro: ['Operating model', 'adoption velocity', 'revenue expansion'],
@@ -64,9 +64,9 @@ export const homeCopy: Record<HomeLang, {
       eyebrow: 'BIO / QUEM OPERA',
       lede: 'Passei a carreira na fronteira entre o que a tecnologia promete e o que a operação aguenta. É ali que IA enterprise vira valor — ou vira risco.',
       paragraphs: [
-        'Sou carioca, vivi anos em Dublin e hoje opero de São José dos Campos. Comecei na interseção entre negócio e plataforma e nunca saí dela: aprendi cedo que arquitetura bonita não sobrevive ao contato com a realidade de uma grande empresa se não tiver contexto, governança e dono.',
+        'Sou carioca, vivi anos em Dublin e hoje opero de São Paulo. Comecei na interseção entre negócio e plataforma e nunca saí dela: aprendi cedo que arquitetura bonita não sobrevive ao contato com a realidade de uma grande empresa se não tiver contexto, governança e dono.',
         'Hoje sou Technical Account Executive / Enterprise Architect na ServiceNow, focado em serviços financeiros. Meu trabalho não é vender “usar IA” — é desenhar como a IA entra em trabalho real: contexto, política, permissões, memória, validação, custo e evidência. A tese que defendo em público é simples: IA só cria vantagem quando vira modelo operacional.',
-        'Para sustentar isso, construo sistemas — frameworks de arquitetura de valor, AgentOps governados, pipelines de inferência e um “segundo cérebro” operacional que aprende, valida e melhora com o tempo. Método antes da ferramenta. Fora do enterprise, sou construtor: lanço produtos e apps, e levo a mesma disciplina de evidência para distribuição. Fé e família são a bússola; mobilidade global está no radar.',
+        'Para sustentar isso, construo sistemas — frameworks de arquitetura de valor, AgentOps governados, pipelines de inferência e um “segundo cérebro” operacional que aprende, valida e melhora com o tempo. Método antes da ferramenta. Fora do enterprise, sou construtor: lanço produtos e apps, e levo a mesma disciplina de evidência para distribuição. Fé e família são a bússola; consistência é o critério.',
       ],
       creds: [
         { k: 'Função', v: 'TAE / Enterprise Architect' },
@@ -75,7 +75,7 @@ export const homeCopy: Record<HomeLang, {
         { k: 'Fundação', v: 'CSDM · CMDB · Service Graph' },
       ],
       status: 'Disponível p/ conversas',
-      loc: 'SJC · BR',
+      loc: 'São Paulo · BR',
     },
     operatingModel: {
       eyebrow: 'MODELO OPERACIONAL',
@@ -109,7 +109,7 @@ export const homeCopy: Record<HomeLang, {
         },
         {
           title: 'ServiceNow e IA governada',
-          copy: 'Now Assist, AI Agents, CSDM, CMDB e operating model conectados diretamente a resultado de negócio e adoção enterprise.',
+          copy: 'Now Assist, AI Agents, CSDM, CMDB e operating model conectados diretamente a resultados de negócio e adoção enterprise.',
           tags: ['Now Assist', 'CSDM', 'SADA', 'governance'],
           icon: 'shield',
         },
@@ -169,9 +169,9 @@ export const homeCopy: Record<HomeLang, {
       eyebrow: 'BIO / WHO OPERATES',
       lede: 'I built my career at the boundary between what technology promises and what operations can absorb. That is where enterprise AI becomes value — or risk.',
       paragraphs: [
-        'I am from Rio, lived for years in Dublin, and now operate from São José dos Campos. I started at the intersection of business and platform and never left: I learned early that beautiful architecture does not survive contact with the reality of a large enterprise without context, governance, and ownership.',
+        'I am from Rio, lived for years in Dublin, and now operate from São Paulo. I started at the intersection of business and platform and never left: I learned early that beautiful architecture does not survive contact with the reality of a large enterprise without context, governance, and ownership.',
         'Today I am a Technical Account Executive / Enterprise Architect at ServiceNow, focused on financial services. My job is not to sell “using AI” — it is to design how AI enters real work: context, policy, permissions, memory, validation, cost, and evidence. The thesis I defend in public is simple: AI only creates advantage when it becomes an operating model.',
-        'To sustain that, I build systems — value architecture frameworks, governed AgentOps, inference pipelines, and an operational second brain that learns, validates, and improves over time. Method before tool. Outside the enterprise, I am a builder: I launch products and apps, and bring the same evidence discipline to distribution. Faith and family are the compass; global mobility is on the radar.',
+        'To sustain that, I build systems — value architecture frameworks, governed AgentOps, inference pipelines, and an operational second brain that learns, validates, and improves over time. Method before tool. Outside the enterprise, I am a builder: I launch products and apps, and bring the same evidence discipline to distribution. Faith and family are the compass; consistency is the filter.',
       ],
       creds: [
         { k: 'Role', v: 'TAE / Enterprise Architect' },
@@ -180,12 +180,12 @@ export const homeCopy: Record<HomeLang, {
         { k: 'Foundation', v: 'CSDM · CMDB · Service Graph' },
       ],
       status: 'Open for conversations',
-      loc: 'SJC · BR',
+      loc: 'São Paulo · BR',
     },
     operatingModel: {
       eyebrow: 'OPERATING MODEL',
       title: 'Autonomy only goes to production when context, permission, action, and evidence are designed.',
-      copy: 'Before scaling agents, I design the chain that connects intent, data, control, workflow, and measurable outcome. That is how I structure the conversation with executives, architects, and delivery teams.',
+      copy: 'Before scaling agents, I design the chain that connects intent, data, control, workflow, and a measurable outcome. That is how I structure the conversation with executives, architects, and delivery teams.',
       nodes: [
         { num: '01', title: 'Intent', copy: 'The input must be simple for the user and clear to the platform.' },
         { num: '02', title: 'Context', copy: 'The agent must see service, asset, risk, history, and priority.' },
@@ -197,8 +197,8 @@ export const homeCopy: Record<HomeLang, {
     },
     systems: {
       eyebrow: 'APPLIED SYSTEMS',
-      title: 'Not a decorative portfolio. Systems that become executive conversation, demo, and execution.',
-      copy: 'How I think architecture, governance, and value in enterprise AI — no client names, no confidential metrics.',
+      title: 'Not a decorative portfolio. Systems that become executive conversations, demos, and execution.',
+      copy: 'How I think about architecture, governance, and value in enterprise AI — no client names, no confidential metrics.',
       cards: [
         {
           title: 'LLM training, eval & inference',
@@ -214,7 +214,7 @@ export const homeCopy: Record<HomeLang, {
         },
         {
           title: 'ServiceNow & governed AI',
-          copy: 'Now Assist, AI Agents, CSDM, CMDB, and operating model connected directly to business outcome and enterprise adoption.',
+          copy: 'Now Assist, AI Agents, CSDM, CMDB, and operating model connected directly to business outcomes and enterprise adoption.',
           tags: ['Now Assist', 'CSDM', 'SADA', 'governance'],
           icon: 'shield',
         },
@@ -254,7 +254,7 @@ export const homeCopy: Record<HomeLang, {
     },
     contact: {
       eyebrow: 'EXECUTIVE CONTACT',
-      title: 'Let us talk about AI that becomes governed execution.',
+      title: "Let's talk about AI that becomes governed execution.",
       copy: 'About AI strategy, ServiceNow, governed agents, and operating models. No sales agenda — a good conversation is always welcome.',
       primaryCta: 'Connect on LinkedIn',
       secondaryCta: 'Send email',

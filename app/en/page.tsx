@@ -6,7 +6,7 @@ import EnterpriseHome from '@/components/enterprise/EnterpriseHome'
 export const metadata: Metadata = {
   title: 'Paulo Pierrondi - Enterprise AI becomes an operating model',
   description:
-    'ServiceNow TAE / Enterprise Architect turning enterprise AI into an operating model: AgentOps, adoption velocity, AI control towers and governed execution.',
+    'ServiceNow TAE / Enterprise Architect turning enterprise AI into an operating model: AgentOps, adoption velocity, AI control towers, and governed execution.',
   keywords: [
     'Paulo Pierrondi',
     'Enterprise AI Operator',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Paulo Pierrondi - Enterprise AI becomes an operating model',
     description:
-      'ServiceNow TAE / Enterprise Architect turning enterprise AI into an operating model, adoption velocity and governed execution.',
+      'ServiceNow TAE / Enterprise Architect turning enterprise AI into an operating model, adoption velocity, and governed execution.',
     url: '/en',
     siteName: 'pierrondi.dev',
     locale: 'en_US',
@@ -72,7 +72,7 @@ const enWebPageSchema = {
   url: `${SITE_URL}/en`,
   name: 'Paulo Pierrondi - Enterprise AI becomes an operating model',
   description:
-    'Executive profile by Paulo Pierrondi on AI Operating Model, Enterprise AI, ServiceNow, AgentOps, adoption velocity, AI control towers and governed implementation systems.',
+    'Executive profile by Paulo Pierrondi on AI Operating Model, Enterprise AI, ServiceNow, AgentOps, adoption velocity, AI control towers, and governed implementation systems.',
   inLanguage: 'en-US',
   isPartOf: { '@id': `${SITE_URL}/#website` },
   about: { '@id': `${SITE_URL}/#person` },

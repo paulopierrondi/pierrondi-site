@@ -1,6 +1,33 @@
 import { z } from 'zod'
 
 const statusSchema = z.enum(['green', 'yellow', 'red', 'unknown'])
+const kimiCodeLaneSchema = z.object({
+  lane: z.enum(['low', 'mid']),
+  title: z.string().min(1).max(120),
+  description: z.string().max(500),
+  total: z.number().int().nonnegative(),
+  loaded: z.number().int().nonnegative(),
+  running: z.number().int().nonnegative(),
+  dormant: z.number().int().nonnegative(),
+  gated: z.number().int().nonnegative(),
+  items: z
+    .array(
+      z.object({
+        id: z.string().min(1).max(160),
+        label: z.string().min(1).max(200),
+        status: z.string().min(1).max(80),
+        risk: z.enum(['report_only', 'gated']),
+        disabled: z.boolean(),
+        runAtLoad: z.boolean(),
+        loaded: z.boolean(),
+        running: z.boolean(),
+        lastExit: z.string().max(80).nullable().optional(),
+        plist: z.string().max(800).nullable().optional(),
+        action: z.string().max(500),
+      }),
+    )
+    .max(80),
+})
 
 export const automationControlSnapshotSchema = z.object({
   schemaVersion: z.literal('1.0'),
@@ -72,6 +99,7 @@ export const automationControlSnapshotSchema = z.object({
       }),
     )
     .max(200),
+  kimiCodeLanes: z.array(kimiCodeLaneSchema).max(2).optional(),
   decisions: z
     .array(
       z.object({
