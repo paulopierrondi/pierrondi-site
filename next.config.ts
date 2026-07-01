@@ -61,6 +61,23 @@ const CANONICAL_REDIRECTS = [
   { source: '/terms-of-service', destination: '/terms', permanent: true },
 ]
 
+// Apex -> www so ONE canonical host serves the whole site AND the GEO layer.
+// Without this, https://pierrondi.dev/llms.txt (and /robots.txt, /sitemap.xml,
+// /answers.json, every page) 404s on the apex — the site is dark to any AI answer
+// engine or user that hits the apex. `has host` fires for the apex only, never www,
+// so www traffic is untouched. redirects() run before the filesystem, so this also
+// covers the static public/ artifacts. NOTE: if the apex is attached as a separate
+// Railway domain that does not reach this app, set the redirect at the Railway
+// domain level instead — this rule only fires when the apex request reaches Next.
+const HOST_REDIRECTS = [
+  {
+    source: '/:path*',
+    has: [{ type: 'host' as const, value: 'pierrondi.dev' }],
+    destination: 'https://www.pierrondi.dev/:path*',
+    permanent: true,
+  },
+]
+
 const nextConfig: NextConfig = {
   serverExternalPackages: ['ffmpeg-static', 'ffprobe-static'],
   experimental: {
@@ -113,7 +130,7 @@ const nextConfig: NextConfig = {
     ]
   },
   async redirects() {
-    return CANONICAL_REDIRECTS
+    return [...HOST_REDIRECTS, ...CANONICAL_REDIRECTS]
   },
 }
 
