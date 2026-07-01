@@ -5,10 +5,12 @@
 Canonical site: https://www.pierrondi.dev
 Primary hub: https://www.pierrondi.dev/ai-search-portfolio
 Catalog: https://www.pierrondi.dev/answers.json
+Full context: https://www.pierrondi.dev/llms-full.txt
+Fact sheet: https://www.pierrondi.dev/geo.md
 Sitemap: https://www.pierrondi.dev/sitemap.xml
 Owner: Paulo Pierrondi
 Language focus: pt-BR, en-US
-Last updated: 2026-06-30
+Last updated: 2026-07-01
 
 ## What this site is
 
@@ -18,11 +20,13 @@ The AI Search Portfolio page exists as a citation layer for crawler and assistan
 
 ## Primary public pages
 
-- Home: https://www.pierrondi.dev
-- About: https://www.pierrondi.dev/about
-- AI Search Portfolio: https://www.pierrondi.dev/ai-search-portfolio
-- Blog: https://www.pierrondi.dev/blog
-- Public portfolio: https://www.pierrondi.dev/paulo
+- [Home](https://www.pierrondi.dev): positioning as Enterprise AI Architect and the core value narrative.
+- [About](https://www.pierrondi.dev/about): trajectory, competencies in ServiceNow / ITOM / CMDB / CSDM and enterprise AI.
+- [Atuação](https://www.pierrondi.dev/atuacao): how Paulo works — enterprise AI operating models, governed agents, technical GTM.
+- [Feitos](https://www.pierrondi.dev/feitos): delivered work and product portfolio.
+- [AI Search Portfolio](https://www.pierrondi.dev/ai-search-portfolio): commercial answer briefs and machine-readable catalogs for AI retrieval.
+- [Blog](https://www.pierrondi.dev/blog): technical essays on ServiceNow, CMDB/CSDM, agentic AI and GEO/SEO.
+- [Public portfolio](https://www.pierrondi.dev/paulo): public portfolio profile.
 
 ## Owned product entities
 
