@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
-    "test": "node --test test/**/*.test.mjs",
+    "test": "node --test $(find test -name '*.test.mjs' | sort | tr '\\n' ' ')",
     "lint": "eslint .",
     "control:tower:dev": "node scripts/control-tower-dev.mjs",
     "automation:collect": "/opt/homebrew/bin/python3 scripts/automation-control-snapshot.py",
