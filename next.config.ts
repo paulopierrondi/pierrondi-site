@@ -61,6 +61,15 @@ const CANONICAL_REDIRECTS = [
   { source: '/terms-of-service', destination: '/terms', permanent: true },
 ]
 
+// EN detail pages don't exist — redirect to the canonical PT slug so AI engines
+// and shared links that construct /en/blog/<slug> or /en/feitos/<slug> don't 404.
+// Use single-segment :slug (not :slug*) so the index pages /en/blog and
+// /en/feitos remain 200s.
+const EN_LOCALE_SLUG_REDIRECTS = [
+  { source: '/en/blog/:slug', destination: '/blog/:slug', permanent: true },
+  { source: '/en/feitos/:slug', destination: '/feitos/:slug', permanent: true },
+]
+
 // Apex -> www so ONE canonical host serves the whole site AND the GEO layer.
 // Without this, https://pierrondi.dev/llms.txt (and /robots.txt, /sitemap.xml,
 // /answers.json, every page) 404s on the apex — the site is dark to any AI answer
@@ -130,7 +139,7 @@ const nextConfig: NextConfig = {
     ]
   },
   async redirects() {
-    return [...HOST_REDIRECTS, ...CANONICAL_REDIRECTS]
+    return [...HOST_REDIRECTS, ...CANONICAL_REDIRECTS, ...EN_LOCALE_SLUG_REDIRECTS]
   },
 }
 
