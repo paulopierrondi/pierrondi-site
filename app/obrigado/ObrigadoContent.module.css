@@ -1,27 +1,59 @@
 .main {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: var(--color-canvas);
+  max-width: 760px;
+  margin: 0 auto;
+  padding-inline: clamp(20px, 5vw, 64px);
+  padding-bottom: clamp(90px, 13vh, 160px);
 }
 
-.contact {
-  margin: 0;
-  font-family: var(--font-system);
-  font-size: var(--font-size-caption);
-  color: var(--color-ink-muted-48);
+.card {
+  border: 1px solid var(--color-hairline);
+  border-radius: 20px;
+  padding: clamp(28px, 5vw, 48px);
+  background: linear-gradient(180deg, var(--color-surface), var(--color-canvas));
   text-align: center;
 }
 
-.contact-link {
-  color: var(--color-accent-cyan);
-  text-decoration: none;
-  font-weight: 600;
+.contact {
+  color: var(--color-body);
+  font-size: 1.05rem;
+  line-height: 1.55;
 }
 
-.contact-link:focus-visible {
-  outline: 2px solid var(--color-accent-cyan);
-  outline-offset: 2px;
-  border-radius: 2px;
+.contactLink {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contactLink:hover {
+  color: var(--color-cyan);
+}
+
+.btnPrimary {
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 14px 22px;
+  border-radius: 10px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btnPrimary:hover {
+  background: var(--color-primary-active);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px -12px var(--color-primary-glow);
 }

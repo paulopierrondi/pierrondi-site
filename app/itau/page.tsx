@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import ItauExperience from './ItauExperience'
+import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -51,5 +51,5 @@ export const metadata: Metadata = {
 }
 
 export default function ItauPage() {
-  return <ItauExperience />
+  redirect('/about')
 }

@@ -55,6 +55,32 @@ const siteSchema = {
         availableLanguage: ['pt-BR', 'en'],
       },
       founder: { '@id': `${SITE_URL}/#person` },
+      owns: [
+        {
+          '@type': 'SoftwareApplication',
+          name: 'FaithSchool',
+          url: 'https://faithschool.app',
+          applicationCategory: 'EducationalApplication',
+          operatingSystem: 'Web, iOS',
+          sameAs: ['https://faithschool.app/answers.json', 'https://faithschool.app/llms.txt'],
+        },
+        {
+          '@type': 'SoftwareApplication',
+          name: 'CantuStudio',
+          url: 'https://cantustudio.app',
+          applicationCategory: 'MultimediaApplication',
+          operatingSystem: 'Web',
+          sameAs: ['https://cantustudio.app/answers.json', 'https://cantustudio.app/llms.txt'],
+        },
+        {
+          '@type': 'SoftwareApplication',
+          name: 'AgenticosCore',
+          url: 'https://agenticoscore.ai',
+          applicationCategory: 'BusinessApplication',
+          operatingSystem: 'Web',
+          sameAs: ['https://agenticoscore.ai/answers.json', 'https://agenticoscore.ai/llms.txt'],
+        },
+      ],
       sameAs: ['https://br.linkedin.com/in/paulopierrondi'],
     },
     {

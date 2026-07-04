@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 import JsonLd from '@/components/JsonLd'
 import { SITE_URL } from '@/lib/site'
-import HomeExperience from '../HomeExperience'
+import EnterpriseHome from '@/components/enterprise/EnterpriseHome'
 
 export const metadata: Metadata = {
-  title: 'Paulo Pierrondi - AI Operating Model, ServiceNow, AgentOps and Enterprise AI',
+  title: 'Paulo Pierrondi - Enterprise AI becomes an operating model',
   description:
-    'ServiceNow TAE / Enterprise Architect turning enterprise AI into an AI Operating Model: AgentOps, adoption velocity, AI control towers and governed execution.',
+    'ServiceNow TAE / Enterprise Architect turning enterprise AI into an operating model: AgentOps, adoption velocity, AI control towers, and governed execution.',
   keywords: [
     'Paulo Pierrondi',
     'Enterprise AI Operator',
@@ -36,8 +36,6 @@ export const metadata: Metadata = {
     'enterprise AI',
     'workflow automation',
     'FSI AI',
-    'Energy AI',
-    'Retail AI',
   ],
   alternates: {
     canonical: '/en',
@@ -48,9 +46,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi - AI Operating Model, ServiceNow and AgentOps',
+    title: 'Paulo Pierrondi - Enterprise AI becomes an operating model',
     description:
-      'ServiceNow TAE / Enterprise Architect turning enterprise AI into an operating model, adoption velocity and governed execution.',
+      'ServiceNow TAE / Enterprise Architect turning enterprise AI into an operating model, adoption velocity, and governed execution.',
     url: '/en',
     siteName: 'pierrondi.dev',
     locale: 'en_US',
@@ -60,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Paulo Pierrondi - AI Operating Model and AgentOps',
+    title: 'Paulo Pierrondi - Enterprise AI becomes an operating model',
     description:
       'ServiceNow, AgentOps, AI Operating Model, adoption velocity and governed implementation in enterprise environments.',
     images: ['/og'],
@@ -72,9 +70,9 @@ const enWebPageSchema = {
   '@type': 'WebPage',
   '@id': `${SITE_URL}/en`,
   url: `${SITE_URL}/en`,
-  name: 'Paulo Pierrondi - AI Operating Model, ServiceNow, AgentOps and Enterprise AI',
+  name: 'Paulo Pierrondi - Enterprise AI becomes an operating model',
   description:
-    'Executive profile by Paulo Pierrondi on AI Operating Model, Enterprise AI, ServiceNow, AgentOps, adoption velocity, AI control towers and governed implementation systems.',
+    'Executive profile by Paulo Pierrondi on AI Operating Model, Enterprise AI, ServiceNow, AgentOps, adoption velocity, AI control towers, and governed implementation systems.',
   inLanguage: 'en-US',
   isPartOf: { '@id': `${SITE_URL}/#website` },
   about: { '@id': `${SITE_URL}/#person` },
@@ -84,7 +82,7 @@ export default function HomeEn() {
   return (
     <>
       <JsonLd data={enWebPageSchema} />
-      <HomeExperience lang="en" />
+      <EnterpriseHome lang="en" />
     </>
   )
 }

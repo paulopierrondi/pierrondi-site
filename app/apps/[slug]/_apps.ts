@@ -56,16 +56,9 @@ export const APPS = {
     category: 'Music quiz app',
     contactSubject: 'Adivinha Support',
   },
-  privytext: {
-    name: 'PrivyText AI',
-    category: '100% on-device private text analysis app',
-    contactSubject: 'PrivyText AI Support',
-    tagline: 'Private text analysis that never leaves your iPhone.',
-    description:
-      'PrivyText AI runs entirely on your device. No accounts, no servers, no telemetry on the text you analyze — your notes, chats and snippets stay local by design.',
-  },
-  // Alias: asc.toml for privytext-ios uses /apps/privytext-ai as its canonical URL.
-  // Keep both slugs working so existing App Store metadata does not 404.
+  // App Store canonical: asc.toml for privytext-ios uses /apps/privytext-ai.
+  // The legacy /apps/privytext slug 308-redirects here via next.config.ts so old
+  // inbound links resolve without creating a duplicate indexable page.
   'privytext-ai': {
     name: 'PrivyText AI',
     category: '100% on-device private text analysis app',
@@ -150,16 +143,8 @@ export const APPS = {
       'SnapRead AI Leitor turns printed pages, signs and screenshots into clean readable text using your iPhone camera. OCR runs on-device — your captures never leave the phone.',
     appStoreUrl: 'https://apps.apple.com/app/id6772517083',
   },
-  // Alias: original Kimi-created asc.toml referenced /apps/snapread-ai before the global-name suffix.
-  'snapread-ai': {
-    name: 'SnapRead AI Leitor',
-    category: 'On-device OCR document reading app',
-    contactSubject: 'SnapRead AI Leitor Support',
-    tagline: 'Read printed text with your camera, on-device.',
-    description:
-      'SnapRead AI Leitor turns printed pages, signs and screenshots into clean readable text using your iPhone camera. OCR runs on-device — your captures never leave the phone.',
-    appStoreUrl: 'https://apps.apple.com/app/id6772517083',
-  },
+  // App Store canonical: snapread-ios asc.toml uses /apps/snapread. The legacy
+  // /apps/snapread-ai slug 308-redirects here via next.config.ts.
   brewmate: {
     name: 'BrewMate Cafe',
     category: 'On-device coffee brewing companion app',

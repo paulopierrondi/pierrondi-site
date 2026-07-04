@@ -26,13 +26,13 @@ import {
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'Design Vault - componentes, referencias e sistemas visuais',
+  title: 'Design Vault - componentes, referências e sistemas visuais',
   description:
-    'Design vault do pierrondi.dev para catalogar componentes React/Tailwind, referencias 21st.dev, padroes de portfolio e sistemas visuais reutilizaveis.',
+    'Design vault do pierrondi.dev para catalogar componentes React/Tailwind, referências 21st.dev, padrões de portfólio e sistemas visuais reutilizáveis.',
   alternates: { canonical: '/design' },
   openGraph: {
     title: 'Pierrondi Design Vault',
-    description: 'Biblioteca viva de componentes, patterns e referencias visuais para produtos e paginas.',
+    description: 'Biblioteca viva de componentes, patterns e referências visuais para produtos e páginas.',
     url: '/design',
     siteName: 'pierrondi.dev',
     type: 'website',
@@ -53,13 +53,13 @@ export default function DesignVaultPage() {
   return (
     <main className={styles.page} data-swarm-root>
       <SwarmEffectsLoader />
-      <nav className={styles.nav} aria-label="Navegacao do Design Vault">
+      <nav className={styles.nav} aria-label="Navegação do Design Vault">
         <BrandSignature href="/" className={styles.brand} ariaLabel="Voltar para pierrondi.dev" subtitle="Design Vault" />
         <div className={styles.navLinks}>
-          <a href="#catalogo">Catalogo</a>
+          <a href="#catalogo">Catálogo</a>
           <Link href="/design/library">Library</Link>
           <a href="#componentes">Componentes</a>
-          <a href="#operacao">Operacao</a>
+          <a href="#operacao">Operação</a>
           <a href="https://21st.dev/community/components" target="_blank" rel="noreferrer">
             21st <ArrowUpRight aria-hidden="true" />
           </a>
@@ -69,19 +69,19 @@ export default function DesignVaultPage() {
       <section className={styles.hero} aria-labelledby="design-title">
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow}>Design Vault / pierrondi.dev</p>
-          <h1 id="design-title">Componentes, patterns e referencias prontos para virar trabalho real.</h1>
+          <h1 id="design-title">Componentes, patterns e referências prontos para virar trabalho real.</h1>
           <p className={styles.heroText}>
-            Um ponto unico para consultar 21st.dev, instalar componentes MIT, remixar no sistema visual Pierrondi e
-            acelerar paginas, produtos, propostas e portfolios.
+            Um ponto único para consultar 21st.dev, instalar componentes MIT, remixar no sistema visual Pierrondi e
+            acelerar páginas, produtos, propostas e portfólios.
           </p>
-          <div className={styles.heroActions} aria-label="Acoes principais">
+          <div className={styles.heroActions} aria-label="Ações principais">
             <a href="#componentes">
               <LayoutGrid aria-hidden="true" />
               Ver componentes
             </a>
             <a href="#operacao">
               <Braces aria-hidden="true" />
-              Ver operacao
+              Ver operação
             </a>
           </div>
         </div>
@@ -123,7 +123,7 @@ export default function DesignVaultPage() {
         </div>
       </section>
 
-      <section className={styles.stats} aria-label="Estado do catalogo">
+      <section className={styles.stats} aria-label="Estado do catálogo">
         {sourceStats.map((stat) => (
           <article key={stat.label}>
             <span>{stat.label}</span>
@@ -136,9 +136,9 @@ export default function DesignVaultPage() {
       <section id="catalogo" className={styles.section} aria-labelledby="catalog-title">
         <div className={styles.sectionHeader}>
           <p className={styles.eyebrow}>Mapa fonte</p>
-          <h2 id="catalog-title">Categorias que entram no repertorio visual.</h2>
+          <h2 id="catalog-title">Categorias que entram no repertório visual.</h2>
           <p>
-            O catalogo rastreia a taxonomia publica do 21st.dev e prioriza blocos que viram paginas de portfolio,
+            O catálogo rastreia a taxonomia pública do 21st.dev e prioriza blocos que viram páginas de portfólio,
             SaaS, apps, control towers e interfaces de agentes.
           </p>
         </div>
@@ -188,10 +188,10 @@ export default function DesignVaultPage() {
 
       <section id="componentes" className={styles.section} aria-labelledby="components-title">
         <div className={styles.sectionHeader}>
-          <p className={styles.eyebrow}>Fila instalavel</p>
+          <p className={styles.eyebrow}>Fila instalável</p>
           <h2 id="components-title">Componentes com rota clara de entrada.</h2>
           <p>
-            A fonte completa fica mapeada; estes sao os primeiros blocos com comando ou referencia direta para virar
+            A fonte completa fica mapeada; estes são os primeiros blocos com comando ou referência direta para virar
             componente local quando houver uso real.
           </p>
         </div>
@@ -218,7 +218,7 @@ export default function DesignVaultPage() {
                 {component.installCommand ? (
                   <code>{component.installCommand}</code>
                 ) : (
-                  <code>usar como referencia visual</code>
+                  <code>usar como referência visual</code>
                 )}
                 <a href={component.sourceUrl} target="_blank" rel="noreferrer" aria-label={`Abrir ${component.title}`}>
                   <ArrowUpRight aria-hidden="true" />
@@ -232,7 +232,7 @@ export default function DesignVaultPage() {
       <section id="operacao" className={styles.operating} aria-labelledby="operating-title">
         <div className={styles.sectionHeader}>
           <p className={styles.eyebrow}>Como usar</p>
-          <h2 id="operating-title">Design vira memoria, nao pasta solta.</h2>
+          <h2 id="operating-title">Design vira memória, não pasta solta.</h2>
         </div>
         <div className={styles.principleGrid}>
           {designPrinciples.map((principle, index) => (
@@ -248,8 +248,8 @@ export default function DesignVaultPage() {
 
       <section className={styles.commandSection} aria-labelledby="commands-title">
         <div>
-          <p className={styles.eyebrow}>Comandos canonicos</p>
-          <h2 id="commands-title">Puxar catalogo, instalar seletivamente, validar.</h2>
+          <p className={styles.eyebrow}>Comandos canônicos</p>
+          <h2 id="commands-title">Puxar catálogo, instalar seletivamente, validar.</h2>
         </div>
         <div className={styles.commandGrid}>
           <code>
@@ -288,7 +288,7 @@ export default function DesignVaultPage() {
       <footer className={styles.footer}>
         <Sparkles aria-hidden="true" />
         <p>
-          Fonte primaria: 21st.dev Community. Componentes entram com licenca MIT, autor preservado e remix visual
+          Fonte primária: 21st.dev Community. Componentes entram com licença MIT, autor preservado e remix visual
           Pierrondi antes de uso comercial.
         </p>
       </footer>

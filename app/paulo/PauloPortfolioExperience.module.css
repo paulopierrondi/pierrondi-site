@@ -1,19 +1,19 @@
 .page {
-  --paulo-bg: #050606;
-  --paulo-ink: #f8f3e7;
-  --paulo-muted: rgba(248, 243, 231, 0.66);
-  --paulo-soft: rgba(248, 243, 231, 0.1);
-  --paulo-line: rgba(248, 243, 231, 0.14);
-  --paulo-green: #7ee35f;
-  --paulo-cyan: #6dc6d9;
-  --paulo-brass: #d8b45f;
-  --paulo-panel: rgba(17, 19, 19, 0.76);
+  --paulo-bg: var(--color-canvas);
+  --paulo-ink: var(--color-ink);
+  --paulo-muted: var(--color-body);
+  --paulo-soft: var(--color-hairline);
+  --paulo-line: var(--color-hairline);
+  --paulo-green: var(--color-primary);
+  --paulo-cyan: var(--color-cyan);
+  --paulo-brass: var(--color-accent-gold);
+  --paulo-panel: var(--color-surface);
   --ease-executive: cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   min-height: 100vh;
   overflow: clip;
-  color: var(--paulo-ink);
-  background: linear-gradient(180deg, #050606 0%, #0a0d0c 42%, #050606 100%);
+  color: var(--color-ink);
+  background: linear-gradient(180deg, var(--color-canvas) 0%, #0a0d0c 42%, var(--color-canvas) 100%);
 }
 
 .page *,
@@ -61,7 +61,7 @@
   transform: translateX(-50%);
   align-items: center;
   gap: 6px;
-  border: 1px solid rgba(248, 243, 231, 0.14);
+  border: 1px solid var(--color-hairline);
   border-radius: 999px;
   padding: 7px;
   background: rgba(5, 6, 6, 0.72);
@@ -114,7 +114,7 @@
 .localNav button:focus-visible,
 .heroActions a:focus-visible,
 .investorPanel a:focus-visible {
-  outline: 2px solid var(--paulo-green);
+  outline: 2px solid var(--color-primary);
   outline-offset: 3px;
 }
 
@@ -163,7 +163,7 @@
 .neuralFieldHero {
   --neural-a: rgba(126, 227, 95, 0.36);
   --neural-b: rgba(109, 198, 217, 0.28);
-  --neural-c: rgba(248, 243, 231, 0.1);
+  --neural-c: var(--color-hairline);
 }
 
 .neuralFieldProof {
@@ -187,7 +187,7 @@
 .neuralFieldArchitecture {
   --neural-a: rgba(109, 198, 217, 0.34);
   --neural-b: rgba(126, 227, 95, 0.22);
-  --neural-c: rgba(248, 243, 231, 0.1);
+  --neural-c: var(--color-hairline);
 }
 
 .neuralFieldInvestor {
@@ -509,7 +509,7 @@
   left: -14vw;
   width: 42vw;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--paulo-green), var(--paulo-cyan), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-cyan), transparent);
 }
 
 .motionEnabled .motionField span {
@@ -537,7 +537,7 @@
 
 .eyebrow {
   margin: 0 0 18px;
-  color: var(--paulo-green);
+  color: var(--color-primary);
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.14em;
@@ -597,7 +597,7 @@
   border-radius: 999px;
   padding: 0 20px;
   color: #061006;
-  background: var(--paulo-green);
+  background: var(--color-primary);
   font-size: 13px;
   font-weight: 900;
   text-decoration: none;
@@ -608,8 +608,8 @@
 }
 
 .heroActions a + a {
-  color: var(--paulo-ink);
-  border: 1px solid var(--paulo-line);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
   background: rgba(248, 243, 231, 0.06);
 }
 
@@ -692,9 +692,9 @@
     inset 0 0 0 1px rgba(255, 255, 255, 0.035);
   transform: translateZ(0);
   transition:
-    border-color 320ms var(--ease-executive),
-    box-shadow 320ms var(--ease-executive),
-    transform 320ms var(--ease-executive);
+    border-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .portraitFrame::before,
@@ -720,7 +720,7 @@
   bottom: 14px;
   width: 58px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--paulo-green));
+  background: linear-gradient(90deg, transparent, var(--color-primary));
 }
 
 .motionEnabled .portraitSystem:hover .portraitFrame::after {
@@ -760,7 +760,7 @@
     repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 4px);
   opacity: 0.09;
   mix-blend-mode: screen;
-  transition: opacity 260ms var(--ease-executive);
+  transition: opacity 260ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .motionEnabled .portraitSystem:hover .portraitScan {
@@ -797,7 +797,7 @@
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: var(--paulo-green);
+  background: var(--color-primary);
   box-shadow: 0 0 0 0 rgba(126, 227, 95, 0.32);
 }
 
@@ -811,7 +811,7 @@
 }
 
 .statusCard span {
-  color: var(--paulo-muted);
+  color: var(--color-body);
   font-size: 12px;
   font-weight: 700;
 }
@@ -848,7 +848,7 @@
 .investorPanel p {
   max-width: 690px;
   margin: 22px 0 0;
-  color: var(--paulo-muted);
+  color: var(--color-body);
   font-size: 17px;
   line-height: 1.58;
 }
@@ -864,7 +864,7 @@
   position: relative;
   overflow: hidden;
   min-height: 168px;
-  border: 1px solid var(--paulo-line);
+  border: 1px solid var(--color-hairline);
   border-radius: 8px;
   padding: 22px;
   background:
@@ -903,7 +903,7 @@
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  --card-node: var(--paulo-green);
+  --card-node: var(--color-primary);
   --card-node-rgb: 126, 227, 95;
   background: var(--card-node);
   box-shadow:
@@ -913,12 +913,12 @@
 }
 
 .workflowCard::before {
-  --card-node: var(--paulo-brass);
+  --card-node: var(--color-accent-gold);
   --card-node-rgb: 216, 180, 95;
 }
 
 .architectureCard::before {
-  --card-node: var(--paulo-cyan);
+  --card-node: var(--color-cyan);
   --card-node-rgb: 109, 198, 217;
 }
 
@@ -976,7 +976,7 @@
 .metricsGrid span {
   display: block;
   margin-top: 20px;
-  color: var(--paulo-muted);
+  color: var(--color-body);
   font-size: 14px;
   font-weight: 700;
 }
@@ -985,12 +985,12 @@
   background:
     radial-gradient(circle at 82% 12%, rgba(109, 198, 217, 0.12), transparent 38%),
     radial-gradient(circle at 14% 80%, rgba(216, 180, 95, 0.12), transparent 40%),
-    linear-gradient(180deg, #06100d, #050706 74%, #050606);
-  color: var(--paulo-ink);
+    linear-gradient(180deg, #06100d, #050706 74%, var(--color-canvas));
+  color: var(--color-ink);
 }
 
 .operating .eyebrow {
-  color: var(--paulo-green);
+  color: var(--color-primary);
 }
 
 .operatingIntro h2 {
@@ -998,7 +998,7 @@
 }
 
 .operatingIntro p:not(.eyebrow) {
-  color: rgba(248, 243, 231, 0.66);
+  color: var(--color-body);
 }
 
 .capabilityGrid {
@@ -1035,7 +1035,7 @@
 }
 
 .capabilityCard svg {
-  color: var(--paulo-green);
+  color: var(--color-primary);
   transition: transform 180ms ease;
 }
 
@@ -1071,7 +1071,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  border: 1px solid var(--paulo-line);
+  border: 1px solid var(--color-hairline);
   border-radius: 8px;
   padding: 22px;
   background:
@@ -1092,7 +1092,7 @@
 }
 
 .workflowCard span {
-  color: var(--paulo-brass);
+  color: var(--color-accent-gold);
   font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.12em;
@@ -1109,7 +1109,7 @@
 
 .workflowCard p {
   margin: 0;
-  color: var(--paulo-muted);
+  color: var(--color-body);
   font-size: 14px;
   line-height: 1.55;
 }
@@ -1129,7 +1129,7 @@
 
 .architectureCard {
   position: relative;
-  border: 1px solid var(--paulo-line);
+  border: 1px solid var(--color-hairline);
   border-radius: 8px;
   overflow: hidden;
   background: rgba(248, 243, 231, 0.035);
@@ -1163,7 +1163,7 @@
   position: absolute;
   inset: 0;
   z-index: 2;
-  border: 1px solid rgba(248, 243, 231, 0.1);
+  border: 1px solid var(--color-hairline);
   background:
     linear-gradient(180deg, rgba(5, 6, 6, 0.1), transparent 38%, rgba(5, 6, 6, 0.24)),
     radial-gradient(circle at 50% 45%, transparent 0 34%, rgba(5, 6, 6, 0.2) 100%);
@@ -1180,7 +1180,7 @@
   height: 3px;
   border-radius: 999px;
   background:
-    linear-gradient(90deg, var(--paulo-green), var(--paulo-cyan)) left / 42% 100% no-repeat,
+    linear-gradient(90deg, var(--color-primary), var(--color-cyan)) left / 42% 100% no-repeat,
     rgba(248, 243, 231, 0.12);
   background-size: 28% 100%, 100% 100%;
   transition: background-size 420ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -1219,7 +1219,7 @@
 }
 
 .architectureMeta span {
-  color: var(--paulo-green);
+  color: var(--color-primary);
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 800;
@@ -1234,7 +1234,7 @@
 
 .architectureMeta p {
   margin: 0;
-  color: var(--paulo-muted);
+  color: var(--color-body);
   font-size: 14px;
   line-height: 1.5;
 }
@@ -1253,7 +1253,7 @@
   align-items: center;
   gap: 7px;
   margin-top: 16px;
-  color: var(--paulo-green);
+  color: var(--color-primary);
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 900;
@@ -1281,7 +1281,7 @@
   position: relative;
   overflow: hidden;
   max-width: 980px;
-  border: 1px solid var(--paulo-line);
+  border: 1px solid var(--color-hairline);
   border-radius: 8px;
   padding: clamp(26px, 5vw, 58px);
   background:
@@ -1307,7 +1307,7 @@
 }
 
 .bulletLine span {
-  border: 1px solid var(--paulo-line);
+  border: 1px solid var(--color-hairline);
   border-radius: 999px;
   padding: 8px 11px;
   color: rgba(248, 243, 231, 0.76);
@@ -1387,7 +1387,7 @@
   position: absolute;
   inset: 0;
   z-index: 2;
-  border: 1px solid rgba(248, 243, 231, 0.1);
+  border: 1px solid var(--color-hairline);
   background:
     linear-gradient(180deg, rgba(5, 6, 6, 0.1), transparent 38%, rgba(5, 6, 6, 0.24)),
     radial-gradient(circle at 50% 45%, transparent 0 34%, rgba(5, 6, 6, 0.2) 100%);

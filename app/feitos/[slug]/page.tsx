@@ -2,8 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import BrandSignature from '@/components/BrandSignature'
+import JsonLd from '@/components/JsonLd'
 import SwarmEffectsLoader from '@/components/SwarmEffectsLoader'
 import { feitos, getFeito, type Feito } from '../feitos-data'
+import { SITE_URL } from '@/lib/site'
 import styles from './page.module.css'
 
 interface Props {
@@ -54,7 +56,12 @@ function FeitoDiagram({ feito }: { feito: Feito }) {
 
   return (
     <div className={styles.diagramShell} aria-label={feito.diagram.label}>
-      <svg viewBox="0 0 360 250" className={styles.diagram} role="img" aria-labelledby="diagram-title">
+      <svg
+        viewBox="0 0 360 250"
+        className={styles.diagram}
+        role="img"
+        aria-labelledby="diagram-title"
+      >
         <title id="diagram-title">{feito.diagram.label}</title>
         <defs>
           <filter id="feito-glow" x="-50%" y="-50%" width="200%" height="200%">
@@ -92,7 +99,11 @@ function FeitoDiagram({ feito }: { feito: Feito }) {
             if (!from || !to) return null
 
             return (
-              <circle key={`signal-${edge.from}-${edge.to}`} r="4" className={`${styles.diagramSignal} ${accentClass[to.accent]}`}>
+              <circle
+                key={`signal-${edge.from}-${edge.to}`}
+                r="4"
+                className={`${styles.diagramSignal} ${accentClass[to.accent]}`}
+              >
                 <animateMotion
                   path={`M ${from.x} ${from.y} L ${to.x} ${to.y}`}
                   dur="3.6s"
@@ -113,9 +124,25 @@ function FeitoDiagram({ feito }: { feito: Feito }) {
         <g className={styles.diagramNodes}>
           {feito.diagram.nodes.map((node) => (
             <g key={node.id} className={styles.diagramNode}>
-              <circle cx={node.x} cy={node.y} r="13" className={`${styles.nodeHalo} ${accentClass[node.accent]}`} />
-              <circle cx={node.x} cy={node.y} r="5" className={`${styles.nodeCore} ${accentClass[node.accent]}`} filter="url(#feito-glow)" />
-              <text x={node.x} y={node.y + 31} textAnchor="middle" className={styles.diagramLabel}>
+              <circle
+                cx={node.x}
+                cy={node.y}
+                r="13"
+                className={`${styles.nodeHalo} ${accentClass[node.accent]}`}
+              />
+              <circle
+                cx={node.x}
+                cy={node.y}
+                r="5"
+                className={`${styles.nodeCore} ${accentClass[node.accent]}`}
+                filter="url(#feito-glow)"
+              />
+              <text
+                x={node.x}
+                y={node.y + 31}
+                textAnchor="middle"
+                className={styles.diagramLabel}
+              >
                 {node.label}
               </text>
             </g>
@@ -126,119 +153,229 @@ function FeitoDiagram({ feito }: { feito: Feito }) {
   )
 }
 
+function getFeitoSchemas(feito: Feito) {
+  const workUrl = `${SITE_URL}/feitos/${feito.slug}`
+  const workSchema = {
+    '@context': 'https://schema.org',
+    '@type': ['CreativeWork', 'Article'],
+    headline: feito.title,
+    name: feito.title,
+    description: feito.lead,
+    image: [`${SITE_URL}/og`],
+    author: { '@id': `${SITE_URL}/#person` },
+    publisher: { '@id': `${SITE_URL}/#organization` },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': workUrl },
+    articleSection: 'Feitos',
+    about: [feito.kicker, ...feito.methods],
+    inLanguage: 'pt-BR',
+  }
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Feitos',
+        item: `${SITE_URL}/feitos`,
+      },
+      { '@type': 'ListItem', position: 3, name: feito.title, item: workUrl },
+    ],
+  }
+
+  return { workSchema, breadcrumbSchema }
+}
+
+function FeitoNav() {
+  return (
+    <nav className={styles.nav} aria-label="Navegacao de feitos">
+      <BrandSignature
+        href="/#top"
+        className={styles.brand}
+        ariaLabel="Voltar para pierrondi.dev"
+        subtitle="Proof System"
+      />
+      <div className={styles.navLinks}>
+        <Link href="/#themes">Temas</Link>
+        <Link href="/#feitos">Feitos</Link>
+        <a
+          href="https://br.linkedin.com/in/paulopierrondi"
+          target="_blank"
+          rel="noreferrer"
+        >
+          LinkedIn
+        </a>
+      </div>
+    </nav>
+  )
+}
+
+function FeitoHero({ feito }: { feito: Feito }) {
+  return (
+    <section className={styles.hero}>
+      <div className={styles.neuralField} aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className={styles.heroCopy} data-swarm-reveal>
+        <p className={styles.eyebrow}>{feito.kicker}</p>
+        <h1>{feito.headline}</h1>
+        <p className={styles.lead}>{feito.lead}</p>
+        <div className={styles.heroSignals}>
+          <span>{feito.marketLine}</span>
+          <span>{feito.englishAbstract}</span>
+        </div>
+      </div>
+      <aside
+        className={styles.heroDiagram}
+        data-swarm-reveal
+        data-swarm-tilt
+        data-reveal-delay="2"
+      >
+        <p>{feito.title}</p>
+        <FeitoDiagram feito={feito} />
+      </aside>
+    </section>
+  )
+}
+
+function FeitoProofSection({ feito }: { feito: Feito }) {
+  return (
+    <section className={styles.proofSection} aria-labelledby="proof-title">
+      <div className={styles.sectionHeader} data-swarm-reveal>
+        <p className={styles.eyebrow}>O que isso prova</p>
+        <h2 id="proof-title">{feito.title}</h2>
+        <p>{feito.proof}</p>
+      </div>
+      <div className={styles.layerGrid}>
+        {feito.layers.map((layer, index) => (
+          <article
+            key={layer.label}
+            data-swarm-reveal
+            data-swarm-tilt
+            data-reveal-delay={index + 1}
+          >
+            <span>{layer.label}</span>
+            <h3>{layer.title}</h3>
+            <p>{layer.copy}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function FeitoWorkflowSection({ feito }: { feito: Feito }) {
+  return (
+    <section
+      className={styles.workflowSection}
+      aria-labelledby="workflow-title"
+    >
+      <div data-swarm-reveal>
+        <p className={styles.eyebrow}>Workflow de valor</p>
+        <h2 id="workflow-title">Como a arquitetura vira execução.</h2>
+      </div>
+      <div className={styles.workflowRail}>
+        {feito.workflow.map((step, index) => (
+          <article
+            key={step.title}
+            data-swarm-reveal
+            data-reveal-delay={index + 1}
+          >
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.copy}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function FeitoMethodsSection({ feito }: { feito: Feito }) {
+  return (
+    <section className={styles.methodsSection} aria-labelledby="methods-title">
+      <div className={styles.methodsPanel} data-swarm-reveal data-swarm-tilt>
+        <p className={styles.eyebrow}>Método</p>
+        <h2 id="methods-title">
+          Rigor técnico sem perder narrativa executiva.
+        </h2>
+        <div className={styles.methodTags}>
+          {feito.methods.map((method) => (
+            <span key={method}>{method}</span>
+          ))}
+        </div>
+      </div>
+      <div
+        className={styles.outcomePanel}
+        data-swarm-reveal
+        data-swarm-tilt
+        data-reveal-delay="2"
+      >
+        <p className={styles.eyebrow}>Valor</p>
+        <ul>
+          {feito.outcomes.map((outcome) => (
+            <li key={outcome}>{outcome}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+function FeitoRelatedSection({ related }: { related: Feito[] }) {
+  return (
+    <section className={styles.relatedSection} aria-labelledby="related-title">
+      <div className={styles.relatedHeader} data-swarm-reveal>
+        <p className={styles.eyebrow}>Arquiteturas relacionadas</p>
+        <h2 id="related-title">Outros feitos no mesmo sistema operacional.</h2>
+      </div>
+      <div className={styles.relatedGrid}>
+        {related.map((item, index) => (
+          <Link
+            key={item.slug}
+            href={`/feitos/${item.slug}`}
+            data-swarm-reveal
+            data-swarm-tilt
+            data-reveal-delay={index + 1}
+          >
+            <span>{item.cardLabel}</span>
+            <strong>{item.cardTitle}</strong>
+          </Link>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 export default async function FeitoPage({ params }: Props) {
   const { slug } = await params
   const feito = getFeito(slug)
   if (!feito) notFound()
   const related = feitos.filter((item) => item.slug !== feito.slug)
+  const { workSchema, breadcrumbSchema } = getFeitoSchemas(feito)
 
   return (
-    <main className={styles.page} data-swarm-root>
-      <SwarmEffectsLoader />
-      <nav className={styles.nav} aria-label="Navegacao de feitos">
-        <BrandSignature href="/#top" className={styles.brand} ariaLabel="Voltar para pierrondi.dev" subtitle="Proof System" />
-        <div className={styles.navLinks}>
-          <Link href="/#themes">Temas</Link>
-          <Link href="/#feitos">Feitos</Link>
-          <a href="https://br.linkedin.com/in/paulopierrondi" target="_blank" rel="noreferrer">
-            LinkedIn
-          </a>
-        </div>
-      </nav>
+    <>
+      <JsonLd data={[workSchema, breadcrumbSchema]} />
 
-      <section className={styles.hero}>
-        <div className={styles.neuralField} aria-hidden="true">
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className={styles.heroCopy} data-swarm-reveal>
-          <p className={styles.eyebrow}>{feito.kicker}</p>
-          <h1>{feito.headline}</h1>
-          <p className={styles.lead}>{feito.lead}</p>
-          <div className={styles.heroSignals}>
-            <span>{feito.marketLine}</span>
-            <span>{feito.englishAbstract}</span>
-          </div>
-        </div>
-        <aside className={styles.heroDiagram} data-swarm-reveal data-swarm-tilt data-reveal-delay="2">
-          <p>{feito.title}</p>
-          <FeitoDiagram feito={feito} />
-        </aside>
-      </section>
-
-      <section className={styles.proofSection} aria-labelledby="proof-title">
-        <div className={styles.sectionHeader} data-swarm-reveal>
-          <p className={styles.eyebrow}>O que isso prova</p>
-          <h2 id="proof-title">{feito.title}</h2>
-          <p>{feito.proof}</p>
-        </div>
-        <div className={styles.layerGrid}>
-          {feito.layers.map((layer, index) => (
-            <article key={layer.label} data-swarm-reveal data-swarm-tilt data-reveal-delay={index + 1}>
-              <span>{layer.label}</span>
-              <h3>{layer.title}</h3>
-              <p>{layer.copy}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.workflowSection} aria-labelledby="workflow-title">
-        <div data-swarm-reveal>
-          <p className={styles.eyebrow}>Workflow de valor</p>
-          <h2 id="workflow-title">Como a arquitetura vira execucao.</h2>
-        </div>
-        <div className={styles.workflowRail}>
-          {feito.workflow.map((step, index) => (
-            <article key={step.title} data-swarm-reveal data-reveal-delay={index + 1}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <div>
-                <h3>{step.title}</h3>
-                <p>{step.copy}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.methodsSection} aria-labelledby="methods-title">
-        <div className={styles.methodsPanel} data-swarm-reveal data-swarm-tilt>
-          <p className={styles.eyebrow}>Metodo</p>
-          <h2 id="methods-title">Rigor tecnico sem perder narrativa executiva.</h2>
-          <div className={styles.methodTags}>
-            {feito.methods.map((method) => (
-              <span key={method}>{method}</span>
-            ))}
-          </div>
-        </div>
-        <div className={styles.outcomePanel} data-swarm-reveal data-swarm-tilt data-reveal-delay="2">
-          <p className={styles.eyebrow}>Valor</p>
-          <ul>
-            {feito.outcomes.map((outcome) => (
-              <li key={outcome}>{outcome}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className={styles.relatedSection} aria-labelledby="related-title">
-        <div className={styles.relatedHeader} data-swarm-reveal>
-          <p className={styles.eyebrow}>Arquiteturas relacionadas</p>
-          <h2 id="related-title">Outros feitos no mesmo sistema operacional.</h2>
-        </div>
-        <div className={styles.relatedGrid}>
-          {related.map((item, index) => (
-            <Link key={item.slug} href={`/feitos/${item.slug}`} data-swarm-reveal data-swarm-tilt data-reveal-delay={index + 1}>
-              <span>{item.cardLabel}</span>
-              <strong>{item.cardTitle}</strong>
-            </Link>
-          ))}
-        </div>
-      </section>
-    </main>
+      <main className={styles.page} data-swarm-root>
+        <SwarmEffectsLoader />
+        <FeitoNav />
+        <FeitoHero feito={feito} />
+        <FeitoProofSection feito={feito} />
+        <FeitoWorkflowSection feito={feito} />
+        <FeitoMethodsSection feito={feito} />
+        <FeitoRelatedSection related={related} />
+      </main>
+    </>
   )
 }

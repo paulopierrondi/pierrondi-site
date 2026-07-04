@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import Footer from '@/components/Footer'
-import Nav from '@/components/Nav'
 import WhatsApp from '@/components/WhatsApp'
-import { ProductTile } from '@/components/ui/ProductTile'
+import PageHeader from '@/components/PageHeader'
+import Reveal from '@/components/Reveal'
+import JsonLd from '@/components/JsonLd'
+import { SITE_URL } from '@/lib/site'
 import { APPS, getApp, isAppSlug } from './_apps'
 import styles from './AppLanding.module.css'
 
@@ -34,6 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonical,
       siteName: 'pierrondi.dev',
       type: 'website',
+      images: [{ url: '/og', width: 1200, height: 630, alt: `${app.name} — pierrondi.dev` }],
     },
   }
 }
@@ -59,18 +61,38 @@ export default async function AppLandingPage({ params }: Props) {
           'Optional paid features, when offered, go through Apple In-App Purchase.',
         ]
 
+  const isGame = /game|puzzle|wargame|quiz|mystery|card/i.test(app.category)
+  const appSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    '@id': `${SITE_URL}/apps/${slug}#app`,
+    name: app.name,
+    description,
+    url: `${SITE_URL}/apps/${slug}`,
+    applicationCategory: isGame ? 'GameApplication' : 'UtilitiesApplication',
+    operatingSystem: 'iOS',
+    image: `${SITE_URL}/og`,
+    author: { '@id': `${SITE_URL}/#person` },
+    publisher: { '@id': `${SITE_URL}/#organization` },
+    // Free to download on the App Store; optional paid features go through Apple IAP.
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    ...(app.appStoreUrl ? { downloadUrl: app.appStoreUrl, installUrl: app.appStoreUrl } : {}),
+  }
+
   return (
     <>
-      <Nav lang="en" />
-      <main>
-        <ProductTile
-          variant="dark"
-          eyebrow={app.name}
-          headline={`${app.name}.`}
-          headlineLevel="h1"
-          tagline={heroTagline}
-          ctas={
-            app.appStoreUrl ? (
+      <JsonLd data={appSchema} />
+      <PageHeader
+        eyebrow={app.category.toUpperCase()}
+        title={<>{app.name}.</>}
+        lead={heroTagline}
+      />
+
+      <main className={styles.main}>
+        <Reveal>
+          <div className={styles.card}>
+            <p className={styles.lead}>{description}</p>
+            {app.appStoreUrl && (
               <a
                 href={app.appStoreUrl}
                 target="_blank"
@@ -79,19 +101,16 @@ export default async function AppLandingPage({ params }: Props) {
               >
                 Download on the App Store
               </a>
-            ) : undefined
-          }
-        />
-        <ProductTile variant="dark" as="div">
-          <div className={styles.prose}>
-            <p>{description}</p>
-            <h2>What you get</h2>
-            <ul>
+            )}
+
+            <h2 className={styles.h2}>What you get</h2>
+            <ul className={styles.list}>
               {highlights.map((highlight) => (
                 <li key={highlight}>{highlight}</li>
               ))}
             </ul>
-            <h2>Help & legal</h2>
+
+            <h2 className={styles.h2}>Help & legal</h2>
             <ul className={styles.linkList}>
               <li>
                 <Link href={`/apps/${slug}/support`}>Support</Link>
@@ -111,9 +130,8 @@ export default async function AppLandingPage({ params }: Props) {
               .
             </p>
           </div>
-        </ProductTile>
+        </Reveal>
       </main>
-      <Footer lang="en" />
       <WhatsApp lang="en" />
     </>
   )

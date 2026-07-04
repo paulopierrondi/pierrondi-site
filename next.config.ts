@@ -39,12 +39,43 @@ const ffmpegTracingIncludes = Object.fromEntries(
 )
 
 const CANONICAL_REDIRECTS = [
-  { source: '/agentes', destination: '/portfolio', permanent: true },
-  { source: '/app-store-connect', destination: '/precos', permanent: true },
+  // Point straight at the final destination to avoid 2-hop redirect chains
+  // (/portfolio and /precos are themselves permanent redirects).
+  { source: '/agentes', destination: '/feitos', permanent: true },
+  { source: '/app-store-connect', destination: '/atuacao', permanent: true },
   { source: '/sobre', destination: '/about', permanent: true },
+  { source: '/servicos', destination: '/atuacao', permanent: true },
+  { source: '/services', destination: '/atuacao', permanent: true },
+  { source: '/contact', destination: '/contato', permanent: true },
+  // App-slug aliases -> their App Store canonical slug (verified against each
+  // app's live asc.toml). Keeps legacy inbound links alive without shipping a
+  // duplicate indexable page or a second sitemap entry for the same app.
+  { source: '/apps/ammosort', destination: '/apps/ammosort-siege', permanent: true },
+  { source: '/apps/ammosort/:doc', destination: '/apps/ammosort-siege/:doc', permanent: true },
+  { source: '/apps/privytext', destination: '/apps/privytext-ai', permanent: true },
+  { source: '/apps/privytext/:doc', destination: '/apps/privytext-ai/:doc', permanent: true },
+  { source: '/apps/snapread-ai', destination: '/apps/snapread', permanent: true },
+  { source: '/apps/snapread-ai/:doc', destination: '/apps/snapread/:doc', permanent: true },
   { source: '/privacy-policy', destination: '/privacy', permanent: true },
   { source: '/policy', destination: '/privacy', permanent: true },
   { source: '/terms-of-service', destination: '/terms', permanent: true },
+]
+
+// Apex -> www so ONE canonical host serves the whole site AND the GEO layer.
+// Without this, https://pierrondi.dev/llms.txt (and /robots.txt, /sitemap.xml,
+// /answers.json, every page) 404s on the apex — the site is dark to any AI answer
+// engine or user that hits the apex. `has host` fires for the apex only, never www,
+// so www traffic is untouched. redirects() run before the filesystem, so this also
+// covers the static public/ artifacts. NOTE: if the apex is attached as a separate
+// Railway domain that does not reach this app, set the redirect at the Railway
+// domain level instead — this rule only fires when the apex request reaches Next.
+const HOST_REDIRECTS = [
+  {
+    source: '/:path*',
+    has: [{ type: 'host' as const, value: 'pierrondi.dev' }],
+    destination: 'https://www.pierrondi.dev/:path*',
+    permanent: true,
+  },
 ]
 
 const nextConfig: NextConfig = {
@@ -99,7 +130,7 @@ const nextConfig: NextConfig = {
     ]
   },
   async redirects() {
-    return CANONICAL_REDIRECTS
+    return [...HOST_REDIRECTS, ...CANONICAL_REDIRECTS]
   },
 }
 

@@ -1,0 +1,48 @@
+.canvas,
+.placeholder {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100svh;
+  min-height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.canvas {
+  opacity: 0.82;
+}
+
+.canvas canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 1 !important;
+}
+
+.placeholder {
+  opacity: 0.34;
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background:
+    radial-gradient(closest-side at 50% 44%, rgba(200, 255, 46, 0.18), transparent 58%),
+    radial-gradient(closest-side at 55% 46%, rgba(85, 184, 217, 0.1), transparent 48%),
+    repeating-radial-gradient(circle at 50% 46%, rgba(200, 255, 46, 0.2) 0 1px, transparent 1px 18px);
+}
+
+.bgGrade {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 78% 14%, rgba(200, 255, 46, 0.06), transparent 60%),
+    radial-gradient(80% 60% at 10% 90%, rgba(85, 184, 217, 0.05), transparent 60%);
+}
+
+.bgVignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(130% 100% at 50% 38%, transparent 52%, rgba(3, 3, 3, 0.55) 100%);
+}

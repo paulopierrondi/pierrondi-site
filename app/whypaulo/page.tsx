@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
-
-import WhyPauloExperience from './WhyPauloExperience'
+import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -30,5 +29,5 @@ export const metadata: Metadata = {
 }
 
 export default function WhyPauloPage() {
-  return <WhyPauloExperience />
+  redirect('/about')
 }

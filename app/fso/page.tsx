@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
-import FsoExperience from './FsoExperience'
-import SwarmEffectsLoader from '@/components/SwarmEffectsLoader'
+import { redirect } from 'next/navigation'
 
 const TITLE = 'Automation-first ServiceNow implementation — FSO, IRM and AI Control Tower'
 const DESCRIPTION =
@@ -49,10 +48,5 @@ export const metadata: Metadata = {
 }
 
 export default function FsoPage() {
-  return (
-    <>
-      <SwarmEffectsLoader />
-      <FsoExperience />
-    </>
-  )
+  redirect('/about')
 }

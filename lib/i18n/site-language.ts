@@ -1,4 +1,4 @@
-import type { HomeLang } from '@/app/home-experience-copy'
+export type HomeLang = 'pt' | 'en'
 
 export const siteLanguages: Array<{
   code: HomeLang
@@ -15,6 +15,14 @@ const localizedRoutes: Record<string, Record<HomeLang, string>> = {
   '/en': { pt: '/', en: '/en' },
   '/about': { pt: '/about', en: '/en/about' },
   '/en/about': { pt: '/about', en: '/en/about' },
+  '/atuacao': { pt: '/atuacao', en: '/en/atuacao' },
+  '/en/atuacao': { pt: '/atuacao', en: '/en/atuacao' },
+  '/contato': { pt: '/contato', en: '/en/contato' },
+  '/en/contato': { pt: '/contato', en: '/en/contato' },
+  '/blog': { pt: '/blog', en: '/en/blog' },
+  '/en/blog': { pt: '/blog', en: '/en/blog' },
+  '/feitos': { pt: '/feitos', en: '/en/feitos' },
+  '/en/feitos': { pt: '/feitos', en: '/en/feitos' },
   '/privacidade': { pt: '/privacidade', en: '/privacy' },
   '/privacy': { pt: '/privacidade', en: '/privacy' },
   '/termos': { pt: '/termos', en: '/terms' },

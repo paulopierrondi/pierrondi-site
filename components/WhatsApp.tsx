@@ -1,4 +1,15 @@
-import { home, type Lang } from '@/lib/i18n/home-copy'
+type Lang = 'pt' | 'en'
+
+const copy: Record<Lang, { aria: string; message: string }> = {
+  pt: {
+    aria: 'Abrir conversa no WhatsApp',
+    message: 'Olá, Paulo. Quero conversar sobre IA enterprise e execução governada.',
+  },
+  en: {
+    aria: 'Open WhatsApp conversation',
+    message: 'Hi, Paulo. I would like to discuss enterprise AI and governed execution.',
+  },
+}
 
 interface WhatsAppProps {
   lang?: Lang
@@ -8,9 +19,9 @@ export default function WhatsApp({ lang = 'pt' }: WhatsAppProps) {
   const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER
   if (!phone || phone === '5511999999999') return null
 
-  const msg = encodeURIComponent(home[lang].whatsappMessage)
+  const msg = encodeURIComponent(copy[lang].message)
   const href = `https://wa.me/${phone}?text=${msg}`
-  const aria = home[lang].whatsappAria
+  const aria = copy[lang].aria
 
   return (
     <>

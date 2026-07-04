@@ -27,7 +27,7 @@ export const sourceStats = [
   {
     label: '21st Community',
     value: 'MIT',
-    detail: 'Componentes React/Tailwind open-source, com atribuicao por autor.',
+    detail: 'Componentes React/Tailwind open-source, com atribuição por autor.',
   },
   {
     label: 'Categorias rastreadas',
@@ -37,10 +37,10 @@ export const sourceStats = [
   {
     label: '21st.dev pack',
     value: '98',
-    detail: 'Colecao oficial citada pelo proprio catalogo 21st.dev.',
+    detail: 'Coleção oficial citada pelo próprio catálogo 21st.dev.',
   },
   {
-    label: 'Intake padrao',
+    label: 'Intake padrão',
     value: '3 fases',
     detail: 'Referenciar, instalar seletivamente e remixar no visual Pierrondi.',
   },
@@ -59,7 +59,7 @@ export const priorityCategories: DesignVaultCategory[] = [
     name: 'Buttons and CTAs',
     count: 250,
     fit: 'utility',
-    note: 'Acoes pequenas, estados de loading, microinteracao e conversao.',
+    note: 'Ações pequenas, estados de loading, microinteração e conversão.',
   },
   {
     slug: 'card',
@@ -87,7 +87,7 @@ export const priorityCategories: DesignVaultCategory[] = [
     name: 'Feature sections',
     count: 102,
     fit: 'portfolio',
-    note: 'Blocos de valor para landing pages, propostas e portfolio.',
+    note: 'Blocos de valor para landing pages, propostas e portfólio.',
   },
   {
     slug: 'shader',
@@ -100,26 +100,26 @@ export const priorityCategories: DesignVaultCategory[] = [
     slug: 'pricing-section',
     name: 'Pricing sections',
     fit: 'product',
-    note: 'Tiers, comparacao, toggles, add-ons e monetizacao.',
+    note: 'Tiers, comparação, toggles, add-ons e monetização.',
   },
   {
     slug: 'form',
     name: 'Forms and inputs',
     fit: 'utility',
-    note: 'Captura de lead, onboarding, filtros, upload e validacao.',
+    note: 'Captura de lead, onboarding, filtros, upload e validação.',
   },
   {
     slug: 'dashboard',
     name: 'Dashboards',
     count: 30,
     fit: 'enterprise',
-    note: 'Admin panels, charts, control towers e metricas operacionais.',
+    note: 'Admin panels, charts, control towers e métricas operacionais.',
   },
   {
     slug: 'footer',
     name: 'Footers',
     fit: 'portfolio',
-    note: 'Credibilidade, links legais, contato e navegacao final.',
+    note: 'Credibilidade, links legais, contato e navegação final.',
   },
   {
     slug: 'spinner-loader',
@@ -200,7 +200,7 @@ export const installableComponents: InstallableComponent[] = [
     sourceUrl: 'https://21st.dev/community/components/jatin-yadav05/pricing-component',
     installCommand: 'npm run design:install -- jatin-yadav05/pricing-component',
     dependencies: ['lucide-react'],
-    useCase: 'Tabelas de precos para produtos digitais, agencias e SaaS pequenos.',
+    useCase: 'Tabelas de preços para produtos digitais, agências e SaaS pequenos.',
     status: 'ready',
   },
   {
@@ -210,7 +210,7 @@ export const installableComponents: InstallableComponent[] = [
     sourceUrl: 'https://21st.dev/community/components/youcefbnm/cards-stack/default',
     installCommand: 'npm run design:install -- youcefbnm/cards-stack',
     dependencies: ['react', 'tailwindcss'],
-    useCase: 'Stacks de cases, provas, portfolios e listas de entregaveis.',
+    useCase: 'Stacks de cases, provas, portfólios e listas de entregáveis.',
     status: 'ready',
   },
   {
@@ -220,7 +220,7 @@ export const installableComponents: InstallableComponent[] = [
     sourceUrl: 'https://21st.dev/community/components/mvp_Subha/footer-column',
     installCommand: 'npm run design:install -- mvp_Subha/footer-column',
     dependencies: ['next', 'lucide-react'],
-    useCase: 'Rodape multi-coluna com contato, social e links institucionais.',
+    useCase: 'Rodapé multicoluna com contato, social e links institucionais.',
     status: 'ready',
   },
   {
@@ -229,7 +229,7 @@ export const installableComponents: InstallableComponent[] = [
     category: 'ai-chat',
     sourceUrl: 'https://21st.dev/community/components/21st.dev/thinking-tool/default',
     dependencies: ['clsx', 'tailwind-merge', '@tabler/icons-react'],
-    useCase: 'Mostrar raciocinio de assistentes, estados colapsaveis e tool calls.',
+    useCase: 'Mostrar raciocínio de assistentes, estados colapsáveis e tool calls.',
     status: 'reference',
   },
   {
@@ -238,7 +238,7 @@ export const installableComponents: InstallableComponent[] = [
     category: 'ai-chat',
     sourceUrl: 'https://21st.dev/community/components/21st.dev/search-tool/alt-source-set',
     dependencies: ['clsx', 'tailwind-merge'],
-    useCase: 'Padrao de busca para copilots, agents, knowledge bases e MCP.',
+    useCase: 'Padrão de busca para copilots, agents, knowledge bases e MCP.',
     status: 'reference',
   },
   {
@@ -255,22 +255,22 @@ export const installableComponents: InstallableComponent[] = [
 export const designPrinciples: DesignPrinciple[] = [
   {
     title: 'Referenciar sem copiar identidade',
-    copy: 'Usar 21st como fonte MIT e transformar o resultado no sistema Pierrondi: preto profundo, lime, cyan, evidencia e narrativa executiva.',
-    evidence: 'Fonte, autor e comando ficam registrados antes de entrar em pagina publica.',
+    copy: 'Usar 21st como fonte MIT e transformar o resultado no sistema Pierrondi: preto profundo, lime, cyan, evidência e narrativa executiva.',
+    evidence: 'Fonte, autor e comando ficam registrados antes de entrar em página pública.',
   },
   {
     title: 'Instalar seletivamente',
-    copy: 'Nao despejar todos os componentes no bundle. O catalogo inteiro fica mapeado; codigo entra quando existe uso real.',
-    evidence: 'Cada install passa por build, visual QA e nota de dependencia.',
+    copy: 'Não despejar todos os componentes no bundle. O catálogo inteiro fica mapeado; código entra quando existe uso real.',
+    evidence: 'Cada install passa por build, visual QA e nota de dependência.',
   },
   {
-    title: 'Remixar para portfolio',
-    copy: 'Todo bloco importado vira variante propria: copy, tokens, estados, responsividade e acessibilidade revisados.',
-    evidence: 'A pagina /design mostra categorias, comandos e o pipeline de remix.',
+    title: 'Remixar para portfólio',
+    copy: 'Todo bloco importado vira variante própria: copy, tokens, estados, responsividade e acessibilidade revisados.',
+    evidence: 'A página /design mostra categorias, comandos e o pipeline de remix.',
   },
   {
-    title: 'Virar memoria operacional',
-    copy: 'Antes de criar paginas novas, consultar este vault, a nota docs/design-vault.md e o snapshot 21st.',
+    title: 'Virar memória operacional',
+    copy: 'Antes de criar páginas novas, consultar este vault, a nota docs/design-vault.md e o snapshot 21st.',
     evidence: 'Vault Obsidian atualizado no High Craft Frontend Visual Standard.',
   },
 ] as const

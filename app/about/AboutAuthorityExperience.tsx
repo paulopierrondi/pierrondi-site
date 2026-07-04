@@ -14,19 +14,19 @@ export default function AboutAuthorityExperience({ lang }: { lang: AuthorityLang
   const page = getAuthorityPage(lang)
   const positioning = authorityOps.positioning[lang]
   const portfolioHref = '/paulo'
-  const architectureLabel = lang === 'pt' ? 'Arquitetura de operacao' : 'Operating architecture'
+  const architectureLabel = lang === 'pt' ? 'Arquitetura de operação' : 'Operating architecture'
   const disclaimer =
     lang === 'pt'
-      ? 'Conteudo pessoal. Nao e canal oficial da ServiceNow e nao usa informacao confidencial.'
-      : 'Personal content. Not an official ServiceNow channel and does not use confidential information.'
+      ? 'Conteúdo pessoal, com recorte público e sem informação confidencial.'
+      : 'Personal content built from public context and without confidential information.'
   const publicOperatingItems =
     lang === 'pt'
       ? [
           'Tese executiva antes de ferramenta',
-          'Contexto, politica, permissao e evidencia antes de autonomia',
-          'Guardrails humanos para qualquer publicacao externa',
+          'Contexto, política, permissão e evidência antes de autonomia',
+          'Guardrails humanos para qualquer publicação externa',
           'Nenhum nome de cliente, roadmap, incidente, budget ou print confidencial',
-          'Prova por arquitetura, sistemas e execucao real',
+          'Prova por arquitetura, sistemas e execução real',
         ]
       : [
           'Executive thesis before tooling',
@@ -41,17 +41,17 @@ export default function AboutAuthorityExperience({ lang }: { lang: AuthorityLang
           {
             label: 'ServiceNow + FSI',
             title: 'Contexto enterprise real',
-            body: 'Experiencia em conta grande, governanca, plataforma, CSDM/CMDB e discussao executiva sem expor informacao sensivel.',
+            body: 'Experiência em conta grande, governança, plataforma, CSDM/CMDB e discussão executiva sem expor informação sensível.',
           },
           {
             label: 'AgentOps',
-            title: 'IA com sistema de operacao',
-            body: 'Preflight, handoffs, memoria, human gates, validacao, automacao e rastreabilidade como parte do metodo.',
+            title: 'IA com sistema de operação',
+            body: 'Preflight, handoffs, memória, human gates, validação, automação e rastreabilidade como parte do método.',
           },
           {
             label: 'Produto',
-            title: 'Execucao publica verificavel',
-            body: 'Site, portfolio, rotas de arquitetura, Marketing OS e provas visuais funcionando como demonstracao de capacidade aplicada.',
+            title: 'Execução pública verificável',
+            body: 'Site, feitos, rotas de arquitetura, sistemas agênticos e provas visuais funcionando como demonstração de capacidade aplicada.',
           },
         ]
       : [
@@ -68,7 +68,7 @@ export default function AboutAuthorityExperience({ lang }: { lang: AuthorityLang
           {
             label: 'Product',
             title: 'Publicly verifiable execution',
-            body: 'Site, portfolio, architecture routes, Marketing OS and visual proof operating as applied capability evidence.',
+            body: 'Site, proof routes, operating architecture, agentic systems and visual evidence operating as applied capability proof.',
           },
         ]
   const guardrailItems =
@@ -77,20 +77,20 @@ export default function AboutAuthorityExperience({ lang }: { lang: AuthorityLang
           {
             label: 'Sem overclaim',
             theme: 'Nada de ranking inventado',
-            hook: 'O posicionamento usa maturidade aplicada, evidencias e sistemas reais, nao percentis pessoais dificeis de auditar.',
-            cta: 'Autoridade sem arrogancia.',
+            hook: 'O posicionamento usa maturidade aplicada, evidências e sistemas reais, não percentis pessoais difíceis de auditar.',
+            cta: 'Autoridade sem arrogância.',
           },
           {
             label: 'Sem confidencial',
             theme: 'Clientes protegidos',
-            hook: 'O site evita nomes, prints, metricas, incidentes, roadmap e qualquer material que pareca canal oficial.',
+            hook: 'O site evita nomes, prints, métricas, incidentes, roadmap e qualquer material sensível ou institucional.',
             cta: 'Credibilidade sem risco.',
           },
           {
             label: 'Sem venda fria',
             theme: 'Conversa por tese',
-            hook: 'A CTA certa para executivos e pedir critica sobre a arquitetura, nao empurrar servico nem parecer campanha.',
-            cta: 'Promocao simples e respeitosa.',
+            hook: 'A CTA certa para executivos é pedir crítica sobre a arquitetura, não empurrar serviço nem parecer campanha.',
+            cta: 'Promoção simples e respeitosa.',
           },
         ]
       : [
@@ -103,7 +103,7 @@ export default function AboutAuthorityExperience({ lang }: { lang: AuthorityLang
           {
             label: 'No confidential content',
             theme: 'Clients protected',
-            hook: 'The site avoids names, screenshots, metrics, incidents, roadmap and anything that could look official.',
+            hook: 'The site avoids names, screenshots, metrics, incidents, roadmap and anything sensitive or institutional.',
             cta: 'Credibility without risk.',
           },
           {
@@ -203,7 +203,7 @@ export default function AboutAuthorityExperience({ lang }: { lang: AuthorityLang
           <p className={styles.kicker}>Authority Ops</p>
           <h2 id="ops-title">
             {lang === 'pt'
-              ? 'Minha autoridade publica precisa provar maturidade sem vazar contexto sensivel.'
+              ? 'Minha autoridade pública precisa provar maturidade sem vazar contexto sensível.'
               : 'My public authority needs to prove maturity without leaking sensitive context.'}
           </h2>
         </div>
@@ -219,10 +219,10 @@ export default function AboutAuthorityExperience({ lang }: { lang: AuthorityLang
 
       <section className={styles.section} aria-labelledby="evidence-title">
         <div className={styles.sectionHeader}>
-          <p className={styles.kicker}>{lang === 'pt' ? 'Evidencia publica' : 'Public evidence'}</p>
+          <p className={styles.kicker}>{lang === 'pt' ? 'Evidência pública' : 'Public evidence'}</p>
           <h2 id="evidence-title">
             {lang === 'pt'
-              ? 'O perfil precisa mostrar prova operacional, nao apenas curriculo.'
+              ? 'O perfil precisa mostrar prova operacional, não apenas currículo.'
               : 'The profile needs to show operational proof, not just a resume.'}
           </h2>
         </div>
@@ -239,10 +239,10 @@ export default function AboutAuthorityExperience({ lang }: { lang: AuthorityLang
 
       <section className={styles.section} aria-labelledby="queue-title">
         <div className={styles.sectionHeader}>
-          <p className={styles.kicker}>{lang === 'pt' ? 'Guardrails publicos' : 'Public guardrails'}</p>
+          <p className={styles.kicker}>{lang === 'pt' ? 'Guardrails públicos' : 'Public guardrails'}</p>
           <h2 id="queue-title">
             {lang === 'pt'
-              ? 'A forma de me promover tambem precisa ser governada.'
+              ? 'A forma de me promover também precisa ser governada.'
               : 'The way I promote myself also needs to be governed.'}
           </h2>
         </div>

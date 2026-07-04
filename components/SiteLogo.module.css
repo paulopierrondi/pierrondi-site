@@ -1,0 +1,11 @@
+.logo {
+  display: block;
+  color: var(--color-ink);
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px var(--color-primary-glow));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo:hover {
+  transform: rotate(120deg);
+}

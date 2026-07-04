@@ -108,8 +108,8 @@ export default function CookieBanner() {
           color: var(--color-on-primary);
         }
         .cookie-btn-essential {
-          background: transparent;
-          color: var(--color-muted);
+          background: rgba(247, 245, 238, 0.04);
+          color: var(--color-body);
           border: 1px solid var(--color-hairline);
         }
         @keyframes slideUp {
@@ -119,14 +119,26 @@ export default function CookieBanner() {
         @media (max-width: 768px) {
           .cookie-banner {
             flex-direction: column;
-            padding: 20px 24px;
-            gap: 16px;
+            align-items: stretch;
+            padding: 12px 20px max(12px, env(safe-area-inset-bottom));
+            gap: 10px;
+          }
+          .cookie-text {
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.45;
           }
           .cookie-actions {
             width: 100%;
+            gap: 10px;
+            padding-left: 34px;
           }
           .cookie-btn {
             flex: 1;
+            min-height: 42px;
+            padding: 9px 12px;
+            font-size: 11px;
+            white-space: nowrap;
           }
         }
       `}</style>

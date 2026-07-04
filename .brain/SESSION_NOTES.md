@@ -47,42 +47,79 @@ Execução em 4 fases sequenciais.
 - **Botão de idioma removido de `/paulo`** — `/en/paulo` não existe.
 - **Contraste ajustado** — `--color-muted` de `0.48` para `0.70`; `--color-muted-soft` de `0.30` para `0.55`.
 
+## Fase 5 — Enterprise Bio redesign (internas)
+
+- **`/atuacao` redesenhada** — 4 blocos de atuação com sticky aside, itens numerados e CTA para `/feitos`.
+- **`/en/atuacao` criada** — versão EN reutilizando `AtuacaoContent`.
+- **`/about` alinhado aos tokens globais** — CSS atualizado para usar `--color-*` do `globals.css`.
+- **`/feitos` índice redesenhado** — 4 cards com mini-diagramas SVG, tags e abstract; componente `FeitosIndexContent` bilíngue.
+- **`/en/feitos` criada**.
+- **`/blog` layout handoff aplicado** — destaque + grid de 3 colunas; `BlogContent` bilíngue.
+- **`/en/blog` criada**.
+- **`/contato` integrado a `/api/contact`** — formulário movido para client component `ContatoForm`; página server component com `ContatoPageContent` bilíngue.
+- **`/en/contato` criada**.
+- **`/privacidade` e `/termos` redesenhadas** — novo layout tipográfico, sem `ProductTile`.
+- **`/privacy` e `/terms` redesenhadas** — equivalentes EN com conteúdo condensado e alinhado.
+- **Rotas i18n atualizadas em `lib/i18n/site-language.ts`** — `/atuacao`, `/contato`, `/blog`, `/feitos` e versões `/en/*` mapeadas no `localizedRoutes`.
+
+## Fase 6 — Redesign das páginas legadas
+
+- **`/precos`** — planos em grid 2×2, tabela comparativa e FAQ com `<details>`; sem `ProductTile`/`PillButton`.
+- **`/tech-partner`** — hero com preço, grid de entregas, personas e FAQ.
+- **`/produto-digital`** — entregas, stack, processo em 4 passos e FAQ.
+- **`/portfolio`** — grid de 6 cases com prova, tags e CTA final.
+- **`/paulo`** — CSS alinhado aos tokens globais (substituição sistemática de variáveis locais).
+- **`/calculadora`** — formulário e resultados em card único, layout limpo.
+- **`/faq`** — categorias com `<details>` e CTA final.
+- **`/quiz`** — fluxo de 4 perguntas, resultado com captura de lead e integração `/api/contact`.
+- **`/marketing-os`** — arquitetura em 4 camadas, princípios, personas, pacotes e CTA.
+- **`/marketing-os/numeros`** — página de placeholder com aviso de migração.
+- **`/apps/[slug]`** — landing de app com card limpo, highlights e links legais.
+- **`/apps/[slug]/[doc]`** — support/privacy/terms com novo layout tipográfico.
+- **`/obrigado`** — página de agradecimento redesenhada.
+- **`/design/page.module.css`** — cores fixas substituídas por tokens globais.
+
 ## Verificação
 
-- `npx tsc --noEmit` ✅
-- `npm run lint` ✅ (1 warning pré-existente em `FsoExperience.tsx`)
+- `npm run lint` ✅
 - `npm test` ✅ (20/20)
-- `npm run build` ✅
+- `npm run build` ✅ (174 páginas)
+
+## Deploy
+
+- **Branch:** `codex/enterprise-bio-phase3`
+- **Commits:** 2 (`829ae09`, `a80f1b4`)
+- **Push:** ✅ enviado para `origin/codex/enterprise-bio-phase3`
+- **Railway:** ✅ deploy em produção concluído
+- **URL de produção:** https://www.pierrondi.dev
+- **Build status:** Online
+
+(Deploy Vercel de preview mencionado anteriormente foi descartado; a hospedagem real é Railway.)
 
 ## Decisões pendentes
 
-- Commit/branch: o usuário precisa decidir se faz commit local ou cria branch.
-- Lighthouse: rodar para validar contraste e performance após deploy.
-- `/whypaulo`: mantido público; variáveis WHYPAULO removidas do `.env.example`.
+- Merge do PR e deploy em produção requerem aprovação explícita.
+- `/en/blog` e `/en/feitos` reutilizam conteúdo PT nos cards; isso é aceitável por ora, mas pode ser melhorado com dados bilíngues completos no futuro.
+- `/sobre` ainda tem arquivo `page.tsx`, mas redirect 301 o torna inacessível.
 
 ## Arquivos principais alterados
 
-- `next.config.ts`
-- `package.json`
-- `.github/workflows/ci.yml`
-- `.husky/pre-commit`
-- `.env.example`
-- `app/layout.tsx`
-- `app/page.tsx`
-- `app/sitemap.ts`
-- `components/PortraitHologram.tsx`
-- `components/ui/ProductTile.tsx`
-- `components/LanguageSwitcher.module.css`
-- `lib/rate-limit.ts`
-- `lib/control-tower/plan-view.ts`
+- `app/atuacao/*`, `app/en/atuacao/page.tsx`
+- `app/feitos/*`, `app/en/feitos/page.tsx`
+- `app/blog/BlogContent.tsx`, `app/en/blog/page.tsx`
+- `app/contato/*`, `app/en/contato/page.tsx`
+- `app/privacidade/*`, `app/privacy/*`, `app/termos/*`, `app/terms/*`
+- `app/about/AboutAuthorityExperience.module.css`
+- `app/precos/*`, `app/tech-partner/*`, `app/produto-digital/*`
+- `app/portfolio/*`, `app/paulo/PauloPortfolioExperience.module.css`, `app/paulo/page.tsx`
+- `app/calculadora/*`, `app/faq/*`, `app/quiz/*`
+- `app/marketing-os/*`, `app/marketing-os/numeros/*`
+- `app/apps/[slug]/*`, `app/apps/[slug]/[doc]/*`
+- `app/obrigado/*`, `app/design/page.module.css`
 - `lib/i18n/site-language.ts`
-- `app/api/contact/route.ts`
-- `app/api/automation-control/session/route.ts`
-- `app/paulo/PauloPortfolioExperience.tsx`
-- `app/globals.css`
 
 ## Riscos
 
-- Grande superfície de mudança (~60 arquivos). Recomendado revisar diff antes de commit.
+- Grande superfície de mudança. Recomendado revisar diff antes de merge.
+- `/en/blog` e `/en/feitos` reutilizam conteúdo PT nos cards; melhorar no futuro.
 - `/sobre` ainda tem arquivo `page.tsx`, mas redirect 301 o torna inacessível.
-- `KimiSwarmEffects` agora só carrega em 4 páginas; scroll smooth (Lenis) só ativo nelas.

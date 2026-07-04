@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 
-import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
-import Nav from '@/components/Nav'
 import { authorityProfileJsonLd, getAuthorityPage } from '@/lib/authority/authority'
 import { SITE_URL } from '@/lib/site'
 import AboutAuthorityExperience from './AboutAuthorityExperience'
@@ -62,9 +60,7 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd data={authorityProfileJsonLd('pt')} />
-      <Nav />
       <AboutAuthorityExperience lang="pt" />
-      <Footer />
     </>
   )
 }

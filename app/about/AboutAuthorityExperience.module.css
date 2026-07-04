@@ -1,16 +1,8 @@
 .page {
-  --bg: #050607;
-  --ink: #f8f3e7;
-  --muted: rgba(248, 243, 231, 0.68);
-  --line: rgba(248, 243, 231, 0.14);
-  --panel: rgba(14, 18, 18, 0.78);
-  --green: #c8ff2e;
-  --cyan: #6dc6d9;
-  --brass: #d8b45f;
-  color: var(--ink);
+  color: var(--color-ink);
   background:
-    linear-gradient(90deg, rgba(248, 243, 231, 0.034) 1px, transparent 1px),
-    linear-gradient(180deg, #050607 0%, #0b1110 46%, #050607 100%);
+    linear-gradient(90deg, var(--color-hairline) 1px, transparent 1px),
+    linear-gradient(180deg, var(--color-canvas) 0%, color-mix(in oklab, var(--color-canvas) 96%, var(--color-cyan)) 46%, var(--color-canvas) 100%);
   background-size: 84px 84px, auto;
   overflow: clip;
 }
@@ -56,7 +48,7 @@
 
 .kicker {
   margin: 0 0 14px;
-  color: var(--green);
+  color: var(--color-primary);
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.12em;
@@ -80,7 +72,7 @@
 .heroLead {
   max-width: 720px;
   margin: 28px 0 0;
-  color: var(--muted);
+  color: var(--color-body);
   font-size: clamp(18px, 2.1vw, 23px);
   line-height: 1.48;
 }
@@ -100,10 +92,10 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 1px solid rgba(248, 243, 231, 0.18);
+  border: 1px solid var(--color-hairline-strong);
   border-radius: 7px;
   padding: 0 18px;
-  color: var(--ink);
+  color: var(--color-ink);
   text-decoration: none;
   font-size: 14px;
   font-weight: 850;
@@ -116,15 +108,15 @@
 
 .heroActions a:first-child,
 .ctaActions a:first-child {
-  border-color: rgba(200, 255, 46, 0.62);
-  color: #071008;
-  background: var(--green);
+  border-color: color-mix(in oklab, var(--color-primary) 62%, transparent);
+  color: var(--color-canvas);
+  background: var(--color-primary);
 }
 
 .heroActions a:hover,
 .ctaActions a:hover {
   transform: translateY(-2px);
-  border-color: rgba(200, 255, 46, 0.52);
+  border-color: color-mix(in oklab, var(--color-primary) 52%, transparent);
 }
 
 .signalStrip {
@@ -138,14 +130,14 @@
 .opsItem,
 .queueGrid span,
 .budgetGrid span {
-  border: 1px solid rgba(248, 243, 231, 0.14);
+  border: 1px solid var(--color-hairline);
   border-radius: 7px;
-  background: rgba(248, 243, 231, 0.055);
+  background: var(--color-surface);
 }
 
 .signalStrip span {
   padding: 8px 10px;
-  color: rgba(248, 243, 231, 0.76);
+  color: var(--color-body-strong);
   font-size: 12px;
   font-weight: 800;
 }
@@ -161,9 +153,9 @@
   position: absolute;
   inset: 0 0 132px;
   overflow: hidden;
-  border: 1px solid rgba(248, 243, 231, 0.16);
+  border: 1px solid var(--color-hairline-strong);
   border-radius: 8px;
-  background: #0c1110;
+  background: var(--color-canvas);
   box-shadow: 0 32px 100px rgba(0, 0, 0, 0.38);
 }
 
@@ -172,8 +164,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, transparent 0%, rgba(5, 6, 7, 0.08) 54%, rgba(5, 6, 7, 0.76) 100%),
-    repeating-linear-gradient(0deg, rgba(248, 243, 231, 0.04) 0 1px, transparent 1px 5px);
+    linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--color-canvas) 8%, transparent) 54%, color-mix(in oklab, var(--color-canvas) 76%, transparent) 100%),
+    repeating-linear-gradient(0deg, var(--color-hairline) 0 1px, transparent 1px 5px);
 }
 
 .portraitFrame img {
@@ -185,10 +177,10 @@
   position: relative;
   z-index: 2;
   margin-inline: 22px;
-  border: 1px solid rgba(248, 243, 231, 0.16);
+  border: 1px solid var(--color-hairline-strong);
   border-radius: 8px;
   padding: 18px;
-  background: rgba(5, 6, 7, 0.82);
+  background: color-mix(in oklab, var(--color-canvas) 82%, transparent);
   backdrop-filter: blur(18px);
 }
 
@@ -199,7 +191,7 @@
 }
 
 .identityCopy span {
-  color: var(--green);
+  color: var(--color-primary);
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -214,21 +206,21 @@
 
 .identityCopy p {
   margin: 12px 0 0;
-  color: var(--muted);
+  color: var(--color-body);
   font-size: 13px;
   line-height: 1.5;
 }
 
 .thesisBand {
-  border-block: 1px solid var(--line);
+  border-block: 1px solid var(--color-hairline);
   padding: 30px max(22px, calc((100vw - 1180px) / 2));
-  background: rgba(248, 243, 231, 0.04);
+  background: var(--color-surface);
 }
 
 .thesisBand p {
   max-width: 1060px;
   margin: 0;
-  color: var(--ink);
+  color: var(--color-ink);
   font-size: clamp(24px, 3vw, 40px);
   line-height: 1.14;
   font-weight: 850;
@@ -270,21 +262,21 @@
 .budgetGrid article,
 .queueGrid article {
   min-height: 244px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--color-hairline);
   border-radius: 8px;
   padding: 22px;
-  background: var(--panel);
+  background: var(--color-surface);
 }
 
 .operatingCard span {
-  color: var(--green);
+  color: var(--color-primary);
   font-size: 12px;
   font-weight: 950;
 }
 
 .operatingCard p,
 .capabilityCard span {
-  color: var(--cyan);
+  color: var(--color-cyan);
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -306,13 +298,13 @@
 .queueGrid p,
 .queueGrid small,
 .ctaSection p {
-  color: var(--muted);
+  color: var(--color-body);
   font-size: 15px;
   line-height: 1.55;
 }
 
 .capabilityCard svg {
-  color: var(--green);
+  color: var(--color-primary);
   margin-bottom: 22px;
 }
 
@@ -321,10 +313,10 @@
   grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
   gap: clamp(26px, 5vw, 70px);
   align-items: start;
-  border-block: 1px solid var(--line);
+  border-block: 1px solid var(--color-hairline);
   background:
-    linear-gradient(90deg, rgba(200, 255, 46, 0.08), transparent 32%),
-    rgba(248, 243, 231, 0.035);
+    linear-gradient(90deg, color-mix(in oklab, var(--color-primary) 8%, transparent), transparent 32%),
+    var(--color-surface);
 }
 
 .opsGrid {
@@ -338,13 +330,13 @@
   align-items: center;
   gap: 12px;
   padding: 14px;
-  color: var(--ink);
+  color: var(--color-ink);
   font-weight: 780;
 }
 
 .opsItem svg {
   flex: 0 0 auto;
-  color: var(--green);
+  color: var(--color-primary);
 }
 
 .budgetGrid span,
@@ -352,7 +344,7 @@
   display: inline-flex;
   width: fit-content;
   padding: 7px 9px;
-  color: var(--green);
+  color: var(--color-primary);
   font-size: 12px;
   font-weight: 900;
   text-transform: uppercase;
@@ -363,7 +355,7 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 28px;
   align-items: end;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--color-hairline);
 }
 
 .ctaSection p {
@@ -373,7 +365,7 @@
 .heroActions a:focus-visible,
 .ctaActions a:focus-visible,
 .identitySystem a:focus-visible {
-  outline: 2px solid var(--green);
+  outline: 2px solid var(--color-primary);
   outline-offset: 4px;
 }
 

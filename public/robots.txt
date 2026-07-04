@@ -16,6 +16,37 @@ Disallow: /portal/
 Disallow: /share/
 Disallow: /whypaulo
 
+# Allow answer-engine crawlers to discover the public GEO layer while preserving
+# the same private-route exclusions used for general crawlers. Google-Extended
+# (Gemini / Vertex grounding) and Applebot-Extended (Apple Intelligence) are
+# included on purpose: unlike OpenAI/Anthropic, Google and Apple expose no
+# separate retrieval bot, so allowing them here is what keeps the public content
+# eligible for Gemini and Apple AI citations. Training-only bots stay blocked below.
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+Disallow: /automacoes
+Disallow: /studio
+Disallow: /studio/
+Disallow: /login
+Disallow: /login-v2
+Disallow: /obrigado
+Disallow: /ai-command-center
+Disallow: /bradesco-26
+Disallow: /control_tower
+Disallow: /itau
+Disallow: /lp/
+Disallow: /portal/
+Disallow: /share/
+Disallow: /whypaulo
+
 # Block training crawlers. User-triggered discovery crawlers follow the public rules above.
 User-agent: GPTBot
 Disallow: /

@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 import JsonLd from '@/components/JsonLd'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
 import { SITE_URL } from '@/lib/site'
 import PauloPortfolioExperience from './PauloPortfolioExperience'
 
@@ -12,7 +10,7 @@ export const metadata: Metadata = {
     'Portfólio executivo de Paulo Pierrondi: ServiceNow, IA governada, treinamento e inferência de LLMs, sistemas operacionais de agentes, produto digital e execução enterprise.',
   keywords: [
     'Paulo Pierrondi',
-    'portfolio executivo IA',
+    'portfólio executivo IA',
     'ServiceNow',
     'LLM inference',
     'LLM training',
@@ -75,11 +73,7 @@ export default function PauloPage() {
   return (
     <>
       <JsonLd data={personSchema} />
-      <Nav />
-      <main>
-        <PauloPortfolioExperience />
-      </main>
-      <Footer />
+      <PauloPortfolioExperience />
     </>
   )
 }
