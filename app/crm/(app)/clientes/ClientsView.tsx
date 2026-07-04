@@ -4,19 +4,11 @@ import { useState } from 'react'
 import { Plus, Pencil, Trash2 } from 'lucide-react'
 import type { Client } from '@/lib/crm/types'
 
-interface Props {
-  initialClients: Client[]
-}
-
 const EMPTY: Omit<Client, 'id' | 'createdAt' | 'updatedAt'> = {
-  name: '',
-  email: '',
-  phone: '',
-  company: '',
-  notes: '',
+  name: '', email: '', phone: '', company: '', notes: '',
 }
 
-export default function ClientsView({ initialClients }: Props) {
+export default function ClientsView({ initialClients }: { initialClients: Client[] }) {
   const [clients, setClients] = useState(initialClients)
   const [editing, setEditing] = useState<Client | null>(null)
   const [creating, setCreating] = useState(false)
@@ -25,18 +17,14 @@ export default function ClientsView({ initialClients }: Props) {
   async function save() {
     if (editing) {
       const res = await fetch(`/api/crm/clients/${editing.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form),
       })
       const updated: Client = await res.json()
       setClients((c) => c.map((x) => (x.id === updated.id ? updated : x)))
       setEditing(null)
     } else {
       const res = await fetch('/api/crm/clients', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form),
       })
       const created: Client = await res.json()
       setClients((c) => [...c, created])
@@ -52,163 +40,74 @@ export default function ClientsView({ initialClients }: Props) {
   }
 
   function startEdit(c: Client) {
-    setEditing(c)
-    setCreating(false)
+    setEditing(c); setCreating(false)
     setForm({ name: c.name, email: c.email, phone: c.phone, company: c.company, notes: c.notes })
   }
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+      <div className="crm-page-header">
         <div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, color: 'var(--color-ink)', margin: 0 }}>Clientes</h1>
-          <p style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 4 }}>{clients.length} cliente(s)</p>
+          <h1 className="crm-page-title">Clientes</h1>
+          <p className="crm-page-sub">{clients.length} cliente(s)</p>
         </div>
-        <button
-          onClick={() => { setCreating(true); setEditing(null); setForm(EMPTY) }}
-          style={btnPrimary}
-        >
+        <button className="crm-btn-primary" onClick={() => { setCreating(true); setEditing(null); setForm(EMPTY) }}>
           <Plus size={15} /> Novo cliente
         </button>
       </div>
 
       {(creating || editing) && (
-        <FormCard
-          title={editing ? 'Editar cliente' : 'Novo cliente'}
-          onSave={save}
-          onCancel={() => { setCreating(false); setEditing(null); setForm(EMPTY) }}
-        >
-          <Field label="Nome *" value={form.name} onChange={(v) => setForm((f) => ({ ...f, name: v }))} />
-          <Field label="Empresa" value={form.company} onChange={(v) => setForm((f) => ({ ...f, company: v }))} />
-          <Field label="Email" value={form.email} onChange={(v) => setForm((f) => ({ ...f, email: v }))} type="email" />
-          <Field label="Telefone" value={form.phone} onChange={(v) => setForm((f) => ({ ...f, phone: v }))} />
-          <Field label="Notas" value={form.notes} onChange={(v) => setForm((f) => ({ ...f, notes: v }))} multi />
-        </FormCard>
-      )}
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {clients.length === 0 ? (
-          <p style={{ fontSize: 14, color: 'var(--color-muted)' }}>Nenhum cliente cadastrado.</p>
-        ) : (
-          clients.map((c) => (
-            <div key={c.id} style={card}>
-              <div style={{ flex: 1 }}>
-                <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--color-ink)', margin: 0 }}>{c.name}</p>
-                {c.company && <p style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 2 }}>{c.company}</p>}
-                {c.email && <p style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 1 }}>{c.email}</p>}
-                {c.notes && <p style={{ fontSize: 12, color: 'var(--color-muted)', marginTop: 6, fontStyle: 'italic' }}>{c.notes}</p>}
-              </div>
-              <div style={{ display: 'flex', gap: 8 }}>
-                <button onClick={() => startEdit(c)} style={btnIcon}><Pencil size={14} /></button>
-                <button onClick={() => remove(c.id)} style={btnIconDanger}><Trash2 size={14} /></button>
-              </div>
+        <div className="crm-form-card">
+          <p className="crm-form-title">{editing ? 'Editar cliente' : 'Novo cliente'}</p>
+          <div className="crm-form-grid">
+            <div className="crm-field">
+              <label>Nome *</label>
+              <input value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
             </div>
-          ))
-        )}
-      </div>
-    </div>
-  )
-}
-
-function FormCard({ title, children, onSave, onCancel }: {
-  title: string
-  children: React.ReactNode
-  onSave: () => void
-  onCancel: () => void
-}) {
-  return (
-    <div style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-hairline-strong)', borderRadius: 12, padding: 20, marginBottom: 24 }}>
-      <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--color-ink)', marginBottom: 16 }}>{title}</p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
-        {children}
-      </div>
-      <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
-        <button onClick={onSave} style={btnPrimary}>Salvar</button>
-        <button onClick={onCancel} style={btnSecondary}>Cancelar</button>
-      </div>
-    </div>
-  )
-}
-
-function Field({ label, value, onChange, type = 'text', multi }: {
-  label: string
-  value: string
-  onChange: (v: string) => void
-  type?: string
-  multi?: boolean
-}) {
-  const style: React.CSSProperties = {
-    width: '100%',
-    padding: '9px 12px',
-    borderRadius: 8,
-    border: '1px solid var(--color-hairline)',
-    background: 'var(--color-surface-3)',
-    color: 'var(--color-ink)',
-    fontSize: 14,
-    outline: 'none',
-    boxSizing: 'border-box',
-    fontFamily: 'inherit',
-    resize: 'vertical',
-  }
-  return (
-    <div>
-      <label style={{ fontSize: 12, color: 'var(--color-muted)', display: 'block', marginBottom: 4 }}>{label}</label>
-      {multi ? (
-        <textarea rows={3} value={value} onChange={(e) => onChange(e.target.value)} style={style} />
-      ) : (
-        <input type={type} value={value} onChange={(e) => onChange(e.target.value)} style={style} />
+            <div className="crm-field">
+              <label>Empresa</label>
+              <input value={form.company} onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))} />
+            </div>
+            <div className="crm-field">
+              <label>Email</label>
+              <input type="email" value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} />
+            </div>
+            <div className="crm-field">
+              <label>Telefone</label>
+              <input value={form.phone} onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))} />
+            </div>
+            <div className="crm-field" style={{ gridColumn: 'span 2' }}>
+              <label>Notas</label>
+              <textarea rows={3} value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))} />
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
+            <button className="crm-btn-primary" onClick={save}>Salvar</button>
+            <button className="crm-btn-secondary" onClick={() => { setCreating(false); setEditing(null); setForm(EMPTY) }}>Cancelar</button>
+          </div>
+        </div>
       )}
+
+      <div className="crm-list">
+        {clients.length === 0 ? (
+          <div className="crm-empty">
+            <p className="crm-empty-text">Nenhum cliente cadastrado. Adicione o primeiro cliente acima.</p>
+          </div>
+        ) : clients.map((c) => (
+          <div key={c.id} className="crm-row">
+            <div style={{ flex: 1 }}>
+              <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--color-ink)', margin: 0 }}>{c.name}</p>
+              {c.company && <p style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 2 }}>{c.company}</p>}
+              {c.email && <p style={{ fontSize: 13, color: 'var(--color-muted)', marginTop: 1 }}>{c.email}</p>}
+              {c.notes && <p style={{ fontSize: 12, color: 'var(--color-muted)', marginTop: 6, fontStyle: 'italic' }}>{c.notes}</p>}
+            </div>
+            <div className="crm-row-actions">
+              <button className="crm-btn-icon" onClick={() => startEdit(c)}><Pencil size={14} /></button>
+              <button className="crm-btn-icon crm-btn-icon-danger" onClick={() => remove(c.id)}><Trash2 size={14} /></button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
-}
-
-const card: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'flex-start',
-  gap: 16,
-  background: 'var(--color-surface)',
-  border: '1px solid var(--color-hairline)',
-  borderRadius: 12,
-  padding: '16px 20px',
-}
-
-const btnPrimary: React.CSSProperties = {
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: 6,
-  padding: '8px 16px',
-  borderRadius: 8,
-  background: 'var(--color-primary)',
-  color: 'var(--color-on-primary)',
-  fontWeight: 700,
-  fontSize: 13,
-  border: 'none',
-  cursor: 'pointer',
-}
-
-const btnSecondary: React.CSSProperties = {
-  padding: '8px 16px',
-  borderRadius: 8,
-  background: 'transparent',
-  color: 'var(--color-body)',
-  fontWeight: 500,
-  fontSize: 13,
-  border: '1px solid var(--color-hairline)',
-  cursor: 'pointer',
-}
-
-const btnIcon: React.CSSProperties = {
-  padding: 7,
-  borderRadius: 7,
-  background: 'transparent',
-  color: 'var(--color-muted)',
-  border: '1px solid var(--color-hairline)',
-  cursor: 'pointer',
-  display: 'flex',
-  alignItems: 'center',
-}
-
-const btnIconDanger: React.CSSProperties = {
-  ...btnIcon,
-  color: 'var(--color-error)',
 }

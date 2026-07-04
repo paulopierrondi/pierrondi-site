@@ -15,14 +15,16 @@ import {
   Menu,
   X,
 } from 'lucide-react'
+import '../crm.css'
 
 const NAV = [
-  { href: '/crm', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/crm', label: 'Dashboard', icon: LayoutDashboard, exact: true },
   { href: '/crm/clientes', label: 'Clientes', icon: Users },
   { href: '/crm/projetos', label: 'Projetos', icon: FolderKanban },
   { href: '/crm/contratos', label: 'Contratos', icon: FileText },
   { href: '/crm/pagamentos', label: 'Pagamentos', icon: DollarSign },
   { href: '/crm/atividades', label: 'Atividades', icon: CheckSquare },
+  { href: '/crm/discussoes', label: 'Discussões', icon: MessageSquare },
 ]
 
 export default function CRMShell({ children }: { children: React.ReactNode }) {
@@ -33,151 +35,65 @@ export default function CRMShell({ children }: { children: React.ReactNode }) {
   async function handleLogout() {
     await fetch('/api/crm/auth', { method: 'DELETE' })
     router.push('/crm/login')
+    router.refresh()
   }
 
-  return (
-    <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 9999,
-        background: 'var(--color-canvas)',
-        display: 'flex',
-        fontFamily: 'var(--font-body, sans-serif)',
-      }}
-    >
-      {/* Mobile overlay */}
-      {open && (
-        <div
-          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 10 }}
-          onClick={() => setOpen(false)}
-        />
-      )}
+  const currentPage = NAV.find((n) =>
+    n.exact ? pathname === n.href : pathname.startsWith(n.href)
+  )
 
-      {/* Sidebar */}
-      <aside
-        style={{
-          width: 220,
-          background: 'var(--color-surface)',
-          borderRight: '1px solid var(--color-hairline)',
-          display: 'flex',
-          flexDirection: 'column',
-          flexShrink: 0,
-          zIndex: 20,
-          transition: 'transform 0.2s',
-        }}
-        className={open ? '' : 'crm-sidebar'}
-      >
-        <div
-          style={{
-            padding: '20px 16px 12px',
-            borderBottom: '1px solid var(--color-hairline)',
-          }}
-        >
-          <span
-            style={{
-              fontSize: 13,
-              fontWeight: 700,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: 'var(--color-primary)',
-            }}
-          >
-            Studio CRM
-          </span>
+  return (
+    <div className="crm-root">
+      {open && <div className="crm-overlay" onClick={() => setOpen(false)} />}
+
+      <aside className={`crm-sidebar${open ? ' open' : ''}`}>
+        <div className="crm-sidebar-logo">
+          <span className="crm-sidebar-logo-label">pierrondi.dev</span>
+          <span className="crm-sidebar-logo-name">Studio CRM</span>
         </div>
 
-        <nav style={{ flex: 1, padding: '8px 8px', overflowY: 'auto' }}>
-          {NAV.map(({ href, label, icon: Icon }) => {
-            const active = pathname === href || (href !== '/crm' && pathname.startsWith(href))
+        <nav className="crm-nav" aria-label="CRM navigation">
+          {NAV.map(({ href, label, icon: Icon, exact }) => {
+            const active = exact ? pathname === href : pathname.startsWith(href)
             return (
               <Link
                 key={href}
                 href={href}
                 onClick={() => setOpen(false)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 10,
-                  padding: '9px 12px',
-                  borderRadius: 8,
-                  marginBottom: 2,
-                  fontSize: 14,
-                  fontWeight: active ? 600 : 400,
-                  color: active ? 'var(--color-primary)' : 'var(--color-body)',
-                  background: active ? 'rgba(200, 255, 46, 0.08)' : 'transparent',
-                  textDecoration: 'none',
-                  transition: 'background 0.15s, color 0.15s',
-                }}
+                className={`crm-nav-link${active ? ' active' : ''}`}
+                aria-current={active ? 'page' : undefined}
               >
-                <Icon size={16} strokeWidth={1.8} />
+                <Icon size={15} strokeWidth={1.8} aria-hidden />
                 {label}
               </Link>
             )
           })}
         </nav>
 
-        <div style={{ padding: '12px 8px', borderTop: '1px solid var(--color-hairline)' }}>
-          <button
-            onClick={handleLogout}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 10,
-              width: '100%',
-              padding: '9px 12px',
-              borderRadius: 8,
-              fontSize: 14,
-              color: 'var(--color-muted)',
-              background: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-            }}
-          >
-            <LogOut size={16} strokeWidth={1.8} />
+        <div className="crm-sidebar-footer">
+          <button className="crm-logout-btn" onClick={handleLogout} aria-label="Sair">
+            <LogOut size={15} strokeWidth={1.8} aria-hidden />
             Sair
           </button>
         </div>
       </aside>
 
-      {/* Main */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-        {/* Top bar (mobile) */}
-        <header
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 12,
-            padding: '12px 20px',
-            borderBottom: '1px solid var(--color-hairline)',
-            background: 'var(--color-surface)',
-          }}
-        >
+      <div className="crm-main">
+        <header className="crm-topbar">
           <button
+            className="crm-topbar-btn crm-topbar-menu"
             onClick={() => setOpen((v) => !v)}
-            style={{ background: 'none', border: 'none', color: 'var(--color-body)', cursor: 'pointer' }}
-            className="crm-menu-btn"
+            aria-label={open ? 'Fechar menu' : 'Abrir menu'}
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            {open ? <X size={18} /> : <Menu size={18} />}
           </button>
-          <span style={{ fontSize: 13, color: 'var(--color-muted)' }}>pierrondi.dev / studio</span>
+          <span className="crm-topbar-breadcrumb">
+            studio / {currentPage?.label.toLowerCase() ?? 'crm'}
+          </span>
         </header>
 
-        <main style={{ flex: 1, overflowY: 'auto', padding: '24px 28px' }}>{children}</main>
+        <main className="crm-content">{children}</main>
       </div>
-
-      <style>{`
-        @media (min-width: 768px) {
-          .crm-menu-btn { display: none !important; }
-        }
-        @media (max-width: 767px) {
-          .crm-sidebar {
-            position: fixed !important;
-            top: 0; left: 0; bottom: 0;
-            transform: translateX(-100%);
-          }
-        }
-      `}</style>
     </div>
   )
 }
