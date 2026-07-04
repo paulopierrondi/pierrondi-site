@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { LayoutGrid } from 'lucide-react'
 import { getCurrentLanguage, type HomeLang } from '@/lib/i18n/site-language'
 import SiteLogo from './SiteLogo'
 import styles from './SiteNav.module.css'
@@ -125,6 +126,9 @@ export default function SiteNav() {
       </nav>
 
       <div className={styles.navRight}>
+        <Link href="/crm" className={styles.navAppBtn} title="Studio CRM" aria-label="Studio CRM">
+          <LayoutGrid size={15} strokeWidth={1.8} />
+        </Link>
         <a
           href="https://br.linkedin.com/in/paulopierrondi"
           target="_blank"
