@@ -36,27 +36,34 @@ export default function HeroSection({
         </motion.div>
 
         <h1 className={styles.headline}>
-          {title.map((line, lineIndex) => (
-            <span key={lineIndex} className={styles.line}>
-              {line.split(' ').map((word, wordIndex) => (
-                <motion.span
-                  key={`${lineIndex}-${wordIndex}`}
-                  className={
-                    lineIndex === title.length - 1 ? styles.accent : undefined
-                  }
-                  initial={reduced ? false : { opacity: 0, y: '115%' }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.9,
-                    delay: 0.2 + wordIndex * 0.05 + lineIndex * 0.1,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </span>
-          ))}
+          {/* Plain-text copy first: the animated words below render word-per-span
+              with initial opacity 0, which naive text extractors (simpler AI
+              crawlers, screen readers pre-hydration) read as one unspaced,
+              invisible string. This sr-only span carries the readable H1. */}
+          <span className="sr-only">{title.join(' ')}</span>
+          <span aria-hidden="true" style={{ display: 'block' }}>
+            {title.map((line, lineIndex) => (
+              <span key={lineIndex} className={styles.line}>
+                {line.split(' ').map((word, wordIndex) => (
+                  <motion.span
+                    key={`${lineIndex}-${wordIndex}`}
+                    className={
+                      lineIndex === title.length - 1 ? styles.accent : undefined
+                    }
+                    initial={reduced ? false : { opacity: 0, y: '115%' }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.9,
+                      delay: 0.2 + wordIndex * 0.05 + lineIndex * 0.1,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </span>
+            ))}
+          </span>
         </h1>
 
         <motion.p
