@@ -121,7 +121,7 @@ GitHub Actions (`.github/workflows/ci.yml`) roda em todo push/PR pra main:
 - `npx tsc --noEmit`
 - `npm run build`
 
-Railway não tem CI integrado próprio — confia no GitHub Actions e re-deploya automaticamente quando `main` muda.
+Railway não tem CI integrado próprio — o gate de qualidade é o GitHub Actions. **Atenção: o deploy NÃO é automático.** O service não está linkado ao GitHub (ver seção Re-deploy): merge em `main` não muda produção até alguém rodar `bash scripts/redeploy.sh` (`railway up`) manualmente, com aprovação explícita do Paulo.
 
 ## Pendências de rede
 
