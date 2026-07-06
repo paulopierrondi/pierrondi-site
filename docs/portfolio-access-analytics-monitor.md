@@ -92,6 +92,27 @@ Known-noise 4xx policy:
 - Protected AgenticosCore API reads such as `/api/v1/me`, `/api/v1/me/onboarding`, and `/api/v1/market-intelligence` remain classified as expected auth probes when they return 401/403.
 - Real public commercial, conversion, or GEO URLs still remain actionable when they return 4xx/5xx.
 
+AgenticosCore GA4 unblock checklist:
+
+1. In Google Analytics property `543366142`, add `portfolio-analytics-monitor@agentcore-499217.iam.gserviceaccount.com` as Viewer.
+2. Confirm the browser/account used for `pierrondi@gmail.com` can open `https://analytics.google.com/analytics/web/#/a387161272p543366142/admin/suiteusermanagement/property`, or use the real admin account for that property.
+3. Run the portfolio snapshot in read-only mode:
+
+```bash
+ACCESS_SNAPSHOT_N8N_DISPATCH=0 \
+ACCESS_SNAPSHOT_LOCAL_LLM_TRIAGE=0 \
+brain-env-run -- node scripts/access-snapshot.mjs \
+  --since 1h \
+  --limit 100 \
+  --out /tmp/portfolio-access-snapshot.json
+
+jq -r '.analytics.sources[] | select(.id=="agenticoscore") | "agenticoscore ga4=\\(.ga4.status) gsc=\\(.searchConsole.status)"' /tmp/portfolio-access-snapshot.json
+```
+
+Expected final state: `agenticoscore ga4=ok gsc=ok`.
+
+Do not start query/page/CTR/title/pSEO decisions for AgenticosCore until this line is `ga4=ok` or a deliberate decision is made to operate from Search Console + first-party funnel only.
+
 ### Plausible
 
 Token:
