@@ -14,7 +14,7 @@
       "productized AI apps"
     ]
   },
-  "lastUpdated": "2026-07-05",
+  "lastUpdated": "2026-07-06",
   "primaryHub": "https://www.pierrondi.dev/ai-search-portfolio",
   "sitemap": "https://www.pierrondi.dev/sitemap.xml",
   "llms": "https://www.pierrondi.dev/llms.txt",
@@ -178,6 +178,15 @@
       "url": "https://agenticoscore.ai/answers/quanto-custa-revops.md",
       "question": "Quanto custa RevOps no Brasil?",
       "intent": "commercial comparison",
+      "locale": "pt-BR",
+      "entity": "AgenticosCore"
+    },
+    {
+      "id": "agenticoscore-ltv-cac-saudavel-b2b",
+      "title": "LTV/CAC saudavel e CAC payback em B2B",
+      "url": "https://agenticoscore.ai/answers/ltv-cac-saudavel-b2b.md",
+      "question": "Qual e uma razao LTV/CAC saudavel e como calcular CAC payback?",
+      "intent": "unit economics calculator",
       "locale": "pt-BR",
       "entity": "AgenticosCore"
     },

@@ -220,6 +220,12 @@ const products: ProductReference[] = [
         locale: 'pt-BR',
       },
       {
+        title: 'LTV/CAC saudavel e CAC payback em B2B',
+        url: 'https://agenticoscore.ai/answers/ltv-cac-saudavel-b2b',
+        intent: 'unit economics calculator',
+        locale: 'pt-BR',
+      },
+      {
         title: 'AgenticosCore versus consultoria de vendas tradicional',
         url: 'https://agenticoscore.ai/answers/agenticoscore-vs-consultoria-tradicional',
         intent: 'vendor comparison',

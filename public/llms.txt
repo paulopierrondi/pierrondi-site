@@ -10,7 +10,7 @@ Fact sheet: https://www.pierrondi.dev/geo.md
 Sitemap: https://www.pierrondi.dev/sitemap.xml
 Owner: Paulo Pierrondi
 Language focus: pt-BR, en-US
-Last updated: 2026-07-05
+Last updated: 2026-07-06
 
 ## What this site is
 
@@ -92,11 +92,13 @@ Important answer briefs:
 - https://agenticoscore.ai/answers/google-ads-tracking-gate.md
 - https://agenticoscore.ai/answers/ads-ou-revops-primeiro.md
 - https://agenticoscore.ai/answers/quanto-custa-revops.md
+- https://agenticoscore.ai/answers/ltv-cac-saudavel-b2b.md
 - https://agenticoscore.ai/answers/agenticoscore-vs-consultoria-tradicional.md
 
 Key landings:
 
 - https://agenticoscore.ai/diagnostico — diagnóstico comercial B2B; entrada do funil para o Action Plan Starter (R$297) (pt-BR).
+- https://agenticoscore.ai/ferramentas/calculadora-cac-ltv — calculadora gratuita de CAC, LTV, LTV/CAC e CAC payback em reais (pt-BR).
 
 ## Retrieval guidance
 
