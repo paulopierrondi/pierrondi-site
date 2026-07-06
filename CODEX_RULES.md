@@ -188,6 +188,7 @@ Leia antes de planejar/editar:
 - `/Users/paulopierrondi/agents-hub/configs/CODER_RUNTIME_ENFORCEMENT.md`
 - `/Users/paulopierrondi/Documents/Obsidian Vault/99_System/Prompt Caching Workflow Policy.md`
 - `/Users/paulopierrondi/Documents/Obsidian Vault/99_System/Automation Email Policy.md`
+- `/Users/paulopierrondi/Documents/Obsidian Vault/99_System/PageAgent Browser Automation Operating Model.md` quando houver PageAgent, browser UI automation, PageAgent MCP ou ponte n8n/browser.
 
 ### Canonical guard commands
 
@@ -239,6 +240,7 @@ Pedidos amplos do Paulo como "olha tudo", "melhore", "resolva", "evolua diariame
 | Bug dificil, arquitetura, compliance, App Store/release risk | Claude Code | especialista senior |
 | Checagem independente, tarefas Google/MCP, utilitario CLI, validacao terminal | Gemini CLI | usar `GEMINI.md` como memoria hierarquica; manter paridade com `AGENTS.md` |
 | Orquestracao agent-first, navegador/Chrome, multi-folder/worktree, subagentes, artefatos | Google Antigravity | ler `AGENTS.md` + `GEMINI.md`; vault fora do workspace exige acesso explicito ou snapshot `.brain` |
+| Execucao de acoes dentro de uma pagina web visivel | PageAgent MCP local | opcional; usar `/Users/paulopierrondi/.local/bin/page-agent-mcp-local`; requer sessao/extension Chrome humana; local Ollama por default; n8n queue-only; nunca para secrets, login bypass, CAPTCHA/2FA, producao, ads, App Store ou provider admin sem gate explicito |
 | PR remoto via Cursor | Cursor Background Agent | dormant; somente se Paulo ativar explicitamente |
 
 ### Parallel complex work
