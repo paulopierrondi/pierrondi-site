@@ -150,8 +150,11 @@ function redact(value) {
 }
 
 function runSource(source) {
-  if (!existsSync(source.cwd)) {
-    return { ok: false, error: `missing cwd ${source.cwd}`, lines: [] }
+  // ACCESS_SNAPSHOT_SOURCES_CWD makes the snapshot hermetic on machines that
+  // don't have the per-service worktrees (CI runs with mocked provider CLIs).
+  const cwd = process.env.ACCESS_SNAPSHOT_SOURCES_CWD || source.cwd
+  if (!existsSync(cwd)) {
+    return { ok: false, error: `missing cwd ${cwd}`, lines: [] }
   }
 
   const args =
@@ -161,7 +164,7 @@ function runSource(source) {
 
   try {
     const output = execFileSync(source.provider === 'railway' ? 'railway' : 'vercel', args, {
-      cwd: source.cwd,
+      cwd,
       encoding: 'utf8',
       maxBuffer: 1024 * 1024 * 8,
       stdio: ['ignore', 'pipe', 'pipe'],

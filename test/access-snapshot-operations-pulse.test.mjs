@@ -133,6 +133,9 @@ console.log(JSON.stringify({
           ACCESS_SNAPSHOT_N8N_WEBHOOK_URL: `http://127.0.0.1:${port}/portfolio-access`,
           ACCESS_SNAPSHOT_LOCAL_LLM_TRIAGE: '0',
           PORTFOLIO_ACCESS_LOCAL_LLM_TRIAGE: '0',
+          // CI runners don't have the per-service worktree paths from SOURCES;
+          // point every source at the repo root so the mocked CLIs run hermetically.
+          ACCESS_SNAPSHOT_SOURCES_CWD: process.cwd(),
         },
       },
     )
