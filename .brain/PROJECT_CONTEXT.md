@@ -1,7 +1,7 @@
 # Project Brain Context
 
-Generated: `2026-07-05 12:26:21`
-Tool: `railway-run`
+Generated: `2026-07-05 23:05:22`
+Tool: `claude`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
 
@@ -2782,17 +2782,20 @@ tags:
 
 ---
 
+## 2026-07-05 20:59 BRT - Access GEO monitor false-alert fix prepared
+
+- Trigger: Paulo pediu "Resolva isso tudo agora" após o `hourly-portfolio-access-geo-monitor` alertar por 20 `4xx` em AgenticosCore e instrumentation `operationsPulse/localLlm/n8n` ausente.
+- Constraint: concurrency guard encontrou active writers no worktree principal de `pierrondi-site`; Codex não editou o shared tree e trabalhou em `/Users/paulopierrondi/Projects/.worktrees/pierrondi-site-access-geo-monitor-fix` na branch local `codex/access-geo-monitor-fix`.
+- Patch preparado: `/Users/paulopierrondi/Projects/.worktrees/pierrondi-site-access-geo-monitor-fix/.brain/agent_patches/2026-07-05-access-geo-monitor-operations-pulse.patch`.
+- Files changed in isolated worktree: `scripts/access-snapshot.mjs`, `test/access-snapshot-operations-pulse.test.mjs`.
+- What changed: `access-snapshot.mjs` now emits structured `operationsPulse`, action-board severity/urgency/routing, queue, human gates, prompt-cache block, local LLM delivery status, and n8n queue-only delivery status. It also classifies protected AgenticosCore API 401s plus WordPress/xmlrpc/Joomla probes as known noise instead of actionable public-growth 4xx.
+- Smoke evidence: read-only smoke at `2026-07-05T23:57Z` wrote `/Users/paulopierrondi/Projects/.worktrees/pierrondi-site-access-geo-monitor-fix/tmp/access-snapshot-smoke.json`; result was `severity=notice`, `urgency=decision_batch`, `routing.primary=analytics_access_queue`, `slackPolicy=digest_only`, `actionableErrors=0`, `knownNoiseErrors=21`, `blockedAnalyticsItems=10`.
+- Validation: `eslint scripts/access-snapshot.mjs test/access-snapshot-operations-pulse.test.mjs` passed; `npm test` passed `34/34`; `complexity-guard.py scan --changed` passed with `HARD=0`; `git diff --check` passed.
+- Linear anchor: `AGE-1486` fetched live and is currently `Done`; no status change was made. Comment-only update planned because the issue reality changed but reopening is a product decision.
+[REDACTED SECRET LINE]
+- Next action: reconcile/apply the patch to the main `pierrondi-site` worktree after active writers settle, then let the scheduled automation run once to confirm the email no longer reports `operationsPulse/localLlm/n8n blocked_unobservable` or false `abnormal 4xx` alert.
+
 ## 2026-07-05 hourly access monitor signal
-
-- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T21:36:43Z`; read-only, anchored to `pierrondi.dev Public Site (AGE-1486)`.
-- Result: snapshot exited `0`; all 8 required public endpoint probes returned HTTP `200`.
-- Access summary: 150 provider-log requests in the last hour; 19 commercial, 14 conversion, 29 GEO, 2 AI crawler, 0 observed 5xx. Provider logs are request counts, not GA4 users/sessions/search clicks.
-- Material signal: traffic normalized from the prior 560-request spike, but GA4 readback for `CantuStudio` and `FaithSchool` moved from previous `ok` state to `blocked_ga4_api_error` with HTTP `403`; keep provider access as the same-day follow-up.
-- Product highlights: `pierrondi.dev` had 17 requests with 2 AI crawler requests on GEO support files; `CantuStudio` had 58 all-2xx requests and 1 `/signup` conversion-path request; `AgenticosCore` had 68 requests with the known three protected API `401` samples; `FaithSchool` had 7 all-2xx requests.
-- Instrumentation blocker: current `scripts/access-snapshot.mjs` stdout still lacks `operationsPulse`, `localLlm`, and structured `n8n` delivery fields despite flags being enabled; `rg` found no matching symbols, so `qwen3:14b` local triage and n8n delivery remain `blocked_unobservable`.
-- Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T213643Z-parsed-summary.json`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T213643Z-endpoint-health.txt`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T213643Z-email-report.md`.
-
----
 
 - Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T09:26:32.323Z`.
 - Result: read-only snapshot exited `0`; all 8 required public endpoints returned HTTP `200`.
@@ -2804,55 +2807,36 @@ tags:
 [REDACTED SECRET LINE]
 [REDACTED SECRET LINE]
 
+## 2026-07-05 hourly access monitor signal - 18:36Z
+
+- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T18:36:27Z`; read-only, anchored to `pierrondi.dev Public Site (AGE-1486)`.
+- Result: snapshot exited `0`; all 8 required public endpoint probes returned HTTP `200`.
+- Access summary: 678 provider-log requests in the last hour; 97 commercial, 98 conversion, 26 GEO, 7 AI crawler, 0 observed 5xx. Provider logs are request counts, not GA4 users/sessions/search clicks.
+- Material signal: `FaithSchool` returned to the provider-log cap with 500 all-2xx requests after the prior low-volume run; treat as traffic/monitoring spike, not analytics users/sessions.
+- Product highlights: `pierrondi.dev` rose to 93 requests with 3 AI crawler requests and sampled 404s on `/en/login` and `/en/kommo`; `CantuStudio` had 18 all-2xx requests and 2 AI crawler requests; `AgenticosCore` retained the known 3 protected API 401 responses.
+[REDACTED SECRET LINE]
+- Instrumentation blocker: current snapshot stdout still lacks `operationsPulse`, `localLlm`, and `n8n` fields despite flags being enabled, so `qwen3:14b` local triage and n8n delivery remain `blocked_unobservable`.
+- Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T183627Z-parsed-summary.json`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T183627Z-endpoint-health.txt`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T183627Z-email-report.md`.
+[REDACTED SECRET LINE]
+[REDACTED SECRET LINE]
+
+## 2026-07-05 hourly access monitor signal - 17:38Z
+
+- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T17:38:09Z`; read-only, anchored to `pierrondi.dev Public Site (AGE-1486)`.
+- Result: snapshot exited `0`; all 8 required public endpoint probes returned HTTP `200`.
+- Access summary: 97 provider-log requests in the last hour; 13 commercial, 14 conversion, 21 GEO, 3 AI crawler, 0 observed 5xx. Provider logs are request counts, not GA4 users/sessions/search clicks.
+- Material signal: traffic cooled versus the prior 158-request run; `pierrondi.dev` dropped to 10 requests with 3 AI crawler requests and two `404 /app-ads.txt`; `AgenticosCore` retained the known 3 protected API 401 responses; `FaithSchool` stayed low at 7 all-2xx provider-log requests.
+[REDACTED SECRET LINE]
+- Instrumentation blocker: current snapshot stdout still lacks `operationsPulse`, `localLlm`, and `n8n` fields despite flags being enabled, so `qwen3:14b` local triage and n8n delivery remain `blocked_unobservable`.
+- Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T173437Z-parsed-summary.json`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T173437Z-endpoint-health.txt`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T173437Z-email-report.md`.
+[REDACTED SECRET LINE]
+[REDACTED SECRET LINE]
+
 ## 2026-07-05 hourly access monitor signal - 14:34Z
 
 - Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T14:34:57Z`; read-only, anchored to `pierrondi.dev Public Site (AGE-1486)`.
 - Result: snapshot exited `0`; all 8 required public endpoint probes returned HTTP `200`.
-- Access summary: 189 provider-log requests in the last hour; 33 commercial, 17 conversion, 24 GEO, 4 AI crawler, 0 observed 5xx. Provider logs are request counts, not GA4 users/sessions/search clicks.
-- Material signal: traffic normalized from the earlier FaithSchool 500-row provider-log spike; current FaithSchool sample is 34 all-2xx requests. CantuStudio and AgenticosCore still show 2 AI crawler requests each.
-- Product highlights: `pierrondi.dev` had 53 requests with one `404 /en/kommo`; `CantuStudio` had 35 requests with three stale asset `404`s; `AgenticosCore` had 67 requests with the known three protected API `401` samples; `FaithSchool` had 34 all-2xx requests.
-[REDACTED SECRET LINE]
-- Instrumentation blocker: current snapshot stdout still lacks `operationsPulse`, `localLlm`, and structured `n8n` delivery fields despite flags being enabled; `scripts/access-snapshot.mjs` currently has no matching symbols, so `qwen3:14b` local triage and n8n delivery remain `blocked_unobservable`.
-- Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T143257Z-parsed-summary.json`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T143257Z-endpoint-health.txt`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T143257Z-email-report.md`.
-[REDACTED SECRET LINE]
-[REDACTED SECRET LINE]
-
-## 2026-06-30 hourly access monitor n8n decision
-
-- Decision: `hourly-portfolio-access-geo-monitor` may use n8n as a downstream triage/digest destination for the redacted `operationsPulse` payload.
-- Current state: code support already exists in `/Users/paulopierrondi/Projects/pierrondi-site/scripts/access-snapshot.mjs`; the run remains `not_configured_or_disabled` until secure env is configured.
-- Expected env names only: `ACCESS_SNAPSHOT_N8N_DISPATCH` or `PORTFOLIO_ACCESS_N8N_DISPATCH`, plus one webhook env from `ACCESS_SNAPSHOT_N8N_WEBHOOK_URL`, `PORTFOLIO_ACCESS_N8N_WEBHOOK_URL`, or `N8N_PORTFOLIO_GEO_WEBHOOK_URL`.
-[REDACTED SECRET LINE]
-
-## 2026-07-04 hourly access monitor signal
-
-- `2026-07-04T23:18:38Z`: hourly monitor saw a material `pierrondi.dev` request spike: portfolio total 396 provider-log requests, with `pierrondi.dev` at 291 requests and 17 4xx responses concentrated around English CRM/content paths. Required public endpoints all returned 200, including `answers.json`, `llms.txt`, FaithSchool, CantuStudio and both AgenticosCore answer endpoints. Plausible/Search Console remain human-gated; GA4 remains blocked for `pierrondi.dev` and AgenticosCore, while CantuStudio/FaithSchool GA4 returned `ok` with empty metrics. `operationsPulse`, local LLM delivery and n8n delivery are still absent from `access-snapshot` stdout, so the script-level decision layer remains an instrumentation blocker. Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260704T231824Z-parsed-summary.json` and `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260704T231824Z-endpoint-health.txt`.
-
-- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-04T20:15:36Z`.
-- Result: snapshot exited 0 and all 8 required public endpoints returned HTTP 200, but stdout still lacks `operationsPulse`, `operationsPulse.localLlm`, and `operationsPulse.n8n` despite local LLM and n8n dispatch flags. Treat as instrumentation blocker until `scripts/access-snapshot.mjs` emits the structured decision layer again.
-- Access summary: 130 provider-log requests in the last hour; 14 commercial, 14 conversion, 34 GEO, 5 AI crawler, 0 observed 5xx. Provider logs are request counts, not GA4 users/sessions/search clicks.
-[REDACTED SECRET LINE]
-[REDACTED SECRET LINE]
-- Evidence: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260704T201341Z-parsed-summary.json` and `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260704T201341Z-email-report.md`.
-
----
-
-## 2026-07-04 hourly access monitor signal
-
-- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-04T19:12:25.009Z`.
-- Endpoint health: all 8 required public probes returned HTTP 200, including `www.pierrondi.dev/answers.json`.
-- Provider logs: 117 requests in the last hour; 13 commercial, 13 conversion, 32 GEO, 3 AI crawler, 4 sampled 4xx/401-style requests, and no observed 5xx. These are provider request counts, not GA4 users/sessions/search clicks.
-[REDACTED SECRET LINE]
-- Instrumentation blocker: current `scripts/access-snapshot.mjs` output still lacks `operationsPulse`, `localLlm`, and `n8n` fields despite flags being enabled, so local LLM/n8n delivery cannot be verified from the structured output.
-- Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260704T191206Z-parsed-summary.json` and `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260704T191206Z-email-report.md`.
-[REDACTED SECRET LINE]
-
----
-
-## 2026-07-02 — RESOLVE: `/en/blog` 404 root-cause + fix (local, deploy gated)
-
-- Trigger: the `17:37Z` monitor flagged `404 /en/blog/ia-enterprise-modelo-operacional` (2 AI-crawler hits that window). Claude Code resolved it.
-- Root cause: the EN locale ships index pages (`app/en/blog/page.tsx`, `app/en/feitos/page.tsx`) but the posts/work entries are **PT-only** — there is no `app/en/blog/[slug
+- Access summary: 189 provider-log requests in the last hour; 33 commercial, 17 conversion, 24 GEO, 4 AI crawler, 0 ob
 ...[truncated]
 
 ## AI History Snapshot
