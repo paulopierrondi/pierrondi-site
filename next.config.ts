@@ -68,6 +68,8 @@ const CANONICAL_REDIRECTS = [
 const EN_LOCALE_SLUG_REDIRECTS = [
   { source: '/en/blog/:slug', destination: '/blog/:slug', permanent: true },
   { source: '/en/feitos/:slug', destination: '/feitos/:slug', permanent: true },
+  { source: '/en/crm', destination: '/crm', permanent: true },
+  { source: '/en/crm/login', destination: '/crm/login', permanent: true },
 ]
 
 // Apex -> www so ONE canonical host serves the whole site AND the GEO layer.

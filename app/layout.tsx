@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import SiteJsonLdWrapper from '@/components/SiteJsonLdWrapper'
 import DocumentLangSync from '@/components/DocumentLangSync'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 import SiteNav from '@/components/SiteNav'
 import SiteFooter from '@/components/SiteFooter'
 import HomeBackground from '@/components/HomeBackground'
@@ -34,6 +35,7 @@ const mono = JetBrains_Mono({
 })
 
 const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN
+const googleAnalyticsMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
 const CookieBanner = dynamic(() => import('@/components/CookieBanner'))
 
@@ -164,6 +166,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <HomeBackground />
         <SiteNav />
         <LanguageSwitcher />
+        <GoogleAnalytics measurementId={googleAnalyticsMeasurementId} />
         {children}
         <SiteFooter />
         <CookieBanner />

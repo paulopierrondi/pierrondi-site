@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { execFileSync } from 'node:child_process'
-import { createSign } from 'node:crypto'
+import { createHash, createSign } from 'node:crypto'
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 
@@ -34,6 +34,9 @@ const SECURITY_SCAN_PATHS = [
   /^\/+.*\/wp-includes\/wlwmanifest\.xml$/i,
   /^\/+components\/com_jce(?:\/|$)/i,
   /^\/+(?:phpmyadmin|pma|adminer|\.env|\.git|server-status)(?:\/|$)/i,
+  /^\/+api\/(?:\.env|\.git|server-status|common\.js|config\.js)$/i,
+  /^\/+api\/(?:\*|auth\/\*)$/i,
+  /^\/+curl\/[a-z0-9_-]{24,}$/i,
 ]
 const EXPECTED_AUTH_PROBE_RULES = {
   agenticoscore: [/^\/api\/v1\/(?:me|me\/onboarding|market-intelligence)(?:\/|$)/],
@@ -1147,6 +1150,7 @@ function operationStats(report) {
     aiCrawlerRequests: summary.aiCrawlerRequests,
     actionableErrors: summary.actionableErrors,
     knownNoiseErrors: summary.knownNoiseErrors,
+    providerLogFailures: summary.providerLogFailures,
     blockedAnalyticsItems: summary.blockedAnalyticsItems,
   }
 }
@@ -1215,6 +1219,33 @@ function operationHumanGates(analyticsItems) {
       status: item.status,
       action: item.action,
     }))
+}
+
+function stableJson(value) {
+  if (Array.isArray(value)) return `[${value.map(stableJson).join(',')}]`
+  if (value && typeof value === 'object') {
+    return `{${Object.keys(value)
+      .sort()
+      .map((key) => `${JSON.stringify(key)}:${stableJson(value[key])}`)
+      .join(',')}}`
+  }
+  return JSON.stringify(value)
+}
+
+function operationStateHash(value) {
+  return createHash('sha256').update(stableJson(value)).digest('hex').slice(0, 16)
+}
+
+function operationGateSignature(humanGates) {
+  return humanGates
+    .map((gate) => ({
+      product: gate.product,
+      area: gate.area,
+      status: gate.status,
+    }))
+    .sort((a, b) =>
+      `${a.product}:${a.area}:${a.status}`.localeCompare(`${b.product}:${b.area}:${b.status}`),
+    )
 }
 
 function operationRequiresHumanGate(item) {
@@ -1367,6 +1398,37 @@ function buildActionReport(pulse, llmResult = null) {
   }
 }
 
+function buildDecisionState(pulseBase) {
+  const openItems = pulseBase.queue.filter((item) => !item.humanGate)
+  const humanGateSignature = operationGateSignature(pulseBase.humanGates)
+  const stateMaterial = {
+    severity: pulseBase.severity,
+    urgency: pulseBase.urgency,
+    routingPrimary: pulseBase.routing.primary,
+    metrics: {
+      actionableErrors: pulseBase.metrics.actionableErrors,
+      knownNoiseErrors: pulseBase.metrics.knownNoiseErrors,
+      providerLogFailures: pulseBase.metrics.providerLogFailures,
+      blockedAnalyticsItems: pulseBase.metrics.blockedAnalyticsItems,
+    },
+    openItems: openItems.map((item) => ({
+      product: item.product,
+      area: item.area,
+      status: item.status,
+      action: item.action,
+    })),
+    humanGates: humanGateSignature,
+  }
+  return {
+    signature: operationStateHash(stateMaterial),
+    humanGateSignature: operationStateHash(humanGateSignature),
+    requiresHumanDecision: humanGateSignature.length > 0,
+    hasOpenTechnicalWork: openItems.length > 0,
+    repeatedGateCandidate: pulseBase.urgency === 'decision_batch' && openItems.length === 0,
+    note: 'Use signature changes to distinguish new operational signals from repeated human-gated analytics blockers.',
+  }
+}
+
 function safeText(value) {
   return redact(String(value || '').slice(0, 1000))
 }
@@ -1437,6 +1499,7 @@ function buildN8nPayload(pulse) {
     routingPrimary: pulse.routing.primary,
     slackPolicy: pulse.routing.slackPolicy,
     metrics: pulse.metrics,
+    decisionState: pulse.decisionState,
     valueSignals: pulse.valueSignals,
     queue: pulse.queue,
     humanGates: pulse.humanGates,
@@ -1491,7 +1554,7 @@ function buildN8nPlan(pulseBase) {
     dispatchEnabled: config.enabled,
     webhookConfigured: config.webhookConfigured,
     webhookEnv: config.webhookEnv,
-    dedupeKey: `${pulseBase.automationId}:${pulseBase.generatedAt.slice(0, 13)}:${pulseBase.severity}:${pulseBase.metrics.actionableErrors}:${pulseBase.metrics.knownNoiseErrors}`,
+    dedupeKey: `${pulseBase.automationId}:${pulseBase.severity}:${pulseBase.decisionState.signature}`,
     delivery: { status: config.enabled ? 'pending' : 'disabled' },
   }
 }
@@ -1517,6 +1580,7 @@ function buildOperationsPulse(report) {
       cached_tokens: null,
     },
   }
+  base.decisionState = buildDecisionState(base)
   return {
     ...base,
     localLlm: buildLocalLlmPlan(),

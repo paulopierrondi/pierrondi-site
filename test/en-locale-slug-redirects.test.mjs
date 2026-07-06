@@ -20,6 +20,11 @@ test('EN blog/feitos detail URLs redirect to the canonical PT article', () => {
   )
 })
 
+test('EN CRM URLs redirect to the canonical private CRM routes', () => {
+  assert.match(nextConfig, /source:\s*'\/en\/crm',\s*destination:\s*'\/crm',\s*permanent:\s*true/)
+  assert.match(nextConfig, /source:\s*'\/en\/crm\/login',\s*destination:\s*'\/crm\/login',\s*permanent:\s*true/)
+})
+
 test('EN locale slug redirects are wired into redirects()', () => {
   assert.match(nextConfig, /const EN_LOCALE_SLUG_REDIRECTS\b/)
   assert.match(nextConfig, /\.\.\.EN_LOCALE_SLUG_REDIRECTS/)

@@ -45,10 +45,12 @@ const rowsByService = {
     { timestamp: '2026-06-30T18:00:01.000Z', host: 'www.pierrondi.dev', method: 'GET', path: '/missing-offer', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.11', totalDuration: 12 }
   ],
   'cantustudio-frontend': [
-    { timestamp: '2026-06-30T18:00:02.000Z', host: 'cantustudio.app', method: 'GET', path: '/answers/melodia-para-satb', httpStatus: 200, clientUa: 'GPTBot/1.0', srcIp: '198.51.100.12', totalDuration: 35 }
+    { timestamp: '2026-06-30T18:00:02.000Z', host: 'cantustudio.app', method: 'GET', path: '/answers/melodia-para-satb', httpStatus: 200, clientUa: 'GPTBot/1.0', srcIp: '198.51.100.12', totalDuration: 35 },
+    { timestamp: '2026-06-30T18:00:02.500Z', host: 'cantustudio.app', method: 'GET', path: '/api/.env', httpStatus: 404, clientUa: 'curl/8.0', srcIp: '198.51.100.14', totalDuration: 8 }
   ],
   'agentcore-revenue-ops': [
-    { timestamp: '2026-06-30T18:00:03.000Z', host: 'agenticoscore.ai', method: 'GET', path: '/diagnostico', httpStatus: 200, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.13', totalDuration: 22 }
+    { timestamp: '2026-06-30T18:00:03.000Z', host: 'agenticoscore.ai', method: 'GET', path: '/diagnostico', httpStatus: 200, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.13', totalDuration: 22 },
+    { timestamp: '2026-06-30T18:00:03.500Z', host: 'agenticoscore.ai', method: 'GET', path: '/curl/c664b4f6c7b940d89f0a0dd6022a88de', httpStatus: 404, clientUa: 'curl/8.0', srcIp: '198.51.100.15', totalDuration: 9 }
   ]
 }
 for (const row of rowsByService[service] || []) console.log(JSON.stringify(row))
@@ -82,10 +84,12 @@ const rowsByService = {
     { timestamp: '2026-06-30T18:00:01.000Z', host: 'www.pierrondi.dev', method: 'GET', path: '/missing-offer', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.11', totalDuration: 12 }
   ],
   'cantustudio-frontend': [
-    { timestamp: '2026-06-30T18:00:02.000Z', host: 'cantustudio.app', method: 'GET', path: '/answers/melodia-para-satb', httpStatus: 200, clientUa: 'GPTBot/1.0', srcIp: '198.51.100.12', totalDuration: 35 }
+    { timestamp: '2026-06-30T18:00:02.000Z', host: 'cantustudio.app', method: 'GET', path: '/answers/melodia-para-satb', httpStatus: 200, clientUa: 'GPTBot/1.0', srcIp: '198.51.100.12', totalDuration: 35 },
+    { timestamp: '2026-06-30T18:00:02.500Z', host: 'cantustudio.app', method: 'GET', path: '/api/.env', httpStatus: 404, clientUa: 'curl/8.0', srcIp: '198.51.100.14', totalDuration: 8 }
   ],
   'agentcore-revenue-ops': [
-    { timestamp: '2026-06-30T18:00:03.000Z', host: 'agenticoscore.ai', method: 'GET', path: '/diagnostico', httpStatus: 200, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.13', totalDuration: 22 }
+    { timestamp: '2026-06-30T18:00:03.000Z', host: 'agenticoscore.ai', method: 'GET', path: '/diagnostico', httpStatus: 200, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.13', totalDuration: 22 },
+    { timestamp: '2026-06-30T18:00:03.500Z', host: 'agenticoscore.ai', method: 'GET', path: '/curl/c664b4f6c7b940d89f0a0dd6022a88de', httpStatus: 404, clientUa: 'curl/8.0', srcIp: '198.51.100.15', totalDuration: 9 }
   ]
 }
 for (const row of rowsByService[service] || []) console.log(JSON.stringify(row))
@@ -151,17 +155,49 @@ console.log(JSON.stringify({
     assert.equal(report.operationsPulse.n8n.webhookEnv, 'ACCESS_SNAPSHOT_N8N_WEBHOOK_URL')
     assert.equal(report.operationsPulse.localLlm.enabled, false)
     assert.equal(report.operationsPulse.localLlm.delivery.status, 'disabled')
-    assert.equal(report.operationsPulse.metrics.requests, 5)
+    assert.equal(report.operationsPulse.metrics.requests, 7)
     assert.equal(report.operationsPulse.metrics.aiCrawlerRequests, 1)
+    assert.equal(report.operationsPulse.metrics.actionableErrors, 1)
+    assert.equal(report.operationsPulse.metrics.knownNoiseErrors, 2)
+    assert.equal(report.sources.find((source) => source.id === 'cantustudio').intent.topKnownNoiseErrorPaths[0].key, '404 /api/.env')
+    assert.equal(
+      report.sources.find((source) => source.id === 'agenticoscore').intent.topKnownNoiseErrorPaths[0].key,
+      '404 /curl/c664b4f6c7b940d89f0a0dd6022a88de',
+    )
+    assert.equal(report.operationsPulse.decisionState.hasOpenTechnicalWork, true)
+    assert.equal(report.operationsPulse.decisionState.repeatedGateCandidate, false)
+    assert.match(report.operationsPulse.decisionState.signature, /^[a-f0-9]{16}$/)
+    assert.match(report.operationsPulse.n8n.dedupeKey, /^hourly-portfolio-access-geo-monitor:warning:[a-f0-9]{16}$/)
+    assert.equal(report.operationsPulse.n8n.dedupeKey.includes(report.generatedAt.slice(0, 13)), false)
     assert.equal(report.operationsPulse.queue.some((item) => item.route === 'incident_or_fix_queue'), true)
 
     assert.equal(received.length, 1)
     assert.equal(received[0].event, 'portfolio.access_geo_monitor')
     assert.equal(received[0].automationId, report.operationsPulse.automationId)
     assert.equal(received[0].dedupeKey, report.operationsPulse.n8n.dedupeKey)
-    assert.equal(received[0].metrics.requests, 5)
+    assert.equal(received[0].decisionState.signature, report.operationsPulse.decisionState.signature)
+    assert.equal(received[0].metrics.requests, 7)
     assert.equal(received[0].queue.some((item) => item.owner === 'technical_ops'), true)
     assert.equal(JSON.stringify(received[0]).includes(`127.0.0.1:${port}`), false)
+
+    const repeatResult = await runNode(
+      ['scripts/access-snapshot.mjs', '--since', '1h', '--limit', '10', '--analytics=0'],
+      {
+        cwd: process.cwd(),
+        env: {
+          ...process.env,
+          PATH: `${binDir}:${process.env.PATH}`,
+          ACCESS_SNAPSHOT_N8N_DISPATCH: '1',
+          ACCESS_SNAPSHOT_N8N_WEBHOOK_URL: `http://127.0.0.1:${port}/portfolio-access`,
+          ACCESS_SNAPSHOT_LOCAL_LLM_TRIAGE: '0',
+          PORTFOLIO_ACCESS_LOCAL_LLM_TRIAGE: '0',
+          ACCESS_SNAPSHOT_SOURCES_CWD: process.cwd(),
+        },
+      },
+    )
+    assert.equal(repeatResult.status, 0, repeatResult.stderr)
+    const repeatReport = JSON.parse(repeatResult.stdout)
+    assert.equal(repeatReport.operationsPulse.n8n.dedupeKey, report.operationsPulse.n8n.dedupeKey)
   } finally {
     server.closeAllConnections?.()
     await new Promise((resolve) => server.close(resolve))
