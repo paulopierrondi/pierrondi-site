@@ -1,6 +1,6 @@
 # Project Brain Context
 
-Generated: `2026-06-30 10:05:49`
+Generated: `2026-07-05 23:05:22`
 Tool: `claude`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
@@ -146,7 +146,7 @@ Every Bradesco Now Assist material must explicitly connect:
 ---
 type: policy
 status: generated
-generated_at: "2026-06-30 09:55:05"
+generated_at: "2026-07-05 09:25:00"
 tags:
   - ai-agents
   - policy
@@ -818,6 +818,7 @@ Implication:
 
 | Linear project | Status | Priority | Repo / path hint | Obsidian note hint | Notes |
 | --- | --- | --- | --- | --- | --- |
+| Kommo-Caio - Implantacao CRM e Pre-Qualificacao | In Progress | High | `/Users/paulopierrondi/Documents/Kommo-Caio` / `paulopierrondi/kommo-caio` | `02_Projects/kommo-caio` | Live project created 2026-07-03; initial backlog AGE-2247 to AGE-2254; first phase covers Kommo CRM structure, segmentation, import model, Salesbot triage and human handoff. |
 | ServiceNow Implementation OS - Bruno PDI Demo | In Progress | High | vault + PDI + ServiceNow demo artifacts | `ServiceNow Implementation OS` | New live project created `2026-06-04`; immediate queue is `AGE-1628` PDI readiness, `AGE-1629` FSO pack, `AGE-1630` IRM pack, `AGE-1631` demo script and `AGE-1632` rehearsal. `AGE-1627` command center is Done. |
 | Itaú NowMobile ServiceNow | Backlog | High | `itau-nowmobile-servicenow` | search Projects Index | New live project from 2026-05-21; repo appears in local sync as `/Users/paulopierrondi/Projects/itau-nowmobile-servicenow` on `codex/AGE-1517-vibe-code-integration` and as `/Users/paulopierrondi/Documents/itau-nowmobile-servicenow` in the project description. |
 | nowassistdemo | Planned | High | `nowassistdemo` | search Projects Index | ServiceNow AI demo control plane. Newest project in Linear. |
@@ -827,10 +828,7 @@ Implication:
 | ServiceNow Agent Army | In Progress | Urgent | `servicenow-agent-army` | search Projects Index | Community ServiceNow agent product. |
 | Pierrondi Marketing OS | In Progress | Urgent | `pierrondi-ia` | `pierrondi-ia` | Core marketing platform and Studio. |
 | PPT_Formation | Backlog | High | `ppt_engine`, `ppt` | search Projects Index | Agentic PPTX engine. |
-| Fashion Stylist AI | Completed | High | `fashion` | search Projects Index | Completed in Linear, still useful as app pattern source. |
-| Faith | Completed | High | `faith`, `faithschool` | `faithschool-web` | Moved to Past Projects after iOS `2.5.2 (64)` was submitted for App Store Review on 2026-05-26. |
-| Design System Consistency | Backlog | High | `csdm-validator` | search Projects Index | CSDM visual consistency project. |
-| Privacy & Cookie Compliance | Planned | N
+| Fashion Stylist AI | Completed | High | `fashion` | search Projects Index | Completed in Linear, still useful as app patte
 ...[truncated]
 
 ## 99_System/Automation Email Policy.md
@@ -1084,8 +1082,7 @@ Todo coder deve registrar aprendizados reutilizaveis em:
 - Development QA + Ornith finish gate: qualquer desenvolvimento, bugfix, refactor, automacao de codigo, code review, arquitetura ou regra de agente so fecha depois de testes/checks proporcionais, QA da superficie e segunda passada local com Ornith/Onif quando disponivel (`@ornith`, `ask_ornith`, `delegate provider="ornith"` ou `qwen-code --model ornith-coder:1.0`). Se Ornith/Ollama estiver indisponivel, registrar blocker e risco residual; nao afirmar "totalmente validado". Final/journal/handoff devem listar testes, QA, resultado/blocker Ornith, arquivos e risco.
 - Prompt caching e workflow layout: separar prefixo estável de delta dinâmico, registrar `prompt_cache.strategy`, `prefix_version` e telemetria quando houver.
 - ASI-Evolve/evaluator-driven evolution: usar apenas como laboratório com `run_spec`, sandbox, timeout, score objetivo, análise por round e proposta de promoção; nunca plugar o pipeline cru em Agent Hub, Vault, Linear, produção ou prompts globais. Ver [[99_System/ASI-Evolve Safe Evolution Lab]].
-- CLI/headless orchestration: comandos batch devem ter modo não-interativo explícito; quando o CLI default for TUI, usar flag headless/documentada antes de integrar em automação.
-- CLI batch verification: se a ferramenta puder cair para TUI/interactive shell mode, tratar isso como falha do pipeline até provar `--print`/head
+- PageAgent browser automation: PageAgent MCP fica instalado como capacidade opcional para acoes dentro de pagina web visivel, nao como orquestrador central. Usar [[99_System/PageAgent Browser Automation Operating Model]], wrapper `/Users/paulopierrondi/.local/bin/page-agent-mcp-local`, Ollama local por default, n8n queue-o
 ...[truncated]
 
 ## 04_Areas/Coding/Best Practices/App Web Quality Best Practices.md
@@ -1266,6 +1263,8 @@ tags:
 - Qualquer relato de progresso ou gap precisa vir de estado vivo lido nesta sessao; memoria, note antiga e resumo de chat nao bastam.
 - Nao alegar verificacao sem evidencia de tool call ou leitura recente na mesma sessao.
 - `workspace_write` exige `cwd` contratual com `AGENTS.md` ou `.brain/PROJECT_CONTEXT.md`; `$HOME` e caminhos genericos nao servem.
+- CLIs que defaultam para TUI/interativo precisam de flag batch/headless documentada antes de entrar em pipeline ou automacao.
+- Prompt cache-aware workflows devem manter prefixo estavel, delta dinamico no fim e registrar `prompt_cache.strategy` / `prefix_version` / telemetria quando disponível.
 
 ## Inicio
 
@@ -1297,14 +1296,7 @@ tags:
 - Atualizar nota do projeto.
 - Atualizar `.brain/SESSION_NOTES.md` se sem vault.
 - Registrar aprendizado em [[04_Areas/Coding/Best Practices/Learning Inbox]] quando reutilizavel.
-- Sugerir promocao para best practice quando padrao aparecer de novo.
-- Se a entrega veio de background coder, registrar owner, handoff aceito/rejeitado e atualizar Linear apenas depois de validação local.
-
-## Aprendizados locais
-
-- Adicionar aqui comportamento que melhorou entregas dos coders.
-
-- 2026-05-21: Cursor Ba
+- Sugerir promocao para
 ...[truncated]
 
 ## 04_Areas/Coding/Checklists/Project Checklist Hub.md
@@ -2790,216 +2782,61 @@ tags:
 
 ---
 
+## 2026-07-05 20:59 BRT - Access GEO monitor false-alert fix prepared
 
-
-## 📸 Screenshots & Previews
-
-### 📸 Screenshots & Previews
-
-
-### 2026-06-17 Autonomous SEO growth loop
-
-- Automation: `pierrondi-dev-autonomous-seo-growth-loop`
-- Preflight: `pass` via Agent Hub mission `20260617-074238-agent-hub-run-pierrondi-dev-autonomous-seo-growth-loop`
-- Verified refreshed artifacts at `2026-06-17T10:44:02Z`:
-  - `/Users/paulopierrondi/agents-hub/state/growth/pierrondi-site-seo-growth.json`
-  - `/Users/paulopierrondi/Documents/Obsidian Vault/04_Areas/Marketing/pierrondi.dev Autonomous Growth Loop.md`
-  - `/Users/paulopierrondi/Documents/Obsidian Vault/Hub_Agentes/04_Dashboards/dashboard_code_review_control_tower.md`
-  - `/Users/paulopierrondi/agents-hub/logs/automation-emails/pierrondi-seo-growth-2026-06-17.md`
-- Outcome: `YELLOW`
-  - `robots.txt` = `200`, zero blocked public routes.
-  - `sitemap.xml` = `200`, `150` URLs, canonical `www` still healthy.
-  - Missing from sitemap: `/portfolio`, `/precos`, `/marketing-os`, `/produto-digital`, `/tech-partner`, `/calculadora`, `/faq`, `/quiz`, `/sobre`.
-- Loop-selected action:
-  - Keyword: `ia para pequenas empresas`
-  - Focus URL: `https://www.pierrondi.dev/marketing-os`
-  - Backlink action: responder manualmente em comunidade/forum apenas se resolver a pergunta.
+- Trigger: Paulo pediu "Resolva isso tudo agora" após o `hourly-portfolio-access-geo-monitor` alertar por 20 `4xx` em AgenticosCore e instrumentation `operationsPulse/localLlm/n8n` ausente.
+- Constraint: concurrency guard encontrou active writers no worktree principal de `pierrondi-site`; Codex não editou o shared tree e trabalhou em `/Users/paulopierrondi/Projects/.worktrees/pierrondi-site-access-geo-monitor-fix` na branch local `codex/access-geo-monitor-fix`.
+- Patch preparado: `/Users/paulopierrondi/Projects/.worktrees/pierrondi-site-access-geo-monitor-fix/.brain/agent_patches/2026-07-05-access-geo-monitor-operations-pulse.patch`.
+- Files changed in isolated worktree: `scripts/access-snapshot.mjs`, `test/access-snapshot-operations-pulse.test.mjs`.
+- What changed: `access-snapshot.mjs` now emits structured `operationsPulse`, action-board severity/urgency/routing, queue, human gates, prompt-cache block, local LLM delivery status, and n8n queue-only delivery status. It also classifies protected AgenticosCore API 401s plus WordPress/xmlrpc/Joomla probes as known noise instead of actionable public-growth 4xx.
+- Smoke evidence: read-only smoke at `2026-07-05T23:57Z` wrote `/Users/paulopierrondi/Projects/.worktrees/pierrondi-site-access-geo-monitor-fix/tmp/access-snapshot-smoke.json`; result was `severity=notice`, `urgency=decision_batch`, `routing.primary=analytics_access_queue`, `slackPolicy=digest_only`, `actionableErrors=0`, `knownNoiseErrors=21`, `blockedAnalyticsItems=10`.
+- Validation: `eslint scripts/access-snapshot.mjs test/access-snapshot-operations-pulse.test.mjs` passed; `npm test` passed `34/34`; `complexity-guard.py scan --changed` passed with `HARD=0`; `git diff --check` passed.
+- Linear anchor: `AGE-1486` fetched live and is currently `Done`; no status change was made. Comment-only update planned because the issue reality changed but reopening is a product decision.
 [REDACTED SECRET LINE]
-- Email transport: `EMAIL_SENT pierrondi@gmail.com sent via sendmail`
+- Next action: reconcile/apply the patch to the main `pierrondi-site` worktree after active writers settle, then let the scheduled automation run once to confirm the email no longer reports `operationsPulse/localLlm/n8n blocked_unobservable` or false `abnormal 4xx` alert.
 
+## 2026-07-05 hourly access monitor signal
 
----
-
-## 📊 UX & Sales Analysis (2026-06-08)
-
-| Métrica | Score | Status |
-|---------|-------|--------|
-| Onboarding | 3/10 | ❌ Não detectado |
-| Hook Strength | 6/10 | Potencial: referral links + social proof + embedda |
-| Monetização | 8/10 | SaaS/ad-supported (unconfirmed) |
-
-### ⚠️ Friction Points (Revenue Killers)
-
-- 🔴 Sem fluxo de onboarding — usuários abandonam no primeiro uso (20-40% churn)
-- 🔴 Sem mecanismo de compartilhamento — crescimento orgânico limitado a ASO/ads
-- 🔴 Sem screenshots de App Store — ASO comprometida, conversão de listing baixa
-
----
-
-## 💡 Como Melhorar (Oportunidades Acionáveis)
-
-##### Adicionar share nativo com preview gerado
-
-**Impacto estimado:** Viral coefficient K > 0.3  
-**Categoria:** `viral`
-
-<details>
-<summary>🛠️ Como Implementar (clique para expandir)</summary>
-
-1. Implementar ShareSheet (iOS) / Intent (Android)
-2. Gerar imagem/card do resultado (ex: emoji grid como Wordle)
-3. Deep link que abre app na tela certa
-4. Add 'Share on TikTok' com template de vídeo
-5. Tracking de convites (referral attribution)
-
-</details>
-
----
-
-##### Criar onboarding de 3 telas com Aha Moment
-
-**Impacto estimado:** +40% completion rate, +25% D1 retention  
-**Categoria:** `ux`
-
-<details>
-<summary>🛠️ Como Implementar (clique para expandir)</summary>
-
-1. Tela 1: Problema (ex: 'Sua playlist está chata?')
-2. Tela 2: Solução (GIF do app em ação, 3 segundos)
-3. Tela 3: CTA ('Começar Agora' + skip option)
-4. Pedir notification permission APÓS o Aha moment
-5. A/B test: onboarding vs direto pro app
-
-</details>
-
----
-
-##### Gerar screenshots de App Store profissionais
-
-**Impacto estimado:** +25-50% conversion na App Store listing  
-**Categoria:** `marketing`
-
-<details>
-<summary>🛠️ Como Implementar (clique para expandir)</summary>
-
-1. Usar fastlane snapshot ou screenshot-tests-for-android
-2. Device frames via frameit (iPhone 15 Pro, iPad Pro)
-3. 5 screenshots: Value prop → Feature 1 → Feature 2 → Social proof → CTA
-4. Texto em português + inglês (2 locales)
-5. Preview video de 15-30s para App Store
-6. A/B test com different copy (emotional vs functional)
-
-</details>
-
----
-
-
-
----
-
-## 🔬 Pesquisa de Mercado (2026-06-08)
-
-#### 🔍 RESEARCH: skipped
-
-_Pesquisa pulada_
-
-
-
----
-
-## 📁 Detalhes do Projeto
-
-- Commits (30d): `92`
-- Branches: `21`
-- Último: `5fe867f fix(control-tower): route low risk plans to kimi cod`
-
-
-### Tech Stack Completo
-
-- react
-- nextjs
-- tailwind
-
-### Monetização Detectada
-
-| Método | Status |
-|--------|--------|
-| RevenueCat | ❌ |
-| Stripe | ❌ |
-| Firebase | ❌ |
-| Ads | ❌ |
-
-### 📱 Screenshots Originais
-
-_Nenhum screenshot encontrado no projeto._
-
----
-
-## 📝 Sobre
-
-Landing page pública de [pierrondi.dev](https://pierrondi.dev) — agência de IA aplicada, automação e produto digital. Stack enxuto: **Next.js 16 + React 19 + Tailwind v4 + Formspree**. Zero banco, zero auth, CI em segundos. > Marketing OS interno vive em [pierrondi-os](https://github.com/paulopierro
-
----
-
-## 🔗 Links
-
-- Repo local: `file:///Users/paulopierrondi/Projects/pierrondi-site`
-- [[Dashboard]]
-- [[Projects Index]]
-- [[2026-06-08-All-Projects-Intelligence]]
-
----
-
-*Última análise automática: 2026-06-08 12:01:35*
-
-<!-- PRODUCT_COUNCIL_PROJECT_START -->
-## Product Council
-
-Este projeto e coberto pelo Hub de Agentes e deve acionar o Product Council em todo trabalho de coder.
-
-| Papel | Agente | Status |
-| --- | --- | --- |
-| Business Owner | [[agente_business_owner]] | ativo |
-| Technical Lead | [[agente_technical_lead]] | ativo |
-| Automation Lead | [[agente_automation_lead]] | ativo |
-| Test Lead | [[agente_test_lead]] | ativo |
-| Product User | [[agente_product_user]] | ativo |
-| Release Lead | [[agente_release_lead]] | ativo |
-| Delivery Lead | [[agente_delivery_lead]] | ativo |
-
-**Start gate:** `/Users/paulopierrondi/agents-hub/scripts/project-council-touchpoint.py --project-id "pierrondi-site" --phase start`
-
-**Finish gate:** `/Users/paulopierrondi/agents-hub/scripts/project-council-touchpoint.py --project-id "pierrondi-site" --phase finish --summary "<resumo>"`
-
-**Reports:** [[Hub_Agentes/03_Outputs/council_reviews/2026-05-20-product-council-report]]
-<!-- PRODUCT_COUNCIL_PROJECT_END -->
-
-<!-- BACKGROUND_CODERS_PROJECT_START -->
-## Background Coders
-
-Modelo ativo: Codex + Claude Code + Kimi CLI + Qwen Code + Google Antigravity/AGY. Gemini CLI fica fallback explicito. Cursor Background Agent fica dormente.
-
-| Trabalho | Coder | Regra |
-| --- | --- | --- |
-| Varredura/triagem/relatorio | Kimi CLI | barato, report-first |
+- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T09:26:32.323Z`.
+- Result: read-only snapshot exited `0`; all 8 required public endpoints returned HTTP `200`.
+- Access summary: 250 provider-log requests in the last hour; 16 commercial, 15 conversion, 24 GEO, 4 AI crawler, 0 observed 5xx. Provider logs are request counts, not GA4 users/sessions/search clicks.
+- Product highlights: `pierrondi.dev` spiked to 128 requests with 3 AI crawler requests and 1 sampled fake app `404`; `CantuStudio` had 52 clean 2xx requests and 1 AI crawler request; `AgenticosCore` had 66 requests with the known 3 protected API `401` responses; `FaithSchool` had 4 clean 2xx requests.
 [REDACTED SECRET LINE]
-| Patch/teste/integracao | Codex | executor principal |
-| Arquitetura/compliance/App Store/bug dificil | Claude Code | especialista senior |
-| Checagem independente/MCP/utilitario terminal/browser/artefatos | Google Antigravity / AGY | default; usar `AGENTS.md` + `GEMINI.md`; vault externo exige acesso explicito |
-| Fallback Gemini-specific | Gemini CLI | usar somente quando Paulo ou a tarefa pedir Gemini explicitamente |
-
-Budget gate: uma tarefa/issue por execução, owner explícito, artefato esperado e stop condition.
-
-Autonomous intake: pedido amplo do Paulo deve virar entrega segura e rastreavel; nao perguntar o obvio. Resolver projeto/superficie, ler fontes vivas, executar melhoria reversivel e separar human gates. `accepted`/heartbeat/handoff vazio nao contam como progresso sem artefato, validacao, Linear ref, fonte viva ou blocker com next action.
-
-Prompt cache: usar prefixo estavel + delta dinamico conforme `Prompt Caching Workflow Policy`; reportar strategy/prefix_version/cache telemetry quando houver.
-
+- Instrumentation blocker: current `scripts/access-snapshot.mjs` stdout still lacks `operationsPulse`, `localLlm`, and `n8n` fields despite flags being enabled, so local LLM/n8n delivery cannot be verified from structured output.
+- Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T092618Z-parsed-summary.json` and `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T092618Z-endpoint-health.txt`.
+[REDACTED SECRET LINE]
 [REDACTED SECRET LINE]
 
-Registry id: `pierrondi-site`.
-<!-- BACKGROUND_CODERS_PROJECT_END -->
+## 2026-07-05 hourly access monitor signal - 18:36Z
 
-## 202
+- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T18:36:27Z`; read-only, anchored to `pierrondi.dev Public Site (AGE-1486)`.
+- Result: snapshot exited `0`; all 8 required public endpoint probes returned HTTP `200`.
+- Access summary: 678 provider-log requests in the last hour; 97 commercial, 98 conversion, 26 GEO, 7 AI crawler, 0 observed 5xx. Provider logs are request counts, not GA4 users/sessions/search clicks.
+- Material signal: `FaithSchool` returned to the provider-log cap with 500 all-2xx requests after the prior low-volume run; treat as traffic/monitoring spike, not analytics users/sessions.
+- Product highlights: `pierrondi.dev` rose to 93 requests with 3 AI crawler requests and sampled 404s on `/en/login` and `/en/kommo`; `CantuStudio` had 18 all-2xx requests and 2 AI crawler requests; `AgenticosCore` retained the known 3 protected API 401 responses.
+[REDACTED SECRET LINE]
+- Instrumentation blocker: current snapshot stdout still lacks `operationsPulse`, `localLlm`, and `n8n` fields despite flags being enabled, so `qwen3:14b` local triage and n8n delivery remain `blocked_unobservable`.
+- Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T183627Z-parsed-summary.json`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T183627Z-endpoint-health.txt`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T183627Z-email-report.md`.
+[REDACTED SECRET LINE]
+[REDACTED SECRET LINE]
+
+## 2026-07-05 hourly access monitor signal - 17:38Z
+
+- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T17:38:09Z`; read-only, anchored to `pierrondi.dev Public Site (AGE-1486)`.
+- Result: snapshot exited `0`; all 8 required public endpoint probes returned HTTP `200`.
+- Access summary: 97 provider-log requests in the last hour; 13 commercial, 14 conversion, 21 GEO, 3 AI crawler, 0 observed 5xx. Provider logs are request counts, not GA4 users/sessions/search clicks.
+- Material signal: traffic cooled versus the prior 158-request run; `pierrondi.dev` dropped to 10 requests with 3 AI crawler requests and two `404 /app-ads.txt`; `AgenticosCore` retained the known 3 protected API 401 responses; `FaithSchool` stayed low at 7 all-2xx provider-log requests.
+[REDACTED SECRET LINE]
+- Instrumentation blocker: current snapshot stdout still lacks `operationsPulse`, `localLlm`, and `n8n` fields despite flags being enabled, so `qwen3:14b` local triage and n8n delivery remain `blocked_unobservable`.
+- Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T173437Z-parsed-summary.json`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T173437Z-endpoint-health.txt`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T173437Z-email-report.md`.
+[REDACTED SECRET LINE]
+[REDACTED SECRET LINE]
+
+## 2026-07-05 hourly access monitor signal - 14:34Z
+
+- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T14:34:57Z`; read-only, anchored to `pierrondi.dev Public Site (AGE-1486)`.
+- Result: snapshot exited `0`; all 8 required public endpoint probes returned HTTP `200`.
+- Access summary: 189 provider-log requests in the last hour; 33 commercial, 17 conversion, 24 GEO, 4 AI crawler, 0 ob
 ...[truncated]
 
 ## AI History Snapshot

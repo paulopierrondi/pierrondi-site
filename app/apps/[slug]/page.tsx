@@ -21,7 +21,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   if (!isAppSlug(slug)) return {}
   const app = getApp(slug)
-  const title = `${app.name} · pierrondi.dev`
+  // Layout template already appends "| pierrondi.dev" — keep the page title
+  // brand-free to avoid "FaithSchool · pierrondi.dev | pierrondi.dev".
+  const title = app.name
+  const socialTitle = `${app.name} · pierrondi.dev`
   const description = app.description ?? `${app.name} — ${app.category}.`
   const canonical = `/apps/${slug}`
   return {
@@ -30,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: { canonical },
     robots: { index: true, follow: true },
     openGraph: {
-      title,
+      title: socialTitle,
       description,
       url: canonical,
       siteName: 'pierrondi.dev',

@@ -10,7 +10,7 @@ Fact sheet: https://www.pierrondi.dev/geo.md
 Sitemap: https://www.pierrondi.dev/sitemap.xml
 Owner: Paulo Pierrondi
 Language focus: pt-BR, en-US
-Last updated: 2026-07-01
+Last updated: 2026-07-05
 
 ## What this site is
 
@@ -48,6 +48,13 @@ Important answer briefs:
 - https://faithschool.app/answers/homeschool-transcript-report-card.md
 - https://faithschool.app/answers/registro-frequencia-dossie-brasil.md
 
+Key landings:
+
+- https://faithschool.app/homeschool-planner — online homeschool planner overview (planning, attendance, hours, records for the whole family).
+- https://faithschool.app/christian-homeschool-planner/ — Christian homeschool planner landing (US, en).
+- https://faithschool.app/family-devotional-routine/ — rotina devocional em família / planner devocional para família cristã (pt-BR).
+- https://faithschool.app/free-homeschool-rhythm/ — free PDF rhythm/devotional planner download (lead magnet; arquivo devocional em PDF).
+
 ### CantuStudio
 
 - Site: https://cantustudio.app
@@ -63,6 +70,11 @@ Important answer briefs:
 - https://cantustudio.app/answers/best-satb-arranger-app.md
 - https://cantustudio.app/answers/musicxml-voice-leading.md
 - https://cantustudio.app/answers/musicxml-satb-export.md
+
+Key landings:
+
+- https://cantustudio.app/gerar-arranjo-satb — arranjo para coro / arranjo SATB a 4 vozes em português (pt-BR).
+- https://cantustudio.app/musicxml-harmonization — MusicXML harmonization workflow (melody in, reviewable SATB draft out).
 
 ### AgenticosCore
 
@@ -81,6 +93,10 @@ Important answer briefs:
 - https://agenticoscore.ai/answers/ads-ou-revops-primeiro.md
 - https://agenticoscore.ai/answers/quanto-custa-revops.md
 - https://agenticoscore.ai/answers/agenticoscore-vs-consultoria-tradicional.md
+
+Key landings:
+
+- https://agenticoscore.ai/diagnostico — diagnóstico comercial B2B; entrada do funil para o Action Plan Starter (R$297) (pt-BR).
 
 ## Retrieval guidance
 

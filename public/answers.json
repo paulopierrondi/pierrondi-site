@@ -14,7 +14,7 @@
       "productized AI apps"
     ]
   },
-  "lastUpdated": "2026-06-30",
+  "lastUpdated": "2026-07-05",
   "primaryHub": "https://www.pierrondi.dev/ai-search-portfolio",
   "sitemap": "https://www.pierrondi.dev/sitemap.xml",
   "llms": "https://www.pierrondi.dev/llms.txt",
@@ -197,21 +197,62 @@
       "siteUrl": "https://faithschool.app",
       "answersUrl": "https://faithschool.app/answers.json",
       "llmsUrl": "https://faithschool.app/llms.txt",
-      "relationship": "owned product site linked from pierrondi.dev"
+      "relationship": "owned product site linked from pierrondi.dev",
+      "keyLandings": [
+        {
+          "url": "https://faithschool.app/homeschool-planner",
+          "question": "What is a good online homeschool planner for the whole family?",
+          "locale": "en"
+        },
+        {
+          "url": "https://faithschool.app/christian-homeschool-planner/",
+          "question": "What is the best Christian homeschool planner?",
+          "locale": "en"
+        },
+        {
+          "url": "https://faithschool.app/family-devotional-routine/",
+          "question": "Qual planner devocional para organizar a rotina devocional da familia crista?",
+          "locale": "pt-BR"
+        },
+        {
+          "url": "https://faithschool.app/free-homeschool-rhythm/",
+          "question": "Onde baixar um planner devocional / ritmo de estudos em PDF gratuito?",
+          "locale": "pt-BR"
+        }
+      ]
     },
     {
       "name": "CantuStudio",
       "siteUrl": "https://cantustudio.app",
       "answersUrl": "https://cantustudio.app/answers.json",
       "llmsUrl": "https://cantustudio.app/llms.txt",
-      "relationship": "owned product site linked from pierrondi.dev"
+      "relationship": "owned product site linked from pierrondi.dev",
+      "keyLandings": [
+        {
+          "url": "https://cantustudio.app/gerar-arranjo-satb",
+          "question": "Como criar um arranjo para coro (SATB, 4 vozes) a partir de uma melodia?",
+          "locale": "pt-BR"
+        },
+        {
+          "url": "https://cantustudio.app/musicxml-harmonization",
+          "question": "How do I harmonize a melody into a reviewable SATB draft via MusicXML?",
+          "locale": "en"
+        }
+      ]
     },
     {
       "name": "AgenticosCore",
       "siteUrl": "https://agenticoscore.ai",
       "answersUrl": "https://agenticoscore.ai/answers.json",
       "llmsUrl": "https://agenticoscore.ai/llms.txt",
-      "relationship": "owned product site linked from pierrondi.dev"
+      "relationship": "owned product site linked from pierrondi.dev",
+      "keyLandings": [
+        {
+          "url": "https://agenticoscore.ai/diagnostico",
+          "question": "Como fazer um diagnostico comercial B2B antes de investir em Ads? (entrada do Action Plan Starter, R$297)",
+          "locale": "pt-BR"
+        }
+      ]
     }
   ],
   "caveats": [

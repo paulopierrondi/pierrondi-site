@@ -70,7 +70,7 @@ console.log(JSON.stringify({
   )
 }
 
-test('access snapshot emits and optionally delivers the n8n operations pulse', { todo: 'operationsPulse not yet implemented in access-snapshot.mjs' }, async () => {
+test('access snapshot emits and optionally delivers the n8n operations pulse', async () => {
   const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
   writeExecutable(
     path.join(binDir, 'railway'),
@@ -133,6 +133,9 @@ console.log(JSON.stringify({
           ACCESS_SNAPSHOT_N8N_WEBHOOK_URL: `http://127.0.0.1:${port}/portfolio-access`,
           ACCESS_SNAPSHOT_LOCAL_LLM_TRIAGE: '0',
           PORTFOLIO_ACCESS_LOCAL_LLM_TRIAGE: '0',
+          // CI runners don't have the per-service worktree paths from SOURCES;
+          // point every source at the repo root so the mocked CLIs run hermetically.
+          ACCESS_SNAPSHOT_SOURCES_CWD: process.cwd(),
         },
       },
     )
@@ -165,7 +168,7 @@ console.log(JSON.stringify({
   }
 })
 
-test('access snapshot can triage operations pulse with a local Ollama-compatible LLM', { todo: 'operationsPulse not yet implemented in access-snapshot.mjs' }, async () => {
+test('access snapshot can triage operations pulse with a local Ollama-compatible LLM', async () => {
   const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
   writeProviderStubs(binDir)
 
@@ -251,7 +254,7 @@ test('access snapshot can triage operations pulse with a local Ollama-compatible
   }
 })
 
-test('access snapshot blocks local LLM triage when endpoint is not local', { todo: 'operationsPulse not yet implemented in access-snapshot.mjs' }, async () => {
+test('access snapshot blocks local LLM triage when endpoint is not local', async () => {
   const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
   writeProviderStubs(binDir)
 
@@ -276,7 +279,7 @@ test('access snapshot blocks local LLM triage when endpoint is not local', { tod
   assert.equal(JSON.stringify(report).includes('https://example.com'), false)
 })
 
-test('access snapshot falls back when local LLM returns empty JSON', { todo: 'operationsPulse not yet implemented in access-snapshot.mjs' }, async () => {
+test('access snapshot falls back when local LLM returns empty JSON', async () => {
   const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
   writeProviderStubs(binDir)
 
