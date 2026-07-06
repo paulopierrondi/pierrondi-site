@@ -77,12 +77,12 @@ Current discovery status on 2026-07-06:
 - CantuStudio GA4 UI access works in Chrome for property `543380598`; service account has Viewer access and GA4 Data API readback is `ok`.
 - pierrondi.dev GA4 property `544419741` was created in the Default Account for Firebase account, web stream `www.pierrondi.dev` uses measurement id `G-1CL8PFYY7T`, and GA4 Data API readback is `ok` with the portfolio service account.
 - pierrondi.dev production tagging is gated by `NEXT_PUBLIC_GA_MEASUREMENT_ID`; the site only loads GA4 after `cookie-consent=all`.
-- AgenticosCore public GA4 measurement id is `G-C9XNT5S87W`; numeric property id `543366142` is configured in the secure env provider, but GA4 Data API readback is still blocked until the service account has Viewer access on that property.
+- AgenticosCore public GA4 measurement id is `G-C9XNT5S87W`; numeric property id `543366142` is configured in the secure env provider, but GA4 Data API readback is still blocked until the service account has Viewer access on that property. On 2026-07-06 the logged-in Google Analytics account had no access to `p543366142`; the GA UI access request was emailed to the property administrators.
 - Search Console UI access works for `sc-domain:agenticoscore.ai`, `sc-domain:pierrondi.dev`, `sc-domain:cantustudio.app`, and `sc-domain:faithschool.app`.
 - Search Console DNS verification was completed for `pierrondi.dev` via GoDaddy TXT, `cantustudio.app` via Cloudflare TXT, and `faithschool.app` via Vercel DNS TXT.
 - The service account is listed as a Full user on all four Search Console domain properties and API readback is `ok`.
 - Current GSC data is still sparse for newly verified properties; use query/page/CTR/position decisions only after data accumulates.
-- GA4 Data API readback works for FaithSchool `527930560`, CantuStudio `543380598`, and pierrondi.dev `544419741`; AgenticosCore remains the only GA4 access blocker because the API still returns an access error for `543366142`.
+- GA4 Data API readback works for FaithSchool `527930560`, CantuStudio `543380598`, and pierrondi.dev `544419741`; AgenticosCore remains the only GA4 access blocker because the API still returns an access error for `543366142`, and the current browser account cannot manage that property.
 - Local ADC with `cloud-platform` exists, but the default `gcloud` ADC client was blocked by Google when requesting `analytics.readonly` and `webmasters.readonly`; keep recurring reads on the service-account path.
 - Plausible API remains blocked until a Plausible token is configured in the secure env provider.
 
