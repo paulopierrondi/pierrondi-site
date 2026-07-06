@@ -28,6 +28,16 @@ const COMMON_TECHNICAL_PATHS = [
   /^\/\.well-known\//,
 ]
 const COMMON_LEGAL_PATHS = [/^\/(?:privacy|privacidade|terms|termos)(?:\/|$)/]
+const SECURITY_SCAN_PATHS = [
+  /^\/+xmlrpc\.php$/,
+  /^\/+(?:wp-admin|wp-login\.php|wp-content|wp-includes|wordpress|wp|cms|blog|news|site|test|backup|old)(?:\/|$)/i,
+  /^\/+.*\/wp-includes\/wlwmanifest\.xml$/i,
+  /^\/+components\/com_jce(?:\/|$)/i,
+  /^\/+(?:phpmyadmin|pma|adminer|\.env|\.git|server-status)(?:\/|$)/i,
+]
+const EXPECTED_AUTH_PROBE_RULES = {
+  agenticoscore: [/^\/api\/v1\/(?:me|me\/onboarding|market-intelligence)(?:\/|$)/],
+}
 const PRODUCT_INTENT_RULES = {
   pierrondi: {
     commercial: [
@@ -164,28 +174,35 @@ function runSource(source) {
 }
 
 function normalize(source, line) {
-  let raw
+  const raw = parseJsonLine(line)
+  if (!raw) return null
+  return source.provider === 'railway' ? normalizeRailwayLog(raw) : normalizeVercelLog(raw)
+}
+
+function parseJsonLine(line) {
   try {
-    raw = JSON.parse(line)
+    return JSON.parse(line)
   } catch {
     return null
   }
+}
 
-  if (source.provider === 'railway') {
-    return {
-      timestamp: raw.timestamp || null,
-      host: raw.host || null,
-      method: raw.method || null,
-      path: raw.path || '/',
-      status: Number(raw.httpStatus || 0),
-      durationMs: Number(raw.totalDuration || 0),
-      userAgent: raw.clientUa || '',
-      source: raw.edgeRegion || null,
-      uniqueKey: raw.srcIp || null,
-      cache: null,
-    }
+function normalizeRailwayLog(raw) {
+  return {
+    timestamp: raw.timestamp || null,
+    host: raw.host || null,
+    method: raw.method || null,
+    path: raw.path || '/',
+    status: Number(raw.httpStatus || 0),
+    durationMs: Number(raw.totalDuration || 0),
+    userAgent: raw.clientUa || '',
+    source: raw.edgeRegion || null,
+    uniqueKey: raw.srcIp || null,
+    cache: null,
   }
+}
 
+function normalizeVercelLog(raw) {
   return {
     timestamp: raw.timestamp ? new Date(raw.timestamp).toISOString() : null,
     host: raw.domain || null,
@@ -244,131 +261,256 @@ function rowIntent(source, row) {
   return 'other'
 }
 
+function classifyHttpIssue(source, row, intent) {
+  const pathValue = cleanPath(row.path)
+  const status = Number(row.status || 0)
+  if (status < 400) return null
+
+  if (matchesAny(pathValue, SECURITY_SCAN_PATHS)) {
+    return {
+      bucket: 'known_noise',
+      reason: 'security_scan_noise',
+      actionable: false,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
+
+  const authRules = EXPECTED_AUTH_PROBE_RULES[source.id] || []
+  if ((status === 401 || status === 403) && matchesAny(pathValue, authRules)) {
+    return {
+      bucket: 'expected_auth',
+      reason: 'expected_protected_api_probe',
+      actionable: false,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
+
+  if (status >= 500) {
+    return {
+      bucket: 'server_error',
+      reason: 'server_error',
+      actionable: true,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
+
+  return {
+    bucket: intent === 'commercial' || intent === 'conversion' || intent === 'geo' ? 'public_growth_4xx' : 'other_4xx',
+    reason: `${intent}_http_${status}`,
+    actionable: true,
+    evidenceKey: `${status} ${pathValue}`,
+  }
+}
+
+function addProviderOpportunity(opportunities, source, result) {
+  if (result.ok) return
+  opportunities.push({
+    priority: 'high',
+    area: 'monitoring',
+    action: `Restore provider log access for ${source.label}.`,
+    why: 'Without provider logs the hourly monitor cannot detect crawl, traffic or production regressions.',
+  })
+}
+
+function addActionableErrorOpportunity(opportunities, intent) {
+  const actionableErrorCount = intent.actionableErrorCount || 0
+  if (actionableErrorCount <= 0) return
+  opportunities.push({
+    priority: 'high',
+    area: 'technical_seo',
+    action: `Fix or intentionally redirect ${actionableErrorCount} recent actionable 4xx/5xx requests.`,
+    why: 'Broken URLs waste crawl budget and can block GEO/SEO pages from being trusted by search and answer engines.',
+    evidence: topEntries(intent.actionableErrorPaths, 5),
+  })
+}
+
+function addSecurityNoiseOpportunity(opportunities, intent, rawErrorCount) {
+  const knownNoiseErrorCount = intent.knownNoiseErrorCount || 0
+  const actionableErrorCount = intent.actionableErrorCount || 0
+  if (rawErrorCount <= 0 || actionableErrorCount > 0 || knownNoiseErrorCount <= 0) return
+  opportunities.push({
+    priority: 'low',
+    area: 'security_noise',
+    action: `Keep filtering ${knownNoiseErrorCount} known auth/security-scan 4xx requests out of growth alerts.`,
+    why: 'Protected API probes and commodity WordPress/xmlrpc scans should not page growth or SEO workflows when public endpoints are healthy.',
+    evidence: topEntries(intent.knownNoiseErrorPaths, 5),
+  })
+}
+
+function addAiCrawlerOpportunity(opportunities, source, intent) {
+  if (intent.aiCrawlerRequests <= 0) return
+  opportunities.push({
+    priority: 'medium',
+    area: 'geo',
+    action: `Expand internal links from AI-visited pages into the strongest commercial pages for ${source.label}.`,
+    why: 'AI crawlers already reached the site; the next gain is making answer pages point clearly to product and conversion pages.',
+    evidence: topEntries(intent.aiCrawlerPaths, 5),
+  })
+}
+
+function addSeoGeoBridgeOpportunity(opportunities, source, intent) {
+  if (intent.geoRequests <= 0 || intent.commercialRequests !== 0) return
+  opportunities.push({
+    priority: 'medium',
+    area: 'seo_geo_bridge',
+    action: `Add stronger commercial CTAs and cross-links from GEO pages for ${source.label}.`,
+    why: 'Discovery traffic is arriving on answer/indexing surfaces, but the sampled window did not show commercial page demand.',
+    evidence: topEntries(intent.geoPaths, 5),
+  })
+}
+
+function addConversionOpportunity(opportunities, source, intent) {
+  if (intent.conversionRequests <= 0) return
+  opportunities.push({
+    priority: 'medium',
+    area: 'conversion_tracking',
+    action: `Audit lead/signup/checkout events on the active conversion paths for ${source.label}.`,
+    why: 'These paths are getting demand; every hit needs GA4/server-side event coverage before budget scales.',
+    evidence: topEntries(intent.conversionPaths, 5),
+  })
+}
+
+function addFaviconOpportunity(opportunities, source, intent) {
+  if (!topEntries(intent.errorPaths, 3).some((item) => item.key.includes('/favicon.ico'))) return
+  opportunities.push({
+    priority: 'low',
+    area: 'technical_polish',
+    action: `Ship a valid favicon for ${source.label}.`,
+    why: 'It removes noisy 404s from logs and keeps health checks focused on real SEO/product issues.',
+  })
+}
+
 function buildSourceOpportunities(source, intent, result) {
   const opportunities = []
   const statusCounts = Object.fromEntries([...intent.statuses.entries()])
-  const errorCount = (statusCounts['4xx'] || 0) + (statusCounts['5xx'] || 0)
-
-  if (!result.ok) {
-    opportunities.push({
-      priority: 'high',
-      area: 'monitoring',
-      action: `Restore provider log access for ${source.label}.`,
-      why: 'Without provider logs the hourly monitor cannot detect crawl, traffic or production regressions.',
-    })
-  }
-
-  if (errorCount > 0) {
-    opportunities.push({
-      priority: 'high',
-      area: 'technical_seo',
-      action: `Fix or intentionally redirect ${errorCount} recent 4xx/5xx requests.`,
-      why: 'Broken URLs waste crawl budget and can block GEO/SEO pages from being trusted by search and answer engines.',
-      evidence: topEntries(intent.errorPaths, 5),
-    })
-  }
-
-  if (intent.aiCrawlerRequests > 0) {
-    opportunities.push({
-      priority: 'medium',
-      area: 'geo',
-      action: `Expand internal links from AI-visited pages into the strongest commercial pages for ${source.label}.`,
-      why: 'AI crawlers already reached the site; the next gain is making answer pages point clearly to product and conversion pages.',
-      evidence: topEntries(intent.aiCrawlerPaths, 5),
-    })
-  }
-
-  if (intent.geoRequests > 0 && intent.commercialRequests === 0) {
-    opportunities.push({
-      priority: 'medium',
-      area: 'seo_geo_bridge',
-      action: `Add stronger commercial CTAs and cross-links from GEO pages for ${source.label}.`,
-      why: 'Discovery traffic is arriving on answer/indexing surfaces, but the sampled window did not show commercial page demand.',
-      evidence: topEntries(intent.geoPaths, 5),
-    })
-  }
-
-  if (intent.conversionRequests > 0) {
-    opportunities.push({
-      priority: 'medium',
-      area: 'conversion_tracking',
-      action: `Audit lead/signup/checkout events on the active conversion paths for ${source.label}.`,
-      why: 'These paths are getting demand; every hit needs GA4/server-side event coverage before budget scales.',
-      evidence: topEntries(intent.conversionPaths, 5),
-    })
-  }
-
-  if (topEntries(intent.errorPaths, 3).some((item) => item.key.includes('/favicon.ico'))) {
-    opportunities.push({
-      priority: 'low',
-      area: 'technical_polish',
-      action: `Ship a valid favicon for ${source.label}.`,
-      why: 'It removes noisy 404s from logs and keeps health checks focused on real SEO/product issues.',
-    })
-  }
+  const rawErrorCount = (statusCounts['4xx'] || 0) + (statusCounts['5xx'] || 0)
+  addProviderOpportunity(opportunities, source, result)
+  addActionableErrorOpportunity(opportunities, intent)
+  addSecurityNoiseOpportunity(opportunities, intent, rawErrorCount)
+  addAiCrawlerOpportunity(opportunities, source, intent)
+  addSeoGeoBridgeOpportunity(opportunities, source, intent)
+  addConversionOpportunity(opportunities, source, intent)
+  addFaviconOpportunity(opportunities, source, intent)
 
   return opportunities
     .sort((a, b) => PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority])
     .slice(0, 6)
 }
 
+function incrementMap(map, key, amount = 1) {
+  map.set(key, (map.get(key) || 0) + amount)
+}
+
+function createSummaryTracker() {
+  return {
+    statuses: new Map(),
+    paths: new Map(),
+    hosts: new Map(),
+    agents: new Map(),
+    unique: new Set(),
+    intentCounts: new Map(),
+    commercialPaths: new Map(),
+    conversionPaths: new Map(),
+    geoPaths: new Map(),
+    aiCrawlerPaths: new Map(),
+    errorPaths: new Map(),
+    actionableErrorPaths: new Map(),
+    knownNoiseErrorPaths: new Map(),
+    issueBuckets: new Map(),
+    botRequests: 0,
+    aiCrawlerRequests: 0,
+    actionableErrorCount: 0,
+    knownNoiseErrorCount: 0,
+    slowestMs: 0,
+  }
+}
+
+function recordIssue(tracker, issue) {
+  if (!issue) return
+  incrementMap(tracker.errorPaths, issue.evidenceKey)
+  incrementMap(tracker.issueBuckets, issue.bucket)
+  if (issue.actionable) {
+    tracker.actionableErrorCount += 1
+    incrementMap(tracker.actionableErrorPaths, issue.evidenceKey)
+    return
+  }
+  tracker.knownNoiseErrorCount += 1
+  incrementMap(tracker.knownNoiseErrorPaths, issue.evidenceKey)
+}
+
+function recordIntentPath(tracker, intent, pathValue) {
+  if (intent === 'commercial') incrementMap(tracker.commercialPaths, pathValue)
+  if (intent === 'conversion') incrementMap(tracker.conversionPaths, pathValue)
+  if (intent === 'geo') incrementMap(tracker.geoPaths, pathValue)
+}
+
+function recordRow(tracker, source, row) {
+  const pathValue = cleanPath(row.path)
+  const intent = rowIntent(source, row)
+  incrementMap(tracker.intentCounts, intent)
+  incrementMap(tracker.statuses, statusBucket(row.status))
+  incrementMap(tracker.paths, `${row.status} ${pathValue}`)
+  if (row.host) incrementMap(tracker.hosts, row.host)
+  if (row.userAgent) incrementMap(tracker.agents, row.userAgent.slice(0, 90))
+  if (row.uniqueKey) tracker.unique.add(row.uniqueKey)
+  if (isBot(row.userAgent)) tracker.botRequests += 1
+  if (isAiCrawler(row.userAgent)) {
+    tracker.aiCrawlerRequests += 1
+    incrementMap(tracker.aiCrawlerPaths, pathValue)
+  }
+  recordIntentPath(tracker, intent, pathValue)
+  recordIssue(tracker, classifyHttpIssue(source, row, intent))
+  if (row.durationMs && row.durationMs > tracker.slowestMs) tracker.slowestMs = row.durationMs
+}
+
+function buildIntentSnapshot(tracker) {
+  return {
+    counts: Object.fromEntries([...tracker.intentCounts.entries()].sort()),
+    commercialRequests: tracker.intentCounts.get('commercial') || 0,
+    conversionRequests: tracker.intentCounts.get('conversion') || 0,
+    geoRequests: tracker.intentCounts.get('geo') || 0,
+    technicalRequests: tracker.intentCounts.get('technical') || 0,
+    aiCrawlerRequests: tracker.aiCrawlerRequests,
+    statuses: tracker.statuses,
+    commercialPaths: tracker.commercialPaths,
+    conversionPaths: tracker.conversionPaths,
+    geoPaths: tracker.geoPaths,
+    aiCrawlerPaths: tracker.aiCrawlerPaths,
+    errorPaths: tracker.errorPaths,
+    actionableErrorPaths: tracker.actionableErrorPaths,
+    knownNoiseErrorPaths: tracker.knownNoiseErrorPaths,
+    issueBuckets: tracker.issueBuckets,
+    actionableErrorCount: tracker.actionableErrorCount,
+    knownNoiseErrorCount: tracker.knownNoiseErrorCount,
+  }
+}
+
+function formatIntentSnapshot(intent) {
+  return {
+    counts: intent.counts,
+    commercialRequests: intent.commercialRequests,
+    conversionRequests: intent.conversionRequests,
+    geoRequests: intent.geoRequests,
+    technicalRequests: intent.technicalRequests,
+    topCommercialPaths: topEntries(intent.commercialPaths, 8),
+    topConversionPaths: topEntries(intent.conversionPaths, 8),
+    topGeoPaths: topEntries(intent.geoPaths, 8),
+    topAiCrawlerPaths: topEntries(intent.aiCrawlerPaths, 8),
+    topErrorPaths: topEntries(intent.errorPaths, 8),
+    actionableErrorCount: intent.actionableErrorCount,
+    knownNoiseErrorCount: intent.knownNoiseErrorCount,
+    issueBuckets: Object.fromEntries([...intent.issueBuckets.entries()].sort()),
+    topActionableErrorPaths: topEntries(intent.actionableErrorPaths, 8),
+    topKnownNoiseErrorPaths: topEntries(intent.knownNoiseErrorPaths, 8),
+  }
+}
+
 function summarize(source) {
   const result = runSource(source)
   const rows = result.lines.map((line) => normalize(source, line)).filter(Boolean)
-
-  const statuses = new Map()
-  const paths = new Map()
-  const hosts = new Map()
-  const agents = new Map()
-  const unique = new Set()
-  const intentCounts = new Map()
-  const commercialPaths = new Map()
-  const conversionPaths = new Map()
-  const geoPaths = new Map()
-  const aiCrawlerPaths = new Map()
-  const errorPaths = new Map()
-  let botRequests = 0
-  let aiCrawlerRequests = 0
-  let slowestMs = 0
-
-  for (const row of rows) {
-    const pathValue = cleanPath(row.path)
-    const intent = rowIntent(source, row)
-    intentCounts.set(intent, (intentCounts.get(intent) || 0) + 1)
-    statuses.set(statusBucket(row.status), (statuses.get(statusBucket(row.status)) || 0) + 1)
-    paths.set(`${row.status} ${pathValue}`, (paths.get(`${row.status} ${pathValue}`) || 0) + 1)
-    if (row.host) hosts.set(row.host, (hosts.get(row.host) || 0) + 1)
-    if (row.userAgent) {
-      const agent = row.userAgent.slice(0, 90)
-      agents.set(agent, (agents.get(agent) || 0) + 1)
-    }
-    if (row.uniqueKey) unique.add(row.uniqueKey)
-    if (isBot(row.userAgent)) botRequests += 1
-    if (isAiCrawler(row.userAgent)) {
-      aiCrawlerRequests += 1
-      aiCrawlerPaths.set(pathValue, (aiCrawlerPaths.get(pathValue) || 0) + 1)
-    }
-    if (intent === 'commercial') commercialPaths.set(pathValue, (commercialPaths.get(pathValue) || 0) + 1)
-    if (intent === 'conversion') conversionPaths.set(pathValue, (conversionPaths.get(pathValue) || 0) + 1)
-    if (intent === 'geo') geoPaths.set(pathValue, (geoPaths.get(pathValue) || 0) + 1)
-    if (row.status >= 400) errorPaths.set(`${row.status} ${pathValue}`, (errorPaths.get(`${row.status} ${pathValue}`) || 0) + 1)
-    if (row.durationMs && row.durationMs > slowestMs) slowestMs = row.durationMs
-  }
-
-  const intent = {
-    counts: Object.fromEntries([...intentCounts.entries()].sort()),
-    commercialRequests: intentCounts.get('commercial') || 0,
-    conversionRequests: intentCounts.get('conversion') || 0,
-    geoRequests: intentCounts.get('geo') || 0,
-    technicalRequests: intentCounts.get('technical') || 0,
-    aiCrawlerRequests,
-    statuses,
-    commercialPaths,
-    conversionPaths,
-    geoPaths,
-    aiCrawlerPaths,
-    errorPaths,
-  }
+  const tracker = createSummaryTracker()
+  for (const row of rows) recordRow(tracker, source, row)
+  const intent = buildIntentSnapshot(tracker)
 
   return {
     id: source.id,
@@ -378,26 +520,15 @@ function summarize(source) {
     error: result.ok ? null : result.error,
     window: { since, limit },
     requests: rows.length,
-    estimatedUniqueIps: unique.size || null,
-    statuses: Object.fromEntries([...statuses.entries()].sort()),
-    botRequests,
-    aiCrawlerRequests,
-    slowestMs: slowestMs || null,
-    topHosts: topEntries(hosts, 5),
-    topPaths: topEntries(paths, 12),
-    topUserAgents: topEntries(agents, 8),
-    intent: {
-      counts: intent.counts,
-      commercialRequests: intent.commercialRequests,
-      conversionRequests: intent.conversionRequests,
-      geoRequests: intent.geoRequests,
-      technicalRequests: intent.technicalRequests,
-      topCommercialPaths: topEntries(commercialPaths, 8),
-      topConversionPaths: topEntries(conversionPaths, 8),
-      topGeoPaths: topEntries(geoPaths, 8),
-      topAiCrawlerPaths: topEntries(aiCrawlerPaths, 8),
-      topErrorPaths: topEntries(errorPaths, 8),
-    },
+    estimatedUniqueIps: tracker.unique.size || null,
+    statuses: Object.fromEntries([...tracker.statuses.entries()].sort()),
+    botRequests: tracker.botRequests,
+    aiCrawlerRequests: tracker.aiCrawlerRequests,
+    slowestMs: tracker.slowestMs || null,
+    topHosts: topEntries(tracker.hosts, 5),
+    topPaths: topEntries(tracker.paths, 12),
+    topUserAgents: topEntries(tracker.agents, 8),
+    intent: formatIntentSnapshot(intent),
     opportunities: buildSourceOpportunities(source, intent, result),
   }
 }
@@ -862,24 +993,37 @@ function parseCsvLine(line) {
   return cells
 }
 
+function localizedNumber(row, keys) {
+  const raw = keys.map((key) => row[key]).find((value) => value !== undefined && value !== '') || '0'
+  return Number(String(raw).replace('%', '').replace(',', '.')) || 0
+}
+
+function firstLocalizedValue(row, keys) {
+  return keys.map((key) => row[key]).find((value) => value) || ''
+}
+
+function parseSearchConsoleCsvRow(headers, line) {
+  const cells = parseCsvLine(line)
+  const row = Object.fromEntries(headers.map((header, index) => [header, cells[index] || '']))
+  const clicks = localizedNumber(row, ['clicks', 'cliques'])
+  const impressions = localizedNumber(row, ['impressions', 'impressoes', 'impressões'])
+  return {
+    keys: [
+      firstLocalizedValue(row, ['page', 'pagina', 'página']),
+      firstLocalizedValue(row, ['query', 'consulta']),
+    ],
+    clicks,
+    impressions,
+    ctr: impressions ? clicks / impressions : 0,
+    position: localizedNumber(row, ['position', 'posicao', 'posição']),
+  }
+}
+
 function summarizeSearchConsoleCsv(body) {
   const lines = body.split(/\r?\n/).filter(Boolean)
   if (lines.length < 2) return { rowCount: 0, metrics: summarizeSearchConsoleRows([]), topRows: [] }
   const headers = parseCsvLine(lines[0]).map((header) => header.trim().toLowerCase())
-  const rows = lines.slice(1, 501).map((line) => {
-    const cells = parseCsvLine(line)
-    const row = Object.fromEntries(headers.map((header, index) => [header, cells[index] || '']))
-    const clicks = Number(String(row.clicks || row.cliques || '0').replace('%', '').replace(',', '.')) || 0
-    const impressions = Number(String(row.impressions || row.impressoes || row.impressões || '0').replace(',', '.')) || 0
-    const position = Number(String(row.position || row.posicao || row['posição'] || '0').replace(',', '.')) || 0
-    return {
-      keys: [row.page || row.pagina || row['página'] || '', row.query || row.consulta || ''],
-      clicks,
-      impressions,
-      ctr: impressions ? clicks / impressions : 0,
-      position,
-    }
-  })
+  const rows = lines.slice(1, 501).map((line) => parseSearchConsoleCsvRow(headers, line))
   return {
     rowCount: rows.length,
     metrics: summarizeSearchConsoleRows(rows),
@@ -903,47 +1047,54 @@ async function sourceAnalyticsSnapshot(source) {
   }
 }
 
+function ga4Opportunity(source) {
+  if (source.ga4?.status === 'ok') return null
+  return {
+    product: source.label,
+    priority: source.ga4?.status === 'blocked_no_ga4_property_id' ? 'high' : 'medium',
+    area: 'ga4',
+    action: source.ga4?.status === 'blocked_no_ga4_property_id'
+      ? `Configure the numeric GA4 property ID for ${source.label}.`
+      : `Restore GA4 Data API readback for ${source.label}.`,
+    why: 'GA4 is the baseline for users, sessions, events and paid traffic learning loops.',
+    status: source.ga4?.status || 'unknown',
+  }
+}
+
+function searchConsoleOpportunity(source) {
+  if (source.searchConsole?.status === 'ok' || source.searchConsole?.status === 'csv') return null
+  return {
+    product: source.label,
+    priority: 'high',
+    area: 'search_console',
+    action: `Grant Search Console access to the portfolio service account for ${source.label}.`,
+    why: 'Search Console is required to see organic queries, pages, impressions, CTR and indexing movement.',
+    status: source.searchConsole?.status || 'unknown',
+  }
+}
+
+function plausibleOpportunity(source) {
+  if (source.plausible?.status === 'ok') return null
+  return {
+    product: source.label,
+    priority: 'medium',
+    area: 'plausible',
+    action: `Configure a Plausible API token for ${source.label}, or explicitly keep GA4 as the primary source.`,
+    why: 'Plausible can give fast lightweight traffic validation, but it should not block the GA4/Search Console path.',
+    status: source.plausible?.status || 'unknown',
+  }
+}
+
+function analyticsSourceOpportunities(source) {
+  return [
+    ga4Opportunity(source),
+    searchConsoleOpportunity(source),
+    plausibleOpportunity(source),
+  ].filter(Boolean)
+}
+
 function analyticsOpportunities(analyticsSources) {
-  return analyticsSources.flatMap((source) => {
-    const items = []
-
-    if (source.ga4?.status !== 'ok') {
-      items.push({
-        product: source.label,
-        priority: source.ga4?.status === 'blocked_no_ga4_property_id' ? 'high' : 'medium',
-        area: 'ga4',
-        action: source.ga4?.status === 'blocked_no_ga4_property_id'
-          ? `Configure the numeric GA4 property ID for ${source.label}.`
-          : `Restore GA4 Data API readback for ${source.label}.`,
-        why: 'GA4 is the baseline for users, sessions, events and paid traffic learning loops.',
-        status: source.ga4?.status || 'unknown',
-      })
-    }
-
-    if (source.searchConsole?.status !== 'ok' && source.searchConsole?.status !== 'csv') {
-      items.push({
-        product: source.label,
-        priority: 'high',
-        area: 'search_console',
-        action: `Grant Search Console access to the portfolio service account for ${source.label}.`,
-        why: 'Search Console is required to see organic queries, pages, impressions, CTR and indexing movement.',
-        status: source.searchConsole?.status || 'unknown',
-      })
-    }
-
-    if (source.plausible?.status !== 'ok') {
-      items.push({
-        product: source.label,
-        priority: 'medium',
-        area: 'plausible',
-        action: `Configure a Plausible API token for ${source.label}, or explicitly keep GA4 as the primary source.`,
-        why: 'Plausible can give fast lightweight traffic validation, but it should not block the GA4/Search Console path.',
-        status: source.plausible?.status || 'unknown',
-      })
-    }
-
-    return items
-  })
+  return analyticsSources.flatMap(analyticsSourceOpportunities)
 }
 
 function buildActionBoard(sources, analyticsSources) {
@@ -966,9 +1117,407 @@ function buildActionBoard(sources, analyticsSources) {
       conversionRequests: sources.reduce((sum, source) => sum + (source.intent?.conversionRequests || 0), 0),
       geoRequests: sources.reduce((sum, source) => sum + (source.intent?.geoRequests || 0), 0),
       aiCrawlerRequests: sources.reduce((sum, source) => sum + source.aiCrawlerRequests, 0),
+      actionableErrors: sources.reduce((sum, source) => sum + (source.intent?.actionableErrorCount || 0), 0),
+      knownNoiseErrors: sources.reduce((sum, source) => sum + (source.intent?.knownNoiseErrorCount || 0), 0),
+      providerLogFailures: sources.filter((source) => !source.ok).length,
       blockedAnalyticsItems: analyticsItems.length,
     },
+    severity: operationSeverity(sources, analyticsItems),
+    urgency: operationUrgency(sources, analyticsItems),
+    routingPrimary: operationRoutingPrimary(sources, analyticsItems),
+    slackPolicy: operationSlackPolicy(sources, analyticsItems),
+    n8nWorkflowName: 'portfolio-access-geo-monitor-triage',
+    valueSignals: operationValueSignals(sources),
+    humanGates: operationHumanGates(analyticsItems),
     nextActions,
+  }
+}
+
+function operationStats(report) {
+  const summary = report.actionBoard.summary
+  return {
+    products: summary.products,
+    requests: summary.requests,
+    commercialRequests: summary.commercialRequests,
+    conversionRequests: summary.conversionRequests,
+    geoRequests: summary.geoRequests,
+    aiCrawlerRequests: summary.aiCrawlerRequests,
+    actionableErrors: summary.actionableErrors,
+    knownNoiseErrors: summary.knownNoiseErrors,
+    blockedAnalyticsItems: summary.blockedAnalyticsItems,
+  }
+}
+
+function operationSeverity(sources, analyticsItems) {
+  const providerFailures = sources.filter((source) => !source.ok).length
+  const actionableErrors = sources.reduce((sum, source) => sum + (source.intent?.actionableErrorCount || 0), 0)
+  const serverErrors = sources.reduce((sum, source) => sum + (source.statuses?.['5xx'] || 0), 0)
+  if (providerFailures > 0 || serverErrors > 0) return 'critical'
+  if (actionableErrors > 0) return 'warning'
+  if (analyticsItems.length > 0 || sources.some((source) => (source.intent?.knownNoiseErrorCount || 0) > 0)) return 'notice'
+  return 'ok'
+}
+
+function operationUrgency(sources, analyticsItems) {
+  const severity = operationSeverity(sources, analyticsItems)
+  if (severity === 'critical') return 'immediate'
+  if (severity === 'warning') return 'same_day'
+  if (analyticsItems.length > 0) return 'decision_batch'
+  return 'routine'
+}
+
+function operationRoutingPrimary(sources, analyticsItems) {
+  if (sources.some((source) => !source.ok || (source.statuses?.['5xx'] || 0) > 0)) return 'incident_or_fix_queue'
+  if (sources.some((source) => (source.intent?.actionableErrorCount || 0) > 0)) return 'portfolio_growth_ops'
+  if (analyticsItems.length > 0) return 'analytics_access_queue'
+  return 'portfolio_growth_digest'
+}
+
+function operationSlackPolicy(sources, analyticsItems) {
+  const severity = operationSeverity(sources, analyticsItems)
+  if (severity === 'critical') return 'active_alert'
+  if (severity === 'warning') return 'thread_update'
+  return analyticsItems.length > 0 ? 'digest_only' : 'no_alert'
+}
+
+function operationValueSignals(sources) {
+  return sources.flatMap((source) => {
+    const signals = []
+    if (source.aiCrawlerRequests > 0) {
+      signals.push({
+        product: source.label,
+        kind: 'ai_crawler',
+        count: source.aiCrawlerRequests,
+        paths: source.intent?.topAiCrawlerPaths || [],
+      })
+    }
+    if ((source.intent?.conversionRequests || 0) > 0) {
+      signals.push({
+        product: source.label,
+        kind: 'conversion_path_demand',
+        count: source.intent.conversionRequests,
+        paths: source.intent?.topConversionPaths || [],
+      })
+    }
+    return signals
+  }).slice(0, 12)
+}
+
+function operationHumanGates(analyticsItems) {
+  return analyticsItems
+    .filter((item) => ['ga4', 'search_console', 'plausible'].includes(item.area))
+    .map((item) => ({
+      product: item.product,
+      area: item.area,
+      status: item.status,
+      action: item.action,
+    }))
+}
+
+function operationRequiresHumanGate(item) {
+  return ['ga4', 'search_console', 'plausible'].includes(item.area)
+}
+
+function buildOperationsQueue(actionBoard) {
+  return actionBoard.nextActions.map((item) => {
+    const humanGate = operationRequiresHumanGate(item)
+    const route = item.area === 'technical_seo'
+      ? 'incident_or_fix_queue'
+      : humanGate
+        ? 'analytics_access_queue'
+        : item.area === 'security_noise'
+          ? 'security_noise_digest'
+          : 'portfolio_growth_ops'
+    return {
+      product: item.product,
+      priority: item.priority,
+      area: item.area,
+      route,
+      owner: route === 'incident_or_fix_queue'
+        ? 'technical_ops'
+        : route === 'analytics_access_queue'
+          ? 'infra_analytics'
+          : 'growth_ops',
+      action: item.action,
+      humanGate,
+      evidence: item.evidence || [],
+      status: item.status || null,
+    }
+  })
+}
+
+function envFlag(names, fallback = false) {
+  const configured = envValue(names)
+  if (!configured) return fallback
+  return !['0', 'false', 'no', 'off'].includes(String(configured.value).toLowerCase())
+}
+
+function n8nWebhookConfig() {
+  const configured = envValue([
+    'ACCESS_SNAPSHOT_N8N_WEBHOOK_URL',
+    'PORTFOLIO_ACCESS_N8N_WEBHOOK_URL',
+    'N8N_PORTFOLIO_ACCESS_WEBHOOK_URL',
+    'N8N_PORTFOLIO_GEO_WEBHOOK_URL',
+  ])
+  return {
+    enabled: envFlag(['ACCESS_SNAPSHOT_N8N_DISPATCH', 'PORTFOLIO_ACCESS_N8N_DISPATCH'], false),
+    webhookConfigured: Boolean(configured),
+    webhookEnv: configured?.name || null,
+    webhookUrl: configured?.value || null,
+  }
+}
+
+function localLlmConfig() {
+  const endpoint = envValue(['ACCESS_SNAPSHOT_LOCAL_LLM_ENDPOINT', 'PORTFOLIO_ACCESS_LOCAL_LLM_ENDPOINT'])
+  const model = envValue(['ACCESS_SNAPSHOT_LOCAL_LLM_MODEL', 'PORTFOLIO_ACCESS_LOCAL_LLM_MODEL'])?.value || 'qwen3:14b'
+  return {
+    enabled: envFlag(['ACCESS_SNAPSHOT_LOCAL_LLM_TRIAGE', 'PORTFOLIO_ACCESS_LOCAL_LLM_TRIAGE'], false),
+    endpoint: endpoint?.value || 'http://127.0.0.1:11434/api/generate',
+    model,
+  }
+}
+
+function localLlmEndpointConfig(config) {
+  try {
+    const url = new URL(config.endpoint)
+    const localHosts = new Set(['127.0.0.1', 'localhost', '[::1]', '::1'])
+    return {
+      ok: url.protocol === 'http:' && localHosts.has(url.hostname),
+      redacted: `${url.protocol}//${url.hostname}`,
+    }
+  } catch {
+    return { ok: false, redacted: 'invalid_endpoint' }
+  }
+}
+
+function buildLocalLlmPrompt(pulse) {
+  return [
+    'Return only compact JSON with keys: summary, recommendedAction, priority, rationale, actionItems.',
+    'Never request secrets, deploys, ads, provider config changes or production mutations.',
+    `Automation: ${pulse.automationId}`,
+    `Severity: ${pulse.severity}`,
+    `Urgency: ${pulse.urgency}`,
+    `Metrics: ${JSON.stringify(pulse.metrics)}`,
+    `Queue: ${JSON.stringify(pulse.queue.slice(0, 8))}`,
+    `Human gates: ${JSON.stringify(pulse.humanGates.slice(0, 8))}`,
+  ].join('\n')
+}
+
+function parseLocalLlmResult(body, pulse) {
+  const raw = typeof body?.response === 'string' ? body.response : JSON.stringify(body || {})
+  try {
+    const parsed = JSON.parse(raw)
+    if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+      return normalizeLocalLlmResult(parsed, pulse)
+    }
+  } catch {}
+  return fallbackLocalLlmResult(pulse)
+}
+
+function normalizeLocalLlmResult(result, pulse) {
+  const actionItems = Array.isArray(result.actionItems) && result.actionItems.length
+    ? result.actionItems
+    : pulse.queue.slice(0, 3).map((item) => ({
+        owner: item.owner,
+        action: item.action,
+        humanGate: item.humanGate,
+      }))
+  return {
+    summary: safeText(result.summary) || fallbackLocalLlmResult(pulse).summary,
+    recommendedAction: safeText(result.recommendedAction) || fallbackLocalLlmResult(pulse).recommendedAction,
+    priority: safeText(result.priority) || pulse.urgency,
+    rationale: safeText(result.rationale) || 'Derived from structured access monitor metrics and queue.',
+    actionItems,
+  }
+}
+
+function fallbackLocalLlmResult(pulse) {
+  return {
+    summary: `${pulse.metrics.requests} requests observed; ${pulse.metrics.actionableErrors} actionable errors, ${pulse.metrics.knownNoiseErrors} known-noise errors and ${pulse.metrics.blockedAnalyticsItems} analytics blockers.`,
+    recommendedAction: pulse.queue[0]?.humanGate
+      ? 'Batch the human-gated analytics access decisions before external changes.'
+      : pulse.queue[0]?.action || 'Keep monitoring; no production action is required.',
+    priority: pulse.urgency,
+    rationale: 'Fallback generated locally because the local LLM returned no usable JSON.',
+    actionItems: pulse.queue.slice(0, 3).map((item) => ({
+      owner: item.owner,
+      action: item.action,
+      humanGate: item.humanGate,
+    })),
+  }
+}
+
+function buildActionReport(pulse, llmResult = null) {
+  const result = llmResult || fallbackLocalLlmResult(pulse)
+  return {
+    decision: pulse.urgency,
+    severity: pulse.severity,
+    recommendedAction: result.recommendedAction,
+    n8n: {
+      workflow: pulse.n8n.workflow,
+      mode: 'queue_only',
+    },
+    actionPlan: {
+      doNow: pulse.queue.filter((item) => !item.humanGate).slice(0, 5),
+      blockedByHumanGate: pulse.queue.filter((item) => item.humanGate).slice(0, 8),
+    },
+  }
+}
+
+function safeText(value) {
+  return redact(String(value || '').slice(0, 1000))
+}
+
+async function runLocalLlmTriage(pulse) {
+  const config = localLlmConfig()
+  if (!config.enabled) {
+    return {
+      status: 'disabled',
+      actionReport: buildActionReport(pulse),
+    }
+  }
+
+  const endpoint = localLlmEndpointConfig(config)
+  if (!endpoint.ok) {
+    return {
+      status: 'blocked_nonlocal_endpoint',
+      model: config.model,
+      actionReport: buildActionReport(pulse),
+      note: 'Local LLM triage only permits loopback HTTP endpoints.',
+    }
+  }
+
+  try {
+    const { response, body } = await fetchJson(config.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: config.model,
+        prompt: buildLocalLlmPrompt(pulse),
+        stream: false,
+        format: 'json',
+      }),
+    })
+    if (!response.ok) {
+      return {
+        status: 'failed',
+        model: config.model,
+        reason: safeText(body?.error || body?.message || response.statusText),
+        actionReport: buildActionReport(pulse),
+      }
+    }
+    const result = parseLocalLlmResult(body, pulse)
+    return {
+      status: 'completed',
+      model: config.model,
+      result,
+      actionReport: buildActionReport(pulse, result),
+    }
+  } catch (error) {
+    return {
+      status: 'failed',
+      model: config.model,
+      reason: safeText(error.message),
+      actionReport: buildActionReport(pulse),
+    }
+  }
+}
+
+function buildN8nPayload(pulse) {
+  return {
+    event: 'portfolio.access_geo_monitor',
+    automationId: pulse.automationId,
+    generatedAt: pulse.generatedAt,
+    dedupeKey: pulse.n8n.dedupeKey,
+    severity: pulse.severity,
+    urgency: pulse.urgency,
+    routingPrimary: pulse.routing.primary,
+    slackPolicy: pulse.routing.slackPolicy,
+    metrics: pulse.metrics,
+    valueSignals: pulse.valueSignals,
+    queue: pulse.queue,
+    humanGates: pulse.humanGates,
+    llmActionReport: pulse.localLlm.delivery?.actionReport || buildActionReport(pulse),
+    prompt_cache: pulse.prompt_cache,
+  }
+}
+
+async function deliverN8n(pulse) {
+  const config = n8nWebhookConfig()
+  if (!config.enabled) return { status: 'disabled' }
+  if (!config.webhookConfigured) {
+    return {
+      status: 'not_configured',
+      expectedEnv: [
+        'ACCESS_SNAPSHOT_N8N_WEBHOOK_URL',
+        'PORTFOLIO_ACCESS_N8N_WEBHOOK_URL',
+        'N8N_PORTFOLIO_ACCESS_WEBHOOK_URL',
+        'N8N_PORTFOLIO_GEO_WEBHOOK_URL',
+      ],
+    }
+  }
+
+  try {
+    const response = await fetch(config.webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(buildN8nPayload(pulse)),
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    })
+    return response.ok
+      ? { status: 'sent', httpStatus: response.status }
+      : { status: 'failed', httpStatus: response.status }
+  } catch (error) {
+    return { status: 'failed', reason: safeText(error.message) }
+  }
+}
+
+function buildLocalLlmPlan() {
+  const config = localLlmConfig()
+  return {
+    enabled: config.enabled,
+    model: config.model,
+    delivery: { status: config.enabled ? 'pending' : 'disabled' },
+  }
+}
+
+function buildN8nPlan(pulseBase) {
+  const config = n8nWebhookConfig()
+  return {
+    workflow: 'portfolio-access-geo-monitor-triage',
+    dispatchEnabled: config.enabled,
+    webhookConfigured: config.webhookConfigured,
+    webhookEnv: config.webhookEnv,
+    dedupeKey: `${pulseBase.automationId}:${pulseBase.generatedAt.slice(0, 13)}:${pulseBase.severity}:${pulseBase.metrics.actionableErrors}:${pulseBase.metrics.knownNoiseErrors}`,
+    delivery: { status: config.enabled ? 'pending' : 'disabled' },
+  }
+}
+
+function buildOperationsPulse(report) {
+  const base = {
+    automationId: 'hourly-portfolio-access-geo-monitor',
+    generatedAt: report.generatedAt,
+    window: report.window,
+    severity: report.actionBoard.severity,
+    urgency: report.actionBoard.urgency,
+    metrics: operationStats(report),
+    routing: {
+      primary: report.actionBoard.routingPrimary,
+      slackPolicy: report.actionBoard.slackPolicy,
+    },
+    valueSignals: report.actionBoard.valueSignals,
+    queue: buildOperationsQueue(report.actionBoard),
+    humanGates: report.actionBoard.humanGates,
+    prompt_cache: {
+      strategy: 'cli-prefix-layout',
+      prefix_version: '2026-06-30-portfolio-access-geo-monitor',
+      cached_tokens: null,
+    },
+  }
+  return {
+    ...base,
+    localLlm: buildLocalLlmPlan(),
+    n8n: buildN8nPlan(base),
   }
 }
 
@@ -976,6 +1525,7 @@ const sourceSummaries = SOURCES.map(summarize)
 const analyticsSources = includeAnalytics
   ? (await Promise.all(SOURCES.map(sourceAnalyticsSnapshot))).filter(Boolean)
   : []
+const actionBoard = buildActionBoard(sourceSummaries, analyticsSources)
 
 const report = {
   generatedAt: new Date().toISOString(),
@@ -991,8 +1541,11 @@ const report = {
         sources: analyticsSources,
       }
     : { status: 'skipped' },
-  actionBoard: buildActionBoard(sourceSummaries, analyticsSources),
+  actionBoard,
 }
+report.operationsPulse = buildOperationsPulse(report)
+report.operationsPulse.localLlm.delivery = await runLocalLlmTriage(report.operationsPulse)
+report.operationsPulse.n8n.delivery = await deliverN8n(report.operationsPulse)
 
 const body = `${JSON.stringify(report, null, 2)}\n`
 if (outPath) {

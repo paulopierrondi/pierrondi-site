@@ -70,7 +70,7 @@ console.log(JSON.stringify({
   )
 }
 
-test('access snapshot emits and optionally delivers the n8n operations pulse', { todo: 'operationsPulse not yet implemented in access-snapshot.mjs' }, async () => {
+test('access snapshot emits and optionally delivers the n8n operations pulse', async () => {
   const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
   writeExecutable(
     path.join(binDir, 'railway'),
@@ -165,7 +165,7 @@ console.log(JSON.stringify({
   }
 })
 
-test('access snapshot can triage operations pulse with a local Ollama-compatible LLM', { todo: 'operationsPulse not yet implemented in access-snapshot.mjs' }, async () => {
+test('access snapshot can triage operations pulse with a local Ollama-compatible LLM', async () => {
   const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
   writeProviderStubs(binDir)
 
@@ -251,7 +251,7 @@ test('access snapshot can triage operations pulse with a local Ollama-compatible
   }
 })
 
-test('access snapshot blocks local LLM triage when endpoint is not local', { todo: 'operationsPulse not yet implemented in access-snapshot.mjs' }, async () => {
+test('access snapshot blocks local LLM triage when endpoint is not local', async () => {
   const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
   writeProviderStubs(binDir)
 
@@ -276,7 +276,7 @@ test('access snapshot blocks local LLM triage when endpoint is not local', { tod
   assert.equal(JSON.stringify(report).includes('https://example.com'), false)
 })
 
-test('access snapshot falls back when local LLM returns empty JSON', { todo: 'operationsPulse not yet implemented in access-snapshot.mjs' }, async () => {
+test('access snapshot falls back when local LLM returns empty JSON', async () => {
   const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
   writeProviderStubs(binDir)
 
