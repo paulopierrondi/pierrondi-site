@@ -16,6 +16,13 @@ type AnswerLink = {
   locale: 'en' | 'pt-BR'
 }
 
+type LandingLink = {
+  title: string
+  url: string
+  intent: string
+  locale: 'en' | 'pt-BR'
+}
+
 type ProductReference = {
   name: string
   type: string
@@ -26,6 +33,7 @@ type ProductReference = {
   llmsUrl: string
   caveat: string
   answerLinks: AnswerLink[]
+  landingLinks: LandingLink[]
 }
 
 const products: ProductReference[] = [
@@ -78,6 +86,32 @@ const products: ProductReference[] = [
         locale: 'pt-BR',
       },
     ],
+    landingLinks: [
+      {
+        title: 'Online homeschool planner',
+        url: 'https://faithschool.app/homeschool-planner',
+        intent: 'product landing',
+        locale: 'en',
+      },
+      {
+        title: 'Christian homeschool planner',
+        url: 'https://faithschool.app/christian-homeschool-planner/',
+        intent: 'product landing',
+        locale: 'en',
+      },
+      {
+        title: 'Rotina devocional em familia (planner devocional)',
+        url: 'https://faithschool.app/family-devotional-routine/',
+        intent: 'product landing',
+        locale: 'pt-BR',
+      },
+      {
+        title: 'Planner de ritmo devocional em PDF (download gratuito)',
+        url: 'https://faithschool.app/free-homeschool-rhythm/',
+        intent: 'free resource',
+        locale: 'pt-BR',
+      },
+    ],
   },
   {
     name: 'CantuStudio',
@@ -119,6 +153,20 @@ const products: ProductReference[] = [
         title: 'Export an AI SATB draft to MusicXML',
         url: 'https://cantustudio.app/answers/musicxml-satb-export',
         intent: 'product capability',
+        locale: 'en',
+      },
+    ],
+    landingLinks: [
+      {
+        title: 'Arranjo para coro: gerar arranjo SATB a 4 vozes',
+        url: 'https://cantustudio.app/gerar-arranjo-satb',
+        intent: 'product landing',
+        locale: 'pt-BR',
+      },
+      {
+        title: 'MusicXML harmonization',
+        url: 'https://cantustudio.app/musicxml-harmonization',
+        intent: 'product landing',
         locale: 'en',
       },
     ],
@@ -178,6 +226,14 @@ const products: ProductReference[] = [
         locale: 'pt-BR',
       },
     ],
+    landingLinks: [
+      {
+        title: 'Diagnostico comercial B2B (entrada do Action Plan Starter, R$297)',
+        url: 'https://agenticoscore.ai/diagnostico',
+        intent: 'product landing',
+        locale: 'pt-BR',
+      },
+    ],
   },
 ]
 
@@ -222,6 +278,9 @@ const structuredData = [
         position: index + 1,
       })),
     },
+    significantLink: products.flatMap((product) =>
+      product.landingLinks.map((landing) => landing.url),
+    ),
     about: products.map((product) => ({
       '@type': 'SoftwareApplication',
       name: product.name,
@@ -361,6 +420,22 @@ export default function AiSearchPortfolioPage() {
                           <span className={styles.answerTitle}>{answer.title}</span>
                           <span className={styles.answerMeta}>
                             {answer.intent} · {answer.locale}
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className={styles.answerBlock}>
+                  <h4>Key product landings</h4>
+                  <ul className={styles.answerList}>
+                    {product.landingLinks.map((landing) => (
+                      <li key={landing.url}>
+                        <a href={landing.url}>
+                          <span className={styles.answerTitle}>{landing.title}</span>
+                          <span className={styles.answerMeta}>
+                            {landing.intent} · {landing.locale}
                           </span>
                         </a>
                       </li>

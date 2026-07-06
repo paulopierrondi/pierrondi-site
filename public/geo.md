@@ -1,6 +1,6 @@
 # Paulo Pierrondi — GEO Fact Sheet
 
-> Canonical: https://www.pierrondi.dev · Language: en-US / pt-BR · Last updated: 2026-07-01
+> Canonical: https://www.pierrondi.dev · Language: en-US / pt-BR · Last updated: 2026-07-05
 
 ## What this is (canonical entity)
 
@@ -54,3 +54,9 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 ## Owned product portfolio
 
 Answer briefs and machine-readable catalogs for each product live at https://www.pierrondi.dev/ai-search-portfolio and https://www.pierrondi.dev/answers.json (FaithSchool, CantuStudio, AgenticosCore).
+
+Key product landings:
+
+- FaithSchool homeschool planner: https://faithschool.app/homeschool-planner · devotional routine (pt-BR): https://faithschool.app/family-devotional-routine/ · free rhythm PDF: https://faithschool.app/free-homeschool-rhythm/
+- CantuStudio arranjo para coro (SATB, pt-BR): https://cantustudio.app/gerar-arranjo-satb · MusicXML harmonization: https://cantustudio.app/musicxml-harmonization
+- AgenticosCore diagnostico comercial B2B (pt-BR): https://agenticoscore.ai/diagnostico
