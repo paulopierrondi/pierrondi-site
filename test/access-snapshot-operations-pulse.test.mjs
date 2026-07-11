@@ -247,6 +247,53 @@ for (const row of rowsByService[service] || []) console.log(JSON.stringify(row))
   assert.equal(report.operationsPulse.metrics.knownNoiseErrors, 2)
 })
 
+test('access snapshot filters benign monitor probes without hiding real public growth 404s', async () => {
+  const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
+  writeExecutable(
+    path.join(binDir, 'railway'),
+    `#!/usr/bin/env node
+const service = process.argv[process.argv.indexOf('--service') + 1]
+const rowsByService = {
+  'pierrondi-site': [
+    { timestamp: '2026-06-30T18:00:00.000Z', host: 'www.pierrondi.dev', method: 'GET', path: '/apps/definitely-not-a-real-app-zzz', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.10', totalDuration: 12 }
+  ],
+  'cantustudio-frontend': [
+    { timestamp: '2026-06-30T18:00:01.000Z', host: 'cantustudio.app', method: 'GET', path: '/app-ads.txt', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.11', totalDuration: 8 },
+    { timestamp: '2026-06-30T18:00:02.000Z', host: 'cantustudio.app', method: 'GET', path: '/satb/how-great-thou-art', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.12', totalDuration: 18 }
+  ]
+}
+for (const row of rowsByService[service] || []) console.log(JSON.stringify(row))
+`,
+  )
+  writeExecutable(path.join(binDir, 'vercel'), '#!/usr/bin/env node\n')
+
+  const result = await runNode(['scripts/access-snapshot.mjs', '--since', '1h', '--limit', '10', '--analytics=0'], {
+    cwd: process.cwd(),
+    env: {
+      ...process.env,
+      PATH: `${binDir}:${process.env.PATH}`,
+      ACCESS_SNAPSHOT_LOCAL_LLM_TRIAGE: '0',
+      PORTFOLIO_ACCESS_LOCAL_LLM_TRIAGE: '0',
+      ACCESS_SNAPSHOT_SOURCES_CWD: process.cwd(),
+    },
+  })
+
+  assert.equal(result.status, 0, result.stderr)
+  const report = JSON.parse(result.stdout)
+  const pierrondi = report.sources.find((source) => source.id === 'pierrondi')
+  const cantustudio = report.sources.find((source) => source.id === 'cantustudio')
+
+  assert.equal(pierrondi.intent.actionableErrorCount, 0)
+  assert.equal(pierrondi.intent.knownNoiseErrorCount, 1)
+  assert.deepEqual(pierrondi.intent.issueBuckets, { known_noise: 1 })
+  assert.equal(cantustudio.intent.actionableErrorCount, 1)
+  assert.equal(cantustudio.intent.knownNoiseErrorCount, 1)
+  assert.deepEqual(cantustudio.intent.topActionableErrorPaths, [{ key: '404 /satb/how-great-thou-art', value: 1 }])
+  assert.deepEqual(cantustudio.intent.topKnownNoiseErrorPaths, [{ key: '404 /app-ads.txt', value: 1 }])
+  assert.equal(report.operationsPulse.metrics.actionableErrors, 1)
+  assert.equal(report.operationsPulse.metrics.knownNoiseErrors, 2)
+})
+
 test('access snapshot can triage operations pulse with a local Ollama-compatible LLM', async () => {
   const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
   writeProviderStubs(binDir)

@@ -67,6 +67,10 @@ const KNOWN_ASSET_PROBE_PATHS = [
   /^\/+.+\.map$/i,
   /^\/+(?:[^/?#]+\/)*(?:debug|error|laravel|npm|yarn|storage)(?:[._-]?\d*)?\.log$/i,
 ]
+const BENIGN_MONITOR_PROBE_PATHS = [
+  /^\/+app-ads\.txt$/i,
+  /^\/+apps\/definitely-not-a-real-app(?:-[a-z0-9-]+)?$/i,
+]
 const EXPECTED_AUTH_PROBE_RULES = {
   agenticoscore: [
     /^\/api\/v1\/(?:me|me\/onboarding|market-intelligence)(?:\/|$)/,
@@ -297,7 +301,7 @@ function rowIntent(source, row) {
   const pathValue = cleanPath(row.path)
   const rules = PRODUCT_INTENT_RULES[source.id] || {}
 
-  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS)) return 'technical'
+  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) || matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS)) return 'technical'
   if (matchesAny(pathValue, rules.conversion)) return 'conversion'
   if (matchesAny(pathValue, COMMON_GEO_PATHS)) return 'geo'
   if (matchesAny(pathValue, rules.commercial)) return 'commercial'
@@ -311,10 +315,14 @@ function classifyHttpIssue(source, row, intent) {
   const status = Number(row.status || 0)
   if (status < 400) return null
 
-  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS)) {
+  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) || matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS)) {
     return {
       bucket: 'known_noise',
-      reason: matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) ? 'asset_or_config_probe_noise' : 'security_scan_noise',
+      reason: matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS)
+        ? 'benign_monitor_or_optional_file_probe'
+        : matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS)
+          ? 'asset_or_config_probe_noise'
+          : 'security_scan_noise',
       actionable: false,
       evidenceKey: `${status} ${pathValue}`,
     }

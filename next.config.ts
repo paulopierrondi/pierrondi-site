@@ -78,6 +78,7 @@ const EN_LOCALE_SLUG_REDIRECTS = [
   { source: '/en/apps/:slug', destination: '/apps/:slug', permanent: true },
   { source: '/en/apps/:slug/:doc', destination: '/apps/:slug/:doc', permanent: true },
   { source: '/en/citations', destination: '/citations', permanent: true },
+  { source: '/en/portfolio', destination: '/portfolio', permanent: true },
   { source: '/en/crm', destination: '/crm', permanent: true },
   { source: '/en/crm/login', destination: '/crm/login', permanent: true },
 ]

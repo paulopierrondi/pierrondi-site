@@ -43,6 +43,13 @@ test('single-language citation hub redirects EN variant to canonical URL', () =>
   )
 })
 
+test('single-language portfolio hub redirects EN variant to canonical URL', () => {
+  assert.match(
+    nextConfig,
+    /source:\s*'\/en\/portfolio',\s*destination:\s*'\/portfolio',\s*permanent:\s*true/,
+  )
+})
+
 test('legacy AI search portfolio URLs redirect to canonical AI search hub', () => {
   assert.match(
     nextConfig,

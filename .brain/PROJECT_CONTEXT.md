@@ -1,7 +1,7 @@
 # Project Brain Context
 
-Generated: `2026-07-10 22:51:59`
-Tool: `claude`
+Generated: `2026-07-10 23:17:30`
+Tool: `railway-run`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
 
@@ -2752,6 +2752,15 @@ Rules:
 - Monitor cleanup: AgenticosCore protected `401 /conversions.csv` and `401 /conversions.json` are now classified as expected auth, not actionable SEO incidents. `npm test -- --runInBand` passed `40/40`.
 - Remaining production gate: deploy prepared Pierrondi `/ai-search` and `/en/apps/:slug` redirects, deploy prepared CantuStudio redirect/sitemap/internal-link fixes, and grant AgenticosCore GA4 Viewer/Analyst on property `543366142` to `portfolio-analytics-monitor@agentcore-499217.iam.gserviceaccount.com`.
 
+## 2026-07-11T01:56:00Z - Consolidated portfolio goal audit added
+
+- Added `scripts/portfolio-goal-audit.mjs` and npm script `goal:audit:portfolio` to consolidate SEO/GEO production validation, AgenticosCore analytics doctor and fresh access snapshot.
+- Added `test/portfolio-goal-audit.test.mjs`; `npm test -- --runInBand` passed `42/42`.
+- Current consolidated audit artifact: `/Users/paulopierrondi/Projects/pierrondi-site/outputs/portfolio-goal-audit-20260711T0156Z.json`.
+- Human-readable report: `/Users/paulopierrondi/Documents/Codex/2026-06-17/cheque-e-analise-as-minhas-3/outputs/portfolio-goal-audit-20260711T0156Z.md`.
+- Result: `complete=false`, `3/7` requirements passed. Open gates remain Pierrondi deploy, CantuStudio deploy, AgenticosCore GA4/Plausible restore, and post-fix snapshot with zero actionable errors.
+- Canonical recheck command: `brain-env-run -- npm run goal:audit:portfolio -- --since=2h --limit=300 --out outputs/portfolio-goal-audit-recheck.json`.
+
 ---
 type: project
 project_type: web-app
@@ -2807,16 +2816,7 @@ tags:
 - Product highlights: `pierrondi.dev` had 25 requests and one actionable `404 /ai-search-portfolio.`; `CantuStudio` had 23 all-2xx requests and 3 AI crawler requests; `AgenticosCore` had 76 requests with active conversion-path demand and only known-noise protected API 401s; `FaithSchool` had 9 all-2xx requests.
 [REDACTED SECRET LINE]
 - AgenticosCore line: `agenticoscore ga4=blocked_no_ga4_property_id gsc=blocked_no_search_console_access`; no GA4 unlock yet. Formal unblock remains adding `portfolio-analytics-monitor@agentcore-499217.iam.gserviceaccount.com` as Viewer on GA4 property `543366142`.
-- Decision layer: local LLM `qwen3:14b` delivery completed, but fallback result was used because no usable JSON came back; recommended action is batching human-gated analytics access decisions before external changes. n8n dispatch flags were enabled but delivery is `not_configured` because no expected webhook env is configured.
-- Top open technical action: fix or intentionally redirect `404 /ai-search-portfolio.` on `pierrondi.dev`.
-- Artifacts: `/tmp/hourly-portfolio-access-geo-monitor.json`; memory updated at `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/memory.md`.
-[REDACTED SECRET LINE]
-[REDACTED SECRET LINE]
-
-## 2026-07-06 13:42 -03 - Hourly access GEO monitor dedupe/noise fix
-
-- Pedido: Paulo pediu `resolve e melhore` após notice `hourly-portfolio-access-geo-monitor` / `notice_decision_batch`.
-- Diagnóstico: o monitor já distinguia `notice/decision_batch`, mas `operationsPulse.n8n.dedupeKey` incluía `generatedAt` por hora; o mesmo lote de gates humanos gerava chave nova em cada run, enfraquecendo dedupe e aumentando ruído. A definição da automação também notificava o thread para qualquer `decision_batch`, mesmo quando os gates humanos eram repet
+- Decision layer: local LLM `qwen3:14b` delivery completed, but fallback result was used because no usable JSON came back; recommended action is batching human-gated analytics access decisions before external changes. n
 ...[truncated]
 
 ## AI History Snapshot
