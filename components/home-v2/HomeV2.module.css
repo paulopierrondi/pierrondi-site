@@ -1,0 +1,25 @@
+.root {
+  min-height: 100svh;
+}
+
+.sections {
+  position: relative;
+  z-index: var(--hv2-z-content);
+}
+
+.section {
+  position: relative;
+  /* Grid stretch sizes the single child section without relying on
+     percentage heights, which do not resolve against auto heights. */
+  display: grid;
+  height: 100svh;
+  overflow: hidden;
+}
+
+@media (max-width: 1023px) {
+  .section {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+}

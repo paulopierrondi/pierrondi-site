@@ -1,0 +1,70 @@
+.rail {
+  position: fixed;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--hv2-z-indicators);
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--hv2-space-4);
+}
+
+.dot {
+  display: flex;
+  align-items: center;
+  gap: var(--hv2-space-3);
+  padding: var(--hv2-space-1);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--hv2-text-muted);
+  background: transparent;
+  transition: all var(--hv2-dur-fast) var(--hv2-ease-elastic);
+}
+
+.dot:hover .circle {
+  border-color: var(--hv2-accent-green);
+}
+
+.dotActive .circle {
+  background: var(--hv2-accent-green);
+  border-color: var(--hv2-accent-green);
+  transform: scale(1.5);
+  box-shadow: var(--hv2-glow-green-md);
+}
+
+.index {
+  font-family: var(--hv2-font-mono);
+  font-size: 0.6875rem;
+  color: var(--hv2-text-muted);
+  opacity: 0;
+  transform: translateX(4px);
+  transition:
+    opacity var(--hv2-dur-fast) var(--hv2-ease-out),
+    transform var(--hv2-dur-fast) var(--hv2-ease-out),
+    color var(--hv2-dur-fast) var(--hv2-ease-out);
+}
+
+.dot:hover .index {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.dotActive .index {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--hv2-accent-green);
+}
+
+@media (min-width: 640px) {
+  .rail {
+    display: flex;
+  }
+}

@@ -1,0 +1,30 @@
+.label {
+  position: fixed;
+  left: var(--hv2-section-pad-x);
+  bottom: 32px;
+  z-index: var(--hv2-z-indicators);
+  display: none;
+  align-items: center;
+  gap: var(--hv2-space-3);
+  font-family: var(--hv2-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hv2-text-muted);
+}
+
+.rule {
+  width: 48px;
+  height: 1px;
+  background: var(--hv2-border-default);
+}
+
+.count {
+  color: var(--hv2-text-disabled);
+}
+
+@media (min-width: 640px) {
+  .label {
+    display: flex;
+  }
+}

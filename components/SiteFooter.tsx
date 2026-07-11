@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { getCurrentLanguage, type HomeLang } from '@/lib/i18n/site-language'
+import { isImmersiveHomeRoute } from '@/components/home-v2/immersive-routes'
 import SiteLogo from './SiteLogo'
 import styles from './SiteFooter.module.css'
 
@@ -49,7 +50,7 @@ const footerCopy: Record<HomeLang, {
       { label: 'AI Operating Model', href: '/atuacao#operating-model' },
       { label: 'ServiceNow & IA', href: '/atuacao#servicenow' },
       { label: 'AgentOps', href: '/atuacao#agentops' },
-      { label: 'AI Search Index', href: '/ai-search-portfolio' },
+      { label: 'AI Search Index', href: '/ai-search' },
       { label: 'Estratégia', href: '/atuacao#lideranca' },
     ],
     productHead: 'Sites',
@@ -89,7 +90,7 @@ const footerCopy: Record<HomeLang, {
       { label: 'AI Operating Model', href: '/en/atuacao#operating-model' },
       { label: 'ServiceNow & AI', href: '/en/atuacao#servicenow' },
       { label: 'AgentOps', href: '/en/atuacao#agentops' },
-      { label: 'AI Search Index', href: '/ai-search-portfolio' },
+      { label: 'AI Search Index', href: '/ai-search' },
       { label: 'Strategy', href: '/en/atuacao#lideranca' },
     ],
     productHead: 'Sites',
@@ -119,6 +120,8 @@ export default function SiteFooter() {
     if (typeof window === 'undefined') return
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  if (isImmersiveHomeRoute(pathname)) return null
 
   return (
     <footer className={styles.footer}>

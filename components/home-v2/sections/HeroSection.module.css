@@ -1,0 +1,262 @@
+/* HeroSection — pierrondi.dev home-v2.
+   Root fills its pinned 100vh parent. Colors/spacing come exclusively from
+   the home-v2 design tokens (see home-v2.css). */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--hv2-bg-base);
+  isolation: isolate;
+}
+
+/* --- background layers -------------------------------------------------- */
+
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 45%,
+    transparent 0%,
+    color-mix(in srgb, var(--hv2-bg-base) 45%, transparent) 70%,
+    color-mix(in srgb, var(--hv2-bg-base) 90%, transparent) 100%
+  );
+}
+
+/* --- content ------------------------------------------------------------ */
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  max-width: var(--hv2-container-max);
+  margin-inline: auto;
+  padding-top: var(--hv2-nav-height);
+  padding-inline: var(--hv2-section-pad-x);
+  padding-bottom: var(--hv2-space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* If copy overflows a short viewport, scroll within the section. */
+  overflow-y: auto;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  max-width: 720px;
+}
+
+/* --- tagline ------------------------------------------------------------ */
+
+.tagline {
+  margin: 0 0 var(--hv2-space-5) 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--hv2-space-2);
+  font-family: var(--hv2-font-mono);
+  font-size: clamp(0.75rem, 1.2vw, 1rem);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--hv2-accent-green);
+}
+
+.bracket {
+  color: var(--hv2-text-muted);
+}
+
+.taglineText {
+  color: var(--hv2-accent-green);
+}
+
+/* --- headline ----------------------------------------------------------- */
+
+.headline {
+  margin: 0 0 var(--hv2-space-6) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--hv2-space-1);
+  font-family: var(--hv2-font-display);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-size: clamp(2.25rem, 11vw, 3.5rem);
+}
+
+.line1 {
+  display: block;
+  color: var(--hv2-text-primary);
+}
+
+.line2 {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  color: var(--hv2-accent-green);
+  font-family: var(--hv2-font-mono);
+  font-weight: 500;
+  font-size: 0.45em;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-top: var(--hv2-space-2);
+}
+
+.line2Text {
+  font-family: var(--hv2-font-mono);
+  white-space: nowrap;
+}
+
+.cursor {
+  font-family: var(--hv2-font-mono);
+  color: var(--hv2-accent-green);
+  margin-left: 0.1em;
+  animation: heroBlink 1s step-end infinite;
+}
+
+@keyframes heroBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* --- description -------------------------------------------------------- */
+
+.description {
+  margin: 0 0 var(--hv2-space-6) 0;
+  max-width: 540px;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--hv2-space-2);
+  font-family: var(--hv2-font-body);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--hv2-text-secondary);
+}
+
+.promptPrefix {
+  flex-shrink: 0;
+  font-family: var(--hv2-font-mono);
+  color: var(--hv2-text-muted);
+}
+
+/* --- badges ------------------------------------------------------------- */
+
+.badges {
+  list-style: none;
+  margin: 0 0 var(--hv2-space-7) 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hv2-space-3);
+}
+
+.badge {
+  padding: var(--hv2-space-1) var(--hv2-space-3);
+  border: 1px solid var(--hv2-accent-green-border);
+  border-radius: 2px;
+  background: var(--hv2-accent-green-soft);
+  font-family: var(--hv2-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--hv2-text-secondary);
+  white-space: nowrap;
+}
+
+/* --- CTAs --------------------------------------------------------------- */
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--hv2-space-4);
+}
+
+.ctaPrimary,
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--hv2-space-3);
+  padding: 14px 32px;
+  border-radius: 0; /* square corners per hero job spec */
+  border: 1px solid var(--hv2-accent-green-border);
+  background: transparent;
+  font-family: var(--hv2-font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--hv2-accent-green);
+  cursor: pointer;
+  transition:
+    background var(--hv2-dur-normal) var(--hv2-ease-default),
+    border-color var(--hv2-dur-normal) var(--hv2-ease-default),
+    color var(--hv2-dur-normal) var(--hv2-ease-default),
+    box-shadow var(--hv2-dur-normal) var(--hv2-ease-default),
+    transform var(--hv2-dur-normal) var(--hv2-ease-default);
+}
+
+.ctaPrimary:hover {
+  background: var(--hv2-accent-green-soft);
+  border-color: var(--hv2-accent-green);
+  box-shadow: var(--hv2-glow-green-md);
+  transform: translateY(-2px);
+}
+
+.ctaPrimary:active {
+  transform: translateY(0);
+  box-shadow: var(--hv2-glow-green-sm);
+}
+
+.ctaSecondary {
+  font-weight: 500;
+  color: var(--hv2-text-primary);
+  border-color: var(--hv2-border-default);
+}
+
+.ctaSecondary:hover {
+  border-color: var(--hv2-border-hover);
+  background: var(--hv2-bg-elevated);
+  color: var(--hv2-text-primary);
+  transform: translateY(-2px);
+}
+
+.ctaSecondary:active {
+  transform: translateY(0);
+}
+
+.ctaIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* --- responsive --------------------------------------------------------- */
+
+@media (min-width: 640px) {
+  .headline {
+    font-size: clamp(3rem, 8vw, 6rem);
+  }
+}
+
+/* Desktop: keep critical copy clear of the global dots rail (last ~72px). */
+@media (min-width: 1024px) {
+  .content {
+    padding-right: calc(var(--hv2-section-pad-x) + 72px);
+  }
+}

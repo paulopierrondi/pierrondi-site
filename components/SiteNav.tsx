@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LayoutGrid } from 'lucide-react'
 import { getCurrentLanguage, type HomeLang } from '@/lib/i18n/site-language'
+import { isImmersiveHomeRoute } from '@/components/home-v2/immersive-routes'
 import SiteLogo from './SiteLogo'
 import styles from './SiteNav.module.css'
 
@@ -51,6 +52,7 @@ const navCopy: Record<HomeLang, {
 
 export default function SiteNav() {
   const pathname = usePathname() || '/'
+  const immersiveHome = isImmersiveHomeRoute(pathname)
   const lang = getCurrentLanguage(pathname)
   const copy = navCopy[lang]
   const [scrolled, setScrolled] = useState(false)
@@ -94,6 +96,8 @@ export default function SiteNav() {
     if (href === '/' || href === '/en') return pathname === href
     return pathname === href || pathname.startsWith(`${href}/`)
   }
+
+  if (immersiveHome) return null
 
   return (
     <header

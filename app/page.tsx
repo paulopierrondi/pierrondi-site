@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import JsonLd from '@/components/JsonLd'
 import { SITE_URL } from '@/lib/site'
-import EnterpriseHome from '@/components/enterprise/EnterpriseHome'
+import HomeV2 from '@/components/home-v2/HomeV2'
 
 export const metadata: Metadata = {
   title: 'Paulo Pierrondi - IA enterprise vira modelo operacional',
@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={homeWebPageSchema} />
-      <EnterpriseHome lang="pt" />
+      <HomeV2 lang="pt" />
     </>
   )
 }

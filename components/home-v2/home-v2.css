@@ -1,0 +1,125 @@
+/* home-v2 scoped design tokens — pierrondi.dev redesign.
+   Everything lives under .hv2 so no other route inherits these values. */
+
+.hv2 {
+  /* Backgrounds */
+  --hv2-bg-base: #0a0a0a;
+  --hv2-bg-elevated: #141414;
+  --hv2-bg-surface: #1a1a1a;
+  --hv2-bg-subtle: #0f0f0f;
+  --hv2-bg-mockup: #111111;
+  --hv2-bg-mockup-header: #0d0d0d;
+
+  /* Text */
+  --hv2-text-primary: #f5f5f5;
+  --hv2-text-secondary: #a3a3a3;
+  --hv2-text-muted: #737373;
+  --hv2-text-disabled: #525252;
+
+  /* Accents */
+  --hv2-accent-green: #4ade80;
+  --hv2-accent-green-dim: #22c55e;
+  --hv2-accent-green-soft: rgba(74, 222, 128, 0.1);
+  --hv2-accent-green-glow: rgba(74, 222, 128, 0.15);
+  --hv2-accent-green-border: rgba(74, 222, 128, 0.3);
+  --hv2-accent-amber: #f59e0b;
+  --hv2-accent-amber-dim: #d97706;
+  --hv2-accent-amber-soft: rgba(245, 158, 11, 0.1);
+  --hv2-accent-amber-border: rgba(245, 158, 11, 0.3);
+
+  /* Borders */
+  --hv2-border-default: #262626;
+  --hv2-border-hover: #404040;
+  --hv2-border-active: #4ade80;
+
+  /* Code / terminal tones */
+  --hv2-code-keyword: #c084fc;
+  --hv2-code-string: #a3e635;
+  --hv2-code-function: #60a5fa;
+  --hv2-code-comment: #737373;
+  --hv2-terminal-prompt: #4ade80;
+  --hv2-terminal-bracket: #f59e0b;
+
+  /* Semantic states */
+  --hv2-state-error: #ef4444;
+  --hv2-state-info: #60a5fa;
+
+  /* Typography (font vars are injected by HomeV2 via next/font) */
+  --hv2-font-display: var(--font-hv2-display), 'Space Grotesk', ui-sans-serif, sans-serif;
+  --hv2-font-body: var(--font-hv2-body), 'Inter', ui-sans-serif, sans-serif;
+  --hv2-font-mono: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Spacing (8px base) */
+  --hv2-space-1: 4px;
+  --hv2-space-2: 8px;
+  --hv2-space-3: 12px;
+  --hv2-space-4: 16px;
+  --hv2-space-5: 24px;
+  --hv2-space-6: 32px;
+  --hv2-space-7: 48px;
+  --hv2-space-8: 64px;
+  --hv2-space-9: 96px;
+
+  /* Layout */
+  --hv2-container-max: 1280px;
+  --hv2-nav-height: 64px;
+  --hv2-section-pad-x: clamp(24px, 5vw, 80px);
+  --hv2-card-padding: 24px;
+
+  /* Z-index */
+  --hv2-z-bg: 0;
+  --hv2-z-content: 10;
+  --hv2-z-indicators: 40;
+  --hv2-z-nav: 50;
+
+  /* Motion */
+  --hv2-dur-instant: 100ms;
+  --hv2-dur-fast: 200ms;
+  --hv2-dur-normal: 300ms;
+  --hv2-dur-slow: 500ms;
+  --hv2-dur-dramatic: 800ms;
+  --hv2-ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --hv2-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --hv2-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --hv2-ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --hv2-ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --hv2-ease-smooth: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+
+  /* Glows & shadows */
+  --hv2-glow-green-sm: 0 0 8px rgba(74, 222, 128, 0.3);
+  --hv2-glow-green-md: 0 0 24px rgba(74, 222, 128, 0.2);
+  --hv2-glow-green-lg: 0 0 48px rgba(74, 222, 128, 0.15);
+  --hv2-shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --hv2-shadow-nav: 0 2px 16px rgba(0, 0, 0, 0.5);
+
+  background: var(--hv2-bg-base);
+  color: var(--hv2-text-primary);
+  font-family: var(--hv2-font-body);
+  color-scheme: dark;
+}
+
+.hv2 ::selection {
+  background: var(--hv2-accent-green);
+  color: var(--hv2-bg-base);
+}
+
+.hv2 :focus-visible {
+  outline: 2px solid var(--hv2-accent-green);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hv2 *,
+  .hv2 *::before,
+  .hv2 *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .hv2 {
+    --hv2-nav-height: 56px;
+  }
+}

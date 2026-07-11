@@ -9,6 +9,7 @@ import {
   shouldHideLanguageSwitcher,
   siteLanguages,
 } from '@/lib/i18n/site-language'
+import { isImmersiveHomeRoute } from '@/components/home-v2/immersive-routes'
 import styles from './LanguageSwitcher.module.css'
 
 export default function LanguageSwitcher() {
@@ -40,7 +41,7 @@ export default function LanguageSwitcher() {
     }
   }, [])
 
-  if (hiddenOnClientRoute || hiddenOnPrivateOpsRoute) return null
+  if (hiddenOnClientRoute || hiddenOnPrivateOpsRoute || isImmersiveHomeRoute(pathname)) return null
 
   return (
     <nav className={`${styles.switcher} ${hasTopNav ? styles.withTopNav : ''}`} aria-label="Language selector">
