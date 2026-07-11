@@ -3,11 +3,15 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import WhatsApp from '@/components/WhatsApp'
 import PageHeader from '@/components/PageHeader'
+import ProductLogo from '@/components/ProductLogo'
 import Reveal from '@/components/Reveal'
 import JsonLd from '@/components/JsonLd'
 import { SITE_URL } from '@/lib/site'
+import iconManifest from '@/public/app-icons/manifest.json'
 import { APPS, getApp, isAppSlug } from './_apps'
 import styles from './AppLanding.module.css'
+
+const APP_ICONS = iconManifest as Record<string, { file: string; name: string; source: string }>
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -64,6 +68,7 @@ export default async function AppLandingPage({ params }: Props) {
           'Optional paid features, when offered, go through Apple In-App Purchase.',
         ]
 
+  const iconEntry = APP_ICONS[slug]
   const isGame = /game|puzzle|wargame|quiz|mystery|card/i.test(app.category)
   const appSchema = {
     '@context': 'https://schema.org',
@@ -74,7 +79,7 @@ export default async function AppLandingPage({ params }: Props) {
     url: `${SITE_URL}/apps/${slug}`,
     applicationCategory: isGame ? 'GameApplication' : 'UtilitiesApplication',
     operatingSystem: 'iOS',
-    image: `${SITE_URL}/og`,
+    image: iconEntry ? `${SITE_URL}/app-icons/${iconEntry.file}` : `${SITE_URL}/og`,
     author: { '@id': `${SITE_URL}/#person` },
     publisher: { '@id': `${SITE_URL}/#organization` },
     // Free to download on the App Store; optional paid features go through Apple IAP.
@@ -89,6 +94,7 @@ export default async function AppLandingPage({ params }: Props) {
         eyebrow={app.category.toUpperCase()}
         title={<>{app.name}.</>}
         lead={heroTagline}
+        icon={<ProductLogo slug={slug} name={app.name} size={72} />}
       />
 
       <main className={styles.main}>

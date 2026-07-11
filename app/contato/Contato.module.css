@@ -135,7 +135,7 @@
 .form input:focus,
 .form textarea:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(200, 255, 46, 0.15);
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.15);
 }
 
 .form input::placeholder,

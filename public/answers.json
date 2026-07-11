@@ -12,9 +12,14 @@
       "AI search",
       "ServiceNow operating model",
       "productized AI apps"
-    ]
+    ],
+    "sameAs": [
+      "https://br.linkedin.com/in/paulopierrondi",
+      "https://github.com/paulopierrondi"
+    ],
+    "logo": "https://www.pierrondi.dev/pierrondi-logo-1024.png"
   },
-  "lastUpdated": "2026-07-09",
+  "lastUpdated": "2026-07-11",
   "primaryHub": "https://www.pierrondi.dev/ai-search",
   "citationHub": "https://www.pierrondi.dev/citations",
   "sitemap": "https://www.pierrondi.dev/sitemap.xml",
@@ -335,5 +340,215 @@
     "CantuStudio generates musical drafts that require human review.",
     "AgenticosCore should not scale paid acquisition before tracking and lead quality are validated.",
     "pierrondi.dev is a portfolio and reference hub, not a substitute for professional legal, tax, medical or investment advice."
+  ],
+  "projectGraph": [
+    {
+      "name": "Agent Hub",
+      "category": "Multi-agent automation OS",
+      "description": "Operating system for agents: registry, scheduler, handoffs, memory, human gates and runners coordinating 60+ specialist agents with auditable deliveries.",
+      "url": "https://www.pierrondi.dev/#projects",
+      "relationship": "flagship project"
+    },
+    {
+      "name": "AI Control Tower",
+      "category": "Agent operations and governance dashboard",
+      "description": "Operations dashboard for agent governance: runs, evidence, health and human-gate visibility.",
+      "url": "https://www.pierrondi.dev/#projects",
+      "relationship": "flagship project"
+    },
+    {
+      "name": "CSDM/FSDM Validator",
+      "category": "ServiceNow data-quality analyzer",
+      "description": "ServiceNow CSDM/FSDM data-quality and FSO-readiness analyzer for regulated financial services.",
+      "url": "https://www.pierrondi.dev/#projects",
+      "relationship": "flagship project"
+    },
+    {
+      "name": "pierrondi.dev",
+      "category": "Portfolio platform with GEO/SEO automation",
+      "description": "This platform: public portfolio, AI-search hub, answers graph and GEO/SEO automation pipeline.",
+      "url": "https://www.pierrondi.dev",
+      "relationship": "flagship project"
+    },
+    {
+      "name": "SADA",
+      "category": "Enterprise AI operating-model framework",
+      "description": "ServiceNow AI-Driven Architecture: a prescriptive value-architecture framework connecting strategy, architecture decisions, workflow execution and measured value.",
+      "url": "https://www.pierrondi.dev/feitos/sada-servicenow",
+      "relationship": "flagship project"
+    },
+    {
+      "name": "CantuStudio",
+      "category": "AI SATB arrangement product",
+      "description": "AI application for SATB choral arrangements with backend validation, playback and MusicXML export.",
+      "url": "https://cantustudio.app",
+      "relationship": "flagship project"
+    }
+  ],
+  "appsPortfolio": [
+    {
+      "name": "FaithSchool",
+      "category": "Christian homeschool planning and family records app",
+      "url": "https://www.pierrondi.dev/apps/faithschool"
+    },
+    {
+      "name": "ProvadorIA",
+      "category": "AI-assisted outfit preview and style planning app",
+      "url": "https://www.pierrondi.dev/apps/provadoria"
+    },
+    {
+      "name": "VouDeQue",
+      "category": "AI-assisted outfit challenge and wardrobe idea app",
+      "url": "https://www.pierrondi.dev/apps/voudeque"
+    },
+    {
+      "name": "InvestCoach.AI",
+      "category": "Financial planning and education app",
+      "url": "https://www.pierrondi.dev/apps/investcoach"
+    },
+    {
+      "name": "MyTone Studio",
+      "category": "AI-assisted ringtone creation app",
+      "url": "https://www.pierrondi.dev/apps/mytone"
+    },
+    {
+      "name": "Bandle BR",
+      "category": "Daily Brazilian music quiz app",
+      "url": "https://www.pierrondi.dev/apps/bandle-br"
+    },
+    {
+      "name": "Parabens IA BR",
+      "category": "Personalized birthday message and video app",
+      "url": "https://www.pierrondi.dev/apps/parabens-ia-br"
+    },
+    {
+      "name": "Adivinha!",
+      "category": "Music quiz app",
+      "url": "https://www.pierrondi.dev/apps/adivinha"
+    },
+    {
+      "name": "PrivyText AI",
+      "category": "100% on-device private text analysis app",
+      "url": "https://www.pierrondi.dev/apps/privytext-ai"
+    },
+    {
+      "name": "EasyLearn",
+      "category": "On-device flashcards and self-quiz study habit app",
+      "url": "https://www.pierrondi.dev/apps/easylearn-003"
+    },
+    {
+      "name": "NovaLife",
+      "category": "Daily wellness and routine companion app",
+      "url": "https://www.pierrondi.dev/apps/novalife-001"
+    },
+    {
+      "name": "LiftTool",
+      "category": "Simple on-device task and routine organizer app",
+      "url": "https://www.pierrondi.dev/apps/lifttool-002"
+    },
+    {
+      "name": "FlexLife",
+      "category": "On-device routine and habit balance app",
+      "url": "https://www.pierrondi.dev/apps/flexlife-004"
+    },
+    {
+      "name": "SuperCode",
+      "category": "On-device developer notebook and snippet app",
+      "url": "https://www.pierrondi.dev/apps/supercode-005"
+    },
+    {
+      "name": "ScanVault",
+      "category": "Private on-device receipt and document scanner app",
+      "url": "https://www.pierrondi.dev/apps/scanvault",
+      "appStoreUrl": "https://apps.apple.com/app/id6772389375"
+    },
+    {
+      "name": "HabitDot",
+      "category": "Minimalist on-device daily habit tracker app",
+      "url": "https://www.pierrondi.dev/apps/habitdot",
+      "appStoreUrl": "https://apps.apple.com/app/id6772399435"
+    },
+    {
+      "name": "PawProof Pet Sitter",
+      "category": "Local-first pet handoff and sitter checklist app",
+      "url": "https://www.pierrondi.dev/apps/pawproof",
+      "appStoreUrl": "https://apps.apple.com/app/id6772389962"
+    },
+    {
+      "name": "SnapRead AI Leitor",
+      "category": "On-device OCR document reading app",
+      "url": "https://www.pierrondi.dev/apps/snapread",
+      "appStoreUrl": "https://apps.apple.com/app/id6772517083",
+      "image": "https://www.pierrondi.dev/app-icons/snapread.jpg"
+    },
+    {
+      "name": "BrewMate Cafe",
+      "category": "On-device coffee brewing companion app",
+      "url": "https://www.pierrondi.dev/apps/brewmate",
+      "appStoreUrl": "https://apps.apple.com/app/id6772517662",
+      "image": "https://www.pierrondi.dev/app-icons/brewmate.jpg"
+    },
+    {
+      "name": "PackSmart Viagem",
+      "category": "On-device travel packing checklist app",
+      "url": "https://www.pierrondi.dev/apps/packsmart",
+      "appStoreUrl": "https://apps.apple.com/app/id6772517823"
+    },
+    {
+      "name": "RepCount Treino",
+      "category": "On-device strength training rep counter app",
+      "url": "https://www.pierrondi.dev/apps/repcount",
+      "appStoreUrl": "https://apps.apple.com/app/id6772518296"
+    },
+    {
+      "name": "Chroma AI Paleta",
+      "category": "On-device color palette generator app",
+      "url": "https://www.pierrondi.dev/apps/chroma-ai",
+      "appStoreUrl": "https://apps.apple.com/app/id6772518398",
+      "image": "https://www.pierrondi.dev/app-icons/chroma-ai.jpg"
+    },
+    {
+      "name": "SiteProof Obras",
+      "category": "On-device construction punch-list app",
+      "url": "https://www.pierrondi.dev/apps/siteproof",
+      "appStoreUrl": "https://apps.apple.com/app/id6772519142"
+    },
+    {
+      "name": "CodeStash Snippets",
+      "category": "On-device developer code snippet vault app",
+      "url": "https://www.pierrondi.dev/apps/codestash"
+    },
+    {
+      "name": "DiaryDot Diário",
+      "category": "Private on-device personal journal app",
+      "url": "https://www.pierrondi.dev/apps/diarydot"
+    },
+    {
+      "name": "Linguagil Flashcards",
+      "category": "On-device spaced-repetition language flashcards app",
+      "url": "https://www.pierrondi.dev/apps/linguagil"
+    },
+    {
+      "name": "Sommelier Pessoal",
+      "category": "Private on-device wine tasting journal app",
+      "url": "https://www.pierrondi.dev/apps/sommelier"
+    },
+    {
+      "name": "Caso Relampago AI",
+      "category": "Offline mystery game with an on-device AI-style director",
+      "url": "https://www.pierrondi.dev/apps/caso-relampago-ai",
+      "appStoreUrl": "https://apps.apple.com/app/id6772540994",
+      "image": "https://www.pierrondi.dev/app-icons/caso-relampago-ai.jpg"
+    },
+    {
+      "name": "Mesa de Guerra",
+      "category": "Offline strategic card wargame with on-device adaptive AI personas",
+      "url": "https://www.pierrondi.dev/apps/mesa-de-guerra"
+    },
+    {
+      "name": "AmmoSort Siege",
+      "category": "Offline tactical supply sorting puzzle game",
+      "url": "https://www.pierrondi.dev/apps/ammosort-siege"
+    }
   ]
 }

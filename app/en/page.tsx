@@ -4,9 +4,9 @@ import { SITE_URL } from '@/lib/site'
 import HomeV2 from '@/components/home-v2/HomeV2'
 
 export const metadata: Metadata = {
-  title: 'Paulo Pierrondi - Enterprise AI becomes an operating model',
+  title: 'Paulo Pierrondi - AI Architect, Full-stack Builder & Enterprise Account Director',
   description:
-    'ServiceNow TAE / Enterprise Architect turning enterprise AI into an operating model: AgentOps, adoption velocity, AI control towers, and governed execution.',
+    'AI/automation architect, full-stack builder, and Enterprise Account Director at ServiceNow. Multi-agent systems, AgentOps, automation platforms, apps and frameworks — with evidence trails.',
   keywords: [
     'Paulo Pierrondi',
     'Enterprise AI Operator',
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi - Enterprise AI becomes an operating model',
+    title: 'Paulo Pierrondi - AI Architect, Full-stack Builder & Enterprise Account Director',
     description:
       'ServiceNow TAE / Enterprise Architect turning enterprise AI into an operating model, adoption velocity, and governed execution.',
     url: '/en',
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Paulo Pierrondi - Enterprise AI becomes an operating model',
+    title: 'Paulo Pierrondi - AI Architect, Full-stack Builder & Enterprise Account Director',
     description:
-      'ServiceNow, AgentOps, AI Operating Model, adoption velocity and governed implementation in enterprise environments.',
+      'Multi-agent systems, AgentOps, automation, apps and frameworks — with enterprise account leadership at ServiceNow.',
     images: ['/og'],
   },
 }
@@ -70,9 +70,9 @@ const enWebPageSchema = {
   '@type': 'WebPage',
   '@id': `${SITE_URL}/en`,
   url: `${SITE_URL}/en`,
-  name: 'Paulo Pierrondi - Enterprise AI becomes an operating model',
+  name: 'Paulo Pierrondi - AI Architect, Full-stack Builder & Enterprise Account Director',
   description:
-    'Executive profile by Paulo Pierrondi on AI Operating Model, Enterprise AI, ServiceNow, AgentOps, adoption velocity, AI control towers, and governed implementation systems.',
+    'Profile of Paulo Pierrondi: AI and automation architecture, multi-agent systems, full-stack building, apps and frameworks, with enterprise FSI account leadership at ServiceNow.',
   inLanguage: 'en-US',
   isPartOf: { '@id': `${SITE_URL}/#website` },
   about: { '@id': `${SITE_URL}/#person` },

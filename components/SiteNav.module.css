@@ -104,8 +104,8 @@
 
 .navAppBtn:hover {
   color: var(--color-primary);
-  border-color: rgba(200, 255, 46, 0.35);
-  background: rgba(200, 255, 46, 0.06);
+  border-color: rgba(74, 222, 128, 0.35);
+  background: rgba(74, 222, 128, 0.06);
 }
 
 .navCta {
@@ -179,7 +179,7 @@
     z-index: 1;
     min-height: 100svh;
     background:
-      radial-gradient(circle at 82% 8%, rgba(200, 255, 46, 0.09), transparent 34%),
+      radial-gradient(circle at 82% 8%, rgba(74, 222, 128, 0.09), transparent 34%),
       rgba(5, 6, 7, 0.98);
     backdrop-filter: blur(22px) saturate(140%);
     -webkit-backdrop-filter: blur(22px) saturate(140%);

@@ -16,6 +16,8 @@ const staticRoutes: Array<{
   { path: '/feitos', priority: 0.86, changeFrequency: 'monthly' },
   { path: '/blog', priority: 0.88, changeFrequency: 'weekly' },
   { path: '/contato', priority: 0.7, changeFrequency: 'monthly' },
+  { path: '/portfolio', priority: 0.9, changeFrequency: 'weekly' },
+  { path: '/geo.md', priority: 0.45, changeFrequency: 'weekly' },
   { path: '/ai-search', priority: 0.78, changeFrequency: 'weekly', lastModified: '2026-06-30T00:00:00.000Z' },
   { path: '/citations', priority: 0.76, changeFrequency: 'weekly', lastModified: '2026-07-09T00:00:00.000Z' },
   { path: '/answers.json', priority: 0.5, changeFrequency: 'weekly', lastModified: '2026-07-06T00:00:00.000Z' },

@@ -1,7 +1,7 @@
 .root {
-  --brand-accent: #c8ff2e;
-  --brand-accent-soft: rgba(200, 255, 46, 0.18);
-  --brand-accent-mid: rgba(200, 255, 46, 0.42);
+  --brand-accent: #4ade80;
+  --brand-accent-soft: rgba(74, 222, 128, 0.18);
+  --brand-accent-mid: rgba(74, 222, 128, 0.42);
   --brand-cyan: #7ee7ff;
   --brand-ink: #f7f5ee;
   --brand-muted: rgba(247, 245, 238, 0.52);

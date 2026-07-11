@@ -1,7 +1,7 @@
 # Project Brain Context
 
-Generated: `2026-07-10 23:17:30`
-Tool: `railway-run`
+Generated: `2026-07-11 09:05:12`
+Tool: `claude`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
 
@@ -146,7 +146,7 @@ Every Bradesco Now Assist material must explicitly connect:
 ---
 type: policy
 status: generated
-generated_at: "2026-07-10 09:25:00"
+generated_at: "2026-07-10 23:42:22"
 tags:
   - ai-agents
   - policy
@@ -1081,7 +1081,7 @@ Todo coder deve registrar aprendizados reutilizaveis em:
 - Development QA + Ornith finish gate: qualquer desenvolvimento, bugfix, refactor, automacao de codigo, code review, arquitetura ou regra de agente so fecha depois de testes/checks proporcionais, QA da superficie e segunda passada local com Ornith/Onif quando disponivel (`@ornith`, `ask_ornith`, `delegate provider="ornith"` ou `qwen-code --model ornith-coder:1.0`). Se Ornith/Ollama estiver indisponivel, registrar blocker e risco residual; nao afirmar "totalmente validado". Final/journal/handoff devem listar testes, QA, resultado/blocker Ornith, arquivos e risco.
 - Prompt caching e workflow layout: separar prefixo estável de delta dinâmico, registrar `prompt_cache.strategy`, `prefix_version` e telemetria quando houver.
 - ASI-Evolve/evaluator-driven evolution: usar apenas como laboratório com `run_spec`, sandbox, timeout, score objetivo, análise por round e proposta de promoção; nunca plugar o pipeline cru em Agent Hub, Vault, Linear, produção ou prompts globais. Ver [[99_System/ASI-Evolve Safe Evolution Lab]].
-- PageAgent browser automation: PageAgent MCP fica instalado como capacidade opcional para acoes dentro de pagina web visivel, nao como orquestrador central. Usar [[99_System/PageAgent Browser Automation Operating Model]], wrapper `/Users/paulopierrondi/.local/bin/page-agent-mcp-local`, Ollama local por default, n8n queue-o
+- Antidoom/anti-loop evaluator pattern: usar detectores de repeticao em saidas de agentes antes de qualquer fine-tuning. Primeiro medir `repetition_score`, `loop_start_count` e `max_repeated_span` em saidas publicas/sinteticas; so considerar FTPO/LoRA quando houver dataset redigido, GPU isolada, baseline comparavel e aprova
 ...[truncated]
 
 ## 04_Areas/Coding/Best Practices/App Web Quality Best Practices.md

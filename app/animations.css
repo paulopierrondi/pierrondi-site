@@ -26,9 +26,9 @@
   pointer-events: none;
   transform: scaleX(0);
   transform-origin: left center;
-  background: #c8ff2e;
+  background: #4ade80;
   box-shadow:
-    0 0 10px rgba(200, 255, 46, 0.58),
+    0 0 10px rgba(74, 222, 128, 0.58),
     0 0 28px rgba(85, 184, 217, 0.22);
   will-change: transform;
 }

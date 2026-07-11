@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="Cantustudio">
+  <defs>
+    <linearGradient id="cantusIconBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="96" height="96" rx="24" fill="url(#cantusIconBg)"/>
+  <rect x="15" y="22" width="66" height="1.5" rx="0.75" fill="#334155"/>
+  <rect x="15" y="35" width="66" height="1.5" rx="0.75" fill="#334155"/>
+  <rect x="15" y="48" width="66" height="1.5" rx="0.75" fill="#334155"/>
+  <rect x="15" y="61" width="66" height="1.5" rx="0.75" fill="#334155"/>
+  <path d="M28 63V30l38-8v31" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="28" cy="67" r="7" fill="#f472b6"/>
+  <circle cx="66" cy="59" r="7" fill="#38bdf8"/>
+  <circle cx="46" cy="44" r="3.5" fill="#34d399"/>
+  <circle cx="58" cy="37" r="3.5" fill="#fbbf24"/>
+</svg>

@@ -66,7 +66,7 @@ export async function GET() {
               letterSpacing: 0,
             }}
           >
-            AI Operating Model.
+            AI Architect. Builder.
           </div>
           <div
             style={{
@@ -77,7 +77,7 @@ export async function GET() {
               letterSpacing: 0,
             }}
           >
-            ServiceNow + AgentOps.
+            Enterprise Director.
           </div>
         </div>
 
@@ -91,7 +91,7 @@ export async function GET() {
               textTransform: 'uppercase',
             }}
           >
-            Enterprise AI | Platform Strategy | Workflows
+            AI Systems | Full-stack | Enterprise Accounts
           </span>
           <span
             style={{

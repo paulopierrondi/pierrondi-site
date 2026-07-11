@@ -39,8 +39,8 @@
   "pages": {
     "pt": {
       "slug": "/about",
-      "metadataTitle": "Paulo Pierrondi - ServiceNow, IA governada e AgentOps",
-      "metadataDescription": "Perfil executivo de Paulo Pierrondi: ServiceNow, IA governada, Now Assist, AI Agents, CSDM, CMDB, AgentOps e execução enterprise sem expor informação confidencial.",
+      "metadataTitle": "Paulo Pierrondi - Arquiteto de IA, Full-stack Builder e Enterprise Account Director",
+      "metadataDescription": "Perfil de Paulo Pierrondi: arquitetura de IA e automação, sistemas multi-agente, full-stack building, apps e frameworks, com liderança de contas enterprise na ServiceNow — sem expor informação confidencial.",
       "hero": {
         "kicker": "Perfil executivo / ServiceNow / IA governada",
         "title": "Eu desenho a camada operacional que faz IA virar trabalho governado.",
@@ -110,8 +110,8 @@
     },
     "en": {
       "slug": "/en/about",
-      "metadataTitle": "Paulo Pierrondi - ServiceNow, governed AI and AgentOps",
-      "metadataDescription": "Executive profile for Paulo Pierrondi: ServiceNow, governed AI, Now Assist, AI Agents, CSDM, CMDB, AgentOps and enterprise execution without confidential claims.",
+      "metadataTitle": "Paulo Pierrondi - AI Architect, Full-stack Builder & Enterprise Account Director",
+      "metadataDescription": "Profile of Paulo Pierrondi: AI and automation architecture, multi-agent systems, full-stack building, apps and frameworks, with enterprise account leadership at ServiceNow — without confidential claims.",
       "hero": {
         "kicker": "Executive profile / ServiceNow / governed AI",
         "title": "I design the operating layer that turns AI into governed work.",

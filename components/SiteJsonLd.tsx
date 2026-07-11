@@ -13,9 +13,9 @@ const siteSchema = {
       url: SITE_URL,
       image: `${SITE_URL}/og`,
       email: 'pierrondi@gmail.com',
-      jobTitle: 'Technical Account Executive',
+      jobTitle: 'Enterprise Account Director & AI/Automation Architect',
       description:
-        'Technical Account Executive na ServiceNow, com foco em IA governada, ServiceNow, SADA, AgentOps, LLM inference, dados e workflows corporativos.',
+        'Arquiteto de IA e automação, full-stack builder e Enterprise Account Director (Technical Account Executive) na ServiceNow. Constrói sistemas multi-agente, plataformas de automação, apps e frameworks — SADA, AgentOps, LLM inference, dados e workflows corporativos.',
       address: {
         '@type': 'PostalAddress',
         addressCountry: 'BR',

@@ -69,7 +69,7 @@
   flex-direction: column;
   padding: 28px;
   border: 1px solid var(--color-hairline);
-  border-radius: 18px;
+  border-radius: 8px;
   background: linear-gradient(180deg, var(--color-surface), var(--color-canvas));
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
@@ -151,4 +151,69 @@
   .grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ── Card head with product logo ── */
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.cardHead .label {
+  margin: 0;
+}
+
+/* ── iOS apps grid ── */
+.appsSection {
+  margin-top: 72px;
+}
+
+.appsGrid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.appTile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid var(--color-hairline);
+  border-radius: 8px;
+  background: var(--color-surface-card);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.appTile:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.12);
+}
+
+.appMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.appName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-ink);
+}
+
+.appCategory {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--color-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

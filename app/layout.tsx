@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Bricolage_Grotesque, Hanken_Grotesk, JetBrains_Mono } from 'next/font/google'
+import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google'
 import Script from 'next/script'
 import dynamic from 'next/dynamic'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
@@ -13,14 +13,14 @@ import { SITE_URL } from '@/lib/site'
 import './globals.css'
 import './animations.css'
 
-const display = Bricolage_Grotesque({
+const display = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
 })
 
-const body = Hanken_Grotesk({
+const body = Inter({
   subsets: ['latin'],
   variable: '--font-body',
   display: 'swap',
@@ -41,11 +41,11 @@ const CookieBanner = dynamic(() => import('@/components/CookieBanner'))
 
 export const metadata: Metadata = {
   title: {
-    default: 'Paulo Pierrondi - AI Operating Model, ServiceNow, AgentOps e Enterprise AI',
+    default: 'Paulo Pierrondi - Arquiteto de IA, Full-stack Builder e Enterprise Account Director',
     template: '%s | pierrondi.dev',
   },
   description:
-    'ServiceNow TAE / Enterprise Architect transformando IA enterprise em AI Operating Model: AgentOps, adoption velocity, AI control towers e execução governada.',
+    'Arquiteto de IA e automação, full-stack builder e Enterprise Account Director na ServiceNow: sistemas multi-agente, AgentOps, plataformas de automação, apps e frameworks.',
   keywords: [
     'Paulo Pierrondi',
     'ServiceNow',
@@ -95,9 +95,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi - AI Operating Model, ServiceNow e AgentOps',
+    title: 'Paulo Pierrondi - Arquiteto de IA, Full-stack Builder e Enterprise Account Director',
     description:
-      'ServiceNow TAE / Enterprise Architect transformando IA enterprise em modelo operacional, adoption velocity e execução governada.',
+      'Sistemas multi-agente, AgentOps, plataformas de automação, apps e frameworks — liderando contas enterprise FSI na ServiceNow.',
     url: '/',
     siteName: 'pierrondi.dev',
     type: 'website',
@@ -109,7 +109,7 @@ export const metadata: Metadata = {
     // page's resolved title, so product/portfolio shares get page-specific
     // cards instead of leaking the homepage's generic enterprise title.
     card: 'summary_large_image',
-    description: 'ServiceNow, AgentOps, AI Operating Model, adoption velocity e implementação governada em ambientes enterprise.',
+    description: 'Sistemas multi-agente, AgentOps, automação, apps e frameworks — com liderança de contas enterprise na ServiceNow.',
     images: ['/og'],
   },
   alternates: {

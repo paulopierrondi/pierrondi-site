@@ -1,0 +1,37 @@
+{
+  "snapread": {
+    "file": "snapread.jpg",
+    "name": "SnapRead AI Leitor",
+    "source": "appstore:6772517083"
+  },
+  "brewmate": {
+    "file": "brewmate.jpg",
+    "name": "BrewMate Cafe",
+    "source": "appstore:6772517662"
+  },
+  "chroma-ai": {
+    "file": "chroma-ai.jpg",
+    "name": "Chroma AI Paleta",
+    "source": "appstore:6772518398"
+  },
+  "caso-relampago-ai": {
+    "file": "caso-relampago-ai.jpg",
+    "name": "Caso Relampago AI",
+    "source": "appstore:6772540994"
+  },
+  "cantustudio": {
+    "file": "cantustudio.svg",
+    "name": "CantuStudio",
+    "source": "https://cantustudio.app/logo.svg"
+  },
+  "faithschool-web": {
+    "file": "faithschool-web.png",
+    "name": "FaithSchool",
+    "source": "https://faithschool.app/apple-touch-icon.png"
+  },
+  "agenticoscore": {
+    "file": "agenticoscore.png",
+    "name": "AgenticosCore",
+    "source": "https://agenticoscore.ai/apple-touch-icon.png"
+  }
+}

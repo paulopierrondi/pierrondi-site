@@ -10,17 +10,17 @@ Fact sheet: https://www.pierrondi.dev/geo.md
 Sitemap: https://www.pierrondi.dev/sitemap.xml
 Owner: Paulo Pierrondi
 Language focus: pt-BR, en-US
-Last updated: 2026-07-06
+Last updated: 2026-07-11
 
 ## What this site is
 
-pierrondi.dev is the owned portfolio and authority site for Paulo Pierrondi, focused on enterprise AI operating models, AgentOps, ServiceNow execution, AI search references and productized AI applications.
+pierrondi.dev is the owned portfolio and authority site for Paulo Pierrondi, an AI/Automation Architect, Full-stack Builder and Enterprise Account Director at ServiceNow. It covers his flagship projects, enterprise AI operating models, AgentOps, ServiceNow execution, AI search references and productized AI applications.
 
 The AI Search Portfolio page exists as a citation layer for crawler and assistant retrieval. It links to commercial answer briefs and machine-readable catalogs for the current product portfolio.
 
 ## Primary public pages
 
-- [Home](https://www.pierrondi.dev): positioning as Enterprise AI Architect and the core value narrative.
+- [Home](https://www.pierrondi.dev): AI/Automation Architect + Full-stack Builder + Enterprise Account Director at ServiceNow.
 - [About](https://www.pierrondi.dev/about): trajectory, competencies in ServiceNow / ITOM / CMDB / CSDM and enterprise AI.
 - [Atuação](https://www.pierrondi.dev/atuacao): how Paulo works — enterprise AI operating models, governed agents, technical GTM.
 - [Feitos](https://www.pierrondi.dev/feitos): delivered work and product portfolio.
@@ -28,6 +28,19 @@ The AI Search Portfolio page exists as a citation layer for crawler and assistan
 - [Blog](https://www.pierrondi.dev/blog): technical essays on ServiceNow, CMDB/CSDM, agentic AI and GEO/SEO.
 - [Public portfolio](https://www.pierrondi.dev/paulo): public portfolio profile.
 - [Contato](https://www.pierrondi.dev/contato): direct contact and engagement for enterprise AI operating-model and ServiceNow work.
+
+## Flagship projects
+
+- Agent Hub — multi-agent automation OS (registry, scheduler, human gates, 60+ agents) — https://www.pierrondi.dev/#projects
+- AI Control Tower — agent operations/governance dashboard — https://www.pierrondi.dev/#projects
+- CSDM/FSDM Validator — ServiceNow data-quality/FSO readiness analyzer — https://www.pierrondi.dev/#projects
+- pierrondi.dev — portfolio + AI-search hub + GEO/SEO automation — https://www.pierrondi.dev
+- SADA — ServiceNow AI-Driven Architecture value framework — https://www.pierrondi.dev/feitos/sada-servicenow
+- CantuStudio — AI SATB arrangement product — https://cantustudio.app
+
+## iOS apps
+
+See the full iOS app catalog at https://www.pierrondi.dev/apps.
 
 ## Owned product entities
 
