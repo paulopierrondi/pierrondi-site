@@ -123,3 +123,52 @@ Execução em 4 fases sequenciais.
 - Grande superfície de mudança. Recomendado revisar diff antes de merge.
 - `/en/blog` e `/en/feitos` reutilizam conteúdo PT nos cards; melhorar no futuro.
 - `/sobre` ainda tem arquivo `page.tsx`, mas redirect 301 o torna inacessível.
+
+## 2026-07-10 (Claude Code) — hourly-portfolio-access-geo-monitor ALERT: root cause + 2 safeguard fixes
+
+Contexto: automação `hourly-portfolio-access-geo-monitor` (cron Codex, roda a partir deste repo,
+config em `~/.codex/automations/hourly-portfolio-access-geo-monitor/automation.toml`) mandou ALERT
+20:10 UTC — "n8n: dispatch enabled but delivery not_configured" + analytics (Plausible/GA4/GSC)
+bloqueados nos 4 sites do portfolio.
+
+**Achado 1 — causa raiz da flakiness do n8n delivery (RESOLVIDO, config-only):**
+`scripts/access-snapshot.mjs` lê env só via `process.env` (sem dotenv próprio). O `automation.toml`
+chamava `npm run access:snapshot` direto, sem `brain-env-run --`, então a variável de webhook n8n
+(guardada só no `.keys.env` central) nunca chegava ao processo do cron — por isso `memory.md` mostra
+oscilação real `sent(200)` ↔ `not_configured` run a run (não é o mesmo bug se repetindo, é falta de
+env consistente). Fix: `automation.toml` passo 1 agora roda
+`... brain-env-run -- npm run access:snapshot -- --since 1h --limit 500` (Central Env File Operating
+Model). Nenhum valor de secret foi lido, mudado ou impresso — só o nome da env var já cadastrada.
+
+**Achado 2 — falso positivo "actionable error" (RESOLVIDO, code):**
+Um run recente sinalizou como "actionable 4xx" os paths `/api/config/` e `/api/env/` no FaithSchool —
+são probes de bot escaneando por vazamento de secrets, já corretamente respondidos com 404, não bugs
+reais do site. `SECURITY_SCAN_PATHS` em `scripts/access-snapshot.mjs` não cobria `/api/config`,
+`/api/env` (dir) nem `/env` (dir). Adicionadas 2 regex novas para classificá-los como
+`security_scan_noise` em vez de `actionable`, reduzindo alert fatigue sem esconder erros reais.
+
+**Validação:** `node --check scripts/access-snapshot.mjs` OK; `node --test test/*.test.mjs` → 36/36
+pass (inclui `test/access-snapshot-operations-pulse.test.mjs`, 4/4). Nada de ads/deploy/DNS/secrets/
+produção tocado.
+
+**Complexity gate:** `complexity-guard.py scan --changed` reportou 1 HARD block em
+`app/ai-search-portfolio/page.tsx` (NLOC>=120) — pré-existente, arquivo já estava dirty antes desta
+sessão (trabalho em andamento do Paulo, não tocado aqui). Waiver registrado: não é regressão desta
+mudança. `classifyHttpIssue` segue WARN (CCN 12, pré-existente, inalterado pela edição no array
+`SECURITY_SCAN_PATHS`).
+
+**Segurança — nota de correção própria:** durante o diagnóstico, um `grep` de verificação de
+existência de nome de env var acabou imprimindo o valor de `N8N_PORTFOLIO_GEO_WEBHOOK_URL` (um
+webhook loopback local, não uma API key) no output de um tool call desta sessão. Não foi reescrito em
+nenhum lugar do vault/Markdown/email/Slack. Registrado aqui como lição: usar sempre `brain-env-run
+list`/`check` (só nomes) em vez de `grep` direto no `.keys.env`.
+
+**Não resolvido (human-gated, fora do meu escopo):**
+- GA4 property IDs numéricos faltando: pierrondi.dev, AgenticosCore.
+- Search Console access bloqueado: todos os 4 sites (pierrondi.dev, CantuStudio, AgenticosCore, FaithSchool).
+- Plausible API token não configurado: todos os 4 sites.
+- AgenticosCore GA4 unblock formal: Viewer access para `portfolio-analytics-monitor@agentcore-499217.iam.gserviceaccount.com` na property `543366142`.
+
+Próxima ação humana: batch de decisão de analytics access (GA4/GSC/Plausible) quando o Paulo tiver
+tempo — a automação já despacha isso como `decision_batch`/`digest_only` (não repetitivo) e agora,
+com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configured`.

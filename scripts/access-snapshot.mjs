@@ -30,16 +30,48 @@ const COMMON_TECHNICAL_PATHS = [
 const COMMON_LEGAL_PATHS = [/^\/(?:privacy|privacidade|terms|termos)(?:\/|$)/]
 const SECURITY_SCAN_PATHS = [
   /^\/+xmlrpc\.php$/,
+  /^\/+wp-config\.php$/i,
+  /^\/+wp-config\.php\.(?:bak|backup|old|save|txt)$/i,
+  /^\/+wp-json(?:\/|$)/i,
   /^\/+(?:wp-admin|wp-login\.php|wp-content|wp-includes|wordpress|wp|cms|blog|news|site|test|backup|old)(?:\/|$)/i,
   /^\/+.*\/wp-includes\/wlwmanifest\.xml$/i,
   /^\/+components\/com_jce(?:\/|$)/i,
-  /^\/+(?:phpmyadmin|pma|adminer|\.env|\.git|server-status)(?:\/|$)/i,
-  /^\/+api\/(?:\.env|\.git|server-status|common\.js|config\.js)$/i,
+  /^\/+(?:phpmyadmin|pma|adminer|server-status)(?:\/|$)/i,
+  /^\/+\.(?:aws|azure|bash_history|config|dev\.vars|docker|env|git|hg|npmrc|ssh|svn|vscode)(?:[./_-]|$)/i,
+  /^\/+(?:[^/?#]+\/)+\.env(?:[._-]|$)/i,
+  /^\/+(?:backend|frontend|server|app|client|src)\/\.(?:aws|azure|config|dev\.vars|docker|env|git|hg|npmrc|ssh|svn|vscode)(?:[./_-]|$)/i,
+  /^\/+(?:backup|dump|database|db)(?:[._-]?(?:sql|sqlite|sqlite3|tar|tar\.gz|tgz|zip|gz|bak|backup|old))?$/i,
+  /^\/+(?:database|db)_backup\.sql$/i,
+  /^\/+(?:server|private|ssl|tls)\.key$/i,
+  /^\/+(?:[^/?#]+\/)*(?:firebase|firebase-adminsdk|gcp-credentials|google-credentials|google-service-account|service-account|key|keyfile)\.json$/i,
+  /^\/+user_secrets\.ya?ml$/i,
+  /^\/+(?:secrets?|credentials?|private|config|configuration)(?:[._-]?(?:php|json|ya?ml|ini|txt|bak|backup|old|production|prod|local|dev))?$/i,
+  /^\/+config(?:[./_-]|$)/i,
+  /^\/+docker-compose\.ya?ml$/i,
+  /^\/+etc\/(?:ssl\/private|passwd|shadow)(?:\/|$)/i,
+  /^\/+actuator\/(?:env|heapdump|metrics|prometheus|shutdown)(?:\/|$)/i,
+  /^\/+admin(?:\/|$)/i,
+  /^\/+(?:_vti_pvt|cgi-bin)(?:\/|$)/i,
+  /^\/+(?:phpinfo|info)(?:\.php)?$/i,
+  /^\/+api\/(?:\.env|\.git|server-status|common\.js|config\.js|secrets?\.json|credentials?\.json)$/i,
+  /^\/+api\/(?:config|env|secrets?|credentials?)(?:\/|$)/i,
+  /^\/+env(?:\/|$)/i,
   /^\/+api\/(?:\*|auth\/\*)$/i,
   /^\/+curl\/[a-z0-9_-]{24,}$/i,
 ]
+const KNOWN_ASSET_PROBE_PATHS = [
+  /^\/+\.vite\/manifest\.json$/i,
+  /^\/+(?:account|appsettings|local\.settings|settings)\.json$/i,
+  /^\/+(?:package|package-lock|yarn\.lock|pnpm-lock)\.(?:json|ya?ml)$/i,
+  /^\/+(?:assets|static|js|css)\/.+\.(?:js|css)\.map$/i,
+  /^\/+.+\.map$/i,
+  /^\/+(?:[^/?#]+\/)*(?:debug|error|laravel|npm|yarn|storage)(?:[._-]?\d*)?\.log$/i,
+]
 const EXPECTED_AUTH_PROBE_RULES = {
-  agenticoscore: [/^\/api\/v1\/(?:me|me\/onboarding|market-intelligence)(?:\/|$)/],
+  agenticoscore: [
+    /^\/api\/v1\/(?:me|me\/onboarding|market-intelligence)(?:\/|$)/,
+    /^\/conversions\.(?:csv|json)$/i,
+  ],
 }
 const PRODUCT_INTENT_RULES = {
   pierrondi: {
@@ -50,8 +82,14 @@ const PRODUCT_INTENT_RULES = {
     conversion: [/^\/(?:contato|en\/contato|quiz|calculadora)(?:\/|$)/, /^\/api\/(?:contact|lead|automation-control|control-tower)(?:\/|$)/],
   },
   cantustudio: {
-    commercial: [/^\/$/, /^\/(?:guias|satb|musicxml|pricing|precos|choral|choir)(?:\/|$)/],
-    conversion: [/^\/(?:checkout|sign-up|signup|pricing|precos)(?:\/|$)/, /^\/api\/(?:checkout|lead|signup)(?:\/|$)/],
+    commercial: [
+      /^\/$/,
+      /^\/(?:answers|ai-search|guias|satb|arranjo|arranjos|musicxml|pricing|precos|planos|choral|choir|hymn-arranger|satb-arranger|satb-arrangement-app|musicxml-harmonization|harmonizar-melodia-online|kit-de-ensaio|gerar-arranjo-satb)(?:\/|$)/,
+    ],
+    conversion: [
+      /^\/(?:checkout|sign-up|signup|pricing|precos|planos|app|gerar-arranjo-satb|harmonizar-melodia-online|kit-de-ensaio)(?:\/|$)/,
+      /^\/api\/(?:checkout|lead|signup)(?:\/|$)/,
+    ],
   },
   agenticoscore: {
     commercial: [/^\/$/, /^\/(?:diagnostico|plano-de-acao-comercial|app|answers)(?:\/|$)/],
@@ -259,6 +297,7 @@ function rowIntent(source, row) {
   const pathValue = cleanPath(row.path)
   const rules = PRODUCT_INTENT_RULES[source.id] || {}
 
+  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS)) return 'technical'
   if (matchesAny(pathValue, rules.conversion)) return 'conversion'
   if (matchesAny(pathValue, COMMON_GEO_PATHS)) return 'geo'
   if (matchesAny(pathValue, rules.commercial)) return 'commercial'
@@ -272,10 +311,10 @@ function classifyHttpIssue(source, row, intent) {
   const status = Number(row.status || 0)
   if (status < 400) return null
 
-  if (matchesAny(pathValue, SECURITY_SCAN_PATHS)) {
+  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS)) {
     return {
       bucket: 'known_noise',
-      reason: 'security_scan_noise',
+      reason: matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) ? 'asset_or_config_probe_noise' : 'security_scan_noise',
       actionable: false,
       evidenceKey: `${status} ${pathValue}`,
     }
@@ -337,8 +376,8 @@ function addSecurityNoiseOpportunity(opportunities, intent, rawErrorCount) {
   opportunities.push({
     priority: 'low',
     area: 'security_noise',
-    action: `Keep filtering ${knownNoiseErrorCount} known auth/security-scan 4xx requests out of growth alerts.`,
-    why: 'Protected API probes and commodity WordPress/xmlrpc scans should not page growth or SEO workflows when public endpoints are healthy.',
+    action: `Keep filtering ${knownNoiseErrorCount} known auth/security/asset-probe 4xx requests out of growth alerts.`,
+    why: 'Protected API probes, commodity scans and intentionally missing source maps should not page growth or SEO workflows when public endpoints are healthy.',
     evidence: topEntries(intent.knownNoiseErrorPaths, 5),
   })
 }
@@ -462,7 +501,9 @@ function recordRow(tracker, source, row) {
   if (isBot(row.userAgent)) tracker.botRequests += 1
   if (isAiCrawler(row.userAgent)) {
     tracker.aiCrawlerRequests += 1
-    incrementMap(tracker.aiCrawlerPaths, pathValue)
+    if (Number(row.status || 0) < 400 && intent !== 'technical') {
+      incrementMap(tracker.aiCrawlerPaths, pathValue)
+    }
   }
   recordIntentPath(tracker, intent, pathValue)
   recordIssue(tracker, classifyHttpIssue(source, row, intent))
@@ -1081,6 +1122,7 @@ function searchConsoleOpportunity(source) {
 
 function plausibleOpportunity(source) {
   if (source.plausible?.status === 'ok') return null
+  if (source.ga4?.status === 'ok') return null
   return {
     product: source.label,
     priority: 'medium',

@@ -22,7 +22,7 @@ Paulo specializes in ServiceNow ITOM and CMDB/CSDM, including Discovery, Service
 - [About](https://www.pierrondi.dev/about)
 - [Atuação](https://www.pierrondi.dev/atuacao)
 - [Feitos](https://www.pierrondi.dev/feitos)
-- [AI Search Portfolio](https://www.pierrondi.dev/ai-search-portfolio)
+- [AI Search Portfolio](https://www.pierrondi.dev/ai-search)
 - [Blog](https://www.pierrondi.dev/blog)
 - [Public portfolio](https://www.pierrondi.dev/paulo)
 - [Contato](https://www.pierrondi.dev/contato)
@@ -48,7 +48,7 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - CantuStudio — https://cantustudio.app — AI-assisted SATB arranger and choir harmonization app.
 - AgenticosCore — https://agenticoscore.ai — productized RevOps / B2B GTM operating system.
 
-Answer briefs and catalogs: https://www.pierrondi.dev/ai-search-portfolio · https://www.pierrondi.dev/answers.json
+Answer briefs and catalogs: https://www.pierrondi.dev/ai-search · https://www.pierrondi.dev/answers.json
 
 ## Product answers (citation-safe, answer-first)
 

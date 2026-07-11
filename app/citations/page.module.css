@@ -1,0 +1,244 @@
+.main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-inline: clamp(20px, 5vw, 64px);
+  padding-bottom: clamp(88px, 12vh, 148px);
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  gap: clamp(26px, 4vw, 52px);
+  align-items: end;
+  padding-bottom: clamp(46px, 7vw, 84px);
+  border-bottom: 1px solid var(--color-hairline-soft);
+}
+
+.kicker {
+  margin-bottom: 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.summary h2,
+.sectionHead h2 {
+  max-width: 780px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
+  color: var(--color-ink);
+  font-weight: 800;
+}
+
+.summary p:not(.kicker),
+.sectionHead p {
+  margin-top: 16px;
+  max-width: 760px;
+  color: var(--color-body-strong);
+  font-size: clamp(1rem, 1.35vw, 1.16rem);
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metric {
+  min-width: 0;
+  min-height: 148px;
+  padding: 22px;
+  border: 1px solid var(--color-hairline);
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--color-surface) 80%, transparent);
+}
+
+.metric svg {
+  color: var(--color-primary);
+}
+
+.metric strong {
+  display: block;
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: 2.3rem;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.metric span {
+  display: block;
+  margin-top: 7px;
+  color: var(--color-muted);
+  line-height: 1.35;
+}
+
+.products {
+  padding-top: clamp(48px, 8vw, 92px);
+}
+
+.sectionHead {
+  margin-bottom: 28px;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+.productCard {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: clamp(22px, 2.4vw, 30px);
+  border: 1px solid var(--color-hairline);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--color-surface) 88%, transparent), transparent 130%),
+    var(--color-canvas);
+}
+
+.cardHead {
+  min-height: 236px;
+}
+
+.cardHead p {
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.35;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-cyan);
+}
+
+.cardHead h3 {
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 2.4vw, 2.2rem);
+  line-height: 1;
+  color: var(--color-ink);
+  font-weight: 800;
+}
+
+.cardHead span {
+  display: block;
+  margin-top: 14px;
+  color: var(--color-body);
+  line-height: 1.55;
+}
+
+.catalogLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-hairline-soft);
+}
+
+.catalogLinks a {
+  min-height: 36px;
+  padding: 8px 11px;
+  border: 1px solid var(--color-hairline);
+  border-radius: 999px;
+  color: var(--color-body-strong);
+  font-size: 0.9rem;
+  transition: border-color 0.18s var(--ease-out), color 0.18s var(--ease-out);
+}
+
+.catalogLinks a:hover {
+  border-color: color-mix(in oklab, var(--color-primary) 54%, transparent);
+  color: var(--color-primary);
+}
+
+.linkGroup {
+  margin-top: 26px;
+}
+
+.linkGroup h4 {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  font-size: 1.08rem;
+}
+
+.linkGroup ul {
+  display: grid;
+  gap: 10px;
+  margin-top: 13px;
+  padding: 0;
+  list-style: none;
+}
+
+.linkGroup a {
+  position: relative;
+  display: grid;
+  min-height: 86px;
+  padding: 13px 42px 13px 14px;
+  border: 1px solid var(--color-hairline-soft);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.018);
+  transition: border-color 0.18s var(--ease-out), background 0.18s var(--ease-out);
+}
+
+.linkGroup a:hover {
+  border-color: var(--color-hairline-strong);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.linkGroup a svg {
+  position: absolute;
+  top: 15px;
+  right: 14px;
+  color: var(--color-muted);
+}
+
+.anchor,
+.intent,
+.why {
+  display: block;
+}
+
+.anchor {
+  color: var(--color-body-strong);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.intent {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+.why {
+  margin-top: 8px;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 1120px) {
+  .summary,
+  .productGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardHead {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .metricGrid {
+    grid-template-columns: 1fr;
+  }
+}

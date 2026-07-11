@@ -46,14 +46,14 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - About: https://www.pierrondi.dev/about
 - Atuação: https://www.pierrondi.dev/atuacao
 - Feitos: https://www.pierrondi.dev/feitos
-- AI Search Portfolio: https://www.pierrondi.dev/ai-search-portfolio
+- AI Search Portfolio: https://www.pierrondi.dev/ai-search
 - Blog: https://www.pierrondi.dev/blog
 - Public portfolio: https://www.pierrondi.dev/paulo
 - Contato: https://www.pierrondi.dev/contato
 
 ## Owned product portfolio
 
-Answer briefs and machine-readable catalogs for each product live at https://www.pierrondi.dev/ai-search-portfolio and https://www.pierrondi.dev/answers.json (FaithSchool, CantuStudio, AgenticosCore).
+Answer briefs and machine-readable catalogs for each product live at https://www.pierrondi.dev/ai-search and https://www.pierrondi.dev/answers.json (FaithSchool, CantuStudio, AgenticosCore).
 
 Key product landings:
 

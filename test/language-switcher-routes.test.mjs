@@ -13,6 +13,8 @@ test('global language picker maps deliberate PT/EN route pairs', () => {
     "'/en': { pt: '/', en: '/en' }",
     "'/about': { pt: '/about', en: '/en/about' }",
     "'/en/about': { pt: '/about', en: '/en/about' }",
+    "'/citations': { pt: '/citations', en: '/citations' }",
+    "'/en/citations': { pt: '/citations', en: '/citations' }",
     "'/privacidade': { pt: '/privacidade', en: '/privacy' }",
     "'/privacy': { pt: '/privacidade', en: '/privacy' }",
     "'/termos': { pt: '/termos', en: '/terms' }",

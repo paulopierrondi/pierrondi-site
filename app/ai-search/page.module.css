@@ -83,6 +83,70 @@
   margin-bottom: 28px;
 }
 
+.sectionHead p:not(.kicker) {
+  margin-top: 14px;
+  max-width: 760px;
+  color: var(--color-body-strong);
+}
+
+.citationPlan {
+  padding-top: clamp(48px, 7vw, 84px);
+}
+
+.citationGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.citationCard {
+  min-width: 0;
+  padding: clamp(20px, 2.2vw, 28px);
+  border: 1px solid var(--color-hairline);
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--color-surface) 70%, transparent);
+}
+
+.citationCard h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.citationCard ul {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.citationCard li {
+  display: grid;
+  gap: 6px;
+  padding: 12px 0;
+  border-top: 1px solid var(--color-hairline-soft);
+}
+
+.citationCard a {
+  color: var(--color-body-strong);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--color-primary) 42%, transparent);
+  text-underline-offset: 4px;
+}
+
+.citationCard a:hover {
+  color: var(--color-primary);
+}
+
+.citationCard span {
+  color: var(--color-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
 .productGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -231,6 +295,7 @@
 }
 
 @media (max-width: 1080px) {
+  .citationGrid,
   .productGrid {
     grid-template-columns: 1fr;
   }

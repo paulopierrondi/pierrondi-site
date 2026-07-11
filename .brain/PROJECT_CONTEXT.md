@@ -1,6 +1,6 @@
 # Project Brain Context
 
-Generated: `2026-07-05 23:05:22`
+Generated: `2026-07-10 21:57:17`
 Tool: `claude`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
@@ -146,7 +146,7 @@ Every Bradesco Now Assist material must explicitly connect:
 ---
 type: policy
 status: generated
-generated_at: "2026-07-05 09:25:00"
+generated_at: "2026-07-10 09:25:00"
 tags:
   - ai-agents
   - policy
@@ -819,6 +819,7 @@ Implication:
 | Linear project | Status | Priority | Repo / path hint | Obsidian note hint | Notes |
 | --- | --- | --- | --- | --- | --- |
 | Kommo-Caio - Implantacao CRM e Pre-Qualificacao | In Progress | High | `/Users/paulopierrondi/Documents/Kommo-Caio` / `paulopierrondi/kommo-caio` | `02_Projects/kommo-caio` | Live project created 2026-07-03; initial backlog AGE-2247 to AGE-2254; first phase covers Kommo CRM structure, segmentation, import model, Salesbot triage and human handoff. |
+| Second Brain Operating System | In Progress | High via `AGE-2226` | `qwen-code`, `/Users/paulopierrondi/Projects/qwen-code` | `02_Projects/qwen-code` | Live Linear issue `AGE-2226` maps qwen-code local-model power work to this project; registry hint updated 2026-07-06. |
 | ServiceNow Implementation OS - Bruno PDI Demo | In Progress | High | vault + PDI + ServiceNow demo artifacts | `ServiceNow Implementation OS` | New live project created `2026-06-04`; immediate queue is `AGE-1628` PDI readiness, `AGE-1629` FSO pack, `AGE-1630` IRM pack, `AGE-1631` demo script and `AGE-1632` rehearsal. `AGE-1627` command center is Done. |
 | Itaú NowMobile ServiceNow | Backlog | High | `itau-nowmobile-servicenow` | search Projects Index | New live project from 2026-05-21; repo appears in local sync as `/Users/paulopierrondi/Projects/itau-nowmobile-servicenow` on `codex/AGE-1517-vibe-code-integration` and as `/Users/paulopierrondi/Documents/itau-nowmobile-servicenow` in the project description. |
 | nowassistdemo | Planned | High | `nowassistdemo` | search Projects Index | ServiceNow AI demo control plane. Newest project in Linear. |
@@ -826,9 +827,7 @@ Implication:
 | fifa26bolao - Bolao Express | Backlog | No priority | `fifa2026bolao`, `bolao` | search Projects Index | iOS + Railway backend. Active issues remain in progress/todo. |
 | Jarvis Butler Experience | Backlog | No priority | `pierrondi-ia` | `pierrondi-ia` | Butler/chat/voice/dashboard experience inside Marketing OS. |
 | ServiceNow Agent Army | In Progress | Urgent | `servicenow-agent-army` | search Projects Index | Community ServiceNow agent product. |
-| Pierrondi Marketing OS | In Progress | Urgent | `pierrondi-ia` | `pierrondi-ia` | Core marketing platform and Studio. |
-| PPT_Formation | Backlog | High | `ppt_engine`, `ppt` | search Projects Index | Agentic PPTX engine. |
-| Fashion Stylist AI | Completed | High | `fashion` | search Projects Index | Completed in Linear, still useful as app patte
+| Pierrondi Marketing OS | In Progress | Urgent | `pierrondi-ia` | `pierrond
 ...[truncated]
 
 ## 99_System/Automation Email Policy.md
@@ -1262,6 +1261,7 @@ tags:
 - Antigravity deve operar com Project folders explicitos. Se o vault nao estiver no Project, usar `.brain/PROJECT_CONTEXT.md` ou pedir acesso ao vault antes de assumir contexto vivo.
 - Qualquer relato de progresso ou gap precisa vir de estado vivo lido nesta sessao; memoria, note antiga e resumo de chat nao bastam.
 - Nao alegar verificacao sem evidencia de tool call ou leitura recente na mesma sessao.
+- Quando um insight vier de AI history/index, tratar isso como pista, nao como prova; revalidar o arquivo vivo atual antes de promover o padrao.
 - `workspace_write` exige `cwd` contratual com `AGENTS.md` ou `.brain/PROJECT_CONTEXT.md`; `$HOME` e caminhos genericos nao servem.
 - CLIs que defaultam para TUI/interativo precisam de flag batch/headless documentada antes de entrar em pipeline ou automacao.
 - Prompt cache-aware workflows devem manter prefixo estavel, delta dinamico no fim e registrar `prompt_cache.strategy` / `prefix_version` / telemetria quando disponível.
@@ -1294,9 +1294,7 @@ tags:
 ## Fim
 
 - Atualizar nota do projeto.
-- Atualizar `.brain/SESSION_NOTES.md` se sem vault.
-- Registrar aprendizado em [[04_Areas/Coding/Best Practices/Learning Inbox]] quando reutilizavel.
-- Sugerir promocao para
+- Atualizar `.brain/SESSION_
 ...[truncated]
 
 ## 04_Areas/Coding/Checklists/Project Checklist Hub.md
@@ -2735,6 +2733,16 @@ Rules:
 - Registry id: `pierrondi-site`.
 <!-- PROJECT_LOCAL_COUNCIL_NOTE_END -->
 
+## Access/GEO monitor — 2026-07-10 01:51 BRT
+
+- Read-only run: all eight public probes returned 200; 136 provider-log requests, no provider failures or 5xx.
+- Material signal: operations signature changed to `1412a71392a000ed` (`same_day`); AgenticosCore received 2 ClaudeBot requests on `/robots.txt` and `/sitemap.xml` plus 12 conversion-path requests.
+- Technical queue: isolated CantuStudio `499 /api/stats/arrangements` and pierrondi.dev `404 /app-ads.txt`; no production change made.
+- Analytics remain human-gated. `agenticoscore ga4=blocked_no_ga4_property_id gsc=blocked_no_search_console_access`; formal GA4 unblock remains Viewer access for the monitoring service account on property `543366142`.
+- Local LLM `qwen3:14b` completed through safe local fallback; n8n delivery is `not_configured` (expected env names only).
+[REDACTED SECRET LINE]
+- Linear anchor: pierrondi.dev Public Site (AGE-1486); no Linear mutation.
+
 ---
 type: project
 project_type: web-app
@@ -2752,6 +2760,14 @@ tags:
 
 # pierrondi-site
 
+## 2026-07-10T17:07:00Z - Hourly portfolio access GEO monitor
+
+- Read-only run anchored to `pierrondi.dev Public Site (AGE-1486)`; all eight required public endpoints returned HTTP 200.
+- Provider logs: 118 request events, no provider failures or 5xx; 3 AI crawler requests. New actionable queue: FaithSchool `404 /api/config/` and `404 /api/env/` (one each), pending classification before any fix.
+- Analytics recovered: pierrondi.dev, CantuStudio and FaithSchool GA4/GSC are `ok`; AgenticosCore remains `ga4=blocked_ga4_api_error gsc=ok` with 4 GSC impressions, 0 clicks and average position 65.75. The GA4 Viewer grant on property `543366142` remains a human gate.
+- Decision layer: `warning/same_day`, signature `ffc43eef82ea8f62`, human-gate signature `1ae8d71d5d5c1032`, repeatedGateCandidate=false. Local `qwen3:14b` triage completed via safe fallback; n8n delivery recovered to `sent` HTTP 200.
+[REDACTED SECRET LINE]
+
 > **Tipo**: web-app  
 > **Modelo**: SaaS/ad-supported (unconfirmed)  
 > **Stack**: `react` `nextjs` `tailwind`  
@@ -2760,83 +2776,43 @@ tags:
 
 ---
 
-## 🎯 Marketing Hooks
+## 2026-07-09T16:43:51Z - Hourly portfolio access GEO monitor
 
-🎯 AI-powered
-
----
-
-## 📋 Linear Context
-
-| Campo | Valor |
-|-------|-------|
-| **Linear Project** | `pierrondi.dev Public Site` |
-| **Status** | 🔵 Todo via issue |
-| **Priority** | 🔴 High |
-| **Repo Hint** | ``pierrondi-site`` |
-| **Obsidian Note** | [[Projects Index]] |
-
-> **Regra AGE-1470:** Todo projeto ativo deve ter issue no Linear app. 
-> Se não há issue aberta para trabalho atual, crie uma antes de começar.
-> Sprint/cycle atual: consulte o Linear app connector para dados vivos.
-
----
-
-## 2026-07-05 20:59 BRT - Access GEO monitor false-alert fix prepared
-
-- Trigger: Paulo pediu "Resolva isso tudo agora" após o `hourly-portfolio-access-geo-monitor` alertar por 20 `4xx` em AgenticosCore e instrumentation `operationsPulse/localLlm/n8n` ausente.
-- Constraint: concurrency guard encontrou active writers no worktree principal de `pierrondi-site`; Codex não editou o shared tree e trabalhou em `/Users/paulopierrondi/Projects/.worktrees/pierrondi-site-access-geo-monitor-fix` na branch local `codex/access-geo-monitor-fix`.
-- Patch preparado: `/Users/paulopierrondi/Projects/.worktrees/pierrondi-site-access-geo-monitor-fix/.brain/agent_patches/2026-07-05-access-geo-monitor-operations-pulse.patch`.
-- Files changed in isolated worktree: `scripts/access-snapshot.mjs`, `test/access-snapshot-operations-pulse.test.mjs`.
-- What changed: `access-snapshot.mjs` now emits structured `operationsPulse`, action-board severity/urgency/routing, queue, human gates, prompt-cache block, local LLM delivery status, and n8n queue-only delivery status. It also classifies protected AgenticosCore API 401s plus WordPress/xmlrpc/Joomla probes as known noise instead of actionable public-growth 4xx.
-- Smoke evidence: read-only smoke at `2026-07-05T23:57Z` wrote `/Users/paulopierrondi/Projects/.worktrees/pierrondi-site-access-geo-monitor-fix/tmp/access-snapshot-smoke.json`; result was `severity=notice`, `urgency=decision_batch`, `routing.primary=analytics_access_queue`, `slackPolicy=digest_only`, `actionableErrors=0`, `knownNoiseErrors=21`, `blockedAnalyticsItems=10`.
-- Validation: `eslint scripts/access-snapshot.mjs test/access-snapshot-operations-pulse.test.mjs` passed; `npm test` passed `34/34`; `complexity-guard.py scan --changed` passed with `HARD=0`; `git diff --check` passed.
-- Linear anchor: `AGE-1486` fetched live and is currently `Done`; no status change was made. Comment-only update planned because the issue reality changed but reopening is a product decision.
+- Automation: `hourly-portfolio-access-geo-monitor`; Linear anchor: `pierrondi.dev Public Site (AGE-1486)`; read-only run from `/Users/paulopierrondi/Projects/pierrondi-site`.
+- Result: active update warranted. `operationsPulse.severity=warning`, `urgency=same_day`, `routing.primary=portfolio_growth_ops`, `slackPolicy=thread_update`; `decisionState.signature=e15749cf95648a67`, changed from prior `17d1052739d84635`; `humanGateSignature=1ae8d71d5d5c1032` unchanged; `repeatedGateCandidate=false`; open technical work remains.
+- Endpoint health: all 8 required public probes returned HTTP `200`.
+- Access logs: 163 provider-log requests in 1h; pierrondi.dev 50 req / unique=7 / 2xx=32,3xx=3,4xx=15 / bots=3 / AI=0; CantuStudio 20 req / unique=4 / 2xx=20 / bots=6 / AI=2; AgenticosCore 84 req / unique=18 / 2xx=75,3xx=3,4xx=6 / bots=18 / AI=3; FaithSchool 9 req / unique=n/a / 2xx=9 / bots=0 / AI=0. Provider logs are request counts, not analytics users/sessions/search clicks.
 [REDACTED SECRET LINE]
-- Next action: reconcile/apply the patch to the main `pierrondi-site` worktree after active writers settle, then let the scheduled automation run once to confirm the email no longer reports `operationsPulse/localLlm/n8n blocked_unobservable` or false `abnormal 4xx` alert.
-
-## 2026-07-05 hourly access monitor signal
-
-- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T09:26:32.323Z`.
-- Result: read-only snapshot exited `0`; all 8 required public endpoints returned HTTP `200`.
-- Access summary: 250 provider-log requests in the last hour; 16 commercial, 15 conversion, 24 GEO, 4 AI crawler, 0 observed 5xx. Provider logs are request counts, not GA4 users/sessions/search clicks.
-- Product highlights: `pierrondi.dev` spiked to 128 requests with 3 AI crawler requests and 1 sampled fake app `404`; `CantuStudio` had 52 clean 2xx requests and 1 AI crawler request; `AgenticosCore` had 66 requests with the known 3 protected API `401` responses; `FaithSchool` had 4 clean 2xx requests.
 [REDACTED SECRET LINE]
-- Instrumentation blocker: current `scripts/access-snapshot.mjs` stdout still lacks `operationsPulse`, `localLlm`, and `n8n` fields despite flags being enabled, so local LLM/n8n delivery cannot be verified from structured output.
-- Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T092618Z-parsed-summary.json` and `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T092618Z-endpoint-health.txt`.
+- Value signals / top queue: pierrondi.dev high-priority technical SEO cleanup for 14 actionable 4xx/5xx items, led by `/app-ads.txt` and app slug variants; AgenticosCore AI crawler=3 and conversion-path demand=12 on `/scorecard`, `/checkout.json`, `/diagnostico`, `/checkout`; CantuStudio AI crawler=2 and needs stronger internal links from AI-visited pages.
+- Human gate: AgenticosCore formal GA4 unblock remains adding `portfolio-analytics-monitor@agentcore-499217.iam.gserviceaccount.com` as Viewer on GA4 property `543366142`; do not ask for pasted credentials. Mark AgenticosCore ready for deeper query/page/CTR/position analysis only after GA4 returns ok and data exists.
+- Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260709T164214Z-parsed-summary.json`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260709T164214Z-endpoint-health.txt`.
+[REDACTED SECRET LINE]
+
+## 2026-07-07 16:49 BRT - Hourly access GEO monitor same-day baseline
+
+- Automation: `hourly-portfolio-access-geo-monitor`; read-only run anchored to `pierrondi.dev Public Site (AGE-1486)`.
+- Result: `operationsPulse.severity=warning`, `urgency=same_day`, `routing.primary=portfolio_growth_ops`, `slackPolicy=thread_update`; `decisionState.signature=ef63f06ac0016d61`, `humanGateSignature=b22ce34b48915b27`, `repeatedGateCandidate=false`.
+- Endpoint health: all 8 required public probes returned HTTP `200`.
+- Access summary: 133 provider-log requests in 1h; 26 commercial, 16 conversion, 32 GEO, 4 AI crawler, 1 actionable error and 3 known-noise protected API errors. Provider logs are request counts, not GA4 users/sessions/search clicks.
+- Product highlights: `pierrondi.dev` had 25 requests and one actionable `404 /ai-search-portfolio.`; `CantuStudio` had 23 all-2xx requests and 3 AI crawler requests; `AgenticosCore` had 76 requests with active conversion-path demand and only known-noise protected API 401s; `FaithSchool` had 9 all-2xx requests.
+[REDACTED SECRET LINE]
+- AgenticosCore line: `agenticoscore ga4=blocked_no_ga4_property_id gsc=blocked_no_search_console_access`; no GA4 unlock yet. Formal unblock remains adding `portfolio-analytics-monitor@agentcore-499217.iam.gserviceaccount.com` as Viewer on GA4 property `543366142`.
+- Decision layer: local LLM `qwen3:14b` delivery completed, but fallback result was used because no usable JSON came back; recommended action is batching human-gated analytics access decisions before external changes. n8n dispatch flags were enabled but delivery is `not_configured` because no expected webhook env is configured.
+- Top open technical action: fix or intentionally redirect `404 /ai-search-portfolio.` on `pierrondi.dev`.
+- Artifacts: `/tmp/hourly-portfolio-access-geo-monitor.json`; memory updated at `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/memory.md`.
 [REDACTED SECRET LINE]
 [REDACTED SECRET LINE]
 
-## 2026-07-05 hourly access monitor signal - 18:36Z
+## 2026-07-06 13:42 -03 - Hourly access GEO monitor dedupe/noise fix
 
-- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T18:36:27Z`; read-only, anchored to `pierrondi.dev Public Site (AGE-1486)`.
-- Result: snapshot exited `0`; all 8 required public endpoint probes returned HTTP `200`.
-- Access summary: 678 provider-log requests in the last hour; 97 commercial, 98 conversion, 26 GEO, 7 AI crawler, 0 observed 5xx. Provider logs are request counts, not GA4 users/sessions/search clicks.
-- Material signal: `FaithSchool` returned to the provider-log cap with 500 all-2xx requests after the prior low-volume run; treat as traffic/monitoring spike, not analytics users/sessions.
-- Product highlights: `pierrondi.dev` rose to 93 requests with 3 AI crawler requests and sampled 404s on `/en/login` and `/en/kommo`; `CantuStudio` had 18 all-2xx requests and 2 AI crawler requests; `AgenticosCore` retained the known 3 protected API 401 responses.
+- Pedido: Paulo pediu `resolve e melhore` após notice `hourly-portfolio-access-geo-monitor` / `notice_decision_batch`.
+- Diagnóstico: o monitor já distinguia `notice/decision_batch`, mas `operationsPulse.n8n.dedupeKey` incluía `generatedAt` por hora; o mesmo lote de gates humanos gerava chave nova em cada run, enfraquecendo dedupe e aumentando ruído. A definição da automação também notificava o thread para qualquer `decision_batch`, mesmo quando os gates humanos eram repetidos e sem mudança material.
+- Mudanças locais: `scripts/access-snapshot.mjs` agora emite `operationsPulse.decisionState` com `signature`, `humanGateSignature`, `requiresHumanDecision`, `hasOpenTechnicalWork` e `repeatedGateCandidate`. O `n8n.dedupeKey` passou a usar `hourly-portfolio-access-geo-monitor:<severity>:<decisionState.signature>`, sem timestamp, e o payload n8n inclui `decisionState`.
+- Automação Codex: `hourly-portfolio-access-geo-monitor` atualizada para manter `notice/decision_batch` repetido como email/vault/n8n digest-only quando `decisionState` não mudou, sem suprimir `immediate`, `same_day`, endpoint failure, provider/log access failure, regressão de local LLM/n8n, 5xx, 4xx comercial, colapso de tráfego, novo sinal real ou novo blocker.
+- Validação: `node --import tsx --test test/access-snapshot-operations-pulse.test.mjs` passou; `npm test` passou com 34 testes.
 [REDACTED SECRET LINE]
-- Instrumentation blocker: current snapshot stdout still lacks `operationsPulse`, `localLlm`, and `n8n` fields despite flags being enabled, so `qwen3:14b` local triage and n8n delivery remain `blocked_unobservable`.
-- Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T183627Z-parsed-summary.json`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T183627Z-endpoint-health.txt`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T183627Z-email-report.md`.
-[REDACTED SECRET LINE]
-[REDACTED SECRET LINE]
-
-## 2026-07-05 hourly access monitor signal - 17:38Z
-
-- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T17:38:09Z`; read-only, anchored to `pierrondi.dev Public Site (AGE-1486)`.
-- Result: snapshot exited `0`; all 8 required public endpoint probes returned HTTP `200`.
-- Access summary: 97 provider-log requests in the last hour; 13 commercial, 14 conversion, 21 GEO, 3 AI crawler, 0 observed 5xx. Provider logs are request counts, not GA4 users/sessions/search clicks.
-- Material signal: traffic cooled versus the prior 158-request run; `pierrondi.dev` dropped to 10 requests with 3 AI crawler requests and two `404 /app-ads.txt`; `AgenticosCore` retained the known 3 protected API 401 responses; `FaithSchool` stayed low at 7 all-2xx provider-log requests.
-[REDACTED SECRET LINE]
-- Instrumentation blocker: current snapshot stdout still lacks `operationsPulse`, `localLlm`, and `n8n` fields despite flags being enabled, so `qwen3:14b` local triage and n8n delivery remain `blocked_unobservable`.
-- Artifacts: `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T173437Z-parsed-summary.json`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T173437Z-endpoint-health.txt`, `/Users/paulopierrondi/.codex/automations/hourly-portfolio-access-geo-monitor/runs/20260705T173437Z-email-report.md`.
-[REDACTED SECRET LINE]
-[REDACTED SECRET LINE]
-
-## 2026-07-05 hourly access monitor signal - 14:34Z
-
-- Run: `hourly-portfolio-access-geo-monitor` at `2026-07-05T14:34:57Z`; read-only, anchored to `pierrondi.dev Public Site (AGE-1486)`.
-- Result: snapshot exited `0`; all 8 required public endpoint probes returned HTTP `200`.
-- Access summary: 189 provider-log requests in the last hour; 33 commercial, 17 conversion, 24 GEO, 4 AI crawler, 0 ob
+- Próxima ação: deixar o próximo run horário confirmar que `decision_batch` repetido fica silencioso no thread e segue registrado e
 ...[truncated]
 
 ## AI History Snapshot

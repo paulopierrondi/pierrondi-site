@@ -23,6 +23,8 @@ const localizedRoutes: Record<string, Record<HomeLang, string>> = {
   '/en/blog': { pt: '/blog', en: '/en/blog' },
   '/feitos': { pt: '/feitos', en: '/en/feitos' },
   '/en/feitos': { pt: '/feitos', en: '/en/feitos' },
+  '/citations': { pt: '/citations', en: '/citations' },
+  '/en/citations': { pt: '/citations', en: '/citations' },
   '/privacidade': { pt: '/privacidade', en: '/privacy' },
   '/privacy': { pt: '/privacidade', en: '/privacy' },
   '/termos': { pt: '/termos', en: '/terms' },

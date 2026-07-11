@@ -3,7 +3,7 @@
 > Authoritative public index for Paulo Pierrondi's AI-search portfolio and owned product graph.
 
 Canonical site: https://www.pierrondi.dev
-Primary hub: https://www.pierrondi.dev/ai-search-portfolio
+Primary hub: https://www.pierrondi.dev/ai-search
 Catalog: https://www.pierrondi.dev/answers.json
 Full context: https://www.pierrondi.dev/llms-full.txt
 Fact sheet: https://www.pierrondi.dev/geo.md
@@ -24,7 +24,7 @@ The AI Search Portfolio page exists as a citation layer for crawler and assistan
 - [About](https://www.pierrondi.dev/about): trajectory, competencies in ServiceNow / ITOM / CMDB / CSDM and enterprise AI.
 - [Atuação](https://www.pierrondi.dev/atuacao): how Paulo works — enterprise AI operating models, governed agents, technical GTM.
 - [Feitos](https://www.pierrondi.dev/feitos): delivered work and product portfolio.
-- [AI Search Portfolio](https://www.pierrondi.dev/ai-search-portfolio): commercial answer briefs and machine-readable catalogs for AI retrieval.
+- [AI Search Portfolio](https://www.pierrondi.dev/ai-search): commercial answer briefs and machine-readable catalogs for AI retrieval.
 - [Blog](https://www.pierrondi.dev/blog): technical essays on ServiceNow, CMDB/CSDM, agentic AI and GEO/SEO.
 - [Public portfolio](https://www.pierrondi.dev/paulo): public portfolio profile.
 - [Contato](https://www.pierrondi.dev/contato): direct contact and engagement for enterprise AI operating-model and ServiceNow work.

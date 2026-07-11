@@ -25,6 +25,35 @@ test('EN CRM URLs redirect to the canonical private CRM routes', () => {
   assert.match(nextConfig, /source:\s*'\/en\/crm\/login',\s*destination:\s*'\/crm\/login',\s*permanent:\s*true/)
 })
 
+test('EN app detail URLs redirect to the canonical app catalog routes', () => {
+  assert.match(
+    nextConfig,
+    /source:\s*'\/en\/apps\/:slug',\s*destination:\s*'\/apps\/:slug',\s*permanent:\s*true/,
+  )
+  assert.match(
+    nextConfig,
+    /source:\s*'\/en\/apps\/:slug\/:doc',\s*destination:\s*'\/apps\/:slug\/:doc',\s*permanent:\s*true/,
+  )
+})
+
+test('single-language citation hub redirects EN variant to canonical URL', () => {
+  assert.match(
+    nextConfig,
+    /source:\s*'\/en\/citations',\s*destination:\s*'\/citations',\s*permanent:\s*true/,
+  )
+})
+
+test('legacy AI search portfolio URLs redirect to canonical AI search hub', () => {
+  assert.match(
+    nextConfig,
+    /source:\s*'\/ai-search-portfolio',\s*destination:\s*'\/ai-search',\s*permanent:\s*true/,
+  )
+  assert.match(
+    nextConfig,
+    /source:\s*'\/en\/ai-search-portfolio',\s*destination:\s*'\/ai-search',\s*permanent:\s*true/,
+  )
+})
+
 test('EN locale slug redirects are wired into redirects()', () => {
   assert.match(nextConfig, /const EN_LOCALE_SLUG_REDIRECTS\b/)
   assert.match(nextConfig, /\.\.\.EN_LOCALE_SLUG_REDIRECTS/)
