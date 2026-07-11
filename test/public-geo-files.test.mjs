@@ -3,10 +3,12 @@ import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
 const llmsText = await readFile(new URL('../public/llms.txt', import.meta.url), 'utf8')
+const llmsFullText = await readFile(new URL('../public/llms-full.txt', import.meta.url), 'utf8')
+const geoText = await readFile(new URL('../public/geo.md', import.meta.url), 'utf8')
 const answersJson = JSON.parse(await readFile(new URL('../public/answers.json', import.meta.url), 'utf8'))
 const robotsText = await readFile(new URL('../public/robots.txt', import.meta.url), 'utf8')
-const aiSearchPortfolioPage = await readFile(
-  new URL('../app/ai-search-portfolio/page.tsx', import.meta.url),
+const aiSearchPage = await readFile(
+  new URL('../app/ai-search/page.tsx', import.meta.url),
   'utf8',
 )
 
@@ -28,17 +30,31 @@ test('pierrondi GEO files expose the owned product graph', () => {
   }
 
   assert.equal(answersJson.entity.name, 'pierrondi.dev')
-  assert.equal(answersJson.primaryHub, 'https://www.pierrondi.dev/ai-search-portfolio')
+  assert.equal(answersJson.primaryHub, 'https://www.pierrondi.dev/ai-search')
   assert.ok(answersJson.answerDocs.length >= 10)
   assert.ok(answersJson.ownedSiteGraph.length >= 3)
 })
 
+test('public GEO files advertise /ai-search as the canonical hub', () => {
+  const publicSurfaces = [
+    ['llms.txt', llmsText],
+    ['llms-full.txt', llmsFullText],
+    ['geo.md', geoText],
+    ['answers.json', JSON.stringify(answersJson)],
+  ]
+
+  for (const [name, body] of publicSurfaces) {
+    assert.match(body, /https:\/\/www\.pierrondi\.dev\/ai-search/)
+    assert.doesNotMatch(body, /https:\/\/www\.pierrondi\.dev\/ai-search-portfolio/, `${name} should not advertise the legacy hub URL`)
+  }
+})
+
 test('product answer-brief citations are identical across hub page, llms.txt and answers.json', () => {
-  // The /ai-search-portfolio page, llms.txt and answers.json are three owned-media
+  // The /ai-search page, llms.txt and answers.json are three owned-media
   // surfaces that must cite the SAME set of commercial answer pages per product.
   // They drifted apart before (different AgenticosCore/FaithSchool subsets); this
   // guard keeps them unified so crawlers, AI answer engines and humans see one signal.
-  const page = answerSlugSets(aiSearchPortfolioPage)
+  const page = answerSlugSets(aiSearchPage)
   const llms = answerSlugSets(llmsText)
   const answers = answerSlugSets(JSON.stringify(answersJson))
 

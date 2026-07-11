@@ -1,6 +1,6 @@
 # Project Brain Context
 
-Generated: `2026-07-10 21:57:17`
+Generated: `2026-07-10 22:51:59`
 Tool: `claude`
 Local Obsidian vault: `/Users/paulopierrondi/Documents/Obsidian Vault`
 Repository: `/Users/paulopierrondi/Projects/pierrondi-site`
@@ -2743,6 +2743,15 @@ Rules:
 [REDACTED SECRET LINE]
 - Linear anchor: pierrondi.dev Public Site (AGE-1486); no Linear mutation.
 
+## 2026-07-11T01:52:00Z - Four-app SEO/GEO production gate tightened
+
+[REDACTED SECRET LINE]
+- Production validator now tracks `32` checks after adding the observed pierrondi.dev `404 /en/apps/brewmate` as formal gate. Current result: `23/32` passed.
+- New gate artifact: `/Users/paulopierrondi/Documents/Codex/2026-06-17/cheque-e-analise-as-minhas-3/outputs/production-gate-seo-geo-ga4-20260711T0152Z.md`.
+- Validator artifact: `/Users/paulopierrondi/Projects/pierrondi-site/outputs/seo-geo-production-validator-20260711T0152Z.json`.
+- Monitor cleanup: AgenticosCore protected `401 /conversions.csv` and `401 /conversions.json` are now classified as expected auth, not actionable SEO incidents. `npm test -- --runInBand` passed `40/40`.
+- Remaining production gate: deploy prepared Pierrondi `/ai-search` and `/en/apps/:slug` redirects, deploy prepared CantuStudio redirect/sitemap/internal-link fixes, and grant AgenticosCore GA4 Viewer/Analyst on property `543366142` to `portfolio-analytics-monitor@agentcore-499217.iam.gserviceaccount.com`.
+
 ---
 type: project
 project_type: web-app
@@ -2807,12 +2816,7 @@ tags:
 ## 2026-07-06 13:42 -03 - Hourly access GEO monitor dedupe/noise fix
 
 - Pedido: Paulo pediu `resolve e melhore` após notice `hourly-portfolio-access-geo-monitor` / `notice_decision_batch`.
-- Diagnóstico: o monitor já distinguia `notice/decision_batch`, mas `operationsPulse.n8n.dedupeKey` incluía `generatedAt` por hora; o mesmo lote de gates humanos gerava chave nova em cada run, enfraquecendo dedupe e aumentando ruído. A definição da automação também notificava o thread para qualquer `decision_batch`, mesmo quando os gates humanos eram repetidos e sem mudança material.
-- Mudanças locais: `scripts/access-snapshot.mjs` agora emite `operationsPulse.decisionState` com `signature`, `humanGateSignature`, `requiresHumanDecision`, `hasOpenTechnicalWork` e `repeatedGateCandidate`. O `n8n.dedupeKey` passou a usar `hourly-portfolio-access-geo-monitor:<severity>:<decisionState.signature>`, sem timestamp, e o payload n8n inclui `decisionState`.
-- Automação Codex: `hourly-portfolio-access-geo-monitor` atualizada para manter `notice/decision_batch` repetido como email/vault/n8n digest-only quando `decisionState` não mudou, sem suprimir `immediate`, `same_day`, endpoint failure, provider/log access failure, regressão de local LLM/n8n, 5xx, 4xx comercial, colapso de tráfego, novo sinal real ou novo blocker.
-- Validação: `node --import tsx --test test/access-snapshot-operations-pulse.test.mjs` passou; `npm test` passou com 34 testes.
-[REDACTED SECRET LINE]
-- Próxima ação: deixar o próximo run horário confirmar que `decision_batch` repetido fica silencioso no thread e segue registrado e
+- Diagnóstico: o monitor já distinguia `notice/decision_batch`, mas `operationsPulse.n8n.dedupeKey` incluía `generatedAt` por hora; o mesmo lote de gates humanos gerava chave nova em cada run, enfraquecendo dedupe e aumentando ruído. A definição da automação também notificava o thread para qualquer `decision_batch`, mesmo quando os gates humanos eram repet
 ...[truncated]
 
 ## AI History Snapshot

@@ -204,6 +204,49 @@ console.log(JSON.stringify({
   }
 })
 
+test('access snapshot treats protected AgenticosCore conversion exports as expected auth', async () => {
+  const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
+  writeExecutable(
+    path.join(binDir, 'railway'),
+    `#!/usr/bin/env node
+const service = process.argv[process.argv.indexOf('--service') + 1]
+const rowsByService = {
+  'agentcore-revenue-ops': [
+    { timestamp: '2026-06-30T18:00:03.000Z', host: 'agenticoscore.ai', method: 'GET', path: '/conversions.csv', httpStatus: 401, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.13', totalDuration: 22 },
+    { timestamp: '2026-06-30T18:00:03.500Z', host: 'agenticoscore.ai', method: 'GET', path: '/conversions.json', httpStatus: 401, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.13', totalDuration: 18 }
+  ]
+}
+for (const row of rowsByService[service] || []) console.log(JSON.stringify(row))
+`,
+  )
+  writeExecutable(path.join(binDir, 'vercel'), '#!/usr/bin/env node\n')
+
+  const result = await runNode(['scripts/access-snapshot.mjs', '--since', '1h', '--limit', '10', '--analytics=0'], {
+    cwd: process.cwd(),
+    env: {
+      ...process.env,
+      PATH: `${binDir}:${process.env.PATH}`,
+      ACCESS_SNAPSHOT_LOCAL_LLM_TRIAGE: '0',
+      PORTFOLIO_ACCESS_LOCAL_LLM_TRIAGE: '0',
+      ACCESS_SNAPSHOT_SOURCES_CWD: process.cwd(),
+    },
+  })
+
+  assert.equal(result.status, 0, result.stderr)
+  const report = JSON.parse(result.stdout)
+  const agenticoscore = report.sources.find((source) => source.id === 'agenticoscore')
+
+  assert.equal(agenticoscore.intent.actionableErrorCount, 0)
+  assert.equal(agenticoscore.intent.knownNoiseErrorCount, 2)
+  assert.deepEqual(agenticoscore.intent.issueBuckets, { expected_auth: 2 })
+  assert.deepEqual(agenticoscore.intent.topKnownNoiseErrorPaths, [
+    { key: '401 /conversions.csv', value: 1 },
+    { key: '401 /conversions.json', value: 1 },
+  ])
+  assert.equal(report.operationsPulse.metrics.actionableErrors, 0)
+  assert.equal(report.operationsPulse.metrics.knownNoiseErrors, 2)
+})
+
 test('access snapshot can triage operations pulse with a local Ollama-compatible LLM', async () => {
   const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
   writeProviderStubs(binDir)
