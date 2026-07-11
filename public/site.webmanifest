@@ -1,11 +1,11 @@
 {
   "name": "pierrondi.dev",
   "short_name": "pierrondi.dev",
-  "description": "Paulo Pierrondi — AI Operating Model, ServiceNow and AgentOps.",
+  "description": "Paulo Pierrondi \u2014 AI/Automation Architect, Full-stack Builder and Enterprise Account Director.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#050607",
-  "theme_color": "#c8ff2e",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
