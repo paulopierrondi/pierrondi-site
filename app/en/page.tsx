@@ -4,9 +4,9 @@ import { SITE_URL } from '@/lib/site'
 import HomeV2 from '@/components/home-v2/HomeV2'
 
 export const metadata: Metadata = {
-  title: 'Paulo Pierrondi - AI Architect, Full-stack Builder & Enterprise Account Director',
+  title: 'Paulo Pierrondi - Technical Account Executive, AI Architect & Full-stack Builder',
   description:
-    'AI/automation architect, full-stack builder, and Enterprise Account Director at ServiceNow. Multi-agent systems, AgentOps, automation platforms, apps and frameworks — with evidence trails.',
+    'Technical Account Executive at ServiceNow, AI architect and full-stack builder. Multi-agent systems, AgentOps, apps and automation platforms with evidence trails.',
   keywords: [
     'Paulo Pierrondi',
     'Enterprise AI Operator',
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi - AI Architect, Full-stack Builder & Enterprise Account Director',
+    title: 'Paulo Pierrondi - Technical Account Executive, AI Architect & Full-stack Builder',
     description:
       'ServiceNow TAE / Enterprise Architect turning enterprise AI into an operating model, adoption velocity, and governed execution.',
     url: '/en',
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Paulo Pierrondi - AI Architect, Full-stack Builder & Enterprise Account Director',
+    title: 'Paulo Pierrondi - Technical Account Executive, AI Architect & Full-stack Builder',
     description:
       'Multi-agent systems, AgentOps, automation, apps and frameworks — with enterprise account leadership at ServiceNow.',
     images: ['/og'],
@@ -70,7 +70,7 @@ const enWebPageSchema = {
   '@type': 'WebPage',
   '@id': `${SITE_URL}/en`,
   url: `${SITE_URL}/en`,
-  name: 'Paulo Pierrondi - AI Architect, Full-stack Builder & Enterprise Account Director',
+  name: 'Paulo Pierrondi - Technical Account Executive, AI Architect & Full-stack Builder',
   description:
     'Profile of Paulo Pierrondi: AI and automation architecture, multi-agent systems, full-stack building, apps and frameworks, with enterprise FSI account leadership at ServiceNow.',
   inLanguage: 'en-US',

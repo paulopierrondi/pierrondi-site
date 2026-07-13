@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import styles from './PrivacidadeContent.module.css'
+import LegalDocument from '@/components/LegalDocument'
 
 export const metadata: Metadata = {
   title: 'Privacidade',
@@ -16,15 +16,16 @@ export const metadata: Metadata = {
 
 export default function PrivacidadePage() {
   return (
-    <main className={styles.shell}>
-      <span className={styles.eyebrow}>Legal</span>
-      <h1 className={styles.h1}>Privacidade.</h1>
-      <p className={styles.lead}>
+    <LegalDocument
+      eyebrow="Legal"
+      title="Privacidade."
+      lead={
+        <>
         Como tratamos seus dados quando você fala com a pierrondi.dev. Direto,
         sem juridiquês desnecessário.
-      </p>
-
-      <div className={styles.prose}>
+        </>
+      }
+    >
         <p>Última atualização: junho de 2026.</p>
 
         <h2>1. Quais dados coletamos</h2>
@@ -68,7 +69,6 @@ export default function PrivacidadePage() {
           Dúvidas sobre privacidade? Escreva para{' '}
           <a href="mailto:pierrondi@gmail.com">pierrondi@gmail.com</a>.
         </p>
-      </div>
-    </main>
+    </LegalDocument>
   )
 }

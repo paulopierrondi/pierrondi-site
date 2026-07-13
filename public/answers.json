@@ -3,7 +3,7 @@
     "name": "pierrondi.dev",
     "canonicalUrl": "https://www.pierrondi.dev",
     "contactUrl": "https://www.pierrondi.dev/contato",
-    "type": "Owned portfolio, enterprise AI authority site and AI search reference hub",
+    "type": "Professional portfolio, enterprise AI authority site and AI search reference hub",
     "owner": "Paulo Pierrondi",
     "markets": [
       "Brazil",
@@ -33,6 +33,15 @@
       "intent": "portfolio discovery",
       "locale": "pt-BR",
       "entity": "pierrondi.dev"
+    },
+    {
+      "id": "portfolio-product-engineering",
+      "title": "Product engineering portfolio — web, iOS, Android, CRM and enterprise AI",
+      "url": "https://www.pierrondi.dev/portfolio",
+      "question": "Which products, mobile apps, integrations and AI frameworks has Paulo Pierrondi developed?",
+      "intent": "portfolio proof",
+      "locale": "pt-BR",
+      "entity": "Paulo Pierrondi"
     },
     {
       "id": "citation-targets",
@@ -221,7 +230,7 @@
       "siteUrl": "https://faithschool.app",
       "answersUrl": "https://faithschool.app/answers.json",
       "llmsUrl": "https://faithschool.app/llms.txt",
-      "relationship": "owned product site linked from pierrondi.dev",
+      "relationship": "product site presented in the pierrondi.dev portfolio",
       "keyLandings": [
         {
           "url": "https://faithschool.app/homeschool-planner",
@@ -250,7 +259,7 @@
       "siteUrl": "https://cantustudio.app",
       "answersUrl": "https://cantustudio.app/answers.json",
       "llmsUrl": "https://cantustudio.app/llms.txt",
-      "relationship": "owned product site linked from pierrondi.dev",
+      "relationship": "product site presented in the pierrondi.dev portfolio",
       "keyLandings": [
         {
           "url": "https://cantustudio.app/gerar-arranjo-satb",
@@ -261,6 +270,16 @@
           "url": "https://cantustudio.app/musicxml-harmonization",
           "question": "How do I harmonize a melody into a reviewable SATB draft via MusicXML?",
           "locale": "en"
+        },
+        {
+          "url": "https://cantustudio.app/harmonizar-melodia-online",
+          "question": "Como harmonizar melodia online e transformar em rascunho SATB?",
+          "locale": "pt-BR"
+        },
+        {
+          "url": "https://cantustudio.app/kit-de-ensaio",
+          "question": "Como preparar um kit de ensaio coral a partir de um arranjo?",
+          "locale": "pt-BR"
         }
       ]
     },
@@ -269,11 +288,21 @@
       "siteUrl": "https://agenticoscore.ai",
       "answersUrl": "https://agenticoscore.ai/answers.json",
       "llmsUrl": "https://agenticoscore.ai/llms.txt",
-      "relationship": "owned product site linked from pierrondi.dev",
+      "relationship": "product site presented in the pierrondi.dev portfolio",
       "keyLandings": [
         {
           "url": "https://agenticoscore.ai/diagnostico",
           "question": "Como fazer um diagnostico comercial B2B antes de investir em Ads? (entrada do Action Plan Starter, R$297)",
+          "locale": "pt-BR"
+        },
+        {
+          "url": "https://agenticoscore.ai/scorecard",
+          "question": "Como medir a prontidao comercial antes de escalar aquisicao?",
+          "locale": "pt-BR"
+        },
+        {
+          "url": "https://agenticoscore.ai/plano-de-acao-comercial",
+          "question": "Como transformar um diagnostico comercial em plano de acao pago?",
           "locale": "pt-BR"
         }
       ]
@@ -317,6 +346,18 @@
       "why": "Pairs technical search intent with the strongest product landing."
     },
     {
+      "entity": "CantuStudio",
+      "anchor": "harmonizar melodia online",
+      "destination": "https://cantustudio.app/harmonizar-melodia-online",
+      "why": "Targets Portuguese musicians looking for an online melody-to-SATB workflow."
+    },
+    {
+      "entity": "CantuStudio",
+      "anchor": "kit de ensaio coral",
+      "destination": "https://cantustudio.app/kit-de-ensaio",
+      "why": "Connects choir-director intent to rehearsal-ready output, beyond notation export."
+    },
+    {
       "entity": "AgenticosCore",
       "anchor": "diagnostico comercial B2B",
       "destination": "https://agenticoscore.ai/diagnostico",
@@ -333,6 +374,18 @@
       "anchor": "Action Plan Starter R$297",
       "destination": "https://agenticoscore.ai/answers/action-plan-starter",
       "why": "Connects offer-aware search to the first paid product."
+    },
+    {
+      "entity": "AgenticosCore",
+      "anchor": "quanto custa RevOps para B2B",
+      "destination": "https://agenticoscore.ai/answers/quanto-custa-revops",
+      "why": "Captures pricing-aware RevOps demand and routes it to the newest answer brief."
+    },
+    {
+      "entity": "AgenticosCore",
+      "anchor": "scorecard de prontidao comercial",
+      "destination": "https://agenticoscore.ai/scorecard",
+      "why": "Sends high-intent visitors directly into the diagnostic workflow."
     }
   ],
   "caveats": [
@@ -373,7 +426,7 @@
     {
       "name": "SADA",
       "category": "Enterprise AI operating-model framework",
-      "description": "ServiceNow AI-Driven Architecture: a prescriptive value-architecture framework connecting strategy, architecture decisions, workflow execution and measured value.",
+      "description": "Framework developed by Paulo Pierrondi: ServiceNow AI-Driven Architecture connects strategy, architecture decisions, workflow execution and measured value.",
       "url": "https://www.pierrondi.dev/feitos/sada-servicenow",
       "relationship": "flagship project"
     },
@@ -383,9 +436,68 @@
       "description": "AI application for SATB choral arrangements with backend validation, playback and MusicXML export.",
       "url": "https://cantustudio.app",
       "relationship": "flagship project"
+    },
+    {
+      "name": "FaithSchool",
+      "category": "Education product for web and mobile",
+      "description": "Christian homeschool planning and family-record workflow delivered across web and iOS, with Android packages prepared for distribution.",
+      "url": "https://faithschool.app",
+      "relationship": "flagship project"
+    },
+    {
+      "name": "Kommo + WhatsApp",
+      "category": "CRM integration and conversational operations",
+      "description": "Controlled Kommo implementation with two operational pipelines, qualification fields, Salesbot routing and documented human handoff.",
+      "url": "https://www.pierrondi.dev/portfolio#kommo-whatsapp",
+      "relationship": "protected case study"
+    },
+    {
+      "name": "Studio CRM",
+      "category": "Custom CRM application",
+      "description": "Protected CRM system covering clients, projects, contracts, payments and operational activity without exposing private records.",
+      "url": "https://www.pierrondi.dev/portfolio#studio-crm",
+      "relationship": "protected case study"
+    },
+    {
+      "name": "AgenticosCore",
+      "category": "Revenue operations system",
+      "description": "Revenue OS connecting diagnosis, scorecard, commercial action plan and operational evidence.",
+      "url": "https://agenticoscore.ai/diagnostico",
+      "relationship": "flagship project"
     }
   ],
+  "appStorePortfolio": {
+    "developerId": "1895717587",
+    "storefront": "BR",
+    "verifiedCount": 21,
+    "portfolioUrl": "https://www.pierrondi.dev/portfolio#app-store",
+    "catalogUrl": "https://www.pierrondi.dev/app-icons/app-store-catalog.json",
+    "scope": "Apps returned by Apple's public developer catalog at the last verified refresh."
+  },
   "appsPortfolio": [
+    { "name": "Bandle BR", "category": "Games", "appStoreUrl": "https://apps.apple.com/br/app/bandle-br/id6769621331", "image": "https://www.pierrondi.dev/app-icons/bandle-br.jpg" },
+    { "name": "FaithSchool", "category": "Education", "appStoreUrl": "https://apps.apple.com/br/app/faithschool/id6764325629", "image": "https://www.pierrondi.dev/app-icons/faithschool.jpg" },
+    { "name": "CantuStudio", "category": "Music", "appStoreUrl": "https://apps.apple.com/br/app/cantustudio/id6764287847", "image": "https://www.pierrondi.dev/app-icons/cantustudio-app.jpg" },
+    { "name": "Muse Edit - Style Closet", "category": "Lifestyle", "appStoreUrl": "https://apps.apple.com/br/app/muse-edit-style-closet/id6764715502", "image": "https://www.pierrondi.dev/app-icons/muse-edit.jpg" },
+    { "name": "Adivinha!", "category": "Games", "appStoreUrl": "https://apps.apple.com/br/app/adivinha/id6769732268", "image": "https://www.pierrondi.dev/app-icons/adivinha.jpg" },
+    { "name": "VibeCode Kids", "category": "Education", "appStoreUrl": "https://apps.apple.com/br/app/vibecode-kids/id6773483083", "image": "https://www.pierrondi.dev/app-icons/vibecode-kids.jpg" },
+    { "name": "Caso Relampago AI", "category": "Games", "appStoreUrl": "https://apps.apple.com/br/app/caso-relampago-ai/id6772540994", "image": "https://www.pierrondi.dev/app-icons/caso-relampago-ai.jpg" },
+    { "name": "Aura - Afirmacoes Diarias", "category": "Lifestyle", "appStoreUrl": "https://apps.apple.com/br/app/aura-afirmacoes-diarias/id6769853592", "image": "https://www.pierrondi.dev/app-icons/aura-afirmacoes.jpg" },
+    { "name": "Álbum de Figurinhas 26", "category": "Entertainment", "appStoreUrl": "https://apps.apple.com/br/app/%C3%A1lbum-de-figurinhas-26/id6782724792", "image": "https://www.pierrondi.dev/app-icons/album-figurinhas-26.jpg" },
+    { "name": "LiftTool Tarefas", "category": "Productivity", "appStoreUrl": "https://apps.apple.com/br/app/lifttool-tarefas/id6772552531", "image": "https://www.pierrondi.dev/app-icons/lifttool-002.jpg" },
+    { "name": "Casa Clara", "category": "Productivity", "appStoreUrl": "https://apps.apple.com/br/app/casa-clara/id6767297661", "image": "https://www.pierrondi.dev/app-icons/casa-clara.jpg" },
+    { "name": "BrewMate Cafe", "category": "Food & Drink", "appStoreUrl": "https://apps.apple.com/br/app/brewmate-cafe/id6772517662", "image": "https://www.pierrondi.dev/app-icons/brewmate.jpg" },
+    { "name": "InvestCoach.AI", "category": "Finance", "appStoreUrl": "https://apps.apple.com/br/app/investcoach-ai/id6764355044", "image": "https://www.pierrondi.dev/app-icons/investcoach.jpg" },
+    { "name": "Blockfront Tactics", "category": "Games", "appStoreUrl": "https://apps.apple.com/br/app/blockfront-tactics/id6772747511", "image": "https://www.pierrondi.dev/app-icons/blockfront-tactics.jpg" },
+    { "name": "Chroma AI Paleta", "category": "Graphics & Design", "appStoreUrl": "https://apps.apple.com/br/app/chroma-ai-paleta/id6772518398", "image": "https://www.pierrondi.dev/app-icons/chroma-ai.jpg" },
+    { "name": "MyTone Studio", "category": "Music", "appStoreUrl": "https://apps.apple.com/br/app/mytone-studio/id6770047382", "image": "https://www.pierrondi.dev/app-icons/mytone.jpg" },
+    { "name": "Parabéns IA", "category": "Entertainment", "appStoreUrl": "https://apps.apple.com/br/app/parab%C3%A9ns-ia/id6769599831", "image": "https://www.pierrondi.dev/app-icons/parabens-ia-br.jpg" },
+    { "name": "SnapRead AI Leitor", "category": "Productivity", "appStoreUrl": "https://apps.apple.com/br/app/snapread-ai-leitor/id6772517083", "image": "https://www.pierrondi.dev/app-icons/snapread.jpg" },
+    { "name": "SuperApp ServiceNow", "category": "Business", "appStoreUrl": "https://apps.apple.com/br/app/superapp-servicenow/id6768396384", "image": "https://www.pierrondi.dev/app-icons/superapp-servicenow.jpg" },
+    { "name": "Linguagil Flashcards", "category": "Education", "appStoreUrl": "https://apps.apple.com/br/app/linguagil-flashcards/id6772552997", "image": "https://www.pierrondi.dev/app-icons/linguagil.jpg" },
+    { "name": "SuperCode Notas", "category": "Developer Tools", "appStoreUrl": "https://apps.apple.com/br/app/supercode-notas/id6772554818", "image": "https://www.pierrondi.dev/app-icons/supercode-005.jpg" }
+  ],
+  "historicalProjectCatalog": [
     {
       "name": "FaithSchool",
       "category": "Christian homeschool planning and family records app",

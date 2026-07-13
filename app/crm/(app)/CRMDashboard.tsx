@@ -48,7 +48,7 @@ export default function CRMDashboard({ stats, projects, activities, payments, cl
       <div className="crm-page-header">
         <div>
           <h1 className="crm-page-title">Dashboard</h1>
-          <p className="crm-page-sub">Visão geral dos seus projetos freelance</p>
+          <p className="crm-page-sub">Visão geral dos seus projetos pessoais e produtos</p>
         </div>
       </div>
 

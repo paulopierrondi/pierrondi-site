@@ -193,6 +193,18 @@ const products: ProductReference[] = [
         intent: 'product landing',
         locale: 'en',
       },
+      {
+        title: 'Harmonizar melodia online',
+        url: 'https://cantustudio.app/harmonizar-melodia-online',
+        intent: 'product landing',
+        locale: 'pt-BR',
+      },
+      {
+        title: 'Kit de ensaio coral',
+        url: 'https://cantustudio.app/kit-de-ensaio',
+        intent: 'product landing',
+        locale: 'pt-BR',
+      },
     ],
     citationPriority: [
       {
@@ -209,6 +221,16 @@ const products: ProductReference[] = [
         anchor: 'MusicXML harmonization workflow',
         destination: 'https://cantustudio.app/musicxml-harmonization',
         why: 'Pairs technical search intent with the strongest product landing.',
+      },
+      {
+        anchor: 'harmonizar melodia online',
+        destination: 'https://cantustudio.app/harmonizar-melodia-online',
+        why: 'Targets Portuguese musicians looking for an online melody-to-SATB workflow.',
+      },
+      {
+        anchor: 'kit de ensaio coral',
+        destination: 'https://cantustudio.app/kit-de-ensaio',
+        why: 'Connects choir-director intent to rehearsal-ready output, beyond notation export.',
       },
     ],
   },
@@ -280,6 +302,18 @@ const products: ProductReference[] = [
         intent: 'product landing',
         locale: 'pt-BR',
       },
+      {
+        title: 'Scorecard de prontidao comercial',
+        url: 'https://agenticoscore.ai/scorecard',
+        intent: 'conversion path',
+        locale: 'pt-BR',
+      },
+      {
+        title: 'Plano de acao comercial',
+        url: 'https://agenticoscore.ai/plano-de-acao-comercial',
+        intent: 'paid offer landing',
+        locale: 'pt-BR',
+      },
     ],
     citationPriority: [
       {
@@ -296,6 +330,16 @@ const products: ProductReference[] = [
         anchor: 'Action Plan Starter R$297',
         destination: 'https://agenticoscore.ai/answers/action-plan-starter',
         why: 'Connects offer-aware search to the first paid product.',
+      },
+      {
+        anchor: 'quanto custa RevOps para B2B',
+        destination: 'https://agenticoscore.ai/answers/quanto-custa-revops',
+        why: 'Captures pricing-aware RevOps demand and routes it to the newest answer brief.',
+      },
+      {
+        anchor: 'scorecard de prontidao comercial',
+        destination: 'https://agenticoscore.ai/scorecard',
+        why: 'Sends high-intent visitors directly into the diagnostic workflow.',
       },
     ],
   },

@@ -78,6 +78,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
+  margin-top: clamp(82px, 10vw, 112px);
   font-family: var(--font-system);
   font-size: 12px;
   letter-spacing: 1.5px;

@@ -222,21 +222,26 @@
 
 .brand {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: baseline;
+  gap: 2px;
   color: var(--color-ink);
   flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .brandName {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 17px;
-  letter-spacing: -0.01em;
+  transition: color 180ms ease;
 }
 
-.brandDot {
+.brand:hover .brandName,
+.brand:focus-visible .brandName {
   color: var(--color-primary);
+}
+
+.brandBracket {
+  color: var(--color-accent-gold);
 }
 
 .note {

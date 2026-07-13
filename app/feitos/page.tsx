@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import PageHeader from '@/components/PageHeader'
 import FeitosIndexContent from './FeitosIndexContent'
 
 export const metadata: Metadata = {
@@ -25,15 +24,5 @@ export const metadata: Metadata = {
 }
 
 export default function FeitosIndexPage() {
-  return (
-    <>
-      <PageHeader
-        eyebrow="FEITOS"
-        title={<>Não é portfólio. <span className="text-primary">São sistemas.</span></>}
-        lead="Sistemas enterprise aplicados sem nomes de clientes e sem métricas confidenciais. O que importa é a arquitetura, a governança e a trilha de evidência."
-        chips={['SADA', 'AgentOps', 'LLMOps', 'Execution OS']}
-      />
-      <FeitosIndexContent lang="pt" />
-    </>
-  )
+  return <FeitosIndexContent lang="pt" />
 }

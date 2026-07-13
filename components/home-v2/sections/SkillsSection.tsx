@@ -1,7 +1,8 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
+import { motion, useInView, type Variants } from 'framer-motion'
+import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import {
   Bot,
   Brain,
@@ -65,7 +66,7 @@ export default function SkillsSection({ lang }: SectionProps) {
     margin: '-20% 0px',
     once: false,
   })
-  const shouldReduceMotion = useReducedMotion()
+  const shouldReduceMotion = useHydratedReducedMotion()
 
   const copy = COPY[lang].skills
   const meta = getSkillsMeta(lang)

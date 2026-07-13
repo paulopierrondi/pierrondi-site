@@ -1,23 +1,108 @@
 {
-  "snapread": {
-    "file": "snapread.jpg",
-    "name": "SnapRead AI Leitor",
-    "source": "appstore:6772517083"
+  "bandle-br": {
+    "file": "bandle-br.jpg",
+    "name": "Bandle BR",
+    "source": "appstore:6769621331"
+  },
+  "faithschool": {
+    "file": "faithschool.jpg",
+    "name": "FaithSchool",
+    "source": "appstore:6764325629"
+  },
+  "cantustudio-app": {
+    "file": "cantustudio-app.jpg",
+    "name": "CantuStudio",
+    "source": "appstore:6764287847"
+  },
+  "muse-edit": {
+    "file": "muse-edit.jpg",
+    "name": "Muse Edit - Style Closet",
+    "source": "appstore:6764715502"
+  },
+  "adivinha": {
+    "file": "adivinha.jpg",
+    "name": "Adivinha!",
+    "source": "appstore:6769732268"
+  },
+  "vibecode-kids": {
+    "file": "vibecode-kids.jpg",
+    "name": "VibeCode Kids",
+    "source": "appstore:6773483083"
+  },
+  "caso-relampago-ai": {
+    "file": "caso-relampago-ai.jpg",
+    "name": "Caso Relampago AI",
+    "source": "appstore:6772540994"
+  },
+  "aura-afirmacoes": {
+    "file": "aura-afirmacoes.jpg",
+    "name": "Aura - Afirmacoes Diarias",
+    "source": "appstore:6769853592"
+  },
+  "album-figurinhas-26": {
+    "file": "album-figurinhas-26.jpg",
+    "name": "Álbum de Figurinhas 26",
+    "source": "appstore:6782724792"
+  },
+  "lifttool-002": {
+    "file": "lifttool-002.jpg",
+    "name": "LiftTool Tarefas",
+    "source": "appstore:6772552531"
+  },
+  "casa-clara": {
+    "file": "casa-clara.jpg",
+    "name": "Casa Clara",
+    "source": "appstore:6767297661"
   },
   "brewmate": {
     "file": "brewmate.jpg",
     "name": "BrewMate Cafe",
     "source": "appstore:6772517662"
   },
+  "investcoach": {
+    "file": "investcoach.jpg",
+    "name": "InvestCoach.AI",
+    "source": "appstore:6764355044"
+  },
+  "blockfront-tactics": {
+    "file": "blockfront-tactics.jpg",
+    "name": "Blockfront Tactics",
+    "source": "appstore:6772747511"
+  },
   "chroma-ai": {
     "file": "chroma-ai.jpg",
     "name": "Chroma AI Paleta",
     "source": "appstore:6772518398"
   },
-  "caso-relampago-ai": {
-    "file": "caso-relampago-ai.jpg",
-    "name": "Caso Relampago AI",
-    "source": "appstore:6772540994"
+  "mytone": {
+    "file": "mytone.jpg",
+    "name": "MyTone Studio",
+    "source": "appstore:6770047382"
+  },
+  "parabens-ia-br": {
+    "file": "parabens-ia-br.jpg",
+    "name": "Parabéns IA",
+    "source": "appstore:6769599831"
+  },
+  "snapread": {
+    "file": "snapread.jpg",
+    "name": "SnapRead AI Leitor",
+    "source": "appstore:6772517083"
+  },
+  "superapp-servicenow": {
+    "file": "superapp-servicenow.jpg",
+    "name": "SuperApp ServiceNow",
+    "source": "appstore:6768396384"
+  },
+  "linguagil": {
+    "file": "linguagil.jpg",
+    "name": "Linguagil Flashcards",
+    "source": "appstore:6772552997"
+  },
+  "supercode-005": {
+    "file": "supercode-005.jpg",
+    "name": "SuperCode Notas",
+    "source": "appstore:6772554818"
   },
   "cantustudio": {
     "file": "cantustudio.svg",

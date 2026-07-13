@@ -9,8 +9,15 @@ import {
   shouldHideLanguageSwitcher,
   siteLanguages,
 } from '@/lib/i18n/site-language'
-import { isImmersiveHomeRoute } from '@/components/home-v2/immersive-routes'
+import { usesHomeChrome } from '@/components/home-v2/immersive-routes'
 import styles from './LanguageSwitcher.module.css'
+
+const LANG_COOKIE = 'pierrondi_lang'
+const LANG_COOKIE_MAX_AGE = 60 * 60 * 24 * 365
+
+function rememberLanguageChoice(lang: string) {
+  document.cookie = `${LANG_COOKIE}=${lang}; path=/; max-age=${LANG_COOKIE_MAX_AGE}; SameSite=Lax`
+}
 
 export default function LanguageSwitcher() {
   const pathname = usePathname() || '/'
@@ -41,7 +48,7 @@ export default function LanguageSwitcher() {
     }
   }, [])
 
-  if (hiddenOnClientRoute || hiddenOnPrivateOpsRoute || isImmersiveHomeRoute(pathname)) return null
+  if (hiddenOnClientRoute || hiddenOnPrivateOpsRoute || usesHomeChrome(pathname)) return null
 
   return (
     <nav className={`${styles.switcher} ${hasTopNav ? styles.withTopNav : ''}`} aria-label="Language selector">
@@ -56,6 +63,7 @@ export default function LanguageSwitcher() {
             aria-label={`${language.label} — ${language.name}`}
             aria-current={isActive ? 'page' : undefined}
             className={isActive ? styles.active : undefined}
+            onClick={() => rememberLanguageChoice(language.code)}
           >
             {language.label}
           </Link>

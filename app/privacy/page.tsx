@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import styles from './PrivacyContent.module.css'
+import LegalDocument from '@/components/LegalDocument'
 
 export const metadata: Metadata = {
   title: 'Privacy',
@@ -16,15 +16,16 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className={styles.shell}>
-      <span className={styles.eyebrow}>Legal</span>
-      <h1 className={styles.h1}>Privacy.</h1>
-      <p className={styles.lead}>
+    <LegalDocument
+      eyebrow="Legal"
+      title="Privacy."
+      lead={
+        <>
         How we handle your data when you contact pierrondi.dev. Direct, without
         unnecessary legalese.
-      </p>
-
-      <div className={styles.prose}>
+        </>
+      }
+    >
         <p>Last updated: June 2026.</p>
 
         <h2>1. Data we collect</h2>
@@ -67,7 +68,6 @@ export default function PrivacyPolicyPage() {
           Privacy questions? Email{' '}
           <a href="mailto:pierrondi@gmail.com">pierrondi@gmail.com</a>.
         </p>
-      </div>
-    </main>
+    </LegalDocument>
   )
 }

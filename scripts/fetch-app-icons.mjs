@@ -1,21 +1,50 @@
 // Fetch official app icons for the portfolio.
 //
 // Sources:
-//  - App Store apps (app/apps/[slug]/_apps.ts entries with appStoreUrl):
-//    iTunes Lookup API -> artworkUrl512, saved as public/app-icons/<slug>.png
+//  - Every public app returned by Paulo's Apple developer page:
+//    iTunes Lookup API -> artworkUrl512, saved as public/app-icons/<slug>.jpg
 //  - Owned web products (WEB_PRODUCTS below): apple-touch-icon fetched from
 //    the product domain.
 //
-// Writes public/app-icons/manifest.json mapping slug -> { file, name, source }.
+// Writes:
+//  - public/app-icons/manifest.json mapping slug -> { file, name, source }
+//  - public/app-icons/app-store-catalog.json with the verified public catalog.
 // Idempotent: re-running refreshes icons in place. Run: npm run icons:fetch
 
-import { readFile, writeFile, mkdir } from 'node:fs/promises'
+import { writeFile, mkdir } from 'node:fs/promises'
 import path from 'node:path'
 
 const ROOT = new URL('..', import.meta.url).pathname
-const APPS_TS = path.join(ROOT, 'app/apps/[slug]/_apps.ts')
 const OUT_DIR = path.join(ROOT, 'public/app-icons')
 const MANIFEST = path.join(OUT_DIR, 'manifest.json')
+const CATALOG = path.join(OUT_DIR, 'app-store-catalog.json')
+const APPLE_DEVELOPER_ID = '1895717587'
+
+// Preserve the routes already used by pierrondi.dev where a public app maps to
+// an existing support/privacy slug. The remaining names receive stable slugs.
+const APP_SLUGS = {
+  '6769621331': 'bandle-br',
+  '6764325629': 'faithschool',
+  '6764287847': 'cantustudio-app',
+  '6764715502': 'muse-edit',
+  '6769732268': 'adivinha',
+  '6773483083': 'vibecode-kids',
+  '6772540994': 'caso-relampago-ai',
+  '6769853592': 'aura-afirmacoes',
+  '6782724792': 'album-figurinhas-26',
+  '6772552531': 'lifttool-002',
+  '6767297661': 'casa-clara',
+  '6772517662': 'brewmate',
+  '6764355044': 'investcoach',
+  '6772747511': 'blockfront-tactics',
+  '6772518398': 'chroma-ai',
+  '6770047382': 'mytone',
+  '6769599831': 'parabens-ia-br',
+  '6772517083': 'snapread',
+  '6768396384': 'superapp-servicenow',
+  '6772552997': 'linguagil',
+  '6772554818': 'supercode-005',
+}
 
 const WEB_PRODUCTS = [
   { slug: 'cantustudio', name: 'CantuStudio', urls: ['https://cantustudio.app/apple-touch-icon.png', 'https://cantustudio.app/icon.png', 'https://cantustudio.app/favicon.png'] },
@@ -23,20 +52,25 @@ const WEB_PRODUCTS = [
   { slug: 'agenticoscore', name: 'AgenticosCore', urls: ['https://agenticoscore.ai/apple-touch-icon.png', 'https://agenticoscore.ai/icon.png', 'https://agenticoscore.ai/favicon.png'] },
 ]
 
-async function parseStoreApps() {
-  const src = await readFile(APPS_TS, 'utf8')
-  const apps = []
-  // Match each entry: 'slug': { ... name: '...', ... appStoreUrl: '...id123...' }
-  const entryRe = /^\s{2}(?:'([^']+)'|([A-Za-z0-9_-]+)):\s*\{([\s\S]*?)^\s{2}\},/gm
-  let m
-  while ((m = entryRe.exec(src))) {
-    const slug = m[1] ?? m[2]
-    const body = m[3]
-    const name = body.match(/name:\s*'([^']+)'/)?.[1] ?? slug
-    const storeId = body.match(/appStoreUrl:\s*'[^']*id(\d+)[^']*'/)?.[1]
-    if (storeId) apps.push({ slug, name, storeId })
+function slugify(value) {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+async function lookupDeveloperApps() {
+  for (const country of ['br', 'us']) {
+    const url = `https://itunes.apple.com/lookup?id=${APPLE_DEVELOPER_ID}&entity=software&country=${country}&limit=200`
+    const res = await fetch(url, { signal: AbortSignal.timeout(20000) })
+    if (!res.ok) continue
+    const data = await res.json()
+    const apps = (data.results ?? []).filter((entry) => entry.wrapperType === 'software')
+    if (apps.length) return { apps, country }
   }
-  return apps
+  throw new Error(`no public apps found for Apple developer ${APPLE_DEVELOPER_ID}`)
 }
 
 async function fetchBuffer(url) {
@@ -48,41 +82,37 @@ async function fetchBuffer(url) {
   return { buf: Buffer.from(await res.arrayBuffer()), ext }
 }
 
-async function lookupArtwork(storeId) {
-  for (const country of ['br', 'us']) {
-    const res = await fetch(`https://itunes.apple.com/lookup?id=${storeId}&country=${country}`, {
-      signal: AbortSignal.timeout(20000),
-    })
-    if (!res.ok) continue
-    const data = await res.json()
-    const hit = data.results?.[0]
-    if (hit?.artworkUrl512 || hit?.artworkUrl100) {
-      return {
-        url: (hit.artworkUrl512 ?? hit.artworkUrl100).replace('100x100', '512x512'),
-        trackName: hit.trackName,
-      }
-    }
-  }
-  return null
-}
-
 async function main() {
   await mkdir(OUT_DIR, { recursive: true })
   const manifest = {}
   const failures = []
+  const { apps, country } = await lookupDeveloperApps()
+  const catalog = []
 
-  for (const app of await parseStoreApps()) {
+  for (const app of apps) {
+    const trackId = String(app.trackId)
+    const slug = APP_SLUGS[trackId] ?? slugify(app.trackName)
+    const artworkUrl = app.artworkUrl512 ?? app.artworkUrl100
     try {
-      const art = await lookupArtwork(app.storeId)
-      if (!art) throw new Error('no lookup result')
-      const { buf, ext } = await fetchBuffer(art.url)
-      const file = `${app.slug}.${ext}`
+      if (!artworkUrl) throw new Error('no artwork URL')
+      const { buf, ext } = await fetchBuffer(artworkUrl)
+      const file = `${slug}.${ext}`
       await writeFile(path.join(OUT_DIR, file), buf)
-      manifest[app.slug] = { file, name: app.name, source: `appstore:${app.storeId}` }
-      console.log(`ok  ${app.slug} <- App Store ${app.storeId} (${art.trackName ?? app.name})`)
+      manifest[slug] = { file, name: app.trackName, source: `appstore:${trackId}` }
+      catalog.push({
+        slug,
+        name: app.trackName,
+        trackId,
+        bundleId: app.bundleId,
+        version: app.version,
+        category: app.primaryGenreName,
+        url: app.trackViewUrl,
+        icon: `/app-icons/${file}`,
+      })
+      console.log(`ok  ${slug} <- App Store ${trackId} (${app.trackName})`)
     } catch (err) {
-      failures.push(`${app.slug}: ${err.message}`)
-      console.warn(`skip ${app.slug}: ${err.message}`)
+      failures.push(`${slug}: ${err.message}`)
+      console.warn(`skip ${slug}: ${err.message}`)
     }
   }
 
@@ -119,7 +149,12 @@ async function main() {
   }
 
   await writeFile(MANIFEST, `${JSON.stringify(manifest, null, 2)}\n`)
+  await writeFile(
+    CATALOG,
+    `${JSON.stringify({ developerId: APPLE_DEVELOPER_ID, storefront: country, count: catalog.length, apps: catalog }, null, 2)}\n`,
+  )
   console.log(`\nmanifest: ${Object.keys(manifest).length} icons, ${failures.length} failures`)
+  console.log(`catalog: ${catalog.length} public App Store apps (${country.toUpperCase()})`)
   if (failures.length) console.log(failures.map((f) => ` - ${f}`).join('\n'))
 }
 

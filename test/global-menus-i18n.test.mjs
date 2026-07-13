@@ -15,15 +15,18 @@ test('global header menu uses route language for PT and EN labels', () => {
   const requiredSnippets = [
     'getCurrentLanguage(pathname)',
     "label: 'Atuação', href: '/atuacao'",
+    "label: 'Portfólio', href: '/portfolio'",
     "label: 'Feitos', href: '/feitos'",
     "label: 'Ideias', href: '/blog'",
     "label: 'Contato', href: '/contato'",
     "label: 'About', href: '/en/about'",
     "label: 'Work', href: '/en/atuacao'",
+    "label: 'Portfolio', href: '/en/portfolio'",
     "label: 'Proof', href: '/en/feitos'",
     "label: 'Ideas', href: '/en/blog'",
     "label: 'Contact', href: '/en/contato'",
-    "cta: 'Connect'",
+    'pierrondi.dev',
+    'className={styles.brandBracket}',
     "aria: 'Main navigation'",
   ]
 

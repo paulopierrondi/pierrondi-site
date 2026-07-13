@@ -41,11 +41,11 @@ const CookieBanner = dynamic(() => import('@/components/CookieBanner'))
 
 export const metadata: Metadata = {
   title: {
-    default: 'Paulo Pierrondi - Arquiteto de IA, Full-stack Builder e Enterprise Account Director',
+    default: 'Paulo Pierrondi - Technical Account Executive, Arquiteto de IA e Full-stack Builder',
     template: '%s | pierrondi.dev',
   },
   description:
-    'Arquiteto de IA e automação, full-stack builder e Enterprise Account Director na ServiceNow: sistemas multi-agente, AgentOps, plataformas de automação, apps e frameworks.',
+    'Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder: sistemas multi-agente, AgentOps, apps, automações e frameworks.',
   keywords: [
     'Paulo Pierrondi',
     'ServiceNow',
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi - Arquiteto de IA, Full-stack Builder e Enterprise Account Director',
+    title: 'Paulo Pierrondi - Technical Account Executive, Arquiteto de IA e Full-stack Builder',
     description:
       'Sistemas multi-agente, AgentOps, plataformas de automação, apps e frameworks — liderando contas enterprise FSI na ServiceNow.',
     url: '/',
@@ -160,7 +160,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </>
         )}
       </head>
-      <body className={`${display.variable} ${body.variable} ${mono.variable} antialiased`}>
+      <body className={`${display.variable} ${body.variable} ${body.className} ${mono.variable} antialiased`}>
         <DocumentLangSync />
         <SiteJsonLdWrapper />
         <HomeBackground />

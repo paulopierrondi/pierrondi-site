@@ -27,6 +27,11 @@ export default function BlogContent({ lang }: { lang: BlogLang }) {
 
   return (
     <main className={styles.main}>
+      {lang === 'en' && (
+        <p className={styles.sourceNote}>
+          <strong>Original language: PT-BR.</strong> The essays below are available in Portuguese; English translations are not yet published.
+        </p>
+      )}
       <Reveal>
         <Link href={`/blog/${featured.slug}`} className={styles.feat}>
           <div className={styles.featBody}>

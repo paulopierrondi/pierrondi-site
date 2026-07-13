@@ -104,7 +104,7 @@ export default async function PostPage({ params }: Props) {
           ← Blog
         </Link>
 
-        {/* Hero tile — parchment */}
+        {/* Hero tile */}
         <ProductTile
           variant="dark"
           eyebrow={post.category}
@@ -121,7 +121,7 @@ export default async function PostPage({ params }: Props) {
           </div>
         </ProductTile>
 
-        {/* Content + sidebar tile — light */}
+        {/* Content + sidebar tile */}
         <ProductTile variant="dark" as="div">
           <div className={styles.layout}>
             <div className={styles.contentCol}>

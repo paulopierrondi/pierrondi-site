@@ -32,9 +32,15 @@ const localizedRoutes: Record<string, Record<HomeLang, string>> = {
 }
 
 const languageSwitcherHiddenPrefixes = [
+  '/ai-search',
+  '/apps',
   '/bradesco-26',
+  '/citations',
+  '/crm',
+  '/design',
   '/fso',
   '/itau',
+  '/obrigado',
   '/paulo',
   '/whypaulo',
   '/control_tower',
@@ -51,6 +57,11 @@ export function getCurrentLanguage(pathname: string): HomeLang {
 
 export function shouldHideLanguageSwitcher(pathname: string) {
   const normalizedPath = pathname || '/'
+  // Article details are canonical PT only; the /en/blog/:slug shape 308s here.
+  // Do not present a language choice that immediately returns the visitor to
+  // the same article.
+  if (normalizedPath.startsWith('/blog/')) return true
+
   return languageSwitcherHiddenPrefixes.some(
     (prefix) =>
       normalizedPath === prefix || normalizedPath.startsWith(`${prefix}/`),

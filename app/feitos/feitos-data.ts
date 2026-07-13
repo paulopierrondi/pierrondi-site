@@ -52,7 +52,7 @@ export const feitos: Feito[] = [
     cardLabel: 'ServiceNow / SADA',
     cardTitle: 'SADA: arquitetura de valor para IA governada',
     cardCopy:
-      'Um framework prescritivo para conectar estratégia, decisões de arquitetura, execução em workflow e valor mensurável.',
+      'Framework desenvolvido por Paulo Pierrondi para conectar estratégia, decisões de arquitetura, execução em workflow e valor mensurável.',
     kicker: 'Feito 01 / ServiceNow AI-Driven Architecture',
     title: 'SADA: ServiceNow AI-Driven Architecture',
     headline: 'Da visão executiva ao workflow medido.',

@@ -10,6 +10,7 @@ Disallow: /obrigado
 Disallow: /ai-command-center
 Disallow: /bradesco-26
 Disallow: /control_tower
+Disallow: /fso
 Disallow: /itau
 Disallow: /lp/
 Disallow: /portal/
@@ -41,6 +42,7 @@ Disallow: /obrigado
 Disallow: /ai-command-center
 Disallow: /bradesco-26
 Disallow: /control_tower
+Disallow: /fso
 Disallow: /itau
 Disallow: /lp/
 Disallow: /portal/

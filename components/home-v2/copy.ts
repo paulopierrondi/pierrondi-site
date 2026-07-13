@@ -23,13 +23,13 @@ export const COPY: Record<Lang, SiteCopy> = {
       headlineLine1: 'Paulo Pierrondi',
       headlineLine2: '$ design_operate_scale_ai()',
       description:
-        'Arquiteto de IA, full-stack builder e Enterprise Account Director na ServiceNow. Lidero contas FSI de grande escala enquanto construo sistemas multi-agente, plataformas de automação e produtos digitais com trilha de evidência.',
+        'Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder. Lidero contexto enterprise em FSI enquanto construo sistemas multi-agente, plataformas de automação e produtos digitais com trilha de evidência.',
       ctaPrimary: { label: 'ver projetos', href: '#projects' },
       ctaSecondary: { label: 'falar comigo', href: '#contact' },
       badges: [
         'AI/Automation Architect',
         'Full-stack Builder',
-        'Enterprise Account Director',
+        'Technical Account Executive',
         'AgentOps',
       ],
     },
@@ -246,7 +246,7 @@ export const COPY: Record<Lang, SiteCopy> = {
       stats: [
         { value: 'FSI', label: 'foco em serviços financeiros regulados' },
         { value: '60+', label: 'agentes registrados no Agent Hub' },
-        { value: '3', label: 'produtos próprios no ar' },
+        { value: '21', label: 'apps publicados na App Store' },
         { value: '5', label: 'estágios do operating model' },
       ],
       testimonials: [],
@@ -361,13 +361,13 @@ export const COPY: Record<Lang, SiteCopy> = {
       headlineLine1: 'Paulo Pierrondi',
       headlineLine2: '$ design_operate_scale_ai()',
       description:
-        'AI architect, full-stack builder, and Enterprise Account Director at ServiceNow. I lead large-scale FSI accounts while building multi-agent systems, automation platforms, and digital products with evidence trails.',
+        'Technical Account Executive at ServiceNow, AI architect and full-stack builder. I lead enterprise FSI context while building multi-agent systems, automation platforms and digital products with evidence trails.',
       ctaPrimary: { label: 'view projects', href: '#projects' },
       ctaSecondary: { label: 'get in touch', href: '#contact' },
       badges: [
         'AI/Automation Architect',
         'Full-stack Builder',
-        'Enterprise Account Director',
+        'Technical Account Executive',
         'AgentOps',
       ],
     },
@@ -584,7 +584,7 @@ export const COPY: Record<Lang, SiteCopy> = {
       stats: [
         { value: 'FSI', label: 'focus on regulated financial services' },
         { value: '60+', label: 'agents registered in Agent Hub' },
-        { value: '3', label: 'owned products live' },
+        { value: '21', label: 'apps published on the App Store' },
         { value: '5', label: 'operating-model stages' },
       ],
       testimonials: [],

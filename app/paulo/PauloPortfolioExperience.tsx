@@ -4,8 +4,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight, BrainCircuit, Cpu, Network, Pause, Play, ShieldCheck } from 'lucide-react'
 import ArchitectureDiagram from './ArchitectureDiagram'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import styles from './PauloPortfolioExperience.module.css'
 
 type Lang = 'pt' | 'en'
@@ -271,10 +272,10 @@ const copy = {
       ],
     ],
     investor: {
-      eyebrow: 'Contratação / investimento',
+      eyebrow: 'Conversa estratégica',
       title: 'O ativo é a capacidade de operar sistemas complexos com IA sem perder controle.',
       body:
-        'Para empresas, isso vira operating model. Para investidores, vira capacidade de construir e validar produtos em série. Para times técnicos, vira aceleração com rastreabilidade.',
+        'Para empresas, isso vira operating model. Para liderança, vira capacidade de construir e validar produtos com clareza. Para times técnicos, vira aceleração com rastreabilidade.',
       bullets: ['enterprise credibility', 'AI execution system', 'product portfolio', 'governed autonomy'],
     },
   },
@@ -399,10 +400,10 @@ const copy = {
       ],
     ],
     investor: {
-      eyebrow: 'Hiring / investment',
+      eyebrow: 'Strategic conversation',
       title: 'The asset is the ability to operate complex systems with AI without losing control.',
       body:
-        'For companies, this becomes an operating model. For investors, it becomes the capacity to build and validate products repeatedly. For technical teams, it becomes acceleration with traceability.',
+        'For companies, this becomes an operating model. For leadership, it becomes the capacity to build and validate products with clarity. For technical teams, it becomes acceleration with traceability.',
       bullets: ['enterprise credibility', 'AI execution system', 'product portfolio', 'governed autonomy'],
     },
   },
@@ -481,7 +482,7 @@ export default function PauloPortfolioExperience() {
   const [portraitSrc, setPortraitSrc] = useState(portrait.primary)
   const [mounted, setMounted] = useState(false)
   const navRef = useRef<HTMLElement | null>(null)
-  const prefersReducedMotion = useReducedMotion()
+  const prefersReducedMotion = useHydratedReducedMotion()
   const t = copy[lang]
   const defaultMotionOn = mounted ? !prefersReducedMotion : false
   const shouldAnimate = motionOverride ?? defaultMotionOn
@@ -559,6 +560,17 @@ export default function PauloPortfolioExperience() {
           </motion.p>
           <motion.p className={styles.note} {...heroStep(shouldAnimate, 0.22)}>
             {t.hero.note}
+          </motion.p>
+          <motion.p className={styles.profileContext} {...heroStep(shouldAnimate, 0.26)}>
+            {lang === 'pt' ? (
+              <>
+                Perfil executivo e trajetória: <Link href="/about">ver Paulo Pierrondi</Link>. Esta página é o laboratório público dos sistemas em construção.
+              </>
+            ) : (
+              <>
+                Executive profile and background: <Link href="/about">meet Paulo Pierrondi</Link>. This page is the public lab for systems in progress.
+              </>
+            )}
           </motion.p>
           <motion.div className={styles.heroActions} {...heroStep(shouldAnimate, 0.3)}>
             <a href="https://br.linkedin.com/in/paulopierrondi" target="_blank" rel="noreferrer">

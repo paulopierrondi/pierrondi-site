@@ -36,7 +36,7 @@ export default function BlogEnPage() {
       <PageHeader
         eyebrow="IDEAS"
         title={<>Notes on <span className="text-primary">enterprise AI.</span></>}
-        lead="Short essays on operating model, agent governance, ServiceNow, value architecture, and execution. No hype — only what I learned in the field."
+        lead="The original essays below are published in Portuguese. This hub keeps the international navigation and their context explicit until editorial English versions are available."
       />
       <BlogContent lang="en" />
     </>

@@ -5,7 +5,7 @@
   --paulo-soft: var(--color-hairline);
   --paulo-line: var(--color-hairline);
   --paulo-green: var(--color-primary);
-  --paulo-cyan: var(--color-cyan);
+  --paulo-cyan: var(--color-accent-cyan);
   --paulo-brass: var(--color-accent-gold);
   --paulo-panel: var(--color-surface);
   --ease-executive: cubic-bezier(0.16, 1, 0.3, 1);
@@ -29,8 +29,8 @@
   z-index: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(248, 243, 231, 0.035) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(248, 243, 231, 0.025) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(245, 245, 245, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(245, 245, 245, 0.025) 1px, transparent 1px);
   background-size: 76px 76px;
   will-change: transform;
 }
@@ -83,7 +83,7 @@
   border: 0;
   border-radius: 999px;
   padding: 0 12px;
-  color: rgba(248, 243, 231, 0.72);
+  color: rgba(245, 245, 245, 0.72);
   background: transparent;
   font-size: 12px;
   font-weight: 800;
@@ -106,7 +106,7 @@
 .localNav a:hover,
 .localNav button:hover {
   color: #fff;
-  background: rgba(248, 243, 231, 0.08);
+  background: rgba(245, 245, 245, 0.08);
   transform: translateY(-1px);
 }
 
@@ -155,45 +155,45 @@
   overflow: hidden;
   opacity: 0.76;
   mix-blend-mode: screen;
-  --neural-a: rgba(126, 227, 95, 0.32);
-  --neural-b: rgba(109, 198, 217, 0.25);
-  --neural-c: rgba(216, 180, 95, 0.16);
+  --neural-a: rgba(74, 222, 128, 0.32);
+  --neural-b: rgba(96, 165, 250, 0.25);
+  --neural-c: rgba(245, 158, 11, 0.16);
 }
 
 .neuralFieldHero {
-  --neural-a: rgba(126, 227, 95, 0.36);
-  --neural-b: rgba(109, 198, 217, 0.28);
+  --neural-a: rgba(74, 222, 128, 0.36);
+  --neural-b: rgba(96, 165, 250, 0.28);
   --neural-c: var(--color-hairline);
 }
 
 .neuralFieldProof {
-  --neural-a: rgba(126, 227, 95, 0.24);
-  --neural-b: rgba(109, 198, 217, 0.3);
-  --neural-c: rgba(216, 180, 95, 0.12);
+  --neural-a: rgba(74, 222, 128, 0.24);
+  --neural-b: rgba(96, 165, 250, 0.3);
+  --neural-c: rgba(245, 158, 11, 0.12);
 }
 
 .neuralFieldOperating {
-  --neural-a: rgba(126, 227, 95, 0.3);
-  --neural-b: rgba(109, 198, 217, 0.2);
-  --neural-c: rgba(216, 180, 95, 0.2);
+  --neural-a: rgba(74, 222, 128, 0.3);
+  --neural-b: rgba(96, 165, 250, 0.2);
+  --neural-c: rgba(245, 158, 11, 0.2);
 }
 
 .neuralFieldWorkflow {
-  --neural-a: rgba(216, 180, 95, 0.26);
-  --neural-b: rgba(126, 227, 95, 0.22);
-  --neural-c: rgba(109, 198, 217, 0.16);
+  --neural-a: rgba(245, 158, 11, 0.26);
+  --neural-b: rgba(74, 222, 128, 0.22);
+  --neural-c: rgba(96, 165, 250, 0.16);
 }
 
 .neuralFieldArchitecture {
-  --neural-a: rgba(109, 198, 217, 0.34);
-  --neural-b: rgba(126, 227, 95, 0.22);
+  --neural-a: rgba(96, 165, 250, 0.34);
+  --neural-b: rgba(74, 222, 128, 0.22);
   --neural-c: var(--color-hairline);
 }
 
 .neuralFieldInvestor {
-  --neural-a: rgba(126, 227, 95, 0.32);
-  --neural-b: rgba(216, 180, 95, 0.2);
-  --neural-c: rgba(109, 198, 217, 0.16);
+  --neural-a: rgba(74, 222, 128, 0.32);
+  --neural-b: rgba(245, 158, 11, 0.2);
+  --neural-c: rgba(96, 165, 250, 0.16);
 }
 
 .neuralField::before,
@@ -285,9 +285,9 @@
   height: var(--node-size, 7px);
   border-radius: 999px;
   background:
-    radial-gradient(circle at 36% 32%, #fff, var(--neural-a) 34%, rgba(126, 227, 95, 0.08) 70%);
+    radial-gradient(circle at 36% 32%, #fff, var(--neural-a) 34%, rgba(74, 222, 128, 0.08) 70%);
   box-shadow:
-    0 0 0 1px rgba(248, 243, 231, 0.18),
+    0 0 0 1px rgba(245, 245, 245, 0.18),
     0 0 24px var(--neural-a);
   opacity: 0.8;
 }
@@ -495,8 +495,8 @@
   position: absolute;
   inset: 10% 0 8%;
   background:
-    linear-gradient(90deg, transparent 0 28%, rgba(126, 227, 95, 0.12) 50%, transparent 72%),
-    linear-gradient(180deg, transparent, rgba(109, 198, 217, 0.08), transparent);
+    linear-gradient(90deg, transparent 0 28%, rgba(74, 222, 128, 0.12) 50%, transparent 72%),
+    linear-gradient(180deg, transparent, rgba(96, 165, 250, 0.08), transparent);
   transform: translateX(-38%);
 }
 
@@ -509,7 +509,7 @@
   left: -14vw;
   width: 42vw;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-cyan), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-accent-cyan), transparent);
 }
 
 .motionEnabled .motionField span {
@@ -560,14 +560,14 @@
   font-size: clamp(50px, 6.15vw, 98px);
   line-height: 0.9;
   text-shadow:
-    0 1px 0 rgba(248, 243, 231, 0.16),
-    0 28px 90px rgba(126, 227, 95, 0.08);
+    0 1px 0 rgba(245, 245, 245, 0.16),
+    0 28px 90px rgba(74, 222, 128, 0.08);
 }
 
 .lead {
   max-width: 730px;
   margin: 28px 0 0;
-  color: rgba(248, 243, 231, 0.78);
+  color: rgba(245, 245, 245, 0.78);
   font-size: clamp(18px, 2vw, 24px);
   line-height: 1.42;
 }
@@ -575,9 +575,28 @@
 .note {
   max-width: 690px;
   margin: 18px 0 0;
-  color: rgba(248, 243, 231, 0.56);
+  color: rgba(245, 245, 245, 0.56);
   font-size: 14px;
   line-height: 1.6;
+}
+
+.profileContext {
+  max-width: 690px;
+  margin: 12px 0 0;
+  color: rgba(245, 245, 245, 0.46);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.profileContext a {
+  color: var(--color-primary);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.profileContext a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .heroActions {
@@ -610,13 +629,13 @@
 .heroActions a + a {
   color: var(--color-ink);
   border: 1px solid var(--color-hairline);
-  background: rgba(248, 243, 231, 0.06);
+  background: rgba(245, 245, 245, 0.06);
 }
 
 .heroActions a:hover,
 .investorPanel a:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 48px rgba(126, 227, 95, 0.16);
+  box-shadow: 0 18px 48px rgba(74, 222, 128, 0.16);
 }
 
 .heroActions a:active,
@@ -642,13 +661,13 @@
   z-index: -1;
   border-radius: 28px;
   background:
-    radial-gradient(circle at 50% 34%, rgba(126, 227, 95, 0.24), transparent 52%),
+    radial-gradient(circle at 50% 34%, rgba(74, 222, 128, 0.24), transparent 52%),
     conic-gradient(
       from 178deg,
       transparent 0deg,
-      rgba(126, 227, 95, 0.28) 52deg,
+      rgba(74, 222, 128, 0.28) 52deg,
       transparent 118deg,
-      rgba(109, 198, 217, 0.22) 210deg,
+      rgba(96, 165, 250, 0.22) 210deg,
       transparent 286deg
     );
   filter: blur(10px);
@@ -658,11 +677,11 @@
 .portraitSystem::after {
   inset: -18px;
   z-index: -1;
-  border: 1px solid rgba(126, 227, 95, 0.16);
+  border: 1px solid rgba(74, 222, 128, 0.16);
   border-radius: 24px;
   background:
-    linear-gradient(90deg, rgba(126, 227, 95, 0.16) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(109, 198, 217, 0.12) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(74, 222, 128, 0.16) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(96, 165, 250, 0.12) 1px, transparent 1px);
   background-size: 34px 34px;
   mask-image: radial-gradient(circle at 50% 48%, #000 0 55%, transparent 78%);
   opacity: 0.55;
@@ -679,16 +698,16 @@
 .portraitFrame {
   position: relative;
   aspect-ratio: 1 / 1;
-  border: 1px solid rgba(126, 227, 95, 0.2);
+  border: 1px solid rgba(74, 222, 128, 0.2);
   border-radius: 18px;
   overflow: hidden;
   background:
-    radial-gradient(circle at 52% 18%, rgba(126, 227, 95, 0.18), transparent 36%),
-    linear-gradient(145deg, rgba(109, 198, 217, 0.16), transparent 38%),
+    radial-gradient(circle at 52% 18%, rgba(74, 222, 128, 0.18), transparent 36%),
+    linear-gradient(145deg, rgba(96, 165, 250, 0.16), transparent 38%),
     #070d0b;
   box-shadow:
     0 34px 120px rgba(0, 0, 0, 0.54),
-    0 0 52px rgba(126, 227, 95, 0.12),
+    0 0 52px rgba(74, 222, 128, 0.12),
     inset 0 0 0 1px rgba(255, 255, 255, 0.035);
   transform: translateZ(0);
   transition:
@@ -707,11 +726,11 @@
 
 .portraitFrame::before {
   inset: 0;
-  border: 1px solid rgba(248, 243, 231, 0.09);
+  border: 1px solid rgba(245, 245, 245, 0.09);
   background:
     linear-gradient(180deg, transparent 0 62%, rgba(5, 6, 6, 0.42) 100%),
-    radial-gradient(circle at 50% 17%, rgba(126, 227, 95, 0.1), transparent 36%),
-    linear-gradient(90deg, rgba(109, 198, 217, 0.09), transparent 18%, transparent 82%, rgba(126, 227, 95, 0.08));
+    radial-gradient(circle at 50% 17%, rgba(74, 222, 128, 0.1), transparent 36%),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.09), transparent 18%, transparent 82%, rgba(74, 222, 128, 0.08));
   opacity: 1;
 }
 
@@ -737,11 +756,11 @@
 
 .portraitSystem:hover .portraitFrame {
   transform: translateY(-6px) scale(1.01);
-  border-color: rgba(126, 227, 95, 0.42);
+  border-color: rgba(74, 222, 128, 0.42);
   box-shadow:
     0 34px 120px rgba(0, 0, 0, 0.54),
-    0 0 0 1px rgba(126, 227, 95, 0.12),
-    0 0 64px rgba(109, 198, 217, 0.12);
+    0 0 0 1px rgba(74, 222, 128, 0.12),
+    0 0 64px rgba(96, 165, 250, 0.12);
 }
 
 .portraitImage {
@@ -756,7 +775,7 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, transparent 0 45%, rgba(126, 227, 95, 0.18) 49%, transparent 54%),
+    linear-gradient(180deg, transparent 0 45%, rgba(74, 222, 128, 0.18) 49%, transparent 54%),
     repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 4px);
   opacity: 0.09;
   mix-blend-mode: screen;
@@ -777,15 +796,15 @@
   position: relative;
   width: calc(100% - 26px);
   margin: -18px auto 0;
-  border: 1px solid rgba(126, 227, 95, 0.22);
+  border: 1px solid rgba(74, 222, 128, 0.22);
   border-radius: 8px;
   padding: 15px;
   background:
-    linear-gradient(120deg, rgba(126, 227, 95, 0.08), rgba(109, 198, 217, 0.04)),
+    linear-gradient(120deg, rgba(74, 222, 128, 0.08), rgba(96, 165, 250, 0.04)),
     rgba(5, 6, 6, 0.86);
   box-shadow:
     0 22px 70px rgba(0, 0, 0, 0.36),
-    0 0 26px rgba(126, 227, 95, 0.08);
+    0 0 26px rgba(74, 222, 128, 0.08);
   backdrop-filter: blur(18px);
 }
 
@@ -798,7 +817,7 @@
   height: 8px;
   border-radius: 999px;
   background: var(--color-primary);
-  box-shadow: 0 0 0 0 rgba(126, 227, 95, 0.32);
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.32);
 }
 
 .motionEnabled .statusCard::before {
@@ -868,8 +887,8 @@
   border-radius: 8px;
   padding: 22px;
   background:
-    linear-gradient(145deg, rgba(126, 227, 95, 0.08), rgba(109, 198, 217, 0.04)),
-    rgba(248, 243, 231, 0.035);
+    linear-gradient(145deg, rgba(74, 222, 128, 0.08), rgba(96, 165, 250, 0.04)),
+    rgba(245, 245, 245, 0.035);
   transition:
     transform 180ms ease,
     border-color 180ms ease,
@@ -904,22 +923,22 @@
   height: 8px;
   border-radius: 999px;
   --card-node: var(--color-primary);
-  --card-node-rgb: 126, 227, 95;
+  --card-node-rgb: 74, 222, 128;
   background: var(--card-node);
   box-shadow:
-    0 0 0 1px rgba(248, 243, 231, 0.16),
+    0 0 0 1px rgba(245, 245, 245, 0.16),
     0 0 24px rgba(var(--card-node-rgb), 0.28);
   opacity: 0.72;
 }
 
 .workflowCard::before {
   --card-node: var(--color-accent-gold);
-  --card-node-rgb: 216, 180, 95;
+  --card-node-rgb: 245, 158, 11;
 }
 
 .architectureCard::before {
-  --card-node: var(--color-cyan);
-  --card-node-rgb: 109, 198, 217;
+  --card-node: var(--color-accent-cyan);
+  --card-node-rgb: 96, 165, 250;
 }
 
 .motionEnabled .metricsGrid article::before,
@@ -951,10 +970,10 @@
 
 .metricsGrid article:hover {
   transform: translateY(-4px);
-  border-color: rgba(126, 227, 95, 0.28);
+  border-color: rgba(74, 222, 128, 0.28);
   background:
-    linear-gradient(145deg, rgba(126, 227, 95, 0.12), rgba(109, 198, 217, 0.06)),
-    rgba(248, 243, 231, 0.045);
+    linear-gradient(145deg, rgba(74, 222, 128, 0.12), rgba(96, 165, 250, 0.06)),
+    rgba(245, 245, 245, 0.045);
 }
 
 .metricsGrid article:hover::after,
@@ -983,8 +1002,8 @@
 
 .operating {
   background:
-    radial-gradient(circle at 82% 12%, rgba(109, 198, 217, 0.12), transparent 38%),
-    radial-gradient(circle at 14% 80%, rgba(216, 180, 95, 0.12), transparent 40%),
+    radial-gradient(circle at 82% 12%, rgba(96, 165, 250, 0.12), transparent 38%),
+    radial-gradient(circle at 14% 80%, rgba(245, 158, 11, 0.12), transparent 40%),
     linear-gradient(180deg, #06100d, #050706 74%, var(--color-canvas));
   color: var(--color-ink);
 }
@@ -1012,11 +1031,11 @@
   position: relative;
   overflow: hidden;
   min-height: 292px;
-  border: 1px solid rgba(248, 243, 231, 0.12);
+  border: 1px solid rgba(245, 245, 245, 0.12);
   border-radius: 8px;
   padding: 22px;
   background:
-    linear-gradient(145deg, rgba(126, 227, 95, 0.08), rgba(109, 198, 217, 0.035)),
+    linear-gradient(145deg, rgba(74, 222, 128, 0.08), rgba(96, 165, 250, 0.035)),
     rgba(7, 13, 12, 0.72);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(14px);
@@ -1028,9 +1047,9 @@
 
 .capabilityCard:hover {
   transform: translateY(-6px);
-  border-color: rgba(126, 227, 95, 0.28);
+  border-color: rgba(74, 222, 128, 0.28);
   background:
-    linear-gradient(145deg, rgba(126, 227, 95, 0.12), rgba(109, 198, 217, 0.045)),
+    linear-gradient(145deg, rgba(74, 222, 128, 0.12), rgba(96, 165, 250, 0.045)),
     rgba(11, 21, 18, 0.82);
 }
 
@@ -1053,7 +1072,7 @@
 
 .capabilityCard p {
   margin: 0;
-  color: rgba(248, 243, 231, 0.62);
+  color: rgba(245, 245, 245, 0.62);
   font-size: 14px;
   line-height: 1.55;
 }
@@ -1075,8 +1094,8 @@
   border-radius: 8px;
   padding: 22px;
   background:
-    linear-gradient(145deg, rgba(216, 180, 95, 0.12), transparent 38%),
-    rgba(248, 243, 231, 0.035);
+    linear-gradient(145deg, rgba(245, 158, 11, 0.12), transparent 38%),
+    rgba(245, 245, 245, 0.035);
   transition:
     transform 190ms ease,
     border-color 190ms ease,
@@ -1085,10 +1104,10 @@
 
 .workflowCard:hover {
   transform: translateY(-5px);
-  border-color: rgba(216, 180, 95, 0.32);
+  border-color: rgba(245, 158, 11, 0.32);
   background:
-    linear-gradient(145deg, rgba(216, 180, 95, 0.16), transparent 42%),
-    rgba(248, 243, 231, 0.05);
+    linear-gradient(145deg, rgba(245, 158, 11, 0.16), transparent 42%),
+    rgba(245, 245, 245, 0.05);
 }
 
 .workflowCard span {
@@ -1116,7 +1135,7 @@
 
 .architectureSection {
   background:
-    linear-gradient(180deg, rgba(109, 198, 217, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(96, 165, 250, 0.08), transparent 34%),
     #060706;
 }
 
@@ -1132,7 +1151,7 @@
   border: 1px solid var(--color-hairline);
   border-radius: 8px;
   overflow: hidden;
-  background: rgba(248, 243, 231, 0.035);
+  background: rgba(245, 245, 245, 0.035);
   transition:
     transform 210ms ease,
     border-color 210ms ease,
@@ -1141,8 +1160,8 @@
 
 .architectureCard:hover {
   transform: translateY(-6px);
-  border-color: rgba(109, 198, 217, 0.34);
-  background: rgba(248, 243, 231, 0.05);
+  border-color: rgba(96, 165, 250, 0.34);
+  background: rgba(245, 245, 245, 0.05);
 }
 
 .architectureViewport {
@@ -1152,9 +1171,9 @@
   display: grid;
   place-items: center;
   background:
-    linear-gradient(125deg, rgba(126, 227, 95, 0.16), transparent 30%),
-    linear-gradient(305deg, rgba(109, 198, 217, 0.18), transparent 36%),
-    repeating-linear-gradient(115deg, rgba(248, 243, 231, 0.055) 0 1px, transparent 1px 24px),
+    linear-gradient(125deg, rgba(74, 222, 128, 0.16), transparent 30%),
+    linear-gradient(305deg, rgba(96, 165, 250, 0.18), transparent 36%),
+    repeating-linear-gradient(115deg, rgba(245, 245, 245, 0.055) 0 1px, transparent 1px 24px),
     #080b0a;
 }
 
@@ -1180,8 +1199,8 @@
   height: 3px;
   border-radius: 999px;
   background:
-    linear-gradient(90deg, var(--color-primary), var(--color-cyan)) left / 42% 100% no-repeat,
-    rgba(248, 243, 231, 0.12);
+    linear-gradient(90deg, var(--color-primary), var(--color-accent-cyan)) left / 42% 100% no-repeat,
+    rgba(245, 245, 245, 0.12);
   background-size: 28% 100%, 100% 100%;
   transition: background-size 420ms cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1199,7 +1218,7 @@
   inset: 0;
   z-index: 2;
   background:
-    linear-gradient(90deg, transparent, rgba(126, 227, 95, 0.16), transparent),
+    linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.16), transparent),
     repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 18px);
   opacity: 0.72;
   transform: translateX(-60%);
@@ -1242,7 +1261,7 @@
 .diagramOutcome {
   display: block;
   margin-top: 14px;
-  color: rgba(248, 243, 231, 0.84);
+  color: rgba(245, 245, 245, 0.84);
   font-size: 12px;
   line-height: 1.48;
   font-weight: 850;
@@ -1285,18 +1304,18 @@
   border-radius: 8px;
   padding: clamp(26px, 5vw, 58px);
   background:
-    linear-gradient(130deg, rgba(126, 227, 95, 0.11), transparent 34%),
-    rgba(248, 243, 231, 0.035);
+    linear-gradient(130deg, rgba(74, 222, 128, 0.11), transparent 34%),
+    rgba(245, 245, 245, 0.035);
   transition:
     border-color 220ms ease,
     background 220ms ease;
 }
 
 .investorPanel:hover {
-  border-color: rgba(126, 227, 95, 0.28);
+  border-color: rgba(74, 222, 128, 0.28);
   background:
-    linear-gradient(130deg, rgba(126, 227, 95, 0.14), transparent 38%),
-    rgba(248, 243, 231, 0.045);
+    linear-gradient(130deg, rgba(74, 222, 128, 0.14), transparent 38%),
+    rgba(245, 245, 245, 0.045);
 }
 
 .bulletLine {
@@ -1310,7 +1329,7 @@
   border: 1px solid var(--color-hairline);
   border-radius: 999px;
   padding: 8px 11px;
-  color: rgba(248, 243, 231, 0.76);
+  color: rgba(245, 245, 245, 0.76);
   font-size: 12px;
   font-weight: 800;
 }
@@ -1376,9 +1395,9 @@
   display: grid;
   place-items: center;
   background:
-    linear-gradient(125deg, rgba(126, 227, 95, 0.08), transparent 30%),
-    linear-gradient(305deg, rgba(109, 198, 217, 0.1), transparent 36%),
-    repeating-linear-gradient(115deg, rgba(248, 243, 231, 0.04) 0 1px, transparent 1px 24px),
+    linear-gradient(125deg, rgba(74, 222, 128, 0.08), transparent 30%),
+    linear-gradient(305deg, rgba(96, 165, 250, 0.1), transparent 36%),
+    repeating-linear-gradient(115deg, rgba(245, 245, 245, 0.04) 0 1px, transparent 1px 24px),
     #080b0a;
 }
 
@@ -1403,7 +1422,7 @@
 
 .diagramEdge {
   fill: none;
-  stroke: rgba(126, 227, 95, 0.35);
+  stroke: rgba(74, 222, 128, 0.35);
   stroke-width: 1.5;
   stroke-dasharray: 10 7;
   stroke-linecap: round;
@@ -1414,16 +1433,16 @@
 }
 
 .diagramEdge[data-dashed='true'] {
-  stroke: rgba(109, 198, 217, 0.3);
+  stroke: rgba(96, 165, 250, 0.3);
   stroke-dasharray: 4 3;
 }
 
 .architectureCard:hover .diagramEdge {
-  stroke: rgba(126, 227, 95, 0.55);
+  stroke: rgba(74, 222, 128, 0.55);
 }
 
 .architectureCard:hover .diagramEdge[data-dashed='true'] {
-  stroke: rgba(109, 198, 217, 0.45);
+  stroke: rgba(96, 165, 250, 0.45);
 }
 
 .motionEnabled .diagramEdge {
@@ -1440,7 +1459,7 @@
 }
 
 .diagramLabel {
-  fill: rgba(248, 243, 231, 0.72);
+  fill: rgba(245, 245, 245, 0.72);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -1567,13 +1586,13 @@
 
 @keyframes statusPulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(126, 227, 95, 0.28);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.28);
   }
   70% {
-    box-shadow: 0 0 0 11px rgba(126, 227, 95, 0);
+    box-shadow: 0 0 0 11px rgba(74, 222, 128, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(126, 227, 95, 0);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
   }
 }
 
@@ -1651,14 +1670,14 @@
     opacity: 0.46;
     transform: scale(0.86);
     box-shadow:
-      0 0 0 1px rgba(248, 243, 231, 0.16),
+      0 0 0 1px rgba(245, 245, 245, 0.16),
       0 0 18px rgba(var(--card-node-rgb), 0.18);
   }
   52% {
     opacity: 0.98;
     transform: scale(1.18);
     box-shadow:
-      0 0 0 1px rgba(248, 243, 231, 0.22),
+      0 0 0 1px rgba(245, 245, 245, 0.22),
       0 0 32px rgba(var(--card-node-rgb), 0.34);
   }
 }
@@ -1717,11 +1736,13 @@
 
 @media (max-width: 760px) {
   .localNav {
-    right: 12px;
-    bottom: calc(12px + env(safe-area-inset-bottom));
-    left: 12px;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
     max-width: none;
     transform: none;
+    margin: calc(70px + env(safe-area-inset-top)) 12px 0;
     overflow-x: auto;
     justify-content: flex-start;
     gap: 2px;
@@ -1761,7 +1782,7 @@
   }
 
   .hero {
-    padding-top: 76px;
+    padding-top: 32px;
     padding-bottom: 64px;
   }
 
@@ -1784,7 +1805,7 @@
   }
 
   .investor {
-    padding-bottom: calc(132px + env(safe-area-inset-bottom));
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
   }
 }
 

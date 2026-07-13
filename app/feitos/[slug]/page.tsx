@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import BrandSignature from '@/components/BrandSignature'
 import JsonLd from '@/components/JsonLd'
 import SwarmEffectsLoader from '@/components/SwarmEffectsLoader'
 import { feitos, getFeito, type Feito } from '../feitos-data'
@@ -158,6 +157,7 @@ function getFeitoSchemas(feito: Feito) {
   const workSchema = {
     '@context': 'https://schema.org',
     '@type': ['CreativeWork', 'Article'],
+    '@id': `${workUrl}#work`,
     headline: feito.title,
     name: feito.title,
     description: feito.lead,
@@ -186,30 +186,6 @@ function getFeitoSchemas(feito: Feito) {
   }
 
   return { workSchema, breadcrumbSchema }
-}
-
-function FeitoNav() {
-  return (
-    <nav className={styles.nav} aria-label="Navegacao de feitos">
-      <BrandSignature
-        href="/#top"
-        className={styles.brand}
-        ariaLabel="Voltar para pierrondi.dev"
-        subtitle="Proof System"
-      />
-      <div className={styles.navLinks}>
-        <Link href="/#themes">Temas</Link>
-        <Link href="/#feitos">Feitos</Link>
-        <a
-          href="https://br.linkedin.com/in/paulopierrondi"
-          target="_blank"
-          rel="noreferrer"
-        >
-          LinkedIn
-        </a>
-      </div>
-    </nav>
-  )
 }
 
 function FeitoHero({ feito }: { feito: Feito }) {
@@ -369,7 +345,6 @@ export default async function FeitoPage({ params }: Props) {
 
       <main className={styles.page} data-swarm-root>
         <SwarmEffectsLoader />
-        <FeitoNav />
         <FeitoHero feito={feito} />
         <FeitoProofSection feito={feito} />
         <FeitoWorkflowSection feito={feito} />

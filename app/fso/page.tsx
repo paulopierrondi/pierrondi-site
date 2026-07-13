@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Paulo Pierrondi' }],
   creator: 'Paulo Pierrondi',
   publisher: 'pierrondi.dev',
+  robots: { index: false, follow: false, nocache: true },
   alternates: { canonical: 'https://www.pierrondi.dev/fso' },
   openGraph: {
     title: TITLE,

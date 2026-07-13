@@ -46,12 +46,14 @@ const CANONICAL_REDIRECTS = [
   { source: '/app', destination: '/portfolio', permanent: true },
   { source: '/login', destination: '/crm/login', permanent: true },
   { source: '/sobre', destination: '/about', permanent: true },
+  { source: '/whypaulo', destination: '/about', permanent: true },
   { source: '/signup', destination: '/contato', permanent: true },
   { source: '/servicos', destination: '/atuacao', permanent: true },
   { source: '/services', destination: '/atuacao', permanent: true },
   { source: '/contact', destination: '/contato', permanent: true },
   { source: '/ai-search-portfolio', destination: '/ai-search', permanent: true },
   { source: '/en/ai-search-portfolio', destination: '/ai-search', permanent: true },
+  { source: '/en/ai-search', destination: '/ai-search', permanent: true },
   { source: '/sitemap_index.xml', destination: '/sitemap.xml', permanent: true },
   { source: '/sitemap-index.xml', destination: '/sitemap.xml', permanent: true },
   // App-slug aliases -> their App Store canonical slug (verified against each
@@ -78,7 +80,6 @@ const EN_LOCALE_SLUG_REDIRECTS = [
   { source: '/en/apps/:slug', destination: '/apps/:slug', permanent: true },
   { source: '/en/apps/:slug/:doc', destination: '/apps/:slug/:doc', permanent: true },
   { source: '/en/citations', destination: '/citations', permanent: true },
-  { source: '/en/portfolio', destination: '/portfolio', permanent: true },
   { source: '/en/crm', destination: '/crm', permanent: true },
   { source: '/en/crm/login', destination: '/crm/login', permanent: true },
 ]

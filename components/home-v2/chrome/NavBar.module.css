@@ -202,3 +202,27 @@
   }
 }
 
+@media (max-width: 359px) {
+  .nav {
+    gap: 8px;
+    padding-inline: 16px;
+  }
+
+  .logo {
+    font-size: 0.8125rem;
+  }
+
+  .right {
+    gap: 8px;
+  }
+
+  .langActive,
+  .langIdle {
+    padding-inline: 6px;
+  }
+
+  .menuButton {
+    width: 36px;
+    height: 36px;
+  }
+}

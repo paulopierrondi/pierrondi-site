@@ -79,6 +79,10 @@
   --font-display: var(--font-display), "Space Grotesk", system-ui, sans-serif;
   --font-body: var(--font-body), "Inter", system-ui, sans-serif;
   --font-mono: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
+  /* Alias: several legacy components reference --font-system directly
+     (pre-dating the --font-display/--font-body split) and were silently
+     falling back to the browser default with no definition at all. */
+  --font-system: var(--font-display);
 
   /* ── Spacing ── */
   --space-xxs:     4px;

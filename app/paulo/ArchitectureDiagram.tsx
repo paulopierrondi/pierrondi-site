@@ -34,9 +34,9 @@ interface ArchitectureDiagramProps {
 }
 
 const colorMap: Record<NodeColor, string> = {
-  green: '#7ee35f',
-  cyan: '#6dc6d9',
-  brass: '#d8b45f',
+  green: 'var(--color-primary)',
+  cyan: 'var(--color-accent-cyan)',
+  brass: 'var(--color-accent-gold)',
 }
 
 export default function ArchitectureDiagram({
@@ -172,7 +172,7 @@ export default function ArchitectureDiagram({
                 cx={node.x}
                 cy={node.y}
                 r="3"
-                fill="#fff"
+                fill="var(--color-ink)"
                 opacity="0.7"
               />
               <text

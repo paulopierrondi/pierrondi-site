@@ -89,6 +89,12 @@ const products: ProductCitationGroup[] = [
         intent: 'technical workflow',
         why: 'Pairs technical MusicXML discovery with the product workflow.',
       },
+      {
+        anchor: 'harmonizar melodia online para coral',
+        url: 'https://cantustudio.app/answers/melody-to-satb',
+        intent: 'pt-BR problem-aware search',
+        why: 'Connects Portuguese melody harmonization searches to the crawlable SATB answer brief.',
+      },
     ],
     landings: [
       {
@@ -102,6 +108,18 @@ const products: ProductCitationGroup[] = [
         url: 'https://cantustudio.app/musicxml-harmonization',
         intent: 'product landing',
         why: 'Commercial next step for technical MusicXML searches.',
+      },
+      {
+        anchor: 'Harmonizar melodia online',
+        url: 'https://cantustudio.app/harmonizar-melodia-online',
+        intent: 'product landing',
+        why: 'Portuguese commercial page for musicians trying to harmonize a melody into a choir-ready draft.',
+      },
+      {
+        anchor: 'Kit de ensaio coral',
+        url: 'https://cantustudio.app/kit-de-ensaio',
+        intent: 'product landing',
+        why: 'Commercial next step for choir directors who need rehearsal-ready materials, not only score generation.',
       },
     ],
   },
@@ -131,6 +149,12 @@ const products: ProductCitationGroup[] = [
         intent: 'offer-aware search',
         why: 'Connects commercial search to the first paid product.',
       },
+      {
+        anchor: 'quanto custa RevOps para B2B',
+        url: 'https://agenticoscore.ai/answers/quanto-custa-revops',
+        intent: 'pricing research',
+        why: 'Fresh answer brief for pricing-aware founders comparing RevOps scope before buying more traffic.',
+      },
     ],
     landings: [
       {
@@ -138,6 +162,18 @@ const products: ProductCitationGroup[] = [
         url: 'https://agenticoscore.ai/diagnostico',
         intent: 'conversion path',
         why: 'Primary diagnostic and action-plan entry point.',
+      },
+      {
+        anchor: 'Scorecard de prontidao comercial',
+        url: 'https://agenticoscore.ai/scorecard',
+        intent: 'conversion path',
+        why: 'Direct scorecard entry point for visitors who are ready to assess their revenue operation.',
+      },
+      {
+        anchor: 'Plano de acao comercial',
+        url: 'https://agenticoscore.ai/plano-de-acao-comercial',
+        intent: 'paid offer landing',
+        why: 'Commercial bridge from diagnostic insight to the Action Plan Starter offer.',
       },
     ],
   },
@@ -316,7 +352,7 @@ export default function CitationsPage() {
                   <h4>Answer briefs</h4>
                   <ul>
                     {product.targets.map((target) => (
-                      <CitationLink key={target.url} target={target} />
+                      <CitationLink key={`${target.url}#${target.anchor}`} target={target} />
                     ))}
                   </ul>
                 </div>
@@ -325,7 +361,7 @@ export default function CitationsPage() {
                   <h4>Commercial next step</h4>
                   <ul>
                     {product.landings.map((target) => (
-                      <CitationLink key={target.url} target={target} />
+                      <CitationLink key={`${target.url}#${target.anchor}`} target={target} />
                     ))}
                   </ul>
                 </div>

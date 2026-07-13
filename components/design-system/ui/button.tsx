@@ -3,10 +3,10 @@ import { cn } from "@/lib/utils";
 
 const buttonVariants = {
   variant: {
-    default: "bg-primary text-white hover:bg-primary-active",
+    default: "bg-primary text-on-primary hover:bg-primary-active",
     outline: "border border-hairline bg-transparent text-ink hover:bg-surface-hover",
     ghost: "text-body hover:text-ink hover:bg-surface-hover",
-    lime: "bg-[#c8ff2e] text-[#030303] hover:brightness-110",
+    lime: "bg-primary text-on-primary hover:bg-primary-active",
   },
   size: {
     default: "h-9 px-4 py-2",

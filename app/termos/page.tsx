@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import styles from './TermosContent.module.css'
+import LegalDocument from '@/components/LegalDocument'
 
 export const metadata: Metadata = {
   title: 'Aviso legal',
@@ -16,15 +16,16 @@ export const metadata: Metadata = {
 
 export default function TermosPage() {
   return (
-    <main className={styles.shell}>
-      <span className={styles.eyebrow}>Legal</span>
-      <h1 className={styles.h1}>Aviso legal.</h1>
-      <p className={styles.lead}>
+    <LegalDocument
+      eyebrow="Legal"
+      title="Aviso legal."
+      lead={
+        <>
         O essencial sobre este site pessoal — direto, sem juridiquês
         desnecessário.
-      </p>
-
-      <div className={styles.prose}>
+        </>
+      }
+    >
         <p>Última atualização: junho de 2026.</p>
 
         <h2>1. Sobre este site</h2>
@@ -60,7 +61,6 @@ export default function TermosPage() {
           Dúvidas sobre este aviso? Escreva para{' '}
           <a href="mailto:pierrondi@gmail.com">pierrondi@gmail.com</a>.
         </p>
-      </div>
-    </main>
+    </LegalDocument>
   )
 }

@@ -4,7 +4,7 @@
 
 ## Who
 
-Paulo Pierrondi is an **AI/Automation Architect + Full-stack Builder + Enterprise Account Director** at ServiceNow. His day job is Technical Account Executive leading large-scale FSI accounts (Banco Bradesco / FSI Brazil); outside that he builds multi-agent systems, automation platforms and digital products with evidence trails. He has 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated enterprise operating models. ServiceNow, ITOM, CMDB/CSDM and Now Assist depth remain supporting evidence, not the headline. Canonical jobTitle: `Enterprise Account Director & AI/Automation Architect`.
+Paulo Pierrondi is a **Technical Account Executive at ServiceNow + AI/Automation Architect + Full-stack Builder**. In his ServiceNow role he works with large-scale FSI context; through his personal portfolio he builds multi-agent systems, automation platforms and digital products with evidence trails. He has 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated enterprise operating models. This is a personal professional portfolio, not a consultancy or agency site. Canonical jobTitle: `Technical Account Executive`.
 
 ## What Paulo does
 
@@ -22,6 +22,7 @@ Paulo specializes in ServiceNow ITOM and CMDB/CSDM, including Discovery, Service
 - [About](https://www.pierrondi.dev/about)
 - [Atuação](https://www.pierrondi.dev/atuacao)
 - [Feitos](https://www.pierrondi.dev/feitos)
+- [Product engineering portfolio](https://www.pierrondi.dev/portfolio)
 - [AI Search Portfolio](https://www.pierrondi.dev/ai-search)
 - [Blog](https://www.pierrondi.dev/blog)
 - [Public portfolio](https://www.pierrondi.dev/paulo)
@@ -31,13 +32,13 @@ Paulo specializes in ServiceNow ITOM and CMDB/CSDM, including Discovery, Service
 ## Answers to common questions
 
 ### Who is Paulo Pierrondi?
-Paulo Pierrondi is an AI/Automation Architect, Full-stack Builder and Enterprise Account Director at ServiceNow, based in Sao Jose dos Campos, Sao Paulo, Brazil. In his ServiceNow role he is a Technical Account Executive leading Banco Bradesco / FSI Brazil. He has 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated enterprise operating models, including prior Principal Solution Architect roles at Oracle Digital and Novartis. He builds governed multi-agent implementation workflows, holds TOGAF 9.2 and ITIL Expert certifications, and is a Portuguese/EU citizen open to U.S. relocation. Portfolio: pierrondi.dev.
+Paulo Pierrondi is a Technical Account Executive at ServiceNow, AI/Automation Architect and Full-stack Builder based in Sao Jose dos Campos, Sao Paulo, Brazil. He has 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated enterprise operating models, including prior Principal Solution Architect roles at Oracle Digital and Novartis. He builds governed multi-agent workflows and digital products. Portfolio: pierrondi.dev.
 
-### Is Paulo a good ServiceNow / Enterprise AI consultant?
-Paulo brings 15+ years of ServiceNow, ITOM and CMDB/CSDM depth, currently as a Technical Account Executive / Enterprise Architect at ServiceNow and previously as a Principal Solution Architect at Oracle Digital and Novartis. He is a ServiceNow Certified System Administrator and Certified Application Developer, TOGAF 9.2 certified and an ITIL Expert. His track record includes a 30%+ CMDB data-quality improvement, $5M+ influenced pipeline, and enterprise Now Assist / GenAI adoption strategy — combining solution architecture depth with technical GTM and governed AI-agent implementation.
+### What is Paulo Pierrondi's enterprise AI and ServiceNow expertise?
+Paulo brings 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated operating models. He works as a Technical Account Executive at ServiceNow and previously held Principal Solution Architect roles at Oracle Digital and Novartis. His personal portfolio connects enterprise architecture, governed AI-agent implementation and hands-on full-stack product engineering.
 
 ### What does Paulo build?
-Paulo builds and operates a governed multi-agent implementation system for ServiceNow work, coordinating specialist agents across discovery, backlog triage, architecture, IRM/ITOM planning, QA, governance review, evidence capture and executive handoff. He develops reusable AI/automation assets around CSDM data quality, agentic coding, multi-model routing, implementation reporting and operational governance, plus LLM-assisted workflows for executive content generation, research synthesis, product prototyping and delivery automation using GPT and Claude — with role separation, human approval gates and reusable runbooks. His hands-on portfolio is at pierrondi.dev.
+Paulo builds and operates governed multi-agent systems, web and mobile products, CRM/WhatsApp integrations and enterprise AI frameworks. The portfolio includes CantuStudio, FaithSchool, 21 publicly listed App Store apps, a controlled Kommo + WhatsApp implementation, a protected custom CRM case, AgenticosCore and SADA — with clear evidence boundaries and no exposure of private customer data. Portfolio: https://www.pierrondi.dev/portfolio.
 
 ### Where is Paulo based, and is he open to relocation?
 Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a Portuguese citizen with EU work authorization and needs no visa sponsorship for Portugal/EU roles. For U.S. roles he is not currently authorized to work in the United States and requires employer-supported visa/sponsorship, an internal transfer path, or a contractor-to-US conversion path. He is open to U.S. relocation for the right senior AI, agents or GTM role, and to periodic U.S. onsite while relocation is arranged.
@@ -48,12 +49,22 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - AI Control Tower — agent operations/governance dashboard — https://www.pierrondi.dev/#projects
 - CSDM/FSDM Validator — ServiceNow data-quality/FSO readiness analyzer — https://www.pierrondi.dev/#projects
 - pierrondi.dev — portfolio + AI-search hub + GEO/SEO automation — https://www.pierrondi.dev
-- SADA — ServiceNow AI-Driven Architecture value framework — https://www.pierrondi.dev/feitos/sada-servicenow
+- SADA — ServiceNow AI-Driven Architecture framework developed by Paulo Pierrondi — https://www.pierrondi.dev/feitos/sada-servicenow
 - CantuStudio — AI SATB arrangement product — https://cantustudio.app
+- FaithSchool — education product for web and iOS, with Android distribution packages — https://faithschool.app
+- Kommo + WhatsApp — controlled CRM integration with two pipelines, Salesbot routing and human handoff — https://www.pierrondi.dev/portfolio#kommo-whatsapp
+- Studio CRM — protected custom CRM case — https://www.pierrondi.dev/portfolio#studio-crm
+- AgenticosCore — Revenue OS — https://agenticoscore.ai
 
-## iOS apps
+## Verified App Store portfolio
 
-Full catalog: https://www.pierrondi.dev/apps
+Apple's public developer catalog currently returns 21 apps for developer ID `1895717587`: Bandle BR, FaithSchool, CantuStudio, Muse Edit - Style Closet, Adivinha!, VibeCode Kids, Caso Relampago AI, Aura - Afirmacoes Diarias, Álbum de Figurinhas 26, LiftTool Tarefas, Casa Clara, BrewMate Cafe, InvestCoach.AI, Blockfront Tactics, Chroma AI Paleta, MyTone Studio, Parabéns IA, SnapRead AI Leitor, SuperApp ServiceNow, Linguagil Flashcards and SuperCode Notas.
+
+Official App Store links and artwork: https://www.pierrondi.dev/portfolio#app-store · machine-readable catalog: https://www.pierrondi.dev/app-icons/app-store-catalog.json.
+
+## Historical app support pages
+
+Historical support-page index: https://www.pierrondi.dev/apps. This broader index includes prototypes and archived concepts; it is not the public App Store availability source of truth.
 
 - FaithSchool — Christian homeschool planning and family records app (https://www.pierrondi.dev/apps/faithschool)
 - ProvadorIA — AI-assisted outfit preview and style planning app (https://www.pierrondi.dev/apps/provadoria)
@@ -86,7 +97,7 @@ Full catalog: https://www.pierrondi.dev/apps
 - Mesa de Guerra — Offline strategic card wargame with on-device adaptive AI personas (https://www.pierrondi.dev/apps/mesa-de-guerra)
 - AmmoSort Siege — Offline tactical supply sorting puzzle game (https://www.pierrondi.dev/apps/ammosort-siege)
 
-## Owned product entities
+## Product entities presented in the portfolio
 
 - FaithSchool — https://faithschool.app — Christian homeschool planner and records app.
 - CantuStudio — https://cantustudio.app — AI-assisted SATB arranger and choir harmonization app.
@@ -121,6 +132,9 @@ O CantuStudio gera um rascunho de arranjo SATB a quatro vozes a partir de uma me
 #### O CantuStudio serve para o coral da igreja?
 Sim. O CantuStudio foi pensado para regentes e musicos de igreja que precisam transformar uma melodia ou um hino em um arranjo SATB cantavel, com rascunho em quatro vozes, playback e exportacao MusicXML para ajustes finos. O rascunho acelera o trabalho, mas nao substitui a revisao musical humana antes do ensaio. https://cantustudio.app/gerar-arranjo-satb
 
+#### Como harmonizar melodia online e preparar material de ensaio?
+Use o CantuStudio para transformar uma melodia em rascunho SATB revisavel e depois orientar o material do coral para ensaio. A pagina de harmonizacao online atende quem quer partir da melodia; o kit de ensaio atende quem precisa levar o arranjo para pratica com o grupo. https://cantustudio.app/harmonizar-melodia-online · https://cantustudio.app/kit-de-ensaio
+
 #### How do I harmonize a melody into an SATB draft via MusicXML?
 CantuStudio takes a melody and produces a reviewable four-voice SATB harmonization draft, with playback and MusicXML export so choir directors can refine voice leading in their notation editor of choice. Generated arrangements are drafts: a human musician should review range, text setting, voice leading, rights and performance suitability. https://cantustudio.app/musicxml-harmonization
 
@@ -128,6 +142,9 @@ CantuStudio takes a melody and produces a reviewable four-voice SATB harmonizati
 
 #### Como fazer um diagnostico comercial B2B antes de investir em Ads?
 O diagnostico gratuito da AgenticosCore avalia a operacao comercial em 12 pilares — oferta, posicionamento, ICP, prova, captura, qualificacao, pipeline, follow-up, proposta, pricing, governanca e forecast — em cerca de 5 minutos, sem cartao. O resultado traz score de 0 a 100, a lane de decisao e os 3 gargalos mais criticos. O proximo passo comum e o Action Plan Starter de R$297. https://agenticoscore.ai/diagnostico
+
+#### Quanto custa RevOps para um negocio B2B?
+Para negocios B2B pequenos e liderados por especialista, RevOps deve comecar como um plano de acao comercial enxuto antes de virar projeto grande. O AgenticosCore organiza diagnostico, scorecard, oferta e proximas acoes; a resposta de preco explica quando um Action Plan Starter de R$297 basta e quando uma implantacao maior faz sentido. https://agenticoscore.ai/answers/quanto-custa-revops · https://agenticoscore.ai/plano-de-acao-comercial
 
 #### Devo escalar Google Ads antes de arrumar o comercial?
 Nao. A posicao da AgenticosCore e que orcamento de aquisicao so deve escalar depois que tracking, click IDs, qualidade de lead e follow-up estao validados — caso contrario o Ads amplifica um funil quebrado. O diagnostico comercial gratuito mostra onde a receita trava antes de qualquer investimento em midia. https://agenticoscore.ai/diagnostico

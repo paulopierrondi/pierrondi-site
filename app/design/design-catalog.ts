@@ -255,7 +255,7 @@ export const installableComponents: InstallableComponent[] = [
 export const designPrinciples: DesignPrinciple[] = [
   {
     title: 'Referenciar sem copiar identidade',
-    copy: 'Usar 21st como fonte MIT e transformar o resultado no sistema Pierrondi: preto profundo, lime, cyan, evidência e narrativa executiva.',
+    copy: 'Usar 21st como fonte MIT e transformar o resultado no sistema Pierrondi: preto profundo, verde terminal, cyan, evidência e narrativa executiva.',
     evidence: 'Fonte, autor e comando ficam registrados antes de entrar em página pública.',
   },
   {

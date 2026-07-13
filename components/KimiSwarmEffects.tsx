@@ -227,9 +227,9 @@ export default function KimiSwarmEffects() {
         const lifeRatio = 1 - particle.life / particle.maxLife
         context.beginPath()
         context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-        context.fillStyle = `rgba(200,255,46,${particle.opacity * lifeRatio})`
+        context.fillStyle = `rgba(74,222,128,${particle.opacity * lifeRatio})`
         context.shadowBlur = 18
-        context.shadowColor = 'rgba(200,255,46,0.46)'
+        context.shadowColor = 'rgba(74,222,128,0.46)'
         context.fill()
       }
 

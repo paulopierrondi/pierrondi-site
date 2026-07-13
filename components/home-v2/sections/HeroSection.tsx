@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
-import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
+import { motion, useInView, type Variants } from 'framer-motion'
+import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import { ArrowDown } from 'lucide-react'
 import { COPY } from '../copy'
 import type { SectionProps } from '../types'
@@ -22,7 +23,7 @@ export default function HeroSection({ lang }: SectionProps) {
   const hero = COPY[lang].hero
   const rootRef = useRef<HTMLDivElement>(null)
   const inView = useInView(rootRef, { margin: '-20% 0px', once: false })
-  const reducedMotion = useReducedMotion()
+  const reducedMotion = useHydratedReducedMotion()
 
   // Typewriter for headline line 2. Initial state is the FULL string so the
   // server-rendered HTML always contains the complete headline (SEO). The

@@ -23,7 +23,7 @@ function answerSlugSets(text) {
   return sets
 }
 
-test('pierrondi GEO files expose the owned product graph', () => {
+test('pierrondi GEO files expose the product portfolio graph', () => {
   for (const product of ['FaithSchool', 'CantuStudio', 'AgenticosCore']) {
     assert.match(llmsText, new RegExp(product))
     assert.match(JSON.stringify(answersJson), new RegExp(product))
@@ -33,6 +33,16 @@ test('pierrondi GEO files expose the owned product graph', () => {
   assert.equal(answersJson.primaryHub, 'https://www.pierrondi.dev/ai-search')
   assert.ok(answersJson.answerDocs.length >= 10)
   assert.ok(answersJson.ownedSiteGraph.length >= 3)
+})
+
+test('machine-readable portfolio matches the verified 21-app App Store catalog', () => {
+  assert.equal(answersJson.appStorePortfolio.developerId, '1895717587')
+  assert.equal(answersJson.appStorePortfolio.verifiedCount, 21)
+  assert.equal(answersJson.appsPortfolio.length, 21)
+  assert.ok(answersJson.appsPortfolio.every((app) => app.appStoreUrl && app.image))
+  assert.match(llmsText, /21 apps/)
+  assert.match(llmsFullText, /21 apps/)
+  assert.match(geoText, /21 apps/)
 })
 
 test('public GEO files advertise /ai-search as the canonical hub', () => {

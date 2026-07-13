@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import PageHeader from '@/components/PageHeader'
 import FeitosIndexContent from '@/app/feitos/FeitosIndexContent'
 
 export const metadata: Metadata = {
@@ -20,19 +19,10 @@ export const metadata: Metadata = {
     siteName: 'pierrondi.dev',
     type: 'website',
     locale: 'en_US',
+    images: [{ url: '/og', width: 1200, height: 630, alt: 'Paulo Pierrondi — Work Index' }],
   },
 }
 
 export default function FeitosEnPage() {
-  return (
-    <>
-      <PageHeader
-        eyebrow="WORK INDEX"
-        title={<>Not a portfolio. <span className="text-primary">These are systems.</span></>}
-        lead="Applied enterprise systems without client names or confidential metrics. What matters is architecture, governance, and an evidence trail."
-        chips={['SADA', 'AgentOps', 'LLMOps', 'Execution OS']}
-      />
-      <FeitosIndexContent lang="en" />
-    </>
-  )
+  return <FeitosIndexContent lang="en" />
 }

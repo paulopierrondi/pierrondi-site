@@ -1,7 +1,8 @@
 'use client'
 
 import { useRef, useEffect, useState, useMemo } from 'react'
-import { motion, useInView, useReducedMotion, animate, type Variants } from 'framer-motion'
+import { motion, useInView, animate, type Variants } from 'framer-motion'
+import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import { SectionProps } from '../types'
 import { COPY } from '../copy'
 import styles from './AboutSection.module.css'
@@ -97,7 +98,7 @@ function TestimonialAvatar({ name }: { name: string }) {
 export default function AboutSection({ lang }: SectionProps) {
   const ref = useRef<HTMLElement>(null)
   const statsRef = useRef<HTMLDListElement>(null)
-  const reducedMotion = useReducedMotion() ?? false
+  const reducedMotion = useHydratedReducedMotion()
   const isInView = useInView(ref, { margin: '-20% 0px', once: false })
   const statsInView = useInView(statsRef, { margin: '-10% 0px', once: false })
 

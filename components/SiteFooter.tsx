@@ -3,8 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { getCurrentLanguage, type HomeLang } from '@/lib/i18n/site-language'
-import { isImmersiveHomeRoute } from '@/components/home-v2/immersive-routes'
-import SiteLogo from './SiteLogo'
+import { isImmersiveHomeRoute, usesOwnAppChrome } from '@/components/home-v2/immersive-routes'
 import styles from './SiteFooter.module.css'
 
 const currentYear = new Date().getFullYear()
@@ -121,7 +120,7 @@ export default function SiteFooter() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  if (isImmersiveHomeRoute(pathname)) return null
+  if (isImmersiveHomeRoute(pathname) || usesOwnAppChrome(pathname)) return null
 
   return (
     <footer className={styles.footer}>
@@ -198,10 +197,9 @@ export default function SiteFooter() {
         <div className={styles.bottom}>
           <div className={styles.brandNote}>
             <Link href={copy.brandHref} className={styles.brand} aria-label="Pierrondi.dev">
-              <SiteLogo size={24} />
-              <span className={styles.brandName}>
-                Pierrondi<span className={styles.brandDot}>.</span>
-              </span>
+              <span className={styles.brandBracket}>&lt;</span>
+              <span className={styles.brandName}>pierrondi.dev</span>
+              <span className={styles.brandBracket}>/&gt;</span>
             </Link>
             <p className={styles.note}>{copy.note}</p>
           </div>

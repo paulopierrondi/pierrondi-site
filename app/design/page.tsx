@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import BrandSignature from '@/components/BrandSignature'
 import SwarmEffectsLoader from '@/components/SwarmEffectsLoader'
 import {
   ArrowUpRight,
@@ -53,23 +51,11 @@ export default function DesignVaultPage() {
   return (
     <main className={styles.page} data-swarm-root>
       <SwarmEffectsLoader />
-      <nav className={styles.nav} aria-label="Navegação do Design Vault">
-        <BrandSignature href="/" className={styles.brand} ariaLabel="Voltar para pierrondi.dev" subtitle="Design Vault" />
-        <div className={styles.navLinks}>
-          <a href="#catalogo">Catálogo</a>
-          <Link href="/design/library">Library</Link>
-          <a href="#componentes">Componentes</a>
-          <a href="#operacao">Operação</a>
-          <a href="https://21st.dev/community/components" target="_blank" rel="noreferrer">
-            21st <ArrowUpRight aria-hidden="true" />
-          </a>
-        </div>
-      </nav>
 
       <section className={styles.hero} aria-labelledby="design-title">
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow}>Design Vault / pierrondi.dev</p>
-          <h1 id="design-title">Componentes, patterns e referências prontos para virar trabalho real.</h1>
+          <h1 id="design-title">Design systems que viram trabalho real.</h1>
           <p className={styles.heroText}>
             Um ponto único para consultar 21st.dev, instalar componentes MIT, remixar no sistema visual Pierrondi e
             acelerar páginas, produtos, propostas e portfólios.

@@ -68,6 +68,8 @@ const KNOWN_ASSET_PROBE_PATHS = [
   /^\/+(?:[^/?#]+\/)*(?:debug|error|laravel|npm|yarn|storage)(?:[._-]?\d*)?\.log$/i,
 ]
 const BENIGN_MONITOR_PROBE_PATHS = [
+  /^\/+\.well-known\/traffic-advice$/i,
+  /^\/+ads\.txt$/i,
   /^\/+app-ads\.txt$/i,
   /^\/+apps\/definitely-not-a-real-app(?:-[a-z0-9-]+)?$/i,
 ]
@@ -563,6 +565,7 @@ function formatIntentSnapshot(intent) {
 function summarize(source) {
   const result = runSource(source)
   const rows = result.lines.map((line) => normalize(source, line)).filter(Boolean)
+  const sampleLimitReached = result.ok && rows.length >= limit
   const tracker = createSummaryTracker()
   for (const row of rows) recordRow(tracker, source, row)
   const intent = buildIntentSnapshot(tracker)
@@ -575,6 +578,12 @@ function summarize(source) {
     error: result.ok ? null : result.error,
     window: { since, limit },
     requests: rows.length,
+    sample: {
+      truncated: sampleLimitReached,
+      note: sampleLimitReached
+        ? `Provider returned the configured limit (${limit}); request counts and unique estimates are lower bounds for this source.`
+        : 'Provider returned fewer rows than the configured limit; no truncation signal was observed.',
+    },
     estimatedUniqueIps: tracker.unique.size || null,
     statuses: Object.fromEntries([...tracker.statuses.entries()].sort()),
     botRequests: tracker.botRequests,
@@ -1175,6 +1184,7 @@ function buildActionBoard(sources, analyticsSources) {
       aiCrawlerRequests: sources.reduce((sum, source) => sum + source.aiCrawlerRequests, 0),
       actionableErrors: sources.reduce((sum, source) => sum + (source.intent?.actionableErrorCount || 0), 0),
       knownNoiseErrors: sources.reduce((sum, source) => sum + (source.intent?.knownNoiseErrorCount || 0), 0),
+      sampledSources: sources.filter((source) => source.sample?.truncated).length,
       providerLogFailures: sources.filter((source) => !source.ok).length,
       blockedAnalyticsItems: analyticsItems.length,
     },
@@ -1200,6 +1210,7 @@ function operationStats(report) {
     aiCrawlerRequests: summary.aiCrawlerRequests,
     actionableErrors: summary.actionableErrors,
     knownNoiseErrors: summary.knownNoiseErrors,
+    sampledSources: summary.sampledSources,
     providerLogFailures: summary.providerLogFailures,
     blockedAnalyticsItems: summary.blockedAnalyticsItems,
   }

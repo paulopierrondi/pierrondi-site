@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { trackEvent } from '@/lib/analytics'
 import styles from './Contato.module.css'
 
 interface Labels {
@@ -37,12 +38,15 @@ export default function ContatoForm({ labels }: { labels: Labels }) {
       })
       if (res.ok) {
         setStatus('ok')
+        trackEvent('Contact_Form_Submitted', { form: 'contato_page' })
         form.reset()
       } else {
         setStatus('error')
+        trackEvent('Contact_Form_Error', { form: 'contato_page', status: res.status })
       }
     } catch {
       setStatus('error')
+      trackEvent('Contact_Form_Error', { form: 'contato_page', status: 'network' })
     }
   }
 

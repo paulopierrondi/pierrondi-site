@@ -11,10 +11,10 @@ const switcherSource = await readFile(
   'utf8',
 )
 
-test('global language picker is compact and does not use the old blocky neon treatment', () => {
-  assert.match(switcherCss, /border-radius:\s*999px/)
+test('global language picker shares the terminal chrome without using the old neon treatment', () => {
+  assert.match(switcherCss, /border-radius:\s*4px/)
   assert.match(switcherCss, /safe-area-inset-top/)
-  assert.match(switcherCss, /--language-active/)
+  assert.match(switcherCss, /--language-active:\s*var\(--color-primary\)/)
   assert.match(switcherCss, /\.switcher\.withTopNav/)
   assert.match(switcherSource, /hasTopNav/)
   assert.doesNotMatch(switcherCss, /minmax\(38px,\s*1fr\)/)

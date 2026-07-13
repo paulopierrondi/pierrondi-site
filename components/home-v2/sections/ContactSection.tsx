@@ -1,9 +1,11 @@
 'use client'
 
 import { useState, useRef, useCallback } from 'react'
-import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
+import { motion, useInView, type Variants } from 'framer-motion'
+import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import { COPY } from '../copy'
 import type { SectionProps } from '../types'
+import { trackEvent } from '@/lib/analytics'
 import styles from './ContactSection.module.css'
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
@@ -11,7 +13,7 @@ type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
 export default function ContactSection({ lang }: SectionProps) {
   const copy = COPY[lang].contact
   const containerRef = useRef<HTMLElement>(null)
-  const prefersReducedMotion = useReducedMotion()
+  const prefersReducedMotion = useHydratedReducedMotion()
   const isInView = useInView(containerRef, { margin: '-20% 0px', once: false })
 
   const [formStatus, setFormStatus] = useState<FormStatus>('idle')
@@ -66,12 +68,14 @@ export default function ContactSection({ lang }: SectionProps) {
         }
 
         setFormStatus('success')
+        trackEvent('Contact_Form_Submitted', { form: 'home_v2', language: lang })
         form.reset()
       } catch {
         setFormStatus('error')
+        trackEvent('Contact_Form_Error', { form: 'home_v2', language: lang })
       }
     },
-    [formStatus]
+    [formStatus, lang]
   )
 
   const statusIcon = formStatus === 'success' ? '$' : '>'

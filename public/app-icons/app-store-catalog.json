@@ -1,0 +1,217 @@
+{
+  "developerId": "1895717587",
+  "storefront": "br",
+  "count": 21,
+  "apps": [
+    {
+      "slug": "bandle-br",
+      "name": "Bandle BR",
+      "trackId": "6769621331",
+      "bundleId": "com.bandlebr.app",
+      "version": "1.0",
+      "category": "Games",
+      "url": "https://apps.apple.com/br/app/bandle-br/id6769621331?uo=4",
+      "icon": "/app-icons/bandle-br.jpg"
+    },
+    {
+      "slug": "faithschool",
+      "name": "FaithSchool",
+      "trackId": "6764325629",
+      "bundleId": "com.faithschool.app",
+      "version": "2.5.6",
+      "category": "Education",
+      "url": "https://apps.apple.com/br/app/faithschool/id6764325629?uo=4",
+      "icon": "/app-icons/faithschool.jpg"
+    },
+    {
+      "slug": "cantustudio-app",
+      "name": "CantuStudio",
+      "trackId": "6764287847",
+      "bundleId": "com.cantustudio.app",
+      "version": "2.0.11",
+      "category": "Music",
+      "url": "https://apps.apple.com/br/app/cantustudio/id6764287847?uo=4",
+      "icon": "/app-icons/cantustudio-app.jpg"
+    },
+    {
+      "slug": "muse-edit",
+      "name": "Muse Edit - Style Closet",
+      "trackId": "6764715502",
+      "bundleId": "com.agentcore.fashionstylist",
+      "version": "2.0.6",
+      "category": "Lifestyle",
+      "url": "https://apps.apple.com/br/app/muse-edit-style-closet/id6764715502?uo=4",
+      "icon": "/app-icons/muse-edit.jpg"
+    },
+    {
+      "slug": "adivinha",
+      "name": "Adivinha!",
+      "trackId": "6769732268",
+      "bundleId": "br.com.adivinha.app",
+      "version": "1.0",
+      "category": "Games",
+      "url": "https://apps.apple.com/br/app/adivinha/id6769732268?uo=4",
+      "icon": "/app-icons/adivinha.jpg"
+    },
+    {
+      "slug": "vibecode-kids",
+      "name": "VibeCode Kids",
+      "trackId": "6773483083",
+      "bundleId": "com.pierrondi.vibecodekids",
+      "version": "1.0.2",
+      "category": "Education",
+      "url": "https://apps.apple.com/br/app/vibecode-kids/id6773483083?uo=4",
+      "icon": "/app-icons/vibecode-kids.jpg"
+    },
+    {
+      "slug": "caso-relampago-ai",
+      "name": "Caso Relampago AI",
+      "trackId": "6772540994",
+      "bundleId": "com.pierrondi.casorelampagoai",
+      "version": "1.0.1",
+      "category": "Games",
+      "url": "https://apps.apple.com/br/app/caso-relampago-ai/id6772540994?uo=4",
+      "icon": "/app-icons/caso-relampago-ai.jpg"
+    },
+    {
+      "slug": "aura-afirmacoes",
+      "name": "Aura - Afirmacoes Diarias",
+      "trackId": "6769853592",
+      "bundleId": "com.auraappbr.app",
+      "version": "1.0",
+      "category": "Lifestyle",
+      "url": "https://apps.apple.com/br/app/aura-afirmacoes-diarias/id6769853592?uo=4",
+      "icon": "/app-icons/aura-afirmacoes.jpg"
+    },
+    {
+      "slug": "album-figurinhas-26",
+      "name": "Álbum de Figurinhas 26",
+      "trackId": "6782724792",
+      "bundleId": "dev.pierrondi.figurinhas",
+      "version": "1.0.2",
+      "category": "Entertainment",
+      "url": "https://apps.apple.com/br/app/%C3%A1lbum-de-figurinhas-26/id6782724792?uo=4",
+      "icon": "/app-icons/album-figurinhas-26.jpg"
+    },
+    {
+      "slug": "lifttool-002",
+      "name": "LiftTool Tarefas",
+      "trackId": "6772552531",
+      "bundleId": "com.pierrondi.lifttool-002",
+      "version": "1.0.1",
+      "category": "Productivity",
+      "url": "https://apps.apple.com/br/app/lifttool-tarefas/id6772552531?uo=4",
+      "icon": "/app-icons/lifttool-002.jpg"
+    },
+    {
+      "slug": "casa-clara",
+      "name": "Casa Clara",
+      "trackId": "6767297661",
+      "bundleId": "com.paulopierrondi.specialapp",
+      "version": "1.0",
+      "category": "Productivity",
+      "url": "https://apps.apple.com/br/app/casa-clara/id6767297661?uo=4",
+      "icon": "/app-icons/casa-clara.jpg"
+    },
+    {
+      "slug": "brewmate",
+      "name": "BrewMate Cafe",
+      "trackId": "6772517662",
+      "bundleId": "com.pierrondi.brewmate",
+      "version": "1.0.1",
+      "category": "Food & Drink",
+      "url": "https://apps.apple.com/br/app/brewmate-cafe/id6772517662?uo=4",
+      "icon": "/app-icons/brewmate.jpg"
+    },
+    {
+      "slug": "investcoach",
+      "name": "InvestCoach.AI",
+      "trackId": "6764355044",
+      "bundleId": "com.wealthman.investcoach",
+      "version": "1.0.3",
+      "category": "Finance",
+      "url": "https://apps.apple.com/br/app/investcoach-ai/id6764355044?uo=4",
+      "icon": "/app-icons/investcoach.jpg"
+    },
+    {
+      "slug": "blockfront-tactics",
+      "name": "Blockfront Tactics",
+      "trackId": "6772747511",
+      "bundleId": "com.pierrondi.blockfronttactics",
+      "version": "1.0",
+      "category": "Games",
+      "url": "https://apps.apple.com/br/app/blockfront-tactics/id6772747511?uo=4",
+      "icon": "/app-icons/blockfront-tactics.jpg"
+    },
+    {
+      "slug": "chroma-ai",
+      "name": "Chroma AI Paleta",
+      "trackId": "6772518398",
+      "bundleId": "com.pierrondi.chroma.ai",
+      "version": "1.0.1",
+      "category": "Graphics & Design",
+      "url": "https://apps.apple.com/br/app/chroma-ai-paleta/id6772518398?uo=4",
+      "icon": "/app-icons/chroma-ai.jpg"
+    },
+    {
+      "slug": "mytone",
+      "name": "MyTone Studio",
+      "trackId": "6770047382",
+      "bundleId": "app.mytone.MyTone",
+      "version": "1.0.0",
+      "category": "Music",
+      "url": "https://apps.apple.com/br/app/mytone-studio/id6770047382?uo=4",
+      "icon": "/app-icons/mytone.jpg"
+    },
+    {
+      "slug": "parabens-ia-br",
+      "name": "Parabéns IA",
+      "trackId": "6769599831",
+      "bundleId": "com.parabensia.app",
+      "version": "1.1.0",
+      "category": "Entertainment",
+      "url": "https://apps.apple.com/br/app/parab%C3%A9ns-ia/id6769599831?uo=4",
+      "icon": "/app-icons/parabens-ia-br.jpg"
+    },
+    {
+      "slug": "snapread",
+      "name": "SnapRead AI Leitor",
+      "trackId": "6772517083",
+      "bundleId": "com.pierrondi.snapread",
+      "version": "1.0.1",
+      "category": "Productivity",
+      "url": "https://apps.apple.com/br/app/snapread-ai-leitor/id6772517083?uo=4",
+      "icon": "/app-icons/snapread.jpg"
+    },
+    {
+      "slug": "superapp-servicenow",
+      "name": "SuperApp ServiceNow",
+      "trackId": "6768396384",
+      "bundleId": "com.pierrondi.superappservicenow",
+      "version": "1.0",
+      "category": "Business",
+      "url": "https://apps.apple.com/br/app/superapp-servicenow/id6768396384?uo=4",
+      "icon": "/app-icons/superapp-servicenow.jpg"
+    },
+    {
+      "slug": "linguagil",
+      "name": "Linguagil Flashcards",
+      "trackId": "6772552997",
+      "bundleId": "com.pierrondi.linguagil",
+      "version": "1.0.1",
+      "category": "Education",
+      "url": "https://apps.apple.com/br/app/linguagil-flashcards/id6772552997?uo=4",
+      "icon": "/app-icons/linguagil.jpg"
+    },
+    {
+      "slug": "supercode-005",
+      "name": "SuperCode Notas",
+      "trackId": "6772554818",
+      "bundleId": "com.pierrondi.supercode-005",
+      "version": "1.0.1",
+      "category": "Developer Tools",
+      "url": "https://apps.apple.com/br/app/supercode-notas/id6772554818?uo=4",
+      "icon": "/app-icons/supercode-005.jpg"
+    }
+  ]
+}

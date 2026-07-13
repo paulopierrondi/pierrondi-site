@@ -17,7 +17,7 @@ export default function Reveal({ children, delay = 0, className = '', as = 'div'
   return (
     <Component
       className={className}
-      initial={false}
+      initial={reduced ? false : { opacity: 0, y: 24, filter: 'blur(4px)' }}
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       viewport={{ once: true, amount: reduced ? 0 : 0.08, margin: '-8% 0px -8% 0px' }}
       transition={{
@@ -80,7 +80,9 @@ export function RevealStaggerItem({
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 1, y: 0, filter: 'blur(0px)' },
+        hidden: reduced
+          ? { opacity: 1, y: 0, filter: 'blur(0px)' }
+          : { opacity: 0, y: 24, filter: 'blur(4px)' },
         visible: {
           opacity: 1,
           y: 0,
@@ -88,7 +90,7 @@ export function RevealStaggerItem({
           transition: { duration: reduced ? 0 : 0.55, ease: [0.16, 1, 0.3, 1] },
         },
       }}
-      initial={false}
+      initial="hidden"
     >
       {children}
     </motion.div>

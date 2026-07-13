@@ -28,23 +28,23 @@
   },
   "positioning": {
     "pt": {
-      "statement": "Eu ajudo organizações complexas a transformar ServiceNow + IA em sistema operacional de adoção, governança e expansão de valor.",
-      "short": "ServiceNow, IA governada e sistemas operacionais de agentes para execução enterprise."
+      "statement": "Atuo como Technical Account Executive na ServiceNow e este portfólio pessoal mostra como conecto liderança enterprise, arquitetura de IA e engenharia full-stack para transformar estratégia em execução governada.",
+      "short": "Technical Account Executive na ServiceNow · Arquiteto de IA · Full-stack Builder."
     },
     "en": {
-      "statement": "I help complex organizations turn ServiceNow + AI into an operating system for adoption, governance, and value expansion.",
-      "short": "ServiceNow, governed AI and agent operating systems for enterprise execution."
+      "statement": "I work as a Technical Account Executive at ServiceNow, and this personal portfolio shows how I connect enterprise leadership, AI architecture, and full-stack engineering to turn strategy into governed execution.",
+      "short": "Technical Account Executive at ServiceNow · AI Architect · Full-stack Builder."
     }
   },
   "pages": {
     "pt": {
       "slug": "/about",
-      "metadataTitle": "Paulo Pierrondi - Arquiteto de IA, Full-stack Builder e Enterprise Account Director",
-      "metadataDescription": "Perfil de Paulo Pierrondi: arquitetura de IA e automação, sistemas multi-agente, full-stack building, apps e frameworks, com liderança de contas enterprise na ServiceNow — sem expor informação confidencial.",
+      "metadataTitle": "Paulo Pierrondi - Technical Account Executive, Arquiteto de IA e Full-stack Builder",
+      "metadataDescription": "Portfólio profissional pessoal de Paulo Pierrondi: Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder de sistemas multi-agente, apps e automações.",
       "hero": {
-        "kicker": "Perfil executivo / ServiceNow / IA governada",
+        "kicker": "Portfólio pessoal / ServiceNow / IA + Engenharia",
         "title": "Eu desenho a camada operacional que faz IA virar trabalho governado.",
-        "lead": "Minha tese é simples: IA corporativa não escala por modelo; escala por contexto, governança, workflow e evidência. Trabalho na interseção entre ServiceNow, FSI, dados operacionais, Now Assist, AI Agents e sistemas de agentes com human gates.",
+        "lead": "Sou Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder. Conecto contexto enterprise, governança, workflow e engenharia para transformar estratégia em agentes, automações e produtos que funcionam no mundo real.",
         "primaryCta": "Conversar no LinkedIn",
         "secondaryCta": "Ver arquitetura"
       },
@@ -53,7 +53,7 @@
         "Now Assist + AI Agents",
         "CSDM / CMDB / Service Graph",
         "AgentOps + governança",
-        "Produto e go-to-market"
+        "Produtos e sistemas + Full-stack"
       ],
       "sections": [
         {
@@ -102,20 +102,20 @@
         "No runtime write, no autopublish, no sensitive claims"
       ],
       "cta": {
-        "title": "Quero conversas que exijam estratégia, plataforma e execução.",
-        "body": "O melhor uso deste site é abrir conversas sobre ServiceNow, IA governada, AgentOps, operating model, produto, carreira global e parcerias executivas. O conteúdo aqui é pessoal, não oficial, e evita informação confidencial.",
+        "title": "Vamos trocar ideias sobre estratégia, arquitetura e código.",
+        "body": "Este portfólio abre conversas entre líderes, arquitetos e builders sobre ServiceNow, IA governada, AgentOps, produtos e sistemas. O conteúdo é pessoal, não oficial e não representa a ServiceNow.",
         "primary": "Abrir LinkedIn",
         "secondary": "Ver portfólio"
       }
     },
     "en": {
       "slug": "/en/about",
-      "metadataTitle": "Paulo Pierrondi - AI Architect, Full-stack Builder & Enterprise Account Director",
-      "metadataDescription": "Profile of Paulo Pierrondi: AI and automation architecture, multi-agent systems, full-stack building, apps and frameworks, with enterprise account leadership at ServiceNow — without confidential claims.",
+      "metadataTitle": "Paulo Pierrondi - Technical Account Executive, AI Architect & Full-stack Builder",
+      "metadataDescription": "Paulo Pierrondi's personal professional portfolio: Technical Account Executive at ServiceNow, AI architect and full-stack builder of multi-agent systems, apps and automations.",
       "hero": {
-        "kicker": "Executive profile / ServiceNow / governed AI",
+        "kicker": "Personal portfolio / ServiceNow / AI + Engineering",
         "title": "I design the operating layer that turns AI into governed work.",
-        "lead": "My thesis is simple: enterprise AI does not scale through models alone. It scales through context, governance, workflow, and evidence. I work at the intersection of ServiceNow, FSI, operational data, Now Assist, AI Agents, and agent systems with human gates.",
+        "lead": "I am a Technical Account Executive at ServiceNow, an AI architect and a full-stack builder. I connect enterprise context, governance, workflow and engineering to turn strategy into agents, automations and products that work in the real world.",
         "primaryCta": "Connect on LinkedIn",
         "secondaryCta": "See architecture"
       },
@@ -124,7 +124,7 @@
         "Now Assist + AI Agents",
         "CSDM / CMDB / Service Graph",
         "AgentOps + governance",
-        "Product and go-to-market"
+        "Product engineering + Full-stack"
       ],
       "sections": [
         {
@@ -173,8 +173,8 @@
         "No runtime write, no autopublish, no sensitive claims"
       ],
       "cta": {
-        "title": "I want conversations that require strategy, platform, and execution.",
-        "body": "The best use of this site is to open conversations about ServiceNow, governed AI, AgentOps, operating model, product, global career paths, and executive partnerships. This content is personal, unofficial, and avoids confidential information.",
+        "title": "Let's exchange ideas about strategy, architecture and code.",
+        "body": "This portfolio opens peer conversations among leaders, architects and builders about ServiceNow, governed AI, AgentOps, products and systems. The content is personal, unofficial and does not represent ServiceNow.",
         "primary": "Open LinkedIn",
         "secondary": "See portfolio"
       }

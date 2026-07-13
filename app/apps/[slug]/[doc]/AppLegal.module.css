@@ -47,7 +47,7 @@
 }
 
 .prose a:hover {
-  color: var(--color-cyan);
+  color: var(--color-accent-cyan);
 }
 
 .meta {

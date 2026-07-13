@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState, useRef, type ComponentType } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useReducedMotion } from 'framer-motion'
+import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import { COPY } from './copy'
 import type { Lang, SectionId, SectionProps } from './types'
 import { hv2Body, hv2Display } from './fonts'
@@ -35,7 +35,7 @@ export default function HomeV2({ lang, langHrefs = { pt: '/', en: '/en' } }: Hom
   const copy = COPY[lang]
   const rootRef = useRef<HTMLDivElement>(null)
   const [activeSection, setActiveSection] = useState<SectionId>('hero')
-  const reducedMotion = useReducedMotion()
+  const reducedMotion = useHydratedReducedMotion()
 
   const sectionIds = useMemo(() => copy.sections.map((section) => section.id).join(','), [copy])
 

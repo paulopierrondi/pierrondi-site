@@ -3,17 +3,14 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutGrid } from 'lucide-react'
 import { getCurrentLanguage, type HomeLang } from '@/lib/i18n/site-language'
-import { isImmersiveHomeRoute } from '@/components/home-v2/immersive-routes'
-import SiteLogo from './SiteLogo'
+import { usesHomeChrome, usesOwnAppChrome } from '@/components/home-v2/immersive-routes'
 import styles from './SiteNav.module.css'
 
 const navCopy: Record<HomeLang, {
   aria: string
   logoAria: string
   homeHref: string
-  cta: string
   menuOpen: string
   menuClose: string
   links: Array<{ label: string; href: string }>
@@ -22,12 +19,12 @@ const navCopy: Record<HomeLang, {
     aria: 'Navegação principal',
     logoAria: 'Pierrondi.dev — página inicial',
     homeHref: '/',
-    cta: 'Conectar',
     menuOpen: 'Abrir menu',
     menuClose: 'Fechar menu',
     links: [
       { label: 'Bio', href: '/about' },
       { label: 'Atuação', href: '/atuacao' },
+      { label: 'Portfólio', href: '/portfolio' },
       { label: 'Feitos', href: '/feitos' },
       { label: 'Ideias', href: '/blog' },
       { label: 'Contato', href: '/contato' },
@@ -37,12 +34,12 @@ const navCopy: Record<HomeLang, {
     aria: 'Main navigation',
     logoAria: 'Pierrondi.dev — home',
     homeHref: '/en',
-    cta: 'Connect',
     menuOpen: 'Open menu',
     menuClose: 'Close menu',
     links: [
       { label: 'About', href: '/en/about' },
       { label: 'Work', href: '/en/atuacao' },
+      { label: 'Portfolio', href: '/en/portfolio' },
       { label: 'Proof', href: '/en/feitos' },
       { label: 'Ideas', href: '/en/blog' },
       { label: 'Contact', href: '/en/contato' },
@@ -52,7 +49,7 @@ const navCopy: Record<HomeLang, {
 
 export default function SiteNav() {
   const pathname = usePathname() || '/'
-  const immersiveHome = isImmersiveHomeRoute(pathname)
+  const ownsHomeChrome = usesHomeChrome(pathname)
   const lang = getCurrentLanguage(pathname)
   const copy = navCopy[lang]
   const [scrolled, setScrolled] = useState(false)
@@ -82,22 +79,12 @@ export default function SiteNav() {
     }
   }, [menuOpen])
 
-  useEffect(() => {
-    if (!menuOpen) return undefined
-
-    const frame = window.requestAnimationFrame(() => {
-      setMenuOpen(false)
-    })
-
-    return () => window.cancelAnimationFrame(frame)
-  }, [menuOpen, pathname])
-
   const isActive = (href: string) => {
     if (href === '/' || href === '/en') return pathname === href
     return pathname === href || pathname.startsWith(`${href}/`)
   }
 
-  if (immersiveHome) return null
+  if (ownsHomeChrome || usesOwnAppChrome(pathname)) return null
 
   return (
     <header
@@ -105,10 +92,9 @@ export default function SiteNav() {
       data-accent="lime"
     >
       <Link href={copy.homeHref} className={styles.brand} aria-label={copy.logoAria}>
-        <SiteLogo size={30} />
-        <span className={styles.brandName}>
-          Pierrondi<span className={styles.brandDot}>.</span>
-        </span>
+        <span className={styles.brandBracket}>&lt;</span>
+        <span className={styles.brandName}>pierrondi.dev</span>
+        <span className={styles.brandBracket}>/&gt;</span>
       </Link>
 
       <nav
@@ -130,17 +116,6 @@ export default function SiteNav() {
       </nav>
 
       <div className={styles.navRight}>
-        <Link href="/crm" className={styles.navAppBtn} title="Studio CRM" aria-label="Studio CRM">
-          <LayoutGrid size={15} strokeWidth={1.8} />
-        </Link>
-        <a
-          href="https://br.linkedin.com/in/paulopierrondi"
-          target="_blank"
-          rel="noreferrer"
-          className={styles.navCta}
-        >
-          {copy.cta} <span aria-hidden="true">↗</span>
-        </a>
         <button
           className={`${styles.navBurger} ${menuOpen ? styles.open : ''}`}
           aria-label={menuOpen ? copy.menuClose : copy.menuOpen}
