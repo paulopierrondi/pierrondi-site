@@ -8,6 +8,7 @@ export type PortfolioVisualKind =
   | 'app-store'
   | 'kommo'
   | 'studio-crm'
+  | 'pierrondi-studio'
   | 'agenticoscore'
   | 'sada'
 
@@ -62,8 +63,32 @@ const appStoreUrl = (trackId: string) =>
 export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
   pt: [
     {
-      id: 'cantustudio',
+      id: 'pierrondi-studio',
       index: '01',
+      navLabel: 'Pierrondi Studio',
+      title: 'Pierrondi Studio',
+      eyebrow: 'MARCA · CONTEÚDO · CRM · IA',
+      headline: 'Marca, conteúdo e operação como um sistema de crescimento.',
+      description:
+        'Frente autoral que transforma posicionamento, comunicação e operação comercial em sistemas executáveis — da estratégia à implementação.',
+      proof:
+        'Quatro frentes integradas, três cases de aplicação, método em cinco etapas e parceria white-label com escopo e aprovação explícitos.',
+      status: 'Oferta autoral · página pública',
+      accent: 'green',
+      visual: 'pierrondi-studio',
+      platforms: ['Estratégia', 'Conteúdo', 'Automação'],
+      stack: ['Posicionamento', 'Branding', 'Multimídia', 'CRM', 'IA'],
+      facts: [
+        { value: '4', label: 'frentes' },
+        { value: '3', label: 'cases' },
+        { value: '5', label: 'etapas' },
+      ],
+      href: '/studio',
+      cta: 'Conhecer o Pierrondi Studio',
+    },
+    {
+      id: 'cantustudio',
+      index: '02',
       navLabel: 'CantuStudio',
       title: 'CantuStudio',
       eyebrow: 'PRODUTO DE IA · MÚSICA · MULTIPLATAFORMA',
@@ -91,7 +116,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'faithschool',
-      index: '02',
+      index: '03',
       navLabel: 'FaithSchool',
       title: 'FaithSchool',
       eyebrow: 'EDTECH · SAAS · MOBILE',
@@ -119,7 +144,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'app-portfolio',
-      index: '03',
+      index: '04',
       navLabel: '21 apps',
       title: 'App portfolio',
       eyebrow: 'APP STORE · PRODUTOS PUBLICADOS',
@@ -143,7 +168,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'kommo-whatsapp',
-      index: '04',
+      index: '05',
       navLabel: 'Kommo + WA',
       title: 'Kommo + WhatsApp',
       eyebrow: 'CRM · AUTOMAÇÃO · HANDOFF HUMANO',
@@ -167,7 +192,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'studio-crm',
-      index: '05',
+      index: '06',
       navLabel: 'Studio CRM',
       title: 'Studio CRM',
       eyebrow: 'FULL-STACK · OPERAÇÃO · DADOS',
@@ -191,7 +216,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'agenticoscore',
-      index: '06',
+      index: '07',
       navLabel: 'AgenticosCore',
       title: 'AgenticosCore',
       eyebrow: 'REVENUE OS · AGENTES · HUMAN GATES',
@@ -217,7 +242,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'sada',
-      index: '07',
+      index: '08',
       navLabel: 'SADA',
       title: 'SADA',
       eyebrow: 'FRAMEWORK DESENVOLVIDO POR PAULO PIERRONDI',
@@ -242,8 +267,32 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
   ],
   en: [
     {
-      id: 'cantustudio',
+      id: 'pierrondi-studio',
       index: '01',
+      navLabel: 'Pierrondi Studio',
+      title: 'Pierrondi Studio',
+      eyebrow: 'BRAND · CONTENT · CRM · AI',
+      headline: 'Brand, content, and operations designed as one growth system.',
+      description:
+        'An author-led practice that turns positioning, communication, and commercial operations into executable systems—from strategy through implementation.',
+      proof:
+        'Four integrated capabilities, three application cases, a five-stage method, and a white-label partnership model with explicit scope and approvals.',
+      status: 'Author-led practice · public page',
+      accent: 'green',
+      visual: 'pierrondi-studio',
+      platforms: ['Strategy', 'Content', 'Automation'],
+      stack: ['Positioning', 'Branding', 'Multimedia', 'CRM', 'AI'],
+      facts: [
+        { value: '4', label: 'capabilities' },
+        { value: '3', label: 'cases' },
+        { value: '5', label: 'stages' },
+      ],
+      href: '/en/studio',
+      cta: 'Explore Pierrondi Studio',
+    },
+    {
+      id: 'cantustudio',
+      index: '02',
       navLabel: 'CantuStudio',
       title: 'CantuStudio',
       eyebrow: 'AI PRODUCT · MUSIC · MULTI-PLATFORM',
@@ -271,7 +320,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'faithschool',
-      index: '02',
+      index: '03',
       navLabel: 'FaithSchool',
       title: 'FaithSchool',
       eyebrow: 'EDTECH · SAAS · MOBILE',
@@ -299,7 +348,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'app-portfolio',
-      index: '03',
+      index: '04',
       navLabel: '21 apps',
       title: 'App portfolio',
       eyebrow: 'APP STORE · SHIPPED PRODUCTS',
@@ -323,7 +372,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'kommo-whatsapp',
-      index: '04',
+      index: '05',
       navLabel: 'Kommo + WA',
       title: 'Kommo + WhatsApp',
       eyebrow: 'CRM · AUTOMATION · HUMAN HANDOFF',
@@ -347,7 +396,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'studio-crm',
-      index: '05',
+      index: '06',
       navLabel: 'Studio CRM',
       title: 'Studio CRM',
       eyebrow: 'FULL-STACK · OPERATIONS · DATA',
@@ -371,7 +420,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'agenticoscore',
-      index: '06',
+      index: '07',
       navLabel: 'AgenticosCore',
       title: 'AgenticosCore',
       eyebrow: 'REVENUE OS · AGENTS · HUMAN GATES',
@@ -397,7 +446,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'sada',
-      index: '07',
+      index: '08',
       navLabel: 'SADA',
       title: 'SADA',
       eyebrow: 'FRAMEWORK DEVELOPED BY PAULO PIERRONDI',

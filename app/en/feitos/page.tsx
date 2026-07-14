@@ -3,7 +3,7 @@ import FeitosIndexContent from '@/app/feitos/FeitosIndexContent'
 
 export const metadata: Metadata = {
   title: 'Work Index',
-  description: 'Applied enterprise systems by Paulo Pierrondi: SADA, Governed Agents, LLM Inference, and AI Execution Platforms.',
+  description: 'Applied work and systems by Paulo Pierrondi: Pierrondi Studio, SADA, Governed Agents, LLM Inference, and AI Execution Platforms.',
   alternates: {
     canonical: '/en/feitos',
     languages: {
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Work Index | pierrondi.dev',
-    description: 'Not a portfolio. These are systems that become executive conversations, demos, and execution.',
+    description: 'Projects and systems connecting strategy, brand, architecture, automation, and execution.',
     url: '/en/feitos',
     siteName: 'pierrondi.dev',
     type: 'website',

@@ -5,16 +5,16 @@ import { APP_STORE_CATALOG, PORTFOLIO_CASES } from '@/components/portfolio/portf
 import { SITE_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'AI, apps and systems portfolio | Paulo Pierrondi',
+  title: 'Products, Studio, and systems portfolio | Paulo Pierrondi',
   description:
-    'CantuStudio, FaithSchool, 21 published apps, iOS, Android, CRM, WhatsApp, AgenticosCore, and SADA — end-to-end architecture and product engineering.',
+    'Pierrondi Studio, CantuStudio, FaithSchool, 21 published apps, CRM, automation, AgenticosCore, and SADA—strategy, architecture, and end-to-end execution.',
   alternates: {
     canonical: '/en/portfolio',
     languages: { 'pt-BR': '/portfolio', 'en-US': '/en/portfolio', 'x-default': '/portfolio' },
   },
   openGraph: {
-    title: 'AI, apps and systems portfolio | Paulo Pierrondi',
-    description: 'Products, systems, and integrations taken from concept to production—with public evidence and real identities.',
+    title: 'Products, Studio, and systems portfolio | Paulo Pierrondi',
+    description: 'Brand, products, systems, and integrations taken from strategy through implementation—with public evidence and real identities.',
     url: '/en/portfolio',
     siteName: 'pierrondi.dev',
     type: 'website',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'AI, apps and systems portfolio | Paulo Pierrondi',
-    description: 'CantuStudio, FaithSchool, published apps, CRM, WhatsApp, AgenticosCore, and SADA.',
+    description: 'Pierrondi Studio, CantuStudio, FaithSchool, published apps, CRM, AgenticosCore, and SADA.',
     images: ['/og'],
   },
 }
@@ -37,7 +37,7 @@ const portfolioSchema = {
   '@type': 'CollectionPage',
   '@id': `${SITE_URL}/en/portfolio#collection`,
   url: `${SITE_URL}/en/portfolio`,
-  name: 'AI, apps and systems portfolio — Paulo Pierrondi',
+  name: 'Products, Studio, and systems portfolio — Paulo Pierrondi',
   description: metadata.description,
   inLanguage: 'en-US',
   about: { '@id': `${SITE_URL}/#person` },
@@ -77,4 +77,3 @@ export default function PortfolioEnPage() {
     </>
   )
 }
-

@@ -5,16 +5,16 @@ import { APP_STORE_CATALOG, PORTFOLIO_CASES } from '@/components/portfolio/portf
 import { SITE_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Portfólio de IA, apps e sistemas | Paulo Pierrondi',
+  title: 'Portfólio de produtos, Studio e sistemas | Paulo Pierrondi',
   description:
-    'Cases de CantuStudio, FaithSchool, 21 apps publicados, iOS, Android, CRM, WhatsApp, AgenticosCore e SADA — arquitetura e desenvolvimento ponta a ponta.',
+    'Cases de Pierrondi Studio, CantuStudio, FaithSchool, 21 apps, CRM, automação, AgenticosCore e SADA — estratégia, arquitetura e execução ponta a ponta.',
   alternates: {
     canonical: '/portfolio',
     languages: { 'pt-BR': '/portfolio', 'en-US': '/en/portfolio', 'x-default': '/portfolio' },
   },
   openGraph: {
-    title: 'Portfólio de IA, apps e sistemas | Paulo Pierrondi',
-    description: 'Produtos, sistemas e integrações levados do conceito à produção — com evidência pública e identidade real.',
+    title: 'Portfólio de produtos, Studio e sistemas | Paulo Pierrondi',
+    description: 'Marca, produtos, sistemas e integrações levados da estratégia à implementação — com evidência pública e identidade real.',
     url: '/portfolio',
     siteName: 'pierrondi.dev',
     type: 'website',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Portfólio de IA, apps e sistemas | Paulo Pierrondi',
-    description: 'CantuStudio, FaithSchool, apps publicados, CRM, WhatsApp, AgenticosCore e SADA.',
+    description: 'Pierrondi Studio, CantuStudio, FaithSchool, apps publicados, CRM, AgenticosCore e SADA.',
     images: ['/og'],
   },
 }
@@ -37,7 +37,7 @@ const portfolioSchema = {
   '@type': 'CollectionPage',
   '@id': `${SITE_URL}/portfolio#collection`,
   url: `${SITE_URL}/portfolio`,
-  name: 'Portfólio de IA, apps e sistemas — Paulo Pierrondi',
+  name: 'Portfólio de produtos, Studio e sistemas — Paulo Pierrondi',
   description: metadata.description,
   inLanguage: 'pt-BR',
   about: { '@id': `${SITE_URL}/#person` },

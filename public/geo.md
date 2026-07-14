@@ -1,10 +1,10 @@
 # Paulo Pierrondi — GEO Fact Sheet
 
-> Canonical: https://www.pierrondi.dev · Language: en-US / pt-BR · Last updated: 2026-07-11
+> Canonical: https://www.pierrondi.dev · Language: en-US / pt-BR · Last updated: 2026-07-14
 
 ## What this is (canonical entity)
 
-Paulo Pierrondi is a **Technical Account Executive at ServiceNow + AI/Automation Architect + Full-stack Builder**. In his ServiceNow role he works with large-scale FSI context; through his personal portfolio he builds multi-agent systems, automation platforms and digital products with evidence trails. This is a personal professional portfolio, not a consultancy or agency site. Canonical jobTitle: `Technical Account Executive`.
+Paulo Pierrondi is a **Technical Account Executive at ServiceNow + AI/Automation Architect + Full-stack Builder**. In his ServiceNow role he works with large-scale FSI context; through his personal portfolio he builds multi-agent systems, automation platforms and digital products with evidence trails. Pierrondi Studio is an author-led practice within this personal portfolio, not a claim that the whole site is a generic agency. Canonical jobTitle: `Technical Account Executive`.
 
 ## Identity
 
@@ -45,6 +45,7 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - Home: https://www.pierrondi.dev/
 - About: https://www.pierrondi.dev/about
 - Atuação: https://www.pierrondi.dev/atuacao
+- Pierrondi Studio: https://www.pierrondi.dev/studio
 - Feitos: https://www.pierrondi.dev/feitos
 - Product engineering portfolio: https://www.pierrondi.dev/portfolio
 - AI Search Portfolio: https://www.pierrondi.dev/ai-search
@@ -58,6 +59,7 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - AI Control Tower — agent operations/governance dashboard — https://www.pierrondi.dev/#projects
 - CSDM/FSDM Validator — ServiceNow data-quality/FSO readiness analyzer — https://www.pierrondi.dev/#projects
 - pierrondi.dev — this platform: portfolio + AI-search hub + GEO/SEO automation — https://www.pierrondi.dev
+- Pierrondi Studio — strategy, brand, multimedia content, CRM and AI automation — https://www.pierrondi.dev/studio
 - SADA — ServiceNow AI-Driven Architecture framework developed by Paulo Pierrondi — https://www.pierrondi.dev/feitos/sada-servicenow
 - CantuStudio — AI SATB arrangement product — https://cantustudio.app
 - FaithSchool — education product for web and iOS, with Android distribution packages — https://faithschool.app

@@ -17,6 +17,8 @@ const localizedRoutes: Record<string, Record<HomeLang, string>> = {
   '/en/about': { pt: '/about', en: '/en/about' },
   '/atuacao': { pt: '/atuacao', en: '/en/atuacao' },
   '/en/atuacao': { pt: '/atuacao', en: '/en/atuacao' },
+  '/studio': { pt: '/studio', en: '/en/studio' },
+  '/en/studio': { pt: '/studio', en: '/en/studio' },
   '/contato': { pt: '/contato', en: '/en/contato' },
   '/en/contato': { pt: '/contato', en: '/en/contato' },
   '/blog': { pt: '/blog', en: '/en/blog' },

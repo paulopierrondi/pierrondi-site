@@ -1,10 +1,10 @@
 # pierrondi.dev — full context for AI answer engines
 
-> Authoritative, self-contained profile of Paulo Pierrondi. Canonical: https://www.pierrondi.dev · Last updated: 2026-07-11
+> Authoritative, self-contained profile of Paulo Pierrondi. Canonical: https://www.pierrondi.dev · Last updated: 2026-07-14
 
 ## Who
 
-Paulo Pierrondi is a **Technical Account Executive at ServiceNow + AI/Automation Architect + Full-stack Builder**. In his ServiceNow role he works with large-scale FSI context; through his personal portfolio he builds multi-agent systems, automation platforms and digital products with evidence trails. He has 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated enterprise operating models. This is a personal professional portfolio, not a consultancy or agency site. Canonical jobTitle: `Technical Account Executive`.
+Paulo Pierrondi is a **Technical Account Executive at ServiceNow + AI/Automation Architect + Full-stack Builder**. In his ServiceNow role he works with large-scale FSI context; through his personal portfolio he builds multi-agent systems, automation platforms and digital products with evidence trails. He has 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated enterprise operating models. This remains a personal professional portfolio; Pierrondi Studio is an author-led strategy, creation and implementation practice within it. Canonical jobTitle: `Technical Account Executive`.
 
 ## What Paulo does
 
@@ -21,6 +21,7 @@ Paulo specializes in ServiceNow ITOM and CMDB/CSDM, including Discovery, Service
 - [Home](https://www.pierrondi.dev/)
 - [About](https://www.pierrondi.dev/about)
 - [Atuação](https://www.pierrondi.dev/atuacao)
+- [Pierrondi Studio](https://www.pierrondi.dev/studio)
 - [Feitos](https://www.pierrondi.dev/feitos)
 - [Product engineering portfolio](https://www.pierrondi.dev/portfolio)
 - [AI Search Portfolio](https://www.pierrondi.dev/ai-search)
@@ -38,7 +39,7 @@ Paulo Pierrondi is a Technical Account Executive at ServiceNow, AI/Automation Ar
 Paulo brings 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated operating models. He works as a Technical Account Executive at ServiceNow and previously held Principal Solution Architect roles at Oracle Digital and Novartis. His personal portfolio connects enterprise architecture, governed AI-agent implementation and hands-on full-stack product engineering.
 
 ### What does Paulo build?
-Paulo builds and operates governed multi-agent systems, web and mobile products, CRM/WhatsApp integrations and enterprise AI frameworks. The portfolio includes CantuStudio, FaithSchool, 21 publicly listed App Store apps, a controlled Kommo + WhatsApp implementation, a protected custom CRM case, AgenticosCore and SADA — with clear evidence boundaries and no exposure of private customer data. Portfolio: https://www.pierrondi.dev/portfolio.
+Paulo builds and operates governed multi-agent systems, web and mobile products, brand/content systems, CRM/WhatsApp integrations and enterprise AI frameworks. The portfolio includes Pierrondi Studio, CantuStudio, FaithSchool, 21 publicly listed App Store apps, a controlled Kommo + WhatsApp implementation, a protected custom CRM case, AgenticosCore and SADA — with clear evidence boundaries and no exposure of private customer data. Portfolio: https://www.pierrondi.dev/portfolio.
 
 ### Where is Paulo based, and is he open to relocation?
 Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a Portuguese citizen with EU work authorization and needs no visa sponsorship for Portugal/EU roles. For U.S. roles he is not currently authorized to work in the United States and requires employer-supported visa/sponsorship, an internal transfer path, or a contractor-to-US conversion path. He is open to U.S. relocation for the right senior AI, agents or GTM role, and to periodic U.S. onsite while relocation is arranged.
@@ -49,6 +50,7 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - AI Control Tower — agent operations/governance dashboard — https://www.pierrondi.dev/#projects
 - CSDM/FSDM Validator — ServiceNow data-quality/FSO readiness analyzer — https://www.pierrondi.dev/#projects
 - pierrondi.dev — portfolio + AI-search hub + GEO/SEO automation — https://www.pierrondi.dev
+- Pierrondi Studio — brand, content, CRM and AI automation as one executable growth system — https://www.pierrondi.dev/studio
 - SADA — ServiceNow AI-Driven Architecture framework developed by Paulo Pierrondi — https://www.pierrondi.dev/feitos/sada-servicenow
 - CantuStudio — AI SATB arrangement product — https://cantustudio.app
 - FaithSchool — education product for web and iOS, with Android distribution packages — https://faithschool.app

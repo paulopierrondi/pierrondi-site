@@ -24,6 +24,7 @@ const navCopy: Record<HomeLang, {
     links: [
       { label: 'Bio', href: '/about' },
       { label: 'Atuação', href: '/atuacao' },
+      { label: 'Studio', href: '/studio' },
       { label: 'Portfólio', href: '/portfolio' },
       { label: 'Feitos', href: '/feitos' },
       { label: 'Ideias', href: '/blog' },
@@ -39,6 +40,7 @@ const navCopy: Record<HomeLang, {
     links: [
       { label: 'About', href: '/en/about' },
       { label: 'Work', href: '/en/atuacao' },
+      { label: 'Studio', href: '/en/studio' },
       { label: 'Portfolio', href: '/en/portfolio' },
       { label: 'Proof', href: '/en/feitos' },
       { label: 'Ideas', href: '/en/blog' },

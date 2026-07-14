@@ -3,7 +3,7 @@ import FeitosIndexContent from './FeitosIndexContent'
 
 export const metadata: Metadata = {
   title: 'Feitos — sistemas enterprise de IA governada',
-  description: 'Sistemas enterprise aplicados por Paulo Pierrondi: SADA, Agentes Governados, LLM Inference e AI Execution Platforms.',
+  description: 'Portfólio e sistemas aplicados por Paulo Pierrondi: Pierrondi Studio, SADA, Agentes Governados, LLM Inference e AI Execution Platforms.',
   alternates: {
     canonical: '/feitos',
     languages: {
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Feitos | pierrondi.dev',
-    description: 'Não é portfólio. São sistemas que viram conversa executiva, demo e execução.',
+    description: 'Projetos e sistemas que conectam estratégia, marca, arquitetura, automação e execução.',
     url: '/feitos',
     siteName: 'pierrondi.dev',
     type: 'website',

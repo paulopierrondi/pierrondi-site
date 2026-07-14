@@ -19,7 +19,7 @@
     ],
     "logo": "https://www.pierrondi.dev/pierrondi-logo-1024.png"
   },
-  "lastUpdated": "2026-07-11",
+  "lastUpdated": "2026-07-14",
   "primaryHub": "https://www.pierrondi.dev/ai-search",
   "citationHub": "https://www.pierrondi.dev/citations",
   "sitemap": "https://www.pierrondi.dev/sitemap.xml",
@@ -422,6 +422,13 @@
       "description": "This platform: public portfolio, AI-search hub, answers graph and GEO/SEO automation pipeline.",
       "url": "https://www.pierrondi.dev",
       "relationship": "flagship project"
+    },
+    {
+      "name": "Pierrondi Studio",
+      "category": "Brand, content and AI growth systems",
+      "description": "Author-led practice combining positioning, brand systems, multimedia content, CRM and AI automation with explicit human handoffs and a five-stage implementation method.",
+      "url": "https://www.pierrondi.dev/studio",
+      "relationship": "author-led portfolio practice"
     },
     {
       "name": "SADA",
