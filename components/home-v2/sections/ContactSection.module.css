@@ -94,6 +94,94 @@
   margin: 0 0 var(--hv2-space-6) 0;
 }
 
+.whatsappCard {
+  display: block;
+  margin-bottom: var(--hv2-space-3);
+  padding: var(--hv2-space-4);
+  border: 1px solid var(--hv2-accent-green-border);
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--hv2-accent-green-soft), var(--hv2-bg-elevated));
+  color: var(--hv2-text-primary);
+  text-decoration: none;
+  transition: border-color var(--hv2-dur-fast) var(--hv2-ease-default),
+    transform var(--hv2-dur-fast) var(--hv2-ease-default),
+    box-shadow var(--hv2-dur-fast) var(--hv2-ease-default);
+}
+
+.whatsappCard:hover,
+.whatsappCard:focus-visible {
+  border-color: var(--hv2-accent-green);
+  box-shadow: 0 10px 28px var(--hv2-accent-green-glow);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.whatsappHeader,
+.whatsappContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--hv2-space-3);
+}
+
+.whatsappHeader {
+  margin-bottom: var(--hv2-space-3);
+  color: var(--hv2-text-muted);
+  font-family: var(--hv2-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.whatsappStatus {
+  color: var(--hv2-accent-green);
+}
+
+.whatsappStatus::before {
+  content: '●';
+  margin-right: var(--hv2-space-2);
+  font-size: 0.5rem;
+}
+
+.whatsappContent strong,
+.whatsappContent small,
+.whatsappAction {
+  display: block;
+}
+
+.whatsappContent strong {
+  font-family: var(--hv2-font-display);
+  font-size: 1.2rem;
+}
+
+.whatsappContent small {
+  margin-top: 4px;
+  color: var(--hv2-text-secondary);
+  font-family: var(--hv2-font-body);
+  font-size: 0.875rem;
+}
+
+.whatsappArrow {
+  color: var(--hv2-accent-green);
+  font-size: 1.25rem;
+  transition: transform var(--hv2-dur-fast) var(--hv2-ease-default);
+}
+
+.whatsappCard:hover .whatsappArrow,
+.whatsappCard:focus-visible .whatsappArrow {
+  transform: translate(3px, -3px);
+}
+
+.whatsappAction {
+  margin-top: var(--hv2-space-3);
+  color: var(--hv2-accent-green);
+  font-family: var(--hv2-font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .emailCard {
   background: var(--hv2-bg-elevated);
   border: 1px solid var(--hv2-border-default);

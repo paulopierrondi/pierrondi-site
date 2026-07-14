@@ -1,4 +1,5 @@
 import type { SiteCopy, Lang } from './types'
+import { CONTACT } from '@/lib/contact'
 
 export const COPY: Record<Lang, SiteCopy> = {
   pt: {
@@ -303,7 +304,7 @@ export const COPY: Record<Lang, SiteCopy> = {
       heading: 'Contato',
       intro:
         'Vamos conversar sobre IA enterprise, arquitetura de agentes, modelos operacionais ou produtos digitais. Resposta por email, sem nomes de clientes.',
-      email: 'pierrondi@gmail.com',
+      email: CONTACT.email,
       form: {
         nameLabel: 'Nome',
         namePlaceholder: 'Seu nome',
@@ -316,8 +317,8 @@ export const COPY: Record<Lang, SiteCopy> = {
         errorMessage: 'Algo deu errado. Tente novamente ou envie um email direto.',
       },
       links: [
-        { label: 'LinkedIn', href: 'https://br.linkedin.com/in/paulopierrondi' },
-        { label: 'GitHub', href: 'https://github.com/paulopierrondi' },
+        { label: 'LinkedIn', href: CONTACT.linkedin },
+        { label: 'GitHub', href: CONTACT.github },
       ],
       footer: {
         line: '© 2026 Paulo Pierrondi — built with Next.js + TypeScript',
@@ -632,7 +633,7 @@ export const COPY: Record<Lang, SiteCopy> = {
       heading: 'Contact',
       intro:
         "Let's talk about enterprise AI, agent architecture, operating models, or digital products. Reply by email, no client names.",
-      email: 'pierrondi@gmail.com',
+      email: CONTACT.email,
       form: {
         nameLabel: 'Name',
         namePlaceholder: 'Your name',
@@ -645,8 +646,8 @@ export const COPY: Record<Lang, SiteCopy> = {
         errorMessage: 'Something went wrong. Please try again or send an email directly.',
       },
       links: [
-        { label: 'LinkedIn', href: 'https://br.linkedin.com/in/paulopierrondi' },
-        { label: 'GitHub', href: 'https://github.com/paulopierrondi' },
+        { label: 'LinkedIn', href: CONTACT.linkedin },
+        { label: 'GitHub', href: CONTACT.github },
       ],
       footer: {
         line: '© 2026 Paulo Pierrondi — built with Next.js + TypeScript',

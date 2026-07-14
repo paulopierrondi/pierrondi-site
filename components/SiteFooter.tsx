@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { CONTACT, getWhatsAppHref } from '@/lib/contact'
 import { getCurrentLanguage, type HomeLang } from '@/lib/i18n/site-language'
 import { isImmersiveHomeRoute, usesOwnAppChrome } from '@/components/home-v2/immersive-routes'
 import styles from './SiteFooter.module.css'
@@ -33,7 +34,7 @@ const footerCopy: Record<HomeLang, {
     headlinePrefix: 'IA que vira',
     headlineAccent: 'execução governada.',
     contactHref: '/contato',
-    primaryCta: 'Conectar no LinkedIn',
+    primaryCta: 'Conversar no WhatsApp',
     secondaryCta: 'Enviar email',
     navHead: 'Navegação',
     navLinks: [
@@ -73,7 +74,7 @@ const footerCopy: Record<HomeLang, {
     headlinePrefix: 'AI that becomes',
     headlineAccent: 'governed execution.',
     contactHref: '/en/contato',
-    primaryCta: 'Connect on LinkedIn',
+    primaryCta: 'Start on WhatsApp',
     secondaryCta: 'Send email',
     navHead: 'Navigation',
     navLinks: [
@@ -114,6 +115,11 @@ export default function SiteFooter() {
   const pathname = usePathname() || '/'
   const lang = getCurrentLanguage(pathname)
   const copy = footerCopy[lang]
+  const whatsappHref = getWhatsAppHref(
+    lang === 'pt'
+      ? 'Olá, Paulo. Encontrei seu site e gostaria de conversar.'
+      : 'Hi Paulo, I found your site and would like to talk.'
+  )
 
   const scrollTop = () => {
     if (typeof window === 'undefined') return
@@ -138,14 +144,14 @@ export default function SiteFooter() {
             </Link>
             <div className={styles.actions}>
               <a
-                href="https://br.linkedin.com/in/paulopierrondi"
+                href={whatsappHref}
                 target="_blank"
                 rel="noreferrer"
                 className={styles.btnPrimary}
               >
                 {copy.primaryCta} <span aria-hidden="true">↗</span>
               </a>
-              <a href="mailto:pierrondi@gmail.com" className={styles.btnGhost}>
+              <a href={`mailto:${CONTACT.email}`} className={styles.btnGhost}>
                 {copy.secondaryCta} <span aria-hidden="true">→</span>
               </a>
             </div>
@@ -174,9 +180,10 @@ export default function SiteFooter() {
             </div>
             <div className={styles.col}>
               <h3 className={styles.colHead}>{copy.contactHead}</h3>
-              <a href="mailto:pierrondi@gmail.com">pierrondi@gmail.com</a>
+              <a href={whatsappHref} target="_blank" rel="noreferrer">WhatsApp</a>
+              <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
               <a
-                href="https://br.linkedin.com/in/paulopierrondi"
+                href={CONTACT.linkedin}
                 target="_blank"
                 rel="noreferrer"
               >

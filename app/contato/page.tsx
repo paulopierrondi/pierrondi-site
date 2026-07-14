@@ -28,9 +28,9 @@ export default function ContatoPage() {
     <>
       <PageHeader
         eyebrow="CONTATO"
-        title={<>Vamos <span className="text-primary">trocar uma ideia.</span></>}
-        lead="Sobre estratégia de IA, ServiceNow, agentes governados e modelo operacional. Sem agenda comercial — uma boa conversa é sempre bem-vinda."
-        chips={['Resposta por email', 'Sem nomes de clientes', 'Contexto técnico + executivo']}
+        title={<>Vamos <span className="text-primary">abrir uma boa conversa.</span></>}
+        lead="WhatsApp para começar direto, email para trazer contexto e LinkedIn para uma conexão profissional. Sem agenda comercial — uma boa conversa é sempre bem-vinda."
+        chips={['WhatsApp direto', 'Email com contexto', 'Técnico + executivo']}
       />
       <ContatoPageContent lang="pt" />
     </>
