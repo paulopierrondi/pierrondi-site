@@ -26,12 +26,9 @@ const SECTION_COMPONENTS: Record<SectionId, ComponentType<SectionProps>> = {
   contact: ContactSection,
 }
 
-export interface HomeV2Props {
-  lang: Lang
-  langHrefs?: { pt: string; en: string }
-}
+export interface HomeV2Props { lang: Lang }
 
-export default function HomeV2({ lang, langHrefs = { pt: '/', en: '/en' } }: HomeV2Props) {
+export default function HomeV2({ lang }: HomeV2Props) {
   const copy = COPY[lang]
   const rootRef = useRef<HTMLDivElement>(null)
   const [activeSection, setActiveSection] = useState<SectionId>('hero')
@@ -96,11 +93,8 @@ export default function HomeV2({ lang, langHrefs = { pt: '/', en: '/en' } }: Hom
     <div ref={rootRef} className={`hv2 ${hv2Body.variable} ${hv2Display.variable} ${styles.root}`}>
       <NavBar
         lang={lang}
-        nav={copy.nav}
         activeSection={activeSection}
         onNavigate={scrollTo}
-        langHrefs={langHrefs}
-        studioHref={lang === 'pt' ? '/studio' : '/en/studio'}
       />
 
       <main className={styles.sections}>

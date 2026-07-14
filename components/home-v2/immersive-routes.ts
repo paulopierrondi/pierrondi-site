@@ -1,6 +1,7 @@
 // Routes where the home-v2 immersive experience owns the full chrome
 // (its own nav, dots, footer/contact). The global SiteNav, SiteFooter,
-// LanguageSwitcher and HomeBackground must not render on these routes.
+// HomeBackground must not render on these routes. LanguageSwitcher is global
+// so every public shell keeps the same language control.
 const IMMERSIVE_HOME_ROUTES = new Set(['/', '/en'])
 const HOME_CHROME_ROUTES = new Set(['/', '/en', '/feitos', '/en/feitos'])
 

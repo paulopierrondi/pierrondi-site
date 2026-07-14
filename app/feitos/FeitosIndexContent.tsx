@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowDown, ArrowRight } from 'lucide-react'
-import { COPY as HOME_COPY } from '@/components/home-v2/copy'
 import { hv2Body, hv2Display } from '@/components/home-v2/fonts'
 import HomeNavBar from '@/components/home-v2/chrome/NavBar'
 import ProjectsSection from '@/components/home-v2/sections/ProjectsSection'
@@ -241,11 +240,8 @@ export default function FeitosIndexContent({ lang }: { lang: FeitosLang }) {
     <div className={`hv2 ${hv2Body.variable} ${hv2Display.variable} ${styles.root}`}>
       <HomeNavBar
         lang={lang}
-        nav={HOME_COPY[lang].nav}
-        activeSection="projects"
+        activeHref={lang === 'pt' ? '/feitos' : '/en/feitos'}
         onNavigate={navigateHome}
-        langHrefs={{ pt: '/feitos', en: '/en/feitos' }}
-        studioHref={lang === 'pt' ? '/studio' : '/en/studio'}
       />
       <div className={styles.portfolioFrame}>
         <ProjectsSection lang={lang} />

@@ -18,12 +18,6 @@ export interface SectionMeta {
   index: string
 }
 
-export interface NavCopy {
-  /** Logo text with decorative brackets, e.g. '<pierrondi.dev/>' */
-  logo: string
-  links: { label: string; target: SectionId }[]
-}
-
 export interface HeroCopy {
   /** Terminal-style tagline typed above the headline, e.g. '$ whoami' */
   tagline: string
@@ -146,7 +140,6 @@ export interface ContactCopy {
 }
 
 export interface SiteCopy {
-  nav: NavCopy
   sections: SectionMeta[]
   hero: HeroCopy
   projects: { heading: string; items: ProjectItem[] }
