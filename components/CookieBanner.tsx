@@ -34,7 +34,7 @@ export default function CookieBanner() {
     pathname === '/paulo' ||
     pathname === '/whypaulo' ||
     pathname?.startsWith('/apps') ||
-    pathname?.startsWith('/studio') ||
+    pathname?.startsWith('/studio/') ||
     pathname?.startsWith('/bradesco-26')
 
   useEffect(() => {

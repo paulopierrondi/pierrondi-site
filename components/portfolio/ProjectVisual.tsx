@@ -51,6 +51,14 @@ export function CaseMark({ item, size = 42 }: { item: PortfolioCase; size?: numb
     )
   }
 
+  if (item.visual === 'pierrondi-studio') {
+    return (
+      <span className={`${styles.caseMark} ${styles.studioMark}`} style={{ width: size, height: size }} aria-hidden="true">
+        PS
+      </span>
+    )
+  }
+
   return (
     <span className={`${styles.caseMark} ${styles.crmMark}`} style={{ width: size, height: size }} aria-hidden="true">
       SC
@@ -80,6 +88,7 @@ export default function ProjectVisual({
       {item.visual === 'app-store' && <AppStoreVisual lang={lang} reduceMotion={reduceMotion} />}
       {item.visual === 'kommo' && <KommoVisual lang={lang} reduceMotion={reduceMotion} />}
       {item.visual === 'studio-crm' && <CrmVisual lang={lang} reduceMotion={reduceMotion} />}
+      {item.visual === 'pierrondi-studio' && <StudioVisual lang={lang} reduceMotion={reduceMotion} />}
       {item.visual === 'agenticoscore' && <AgenticosVisual />}
       {item.visual === 'sada' && <SadaVisual lang={lang} reduceMotion={reduceMotion} />}
     </div>
@@ -274,6 +283,41 @@ function AgenticosVisual() {
       <div className={styles.agenticosLabel}>
         <Image src="/portfolio/agenticoscore/logo.svg" alt="" width={28} height={28} />
         <span>REVENUE OPERATING SYSTEM</span>
+      </div>
+    </div>
+  )
+}
+
+function StudioVisual({ lang, reduceMotion }: { lang: PortfolioLang; reduceMotion: boolean }) {
+  const nodes = lang === 'pt'
+    ? ['Posição', 'Marca', 'Conteúdo', 'CRM', 'Crescimento']
+    : ['Position', 'Brand', 'Content', 'CRM', 'Growth']
+
+  return (
+    <div className={styles.studioVisual}>
+      <div className={styles.studioVisualHeader}>
+        <span className={styles.studioVisualMark}>PS</span>
+        <div><span>PIERRONDI</span><strong>STUDIO</strong></div>
+        <small>{lang === 'pt' ? 'SISTEMA CONECTADO' : 'CONNECTED SYSTEM'}</small>
+      </div>
+      <div className={styles.studioVisualFlow}>
+        <span className={styles.studioVisualLine} aria-hidden="true" />
+        {nodes.map((node, index) => (
+          <motion.div
+            key={node}
+            initial={reduceMotion ? false : { opacity: 0, y: 12, scale: 0.92 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: reduceMotion ? 0 : 0.38, delay: reduceMotion ? 0 : index * 0.07 }}
+          >
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>{node}</strong>
+          </motion.div>
+        ))}
+      </div>
+      <div className={styles.studioVisualFooter}>
+        <span>{lang === 'pt' ? 'ESTRATÉGIA' : 'STRATEGY'}</span>
+        <span>{lang === 'pt' ? 'PRODUÇÃO' : 'PRODUCTION'}</span>
+        <span>{lang === 'pt' ? 'IMPLEMENTAÇÃO' : 'IMPLEMENTATION'}</span>
       </div>
     </div>
   )

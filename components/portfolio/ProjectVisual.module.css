@@ -112,12 +112,24 @@
   background: linear-gradient(135deg, #112f33, #101617);
 }
 
+.studioMark {
+  color: #041108;
+  border-color: rgba(74, 222, 128, 0.46);
+  background: linear-gradient(135deg, #8af4ad, #4ade80 60%, #239852);
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.18);
+}
+
 .cantuVisual,
 .agenticosVisual,
 .faithVisual,
 .appStoreVisual,
 .kommoVisual,
 .crmVisual,
+.studioVisual,
 .sadaVisual {
   position: absolute;
   inset: 0;
@@ -658,6 +670,146 @@
   letter-spacing: 0.08em;
 }
 
+/* Pierrondi Studio — strategy-to-growth system map */
+.studioVisual {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(22px, 4vw, 42px);
+  overflow: hidden;
+  padding: clamp(22px, 4vw, 42px);
+  background:
+    radial-gradient(circle at 86% 12%, rgba(96, 165, 250, 0.18), transparent 34%),
+    radial-gradient(circle at 12% 90%, rgba(74, 222, 128, 0.16), transparent 34%),
+    linear-gradient(145deg, #070b0a, #111716 58%, #080b0a);
+}
+
+.studioVisual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.24;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 38px 38px;
+}
+
+.studioVisualHeader,
+.studioVisualFlow,
+.studioVisualFooter {
+  position: relative;
+  z-index: 2;
+}
+
+.studioVisualHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.studioVisualMark {
+  display: grid;
+  width: 38px;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 11px;
+  color: #041108;
+  background: #4ade80;
+  box-shadow: 0 0 24px rgba(74, 222, 128, 0.23);
+  font: 900 10px/1 var(--font-display, ui-sans-serif, sans-serif);
+}
+
+.studioVisualHeader > div {
+  display: grid;
+  gap: 2px;
+}
+
+.studioVisualHeader > div span {
+  color: rgba(247, 255, 249, 0.42);
+  font: 700 7px/1 var(--hv2-font-mono, ui-monospace, monospace);
+  letter-spacing: 0.18em;
+}
+
+.studioVisualHeader > div strong {
+  color: #f4fff7;
+  font-size: 18px;
+  letter-spacing: -0.04em;
+}
+
+.studioVisualHeader small {
+  margin-left: auto;
+  color: #86efac;
+  font: 700 7px/1 var(--hv2-font-mono, ui-monospace, monospace);
+  letter-spacing: 0.1em;
+}
+
+.studioVisualFlow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: center;
+  gap: 8px;
+}
+
+.studioVisualFlow > div {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 11px;
+  padding: 12px 9px;
+  background: rgba(4, 8, 7, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.studioVisualFlow > div:nth-child(4) {
+  border-color: rgba(74, 222, 128, 0.34);
+}
+
+.studioVisualFlow > div:last-child {
+  border-color: rgba(245, 158, 11, 0.32);
+}
+
+.studioVisualFlow > div span {
+  color: rgba(247, 255, 249, 0.34);
+  font: 700 7px/1 var(--hv2-font-mono, ui-monospace, monospace);
+}
+
+.studioVisualFlow > div strong {
+  overflow: hidden;
+  color: #f0f8f2;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.studioVisualLine {
+  position: absolute;
+  z-index: 1;
+  left: 3%;
+  right: 3%;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, #60a5fa, #4ade80, #f59e0b);
+  box-shadow: 0 0 16px rgba(74, 222, 128, 0.36);
+}
+
+.studioVisualFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.studioVisualFooter span {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 6px 8px;
+  color: rgba(247, 255, 249, 0.5);
+  font: 700 7px/1 var(--hv2-font-mono, ui-monospace, monospace);
+  letter-spacing: 0.08em;
+}
+
 /* SADA */
 .sadaVisual {
   display: grid;
@@ -929,6 +1081,27 @@
   .crmTable {
     gap: 9px;
     padding: 12px;
+  }
+
+  .studioVisual {
+    gap: 18px;
+    padding: 18px;
+  }
+
+  .studioVisualHeader small {
+    display: none;
+  }
+
+  .studioVisualFlow {
+    gap: 4px;
+  }
+
+  .studioVisualFlow > div {
+    padding: 9px 5px;
+  }
+
+  .studioVisualFlow > div strong {
+    font-size: 7px;
   }
 
   .sadaVisual {

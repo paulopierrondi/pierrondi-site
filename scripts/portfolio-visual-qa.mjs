@@ -54,6 +54,7 @@ async function inspectViewport(viewport) {
     viewportWidth: window.innerWidth,
     scrollWidth: document.documentElement.scrollWidth,
     projectVisuals: document.querySelectorAll('#projects [data-visual]').length,
+    projectTabs: document.querySelectorAll('#projects [role="tab"]').length,
     selectedTab: document.querySelector('#projects [role="tab"][aria-selected="true"]')?.textContent?.trim() ?? '',
   }))
 
@@ -94,10 +95,10 @@ async function inspectViewport(viewport) {
     pass: homeMetrics.scrollWidth <= homeMetrics.viewportWidth
       && portfolioMetrics.scrollWidth <= portfolioMetrics.viewportWidth
       && homeMetrics.projectVisuals === 1
-      && selectedAfterKeyboard === 'FaithSchool'
-      && focusedAfterKeyboard === 'project-tab-faithschool'
+      && selectedAfterKeyboard === 'CantuStudio'
+      && focusedAfterKeyboard === 'project-tab-cantustudio'
       && portfolioMetrics.appLinks === 21
-      && portfolioMetrics.caseSections === 7
+      && portfolioMetrics.caseSections === homeMetrics.projectTabs
       && !portfolioMetrics.exposesClientName
       && consoleErrors.length === 0
       && pageErrors.length === 0,

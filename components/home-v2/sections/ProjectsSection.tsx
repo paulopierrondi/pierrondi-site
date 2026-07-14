@@ -76,10 +76,10 @@ export default function ProjectsSection({ lang }: SectionProps) {
 
       <header className={styles.topbar}>
         <div>
-          <p className={styles.kicker}>{lang === 'pt' ? 'PRODUTO · MOBILE · INTEGRAÇÕES · IA' : 'PRODUCT · MOBILE · INTEGRATIONS · AI'}</p>
+          <p className={styles.kicker}>{lang === 'pt' ? 'PRODUTO · MARCA · INTEGRAÇÕES · IA' : 'PRODUCT · BRAND · INTEGRATIONS · AI'}</p>
           <h2 id="portfolio-home-title" className={styles.heading}>
             <span className={styles.headingIndex}>{SECTION_NUMBER}</span>
-            {lang === 'pt' ? 'Código que virou produto.' : 'Code that became product.'}
+            {lang === 'pt' ? 'Estratégia e código que viraram sistema.' : 'Strategy and code turned into systems.'}
           </h2>
         </div>
         <a href={portfolioHref} className={styles.portfolioLink}>

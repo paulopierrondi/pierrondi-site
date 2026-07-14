@@ -2,7 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /automacoes
-Disallow: /studio
 Disallow: /studio/
 Disallow: /login
 Disallow: /login-v2
@@ -34,7 +33,6 @@ User-agent: Applebot-Extended
 Allow: /
 Disallow: /api/
 Disallow: /automacoes
-Disallow: /studio
 Disallow: /studio/
 Disallow: /login
 Disallow: /login-v2
