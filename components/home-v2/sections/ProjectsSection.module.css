@@ -72,6 +72,48 @@
   transition: color 180ms ease, border-color 180ms ease;
 }
 
+.topbarLinks {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.studioDirectLink {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(74, 222, 128, 0.24);
+  border-radius: 999px;
+  padding: 0 13px;
+  color: #dffff0;
+  background: rgba(74, 222, 128, 0.06);
+  font: 750 9px/1 var(--hv2-font-mono);
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.studioDirectLink > span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--hv2-accent-green);
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.7);
+}
+
+.studioDirectLink svg { width: 13px; }
+.studioDirectLink:hover,
+.studioDirectLink:focus-visible {
+  border-color: var(--hv2-accent-green);
+  color: #041108;
+  background: var(--hv2-accent-green);
+  transform: translateY(-1px);
+}
+.studioDirectLink:hover > span,
+.studioDirectLink:focus-visible > span { background: #041108; box-shadow: none; }
+
 .portfolioLink svg {
   width: 15px;
 }
@@ -478,6 +520,11 @@
     align-items: center;
   }
 
+  .topbarLinks {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
   .stage {
     display: block;
     min-width: 0;
@@ -583,6 +630,12 @@
 
   .portfolioLink {
     width: fit-content;
+  }
+
+  .topbarLinks {
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px 16px;
     margin-top: 17px;
   }
 
