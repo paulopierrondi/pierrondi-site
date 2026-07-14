@@ -28,9 +28,9 @@ export default function ContatoEnPage() {
     <>
       <PageHeader
         eyebrow="CONTACT"
-        title={<>Let&apos;s <span className="text-primary">talk.</span></>}
-        lead="About AI strategy, ServiceNow, governed agents, and operating models. No sales agenda — a good conversation is always welcome."
-        chips={['Reply by email', 'No client names', 'Technical + executive context']}
+        title={<>Let&apos;s <span className="text-primary">start a good conversation.</span></>}
+        lead="WhatsApp for a direct start, email for detailed context, and LinkedIn for a professional connection. No sales agenda — a good conversation is always welcome."
+        chips={['Direct WhatsApp', 'Email for context', 'Technical + executive']}
       />
       <ContatoPageContent lang="en" />
     </>

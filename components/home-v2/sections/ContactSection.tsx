@@ -6,12 +6,26 @@ import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import { COPY } from '../copy'
 import type { SectionProps } from '../types'
 import { trackEvent } from '@/lib/analytics'
+import { CONTACT, getWhatsAppHref } from '@/lib/contact'
 import styles from './ContactSection.module.css'
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
 
 export default function ContactSection({ lang }: SectionProps) {
   const copy = COPY[lang].contact
+  const whatsapp = lang === 'pt'
+    ? {
+        kicker: 'Canal mais direto',
+        action: 'Abrir conversa no WhatsApp',
+        detail: 'Para começar uma conversa agora',
+        href: getWhatsAppHref('Olá, Paulo. Encontrei seu site e gostaria de conversar sobre IA, produtos ou sistemas.'),
+      }
+    : {
+        kicker: 'Most direct channel',
+        action: 'Start a WhatsApp conversation',
+        detail: 'To start a conversation now',
+        href: getWhatsAppHref('Hi Paulo, I found your site and would like to discuss AI, products, or operating systems.'),
+      }
   const containerRef = useRef<HTMLElement>(null)
   const prefersReducedMotion = useHydratedReducedMotion()
   const isInView = useInView(containerRef, { margin: '-20% 0px', once: false })
@@ -108,6 +122,28 @@ export default function ContactSection({ lang }: SectionProps) {
             <motion.p className={styles.intro} variants={baseVariants}>
               {copy.intro}
             </motion.p>
+
+            <motion.a
+              className={styles.whatsappCard}
+              href={whatsapp.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={baseVariants}
+              onClick={() => trackEvent('Contact_WhatsApp_Clicked', { source: 'home_v2', language: lang })}
+            >
+              <span className={styles.whatsappHeader}>
+                <span>{whatsapp.kicker}</span>
+                <span className={styles.whatsappStatus}>online</span>
+              </span>
+              <span className={styles.whatsappContent}>
+                <span>
+                  <strong>WhatsApp</strong>
+                  <small>{CONTACT.whatsapp.display} · {whatsapp.detail}</small>
+                </span>
+                <span className={styles.whatsappArrow} aria-hidden="true">↗</span>
+              </span>
+              <span className={styles.whatsappAction}>{whatsapp.action}</span>
+            </motion.a>
 
             <motion.div className={styles.emailCard} variants={baseVariants}>
               <div className={styles.emailCardHeader}>
