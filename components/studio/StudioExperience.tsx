@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import {
   ArrowDownRight,
@@ -23,6 +24,10 @@ import {
 import styles from './StudioExperience.module.css'
 
 const frontIcons = [Compass, Palette, Clapperboard, Bot] as const
+const StudioGrowthCore = dynamic(() => import('./StudioGrowthCore'), {
+  ssr: false,
+  loading: () => <div className={styles.growthCoreLoading} aria-hidden="true" />,
+})
 
 export function StudioMark({ compact = false }: { compact?: boolean }) {
   return (
@@ -30,50 +35,6 @@ export function StudioMark({ compact = false }: { compact?: boolean }) {
       <span>P</span>
       <i>S</i>
     </span>
-  )
-}
-
-function SignalMap({ lang }: { lang: StudioLang }) {
-  const copy = STUDIO_COPY[lang].signalMap
-
-  return (
-    <figure className={styles.signalMap} aria-label={`${copy.title}: ${copy.nodes.join(' → ')}`}>
-      <div className={styles.signalHeader}>
-        <span>{copy.eyebrow}</span>
-        <span className={styles.liveStatus}><i /> {copy.status}</span>
-      </div>
-      <div className={styles.signalTitle}>
-        <StudioMark />
-        <div>
-          <span>PIERRONDI</span>
-          <strong id="studio-system-map-title">STUDIO</strong>
-        </div>
-      </div>
-      <div className={styles.signalCanvas} aria-hidden="true">
-        <span className={styles.signalOrbit} />
-        <span className={styles.signalSweep} />
-        <svg viewBox="0 0 660 280" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="studio-line" x1="0" x2="1">
-              <stop offset="0" stopColor="#60a5fa" />
-              <stop offset="0.48" stopColor="#4ade80" />
-              <stop offset="1" stopColor="#f59e0b" />
-            </linearGradient>
-          </defs>
-          <path d="M 48 178 C 132 60, 226 60, 304 140 S 466 248, 612 78" />
-          <path className={styles.signalPathGhost} d="M 48 220 C 156 160, 224 236, 330 152 S 506 34, 612 126" />
-        </svg>
-        <div className={styles.signalNodes}>
-          {copy.nodes.map((node, index) => (
-            <span key={node} className={styles.signalNode} data-node={index + 1}>
-              <i>{String(index + 1).padStart(2, '0')}</i>
-              <strong>{node}</strong>
-            </span>
-          ))}
-        </div>
-      </div>
-      <figcaption>{copy.title}</figcaption>
-    </figure>
   )
 }
 
@@ -118,7 +79,10 @@ export default function StudioExperience({ lang }: { lang: StudioLang }) {
         </div>
 
         <motion.div className={styles.heroVisual} {...reveal(0.1)}>
-          <SignalMap lang={lang} />
+          <figure className={styles.growthFigure} aria-label={`${copy.signalMap.title}: ${copy.signalMap.nodes.join(' → ')}`}>
+            <StudioGrowthCore lang={lang} />
+            <figcaption className={styles.srOnly}>{copy.signalMap.title}</figcaption>
+          </figure>
         </motion.div>
 
         <div className={styles.proofRail} aria-label={lang === 'pt' ? 'Componentes do sistema' : 'System components'}>

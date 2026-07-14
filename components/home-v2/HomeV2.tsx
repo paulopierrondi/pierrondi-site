@@ -94,7 +94,14 @@ export default function HomeV2({ lang, langHrefs = { pt: '/', en: '/en' } }: Hom
 
   return (
     <div ref={rootRef} className={`hv2 ${hv2Body.variable} ${hv2Display.variable} ${styles.root}`}>
-      <NavBar lang={lang} nav={copy.nav} activeSection={activeSection} onNavigate={scrollTo} langHrefs={langHrefs} />
+      <NavBar
+        lang={lang}
+        nav={copy.nav}
+        activeSection={activeSection}
+        onNavigate={scrollTo}
+        langHrefs={langHrefs}
+        studioHref={lang === 'pt' ? '/studio' : '/en/studio'}
+      />
 
       <main className={styles.sections}>
         {copy.sections.map((meta) => {

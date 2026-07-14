@@ -15,7 +15,10 @@ const viewports = [
 ]
 
 await mkdir(outputDir, { recursive: true })
-const browser = await chromium.launch({ headless: true })
+const browser = await chromium.launch({
+  headless: true,
+  args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-webgl'],
+})
 const report = {
   baseUrl,
   generatedAt: new Date().toISOString(),
@@ -87,6 +90,8 @@ async function inspectViewport(viewport) {
     processSteps: document.querySelectorAll('#metodo article').length,
     sectionLinks: document.querySelectorAll('nav[aria-label="Seções do Studio"] a').length,
     primaryCta: document.querySelector('main a[href^="/contato"]')?.getAttribute('href') ?? '',
+    webglReady: document.querySelector('[data-studio-growth-core]')?.getAttribute('data-webgl-ready') ?? '',
+    growthCoreCanvases: document.querySelectorAll('[data-studio-growth-core] canvas').length,
     visibleCookieBanners: [...document.querySelectorAll('[aria-label="Consentimento de cookies"]')]
       .filter((element) => element.getBoundingClientRect().height > 0).length,
     casesHeadingTop: document.querySelector('#studio-cases-title')?.getBoundingClientRect().top ?? -1,
@@ -102,6 +107,8 @@ async function inspectViewport(viewport) {
     && metrics.processSteps === 5
     && metrics.sectionLinks === 4
     && metrics.primaryCta.includes('studio-piloto')
+    && metrics.webglReady === 'true'
+    && metrics.growthCoreCanvases === 1
     && metrics.visibleCookieBanners === 0
     && metrics.casesHeadingTop >= 110
     && metrics.casesHeadingTop < metrics.viewportHeight
@@ -133,7 +140,42 @@ const home = await integrationPage.evaluate(() => ({
   viewportWidth: window.innerWidth,
   selectedProject: document.querySelector('section[aria-labelledby="portfolio-home-title"] [role="tab"][aria-selected="true"] strong')?.textContent?.trim() ?? '',
   studioHref: document.querySelector('section[aria-labelledby="portfolio-home-title"] a[href="/studio"]')?.getAttribute('href') ?? '',
+  navStudioHref: document.querySelector('header a[href="/studio"]')?.getAttribute('href') ?? '',
+  growthCoreCanvases: document.querySelectorAll('section[aria-labelledby="portfolio-home-title"] [data-studio-growth-core] canvas').length,
+  webglReady: document.querySelector('section[aria-labelledby="portfolio-home-title"] [data-studio-growth-core]')?.getAttribute('data-webgl-ready') ?? '',
 }))
+
+const desktopContext = await createContext({
+  viewport: { width: 1440, height: 1000 },
+  deviceScaleFactor: 1,
+  locale: 'pt-BR',
+  colorScheme: 'dark',
+})
+const desktopPage = await desktopContext.newPage()
+const desktopDiagnostics = attachDiagnostics(desktopPage)
+await desktopPage.goto(`${baseUrl}/`, { waitUntil: 'domcontentloaded' })
+await settle(desktopPage, 900)
+const desktopPortfolio = desktopPage.locator('section[aria-labelledby="portfolio-home-title"]')
+await desktopPortfolio.evaluate((element) => element.scrollIntoView({ block: 'start', behavior: 'instant' }))
+await desktopPage.waitForTimeout(700)
+const desktopCore = desktopPortfolio.locator('[data-studio-growth-core]')
+const desktopCanvas = desktopCore.locator('canvas')
+const frameBefore = await desktopCanvas.evaluate((canvas) => canvas.toDataURL('image/png'))
+const coreBox = await desktopCore.boundingBox()
+if (coreBox) await desktopPage.mouse.move(coreBox.x + coreBox.width * 0.72, coreBox.y + coreBox.height * 0.32)
+await desktopPage.waitForTimeout(650)
+const frameAfter = await desktopCanvas.evaluate((canvas) => canvas.toDataURL('image/png'))
+await desktopPage.screenshot({ path: path.join(outputDir, 'home-studio-desktop-1440.png'), fullPage: false })
+const homeDesktop = await desktopPage.evaluate(() => ({
+  scrollWidth: document.documentElement.scrollWidth,
+  viewportWidth: window.innerWidth,
+  navStudioHref: document.querySelector('header a[href="/studio"]')?.getAttribute('href') ?? '',
+  topbarStudioHref: document.querySelector('section[aria-labelledby="portfolio-home-title"] a[href="/studio"]')?.getAttribute('href') ?? '',
+  webglReady: document.querySelector('section[aria-labelledby="portfolio-home-title"] [data-studio-growth-core]')?.getAttribute('data-webgl-ready') ?? '',
+  growthCoreCanvases: document.querySelectorAll('section[aria-labelledby="portfolio-home-title"] [data-studio-growth-core] canvas').length,
+}))
+homeDesktop.frameChanged = frameBefore !== frameAfter
+await desktopContext.close()
 
 await integrationPage.goto(`${baseUrl}/portfolio#pierrondi-studio`, { waitUntil: 'domcontentloaded' })
 await settle(integrationPage)
@@ -171,14 +213,25 @@ const english = await integrationPage.evaluate(() => ({
 await integrationContext.close()
 report.integrations = {
   home,
+  homeDesktop,
   portfolio,
   feitos,
   english,
   englishStatus: enResponse?.status(),
   ...integrationDiagnostics,
+  desktopDiagnostics,
   pass: home.scrollWidth <= home.viewportWidth
     && home.selectedProject === 'Pierrondi Studio'
     && home.studioHref === '/studio'
+    && home.navStudioHref === '/studio'
+    && home.growthCoreCanvases === 1
+    && home.webglReady === 'true'
+    && homeDesktop.scrollWidth <= homeDesktop.viewportWidth
+    && homeDesktop.navStudioHref === '/studio'
+    && homeDesktop.topbarStudioHref === '/studio'
+    && homeDesktop.webglReady === 'true'
+    && homeDesktop.growthCoreCanvases === 1
+    && homeDesktop.frameChanged
     && portfolio.scrollWidth <= portfolio.viewportWidth
     && portfolio.studioAnchors === 1
     && portfolio.studioHref === '/studio'
@@ -191,7 +244,10 @@ report.integrations = {
     && english.caseCards === 3
     && integrationDiagnostics.consoleErrors.length === 0
     && integrationDiagnostics.pageErrors.length === 0
-    && integrationDiagnostics.failedRequests.length === 0,
+    && integrationDiagnostics.failedRequests.length === 0
+    && desktopDiagnostics.consoleErrors.length === 0
+    && desktopDiagnostics.pageErrors.length === 0
+    && desktopDiagnostics.failedRequests.length === 0,
 }
 
 const reducedContext = await createContext({

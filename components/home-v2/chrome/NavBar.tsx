@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { ArrowUpRight, Menu, X } from 'lucide-react'
 import type { Lang, NavCopy, SectionId } from '../types'
 import styles from './NavBar.module.css'
 
@@ -11,9 +11,10 @@ interface NavBarProps {
   activeSection: SectionId
   onNavigate: (target: SectionId) => void
   langHrefs: { pt: string; en: string }
+  studioHref: string
 }
 
-export default function NavBar({ lang, nav, activeSection, onNavigate, langHrefs }: NavBarProps) {
+export default function NavBar({ lang, nav, activeSection, onNavigate, langHrefs, studioHref }: NavBarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -66,6 +67,11 @@ export default function NavBar({ lang, nav, activeSection, onNavigate, langHrefs
       </nav>
 
       <div className={styles.right}>
+        <a href={studioHref} className={styles.studioLink}>
+          <span aria-hidden="true" />
+          Studio
+          <ArrowUpRight aria-hidden="true" />
+        </a>
         <div className={styles.langToggle}>
           <a
             href={langHrefs.pt}
@@ -98,6 +104,10 @@ export default function NavBar({ lang, nav, activeSection, onNavigate, langHrefs
 
       {menuOpen && (
         <nav className={styles.mobileMenu} aria-label={lang === 'pt' ? 'Menu' : 'Menu'}>
+          <a href={studioHref} className={`${styles.mobileLink} ${styles.mobileStudioLink}`}>
+            <span className={styles.mobilePrompt} aria-hidden="true">↗</span>
+            Pierrondi Studio
+          </a>
           {nav.links.map((link) => (
             <a
               key={link.target}

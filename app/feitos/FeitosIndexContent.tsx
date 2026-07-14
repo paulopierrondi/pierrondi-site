@@ -245,6 +245,7 @@ export default function FeitosIndexContent({ lang }: { lang: FeitosLang }) {
         activeSection="projects"
         onNavigate={navigateHome}
         langHrefs={{ pt: '/feitos', en: '/en/feitos' }}
+        studioHref={lang === 'pt' ? '/studio' : '/en/studio'}
       />
       <div className={styles.portfolioFrame}>
         <ProjectsSection lang={lang} />

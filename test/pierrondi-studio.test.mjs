@@ -7,6 +7,9 @@ import { resolveLocalizedPath } from '../lib/i18n/site-language.ts'
 const root = new URL('../', import.meta.url)
 const portfolioData = await readFile(new URL('components/portfolio/portfolio-data.ts', root), 'utf8')
 const projectsSection = await readFile(new URL('components/home-v2/sections/ProjectsSection.tsx', root), 'utf8')
+const homeNav = await readFile(new URL('components/home-v2/chrome/NavBar.tsx', root), 'utf8')
+const homeV2 = await readFile(new URL('components/home-v2/HomeV2.tsx', root), 'utf8')
+const growthCore = await readFile(new URL('components/studio/StudioGrowthCore.tsx', root), 'utf8')
 const feitosIndex = await readFile(new URL('app/feitos/FeitosIndexContent.tsx', root), 'utf8')
 const sitemap = await readFile(new URL('app/sitemap.ts', root), 'utf8')
 const robots = await readFile(new URL('public/robots.txt', root), 'utf8')
@@ -45,6 +48,17 @@ test('one shared portfolio case powers the landing, portfolio, and feitos', () =
   assert.match(portfolioData, /href: '\/en\/studio'/)
   assert.match(projectsSection, /PORTFOLIO_CASES\[lang\]/)
   assert.match(feitosIndex, /<ProjectsSection lang=\{lang\} \/>/)
+})
+
+test('landing exposes Studio directly and the visual uses an accessible WebGL system', () => {
+  assert.match(homeV2, /studioHref=\{lang === 'pt' \? '\/studio' : '\/en\/studio'\}/)
+  assert.match(homeNav, /href=\{studioHref\}/)
+  assert.match(homeNav, /Pierrondi Studio/)
+  assert.match(projectsSection, /Pierrondi Studio/)
+  assert.match(projectsSection, /const studioHref = lang === 'pt' \? '\/studio' : '\/en\/studio'/)
+  assert.match(growthCore, /data-studio-growth-core/)
+  assert.match(growthCore, /frameloop=\{reducedMotion \? 'demand' : 'always'\}/)
+  assert.match(growthCore, /preserveDrawingBuffer: true/)
 })
 
 test('Studio is indexable while legacy private descendants remain blocked', () => {

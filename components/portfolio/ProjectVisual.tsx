@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import type { CSSProperties } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Bot, Check, MessageCircleMore, ShieldCheck } from 'lucide-react'
@@ -14,6 +15,10 @@ import {
 import styles from './ProjectVisual.module.css'
 
 const APP_WALL = APP_STORE_CATALOG.apps.slice(0, 15)
+const StudioGrowthCore = dynamic(() => import('@/components/studio/StudioGrowthCore'), {
+  ssr: false,
+  loading: () => <div className={styles.studioCoreLoading} aria-hidden="true" />,
+})
 
 export function CaseMark({ item, size = 42 }: { item: PortfolioCase; size?: number }) {
   if (item.logoSlug) return <ProductLogo slug={item.logoSlug} name={item.title} size={size} />
@@ -88,7 +93,7 @@ export default function ProjectVisual({
       {item.visual === 'app-store' && <AppStoreVisual lang={lang} reduceMotion={reduceMotion} />}
       {item.visual === 'kommo' && <KommoVisual lang={lang} reduceMotion={reduceMotion} />}
       {item.visual === 'studio-crm' && <CrmVisual lang={lang} reduceMotion={reduceMotion} />}
-      {item.visual === 'pierrondi-studio' && <StudioVisual lang={lang} reduceMotion={reduceMotion} />}
+      {item.visual === 'pierrondi-studio' && <StudioVisual lang={lang} />}
       {item.visual === 'agenticoscore' && <AgenticosVisual />}
       {item.visual === 'sada' && <SadaVisual lang={lang} reduceMotion={reduceMotion} />}
     </div>
@@ -288,37 +293,10 @@ function AgenticosVisual() {
   )
 }
 
-function StudioVisual({ lang, reduceMotion }: { lang: PortfolioLang; reduceMotion: boolean }) {
-  const nodes = lang === 'pt'
-    ? ['Posição', 'Marca', 'Conteúdo', 'CRM', 'Crescimento']
-    : ['Position', 'Brand', 'Content', 'CRM', 'Growth']
-
+function StudioVisual({ lang }: { lang: PortfolioLang }) {
   return (
     <div className={styles.studioVisual}>
-      <div className={styles.studioVisualHeader}>
-        <span className={styles.studioVisualMark}>PS</span>
-        <div><span>PIERRONDI</span><strong>STUDIO</strong></div>
-        <small>{lang === 'pt' ? 'SISTEMA CONECTADO' : 'CONNECTED SYSTEM'}</small>
-      </div>
-      <div className={styles.studioVisualFlow}>
-        <span className={styles.studioVisualLine} aria-hidden="true" />
-        {nodes.map((node, index) => (
-          <motion.div
-            key={node}
-            initial={reduceMotion ? false : { opacity: 0, y: 12, scale: 0.92 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: reduceMotion ? 0 : 0.38, delay: reduceMotion ? 0 : index * 0.07 }}
-          >
-            <span>{String(index + 1).padStart(2, '0')}</span>
-            <strong>{node}</strong>
-          </motion.div>
-        ))}
-      </div>
-      <div className={styles.studioVisualFooter}>
-        <span>{lang === 'pt' ? 'ESTRATÉGIA' : 'STRATEGY'}</span>
-        <span>{lang === 'pt' ? 'PRODUÇÃO' : 'PRODUCTION'}</span>
-        <span>{lang === 'pt' ? 'IMPLEMENTAÇÃO' : 'IMPLEMENTATION'}</span>
-      </div>
+      <StudioGrowthCore lang={lang} mode="compact" />
     </div>
   )
 }

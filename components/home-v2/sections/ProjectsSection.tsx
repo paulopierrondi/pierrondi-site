@@ -40,6 +40,7 @@ export default function ProjectsSection({ lang }: SectionProps) {
 
   const active = items[index]
   const portfolioHref = lang === 'pt' ? '/portfolio' : '/en/portfolio'
+  const studioHref = lang === 'pt' ? '/studio' : '/en/studio'
 
   const selectAndFocus = (next: number) => {
     const normalized = (next + items.length) % items.length
@@ -82,10 +83,17 @@ export default function ProjectsSection({ lang }: SectionProps) {
             {lang === 'pt' ? 'Estratégia e código que viraram sistema.' : 'Strategy and code turned into systems.'}
           </h2>
         </div>
-        <a href={portfolioHref} className={styles.portfolioLink}>
-          {lang === 'pt' ? 'portfólio completo' : 'full portfolio'}
-          <ArrowRight aria-hidden="true" />
-        </a>
+        <div className={styles.topbarLinks}>
+          <a href={studioHref} className={styles.studioDirectLink}>
+            <span aria-hidden="true" />
+            Pierrondi Studio
+            <ArrowRight aria-hidden="true" />
+          </a>
+          <a href={portfolioHref} className={styles.portfolioLink}>
+            {lang === 'pt' ? 'portfólio completo' : 'full portfolio'}
+            <ArrowRight aria-hidden="true" />
+          </a>
+        </div>
       </header>
 
       <motion.div
