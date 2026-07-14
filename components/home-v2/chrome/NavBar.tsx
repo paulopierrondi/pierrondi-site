@@ -1,128 +1,49 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { ArrowUpRight, Menu, X } from 'lucide-react'
-import type { Lang, NavCopy, SectionId } from '../types'
-import styles from './NavBar.module.css'
+import type { Lang, SectionId } from '../types'
+import PublicNavigation from '@/components/PublicNavigation'
+import { PUBLIC_NAV_COPY } from '@/components/public-navigation'
 
 interface NavBarProps {
   lang: Lang
-  nav: NavCopy
-  activeSection: SectionId
+  activeSection?: SectionId
+  activeHref?: string
   onNavigate: (target: SectionId) => void
-  langHrefs: { pt: string; en: string }
-  studioHref: string
 }
 
-export default function NavBar({ lang, nav, activeSection, onNavigate, langHrefs, studioHref }: NavBarProps) {
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+export default function NavBar({ lang, activeSection, activeHref, onNavigate }: NavBarProps) {
+  const copy = PUBLIC_NAV_COPY[lang]
+  const onHome = Boolean(activeHref)
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const links = copy.links.map((link) => {
+    const homeHref = link.homeSection
+      ? `${onHome ? copy.homeHref : ''}#${link.homeSection}`
+      : link.href
+    const active = activeHref === link.href || Boolean(link.homeSection && activeSection === link.homeSection)
 
-  useEffect(() => {
-    if (!menuOpen) return
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setMenuOpen(false)
+    return {
+      ...link,
+      href: homeHref,
+      active,
+      activeCurrent: link.homeSection ? ('location' as const) : ('page' as const),
+      onSelect: link.homeSection
+        ? ((event: React.MouseEvent<HTMLAnchorElement>) => {
+            event.preventDefault()
+            onNavigate(link.homeSection as SectionId)
+          })
+        : undefined,
     }
-    document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
-  }, [menuOpen])
-
-  const handleNavigate = (event: React.MouseEvent, target: SectionId) => {
-    event.preventDefault()
-    setMenuOpen(false)
-    onNavigate(target)
-  }
+  })
 
   return (
-    <header className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
-      <a
-        href="#hero"
-        className={styles.logo}
-        onClick={(event) => handleNavigate(event, 'hero')}
-        aria-label={lang === 'pt' ? 'pierrondi.dev — início' : 'pierrondi.dev — home'}
-      >
-        <span className={styles.bracket}>&lt;</span>
-        <span className={styles.logoName}>pierrondi.dev</span>
-        <span className={styles.bracket}>/&gt;</span>
-      </a>
-
-      <nav className={styles.links} aria-label={lang === 'pt' ? 'Seções' : 'Sections'}>
-        {nav.links.map((link) => (
-          <a
-            key={link.target}
-            href={`#${link.target}`}
-            className={`${styles.link} ${activeSection === link.target ? styles.linkActive : ''}`}
-            onClick={(event) => handleNavigate(event, link.target)}
-          >
-            {link.label}
-          </a>
-        ))}
-      </nav>
-
-      <div className={styles.right}>
-        <a href={studioHref} className={styles.studioLink}>
-          <span aria-hidden="true" />
-          Studio
-          <ArrowUpRight aria-hidden="true" />
-        </a>
-        <div className={styles.langToggle}>
-          <a
-            href={langHrefs.pt}
-            className={lang === 'pt' ? styles.langActive : styles.langIdle}
-            aria-current={lang === 'pt' ? 'true' : undefined}
-            aria-label="Português"
-          >
-            PT
-          </a>
-          <a
-            href={langHrefs.en}
-            className={lang === 'en' ? styles.langActive : styles.langIdle}
-            aria-current={lang === 'en' ? 'true' : undefined}
-            aria-label="English"
-          >
-            EN
-          </a>
-        </div>
-
-        <button
-          type="button"
-          className={styles.menuButton}
-          aria-expanded={menuOpen}
-          aria-label={lang === 'pt' ? 'Abrir menu' : 'Open menu'}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          {menuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
-        </button>
-      </div>
-
-      {menuOpen && (
-        <nav className={styles.mobileMenu} aria-label={lang === 'pt' ? 'Menu' : 'Menu'}>
-          <a href={studioHref} className={`${styles.mobileLink} ${styles.mobileStudioLink}`}>
-            <span className={styles.mobilePrompt} aria-hidden="true">↗</span>
-            Pierrondi Studio
-          </a>
-          {nav.links.map((link) => (
-            <a
-              key={link.target}
-              href={`#${link.target}`}
-              className={`${styles.mobileLink} ${activeSection === link.target ? styles.mobileLinkActive : ''}`}
-              onClick={(event) => handleNavigate(event, link.target)}
-            >
-              <span className={styles.mobilePrompt} aria-hidden="true">
-                $
-              </span>
-              {link.label}
-            </a>
-          ))}
-        </nav>
-      )}
-    </header>
+    <PublicNavigation
+      lang={lang}
+      homeHref={onHome ? copy.homeHref : '#hero'}
+      links={links}
+      onHomeSelect={(event) => {
+        event.preventDefault()
+        onNavigate('hero')
+      }}
+    />
   )
 }

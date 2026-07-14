@@ -2,15 +2,6 @@ import type { SiteCopy, Lang } from './types'
 
 export const COPY: Record<Lang, SiteCopy> = {
   pt: {
-    nav: {
-      logo: '<pierrondi.dev/>',
-      links: [
-        { label: 'projetos', target: 'projects' },
-        { label: 'sobre', target: 'about' },
-        { label: 'skills', target: 'skills' },
-        { label: 'contato', target: 'contact' },
-      ],
-    },
     sections: [
       { id: 'hero', label: 'hero', index: '01' },
       { id: 'projects', label: 'projetos', index: '02' },
@@ -340,15 +331,6 @@ export const COPY: Record<Lang, SiteCopy> = {
     },
   },
   en: {
-    nav: {
-      logo: '<pierrondi.dev/>',
-      links: [
-        { label: 'projects', target: 'projects' },
-        { label: 'about', target: 'about' },
-        { label: 'skills', target: 'skills' },
-        { label: 'contact', target: 'contact' },
-      ],
-    },
     sections: [
       { id: 'hero', label: 'hero', index: '01' },
       { id: 'projects', label: 'projects', index: '02' },

@@ -17,6 +17,7 @@ test('global language picker shares the terminal chrome without using the old ne
   assert.match(switcherCss, /--language-active:\s*var\(--color-primary\)/)
   assert.match(switcherCss, /\.switcher\.withTopNav/)
   assert.match(switcherSource, /hasTopNav/)
+  assert.doesNotMatch(switcherSource, /usesHomeChrome/)
   assert.doesNotMatch(switcherCss, /minmax\(38px,\s*1fr\)/)
   assert.doesNotMatch(switcherCss, /#c8ff2e/i)
 })

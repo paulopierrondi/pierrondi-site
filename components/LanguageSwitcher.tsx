@@ -9,7 +9,6 @@ import {
   shouldHideLanguageSwitcher,
   siteLanguages,
 } from '@/lib/i18n/site-language'
-import { usesHomeChrome } from '@/components/home-v2/immersive-routes'
 import styles from './LanguageSwitcher.module.css'
 
 const LANG_COOKIE = 'pierrondi_lang'
@@ -48,7 +47,7 @@ export default function LanguageSwitcher() {
     }
   }, [])
 
-  if (hiddenOnClientRoute || hiddenOnPrivateOpsRoute || usesHomeChrome(pathname)) return null
+  if (hiddenOnClientRoute || hiddenOnPrivateOpsRoute) return null
 
   return (
     <nav className={`${styles.switcher} ${hasTopNav ? styles.withTopNav : ''}`} aria-label="Language selector">
