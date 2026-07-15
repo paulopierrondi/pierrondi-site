@@ -1,51 +1,56 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
-import { motion, useInView, type Variants } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import { ArrowDown } from 'lucide-react'
 import { COPY } from '../copy'
 import type { SectionProps } from '../types'
+import sceneStyles from '../three/FrontierEventHorizon.module.css'
 import styles from './HeroSection.module.css'
 
-// r3f background is client-only: never rendered on the server.
-const WireframeGrid = dynamic(() => import('../three/WireframeGrid'), {
-  ssr: false,
-})
+// The procedural event horizon is client-only; CSS remains as the no-WebGL fallback.
+const FrontierEventHorizon = dynamic(
+  () => import('../three/FrontierEventHorizon'),
+  {
+    ssr: false,
+  },
+)
 
 const HEADING_ID = 'hero-heading'
-const TYPE_INTERVAL_MS = 55
 // framer-motion cubic-bezier, typed as a fixed tuple to satisfy strict TS.
 const EXPO_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
+function HeroTelemetry() {
+  return (
+    <>
+      <div className={styles.sceneMeta} aria-hidden="true">
+        <span>FRONTIER SYSTEM / 001</span>
+        <span className={styles.sceneStatus}>
+          <i /> SIGNAL LOCK
+        </span>
+      </div>
+      <div className={styles.orbitalData} aria-hidden="true">
+        <span>EVENT HORIZON</span>
+        <strong>R → ∞</strong>
+        <i />
+        <small>40°42′46″ N · 74°00′21″ W</small>
+      </div>
+      <div className={styles.scaleMarker} aria-hidden="true">
+        <span>OBSERVER / 01</span>
+        <i />
+      </div>
+    </>
+  )
+}
+
 export default function HeroSection({ lang }: SectionProps) {
   const hero = COPY[lang].hero
-  const rootRef = useRef<HTMLDivElement>(null)
-  const inView = useInView(rootRef, { margin: '-20% 0px', once: false })
   const reducedMotion = useHydratedReducedMotion()
 
-  // Typewriter for headline line 2. Initial state is the FULL string so the
-  // server-rendered HTML always contains the complete headline (SEO). The
-  // effect only runs on the client and only replays when motion is allowed.
+  // Keep the full headline in the DOM at every stage. CSS reveals it visually,
+  // avoiding the post-hydration text collapse caused by a JS typewriter.
   const fullLine2 = hero.headlineLine2
-  const [typedCount, setTypedCount] = useState(fullLine2.length)
-
-  useEffect(() => {
-    if (reducedMotion) return
-    let i = 0
-    const id = window.setInterval(() => {
-      i += 1
-      setTypedCount(i)
-      if (i >= fullLine2.length) {
-        window.clearInterval(id)
-      }
-    }, TYPE_INTERVAL_MS)
-    return () => window.clearInterval(id)
-  }, [fullLine2, reducedMotion])
-
-  // Under reduced motion the full line is always shown, no state writes needed.
-  const typedLine2 = reducedMotion ? fullLine2 : fullLine2.slice(0, typedCount)
 
   const containerVariants: Variants = {
     hidden: {},
@@ -75,16 +80,23 @@ export default function HeroSection({ lang }: SectionProps) {
   return (
     <section className={styles.hero} aria-labelledby={HEADING_ID}>
       <div className={styles.bg} aria-hidden="true">
-        <WireframeGrid />
+        <div className={sceneStyles.fallback} data-frontier-fallback>
+          <span className={sceneStyles.fallbackDisk} />
+          <span className={sceneStyles.fallbackVoid} />
+        </div>
+        <FrontierEventHorizon />
       </div>
       <div className={styles.vignette} aria-hidden="true" />
+      <div className={styles.chromaticVeil} aria-hidden="true" />
 
-      <div className={styles.content} ref={rootRef}>
+      <HeroTelemetry />
+
+      <div className={styles.content}>
         <motion.div
           className={styles.inner}
           variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
+          initial={false}
+          animate="visible"
         >
           <motion.p className={styles.tagline} variants={itemVariants}>
             <span className={styles.bracket} aria-hidden="true">
@@ -105,7 +117,7 @@ export default function HeroSection({ lang }: SectionProps) {
               {hero.headlineLine1}
             </motion.span>
             <motion.span className={styles.line2} variants={itemVariants}>
-              <span className={styles.line2Text}>{typedLine2}</span>
+              <span className={styles.line2Text}>{fullLine2}</span>
               <span className={styles.cursor} aria-hidden="true">
                 █
               </span>
