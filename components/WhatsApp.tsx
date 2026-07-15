@@ -1,13 +1,15 @@
+import { getWhatsAppHref } from '@/lib/contact'
+
 type Lang = 'pt' | 'en'
 
 const copy: Record<Lang, { aria: string; message: string }> = {
   pt: {
-    aria: 'Abrir conversa no WhatsApp',
-    message: 'Olá, Paulo. Quero conversar sobre IA enterprise e execução governada.',
+    aria: 'Chamar Paulo no WhatsApp',
+    message: 'Olá, Paulo! Vim pelo seu site e quero conversar sobre IA enterprise e execução governada.',
   },
   en: {
-    aria: 'Open WhatsApp conversation',
-    message: 'Hi, Paulo. I would like to discuss enterprise AI and governed execution.',
+    aria: 'Message Paulo on WhatsApp',
+    message: 'Hi Paulo! I found your site and would like to discuss enterprise AI and governed execution.',
   },
 }
 
@@ -16,11 +18,7 @@ interface WhatsAppProps {
 }
 
 export default function WhatsApp({ lang = 'pt' }: WhatsAppProps) {
-  const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER
-  if (!phone || phone === '5511999999999') return null
-
-  const msg = encodeURIComponent(copy[lang].message)
-  const href = `https://wa.me/${phone}?text=${msg}`
+  const href = getWhatsAppHref(copy[lang].message)
   const aria = copy[lang].aria
 
   return (
@@ -31,6 +29,7 @@ export default function WhatsApp({ lang = 'pt' }: WhatsAppProps) {
         rel="noopener noreferrer"
         className="whatsapp-btn"
         aria-label={aria}
+        title={aria}
       >
         <svg
           aria-hidden="true"

@@ -32,8 +32,8 @@ const copy: Record<ContatoLang, {
         label: 'WhatsApp',
         value: CONTACT.whatsapp.display,
         description: 'O canal mais direto para iniciar uma conversa.',
-        action: 'Abrir conversa',
-        href: getWhatsAppHref('Olá, Paulo. Encontrei seu site e gostaria de conversar sobre IA, produtos ou sistemas.'),
+        action: 'Chamar Paulo no WhatsApp',
+        href: getWhatsAppHref('Olá, Paulo! Vim pelo seu site e quero conversar sobre IA, produtos ou sistemas.'),
         prominent: true,
         icon: (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -92,8 +92,8 @@ const copy: Record<ContatoLang, {
         label: 'WhatsApp',
         value: CONTACT.whatsapp.display,
         description: 'The most direct way to start a conversation.',
-        action: 'Start conversation',
-        href: getWhatsAppHref('Hi Paulo, I found your site and would like to discuss AI, products, or operating systems.'),
+        action: 'Message Paulo on WhatsApp',
+        href: getWhatsAppHref('Hi Paulo! I found your site and would like to discuss AI, products, or operating systems.'),
         prominent: true,
         icon: (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
