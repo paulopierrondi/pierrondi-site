@@ -958,6 +958,40 @@ async function searchConsoleSnapshot(source) {
 
 async function searchConsoleQuery(siteUrl, token) {
   const dateRange = gscDateRange()
+
+  // Headline totals come from a date-only query. Google withholds anonymised
+  // query rows, so a page+query breakdown can return zero rows while the
+  // property still has clicks and impressions. Summing that breakdown reports
+  // a low-volume site as dark instead of small.
+  const headline = await searchAnalyticsRows(siteUrl, token, {
+    ...dateRange,
+    dimensions: ['date'],
+    rowLimit: GSC_LOOKBACK_DAYS + GSC_LAG_DAYS + 1,
+  })
+  if (!headline.ok) {
+    return { ok: false, siteUrl, httpStatus: headline.httpStatus, reason: headline.reason }
+  }
+
+  const breakdown = await searchAnalyticsRows(siteUrl, token, {
+    ...dateRange,
+    dimensions: ['page', 'query'],
+    rowLimit: 25,
+  })
+
+  return {
+    ok: true,
+    status: 'ok',
+    source: 'search_console_api',
+    siteUrl,
+    dateRange,
+    rowCount: breakdown.ok ? breakdown.rows.length : 0,
+    metrics: summarizeSearchConsoleRows(headline.rows),
+    topRows: breakdown.ok ? topSearchConsoleRows(breakdown.rows) : [],
+    ...(breakdown.ok ? {} : { breakdownReason: breakdown.reason }),
+  }
+}
+
+async function searchAnalyticsRows(siteUrl, token, payload) {
   try {
     const { response, body } = await fetchJson(`https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/searchAnalytics/query`, {
       method: 'POST',
@@ -965,33 +999,18 @@ async function searchConsoleQuery(siteUrl, token) {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        ...dateRange,
-        dimensions: ['page', 'query'],
-        rowLimit: 25,
-      }),
+      body: JSON.stringify(payload),
     })
     if (!response.ok) {
       return {
         ok: false,
-        siteUrl,
         httpStatus: response.status,
         reason: redact(body?.error?.message || response.statusText).slice(0, 240),
       }
     }
-    const rows = Array.isArray(body.rows) ? body.rows : []
-    return {
-      ok: true,
-      status: 'ok',
-      source: 'search_console_api',
-      siteUrl,
-      dateRange,
-      rowCount: rows.length,
-      metrics: summarizeSearchConsoleRows(rows),
-      topRows: topSearchConsoleRows(rows),
-    }
+    return { ok: true, rows: Array.isArray(body.rows) ? body.rows : [] }
   } catch (error) {
-    return { ok: false, siteUrl, reason: redact(error.message).slice(0, 240) }
+    return { ok: false, reason: redact(error.message).slice(0, 240) }
   }
 }
 
