@@ -16,15 +16,15 @@ export default function ContactSection({ lang }: SectionProps) {
   const whatsapp = lang === 'pt'
     ? {
         kicker: 'Canal mais direto',
-        action: 'Abrir conversa no WhatsApp',
+        action: 'Chamar Paulo no WhatsApp',
         detail: 'Para começar uma conversa agora',
-        href: getWhatsAppHref('Olá, Paulo. Encontrei seu site e gostaria de conversar sobre IA, produtos ou sistemas.'),
+        href: getWhatsAppHref('Olá, Paulo! Vim pelo seu site e quero conversar sobre IA, produtos ou sistemas.'),
       }
     : {
         kicker: 'Most direct channel',
-        action: 'Start a WhatsApp conversation',
+        action: 'Message Paulo on WhatsApp',
         detail: 'To start a conversation now',
-        href: getWhatsAppHref('Hi Paulo, I found your site and would like to discuss AI, products, or operating systems.'),
+        href: getWhatsAppHref('Hi Paulo! I found your site and would like to discuss AI, products, or operating systems.'),
       }
   const containerRef = useRef<HTMLElement>(null)
   const prefersReducedMotion = useHydratedReducedMotion()

@@ -34,7 +34,7 @@ const footerCopy: Record<HomeLang, {
     headlinePrefix: 'IA que vira',
     headlineAccent: 'execução governada.',
     contactHref: '/contato',
-    primaryCta: 'Conversar no WhatsApp',
+    primaryCta: 'Chamar Paulo no WhatsApp',
     secondaryCta: 'Enviar email',
     navHead: 'Navegação',
     navLinks: [
@@ -74,7 +74,7 @@ const footerCopy: Record<HomeLang, {
     headlinePrefix: 'AI that becomes',
     headlineAccent: 'governed execution.',
     contactHref: '/en/contato',
-    primaryCta: 'Start on WhatsApp',
+    primaryCta: 'Message Paulo on WhatsApp',
     secondaryCta: 'Send email',
     navHead: 'Navigation',
     navLinks: [
@@ -117,8 +117,8 @@ export default function SiteFooter() {
   const copy = footerCopy[lang]
   const whatsappHref = getWhatsAppHref(
     lang === 'pt'
-      ? 'Olá, Paulo. Encontrei seu site e gostaria de conversar.'
-      : 'Hi Paulo, I found your site and would like to talk.'
+      ? 'Olá, Paulo! Vim pelo seu site e gostaria de conversar.'
+      : 'Hi Paulo! I found your site and would like to talk.'
   )
 
   const scrollTop = () => {

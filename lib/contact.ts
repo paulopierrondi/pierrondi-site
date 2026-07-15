@@ -3,8 +3,8 @@ export const CONTACT = {
   linkedin: 'https://br.linkedin.com/in/paulopierrondi',
   github: 'https://github.com/paulopierrondi',
   whatsapp: {
-    display: '+55 12 98205-1155',
-    phone: '5512982051155',
+    display: '+55 11 99626-2975',
+    phone: '5511996262975',
   },
 } as const
 
