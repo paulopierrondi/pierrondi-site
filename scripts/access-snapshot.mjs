@@ -37,6 +37,9 @@ const SECURITY_SCAN_PATHS = [
   /^\/+.*\/wp-includes\/wlwmanifest\.xml$/i,
   /^\/+(?:[^/?#]+\/)*components\/com_jce(?:\/|$)/i,
   /^\/+administrator(?:\/|$)/i,
+  /^\/+(?:_debugbar|debugbar|telescope|_ignition)(?:\/|$)/i,
+  /^\/+aws(?:[-._]|$)/i,
+  /^\/+debug(?:\/|$)/i,
   /^\/+(?:phpmyadmin|pma|adminer|server-status)(?:\/|$)/i,
   /^\/+\.(?:aws|azure|bash_history|config|dev\.vars|docker|env|git|hg|npmrc|ssh|svn|vscode)(?:[./_-]|$)/i,
   /^\/+(?:[^/?#]+\/)+\.env(?:[._-]|$)/i,
@@ -44,7 +47,9 @@ const SECURITY_SCAN_PATHS = [
   /^\/+(?:backup|dump|database|db)(?:[._-]?(?:sql|sqlite|sqlite3|tar|tar\.gz|tgz|zip|gz|bak|backup|old))?$/i,
   /^\/+(?:database|db)_backup\.sql$/i,
   /^\/+(?:server|private|ssl|tls)\.key$/i,
-  /^\/+(?:[^/?#]+\/)*(?:firebase|firebase-adminsdk|gcp-credentials|google-credentials|google-service-account|service-account|key|keyfile)\.json$/i,
+  /^\/+(?:[^/?#]+\/)*(?:firebase|firebase-adminsdk|gcp-credentials|google-credentials|google-services(?:-account)?|service-?account-?key|service-account|key|keyfile)\.json$/i,
+  /^\/+[^/?#]+\.config$/i,
+  /^\/+(?:[^/?#]+\/)*[^/?#]*\.php$/i,
   /^\/+user_secrets\.ya?ml$/i,
   /^\/+(?:secrets?|credentials?|private|config|configuration)(?:[._-]?(?:php|json|ya?ml|ini|txt|bak|backup|old|production|prod|local|dev))?$/i,
   /^\/+config(?:[./_-]|$)/i,
@@ -62,11 +67,24 @@ const SECURITY_SCAN_PATHS = [
 ]
 const KNOWN_ASSET_PROBE_PATHS = [
   /^\/+\.vite\/manifest\.json$/i,
-  /^\/+(?:account|appsettings|local\.settings|settings)\.json$/i,
+  /^\/+(?:account|appsettings(?:\.[a-z0-9_-]+)?|local\.settings|settings)\.json$/i,
   /^\/+(?:package|package-lock|yarn\.lock|pnpm-lock)\.(?:json|ya?ml)$/i,
   /^\/+(?:assets|static|js|css)\/.+\.(?:js|css)\.map$/i,
   /^\/+.+\.map$/i,
   /^\/+(?:[^/?#]+\/)*(?:debug|error|laravel|npm|yarn|storage)(?:[._-]?\d*)?\.log$/i,
+]
+// Dotfile segments (except the legitimate /.well-known/) are never served by
+// these sites: .htpasswd, .s3cfg, .travis.yml, .env*, .aws/*, .git/* and the
+// next hundred credential/config probes a scanner will try. One rule instead
+// of an endless allowlist.
+const DOTFILE_PROBE_PATHS = [
+  /^\/+(?!\.well-known(?:\/|$))(?:[^/?#]+\/)*\.[^/?#]+/,
+]
+// Raw quotes, angle brackets or backslashes never appear in a legitimate URL
+// (browsers percent-encode them). They mark hand-crafted scanner requests like
+// 404 /"/_next/static/chunks/xxx.js" that otherwise look like asset 404s.
+const MALFORMED_PROBE_PATHS = [
+  /["'<>\\]/,
 ]
 const BENIGN_MONITOR_PROBE_PATHS = [
   /^\/+\.well-known\/traffic-advice$/i,
@@ -315,7 +333,7 @@ function rowIntent(source, row) {
   const pathValue = cleanPath(row.path)
   const rules = PRODUCT_INTENT_RULES[source.id] || {}
 
-  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) || matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS)) return 'technical'
+  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) || matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS) || matchesAny(pathValue, DOTFILE_PROBE_PATHS) || matchesAny(pathValue, MALFORMED_PROBE_PATHS)) return 'technical'
   if (matchesAny(pathValue, rules.conversion)) return 'conversion'
   if (matchesAny(pathValue, COMMON_GEO_PATHS)) return 'geo'
   if (matchesAny(pathValue, rules.commercial)) return 'commercial'
@@ -329,12 +347,34 @@ function classifyHttpIssue(source, row, intent) {
   const status = Number(row.status || 0)
   if (status < 400) return null
 
-  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) || matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS)) {
+  // Client-side artifacts, not site failures: 499 = client closed the connection
+  // before the server answered (nginx convention). Bots fire-and-forget
+  // constantly, and a user abandoning a slow load is not a page regression.
+  // Real outages surface as 5xx or as failed required-endpoint probes instead.
+  if (status === 499) {
+    return {
+      bucket: 'known_noise',
+      reason: 'client_closed_request_noise',
+      actionable: false,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
+
+  if (matchesAny(pathValue, MALFORMED_PROBE_PATHS)) {
+    return {
+      bucket: 'known_noise',
+      reason: 'malformed_request_noise',
+      actionable: false,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
+
+  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) || matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS) || matchesAny(pathValue, DOTFILE_PROBE_PATHS)) {
     return {
       bucket: 'known_noise',
       reason: matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS)
         ? 'benign_monitor_or_optional_file_probe'
-        : matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS)
+        : matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) || matchesAny(pathValue, DOTFILE_PROBE_PATHS)
           ? 'asset_or_config_probe_noise'
           : 'security_scan_noise',
       actionable: false,
@@ -347,6 +387,18 @@ function classifyHttpIssue(source, row, intent) {
     return {
       bucket: 'expected_auth',
       reason: 'expected_protected_api_probe',
+      actionable: false,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
+
+  // 400 on technical asset paths (e.g. `/_next/image?url=` with invalid params)
+  // is a malformed client request against the framework's own machinery — real
+  // browsers never send it, scanners and hotlinkers do. Not a growth regression.
+  if (status === 400 && matchesAny(pathValue, COMMON_TECHNICAL_PATHS)) {
+    return {
+      bucket: 'known_noise',
+      reason: 'technical_asset_bad_request_noise',
       actionable: false,
       evidenceKey: `${status} ${pathValue}`,
     }
