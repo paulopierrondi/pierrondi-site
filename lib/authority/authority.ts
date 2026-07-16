@@ -23,6 +23,13 @@ const capabilitySchema = z.object({
   body: z.string(),
 })
 
+const profileSectionSchema = z.object({
+  eyebrow: z.string(),
+  title: z.string(),
+  body: z.string(),
+  items: z.array(capabilitySchema).min(1),
+})
+
 const pageSchema = z.object({
   slug: z.string(),
   metadataTitle: z.string(),
@@ -36,7 +43,9 @@ const pageSchema = z.object({
   }),
   proofStrip: z.array(z.string()).min(1),
   sections: z.array(authoritySectionSchema).min(1),
+  qualities: profileSectionSchema,
   capabilities: z.array(capabilitySchema).min(1),
+  evidence: profileSectionSchema,
   operatingSystem: z.array(z.string()).min(1),
   cta: z.object({
     title: z.string(),

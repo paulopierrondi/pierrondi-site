@@ -1,5 +1,5 @@
 {
-  "version": "2026-05-30",
+  "version": "2026-07-16",
   "budgetUsd": 40,
   "budgetPlan": [
     {
@@ -28,25 +28,25 @@
   },
   "positioning": {
     "pt": {
-      "statement": "Atuo como Technical Account Executive na ServiceNow e este portfólio pessoal mostra como desenho o operating model da IA — contexto, governança, AgentOps e evidência — para transformar estratégia em operação real.",
-      "short": "Operating model de IA · AgentOps · Enterprise FSI · Sistemas públicos."
+      "statement": "Atuo como Technical Account Executive na ServiceNow. Este portfólio pessoal mostra como desenho o operating model da IA — contexto, governança, AgentOps e evidência — para transformar estratégia em operação real, com código e sistemas que qualquer pessoa pode inspecionar.",
+      "short": "Operating model de IA · AgentOps · Engenharia pública."
     },
     "en": {
-      "statement": "I work as a Technical Account Executive at ServiceNow, and this personal portfolio shows how I design the AI operating model — context, governance, AgentOps and evidence — to turn strategy into real operations.",
-      "short": "AI operating model · AgentOps · Enterprise FSI · Public systems."
+      "statement": "I work as a Technical Account Executive at ServiceNow. This personal portfolio shows how I design the AI operating model — context, governance, AgentOps and evidence — to turn strategy into real operations, with code and systems anyone can inspect.",
+      "short": "AI operating model · AgentOps · Public engineering."
     }
   },
   "pages": {
     "pt": {
       "slug": "/about",
       "metadataTitle": "Paulo Pierrondi — Onde IA vira operação com evidência",
-      "metadataDescription": "Operating model de IA, AgentOps e trilha de evidência. Technical Account Executive na ServiceNow e builder de sistemas multi-agente, apps e automações públicas.",
+      "metadataDescription": "Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder. Operating model, AgentOps, governança e produtos públicos.",
       "hero": {
         "kicker": "Portfólio pessoal / ServiceNow / IA + Engenharia",
-        "title": "Eu desenho a camada operacional que faz IA virar trabalho governado.",
-        "lead": "Sou Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder. Conecto contexto enterprise, governança, workflow e engenharia para transformar estratégia em agentes, automações e produtos que funcionam no mundo real.",
+        "title": "Eu desenho a camada em que a IA para de improvisar e começa a operar.",
+        "lead": "Sou Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder. Conecto estratégia enterprise, operating model, governança, AgentOps, workflow e engenharia — e construo em público apps, automações e sistemas que provam a tese.",
         "primaryCta": "Conversar no LinkedIn",
-        "secondaryCta": "Ver arquitetura"
+        "secondaryCta": "Ver o sistema"
       },
       "proofStrip": [
         "ServiceNow + FSI",
@@ -58,20 +58,52 @@
       "sections": [
         {
           "eyebrow": "Tese operacional",
-          "title": "O gargalo deixou de ser IA. Agora é o modelo operacional.",
-          "body": "Empresas complexas não precisam apenas de prompts melhores. Precisam decidir onde agentes podem atuar, quais dados podem usar, quem aprova exceções, como custo e qualidade são medidos e como valor aparece no workflow real."
+          "title": "O gargalo não é mais o modelo. É o modelo operacional.",
+          "body": "Empresas complexas não precisam só de prompts melhores. Precisam decidir onde agentes atuam, com quais dados, quem aprova exceções, como se medem custo e qualidade e como o valor aparece no workflow."
         },
         {
           "eyebrow": "Como eu penso",
           "title": "Modelo operacional → velocidade de adoção → expansão de valor.",
-          "body": "Esse é o encadeamento que uso para estruturar conversas executivas: sem operating model, pilotos ficam presos; com governança, contexto e evidência, a plataforma ganha velocidade de adoção e abre novas frentes de valor."
+          "body": "Sem operating model, o piloto vira demo eterna. Com contexto, governança e evidência, a plataforma ganha velocidade de adoção e abre novas frentes de valor — sem atalho mágico."
         },
         {
           "eyebrow": "Território",
           "title": "ServiceNow como system of action para IA governada.",
-          "body": "A conversa que me interessa conecta CSDM, CMDB, Service Graph, workflow, Now Assist, AI Agents, AI Control Tower, avaliação, permissão e rastreabilidade. Não é hype de IA; é arquitetura para delegar trabalho com controle."
+          "body": "A conversa que me interessa liga CSDM, CMDB, Service Graph, workflow, Now Assist, AI Agents, avaliação, permissão e rastreabilidade. Não é hype de IA; é arquitetura para delegar trabalho com controle."
         }
       ],
+      "qualities": {
+        "eyebrow": "Qualidades de operação",
+        "title": "O que sobra quando o slide termina.",
+        "body": "Clareza executiva, disciplina de engenharia e curiosidade sem cerimônia. Porque o melhor sistema ainda precisa ser compreendido por gente.",
+        "items": [
+          {
+            "label": "Clareza",
+            "title": "Clareza sob ruído",
+            "body": "Traduzo complexidade em decisão legível — sem teatro de jargão e sem esconder o trade-off."
+          },
+          {
+            "label": "Rigor",
+            "title": "Rigor com humor de commit",
+            "body": "Governança séria, tom humano. Prefiro um gate bem nomeado a um discurso inflado."
+          },
+          {
+            "label": "Prova",
+            "title": "Prova acima de pose",
+            "body": "Se a tese não roda em app, automação ou sistema público, ainda é slide."
+          },
+          {
+            "label": "Controle",
+            "title": "Human gates sem drama",
+            "body": "Velocidade com o freio certo: risco e publicação merecem decisão explícita, não improviso."
+          },
+          {
+            "label": "Ponte",
+            "title": "Tradutor de mundos",
+            "body": "Quadro branco executivo, arquitetura e pull request no mesmo fio — em português e inglês."
+          }
+        ]
+      },
       "capabilities": [
         {
           "label": "Platform Strategy",
@@ -80,44 +112,66 @@
         },
         {
           "label": "Agent Governance",
-          "title": "Projetar agentes com trilha, política e gate",
-          "body": "Definir contexto, permissões, avaliação, custo, fallback e aprovação humana para autonomia auditável."
+          "title": "Agentes com trilha, política e gate",
+          "body": "Contexto, permissões, avaliação, custo, fallback e aprovação humana — autonomia auditável."
         },
         {
           "label": "Executive Narrative",
-          "title": "Criar narrativa executiva que sustenta adoção",
-          "body": "Transformar arquitetura técnica em história clara para decisores: por que agora, por que governado, por que na plataforma."
+          "title": "Narrativa que sustenta adoção",
+          "body": "Arquitetura virando história clara: por que agora, por que governado, por que na plataforma."
         },
         {
           "label": "Product Execution",
-          "title": "Construir sistemas que provam capacidade",
-          "body": "Usar software, automação, content ops e experimentos reais para transformar tese em prova pública."
+          "title": "Sistemas que provam a capacidade",
+          "body": "Software, automação e experimentos públicos: tese com evidência, não com adjetivo."
         }
       ],
+      "evidence": {
+        "eyebrow": "Evidência pública",
+        "title": "Três provas que cabem no site — e no Git.",
+        "body": "A autoridade aqui não depende de uma lista de adjetivos. Ela aparece na combinação entre contexto enterprise, método operacional e produtos públicos.",
+        "items": [
+          {
+            "label": "Enterprise",
+            "title": "Contexto de plataforma real",
+            "body": "Trabalho com governança, plataforma, CSDM/CMDB e narrativa executiva em serviços financeiros, preservando sempre o que é confidencial."
+          },
+          {
+            "label": "AgentOps",
+            "title": "IA com sistema operacional",
+            "body": "Preflight, handoffs, memória, permissões, avaliação, human gates e rastreabilidade como método — não como post."
+          },
+          {
+            "label": "Full-stack",
+            "title": "Produtos além do diagrama",
+            "body": "Apps web e iOS, automações e sistemas agênticos públicos: a engenharia que valida o discurso."
+          }
+        ]
+      },
       "operatingSystem": [
-        "Owned authority surface in pierrondi.dev",
-        "Manual LinkedIn drafting and approval",
-        "Build-time content registry",
-        "Guardrail validation before build",
-        "No runtime write, no autopublish, no sensitive claims"
+        "Tese executiva antes da ferramenta",
+        "Contexto, política, permissão e evidência antes da autonomia",
+        "Código versionado, testável e observável antes de escalar",
+        "Human gates para risco ou publicação externa",
+        "Nenhum nome de cliente, roadmap, incidente ou material confidencial"
       ],
       "cta": {
         "title": "Vamos trocar ideias sobre estratégia, arquitetura e código.",
-        "body": "Este portfólio abre conversas entre líderes, arquitetos e builders sobre ServiceNow, IA governada, AgentOps, produtos e sistemas. O conteúdo é pessoal, não oficial e não representa a ServiceNow.",
+        "body": "Portfólio pessoal para líderes, arquitetos e builders sobre ServiceNow, IA governada, AgentOps e sistemas públicos. Conteúdo independente — não representa a ServiceNow.",
         "primary": "Abrir LinkedIn",
         "secondary": "Ver portfólio"
       }
     },
     "en": {
       "slug": "/en/about",
-      "metadataTitle": "Paulo Pierrondi — Where AI becomes governed operations",
-      "metadataDescription": "AI operating model, AgentOps and evidence trails. Technical Account Executive at ServiceNow and builder of multi-agent systems, apps and public automations.",
+      "metadataTitle": "Paulo Pierrondi — Where AI becomes governed work",
+      "metadataDescription": "Technical Account Executive at ServiceNow, AI architect and full-stack builder. Operating model, AgentOps, governance and public products.",
       "hero": {
         "kicker": "Personal portfolio / ServiceNow / AI + Engineering",
-        "title": "I design the operating layer that turns AI into governed work.",
-        "lead": "I am a Technical Account Executive at ServiceNow, an AI architect and a full-stack builder. I connect enterprise context, governance, workflow and engineering to turn strategy into agents, automations and products that work in the real world.",
+        "title": "I design the layer where AI stops improvising and starts operating.",
+        "lead": "I am a Technical Account Executive at ServiceNow, an AI architect and a full-stack builder. I connect enterprise strategy, operating model, governance, AgentOps, workflow and engineering — and I build in public the apps, automations and systems that prove the thesis.",
         "primaryCta": "Connect on LinkedIn",
-        "secondaryCta": "See architecture"
+        "secondaryCta": "See the system"
       },
       "proofStrip": [
         "ServiceNow + FSI",
@@ -129,20 +183,52 @@
       "sections": [
         {
           "eyebrow": "Operating thesis",
-          "title": "AI is no longer the bottleneck. The operating model is.",
-          "body": "Complex organizations do not only need better prompts. They need to decide where agents can act, which data they can use, who approves exceptions, how cost and quality are measured, and how value shows up inside real workflows."
+          "title": "The bottleneck is no longer the model. It is the operating model.",
+          "body": "Complex organizations do not only need better prompts. They need to decide where agents act, with which data, who approves exceptions, how cost and quality are measured, and how value shows up in the workflow."
         },
         {
           "eyebrow": "How I think",
           "title": "Operating model -> adoption velocity -> value expansion.",
-          "body": "This is the chain I use for executive conversations: without an operating model, pilots stall; with governance, context, and evidence, the platform gains adoption velocity and opens new value expansion paths."
+          "body": "Without an operating model, the pilot becomes an eternal demo. With context, governance and evidence, the platform gains adoption velocity and opens new value paths — no magic shortcut."
         },
         {
           "eyebrow": "Territory",
           "title": "ServiceNow as the system of action for governed AI.",
-          "body": "The conversation I care about connects CSDM, CMDB, Service Graph, workflow, Now Assist, AI Agents, AI Control Tower, evaluation, permissioning, and traceability. This is not AI hype; it is architecture for delegating work with control."
+          "body": "The conversation I care about links CSDM, CMDB, Service Graph, workflow, Now Assist, AI Agents, evaluation, permissioning and traceability. Not AI hype — architecture for delegating work with control."
         }
       ],
+      "qualities": {
+        "eyebrow": "Operating qualities",
+        "title": "What remains when the slide ends.",
+        "body": "Executive clarity, engineering discipline and curiosity without ceremony. Because even the best system still has to make sense to people.",
+        "items": [
+          {
+            "label": "Clarity",
+            "title": "Clarity under noise",
+            "body": "I turn complexity into a readable decision — no jargon theatre and no hidden trade-off."
+          },
+          {
+            "label": "Rigor",
+            "title": "Rigor with commit humor",
+            "body": "Serious governance, human tone. I would rather ship a well-named gate than an inflated speech."
+          },
+          {
+            "label": "Proof",
+            "title": "Proof over pose",
+            "body": "If the thesis does not run in a public app, automation or system, it is still a slide."
+          },
+          {
+            "label": "Control",
+            "title": "Human gates, no drama",
+            "body": "Speed with the right brake: risk and publishing deserve an explicit decision, not improvisation."
+          },
+          {
+            "label": "Bridge",
+            "title": "Translator between worlds",
+            "body": "Executive whiteboard, architecture and pull request on one thread — in Portuguese and English."
+          }
+        ]
+      },
       "capabilities": [
         {
           "label": "Platform Strategy",
@@ -151,30 +237,52 @@
         },
         {
           "label": "Agent Governance",
-          "title": "Design agents with a trail, policy and gates",
-          "body": "Define context, permissions, evaluation, cost, fallback, and human approval for auditable autonomy."
+          "title": "Agents with trail, policy and gates",
+          "body": "Context, permissions, evaluation, cost, fallback and human approval — auditable autonomy."
         },
         {
           "label": "Executive Narrative",
-          "title": "Create an executive narrative that sustains adoption",
-          "body": "Turn technical architecture into a clear story for decision makers: why now, why governed, why on the platform."
+          "title": "Narrative that sustains adoption",
+          "body": "Architecture as a clear story: why now, why governed, why on the platform."
         },
         {
           "label": "Product Execution",
-          "title": "Build systems that prove capability",
-          "body": "Use software, automation, content ops, and real experiments to turn a thesis into public proof."
+          "title": "Systems that prove capability",
+          "body": "Software, automation and public experiments: thesis with evidence, not adjectives."
         }
       ],
+      "evidence": {
+        "eyebrow": "Public evidence",
+        "title": "Three proofs that fit on the site — and in Git.",
+        "body": "Authority here does not depend on a list of adjectives. It shows up in the combination of enterprise context, operating method and public products.",
+        "items": [
+          {
+            "label": "Enterprise",
+            "title": "Real platform context",
+            "body": "I work across governance, platform, CSDM/CMDB and executive narrative in financial services, while always preserving what is confidential."
+          },
+          {
+            "label": "AgentOps",
+            "title": "AI with an operating system",
+            "body": "Preflight, handoffs, memory, permissions, evaluation, human gates and traceability as method — not as a post."
+          },
+          {
+            "label": "Full-stack",
+            "title": "Products beyond the diagram",
+            "body": "Public web and iOS apps, automations and agent systems: engineering that validates the talk."
+          }
+        ]
+      },
       "operatingSystem": [
-        "Owned authority surface in pierrondi.dev",
-        "Manual LinkedIn drafting and approval",
-        "Build-time content registry",
-        "Guardrail validation before build",
-        "No runtime write, no autopublish, no sensitive claims"
+        "Executive thesis before tooling",
+        "Context, policy, permission and evidence before autonomy",
+        "Versioned, testable and observable code before scale",
+        "Human gates for risk or external publishing",
+        "No client names, roadmaps, incidents or confidential material"
       ],
       "cta": {
-        "title": "Let's exchange ideas about strategy, architecture and code.",
-        "body": "This portfolio opens peer conversations among leaders, architects and builders about ServiceNow, governed AI, AgentOps, products and systems. The content is personal, unofficial and does not represent ServiceNow.",
+        "title": "Let's trade notes on strategy, architecture and code.",
+        "body": "A personal portfolio for leaders, architects and builders on ServiceNow, governed AI, AgentOps and public systems. Independent content — it does not represent ServiceNow.",
         "primary": "Open LinkedIn",
         "secondary": "See portfolio"
       }
