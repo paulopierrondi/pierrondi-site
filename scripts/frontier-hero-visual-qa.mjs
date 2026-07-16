@@ -9,7 +9,10 @@ const viewports = [
   { name: 'mobile-390', width: 390, height: 844 },
   { name: 'tablet-768', width: 768, height: 1024 },
   { name: 'laptop-1024', width: 1024, height: 768 },
-  { name: 'desktop-1440', width: 1440, height: 1000 },
+  { name: 'laptop-1366', width: 1366, height: 768 },
+  { name: 'desktop-1440', width: 1440, height: 900 },
+  { name: 'desktop-1536', width: 1536, height: 864 },
+  { name: 'desktop-wide-2048', width: 2048, height: 1080 },
 ]
 
 const PT_LANE_HREFS = ['/feitos', '/portfolio']
@@ -108,6 +111,11 @@ async function collectViewportMetrics(page) {
     const scene = document.querySelector('[data-frontier-scene]')
     const hero = document.querySelector('#hero')
     const heading = hero?.querySelector('h1')
+    const prelude = hero?.querySelector('[data-hero-prelude]')
+    const description = heading?.nextElementSibling
+    const badges = description?.nextElementSibling
+    const ctaGroup = hero?.querySelector('[data-hero-ctas]')
+    const laneGroup = hero?.querySelector('[data-hero-lanes]')
     // Primary CTAs only — lane cards live outside [data-hero-ctas].
     const ctas = [...(hero?.querySelectorAll('[data-hero-ctas] a') ?? [])]
     const lanes = [...(hero?.querySelectorAll('[data-hero-lanes] a') ?? [])]
@@ -124,6 +132,19 @@ async function collectViewportMetrics(page) {
           rect.bottom <= window.innerHeight,
       }
     }
+    const layoutRects = [
+      prelude,
+      heading,
+      description,
+      badges,
+      ctaGroup,
+      laneGroup,
+    ].map((element) => element?.getBoundingClientRect() ?? null)
+    const layoutOrdered = layoutRects.every((rect, index) => {
+      if (!rect || index === 0) return true
+      const previous = layoutRects[index - 1]
+      return !previous || previous.bottom <= rect.top + 0.5
+    })
     return {
       viewportWidth: window.innerWidth,
       viewportHeight: window.innerHeight,
@@ -132,6 +153,12 @@ async function collectViewportMetrics(page) {
       heroRect: hero?.getBoundingClientRect().toJSON() ?? null,
       h1Count: document.querySelectorAll('h1').length,
       headingText: heading?.textContent?.replace(/\s+/g, ' ').trim() ?? '',
+      preludeText: prelude?.textContent?.replace(/\s+/g, ' ').trim() ?? '',
+      preludeInViewport: prelude
+        ? prelude.getBoundingClientRect().top >= 0 &&
+          prelude.getBoundingClientRect().bottom <= window.innerHeight
+        : false,
+      layoutOrdered,
       sceneState: scene?.getAttribute('data-frontier-state') ?? '',
       sceneActive: scene?.getAttribute('data-frontier-active') ?? '',
       canvases: scene?.querySelectorAll('canvas').length ?? 0,
@@ -175,10 +202,17 @@ function viewportPassed({
     metrics.ctas.length === 2 &&
     metrics.ctas.every((cta) => cta.visible && cta.inViewport)
   const framePass = frameChanged === null ? true : frameChanged
+  const lanesFitPass =
+    metrics.viewportWidth < 768 ||
+    metrics.lanes.every((lane) => lane.inViewport)
   return [
     response?.status() === 200,
     metrics.scrollWidth <= metrics.viewportWidth,
     metrics.h1Count === 1,
+    metrics.preludeText.includes('001'),
+    metrics.preludeText.toLowerCase().includes('frontier'),
+    metrics.preludeInViewport,
+    metrics.layoutOrdered,
     metrics.headingText.includes('Paulo Pierrondi'),
     metrics.headingText.includes('operação com evidência') ||
       metrics.headingText.includes('governed operations'),
@@ -186,6 +220,7 @@ function viewportPassed({
     metrics.canvases === 1,
     ctasPass,
     lanesPass(metrics.lanes, PT_LANE_HREFS),
+    lanesFitPass,
     pausedOffscreen,
     framePass,
     diagnostics.consoleErrors.length === 0,
