@@ -7,6 +7,14 @@ const hero = await readFile(
   new URL('components/home-v2/sections/HeroSection.tsx', root),
   'utf8',
 )
+const heroTelemetry = await readFile(
+  new URL('components/home-v2/sections/HeroTelemetry.tsx', root),
+  'utf8',
+)
+const heroStyles = await readFile(
+  new URL('components/home-v2/sections/HeroSection.module.css', root),
+  'utf8',
+)
 const scene = await readFile(
   new URL('components/home-v2/three/FrontierEventHorizon.tsx', root),
   'utf8',
@@ -45,6 +53,24 @@ test('hero keeps semantic copy in SSR while the frontier scene stays client-only
   assert.match(hero, /initial=\{false\}/)
   assert.match(hero, /ctaPrimary/)
   assert.match(hero, /ctaSecondary/)
+})
+
+test('hero uses one ordered editorial prelude and compacts short desktops', () => {
+  assert.match(hero, /data-hero-prelude/)
+  assert.match(hero, /styles\.preludeIndex/)
+  assert.match(hero, /styles\.sceneStatus/)
+  assert.doesNotMatch(heroTelemetry, /sceneMeta|MODELO OPERACIONAL|OPERATING MODEL \/ 001/)
+  assert.match(heroStyles, /max-width: 1520px/)
+  assert.match(
+    heroStyles,
+    /@media \(min-width: 768px\) and \(max-height: 900px\)/,
+  )
+  assert.match(heroStyles, /transform: translate3d\(clamp\(36px, 4vw, 82px\)/)
+  assert.match(visualQa, /laptop-1366/)
+  assert.match(visualQa, /desktop-1536/)
+  assert.match(visualQa, /desktop-wide-2048/)
+  assert.match(visualQa, /layoutOrdered/)
+  assert.match(visualQa, /lanesFitPass/)
 })
 
 test('frontier scene is deterministic, bounded, and stops rendering when inactive', () => {

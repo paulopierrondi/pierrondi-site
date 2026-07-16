@@ -49,16 +49,9 @@ function itemVariantsFor(reducedMotion: boolean): Variants {
       }
 }
 
-export default function HeroSection({ lang }: SectionProps) {
-  const hero = COPY[lang].hero
-  const reducedMotion = useHydratedReducedMotion()
-  // Keep the full headline in the DOM at every stage. CSS reveals it visually,
-  // avoiding the post-hydration text collapse caused by a JS typewriter.
-  const fullLine2 = hero.headlineLine2
-  const itemVariants = itemVariantsFor(reducedMotion)
-
+function HeroBackdrop() {
   return (
-    <section className={styles.hero} aria-labelledby={HEADING_ID}>
+    <>
       <div className={styles.bg} aria-hidden="true">
         <div className={sceneStyles.fallback} data-frontier-fallback>
           <span className={sceneStyles.fallbackDisk} />
@@ -71,7 +64,22 @@ export default function HeroSection({ lang }: SectionProps) {
       <div className={styles.vignette} aria-hidden="true" />
       <div className={styles.chromaticVeil} aria-hidden="true" />
       <div className={styles.gravityWell} aria-hidden="true" />
+    </>
+  )
+}
 
+export default function HeroSection({ lang }: SectionProps) {
+  const hero = COPY[lang].hero
+  const reducedMotion = useHydratedReducedMotion()
+  // Keep the full headline in the DOM at every stage. CSS reveals it visually,
+  // avoiding the post-hydration text collapse caused by a JS typewriter.
+  const fullLine2 = hero.headlineLine2
+  const [firstName, ...remainingName] = hero.headlineLine1.split(' ')
+  const itemVariants = itemVariantsFor(reducedMotion)
+
+  return (
+    <section className={styles.hero} aria-labelledby={HEADING_ID}>
+      <HeroBackdrop />
       <HeroTelemetry lang={lang} />
 
       <div className={styles.content}>
@@ -81,15 +89,31 @@ export default function HeroSection({ lang }: SectionProps) {
           initial={false}
           animate="visible"
         >
-          <motion.p className={styles.tagline} variants={itemVariants}>
+          <motion.div
+            className={styles.tagline}
+            data-hero-prelude
+            variants={itemVariants}
+          >
             <span className={styles.bracket} aria-hidden="true">
               [
             </span>
+            {' '}
+            <span className={styles.preludeIndex}>001</span>
+            {' '}
+            <span className={styles.preludeDivider} aria-hidden="true">
+              /
+            </span>
+            {' '}
             <span className={styles.taglineText}>{hero.tagline}</span>
+            {' '}
             <span className={styles.bracket} aria-hidden="true">
               ]
             </span>
-          </motion.p>
+            {' '}
+            <span className={styles.sceneStatus} aria-hidden="true">
+              <i /> {lang === 'pt' ? 'EVIDÊNCIA ATIVA' : 'EVIDENCE ACTIVE'}
+            </span>
+          </motion.div>
 
           <motion.h1
             id={HEADING_ID}
@@ -97,8 +121,12 @@ export default function HeroSection({ lang }: SectionProps) {
             variants={HEADLINE_VARIANTS}
           >
             <motion.span className={styles.line1} variants={itemVariants}>
-              {hero.headlineLine1}
+              <span>{firstName}</span>{' '}
+              {remainingName.length > 0 ? (
+                <span>{remainingName.join(' ')}</span>
+              ) : null}
             </motion.span>
+            {' '}
             <motion.span className={styles.line2} variants={itemVariants}>
               <span className={styles.line2Text}>{fullLine2}</span>
             </motion.span>
