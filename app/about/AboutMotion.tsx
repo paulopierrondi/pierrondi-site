@@ -23,7 +23,7 @@ export function AboutReveal({
   return (
     <Component
       className={className}
-      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.16, margin: '-6% 0px -6% 0px' }}
       transition={{ duration: reduceMotion ? 0 : 0.58, delay, ease: easing }}
@@ -54,7 +54,7 @@ export function AboutStagger({
   return (
     <Component
       className={className}
-      initial={reduceMotion ? false : 'hidden'}
+      initial={false}
       whileInView="visible"
       viewport={{ once: true, amount: 0.1, margin: '-5% 0px -5% 0px' }}
       variants={variants}

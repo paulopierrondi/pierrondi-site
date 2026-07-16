@@ -129,7 +129,7 @@ export default function SiteFooter() {
   if (isImmersiveHomeRoute(pathname) || usesOwnAppChrome(pathname)) return null
 
   return (
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} ${pathname === '/paulo' ? styles.withFloatingNav : ''}`}>
       <div className={styles.glow} aria-hidden="true" />
       <div className={styles.inner}>
         <div className={styles.top}>

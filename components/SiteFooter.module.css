@@ -7,6 +7,10 @@
   overflow: hidden;
 }
 
+.withFloatingNav {
+  padding-bottom: 120px;
+}
+
 .glow {
   position: absolute;
   top: -40%;

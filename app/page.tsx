@@ -4,9 +4,9 @@ import { SITE_URL } from '@/lib/site'
 import HomeV2 from '@/components/home-v2/HomeV2'
 
 export const metadata: Metadata = {
-  title: 'Paulo Pierrondi - Technical Account Executive, Arquiteto de IA e Full-stack Builder',
+  title: 'Paulo Pierrondi — Onde IA vira operação com evidência',
   description:
-    'Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder. Sistemas multi-agente, AgentOps, apps e automações com trilha de evidência.',
+    'Sistema operacional da IA: operating model, AgentOps, governança e trilha de evidência. Enterprise FSI na ServiceNow e sistemas públicos construídos e publicados por Paulo Pierrondi.',
   keywords: [
     'Paulo Pierrondi',
     'AI Architect',
@@ -50,9 +50,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi - Technical Account Executive, Arquiteto de IA e Full-stack Builder',
+    title: 'Paulo Pierrondi — Onde IA vira operação com evidência',
     description:
-      'Sistemas multi-agente, AgentOps, plataformas de automação, apps e frameworks — liderando contas enterprise FSI na ServiceNow.',
+      'Operating model de IA, AgentOps e sistemas com trilha de evidência — enterprise FSI na ServiceNow e produtos públicos.',
     url: '/',
     siteName: 'pierrondi.dev',
     locale: 'pt_BR',
@@ -62,9 +62,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Paulo Pierrondi - Technical Account Executive, Arquiteto de IA e Full-stack Builder',
+    title: 'Paulo Pierrondi — Onde IA vira operação com evidência',
     description:
-      'Sistemas multi-agente, AgentOps, automação, apps e frameworks — com liderança de contas enterprise na ServiceNow.',
+      'Sistema operacional da IA: contexto, governança, AgentOps e evidência — em contas enterprise e em sistemas construídos e publicados.',
     images: ['/og'],
   },
 }
@@ -74,9 +74,9 @@ const homeWebPageSchema = {
   '@type': 'ProfilePage',
   '@id': `${SITE_URL}/#profile-page`,
   url: SITE_URL,
-  name: 'Paulo Pierrondi - Technical Account Executive, Arquiteto de IA e Full-stack Builder',
+  name: 'Paulo Pierrondi — Onde IA vira operação com evidência',
   description:
-    'Perfil de Paulo Pierrondi: arquitetura de IA e automação, sistemas multi-agente, full-stack building, apps e frameworks, com liderança de contas enterprise FSI na ServiceNow.',
+    'Perfil de Paulo Pierrondi: operating model de IA, AgentOps, sistemas multi-agente, produtos e frameworks com trilha de evidência, e liderança de contas enterprise FSI na ServiceNow.',
   inLanguage: 'pt-BR',
   isPartOf: { '@id': `${SITE_URL}/#website` },
   about: { '@id': `${SITE_URL}/#person` },

@@ -8,7 +8,10 @@
   align-items: center;
   justify-content: flex-start;
   overflow: hidden;
-  background: var(--hv2-bg-base);
+  background:
+    radial-gradient(circle at 84% 28%, rgba(88, 227, 155, 0.045), transparent 28%),
+    radial-gradient(circle at 20% 72%, rgba(240, 166, 107, 0.06), transparent 34%),
+    linear-gradient(180deg, rgba(7, 6, 5, 0.22), rgba(16, 13, 10, 0.48));
 }
 
 .inner {
@@ -98,9 +101,9 @@
   display: block;
   margin-bottom: var(--hv2-space-3);
   padding: var(--hv2-space-4);
-  border: 1px solid var(--hv2-accent-green-border);
+  border: 1px solid var(--hv2-accent-signal-border);
   border-radius: 8px;
-  background: linear-gradient(135deg, var(--hv2-accent-green-soft), var(--hv2-bg-elevated));
+  background: linear-gradient(135deg, var(--hv2-accent-signal-soft), rgba(16, 13, 10, 0.84));
   color: var(--hv2-text-primary);
   text-decoration: none;
   transition: border-color var(--hv2-dur-fast) var(--hv2-ease-default),
@@ -110,8 +113,8 @@
 
 .whatsappCard:hover,
 .whatsappCard:focus-visible {
-  border-color: var(--hv2-accent-green);
-  box-shadow: 0 10px 28px var(--hv2-accent-green-glow);
+  border-color: var(--hv2-accent-signal);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.24), 0 0 28px var(--hv2-accent-signal-glow);
   transform: translateY(-2px);
   outline: none;
 }
@@ -134,7 +137,7 @@
 }
 
 .whatsappStatus {
-  color: var(--hv2-accent-green);
+  color: var(--hv2-accent-signal);
 }
 
 .whatsappStatus::before {
@@ -162,7 +165,7 @@
 }
 
 .whatsappArrow {
-  color: var(--hv2-accent-green);
+  color: var(--hv2-accent-signal);
   font-size: 1.25rem;
   transition: transform var(--hv2-dur-fast) var(--hv2-ease-default);
 }
@@ -174,7 +177,7 @@
 
 .whatsappAction {
   margin-top: var(--hv2-space-3);
-  color: var(--hv2-accent-green);
+  color: var(--hv2-accent-signal);
   font-family: var(--hv2-font-mono);
   font-size: 0.75rem;
   font-weight: 600;
@@ -183,7 +186,7 @@
 }
 
 .emailCard {
-  background: var(--hv2-bg-elevated);
+  background: rgba(16, 13, 10, 0.78);
   border: 1px solid var(--hv2-border-default);
   border-radius: 8px;
   padding: var(--hv2-space-4);
@@ -210,7 +213,7 @@
   font-family: var(--hv2-font-mono);
   font-size: 0.75rem;
   font-weight: 400;
-  color: var(--hv2-accent-green);
+  color: var(--hv2-accent-signal);
 }
 
 .emailCardStatus::before {
@@ -283,7 +286,9 @@
 }
 
 .formContainer {
-  background: var(--hv2-bg-elevated);
+  background:
+    linear-gradient(145deg, rgba(240, 166, 107, 0.045), transparent 52%),
+    rgba(16, 13, 10, 0.86);
   border: 1px solid var(--hv2-border-default);
   border-radius: 12px;
   overflow: hidden;
@@ -301,7 +306,7 @@
   align-items: center;
   gap: var(--hv2-space-3);
   padding: var(--hv2-space-3) var(--hv2-space-4);
-  background: var(--hv2-bg-surface);
+  background: rgba(24, 19, 15, 0.82);
   border-bottom: 1px solid var(--hv2-border-default);
 }
 
@@ -325,7 +330,7 @@
 }
 
 .controlMaximize {
-  background: var(--hv2-accent-green);
+  background: var(--hv2-accent-signal);
 }
 
 .formTitle {
@@ -466,9 +471,9 @@
 }
 
 .successMessage {
-  color: var(--hv2-accent-green);
-  background: var(--hv2-accent-green-soft);
-  border: 1px solid var(--hv2-accent-green-border);
+  color: var(--hv2-accent-signal);
+  background: var(--hv2-accent-signal-soft);
+  border: 1px solid var(--hv2-accent-signal-border);
 }
 
 .errorMessage {
@@ -480,7 +485,7 @@
 .footer {
   width: 100%;
   border-top: 1px solid var(--hv2-border-default);
-  background: rgba(10, 10, 10, 0.8);
+  background: rgba(7, 6, 5, 0.82);
   backdrop-filter: blur(8px);
   position: relative;
   z-index: var(--hv2-z-content);

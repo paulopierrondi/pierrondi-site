@@ -7,7 +7,7 @@
 
 /* ── Hero ── */
 .hero {
-  padding-top: clamp(48px, 9vh, 110px);
+  padding-top: clamp(calc(80px + env(safe-area-inset-top)), 9vh, calc(110px + env(safe-area-inset-top)));
   padding-bottom: clamp(24px, 4vh, 40px);
 }
 .eyebrow {

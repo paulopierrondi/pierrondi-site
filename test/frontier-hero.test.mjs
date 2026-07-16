@@ -23,6 +23,18 @@ const visualQa = await readFile(
   new URL('scripts/frontier-hero-visual-qa.mjs', root),
   'utf8',
 )
+const home = await readFile(
+  new URL('components/home-v2/HomeV2.tsx', root),
+  'utf8',
+)
+const publicNavigation = await readFile(
+  new URL('components/PublicNavigation.tsx', root),
+  'utf8',
+)
+const homeTokens = await readFile(
+  new URL('components/home-v2/home-v2.css', root),
+  'utf8',
+)
 
 test('hero keeps semantic copy in SSR while the frontier scene stays client-only', () => {
   assert.match(hero, /dynamic\(.*FrontierEventHorizon/s)
@@ -41,7 +53,7 @@ test('frontier scene is deterministic, bounded, and stops rendering when inactiv
   assert.match(scene, /dpr=\{\[1, 1\.35\]\}/)
   assert.match(scene, /IntersectionObserver/)
   assert.match(scene, /visibilitychange/)
-  assert.match(scene, /reducedMotion\s*\?\s*'demand'/)
+  assert.match(scene, /reducedMotion\s*\?\s*'never'/)
   assert.match(scene, /'never'/)
   assert.match(scene, /getContext\('webgl2'\)/)
   assert.doesNotMatch(scene, /getContext\('webgl'\)/)
@@ -53,9 +65,30 @@ test('frontier scene is deterministic, bounded, and stops rendering when inactiv
   assert.doesNotMatch(scene, /preserveDrawingBuffer/)
 })
 
-test('visual QA fails if reduced-motion frames keep changing', () => {
+test('visual QA requires a static CSS fallback for reduced motion', () => {
   assert.match(visualQa, /const reducedFrameStable = reducedBefore\.equals\(reducedAfter\)/)
-  assert.match(visualQa, /reducedMetrics\.motion === 'reduced' &&\s*reducedFrameStable/s)
+  assert.match(visualQa, /reducedMetrics\.sceneState === 'fallback'/)
+  assert.match(visualQa, /reducedMetrics\.loop === 'never'/)
+  assert.match(visualQa, /reducedMetrics\.canvases === 0/)
+  assert.match(visualQa, /getAnimations\(\{ subtree: true \}\)/)
+  assert.match(visualQa, /reducedMetrics\.activeFallbackAnimations === 0/)
+})
+
+test('visual QA counts CTAs inside data-hero-ctas and lanes separately', () => {
+  assert.match(visualQa, /\[data-hero-ctas\] a/)
+  assert.match(visualQa, /\[data-hero-lanes\] a/)
+  assert.match(visualQa, /PT_LANE_HREFS/)
+  assert.match(visualQa, /EN_LANE_HREFS/)
+  assert.match(visualQa, /function lanesPass/)
+  assert.match(visualQa, /lanesPass\(metrics\.lanes, PT_LANE_HREFS\)/)
+  assert.match(visualQa, /lanesPass\(englishMetrics\.lanes, EN_LANE_HREFS\)/)
+  assert.doesNotMatch(
+    visualQa,
+    /querySelectorAll\('#hero a'\)|hero\?\.querySelectorAll\('a'\)/,
+  )
+  assert.match(hero, /data-hero-ctas/)
+  assert.match(hero, /data-hero-lanes/)
+  assert.match(hero, /data-hero-lane=\{lane\.kicker\.toLowerCase\(\)\}/)
 })
 
 test('CSS event-horizon fallback is server-rendered and responsive', () => {
@@ -63,14 +96,55 @@ test('CSS event-horizon fallback is server-rendered and responsive', () => {
   assert.match(hero, /data-frontier-fallback/)
   assert.match(hero, /sceneStyles\.fallbackDisk/)
   assert.match(hero, /sceneStyles\.fallbackVoid/)
+  assert.match(hero, /sceneStyles\.fallbackHorizon/)
+  assert.match(hero, /sceneStyles\.fallbackObserver/)
   assert.match(sceneStyles, /\.fallbackDisk/)
   assert.match(sceneStyles, /\.fallbackVoid/)
+  assert.match(sceneStyles, /\.fallbackHorizon/)
+  assert.match(sceneStyles, /\.fallbackObserver/)
   assert.match(sceneStyles, /@media \(max-width: 767px\)/)
   assert.match(sceneStyles, /prefers-reduced-motion: reduce/)
+})
+
+test('hero thesis copy exposes dual enterprise/builder routes', async () => {
+  const copy = await readFile(
+    new URL('components/home-v2/copy.ts', root),
+    'utf8',
+  )
+  assert.match(copy, /Onde IA vira operação com evidência/)
+  assert.match(copy, /Where AI becomes governed operations/)
+  assert.match(copy, /lanes:\s*\[/)
+  assert.match(copy, /kicker: 'Enterprise'/)
+  assert.match(copy, /kicker: 'Builder'/)
+  assert.match(copy, /href: '\/feitos'/)
+  assert.match(copy, /href: '\/portfolio'/)
+  assert.doesNotMatch(copy, /bradesco-prod/)
+  assert.doesNotMatch(copy, /design_operate_scale_ai/)
+  assert.match(hero, /hero\.lanes\.map/)
+  assert.match(hero, /data-hero-lanes/)
+  assert.match(hero, /aria-label=\{lang === 'pt' \? 'Rotas de entrada' : 'Entry routes'\}/)
 })
 
 test('projects rail cannot pull the document past the entry hero on mount', () => {
   assert.doesNotMatch(projects, /activeTab\?\.scrollIntoView/)
   assert.match(projects, /rail\.scrollTo/)
   assert.match(projects, /activeTab\.offsetLeft/)
+})
+
+test('frontier palette separates copper emphasis from live status', () => {
+  assert.match(homeTokens, /--hv2-accent-copper: #f0a66b/)
+  assert.match(homeTokens, /--hv2-accent-champagne: #f5cf9f/)
+  assert.match(homeTokens, /--hv2-accent-signal: #58e39b/)
+  assert.match(homeTokens, /--hv2-accent-green: var\(--hv2-accent-copper\)/)
+})
+
+test('mobile section navigation unlocks before scroll and keeps the hash synchronized', () => {
+  assert.match(publicNavigation, /menuOpen && link\.onSelect/)
+  assert.match(
+    publicNavigation,
+    /requestAnimationFrame\(\(\) => \{\s*window\.requestAnimationFrame\(\(\) => link\.onSelect/s,
+  )
+  assert.match(home, /window\.history\.replaceState/)
+  assert.match(home, /new HashChangeEvent\('hashchange'\)/)
+  assert.match(home, /el\?\.scrollIntoView/)
 })

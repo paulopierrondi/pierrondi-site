@@ -39,6 +39,17 @@ export default function HomeV2({ lang }: HomeV2Props) {
   const scrollTo = useCallback(
     (target: SectionId) => {
       const el = document.getElementById(target)
+      const targetHash = `#${target}`
+
+      if (window.location.hash !== targetHash) {
+        window.history.replaceState(
+          window.history.state,
+          '',
+          `${window.location.pathname}${window.location.search}${targetHash}`,
+        )
+        window.dispatchEvent(new HashChangeEvent('hashchange'))
+      }
+
       el?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' })
     },
     [reducedMotion],
@@ -73,9 +84,9 @@ export default function HomeV2({ lang }: HomeV2Props) {
           end: 'bottom bottom',
           snap: {
             snapTo: 1 / (sections.length - 1),
-            duration: { min: 0.2, max: 0.5 },
-            delay: 0.05,
-            ease: 'power1.inOut',
+            duration: { min: 0.35, max: 0.8 },
+            delay: 0.08,
+            ease: 'power2.inOut',
           },
         })
         return () => snapTrigger.kill()
@@ -90,7 +101,11 @@ export default function HomeV2({ lang }: HomeV2Props) {
   const total = String(copy.sections.length).padStart(2, '0')
 
   return (
-    <div ref={rootRef} className={`hv2 ${hv2Body.variable} ${hv2Display.variable} ${styles.root}`}>
+    <div
+      ref={rootRef}
+      className={`hv2 ${hv2Body.variable} ${hv2Display.variable} ${styles.root}`}
+      data-active-section={activeSection}
+    >
       <NavBar
         lang={lang}
         activeSection={activeSection}
@@ -105,6 +120,7 @@ export default function HomeV2({ lang }: HomeV2Props) {
               key={meta.id}
               id={meta.id}
               data-hv2-section={meta.id}
+              data-hv2-active={meta.id === activeSection ? 'true' : 'false'}
               className={styles.section}
               aria-label={meta.label}
             >

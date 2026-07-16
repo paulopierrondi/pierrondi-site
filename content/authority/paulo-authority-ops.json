@@ -28,19 +28,19 @@
   },
   "positioning": {
     "pt": {
-      "statement": "Atuo como Technical Account Executive na ServiceNow e este portfólio pessoal mostra como conecto liderança enterprise, arquitetura de IA e engenharia full-stack para transformar estratégia em execução governada.",
-      "short": "Technical Account Executive na ServiceNow · Arquiteto de IA · Full-stack Builder."
+      "statement": "Atuo como Technical Account Executive na ServiceNow e este portfólio pessoal mostra como desenho o operating model da IA — contexto, governança, AgentOps e evidência — para transformar estratégia em operação real.",
+      "short": "Operating model de IA · AgentOps · Enterprise FSI · Sistemas públicos."
     },
     "en": {
-      "statement": "I work as a Technical Account Executive at ServiceNow, and this personal portfolio shows how I connect enterprise leadership, AI architecture, and full-stack engineering to turn strategy into governed execution.",
-      "short": "Technical Account Executive at ServiceNow · AI Architect · Full-stack Builder."
+      "statement": "I work as a Technical Account Executive at ServiceNow, and this personal portfolio shows how I design the AI operating model — context, governance, AgentOps and evidence — to turn strategy into real operations.",
+      "short": "AI operating model · AgentOps · Enterprise FSI · Public systems."
     }
   },
   "pages": {
     "pt": {
       "slug": "/about",
-      "metadataTitle": "Paulo Pierrondi - Technical Account Executive, Arquiteto de IA e Full-stack Builder",
-      "metadataDescription": "Portfólio profissional pessoal de Paulo Pierrondi: Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder de sistemas multi-agente, apps e automações.",
+      "metadataTitle": "Paulo Pierrondi — Onde IA vira operação com evidência",
+      "metadataDescription": "Operating model de IA, AgentOps e trilha de evidência. Technical Account Executive na ServiceNow e builder de sistemas multi-agente, apps e automações públicas.",
       "hero": {
         "kicker": "Portfólio pessoal / ServiceNow / IA + Engenharia",
         "title": "Eu desenho a camada operacional que faz IA virar trabalho governado.",
@@ -110,8 +110,8 @@
     },
     "en": {
       "slug": "/en/about",
-      "metadataTitle": "Paulo Pierrondi - Technical Account Executive, AI Architect & Full-stack Builder",
-      "metadataDescription": "Paulo Pierrondi's personal professional portfolio: Technical Account Executive at ServiceNow, AI architect and full-stack builder of multi-agent systems, apps and automations.",
+      "metadataTitle": "Paulo Pierrondi — Where AI becomes governed operations",
+      "metadataDescription": "AI operating model, AgentOps and evidence trails. Technical Account Executive at ServiceNow and builder of multi-agent systems, apps and public automations.",
       "hero": {
         "kicker": "Personal portfolio / ServiceNow / AI + Engineering",
         "title": "I design the operating layer that turns AI into governed work.",

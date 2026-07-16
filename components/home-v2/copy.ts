@@ -11,18 +11,30 @@ export const COPY: Record<Lang, SiteCopy> = {
       { id: 'contact', label: 'contato', index: '05' },
     ],
     hero: {
-      tagline: '$ whoami',
+      tagline: 'frontier · operating model',
       headlineLine1: 'Paulo Pierrondi',
-      headlineLine2: '$ design_operate_scale_ai()',
+      headlineLine2: 'Onde IA vira operação com evidência',
       description:
-        'Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder. Lidero contexto enterprise em FSI enquanto construo sistemas multi-agente, plataformas de automação e produtos digitais com trilha de evidência.',
-      ctaPrimary: { label: 'ver projetos', href: '#projects' },
-      ctaSecondary: { label: 'falar comigo', href: '#contact' },
+        'Desenho o sistema operacional da IA: contexto, governança, AgentOps e trilha de evidência — em contas enterprise FSI na ServiceNow e em sistemas que eu mesmo construo e publico.',
+      ctaPrimary: { label: 'sistemas em produção', href: '#projects' },
+      ctaSecondary: { label: 'colaborar', href: '#contact' },
+      lanes: [
+        {
+          kicker: 'Enterprise',
+          label: 'Operating model · AgentOps · frameworks',
+          href: '/feitos',
+        },
+        {
+          kicker: 'Builder',
+          label: 'Produtos, apps e plataformas públicas',
+          href: '/portfolio',
+        },
+      ],
       badges: [
-        'AI/Automation Architect',
-        'Full-stack Builder',
-        'Technical Account Executive',
+        'AI Operating Model',
         'AgentOps',
+        'Evidence trails',
+        'Full-stack systems',
       ],
     },
     projects: {
@@ -114,7 +126,7 @@ export const COPY: Record<Lang, SiteCopy> = {
               { text: 'from validator import CsdmRuleSet, FsdmConformance', tone: 'keyword' },
               { text: '', tone: 'plain' },
               { text: 'rules = CsdmRuleSet.load("fsdm/card_dispute.json")', tone: 'plain' },
-              { text: 'result = rules.evaluate(instance="bradesco-prod")', tone: 'function' },
+              { text: 'result = rules.evaluate(instance="fsi-demo")', tone: 'function' },
               { text: '', tone: 'plain' },
               { text: 'assert result.maturity >= 0.85', tone: 'keyword' },
               { text: 'assert result.orphan_accounts == 0', tone: 'keyword' },
@@ -231,9 +243,9 @@ export const COPY: Record<Lang, SiteCopy> = {
     about: {
       heading: 'Sobre',
       bio: [
-        'Sou carioca, vivi anos em Dublin e opero de São Paulo. Construí a carreira na interseção entre o que a tecnologia promete e o que a operação aguenta — é ali que IA enterprise vira valor ou vira risco.',
-        'Hoje sou Technical Account Executive / Enterprise Architect na ServiceNow, focado em serviços financeiros. Meu trabalho não é vender "usar IA": é desenhar como a IA entra em trabalho real, com contexto, política, permissões, memória, validação, custo e evidência.',
-        'Para sustentar isso, construo sistemas — frameworks de arquitetura de valor, AgentOps governados, pipelines de inferência e produtos digitais. Método antes da ferramenta; trilha de evidência antes da escala.',
+        'Sou carioca, vivi anos em Dublin e opero de São Paulo. Trabalho na fronteira entre o que a tecnologia promete e o que a operação aguenta — é ali que IA enterprise vira valor ou vira risco.',
+        'Como Technical Account Executive / Enterprise Architect na ServiceNow, em serviços financeiros, não vendo "usar IA": desenho o operating model que a coloca em trabalho real — contexto, política, permissões, memória, validação, custo e evidência.',
+        'A mesma disciplina que governa contas enterprise constrói produtos públicos: frameworks, AgentOps, painéis, validators e apps. Método antes da ferramenta; trilha de evidência antes da escala.',
       ],
       stats: [
         { value: 'FSI', label: 'foco em serviços financeiros regulados' },
@@ -340,18 +352,30 @@ export const COPY: Record<Lang, SiteCopy> = {
       { id: 'contact', label: 'contact', index: '05' },
     ],
     hero: {
-      tagline: '$ whoami',
+      tagline: 'frontier · operating model',
       headlineLine1: 'Paulo Pierrondi',
-      headlineLine2: '$ design_operate_scale_ai()',
+      headlineLine2: 'Where AI becomes governed operations',
       description:
-        'Technical Account Executive at ServiceNow, AI architect and full-stack builder. I lead enterprise FSI context while building multi-agent systems, automation platforms and digital products with evidence trails.',
-      ctaPrimary: { label: 'view projects', href: '#projects' },
-      ctaSecondary: { label: 'get in touch', href: '#contact' },
+        'I design the operating system for AI: context, governance, AgentOps and evidence trails — across enterprise FSI accounts at ServiceNow and systems I build and ship myself.',
+      ctaPrimary: { label: 'systems in production', href: '#projects' },
+      ctaSecondary: { label: 'collaborate', href: '#contact' },
+      lanes: [
+        {
+          kicker: 'Enterprise',
+          label: 'Operating model · AgentOps · frameworks',
+          href: '/en/feitos',
+        },
+        {
+          kicker: 'Builder',
+          label: 'Public products, apps and platforms',
+          href: '/en/portfolio',
+        },
+      ],
       badges: [
-        'AI/Automation Architect',
-        'Full-stack Builder',
-        'Technical Account Executive',
+        'AI Operating Model',
         'AgentOps',
+        'Evidence trails',
+        'Full-stack systems',
       ],
     },
     projects: {
@@ -443,7 +467,7 @@ export const COPY: Record<Lang, SiteCopy> = {
               { text: 'from validator import CsdmRuleSet, FsdmConformance', tone: 'keyword' },
               { text: '', tone: 'plain' },
               { text: 'rules = CsdmRuleSet.load("fsdm/card_dispute.json")', tone: 'plain' },
-              { text: 'result = rules.evaluate(instance="bradesco-prod")', tone: 'function' },
+              { text: 'result = rules.evaluate(instance="fsi-demo")', tone: 'function' },
               { text: '', tone: 'plain' },
               { text: 'assert result.maturity >= 0.85', tone: 'keyword' },
               { text: 'assert result.orphan_accounts == 0', tone: 'keyword' },
@@ -560,9 +584,9 @@ export const COPY: Record<Lang, SiteCopy> = {
     about: {
       heading: 'About',
       bio: [
-        'I am from Rio, lived for years in Dublin, and operate from São Paulo. I built my career at the intersection of what technology promises and what operations can absorb — that is where enterprise AI becomes value or risk.',
-        'Today I am a Technical Account Executive / Enterprise Architect at ServiceNow, focused on financial services. My job is not to sell "using AI": it is to design how AI enters real work, with context, policy, permissions, memory, validation, cost, and evidence.',
-        'To sustain that, I build systems — value architecture frameworks, governed AgentOps, inference pipelines, and digital products. Method before tool; evidence trail before scale.',
+        'I am from Rio, lived for years in Dublin, and operate from São Paulo. I work at the frontier between what technology promises and what operations can absorb — that is where enterprise AI becomes value or risk.',
+        'As a Technical Account Executive / Enterprise Architect at ServiceNow, focused on financial services, I do not sell "using AI": I design the operating model that puts it into real work — context, policy, permissions, memory, validation, cost, and evidence.',
+        'The same discipline that governs enterprise accounts builds public products: frameworks, AgentOps, dashboards, validators, and apps. Method before tool; evidence trail before scale.',
       ],
       stats: [
         { value: 'FSI', label: 'focus on regulated financial services' },

@@ -11,12 +11,13 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--hv2-text-muted);
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.72);
 }
 
 .rule {
   width: 48px;
   height: 1px;
-  background: var(--hv2-border-default);
+  background: linear-gradient(90deg, var(--hv2-accent-copper), var(--hv2-border-default));
 }
 
 .count {

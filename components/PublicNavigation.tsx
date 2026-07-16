@@ -48,11 +48,20 @@ export default function PublicNavigation({ lang, homeHref, links, onHomeSelect }
     }
   }, [menuOpen])
 
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1081px)')
+    const closeOnDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setMenuOpen(false)
+    }
+    desktop.addEventListener('change', closeOnDesktop)
+    return () => desktop.removeEventListener('change', closeOnDesktop)
+  }, [])
+
   return (
     <header
       className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}
       data-public-navigation
-      data-accent="lime"
+      data-accent="copper"
     >
       <Link
         href={homeHref}
@@ -82,6 +91,15 @@ export default function PublicNavigation({ lang, homeHref, links, onHomeSelect }
             aria-current={link.active ? (link.activeCurrent ?? 'page') : undefined}
             data-public-nav-key={link.key}
             onClick={(event) => {
+              if (menuOpen && link.onSelect) {
+                event.preventDefault()
+                setMenuOpen(false)
+                window.requestAnimationFrame(() => {
+                  window.requestAnimationFrame(() => link.onSelect?.(event))
+                })
+                return
+              }
+
               setMenuOpen(false)
               link.onSelect?.(event)
             }}

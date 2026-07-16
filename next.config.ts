@@ -54,6 +54,19 @@ const CANONICAL_REDIRECTS = [
   { source: '/ai-search-portfolio', destination: '/ai-search', permanent: true },
   { source: '/en/ai-search-portfolio', destination: '/ai-search', permanent: true },
   { source: '/en/ai-search', destination: '/ai-search', permanent: true },
+  // Filesystem redirect pages are too late for first-visit geo routing: an EN
+  // visitor would otherwise be prefixed to a nonexistent /en/<legacy> path.
+  { source: '/bio', destination: '/about', permanent: true },
+  { source: '/precos', destination: '/atuacao', permanent: true },
+  { source: '/ideias', destination: '/blog', permanent: true },
+  { source: '/quiz', destination: '/atuacao', permanent: true },
+  { source: '/produto-digital', destination: '/atuacao', permanent: true },
+  { source: '/calculadora', destination: '/atuacao', permanent: true },
+  { source: '/marketing-os', destination: '/atuacao', permanent: true },
+  { source: '/marketing-os/demo', destination: '/atuacao', permanent: true },
+  { source: '/marketing-os/numeros', destination: '/atuacao', permanent: true },
+  { source: '/faq', destination: '/contato', permanent: true },
+  { source: '/tech-partner', destination: '/atuacao', permanent: true },
   { source: '/sitemap_index.xml', destination: '/sitemap.xml', permanent: true },
   { source: '/sitemap-index.xml', destination: '/sitemap.xml', permanent: true },
   // App-slug aliases -> their App Store canonical slug (verified against each

@@ -1,6 +1,6 @@
 .visual {
-  --case-accent: #4ade80;
-  --case-accent-soft: rgba(74, 222, 128, 0.18);
+  --case-accent: var(--color-primary);
+  --case-accent-soft: rgba(240, 166, 107, 0.18);
   position: relative;
   min-height: 420px;
   height: 100%;
@@ -114,13 +114,13 @@
 
 .studioMark {
   color: #041108;
-  border-color: rgba(74, 222, 128, 0.46);
-  background: linear-gradient(135deg, #8af4ad, #4ade80 60%, #239852);
+  border-color: rgba(240, 166, 107, 0.46);
+  background: linear-gradient(135deg, #f5cf9f, #f0a66b 60%, #b7602d);
   font-family: var(--font-display);
   font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: -0.08em;
-  box-shadow: 0 0 20px rgba(74, 222, 128, 0.18);
+  box-shadow: 0 0 20px rgba(240, 166, 107, 0.18);
 }
 
 .cantuVisual,
@@ -686,7 +686,7 @@
   width: 100%;
   height: 100%;
   background:
-    radial-gradient(circle at 50% 48%, rgba(74, 222, 128, 0.16), transparent 22%),
+    radial-gradient(circle at 50% 48%, rgba(240, 166, 107, 0.16), transparent 22%),
     linear-gradient(145deg, #050807, #08100d 58%, #050706);
 }
 

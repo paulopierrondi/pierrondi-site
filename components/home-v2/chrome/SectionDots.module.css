@@ -8,6 +8,12 @@
   flex-direction: column;
   align-items: flex-end;
   gap: var(--hv2-space-4);
+  padding: 14px 9px;
+  border: 1px solid rgba(245, 207, 159, 0.1);
+  border-radius: 999px;
+  background: rgba(7, 6, 5, 0.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .dot {
@@ -26,7 +32,11 @@
   border-radius: 50%;
   border: 1px solid var(--hv2-text-muted);
   background: transparent;
-  transition: all var(--hv2-dur-fast) var(--hv2-ease-elastic);
+  transition:
+    background var(--hv2-dur-fast) var(--hv2-ease-expo-out),
+    border-color var(--hv2-dur-fast) var(--hv2-ease-expo-out),
+    box-shadow var(--hv2-dur-normal) var(--hv2-ease-expo-out),
+    transform var(--hv2-dur-normal) var(--hv2-ease-expo-out);
 }
 
 .dot:hover .circle {
@@ -36,7 +46,7 @@
 .dotActive .circle {
   background: var(--hv2-accent-green);
   border-color: var(--hv2-accent-green);
-  transform: scale(1.5);
+  transform: scale(1.42);
   box-shadow: var(--hv2-glow-green-md);
 }
 

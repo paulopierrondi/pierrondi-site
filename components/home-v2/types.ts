@@ -18,18 +18,28 @@ export interface SectionMeta {
   index: string
 }
 
+export interface HeroLane {
+  /** Short lane kicker, e.g. 'Enterprise' */
+  kicker: string
+  /** Compact route label under the kicker */
+  label: string
+  href: string
+}
+
 export interface HeroCopy {
-  /** Terminal-style tagline typed above the headline, e.g. '$ whoami' */
+  /** Compact kicker above the headline — thesis signal, not a role list */
   tagline: string
   /** Line 1 of the display headline, e.g. 'Paulo Pierrondi' */
   headlineLine1: string
-  /** Line 2, terminal style with cursor, e.g. '$ build_ai_systems()' */
+  /** Line 2: unifying thesis in one breath */
   headlineLine2: string
   /** 1-2 sentence supporting description */
   description: string
   ctaPrimary: CTA
   ctaSecondary: CTA
-  /** Small mono badges under the description, max 4, e.g. 'AI Architect' */
+  /** Dual entry paths: enterprise collaborators vs products/builders */
+  lanes: HeroLane[]
+  /** Small mono badges under the description, max 4, value pillars not titles */
   badges: string[]
 }
 

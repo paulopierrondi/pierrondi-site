@@ -2,43 +2,58 @@
    Everything lives under .hv2 so no other route inherits these values. */
 
 .hv2 {
-  /* Backgrounds */
-  --hv2-bg-base: #0a0a0a;
-  --hv2-bg-elevated: #141414;
-  --hv2-bg-surface: #1a1a1a;
-  --hv2-bg-subtle: #0f0f0f;
-  --hv2-bg-mockup: #111111;
-  --hv2-bg-mockup-header: #0d0d0d;
+  /* Frontier palette: warm near-black, copper energy and restrained live signal. */
+  --hv2-bg-base: #070605;
+  --hv2-bg-elevated: #100d0a;
+  --hv2-bg-surface: #18130f;
+  --hv2-bg-subtle: #0c0907;
+  --hv2-bg-mockup: #0f0c0a;
+  --hv2-bg-mockup-header: #0a0807;
 
   /* Text */
-  --hv2-text-primary: #f5f5f5;
-  --hv2-text-secondary: #a3a3a3;
-  --hv2-text-muted: #737373;
-  --hv2-text-disabled: #525252;
+  --hv2-text-primary: #f7f1e8;
+  --hv2-text-secondary: #b8ada1;
+  --hv2-text-muted: #81766d;
+  --hv2-text-disabled: #5f554d;
 
   /* Accents */
-  --hv2-accent-green: #4ade80;
-  --hv2-accent-green-dim: #22c55e;
-  --hv2-accent-green-soft: rgba(74, 222, 128, 0.1);
-  --hv2-accent-green-glow: rgba(74, 222, 128, 0.15);
-  --hv2-accent-green-border: rgba(74, 222, 128, 0.3);
-  --hv2-accent-amber: #f59e0b;
-  --hv2-accent-amber-dim: #d97706;
-  --hv2-accent-amber-soft: rgba(245, 158, 11, 0.1);
-  --hv2-accent-amber-border: rgba(245, 158, 11, 0.3);
+  --hv2-accent-copper: #f0a66b;
+  --hv2-accent-copper-dim: #d98449;
+  --hv2-accent-copper-soft: rgba(240, 166, 107, 0.1);
+  --hv2-accent-copper-glow: rgba(240, 166, 107, 0.18);
+  --hv2-accent-copper-border: rgba(240, 166, 107, 0.32);
+  --hv2-accent-champagne: #f5cf9f;
+  --hv2-accent-champagne-dim: #d8aa70;
+  --hv2-accent-champagne-soft: rgba(245, 207, 159, 0.09);
+  --hv2-accent-champagne-border: rgba(245, 207, 159, 0.28);
+  --hv2-accent-signal: #58e39b;
+  --hv2-accent-signal-soft: rgba(88, 227, 155, 0.1);
+  --hv2-accent-signal-glow: rgba(88, 227, 155, 0.28);
+  --hv2-accent-signal-border: rgba(88, 227, 155, 0.32);
+
+  /* Backwards-compatible aliases keep every section on one visual system. */
+  --hv2-accent-green: var(--hv2-accent-copper);
+  --hv2-accent-green-dim: var(--hv2-accent-copper-dim);
+  --hv2-accent-green-soft: var(--hv2-accent-copper-soft);
+  --hv2-accent-green-glow: var(--hv2-accent-copper-glow);
+  --hv2-accent-green-border: var(--hv2-accent-copper-border);
+  --hv2-accent-amber: var(--hv2-accent-champagne);
+  --hv2-accent-amber-dim: var(--hv2-accent-champagne-dim);
+  --hv2-accent-amber-soft: var(--hv2-accent-champagne-soft);
+  --hv2-accent-amber-border: var(--hv2-accent-champagne-border);
 
   /* Borders */
-  --hv2-border-default: #262626;
-  --hv2-border-hover: #404040;
-  --hv2-border-active: #4ade80;
+  --hv2-border-default: rgba(245, 207, 159, 0.12);
+  --hv2-border-hover: rgba(245, 207, 159, 0.26);
+  --hv2-border-active: var(--hv2-accent-copper);
 
   /* Code / terminal tones */
   --hv2-code-keyword: #c084fc;
-  --hv2-code-string: #a3e635;
+  --hv2-code-string: var(--hv2-accent-signal);
   --hv2-code-function: #60a5fa;
   --hv2-code-comment: #737373;
-  --hv2-terminal-prompt: #4ade80;
-  --hv2-terminal-bracket: #f59e0b;
+  --hv2-terminal-prompt: var(--hv2-accent-copper);
+  --hv2-terminal-bracket: var(--hv2-accent-champagne);
 
   /* Semantic states */
   --hv2-state-error: #ef4444;
@@ -86,11 +101,25 @@
   --hv2-ease-smooth: cubic-bezier(0.45, 0.05, 0.55, 0.95);
 
   /* Glows & shadows */
-  --hv2-glow-green-sm: 0 0 8px rgba(74, 222, 128, 0.3);
-  --hv2-glow-green-md: 0 0 24px rgba(74, 222, 128, 0.2);
-  --hv2-glow-green-lg: 0 0 48px rgba(74, 222, 128, 0.15);
-  --hv2-shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
-  --hv2-shadow-nav: 0 2px 16px rgba(0, 0, 0, 0.5);
+  --hv2-glow-green-sm: 0 0 12px rgba(240, 166, 107, 0.24);
+  --hv2-glow-green-md: 0 0 30px rgba(240, 166, 107, 0.16);
+  --hv2-glow-green-lg: 0 0 56px rgba(240, 166, 107, 0.12);
+  --hv2-shadow-card: 0 18px 60px rgba(0, 0, 0, 0.34);
+  --hv2-shadow-nav: 0 12px 36px rgba(0, 0, 0, 0.42);
+
+  /* Bridge shared chrome tokens only while the immersive home is mounted. */
+  --color-canvas: var(--hv2-bg-base);
+  --color-ink: var(--hv2-text-primary);
+  --color-body: var(--hv2-text-secondary);
+  --color-muted: var(--hv2-text-muted);
+  --color-faint: var(--hv2-text-disabled);
+  --color-hairline: var(--hv2-border-default);
+  --color-hairline-soft: rgba(245, 207, 159, 0.08);
+  --color-hairline-strong: var(--hv2-border-hover);
+  --color-primary: var(--hv2-accent-copper);
+  --color-primary-active: var(--hv2-accent-champagne);
+  --color-primary-glow: var(--hv2-accent-copper-glow);
+  --color-accent-gold: var(--hv2-accent-champagne);
 
   background: var(--hv2-bg-base);
   color: var(--hv2-text-primary);
@@ -99,12 +128,12 @@
 }
 
 .hv2 ::selection {
-  background: var(--hv2-accent-green);
+  background: var(--hv2-accent-copper);
   color: var(--hv2-bg-base);
 }
 
 .hv2 :focus-visible {
-  outline: 2px solid var(--hv2-accent-green);
+  outline: 2px solid var(--hv2-accent-copper);
   outline-offset: 2px;
 }
 

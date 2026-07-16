@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { createElement, useRef } from 'react'
 import { motion, useInView, type Variants } from 'framer-motion'
 import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import {
@@ -60,6 +60,64 @@ function getSkillsMeta(lang: Lang) {
   return COPY[lang].sections.find((s) => s.id === 'skills')
 }
 
+const DEFAULT_MOTION = {
+  stagger: 0.12,
+  delay: 0.05,
+  headerY: 30,
+  cardY: 40,
+  badgeY: 12,
+  duration: 0.6,
+  badgeDuration: 0.38,
+} as const
+
+const REDUCED_MOTION = {
+  stagger: 0,
+  delay: 0,
+  headerY: 0,
+  cardY: 0,
+  badgeY: 0,
+  duration: 0.1,
+  badgeDuration: 0.1,
+} as const
+
+interface SkillCardProps {
+  category: SkillCategory
+  cardVariants: Variants
+  badgeVariants: Variants
+}
+
+function SkillCard({ category, cardVariants, badgeVariants }: SkillCardProps) {
+  const icon = createElement(resolveIcon(category.icon), {
+    className: styles.icon,
+    'aria-hidden': true,
+  })
+
+  return (
+    <motion.article className={styles.card} variants={cardVariants} tabIndex={0}>
+      <div className={styles.cardHeader}>
+        {icon}
+        <h3 className={styles.title}>{category.title}</h3>
+      </div>
+
+      <ul className={styles.badges}>
+        {category.skills.map((skill: SkillItem) => (
+          <motion.li key={skill.name} className={styles.badge} variants={badgeVariants}>
+            <span className={styles.badgeName}>{skill.name}</span>
+            {skill.note && (
+              <>
+                <span className={styles.badgeSeparator} aria-hidden="true">
+                  {' · '}
+                </span>
+                <span className={styles.badgeNote}>{skill.note}</span>
+              </>
+            )}
+          </motion.li>
+        ))}
+      </ul>
+    </motion.article>
+  )
+}
+
 export default function SkillsSection({ lang }: SectionProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, {
@@ -67,6 +125,7 @@ export default function SkillsSection({ lang }: SectionProps) {
     once: false,
   })
   const shouldReduceMotion = useHydratedReducedMotion()
+  const motionTokens = shouldReduceMotion ? REDUCED_MOTION : DEFAULT_MOTION
 
   const copy = COPY[lang].skills
   const meta = getSkillsMeta(lang)
@@ -76,46 +135,46 @@ export default function SkillsSection({ lang }: SectionProps) {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: shouldReduceMotion ? 0 : 0.12,
-        delayChildren: shouldReduceMotion ? 0 : 0.05,
+        staggerChildren: motionTokens.stagger,
+        delayChildren: motionTokens.delay,
       },
     },
   }
 
   const headerVariants: Variants = {
-    hidden: { opacity: shouldReduceMotion ? 0 : 0, y: shouldReduceMotion ? 0 : 30 },
+    hidden: { opacity: 0, y: motionTokens.headerY },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.6,
+        duration: motionTokens.duration,
         ease: [0.16, 1, 0.3, 1],
       },
     },
   }
 
   const cardVariants: Variants = {
-    hidden: { opacity: shouldReduceMotion ? 0 : 0, y: shouldReduceMotion ? 0 : 40 },
+    hidden: { opacity: 0, y: motionTokens.cardY },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.6,
+        duration: motionTokens.duration,
         ease: [0.16, 1, 0.3, 1],
-        staggerChildren: shouldReduceMotion ? 0 : 0.04,
-        delayChildren: shouldReduceMotion ? 0 : 0.1,
+        staggerChildren: motionTokens.stagger / 3,
+        delayChildren: motionTokens.delay * 2,
       },
     },
   }
 
   const badgeVariants: Variants = {
-    hidden: { opacity: shouldReduceMotion ? 0 : 0, scale: shouldReduceMotion ? 1 : 0.85 },
+    hidden: { opacity: 0, y: motionTokens.badgeY },
     visible: {
       opacity: 1,
-      scale: 1,
+      y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.4,
-        ease: [0.68, -0.55, 0.265, 1.55],
+        duration: motionTokens.badgeDuration,
+        ease: [0.16, 1, 0.3, 1],
       },
     },
   }
@@ -155,38 +214,14 @@ export default function SkillsSection({ lang }: SectionProps) {
           animate={isInView ? 'visible' : 'hidden'}
           variants={sectionVariants}
         >
-          {copy.categories.map((category: SkillCategory) => {
-            const Icon = resolveIcon(category.icon)
-            return (
-              <motion.article
-                key={category.title}
-                className={styles.card}
-                variants={cardVariants}
-                tabIndex={0}
-              >
-                <div className={styles.cardHeader}>
-                  <Icon className={styles.icon} aria-hidden="true" />
-                  <h3 className={styles.title}>{category.title}</h3>
-                </div>
-
-                <ul className={styles.badges}>
-                  {category.skills.map((skill: SkillItem) => (
-                    <motion.li key={skill.name} className={styles.badge} variants={badgeVariants}>
-                      <span className={styles.badgeName}>{skill.name}</span>
-                      {skill.note && (
-                        <>
-                          <span className={styles.badgeSeparator} aria-hidden="true">
-                            {' · '}
-                          </span>
-                          <span className={styles.badgeNote}>{skill.note}</span>
-                        </>
-                      )}
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.article>
-            )
-          })}
+          {copy.categories.map((category: SkillCategory) => (
+            <SkillCard
+              key={category.title}
+              category={category}
+              cardVariants={cardVariants}
+              badgeVariants={badgeVariants}
+            />
+          ))}
         </motion.div>
       </div>
     </section>

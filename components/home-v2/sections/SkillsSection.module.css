@@ -3,7 +3,9 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  background: var(--hv2-bg-base);
+  background:
+    radial-gradient(circle at 14% 28%, rgba(215, 129, 73, 0.06), transparent 31%),
+    linear-gradient(180deg, rgba(16, 13, 10, 0.3), rgba(7, 6, 5, 0.34));
   overflow: hidden;
 }
 
@@ -78,7 +80,9 @@
 }
 
 .card {
-  background: var(--hv2-bg-elevated);
+  background:
+    linear-gradient(145deg, rgba(240, 166, 107, 0.045), transparent 48%),
+    rgba(16, 13, 10, 0.8);
   border: 1px solid var(--hv2-border-default);
   border-radius: 12px;
   padding: 16px;
@@ -88,7 +92,8 @@
   transition:
     border-color var(--hv2-dur-normal) ease,
     box-shadow var(--hv2-dur-normal) ease,
-    transform var(--hv2-dur-normal) var(--hv2-ease-elastic);
+    background var(--hv2-dur-normal) ease,
+    transform var(--hv2-dur-normal) var(--hv2-ease-expo-out);
 }
 
 @media (min-width: 640px) {
@@ -105,8 +110,11 @@
 
 .card:hover {
   border-color: var(--hv2-border-active);
-  box-shadow: var(--hv2-glow-green-md);
-  transform: scale(1.02);
+  background:
+    linear-gradient(145deg, rgba(240, 166, 107, 0.08), transparent 52%),
+    rgba(24, 19, 15, 0.9);
+  box-shadow: 0 20px 54px rgba(0, 0, 0, 0.28), var(--hv2-glow-green-md);
+  transform: translateY(-5px);
 }
 
 .cardHeader {
@@ -152,13 +160,13 @@
   color: var(--hv2-accent-green);
   border: 1px solid var(--hv2-accent-green-border);
   transition:
-    transform var(--hv2-dur-fast) var(--hv2-ease-elastic),
-    box-shadow var(--hv2-dur-fast) var(--hv2-ease-elastic),
-    border-color var(--hv2-dur-fast) var(--hv2-ease-elastic);
+    transform var(--hv2-dur-fast) var(--hv2-ease-expo-out),
+    box-shadow var(--hv2-dur-fast) var(--hv2-ease-expo-out),
+    border-color var(--hv2-dur-fast) var(--hv2-ease-expo-out);
 }
 
 .badge:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px);
   border-color: var(--hv2-accent-green);
   box-shadow: var(--hv2-glow-green-sm);
 }

@@ -244,7 +244,7 @@ function AccretionDisk({
 
   useDisposable(geometry, material)
   useFrame(({ clock }) => {
-    if (materialRef.current)
+    if (!reducedMotion && materialRef.current)
       materialRef.current.uniforms.uTime.value = clock.elapsedTime
   })
 
@@ -528,9 +528,10 @@ export default function FrontierEventHorizon() {
   const frameloop: 'always' | 'demand' | 'never' = !active
     ? 'never'
     : reducedMotion
-      ? 'demand'
+      ? 'never'
       : 'always'
-  const state = supported === false ? 'fallback' : ready ? 'ready' : 'loading'
+  const state =
+    reducedMotion || supported === false ? 'fallback' : ready ? 'ready' : 'loading'
 
   return (
     <div
@@ -540,8 +541,9 @@ export default function FrontierEventHorizon() {
       data-frontier-state={state}
       data-frontier-active={active ? 'true' : 'false'}
       data-frontier-motion={reducedMotion ? 'reduced' : 'full'}
+      data-frontier-loop={frameloop}
     >
-      {supported && (
+      {supported && !reducedMotion && (
         <FrontierBoundary onFailure={() => setSupported(false)}>
           <Canvas
             className={`${styles.canvas} ${ready ? styles.canvasReady : ''}`}
@@ -557,7 +559,7 @@ export default function FrontierEventHorizon() {
             onCreated={({ gl }) => {
               gl.setClearColor(0x020202, 0)
               gl.toneMapping = THREE.ACESFilmicToneMapping
-              gl.toneMappingExposure = 1.16
+              gl.toneMappingExposure = 1.22
               gl.domElement.addEventListener(
                 'webglcontextlost',
                 (event) => {

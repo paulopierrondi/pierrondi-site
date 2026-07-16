@@ -53,20 +53,45 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.36;
+  opacity: 0.42;
   background:
     linear-gradient(
       110deg,
-      transparent 42%,
-      rgba(255, 122, 24, 0.045) 60%,
+      transparent 38%,
+      rgba(255, 122, 24, 0.07) 58%,
       transparent 78%
     ),
     radial-gradient(
+      circle at 68% 40%,
+      rgba(255, 214, 150, 0.05),
+      transparent 34%
+    ),
+    radial-gradient(
       circle at 12% 70%,
-      rgba(74, 222, 128, 0.04),
+      rgba(88, 227, 155, 0.03),
       transparent 29%
     );
   mix-blend-mode: screen;
+}
+
+/* Soft gravitational pull that keeps the void readable behind the thesis. */
+.gravityWell {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  right: -8%;
+  top: 8%;
+  width: min(72vw, 920px);
+  height: min(72vh, 780px);
+  background:
+    radial-gradient(
+      circle at 52% 46%,
+      transparent 18%,
+      rgba(2, 2, 2, 0.18) 42%,
+      rgba(2, 2, 2, 0.55) 72%,
+      rgba(2, 2, 2, 0.82) 100%
+    );
+  opacity: 0.72;
 }
 
 .sceneMeta,
@@ -102,8 +127,8 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--hv2-accent-green);
-  box-shadow: 0 0 14px rgba(74, 222, 128, 0.84);
+  background: var(--hv2-accent-signal);
+  box-shadow: 0 0 14px rgba(88, 227, 155, 0.72);
   animation: signalPulse 1.8s ease-in-out infinite;
 }
 
@@ -209,28 +234,29 @@
   align-items: center;
   gap: var(--hv2-space-2);
   font-family: var(--hv2-font-mono);
-  font-size: clamp(0.75rem, 1.2vw, 1rem);
+  font-size: clamp(0.72rem, 1.1vw, 0.875rem);
   line-height: 1.5;
-  letter-spacing: 0.02em;
-  color: #a9f6c4;
-  text-shadow: 0 0 18px rgba(74, 222, 128, 0.24);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 214, 160, 0.78);
+  text-shadow: 0 0 22px rgba(255, 140, 48, 0.18);
 }
 
 .bracket {
-  color: var(--hv2-text-muted);
+  color: rgba(245, 245, 245, 0.28);
 }
 
 .taglineText {
-  color: var(--hv2-accent-green);
+  color: rgba(255, 214, 160, 0.88);
 }
 
 /* --- headline ----------------------------------------------------------- */
 
 .headline {
-  margin: 0 0 var(--hv2-space-6) 0;
+  margin: 0 0 var(--hv2-space-5) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--hv2-space-1);
+  gap: var(--hv2-space-3);
   font-family: var(--hv2-font-display);
   font-weight: 700;
   line-height: 0.95;
@@ -246,49 +272,36 @@
 }
 
 .line2 {
-  display: inline-flex;
-  align-items: baseline;
-  flex-wrap: nowrap;
-  color: var(--hv2-accent-green);
-  font-family: var(--hv2-font-mono);
-  font-weight: 500;
-  font-size: 0.45em;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-  margin-top: var(--hv2-space-2);
-  text-shadow: 0 0 22px rgba(74, 222, 128, 0.2);
+  display: block;
+  max-width: 18ch;
+  color: rgba(255, 236, 210, 0.94);
+  font-family: var(--hv2-font-display);
+  font-weight: 600;
+  font-size: 0.42em;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
+  margin-top: 0;
+  text-shadow:
+    0 0 28px rgba(255, 140, 48, 0.18),
+    0 10px 36px rgba(0, 0, 0, 0.55);
 }
 
 .line2Text {
   display: inline-block;
-  font-family: var(--hv2-font-mono);
-  white-space: nowrap;
-  animation: heroTypeReveal 1.35s steps(28, end) 0.3s both;
+  white-space: normal;
+  animation: heroThesisReveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
 }
 
-.cursor {
-  font-family: var(--hv2-font-mono);
-  color: var(--hv2-accent-green);
-  margin-left: 0.1em;
-  animation: heroBlink 1s step-end infinite;
-}
-
-@keyframes heroBlink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-@keyframes heroTypeReveal {
+@keyframes heroThesisReveal {
   from {
-    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
   }
   to {
-    clip-path: inset(0);
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
   }
 }
 
@@ -296,21 +309,12 @@
 
 .description {
   margin: 0 0 var(--hv2-space-6) 0;
-  max-width: 540px;
-  display: flex;
-  align-items: flex-start;
-  gap: var(--hv2-space-2);
+  max-width: 36rem;
   font-family: var(--hv2-font-body);
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  line-height: 1.6;
-  color: var(--hv2-text-secondary);
+  font-size: clamp(0.98rem, 1.4vw, 1.125rem);
+  line-height: 1.55;
+  color: rgba(220, 220, 220, 0.82);
   text-wrap: pretty;
-}
-
-.promptPrefix {
-  flex-shrink: 0;
-  font-family: var(--hv2-font-mono);
-  color: var(--hv2-text-muted);
 }
 
 /* --- badges ------------------------------------------------------------- */
@@ -326,14 +330,14 @@
 
 .badge {
   padding: var(--hv2-space-1) var(--hv2-space-3);
-  border: 1px solid var(--hv2-accent-green-border);
+  border: 1px solid rgba(255, 170, 96, 0.28);
   border-radius: 999px;
-  background: rgba(3, 12, 7, 0.56);
+  background: rgba(18, 10, 4, 0.58);
   backdrop-filter: blur(12px);
   font-family: var(--hv2-font-mono);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.04em;
-  color: var(--hv2-text-secondary);
+  color: rgba(245, 230, 210, 0.78);
   white-space: nowrap;
 }
 
@@ -351,18 +355,18 @@
   display: inline-flex;
   align-items: center;
   gap: var(--hv2-space-3);
-  padding: 14px 32px;
-  border-radius: 0; /* square corners per hero job spec */
-  border: 1px solid var(--hv2-accent-green-border);
-  background: rgba(2, 2, 2, 0.54);
+  padding: 14px 28px;
+  border-radius: 0;
+  border: 1px solid rgba(255, 176, 104, 0.42);
+  background: rgba(2, 2, 2, 0.58);
   backdrop-filter: blur(12px);
   font-family: var(--hv2-font-body);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--hv2-accent-green);
+  color: rgba(255, 226, 184, 0.96);
   cursor: pointer;
   transition:
     background var(--hv2-dur-normal) var(--hv2-ease-default),
@@ -373,26 +377,26 @@
 }
 
 .ctaPrimary:hover {
-  background: var(--hv2-accent-green-soft);
-  border-color: var(--hv2-accent-green);
-  box-shadow: var(--hv2-glow-green-md);
+  background: rgba(255, 140, 48, 0.14);
+  border-color: rgba(255, 176, 104, 0.78);
+  box-shadow: 0 0 28px rgba(255, 120, 32, 0.22);
   transform: translateY(-2px);
 }
 
 .ctaPrimary:active {
   transform: translateY(0);
-  box-shadow: var(--hv2-glow-green-sm);
+  box-shadow: 0 0 14px rgba(255, 120, 32, 0.16);
 }
 
 .ctaSecondary {
   font-weight: 500;
   color: var(--hv2-text-primary);
-  border-color: var(--hv2-border-default);
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
 .ctaSecondary:hover {
-  border-color: var(--hv2-border-hover);
-  background: var(--hv2-bg-elevated);
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.04);
   color: var(--hv2-text-primary);
   transform: translateY(-2px);
 }
@@ -404,6 +408,61 @@
 .ctaIcon {
   width: 16px;
   height: 16px;
+}
+
+/* Dual entry lanes: enterprise collaborators vs products/builders. */
+.lanes {
+  margin-top: var(--hv2-space-6);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 34rem;
+}
+
+.lane {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding: 12px 36px 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(8, 6, 4, 0.55);
+  backdrop-filter: blur(10px);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color var(--hv2-dur-normal) var(--hv2-ease-default),
+    background var(--hv2-dur-normal) var(--hv2-ease-default),
+    transform var(--hv2-dur-normal) var(--hv2-ease-default);
+}
+
+.lane:hover {
+  border-color: rgba(255, 176, 104, 0.42);
+  background: rgba(22, 12, 6, 0.72);
+  transform: translateY(-1px);
+}
+
+.laneKicker {
+  font-family: var(--hv2-font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 196, 128, 0.72);
+}
+
+.laneLabel {
+  font-family: var(--hv2-font-body);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: rgba(235, 235, 235, 0.86);
+}
+
+.laneIcon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 14px;
+  height: 14px;
+  color: rgba(255, 214, 160, 0.55);
 }
 
 /* --- responsive --------------------------------------------------------- */
@@ -474,26 +533,35 @@
     padding-top: 0;
   }
 
+  .gravityWell {
+    right: -20%;
+    top: 0;
+    width: 120vw;
+    height: 58vh;
+    opacity: 0.55;
+  }
+
   .tagline {
     margin-bottom: 10px;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
   }
   .headline {
-    margin-bottom: 14px;
-    gap: 0;
+    margin-bottom: 12px;
+    gap: 8px;
   }
   .line2 {
-    margin-top: 7px;
-    font-size: 0.38em;
+    max-width: 16ch;
+    font-size: 0.4em;
   }
   .description {
-    max-width: 47ch;
-    margin-bottom: 16px;
+    max-width: 42ch;
+    margin-bottom: 14px;
     font-size: clamp(0.82rem, 3.6vw, 0.95rem);
     line-height: 1.48;
   }
   .badges {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     gap: 7px;
   }
   .badge {
@@ -508,8 +576,19 @@
   .ctaSecondary {
     justify-content: center;
     padding: 11px 14px;
-    font-size: 0.7rem;
-    letter-spacing: 0.055em;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+  }
+  .lanes {
+    grid-template-columns: 1fr;
+    margin-top: 14px;
+    gap: 8px;
+  }
+  .lane {
+    padding: 10px 32px 10px 12px;
+  }
+  .laneLabel {
+    font-size: 0.75rem;
   }
 }
 
@@ -549,7 +628,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sceneStatus i,
-  .cursor,
   .line2Text {
     animation: none;
   }
