@@ -56,4 +56,15 @@ if (ptSections !== enSections) {
   process.exit(1)
 }
 
+for (const path of ['qualities.items', 'capabilities', 'evidence.items', 'operatingSystem']) {
+  const readPath = (page) => path.split('.').reduce((value, key) => value?.[key], page)
+  const ptCount = readPath(data.pages?.pt)?.length ?? -1
+  const enCount = readPath(data.pages?.en)?.length ?? -2
+
+  if (ptCount !== enCount) {
+    console.error(`PT/EN ${path} parity failed: pt=${ptCount} en=${enCount}`)
+    process.exit(1)
+  }
+}
+
 console.log(`Authority content ok: ${queue.length} draft LinkedIn items, budget USD ${data.budgetUsd}`)
