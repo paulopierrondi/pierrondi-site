@@ -35,7 +35,8 @@ const SECURITY_SCAN_PATHS = [
   /^\/+wp-json(?:\/|$)/i,
   /^\/+(?:wp-admin|wp-login\.php|wp-content|wp-includes|wordpress|wp|cms|blog|news|site|test|backup|old)(?:\/|$)/i,
   /^\/+.*\/wp-includes\/wlwmanifest\.xml$/i,
-  /^\/+components\/com_jce(?:\/|$)/i,
+  /^\/+(?:[^/?#]+\/)*components\/com_jce(?:\/|$)/i,
+  /^\/+administrator(?:\/|$)/i,
   /^\/+(?:phpmyadmin|pma|adminer|server-status)(?:\/|$)/i,
   /^\/+\.(?:aws|azure|bash_history|config|dev\.vars|docker|env|git|hg|npmrc|ssh|svn|vscode)(?:[./_-]|$)/i,
   /^\/+(?:[^/?#]+\/)+\.env(?:[._-]|$)/i,
@@ -79,6 +80,17 @@ const EXPECTED_AUTH_PROBE_RULES = {
     /^\/conversions\.(?:csv|json)$/i,
   ],
 }
+// Endpoints where a non-GET method is a REAL user action (form posts, event
+// intake, checkout APIs). A 4xx here is a genuine breakage and must stay
+// actionable. Read pages that merely signal conversion demand (e.g.
+// /diagnostico, /contato, /pricing) are NOT here on purpose: bots POST to them
+// constantly and the app rightly 404s those probes.
+const WRITE_ENDPOINT_RULES = {
+  agenticoscore: [/^\/(?:lead|event|scorecard|checkout|checkout\.json)(?:\/|$)/, /^\/api\/(?:lead|scorecard|checkout)(?:\/|$)/],
+  pierrondi: [/^\/api\/(?:contact|lead|automation-control|control-tower)(?:\/|$)/],
+  cantustudio: [/^\/api\/(?:checkout|lead|signup)(?:\/|$)/],
+  faithschool: [/^\/api\/(?:billing\/checkout|lead|checkout|signup|subscribe)(?:\/|$)/],
+}
 const PRODUCT_INTENT_RULES = {
   pierrondi: {
     commercial: [
@@ -99,7 +111,7 @@ const PRODUCT_INTENT_RULES = {
   },
   agenticoscore: {
     commercial: [/^\/$/, /^\/(?:diagnostico|plano-de-acao-comercial|app|answers)(?:\/|$)/],
-    conversion: [/^\/(?:scorecard|checkout|checkout\.json|diagnostico)(?:\/|$)/, /^\/api\/(?:lead|scorecard|checkout)(?:\/|$)/],
+    conversion: [/^\/(?:scorecard|checkout|checkout\.json|diagnostico|lead|event)(?:\/|$)/, /^\/api\/(?:lead|scorecard|checkout)(?:\/|$)/],
   },
   faithschool: {
     commercial: [/^\/$/, /^\/(?:registro-de-frequencia-homeschool|homeschool-laws|curriculum|planner|devotional|pricing)(?:\/|$)/],
@@ -335,6 +347,21 @@ function classifyHttpIssue(source, row, intent) {
     return {
       bucket: 'expected_auth',
       reason: 'expected_protected_api_probe',
+      actionable: false,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
+
+  // Non-GET/HEAD 4xx on paths that are not real write endpoints are scanner/form
+  // probes (e.g. `POST /` answered 404 by design). They are not growth regressions:
+  // real users reach commercial pages with GET/HEAD. Genuine write endpoints
+  // (POST /lead, /scorecard, /event, checkout...) stay actionable via WRITE_ENDPOINT_RULES.
+  const httpMethod = String(row.method || 'GET').toUpperCase()
+  const writeRules = WRITE_ENDPOINT_RULES[source.id] || []
+  if (status < 500 && httpMethod !== 'GET' && httpMethod !== 'HEAD' && !matchesAny(pathValue, writeRules)) {
+    return {
+      bucket: 'known_noise',
+      reason: 'non_get_probe_noise',
       actionable: false,
       evidenceKey: `${status} ${pathValue}`,
     }
