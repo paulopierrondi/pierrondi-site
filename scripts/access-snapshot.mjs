@@ -35,7 +35,11 @@ const SECURITY_SCAN_PATHS = [
   /^\/+wp-json(?:\/|$)/i,
   /^\/+(?:wp-admin|wp-login\.php|wp-content|wp-includes|wordpress|wp|cms|blog|news|site|test|backup|old)(?:\/|$)/i,
   /^\/+.*\/wp-includes\/wlwmanifest\.xml$/i,
-  /^\/+components\/com_jce(?:\/|$)/i,
+  /^\/+(?:[^/?#]+\/)*components\/com_jce(?:\/|$)/i,
+  /^\/+administrator(?:\/|$)/i,
+  /^\/+(?:_debugbar|debugbar|telescope|_ignition)(?:\/|$)/i,
+  /^\/+aws(?:[-._]|$)/i,
+  /^\/+debug(?:\/|$)/i,
   /^\/+(?:phpmyadmin|pma|adminer|server-status)(?:\/|$)/i,
   /^\/+\.(?:aws|azure|bash_history|config|dev\.vars|docker|env|git|hg|npmrc|ssh|svn|vscode)(?:[./_-]|$)/i,
   /^\/+(?:[^/?#]+\/)+\.env(?:[._-]|$)/i,
@@ -43,7 +47,9 @@ const SECURITY_SCAN_PATHS = [
   /^\/+(?:backup|dump|database|db)(?:[._-]?(?:sql|sqlite|sqlite3|tar|tar\.gz|tgz|zip|gz|bak|backup|old))?$/i,
   /^\/+(?:database|db)_backup\.sql$/i,
   /^\/+(?:server|private|ssl|tls)\.key$/i,
-  /^\/+(?:[^/?#]+\/)*(?:firebase|firebase-adminsdk|gcp-credentials|google-credentials|google-service-account|service-account|key|keyfile)\.json$/i,
+  /^\/+(?:[^/?#]+\/)*(?:firebase|firebase-adminsdk|gcp-credentials|google-credentials|google-services(?:-account)?|service-?account-?key|service-account|key|keyfile)\.json$/i,
+  /^\/+[^/?#]+\.config$/i,
+  /^\/+(?:[^/?#]+\/)*[^/?#]*\.php$/i,
   /^\/+user_secrets\.ya?ml$/i,
   /^\/+(?:secrets?|credentials?|private|config|configuration)(?:[._-]?(?:php|json|ya?ml|ini|txt|bak|backup|old|production|prod|local|dev))?$/i,
   /^\/+config(?:[./_-]|$)/i,
@@ -61,11 +67,24 @@ const SECURITY_SCAN_PATHS = [
 ]
 const KNOWN_ASSET_PROBE_PATHS = [
   /^\/+\.vite\/manifest\.json$/i,
-  /^\/+(?:account|appsettings|local\.settings|settings)\.json$/i,
+  /^\/+(?:account|appsettings(?:\.[a-z0-9_-]+)?|local\.settings|settings)\.json$/i,
   /^\/+(?:package|package-lock|yarn\.lock|pnpm-lock)\.(?:json|ya?ml)$/i,
   /^\/+(?:assets|static|js|css)\/.+\.(?:js|css)\.map$/i,
   /^\/+.+\.map$/i,
   /^\/+(?:[^/?#]+\/)*(?:debug|error|laravel|npm|yarn|storage)(?:[._-]?\d*)?\.log$/i,
+]
+// Dotfile segments (except the legitimate /.well-known/) are never served by
+// these sites: .htpasswd, .s3cfg, .travis.yml, .env*, .aws/*, .git/* and the
+// next hundred credential/config probes a scanner will try. One rule instead
+// of an endless allowlist.
+const DOTFILE_PROBE_PATHS = [
+  /^\/+(?!\.well-known(?:\/|$))(?:[^/?#]+\/)*\.[^/?#]+/,
+]
+// Raw quotes, angle brackets or backslashes never appear in a legitimate URL
+// (browsers percent-encode them). They mark hand-crafted scanner requests like
+// 404 /"/_next/static/chunks/xxx.js" that otherwise look like asset 404s.
+const MALFORMED_PROBE_PATHS = [
+  /["'<>\\]/,
 ]
 const BENIGN_MONITOR_PROBE_PATHS = [
   /^\/+\.well-known\/traffic-advice$/i,
@@ -78,6 +97,17 @@ const EXPECTED_AUTH_PROBE_RULES = {
     /^\/api\/v1\/(?:me|me\/onboarding|market-intelligence)(?:\/|$)/,
     /^\/conversions\.(?:csv|json)$/i,
   ],
+}
+// Endpoints where a non-GET method is a REAL user action (form posts, event
+// intake, checkout APIs). A 4xx here is a genuine breakage and must stay
+// actionable. Read pages that merely signal conversion demand (e.g.
+// /diagnostico, /contato, /pricing) are NOT here on purpose: bots POST to them
+// constantly and the app rightly 404s those probes.
+const WRITE_ENDPOINT_RULES = {
+  agenticoscore: [/^\/(?:lead|event|scorecard|checkout|checkout\.json)(?:\/|$)/, /^\/api\/(?:lead|scorecard|checkout)(?:\/|$)/],
+  pierrondi: [/^\/api\/(?:contact|lead|automation-control|control-tower)(?:\/|$)/],
+  cantustudio: [/^\/api\/(?:checkout|lead|signup)(?:\/|$)/],
+  faithschool: [/^\/api\/(?:billing\/checkout|lead|checkout|signup|subscribe)(?:\/|$)/],
 }
 const PRODUCT_INTENT_RULES = {
   pierrondi: {
@@ -99,7 +129,7 @@ const PRODUCT_INTENT_RULES = {
   },
   agenticoscore: {
     commercial: [/^\/$/, /^\/(?:diagnostico|plano-de-acao-comercial|app|answers)(?:\/|$)/],
-    conversion: [/^\/(?:scorecard|checkout|checkout\.json|diagnostico)(?:\/|$)/, /^\/api\/(?:lead|scorecard|checkout)(?:\/|$)/],
+    conversion: [/^\/(?:scorecard|checkout|checkout\.json|diagnostico|lead|event)(?:\/|$)/, /^\/api\/(?:lead|scorecard|checkout)(?:\/|$)/],
   },
   faithschool: {
     commercial: [/^\/$/, /^\/(?:registro-de-frequencia-homeschool|homeschool-laws|curriculum|planner|devotional|pricing)(?:\/|$)/],
@@ -303,7 +333,7 @@ function rowIntent(source, row) {
   const pathValue = cleanPath(row.path)
   const rules = PRODUCT_INTENT_RULES[source.id] || {}
 
-  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) || matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS)) return 'technical'
+  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) || matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS) || matchesAny(pathValue, DOTFILE_PROBE_PATHS) || matchesAny(pathValue, MALFORMED_PROBE_PATHS)) return 'technical'
   if (matchesAny(pathValue, rules.conversion)) return 'conversion'
   if (matchesAny(pathValue, COMMON_GEO_PATHS)) return 'geo'
   if (matchesAny(pathValue, rules.commercial)) return 'commercial'
@@ -317,12 +347,34 @@ function classifyHttpIssue(source, row, intent) {
   const status = Number(row.status || 0)
   if (status < 400) return null
 
-  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) || matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS)) {
+  // Client-side artifacts, not site failures: 499 = client closed the connection
+  // before the server answered (nginx convention). Bots fire-and-forget
+  // constantly, and a user abandoning a slow load is not a page regression.
+  // Real outages surface as 5xx or as failed required-endpoint probes instead.
+  if (status === 499) {
+    return {
+      bucket: 'known_noise',
+      reason: 'client_closed_request_noise',
+      actionable: false,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
+
+  if (matchesAny(pathValue, MALFORMED_PROBE_PATHS)) {
+    return {
+      bucket: 'known_noise',
+      reason: 'malformed_request_noise',
+      actionable: false,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
+
+  if (matchesAny(pathValue, SECURITY_SCAN_PATHS) || matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) || matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS) || matchesAny(pathValue, DOTFILE_PROBE_PATHS)) {
     return {
       bucket: 'known_noise',
       reason: matchesAny(pathValue, BENIGN_MONITOR_PROBE_PATHS)
         ? 'benign_monitor_or_optional_file_probe'
-        : matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS)
+        : matchesAny(pathValue, KNOWN_ASSET_PROBE_PATHS) || matchesAny(pathValue, DOTFILE_PROBE_PATHS)
           ? 'asset_or_config_probe_noise'
           : 'security_scan_noise',
       actionable: false,
@@ -335,6 +387,33 @@ function classifyHttpIssue(source, row, intent) {
     return {
       bucket: 'expected_auth',
       reason: 'expected_protected_api_probe',
+      actionable: false,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
+
+  // 400 on technical asset paths (e.g. `/_next/image?url=` with invalid params)
+  // is a malformed client request against the framework's own machinery — real
+  // browsers never send it, scanners and hotlinkers do. Not a growth regression.
+  if (status === 400 && matchesAny(pathValue, COMMON_TECHNICAL_PATHS)) {
+    return {
+      bucket: 'known_noise',
+      reason: 'technical_asset_bad_request_noise',
+      actionable: false,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
+
+  // Non-GET/HEAD 4xx on paths that are not real write endpoints are scanner/form
+  // probes (e.g. `POST /` answered 404 by design). They are not growth regressions:
+  // real users reach commercial pages with GET/HEAD. Genuine write endpoints
+  // (POST /lead, /scorecard, /event, checkout...) stay actionable via WRITE_ENDPOINT_RULES.
+  const httpMethod = String(row.method || 'GET').toUpperCase()
+  const writeRules = WRITE_ENDPOINT_RULES[source.id] || []
+  if (status < 500 && httpMethod !== 'GET' && httpMethod !== 'HEAD' && !matchesAny(pathValue, writeRules)) {
+    return {
+      bucket: 'known_noise',
+      reason: 'non_get_probe_noise',
       actionable: false,
       evidenceKey: `${status} ${pathValue}`,
     }
@@ -958,6 +1037,40 @@ async function searchConsoleSnapshot(source) {
 
 async function searchConsoleQuery(siteUrl, token) {
   const dateRange = gscDateRange()
+
+  // Headline totals come from a date-only query. Google withholds anonymised
+  // query rows, so a page+query breakdown can return zero rows while the
+  // property still has clicks and impressions. Summing that breakdown reports
+  // a low-volume site as dark instead of small.
+  const headline = await searchAnalyticsRows(siteUrl, token, {
+    ...dateRange,
+    dimensions: ['date'],
+    rowLimit: GSC_LOOKBACK_DAYS + GSC_LAG_DAYS + 1,
+  })
+  if (!headline.ok) {
+    return { ok: false, siteUrl, httpStatus: headline.httpStatus, reason: headline.reason }
+  }
+
+  const breakdown = await searchAnalyticsRows(siteUrl, token, {
+    ...dateRange,
+    dimensions: ['page', 'query'],
+    rowLimit: 25,
+  })
+
+  return {
+    ok: true,
+    status: 'ok',
+    source: 'search_console_api',
+    siteUrl,
+    dateRange,
+    rowCount: breakdown.ok ? breakdown.rows.length : 0,
+    metrics: summarizeSearchConsoleRows(headline.rows),
+    topRows: breakdown.ok ? topSearchConsoleRows(breakdown.rows) : [],
+    ...(breakdown.ok ? {} : { breakdownReason: breakdown.reason }),
+  }
+}
+
+async function searchAnalyticsRows(siteUrl, token, payload) {
   try {
     const { response, body } = await fetchJson(`https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/searchAnalytics/query`, {
       method: 'POST',
@@ -965,33 +1078,18 @@ async function searchConsoleQuery(siteUrl, token) {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        ...dateRange,
-        dimensions: ['page', 'query'],
-        rowLimit: 25,
-      }),
+      body: JSON.stringify(payload),
     })
     if (!response.ok) {
       return {
         ok: false,
-        siteUrl,
         httpStatus: response.status,
         reason: redact(body?.error?.message || response.statusText).slice(0, 240),
       }
     }
-    const rows = Array.isArray(body.rows) ? body.rows : []
-    return {
-      ok: true,
-      status: 'ok',
-      source: 'search_console_api',
-      siteUrl,
-      dateRange,
-      rowCount: rows.length,
-      metrics: summarizeSearchConsoleRows(rows),
-      topRows: topSearchConsoleRows(rows),
-    }
+    return { ok: true, rows: Array.isArray(body.rows) ? body.rows : [] }
   } catch (error) {
-    return { ok: false, siteUrl, reason: redact(error.message).slice(0, 240) }
+    return { ok: false, reason: redact(error.message).slice(0, 240) }
   }
 }
 
