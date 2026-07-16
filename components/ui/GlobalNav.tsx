@@ -17,6 +17,17 @@ export interface GlobalNavProps {
   className?: string
 }
 
+function useCloseMenuOnDesktop(setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>) {
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 835px)')
+    const closeOnDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setMenuOpen(false)
+    }
+    desktop.addEventListener('change', closeOnDesktop)
+    return () => desktop.removeEventListener('change', closeOnDesktop)
+  }, [setMenuOpen])
+}
+
 export function GlobalNav({
   logo,
   links,
@@ -40,6 +51,8 @@ export function GlobalNav({
       overlayRef.current?.querySelector<HTMLElement>('a, button')?.focus()
     }
   }, [menuOpen])
+
+  useCloseMenuOnDesktop(setMenuOpen)
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {

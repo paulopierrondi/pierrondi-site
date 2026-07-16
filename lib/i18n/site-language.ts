@@ -35,6 +35,7 @@ const localizedRoutes: Record<string, Record<HomeLang, string>> = {
 
 const languageSwitcherHiddenPrefixes = [
   '/ai-search',
+  '/answers',
   '/apps',
   '/bradesco-26',
   '/citations',
@@ -42,6 +43,7 @@ const languageSwitcherHiddenPrefixes = [
   '/design',
   '/fso',
   '/itau',
+  '/kommo',
   '/obrigado',
   '/paulo',
   '/whypaulo',

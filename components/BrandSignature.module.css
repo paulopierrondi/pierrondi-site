@@ -1,8 +1,8 @@
 .root {
-  --brand-accent: #4ade80;
-  --brand-accent-soft: rgba(74, 222, 128, 0.18);
-  --brand-accent-mid: rgba(74, 222, 128, 0.42);
-  --brand-cyan: #7ee7ff;
+  --brand-accent: var(--color-primary);
+  --brand-accent-soft: rgba(240, 166, 107, 0.18);
+  --brand-accent-mid: rgba(240, 166, 107, 0.42);
+  --brand-cyan: var(--color-accent-gold);
   --brand-ink: #f7f5ee;
   --brand-muted: rgba(247, 245, 238, 0.52);
   position: relative;
@@ -20,7 +20,7 @@
   --brand-accent: #ffb870;
   --brand-accent-soft: rgba(255, 184, 112, 0.18);
   --brand-accent-mid: rgba(255, 184, 112, 0.42);
-  --brand-cyan: #7ee7ff;
+  --brand-cyan: var(--color-accent-gold);
 }
 
 .mark {
@@ -34,7 +34,7 @@
   border: 1px solid var(--brand-accent-mid);
   border-radius: 8px;
   background:
-    radial-gradient(circle at 72% 22%, rgba(126, 231, 255, 0.3), transparent 34%),
+    radial-gradient(circle at 72% 22%, rgba(245, 207, 159, 0.24), transparent 34%),
     radial-gradient(circle at 28% 78%, var(--brand-accent-soft), transparent 45%),
     linear-gradient(135deg, rgba(247, 245, 238, 0.08), rgba(247, 245, 238, 0.015));
   box-shadow:

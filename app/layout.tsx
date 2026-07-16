@@ -15,23 +15,23 @@ import './animations.css'
 
 const display = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-display',
+  variable: '--font-space-grotesk',
   display: 'swap',
   weight: ['400', '500', '600', '700'],
 })
 
 const body = Inter({
   subsets: ['latin'],
-  variable: '--font-body',
+  variable: '--font-inter',
   display: 'swap',
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
 })
 
 const mono = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-mono',
+  variable: '--font-jetbrains-mono',
   display: 'swap',
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN
@@ -41,11 +41,11 @@ const CookieBanner = dynamic(() => import('@/components/CookieBanner'))
 
 export const metadata: Metadata = {
   title: {
-    default: 'Paulo Pierrondi - Technical Account Executive, Arquiteto de IA e Full-stack Builder',
+    default: 'Paulo Pierrondi — Onde IA vira operação com evidência',
     template: '%s | pierrondi.dev',
   },
   description:
-    'Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder: sistemas multi-agente, AgentOps, apps, automações e frameworks.',
+    'Sistema operacional da IA: operating model, AgentOps, governança e trilha de evidência. Enterprise FSI na ServiceNow e sistemas públicos construídos e publicados.',
   keywords: [
     'Paulo Pierrondi',
     'ServiceNow',
@@ -95,9 +95,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi - Technical Account Executive, Arquiteto de IA e Full-stack Builder',
+    title: 'Paulo Pierrondi — Onde IA vira operação com evidência',
     description:
-      'Sistemas multi-agente, AgentOps, plataformas de automação, apps e frameworks — liderando contas enterprise FSI na ServiceNow.',
+      'Operating model de IA, AgentOps e sistemas com trilha de evidência — enterprise FSI na ServiceNow e produtos públicos.',
     url: '/',
     siteName: 'pierrondi.dev',
     type: 'website',
@@ -144,6 +144,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="pt-BR"
       data-scroll-behavior="smooth"
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
     >
       <head>
         {plausibleDomain && (
@@ -160,7 +161,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </>
         )}
       </head>
-      <body className={`${display.variable} ${body.variable} ${body.className} ${mono.variable} antialiased`}>
+      <body className={`${body.className} antialiased`}>
         <DocumentLangSync />
         <SiteJsonLdWrapper />
         <HomeBackground />

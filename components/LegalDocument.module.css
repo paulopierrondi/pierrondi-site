@@ -4,7 +4,7 @@
   overflow: clip;
   color: var(--color-ink);
   background:
-    radial-gradient(circle at 82% 4%, rgba(74, 222, 128, 0.09), transparent 27%),
+    radial-gradient(circle at 82% 4%, rgba(240, 166, 107, 0.09), transparent 27%),
     linear-gradient(180deg, var(--color-canvas) 0%, #0a0d0c 56%, var(--color-canvas) 100%);
 }
 

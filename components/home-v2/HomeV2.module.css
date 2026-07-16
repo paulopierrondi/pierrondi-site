@@ -1,5 +1,11 @@
 .root {
+  position: relative;
   min-height: 100svh;
+  overflow: clip;
+  background:
+    radial-gradient(circle at 78% 6%, rgba(240, 166, 107, 0.08), transparent 26rem),
+    radial-gradient(circle at 12% 92%, rgba(245, 207, 159, 0.045), transparent 30rem),
+    var(--hv2-bg-base);
 }
 
 .sections {
@@ -7,19 +13,127 @@
   z-index: var(--hv2-z-content);
 }
 
+.sections::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  inset: 0 auto 0 clamp(14px, 2.2vw, 34px);
+  width: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(240, 166, 107, 0.34) 12%,
+    rgba(245, 207, 159, 0.13) 52%,
+    rgba(88, 227, 155, 0.2) 88%,
+    transparent
+  );
+  mask-image: linear-gradient(180deg, transparent, #000 6%, #000 94%, transparent);
+}
+
 .section {
+  --hv2-section-rgb: 240 166 107;
+  isolation: isolate;
   position: relative;
   /* Grid stretch sizes the single child section without relying on
      percentage heights, which do not resolve against auto heights. */
   display: grid;
   height: 100svh;
   overflow: hidden;
+  background: transparent;
+}
+
+.section[data-hv2-section='about'] {
+  --hv2-section-rgb: 245 207 159;
+}
+
+.section[data-hv2-section='skills'] {
+  --hv2-section-rgb: 215 129 73;
+}
+
+.section[data-hv2-section='contact'] {
+  --hv2-section-rgb: 88 227 155;
+}
+
+.section::before,
+.section::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.section::before {
+  inset: -18%;
+  opacity: 0.34;
+  transform: scale(0.94) translate3d(0, 18px, 0);
+  background:
+    radial-gradient(circle at 72% 38%, rgb(var(--hv2-section-rgb) / 0.13), transparent 34%),
+    radial-gradient(circle at 18% 74%, rgb(var(--hv2-section-rgb) / 0.055), transparent 30%);
+  transition:
+    opacity 900ms var(--hv2-ease-expo-out),
+    transform 1100ms var(--hv2-ease-expo-out);
+}
+
+.section::after {
+  inset: 0 var(--hv2-section-pad-x) auto;
+  height: 1px;
+  opacity: 0.42;
+  transform: scaleX(0.72);
+  transform-origin: center;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--hv2-section-rgb) / 0.42),
+    transparent
+  );
+  transition:
+    opacity 700ms var(--hv2-ease-expo-out),
+    transform 900ms var(--hv2-ease-expo-out);
+}
+
+.section[data-hv2-active='true']::before {
+  opacity: 1;
+  transform: scale(1) translate3d(0, 0, 0);
+}
+
+.section[data-hv2-active='true']::after {
+  opacity: 0.92;
+  transform: scaleX(1);
+}
+
+.section > * {
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 1023px) {
+  .root {
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+
   .section {
     height: auto;
     min-height: 100svh;
-    overflow: visible;
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+
+  .section::before {
+    inset: -8% -20%;
+    opacity: 0.72;
+    transform: none;
+  }
+
+  .sections::before {
+    left: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section::before,
+  .section::after {
+    transition: none;
   }
 }

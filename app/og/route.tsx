@@ -39,7 +39,7 @@ export async function GET() {
               width: '10px',
               height: '10px',
               borderRadius: '50%',
-              background: '#62d84e',
+              background: '#f0a66b',
             }}
           />
           <span
@@ -72,7 +72,7 @@ export async function GET() {
             style={{
               fontSize: '88px',
               fontWeight: 800,
-              color: '#62d84e',
+              color: '#f0a66b',
               lineHeight: 0.9,
               letterSpacing: 0,
             }}
@@ -96,7 +96,7 @@ export async function GET() {
           <span
             style={{
               fontSize: '16px',
-              color: '#62d84e',
+              color: '#f0a66b',
               letterSpacing: '1px',
             }}
           >

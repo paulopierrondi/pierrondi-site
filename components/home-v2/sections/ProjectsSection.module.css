@@ -7,8 +7,8 @@
   overflow: hidden;
   box-sizing: border-box;
   background:
-    radial-gradient(circle at 16% 20%, rgba(74, 222, 128, 0.055), transparent 34%),
-    var(--hv2-bg-base);
+    radial-gradient(circle at 16% 20%, rgba(240, 166, 107, 0.06), transparent 34%),
+    linear-gradient(180deg, rgba(7, 6, 5, 0.68), rgba(7, 6, 5, 0.18));
 }
 
 .srOnly {
@@ -17,6 +17,8 @@
   height: 1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  contain: inline-size;
   white-space: nowrap;
 }
 
@@ -83,11 +85,11 @@
   min-height: 40px;
   align-items: center;
   gap: 8px;
-  border: 1px solid rgba(74, 222, 128, 0.24);
+  border: 1px solid var(--hv2-accent-copper-border);
   border-radius: 999px;
   padding: 0 13px;
-  color: #dffff0;
-  background: rgba(74, 222, 128, 0.06);
+  color: var(--hv2-accent-champagne);
+  background: var(--hv2-accent-copper-soft);
   font: 750 9px/1 var(--hv2-font-mono);
   letter-spacing: 0.06em;
   text-decoration: none;
@@ -99,15 +101,15 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--hv2-accent-green);
-  box-shadow: 0 0 12px rgba(74, 222, 128, 0.7);
+  background: var(--hv2-accent-signal);
+  box-shadow: 0 0 12px var(--hv2-accent-signal-glow);
 }
 
 .studioDirectLink svg { width: 13px; }
 .studioDirectLink:hover,
 .studioDirectLink:focus-visible {
   border-color: var(--hv2-accent-green);
-  color: #041108;
+  color: #160b05;
   background: var(--hv2-accent-green);
   transform: translateY(-1px);
 }
@@ -168,9 +170,9 @@
 
 .caseTabActive {
   color: var(--hv2-text-primary);
-  border-color: rgba(74, 222, 128, 0.38);
+  border-color: var(--hv2-accent-copper-border);
   background:
-    linear-gradient(135deg, rgba(74, 222, 128, 0.08), transparent),
+    linear-gradient(135deg, var(--hv2-accent-copper-soft), transparent),
     var(--hv2-bg-elevated);
   box-shadow: inset 0 -2px 0 var(--hv2-accent-green);
 }
@@ -241,8 +243,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--hv2-accent-green);
-  box-shadow: 0 0 14px rgba(74, 222, 128, 0.62);
+  background: var(--hv2-accent-signal);
+  box-shadow: 0 0 14px var(--hv2-accent-signal-glow);
 }
 
 .eyebrow {
@@ -359,13 +361,13 @@
 }
 
 .primaryAction {
-  color: #041108;
+  color: #160b05;
   background: var(--hv2-accent-green);
-  box-shadow: 0 12px 30px rgba(74, 222, 128, 0.16);
+  box-shadow: 0 12px 34px var(--hv2-accent-copper-glow);
 }
 
 .primaryAction:hover {
-  background: #70ee9d;
+  background: var(--hv2-accent-champagne);
   transform: translateY(-1px);
 }
 

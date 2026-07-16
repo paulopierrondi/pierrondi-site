@@ -52,7 +52,7 @@ function StarField({ compact }: { compact: boolean }) {
     const count = compact ? 220 : 420
     const positions = new Float32Array(count * 3)
     const colors = new Float32Array(count * 3)
-    const green = new THREE.Color('#4ade80')
+    const green = new THREE.Color('#f0a66b')
     const cyan = new THREE.Color('#5ecbff')
 
     for (let index = 0; index < count; index += 1) {
@@ -92,7 +92,7 @@ function ConnectionField() {
     ])
     const geometry = new THREE.BufferGeometry().setFromPoints(curve.getPoints(42))
     const material = new THREE.LineBasicMaterial({
-      color: index === 4 ? '#f4bd50' : index > 1 ? '#4ade80' : '#5ecbff',
+      color: index === 4 ? '#f4bd50' : index > 1 ? '#f0a66b' : '#5ecbff',
       transparent: true,
       opacity: 0.29,
     })
@@ -170,9 +170,9 @@ function GrowthMachine({ compact, reducedMotion }: { compact: boolean; reducedMo
         </mesh>
         <mesh rotation={[Math.PI / 1.72, -0.45, 0.4]}>
           <torusGeometry args={[2.08, 0.012, 8, 160]} />
-          <meshBasicMaterial color="#4ade80" transparent opacity={0.34} toneMapped={false} />
+          <meshBasicMaterial color="#f0a66b" transparent opacity={0.34} toneMapped={false} />
         </mesh>
-        <pointLight color="#4ade80" intensity={compact ? 8 : 12} distance={8} decay={2} />
+        <pointLight color="#f0a66b" intensity={compact ? 8 : 12} distance={8} decay={2} />
       </group>
 
       {NODE_POSITIONS.map((position, index) => (
@@ -180,8 +180,8 @@ function GrowthMachine({ compact, reducedMotion }: { compact: boolean; reducedMo
           <mesh>
             <sphereGeometry args={[index === 4 ? 0.22 : 0.16, 22, 22]} />
             <meshPhysicalMaterial
-              color={index === 4 ? '#f4bd50' : index > 1 ? '#4ade80' : '#5ecbff'}
-              emissive={index === 4 ? '#8a4d00' : '#143d28'}
+              color={index === 4 ? '#f4bd50' : index > 1 ? '#f0a66b' : '#5ecbff'}
+              emissive={index === 4 ? '#8a4d00' : '#4d2512'}
               emissiveIntensity={1.15}
               metalness={0.45}
               roughness={0.16}
@@ -190,7 +190,7 @@ function GrowthMachine({ compact, reducedMotion }: { compact: boolean; reducedMo
           <mesh scale={index === 4 ? 1.85 : 1.7}>
             <sphereGeometry args={[0.2, 18, 18]} />
             <meshBasicMaterial
-              color={index === 4 ? '#f4bd50' : '#4ade80'}
+              color={index === 4 ? '#f4bd50' : '#f0a66b'}
               transparent
               opacity={0.08}
               blending={THREE.AdditiveBlending}

@@ -21,6 +21,7 @@ export default function SiteNav() {
 
   return (
     <PublicNavigation
+      key={pathname}
       lang={lang}
       homeHref={copy.homeHref}
       links={copy.links.map((link) => ({ ...link, active: isActive(link.href) }))}

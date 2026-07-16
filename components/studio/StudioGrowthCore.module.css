@@ -15,7 +15,7 @@
   border-radius: 30px;
   box-shadow:
     0 42px 120px rgba(0, 0, 0, 0.5),
-    0 0 90px rgba(74, 222, 128, 0.07),
+    0 0 90px rgba(240, 166, 107, 0.07),
     inset 0 1px rgba(255, 255, 255, 0.04);
 }
 
@@ -62,7 +62,7 @@
   inset: -35%;
   pointer-events: none;
   background:
-    conic-gradient(from 200deg at 50% 50%, transparent, rgba(66, 197, 255, 0.14), transparent 28%, rgba(74, 222, 128, 0.14), transparent 64%, rgba(244, 189, 80, 0.08), transparent);
+    conic-gradient(from 200deg at 50% 50%, transparent, rgba(66, 197, 255, 0.14), transparent 28%, rgba(240, 166, 107, 0.14), transparent 64%, rgba(244, 189, 80, 0.08), transparent);
   filter: blur(48px);
   animation: auroraSpin 22s linear infinite;
 }
@@ -99,8 +99,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 14px #4ade80;
+  background: #58e39b;
+  box-shadow: 0 0 14px rgba(88, 227, 155, 0.72);
   animation: livePulse 1.8s ease-in-out infinite;
 }
 
@@ -149,11 +149,11 @@
   width: 42px;
   aspect-ratio: 1;
   place-items: center;
-  border: 1px solid rgba(126, 255, 171, 0.7);
+  border: 1px solid rgba(245, 207, 159, 0.7);
   border-radius: 13px;
   color: #041108;
-  background: linear-gradient(145deg, #a5ffc5, #4ade80 58%, #239c55);
-  box-shadow: 0 0 34px rgba(74, 222, 128, 0.34);
+  background: linear-gradient(145deg, #f5cf9f, #f0a66b 58%, #b7602d);
+  box-shadow: 0 0 34px rgba(240, 166, 107, 0.3);
   font: 900 15px/1 var(--font-display, ui-sans-serif, sans-serif);
 }
 

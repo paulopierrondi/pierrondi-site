@@ -83,6 +83,54 @@
     0 0 76px rgba(255, 92, 20, 0.2);
 }
 
+/* Ground ridge + small observer: the human signal at the frontier. */
+.fallbackHorizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34%;
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(18, 10, 6, 0.35) 42%,
+      rgba(6, 4, 3, 0.92) 100%
+    ),
+    radial-gradient(
+      ellipse 88% 48% at 58% 100%,
+      rgba(90, 38, 12, 0.28),
+      transparent 72%
+    );
+}
+
+.fallbackObserver {
+  position: absolute;
+  left: 58%;
+  bottom: 11%;
+  width: 7px;
+  height: 18px;
+  border-radius: 999px 999px 3px 3px;
+  background: #050505;
+  box-shadow:
+    0 0 0 1px rgba(255, 214, 160, 0.18),
+    0 0 18px rgba(255, 176, 104, 0.22);
+  transform: translateX(-50%);
+}
+
+.fallbackObserver::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #050505;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px rgba(255, 214, 160, 0.2);
+}
+
 .canvas {
   z-index: 1;
   opacity: 0;
@@ -121,6 +169,15 @@
     left: 50%;
     top: 28%;
     width: clamp(188px, 57vw, 260px);
+  }
+
+  .fallbackHorizon {
+    height: 42%;
+  }
+
+  .fallbackObserver {
+    left: 50%;
+    bottom: 14%;
   }
 }
 

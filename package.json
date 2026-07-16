@@ -22,7 +22,8 @@
     "test:apps": "node scripts/check-apps-urls.mjs",
     "test:apps:prod": "TARGET_URL=https://www.pierrondi.dev node scripts/check-apps-urls.mjs",
     "icons:fetch": "node scripts/fetch-app-icons.mjs",
-    "qa:frontier-hero": "node scripts/frontier-hero-visual-qa.mjs"
+    "qa:frontier-hero": "node scripts/frontier-hero-visual-qa.mjs",
+    "qa:site-wide": "node scripts/site-wide-ui-qa.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",

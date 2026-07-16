@@ -4,35 +4,35 @@
   /* ── Terminal/Dev Design System (aligned with home-v2 .hv2 tokens) ── */
 
   /* Brand & Accent */
-  --color-primary:                 #4ade80;
-  --color-primary-active:          #22c55e;
-  --color-primary-glow:            rgba(74, 222, 128, 0.30);
+  --color-primary:                 #f0a66b;
+  --color-primary-active:          #d98449;
+  --color-primary-glow:            rgba(240, 166, 107, 0.24);
   --color-accent-cyan:             #60a5fa;
-  --color-accent-gold:             #f59e0b;
-  --color-on-primary:              #0a0a0a;
+  --color-accent-gold:             #f5cf9f;
+  --color-on-primary:              #160b05;
 
   /* Surface */
-  --color-canvas:                  #0a0a0a;
-  --color-canvas-deep:             #050505;
-  --color-surface:                 #141414;
-  --color-surface-2:               #1a1a1a;
-  --color-surface-3:               #202020;
-  --color-surface-card:            #141414;
-  --color-surface-card-elevated:   #181818;
-  --color-surface-strong:          #222222;
-  --color-surface-hover:           #262626;
+  --color-canvas:                  #070605;
+  --color-canvas-deep:             #030302;
+  --color-surface:                 #100d0a;
+  --color-surface-2:               #18130f;
+  --color-surface-3:               #211912;
+  --color-surface-card:            #100d0a;
+  --color-surface-card-elevated:   #18130f;
+  --color-surface-strong:          #241b15;
+  --color-surface-hover:           #2c2119;
 
   /* Hairlines */
-  --color-hairline:                #262626;
-  --color-hairline-soft:           #1f1f1f;
-  --color-hairline-strong:         #404040;
+  --color-hairline:                rgba(245, 207, 159, 0.12);
+  --color-hairline-soft:           rgba(245, 207, 159, 0.08);
+  --color-hairline-strong:         rgba(245, 207, 159, 0.26);
 
   /* Text */
-  --color-ink:                     #f5f5f5;
-  --color-body:                    #a3a3a3;
-  --color-body-strong:             #e5e5e5;
-  --color-muted:                   #737373;
-  --color-on-primary:              #0a0a0a;
+  --color-ink:                     #f7f1e8;
+  --color-body:                    #b8ada1;
+  --color-body-strong:             #e8ded2;
+  --color-muted:                   #81766d;
+  --color-on-primary:              #160b05;
 
   /* Semantic */
   --color-success:                 #16c456;
@@ -42,23 +42,23 @@
   --color-warning:                 #f2c82e;
 
   /* Legacy aliases for backward compatibility */
-  --color-canvas-parchment:        #141414;
-  --color-surface-pearl:           #1e1e1e;
+  --color-canvas-parchment:        #100d0a;
+  --color-surface-pearl:           #18130f;
   --color-ink-muted-80:            hsla(0, 0%, 100%, 0.65);
   --color-ink-muted-48:            hsla(0, 0%, 100%, 0.45);
-  --color-primary-focus:           #4ade80;
-  --color-primary-on-dark:         #4ade80;
+  --color-primary-focus:           #f0a66b;
+  --color-primary-on-dark:         #f0a66b;
   --color-on-dark:                 #ffffff;
   --color-divider-soft:            rgba(255, 255, 255, 0.06);
-  --color-surface-black:           #0a0a0a;
-  --color-surface-tile-1:          #1e1e1e;
-  --color-surface-tile-2:          #1a1a1a;
-  --color-surface-tile-3:          #1e1e1e;
+  --color-surface-black:           #070605;
+  --color-surface-tile-1:          #18130f;
+  --color-surface-tile-2:          #14100d;
+  --color-surface-tile-3:          #18130f;
   --color-surface-chip-translucent: rgba(255, 255, 255, 0.08);
 
   /* Elevation */
   --shadow-product: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -8px rgba(0, 0, 0, 0.6);
-  --shadow-glow-blue: 0 0 40px rgba(74, 222, 128, 0.12);
+  --shadow-glow-blue: 0 0 40px rgba(240, 166, 107, 0.12);
 
   /* ── Type scale ── */
   --font-size-hero:          72px;
@@ -76,13 +76,17 @@
   --font-size-micro:         11px;
 
   /* ── Font family ── */
-  --font-display: var(--font-display), "Space Grotesk", system-ui, sans-serif;
-  --font-body: var(--font-body), "Inter", system-ui, sans-serif;
-  --font-mono: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
+  --font-display: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
+  --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, monospace;
   /* Alias: several legacy components reference --font-system directly
      (pre-dating the --font-display/--font-body split) and were silently
      falling back to the browser default with no definition at all. */
   --font-system: var(--font-display);
+  /* Legacy route aliases. Keeping them semantic prevents branded pages from
+     silently falling back to a different system font when Geist is absent. */
+  --font-geist-sans: var(--font-body);
+  --font-geist-mono: var(--font-mono);
 
   /* ── Spacing ── */
   --space-xxs:     4px;
@@ -108,6 +112,11 @@
   --ease-in-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-in:     cubic-bezier(0.42, 0, 1, 1);
+  --motion-duration-fast: 180ms;
+  --motion-duration-normal: 320ms;
+  --motion-duration-slow: 560ms;
+  --motion-ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ── Global base ── */
@@ -119,6 +128,9 @@ html {
   font-size: var(--font-size-body);
   line-height: 1.6;
   letter-spacing: -0.005em;
+  scroll-padding-top: calc(80px + env(safe-area-inset-top));
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -127,7 +139,50 @@ body {
   background: var(--color-canvas);
   color: var(--color-body);
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
+  min-width: 0;
+  max-width: 100%;
+}
+
+main,
+header,
+footer,
+section,
+article,
+nav {
+  min-width: 0;
+}
+
+/* The component library uses a fixed global header but owns no route module. */
+main.min-h-screen.bg-canvas.text-ink > .mx-auto.max-w-6xl.px-6.py-12 {
+  padding-top: 7rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+dt,
+dd,
+a,
+button {
+  overflow-wrap: break-word;
+}
+
+img,
+picture,
+video,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+[id] {
+  scroll-margin-top: calc(80px + env(safe-area-inset-top));
 }
 
 /* ── Selection ── */
@@ -156,6 +211,23 @@ button {
   background: none;
 }
 
+button,
+input,
+textarea,
+select {
+  font-synthesis: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-primary-focus);
+  outline-offset: 3px;
+}
+
 /* ── Inputs ── */
 input, textarea, select {
   font-family: var(--font-body);
@@ -168,9 +240,9 @@ input, textarea, select {
   outline: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-input:focus, textarea:focus, select:focus {
+input:focus-visible, textarea:focus-visible, select:focus-visible {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.15);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
 }
 input::placeholder, textarea::placeholder {
   color: var(--color-muted);
@@ -204,13 +276,13 @@ pre {
 .reveal-anim {
   opacity: 0;
   transform: translateY(24px);
-  animation: reveal-fade-up 0.7s var(--ease-out) forwards;
+  animation: reveal-fade-up var(--motion-duration-slow) var(--motion-ease-enter) forwards;
 }
 
 .reveal-anim-fast {
   opacity: 0;
   transform: translateY(16px);
-  animation: reveal-fade-up 0.5s var(--ease-out) forwards;
+  animation: reveal-fade-up var(--motion-duration-normal) var(--motion-ease-enter) forwards;
 }
 
 @keyframes scan {

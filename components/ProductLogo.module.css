@@ -20,7 +20,7 @@
   font-family: var(--font-mono, ui-monospace, monospace);
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: #4ade80;
-  background: linear-gradient(135deg, #141414 0%, #0a0a0a 100%);
-  border-color: rgba(74, 222, 128, 0.25);
+  color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-surface-2) 0%, var(--color-canvas) 100%);
+  border-color: rgba(240, 166, 107, 0.25);
 }

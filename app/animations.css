@@ -2,7 +2,7 @@
 [data-animate] {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity var(--motion-duration-slow) var(--motion-ease-enter), transform var(--motion-duration-slow) var(--motion-ease-enter);
 }
 
 [data-animate].revealed {
@@ -26,10 +26,10 @@
   pointer-events: none;
   transform: scaleX(0);
   transform-origin: left center;
-  background: #4ade80;
+  background: var(--color-primary);
   box-shadow:
-    0 0 10px rgba(74, 222, 128, 0.58),
-    0 0 28px rgba(85, 184, 217, 0.22);
+    0 0 10px rgba(240, 166, 107, 0.52),
+    0 0 28px rgba(245, 207, 159, 0.2);
   will-change: transform;
 }
 
@@ -116,8 +116,8 @@
   pointer-events: none;
   background: radial-gradient(
     circle at var(--swarm-tilt-x, 50%) var(--swarm-tilt-y, 50%),
-    rgba(98, 216, 78, 0.18),
-    rgba(85, 184, 217, 0.08) 28%,
+    rgba(240, 166, 107, 0.18),
+    rgba(245, 207, 159, 0.08) 28%,
     transparent 62%
   );
   transition: opacity 220ms ease;

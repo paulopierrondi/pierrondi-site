@@ -13,6 +13,7 @@
   box-shadow: var(--shadow-product);
   backdrop-filter: blur(12px);
   border-radius: 4px;
+  isolation: isolate;
 }
 
 .switcher.withTopNav {
@@ -50,11 +51,11 @@
 }
 
 .switcher .active {
-  color: #081008;
+  color: var(--color-on-primary);
   background: var(--language-active);
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1080px) {
   .switcher {
     top: calc(11px + env(safe-area-inset-top));
     right: 76px;
@@ -63,4 +64,9 @@
   .switcher.withTopNav {
     top: calc(11px + env(safe-area-inset-top));
   }
+}
+
+@media (max-width: 359px) {
+  .switcher { right: 68px; }
+  .switcher a { padding-inline: 8px; }
 }
