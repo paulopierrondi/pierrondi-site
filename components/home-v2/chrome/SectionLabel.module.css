@@ -21,7 +21,7 @@
 }
 
 .count {
-  color: var(--hv2-text-disabled);
+  color: var(--hv2-text-muted);
 }
 
 @media (min-width: 640px) {

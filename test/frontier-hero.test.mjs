@@ -132,6 +132,30 @@ test('CSS event-horizon fallback is server-rendered and responsive', () => {
   assert.match(sceneStyles, /prefers-reduced-motion: reduce/)
 })
 
+test('static fallback retires once the WebGL scene is live', () => {
+  // Both compositions stacking is the "two globes + stray ring" defect:
+  // the fallback must fade out once the sibling scene root reports ready.
+  // Adjacent-sibling selector (not :has) so every browser honors it.
+  assert.match(
+    sceneStyles,
+    /\.root\[data-frontier-state='ready'\] \+ \.fallback\s*\{\s*opacity: 0;/,
+  )
+  // Retire-direction-only transition: context loss restores the fallback
+  // instantly instead of leaving a black gap.
+  assert.match(
+    sceneStyles,
+    /\.root\[data-frontier-state='ready'\] \+ \.fallback\s*\{[^}]*transition: opacity/s,
+  )
+  // Ready must wait for the first painted frame, not context creation.
+  assert.match(scene, /function ReadySignal/)
+  assert.match(scene, /<ReadySignal onReady=/)
+  assert.match(visualQa, /verifyFallbackRetired/)
+  assert.match(visualQa, /fallbackRetired,/)
+  // The gravity well must never end on a visible rectangle edge.
+  assert.match(heroStyles, /\.gravityWell \{[^}]*inset: 0;/s)
+  assert.doesNotMatch(heroStyles, /\.gravityWell \{[^}]*width: min\(/s)
+})
+
 test('hero thesis copy exposes dual enterprise/builder routes', async () => {
   const copy = await readFile(
     new URL('components/home-v2/copy.ts', root),

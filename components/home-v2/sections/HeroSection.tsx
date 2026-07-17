@@ -53,13 +53,15 @@ function HeroBackdrop() {
   return (
     <>
       <div className={styles.bg} aria-hidden="true">
+        {/* Scene root first: the universally supported `.root + .fallback`
+            sibling rule retires the static fallback once WebGL is live. */}
+        <FrontierEventHorizon />
         <div className={sceneStyles.fallback} data-frontier-fallback>
           <span className={sceneStyles.fallbackDisk} />
           <span className={sceneStyles.fallbackVoid} />
           <span className={sceneStyles.fallbackHorizon} />
           <span className={sceneStyles.fallbackObserver} />
         </div>
-        <FrontierEventHorizon />
       </div>
       <div className={styles.vignette} aria-hidden="true" />
       <div className={styles.chromaticVeil} aria-hidden="true" />

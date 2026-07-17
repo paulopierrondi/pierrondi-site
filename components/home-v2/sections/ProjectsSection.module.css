@@ -320,7 +320,8 @@
 
 .facts dt {
   overflow: hidden;
-  color: var(--hv2-text-disabled);
+  /* Informative labels must clear WCAG AA on the dark canvas. */
+  color: var(--hv2-text-muted);
   font: 700 8px/1.2 var(--hv2-font-mono);
   letter-spacing: 0.04em;
   text-overflow: ellipsis;

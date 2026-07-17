@@ -67,7 +67,7 @@ export const metadata: Metadata = {
 
 const enWebPageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'WebPage',
+  '@type': 'ProfilePage',
   '@id': `${SITE_URL}/en`,
   url: `${SITE_URL}/en`,
   name: 'Paulo Pierrondi — Where AI becomes governed operations',

@@ -15,10 +15,10 @@
 
 .bg {
   position: absolute;
-  inset: 0;
+  /* Horizontal bleed covers the translate shift below so no bare strip of
+     the section background is ever exposed at the hero edges. */
+  inset: 0 -96px;
   z-index: 0;
-  width: 100%;
-  height: 100%;
   transform: translate3d(clamp(36px, 4vw, 82px), 0, 0);
   transform-origin: 66% 44%;
 }
@@ -76,23 +76,20 @@
   mix-blend-mode: screen;
 }
 
-/* Soft gravitational pull that keeps the void readable behind the thesis. */
+/* Soft gravitational pull that keeps the void readable behind the thesis.
+   Full-bleed so the falloff never ends on a visible rectangle edge. */
 .gravityWell {
   position: absolute;
   z-index: 1;
   pointer-events: none;
-  right: -8%;
-  top: 8%;
-  width: min(72vw, 920px);
-  height: min(72vh, 780px);
-  background:
-    radial-gradient(
-      circle at 52% 46%,
-      transparent 18%,
-      rgba(2, 2, 2, 0.18) 42%,
-      rgba(2, 2, 2, 0.55) 72%,
-      rgba(2, 2, 2, 0.82) 100%
-    );
+  inset: 0;
+  background: radial-gradient(
+    ellipse 52% 58% at 68% 42%,
+    transparent 30%,
+    rgba(2, 2, 2, 0.16) 56%,
+    rgba(2, 2, 2, 0.44) 80%,
+    rgba(2, 2, 2, 0.6) 100%
+  );
   opacity: 0.72;
 }
 
@@ -570,6 +567,9 @@
 
 @media (max-width: 767px) {
   .bg {
+    /* No translate on mobile, so drop the bleed too: keeping it would render
+       a canvas 192px wider than the viewport (wasted GPU fill on phones). */
+    inset: 0;
     transform: none;
   }
 
@@ -629,10 +629,12 @@
   }
 
   .gravityWell {
-    right: -20%;
-    top: 0;
-    width: 120vw;
-    height: 58vh;
+    background: radial-gradient(
+      ellipse 92% 44% at 50% 28%,
+      transparent 32%,
+      rgba(2, 2, 2, 0.4) 74%,
+      rgba(2, 2, 2, 0.58) 100%
+    );
     opacity: 0.55;
   }
 

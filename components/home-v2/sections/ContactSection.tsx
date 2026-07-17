@@ -298,7 +298,10 @@ export default function ContactSection({ lang }: SectionProps) {
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <span className={styles.footerLine}>{copy.footer.line}</span>
-          <nav className={styles.footerNav} aria-label="Footer navigation">
+          <nav
+            className={styles.footerNav}
+            aria-label={lang === 'pt' ? 'Navegação do rodapé' : 'Footer navigation'}
+          >
             {copy.footer.nav.map((item) => (
               <a key={item.href} className={styles.footerNavLink} href={item.href}>
                 {item.label}

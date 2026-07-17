@@ -412,6 +412,19 @@ function ObserverSilhouette() {
   )
 }
 
+// Flags readiness only after the first frame actually paints. Declaring ready
+// in onCreated retires the CSS fallback while frameloop can still be 'never'
+// (hero offscreen / document hidden), leaving a black canvas behind it.
+function ReadySignal({ onReady }: { onReady: () => void }) {
+  const signaled = useRef(false)
+  useFrame(() => {
+    if (signaled.current) return
+    signaled.current = true
+    onReady()
+  })
+  return null
+}
+
 function CosmicSystem({
   reducedMotion,
   pointer,
@@ -429,7 +442,7 @@ function CosmicSystem({
     -0.3,
   ]
 
-  useFrame((_, delta) => {
+  useFrame(({ clock }) => {
     if (!rig.current || reducedMotion) return
     rig.current.rotation.y = THREE.MathUtils.lerp(
       rig.current.rotation.y,
@@ -441,7 +454,9 @@ function CosmicSystem({
       -pointer.current.y * 0.025,
       0.028,
     )
-    rig.current.rotation.z += delta * 0.0035
+    // Bounded breathing drift: an unbounded += rotation slowly turned the
+    // disk vertical after a few minutes, breaking the hero composition.
+    rig.current.rotation.z = Math.sin(clock.elapsedTime * 0.055) * 0.05
   })
 
   return (
@@ -568,10 +583,10 @@ export default function FrontierEventHorizon() {
                 },
                 { once: true },
               )
-              setReady(true)
             }}
           >
             <fog attach="fog" args={['#020202', 8, 27]} />
+            <ReadySignal onReady={() => setReady(true)} />
             <CosmicSystem reducedMotion={reducedMotion} pointer={pointerRef} />
           </Canvas>
         </FrontierBoundary>

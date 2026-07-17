@@ -676,10 +676,10 @@ export const COPY: Record<Lang, SiteCopy> = {
       footer: {
         line: '© 2026 Paulo Pierrondi — built with Next.js + TypeScript',
         nav: [
-          { label: 'blog', href: '/blog' },
-          { label: 'portfolio', href: '/portfolio' },
-          { label: 'about', href: '/about' },
-          { label: 'contact', href: '/contato' },
+          { label: 'blog', href: '/en/blog' },
+          { label: 'portfolio', href: '/en/portfolio' },
+          { label: 'about', href: '/en/about' },
+          { label: 'contact', href: '/en/contato' },
         ],
       },
     },

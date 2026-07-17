@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, type MouseEventHandler } from 'react'
+import { useEffect, useRef, useState, type MouseEventHandler } from 'react'
 import Link from 'next/link'
 import type { HomeLang } from '@/lib/i18n/site-language'
 import { PUBLIC_NAV_COPY, type PublicNavLink } from '@/components/public-navigation'
@@ -19,10 +19,39 @@ interface PublicNavigationProps {
   onHomeSelect?: MouseEventHandler<HTMLAnchorElement>
 }
 
+// Keyboard focus must survive the panel closing: without this, Escape or
+// selecting a section link drops focus to <body> / a hidden link.
+function useReturnFocusOnClose(
+  menuOpen: boolean,
+  burgerRef: React.RefObject<HTMLButtonElement | null>,
+  navPanelRef: React.RefObject<HTMLElement | null>,
+) {
+  const wasOpenRef = useRef(false)
+
+  useEffect(() => {
+    if (menuOpen) {
+      wasOpenRef.current = true
+      return
+    }
+    if (!wasOpenRef.current) return
+    wasOpenRef.current = false
+    const burger = burgerRef.current
+    const active = document.activeElement
+    const focusLost =
+      active === null ||
+      active === document.body ||
+      Boolean(navPanelRef.current?.contains(active))
+    if (burger && burger.offsetParent !== null && focusLost) burger.focus()
+  }, [menuOpen, burgerRef, navPanelRef])
+}
+
 export default function PublicNavigation({ lang, homeHref, links, onHomeSelect }: PublicNavigationProps) {
   const copy = PUBLIC_NAV_COPY[lang]
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const burgerRef = useRef<HTMLButtonElement>(null)
+  const navPanelRef = useRef<HTMLElement>(null)
+  useReturnFocusOnClose(menuOpen, burgerRef, navPanelRef)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -79,6 +108,7 @@ export default function PublicNavigation({ lang, homeHref, links, onHomeSelect }
 
       <nav
         id="site-nav-links"
+        ref={navPanelRef}
         className={`${styles.navLinks} ${menuOpen ? styles.open : ''}`}
         aria-label={copy.aria}
         data-public-nav-links
@@ -112,6 +142,7 @@ export default function PublicNavigation({ lang, homeHref, links, onHomeSelect }
       <div className={styles.navRight}>
         <button
           type="button"
+          ref={burgerRef}
           className={`${styles.navBurger} ${menuOpen ? styles.open : ''}`}
           aria-label={menuOpen ? copy.menuClose : copy.menuOpen}
           aria-expanded={menuOpen}
