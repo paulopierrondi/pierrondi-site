@@ -96,6 +96,7 @@ const BENIGN_MONITOR_PROBE_PATHS = [
   /^\/+\.well-known\/traffic-advice$/i,
   /^\/+ads\.txt$/i,
   /^\/+app-ads\.txt$/i,
+  /^\/+sellers\.json$/i,
   /^\/+apps\/definitely-not-a-real-app(?:-[a-z0-9-]+)?$/i,
 ]
 const EXPECTED_AUTH_PROBE_RULES = {
@@ -1573,7 +1574,7 @@ function buildActionReport(pulse, llmResult = null) {
 }
 
 function buildDecisionState(pulseBase) {
-  const openItems = pulseBase.queue.filter((item) => !item.humanGate)
+  const openItems = pulseBase.queue.filter((item) => !item.humanGate && item.area !== 'security_noise')
   const humanGateSignature = operationGateSignature(pulseBase.humanGates)
   const stateMaterial = {
     severity: pulseBase.severity,
@@ -1581,7 +1582,6 @@ function buildDecisionState(pulseBase) {
     routingPrimary: pulseBase.routing.primary,
     metrics: {
       actionableErrors: pulseBase.metrics.actionableErrors,
-      knownNoiseErrors: pulseBase.metrics.knownNoiseErrors,
       providerLogFailures: pulseBase.metrics.providerLogFailures,
       blockedAnalyticsItems: pulseBase.metrics.blockedAnalyticsItems,
     },
@@ -1599,7 +1599,7 @@ function buildDecisionState(pulseBase) {
     requiresHumanDecision: humanGateSignature.length > 0,
     hasOpenTechnicalWork: openItems.length > 0,
     repeatedGateCandidate: pulseBase.urgency === 'decision_batch' && openItems.length === 0,
-    note: 'Use signature changes to distinguish new operational signals from repeated human-gated analytics blockers.',
+    note: 'The signature tracks material operational state and excludes known-noise volume and filter-only queue items.',
   }
 }
 

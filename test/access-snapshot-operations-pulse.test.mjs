@@ -260,10 +260,12 @@ test('access snapshot filters benign monitor probes without hiding real public g
     path.join(binDir, 'railway'),
     `#!/usr/bin/env node
 const service = process.argv[process.argv.indexOf('--service') + 1]
+const sellersProbeCopies = Number(process.env.SELLERS_PROBE_COPIES || 1)
 const rowsByService = {
   'pierrondi-site': [
     { timestamp: '2026-06-30T18:00:00.000Z', host: 'www.pierrondi.dev', method: 'GET', path: '/apps/definitely-not-a-real-app-zzz', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.10', totalDuration: 12 },
-    { timestamp: '2026-06-30T18:00:00.500Z', host: 'www.pierrondi.dev', method: 'GET', path: '/ads.txt', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.13', totalDuration: 10 }
+    { timestamp: '2026-06-30T18:00:00.500Z', host: 'www.pierrondi.dev', method: 'GET', path: '/ads.txt', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.13', totalDuration: 10 },
+    ...Array.from({ length: sellersProbeCopies }, (_, index) => ({ timestamp: '2026-06-30T18:00:00.750Z', host: 'www.pierrondi.dev', method: 'GET', path: '/sellers.json', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: \`198.51.100.\${20 + index}\`, totalDuration: 9 }))
   ],
   'cantustudio-frontend': [
     { timestamp: '2026-06-30T18:00:01.000Z', host: 'cantustudio.app', method: 'GET', path: '/app-ads.txt', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.11', totalDuration: 8 },
@@ -293,8 +295,9 @@ for (const row of rowsByService[service] || []) console.log(JSON.stringify(row))
   const cantustudio = report.sources.find((source) => source.id === 'cantustudio')
 
   assert.equal(pierrondi.intent.actionableErrorCount, 0)
-  assert.equal(pierrondi.intent.knownNoiseErrorCount, 2)
-  assert.deepEqual(pierrondi.intent.issueBuckets, { known_noise: 2 })
+  assert.equal(pierrondi.intent.knownNoiseErrorCount, 3)
+  assert.deepEqual(pierrondi.intent.issueBuckets, { known_noise: 3 })
+  assert.equal(pierrondi.intent.topKnownNoiseErrorPaths.some((item) => item.key === '404 /sellers.json'), true)
   assert.equal(cantustudio.intent.actionableErrorCount, 1)
   assert.equal(cantustudio.intent.knownNoiseErrorCount, 2)
   assert.deepEqual(cantustudio.intent.topActionableErrorPaths, [{ key: '404 /satb/how-great-thou-art', value: 1 }])
@@ -303,7 +306,30 @@ for (const row of rowsByService[service] || []) console.log(JSON.stringify(row))
     { key: '404 /app-ads.txt', value: 1 },
   ])
   assert.equal(report.operationsPulse.metrics.actionableErrors, 1)
-  assert.equal(report.operationsPulse.metrics.knownNoiseErrors, 4)
+  assert.equal(report.operationsPulse.metrics.knownNoiseErrors, 5)
+
+  const noisyRepeatResult = await runNode(
+    ['scripts/access-snapshot.mjs', '--since', '1h', '--limit', '10', '--analytics=0'],
+    {
+      cwd: process.cwd(),
+      env: {
+        ...process.env,
+        PATH: `${binDir}:${process.env.PATH}`,
+        ACCESS_SNAPSHOT_LOCAL_LLM_TRIAGE: '0',
+        PORTFOLIO_ACCESS_LOCAL_LLM_TRIAGE: '0',
+        ACCESS_SNAPSHOT_SOURCES_CWD: process.cwd(),
+        SELLERS_PROBE_COPIES: '3',
+      },
+    },
+  )
+
+  assert.equal(noisyRepeatResult.status, 0, noisyRepeatResult.stderr)
+  const noisyRepeatReport = JSON.parse(noisyRepeatResult.stdout)
+  assert.equal(noisyRepeatReport.operationsPulse.metrics.knownNoiseErrors, 7)
+  assert.equal(
+    noisyRepeatReport.operationsPulse.decisionState.signature,
+    report.operationsPulse.decisionState.signature,
+  )
 })
 
 test('access snapshot can triage operations pulse with a local Ollama-compatible LLM', async () => {
