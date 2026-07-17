@@ -94,6 +94,27 @@ async function sampleFrames(page, frames = 48) {
   )
 }
 
+// With WebGL live the static fallback must crossfade out; both compositions
+// stacked is the "two globes + stray ring" defect.
+async function verifyFallbackRetired(page) {
+  try {
+    await page.waitForFunction(
+      () => {
+        const scene = document.querySelector('[data-frontier-scene]')
+        const fallback = document.querySelector('[data-frontier-fallback]')
+        if (!scene || !fallback) return false
+        if (scene.getAttribute('data-frontier-state') !== 'ready') return true
+        return getComputedStyle(fallback).opacity === '0'
+      },
+      undefined,
+      { timeout: 6_000 },
+    )
+    return true
+  } catch {
+    return false
+  }
+}
+
 async function captureMotionChange(page, viewport) {
   const canvas = page.locator('[data-frontier-scene] canvas')
   const canvasCount = await canvas.count()
@@ -196,6 +217,7 @@ function viewportPassed({
   metrics,
   frameChanged,
   pausedOffscreen,
+  fallbackRetired,
   diagnostics,
 }) {
   const ctasPass =
@@ -222,6 +244,7 @@ function viewportPassed({
     lanesPass(metrics.lanes, PT_LANE_HREFS),
     lanesFitPass,
     pausedOffscreen,
+    fallbackRetired,
     framePass,
     diagnostics.consoleErrors.length === 0,
     diagnostics.pageErrors.length === 0,
@@ -243,6 +266,7 @@ async function inspectViewport(viewport) {
   })
   await settleScene(page)
 
+  const fallbackRetired = await verifyFallbackRetired(page)
   const frameChanged = await captureMotionChange(page, viewport)
 
   const framePerformance = ['mobile-390', 'desktop-1440'].includes(
@@ -264,6 +288,7 @@ async function inspectViewport(viewport) {
     metrics,
     frameChanged,
     pausedOffscreen,
+    fallbackRetired,
     diagnostics,
   })
 
@@ -274,6 +299,7 @@ async function inspectViewport(viewport) {
     frameChanged,
     framePerformance,
     pausedOffscreen,
+    fallbackRetired,
     ...diagnostics,
     pass,
   }

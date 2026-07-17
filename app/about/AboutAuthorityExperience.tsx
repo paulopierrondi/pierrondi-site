@@ -211,7 +211,9 @@ function CapabilityMap({ lang, page }: { lang: AuthorityLang; page: AuthorityPag
   return (
     <section className={styles.section} aria-labelledby="capabilities-title">
       <AboutReveal className={styles.sectionHeader}>
-        <p className={styles.kicker}>Capability map</p>
+        <p className={styles.kicker}>
+          {lang === 'pt' ? 'Mapa de capacidades' : 'Capability map'}
+        </p>
         <h2 id="capabilities-title">
           {lang === 'pt' ? 'Estratégia no quadro. Código em produção.' : 'Strategy on the board. Code in production.'}
         </h2>
@@ -275,7 +277,9 @@ function OperatingPrinciples({ lang, page }: { lang: AuthorityLang; page: Author
   return (
     <section id="authority-os" className={styles.opsSection} aria-labelledby="ops-title">
       <AboutReveal className={styles.opsIntro}>
-        <p className={styles.kicker}>Operating principles</p>
+        <p className={styles.kicker}>
+          {lang === 'pt' ? 'Princípios de operação' : 'Operating principles'}
+        </p>
         <h2 id="ops-title">
           {lang === 'pt'
             ? 'Construir rápido não elimina governança. Exige uma melhor.'

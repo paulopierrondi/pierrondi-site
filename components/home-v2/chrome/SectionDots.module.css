@@ -62,7 +62,8 @@
     color var(--hv2-dur-fast) var(--hv2-ease-out);
 }
 
-.dot:hover .index {
+.dot:hover .index,
+.dot:focus-visible .index {
   opacity: 1;
   transform: translateX(0);
 }

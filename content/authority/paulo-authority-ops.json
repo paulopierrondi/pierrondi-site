@@ -39,7 +39,7 @@
   "pages": {
     "pt": {
       "slug": "/about",
-      "metadataTitle": "Paulo Pierrondi — Onde IA vira operação com evidência",
+      "metadataTitle": "Sobre Paulo Pierrondi — Onde IA vira operação com evidência",
       "metadataDescription": "Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder. Operating model, AgentOps, governança e produtos públicos.",
       "hero": {
         "kicker": "Portfólio pessoal / ServiceNow / IA + Engenharia",
@@ -164,7 +164,7 @@
     },
     "en": {
       "slug": "/en/about",
-      "metadataTitle": "Paulo Pierrondi — Where AI becomes governed work",
+      "metadataTitle": "About Paulo Pierrondi — Where AI becomes governed operations",
       "metadataDescription": "Technical Account Executive at ServiceNow, AI architect and full-stack builder. Operating model, AgentOps, governance and public products.",
       "hero": {
         "kicker": "Personal portfolio / ServiceNow / AI + Engineering",
