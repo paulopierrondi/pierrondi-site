@@ -46,11 +46,13 @@ test('mobile overlays remain below their close controls and honor reduced motion
 })
 
 test('shared reveals keep critical content visible before hydration', async () => {
-  const [reveal, aboutMotion, studio, studioStyles, globals, qa] = await Promise.all([
+  const [reveal, aboutMotion, studio, studioStyles, feitoDetail, feitoStyles, globals, qa] = await Promise.all([
     read('components/Reveal.tsx'),
     read('app/about/AboutMotion.tsx'),
     read('components/studio/StudioExperience.tsx'),
     read('components/studio/StudioExperience.module.css'),
+    read('app/feitos/[slug]/page.tsx'),
+    read('app/feitos/[slug]/page.module.css'),
     read('app/globals.css'),
     read('scripts/site-wide-ui-qa.mjs'),
   ])
@@ -60,6 +62,9 @@ test('shared reveals keep critical content visible before hydration', async () =
   assert.doesNotMatch(aboutMotion, /initial=\{reduceMotion \? false :/)
   assert.match(studio, /initial:\s*reduceMotion \? false/)
   assert.match(studioStyles, /\.page \[style\*='opacity:0'\]/)
+  assert.match(feitoDetail, /<div className=\{styles\.heroCopy\}>/)
+  assert.doesNotMatch(feitoDetail, /className=\{styles\.heroCopy\}\s+data-swarm-reveal/)
+  assert.doesNotMatch(feitoStyles, /\.heroCopy\s*\{[^}]*animation:/)
   assert.match(globals, /a:focus-visible,[\s\S]*?\[tabindex\]:focus-visible/)
   assert.match(qa, /javaScriptEnabled:\s*false/)
   assert.match(qa, /metrics\.h1Visible/)
