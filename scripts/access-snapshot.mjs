@@ -105,6 +105,9 @@ const EXPECTED_AUTH_PROBE_RULES = {
     /^\/conversions\.(?:csv|json)$/i,
   ],
 }
+const EXPECTED_RETIRED_ROUTE_RULES = {
+  pierrondi: [/^\/(?:(?:en|es|pt)\/)?breach\/?$/i],
+}
 // Endpoints where a non-GET method is a REAL user action (form posts, event
 // intake, checkout APIs). A 4xx here is a genuine breakage and must stay
 // actionable. Read pages that merely signal conversion demand (e.g.
@@ -353,6 +356,16 @@ function classifyHttpIssue(source, row, intent) {
   const pathValue = cleanPath(row.path)
   const status = Number(row.status || 0)
   if (status < 400) return null
+
+  const retiredRouteRules = EXPECTED_RETIRED_ROUTE_RULES[source.id] || []
+  if (status === 410 && matchesAny(pathValue, retiredRouteRules)) {
+    return {
+      bucket: 'known_noise',
+      reason: 'intentional_retired_route',
+      actionable: false,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
 
   // Client-side artifacts, not site failures: 499 = client closed the connection
   // before the server answered (nginx convention). Bots fire-and-forget
