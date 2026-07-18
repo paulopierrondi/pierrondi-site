@@ -199,7 +199,7 @@ function FeitoHero({ feito }: { feito: Feito }) {
         <span />
         <span />
       </div>
-      <div className={styles.heroCopy} data-swarm-reveal>
+      <div className={styles.heroCopy}>
         <p className={styles.eyebrow}>{feito.kicker}</p>
         <h1>{feito.headline}</h1>
         <p className={styles.lead}>{feito.lead}</p>
