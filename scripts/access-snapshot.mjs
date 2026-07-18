@@ -70,6 +70,10 @@ const KNOWN_ASSET_PROBE_PATHS = [
   /^\/+(?:account|appsettings(?:\.[a-z0-9_-]+)?|local\.settings|settings)\.json$/i,
   /^\/+(?:package|package-lock|yarn\.lock|pnpm-lock)\.(?:json|ya?ml)$/i,
   /^\/+(?:assets|static|js|css)\/.+\.(?:js|css)\.map$/i,
+  // Error trackers sometimes serialize a JavaScript stack frame as if it were
+  // an HTTP path (`/assets/app.js:12:8908`). Only the coordinate-suffixed shape
+  // is noise; `/assets/app.js` remains an actionable asset request.
+  /^\/+[^?#]+\.m?js:\d+:\d+$/i,
   /^\/+.+\.map$/i,
   /^\/+(?:[^/?#]+\/)*(?:debug|error|laravel|npm|yarn|storage)(?:[._-]?\d*)?\.log$/i,
 ]
@@ -94,6 +98,9 @@ const MALFORMED_PROBE_PATHS = [
 ]
 const BENIGN_MONITOR_PROBE_PATHS = [
   /^\/+\.well-known\/traffic-advice$/i,
+  // Apple uses `/.well-known/apple-app-site-association`; the root fallback is
+  // optional, so a crawler probing the absent root variant is not a defect.
+  /^\/+apple-app-site-association$/i,
   /^\/+ads\.txt$/i,
   /^\/+app-ads\.txt$/i,
   /^\/+sellers\.json$/i,

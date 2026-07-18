@@ -254,7 +254,7 @@ for (const row of rowsByService[service] || []) console.log(JSON.stringify(row))
   assert.equal(report.operationsPulse.metrics.knownNoiseErrors, 2)
 })
 
-test('access snapshot filters benign monitor probes without hiding real public growth 404s', async () => {
+test('access snapshot classifies intentional and client-artifact 404s without hiding real public failures', async () => {
   const binDir = mkdtempSync(path.join(tmpdir(), 'access-snapshot-bin-'))
   writeExecutable(
     path.join(binDir, 'railway'),
@@ -271,7 +271,10 @@ const rowsByService = {
   'cantustudio-frontend': [
     { timestamp: '2026-06-30T18:00:01.000Z', host: 'cantustudio.app', method: 'GET', path: '/app-ads.txt', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.11', totalDuration: 8 },
     { timestamp: '2026-06-30T18:00:01.500Z', host: 'cantustudio.app', method: 'GET', path: '/.well-known/traffic-advice', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.14', totalDuration: 9 },
-    { timestamp: '2026-06-30T18:00:02.000Z', host: 'cantustudio.app', method: 'GET', path: '/satb/how-great-thou-art', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.12', totalDuration: 18 }
+    { timestamp: '2026-06-30T18:00:02.000Z', host: 'cantustudio.app', method: 'GET', path: '/apple-app-site-association', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.15', totalDuration: 9 },
+    { timestamp: '2026-06-30T18:00:02.500Z', host: 'cantustudio.app', method: 'GET', path: '/assets/router-vendor-CHKagrCO.js:12:8908', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.16', totalDuration: 9 },
+    { timestamp: '2026-06-30T18:00:03.000Z', host: 'cantustudio.app', method: 'GET', path: '/satb/how-great-thou-art', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.12', totalDuration: 18 },
+    { timestamp: '2026-06-30T18:00:03.500Z', host: 'cantustudio.app', method: 'GET', path: '/assets/missing-app.js', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.17', totalDuration: 18 }
   ]
 }
 for (const row of rowsByService[service] || []) console.log(JSON.stringify(row))
@@ -300,15 +303,23 @@ for (const row of rowsByService[service] || []) console.log(JSON.stringify(row))
   assert.deepEqual(pierrondi.intent.issueBuckets, { known_noise: 4 })
   assert.equal(pierrondi.intent.topKnownNoiseErrorPaths.some((item) => item.key === '404 /sellers.json'), true)
   assert.equal(pierrondi.intent.topKnownNoiseErrorPaths.some((item) => item.key === '410 /en/breach'), true)
-  assert.equal(cantustudio.intent.actionableErrorCount, 1)
-  assert.equal(cantustudio.intent.knownNoiseErrorCount, 2)
-  assert.deepEqual(cantustudio.intent.topActionableErrorPaths, [{ key: '404 /satb/how-great-thou-art', value: 1 }])
-  assert.deepEqual(cantustudio.intent.topKnownNoiseErrorPaths, [
-    { key: '404 /.well-known/traffic-advice', value: 1 },
-    { key: '404 /app-ads.txt', value: 1 },
-  ])
-  assert.equal(report.operationsPulse.metrics.actionableErrors, 1)
-  assert.equal(report.operationsPulse.metrics.knownNoiseErrors, 6)
+  assert.equal(cantustudio.intent.actionableErrorCount, 2)
+  assert.equal(cantustudio.intent.knownNoiseErrorCount, 4)
+  assert.deepEqual(
+    new Set(cantustudio.intent.topActionableErrorPaths.map((entry) => entry.key)),
+    new Set(['404 /satb/how-great-thou-art', '404 /assets/missing-app.js']),
+  )
+  assert.deepEqual(
+    new Set(cantustudio.intent.topKnownNoiseErrorPaths.map((entry) => entry.key)),
+    new Set([
+      '404 /.well-known/traffic-advice',
+      '404 /app-ads.txt',
+      '404 /apple-app-site-association',
+      '404 /assets/router-vendor-CHKagrCO.js:12:8908',
+    ]),
+  )
+  assert.equal(report.operationsPulse.metrics.actionableErrors, 2)
+  assert.equal(report.operationsPulse.metrics.knownNoiseErrors, 8)
 
   const noisyRepeatResult = await runNode(
     ['scripts/access-snapshot.mjs', '--since', '1h', '--limit', '10', '--analytics=0'],
@@ -327,7 +338,7 @@ for (const row of rowsByService[service] || []) console.log(JSON.stringify(row))
 
   assert.equal(noisyRepeatResult.status, 0, noisyRepeatResult.stderr)
   const noisyRepeatReport = JSON.parse(noisyRepeatResult.stdout)
-  assert.equal(noisyRepeatReport.operationsPulse.metrics.knownNoiseErrors, 8)
+  assert.equal(noisyRepeatReport.operationsPulse.metrics.knownNoiseErrors, 10)
   assert.equal(
     noisyRepeatReport.operationsPulse.decisionState.signature,
     report.operationsPulse.decisionState.signature,

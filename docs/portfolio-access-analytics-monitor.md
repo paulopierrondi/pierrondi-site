@@ -89,6 +89,8 @@ Current discovery status on 2026-07-06:
 Known-noise 4xx policy:
 
 - Commodity probes such as `/api/.env`, `/api/*`, `/api/auth/*`, `/api/common.js`, `/api/config.js`, and random `/curl/<hash>` paths are classified as `known_noise`, not growth/SEO defects.
+- JavaScript stack-frame artifacts such as `/assets/app.js:12:8908` are `known_noise`; the coordinate-free asset path remains actionable when it returns 4xx/5xx.
+- CantuStudio intentionally serves Apple association metadata only from `/.well-known/apple-app-site-association`; a 404 on the optional root variant `/apple-app-site-association` is `known_noise`.
 - Protected AgenticosCore API reads such as `/api/v1/me`, `/api/v1/me/onboarding`, and `/api/v1/market-intelligence` remain classified as expected auth probes when they return 401/403.
 - Real public commercial, conversion, or GEO URLs still remain actionable when they return 4xx/5xx.
 
