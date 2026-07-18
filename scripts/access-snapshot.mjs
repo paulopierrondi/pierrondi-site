@@ -80,6 +80,12 @@ const KNOWN_ASSET_PROBE_PATHS = [
 const DOTFILE_PROBE_PATHS = [
   /^\/+(?!\.well-known(?:\/|$))(?:[^/?#]+\/)*\.[^/?#]+/,
 ]
+// Next.js internal route names (/_not-found, com ou sem prefixo de locale) nao
+// sao paginas publicas: hit direto vem de crawler repetindo artefato de build.
+// O 404 e o comportamento correto e nunca deve contar como regressao acionavel.
+const FRAMEWORK_INTERNAL_ROUTE_PATHS = [
+  /^\/+(?:[a-z]{2}(?:-[a-z]{2})?\/)?_not-found\/?$/i,
+]
 // Raw quotes, angle brackets or backslashes never appear in a legitimate URL
 // (browsers percent-encode them). They mark hand-crafted scanner requests like
 // 404 /"/_next/static/chunks/xxx.js" that otherwise look like asset 404s.
@@ -364,6 +370,15 @@ function classifyHttpIssue(source, row, intent) {
     return {
       bucket: 'known_noise',
       reason: 'malformed_request_noise',
+      actionable: false,
+      evidenceKey: `${status} ${pathValue}`,
+    }
+  }
+
+  if (matchesAny(pathValue, FRAMEWORK_INTERNAL_ROUTE_PATHS)) {
+    return {
+      bucket: 'known_noise',
+      reason: 'framework_internal_route_noise',
       actionable: false,
       evidenceKey: `${status} ${pathValue}`,
     }

@@ -81,7 +81,8 @@ const service = process.argv[process.argv.indexOf('--service') + 1]
 const rowsByService = {
   'pierrondi-site': [
     { timestamp: '2026-06-30T18:00:00.000Z', host: 'www.pierrondi.dev', method: 'GET', path: '/marketing-os', httpStatus: 200, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.10', totalDuration: 42 },
-    { timestamp: '2026-06-30T18:00:01.000Z', host: 'www.pierrondi.dev', method: 'GET', path: '/missing-offer', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.11', totalDuration: 12 }
+    { timestamp: '2026-06-30T18:00:01.000Z', host: 'www.pierrondi.dev', method: 'GET', path: '/missing-offer', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.11', totalDuration: 12 },
+    { timestamp: '2026-06-30T18:00:01.500Z', host: 'www.pierrondi.dev', method: 'GET', path: '/en/_not-found', httpStatus: 404, clientUa: 'Mozilla/5.0', srcIp: '198.51.100.16', totalDuration: 9 }
   ],
   'cantustudio-frontend': [
     { timestamp: '2026-06-30T18:00:02.000Z', host: 'cantustudio.app', method: 'GET', path: '/answers/melodia-para-satb', httpStatus: 200, clientUa: 'GPTBot/1.0', srcIp: '198.51.100.12', totalDuration: 35 },
@@ -155,13 +156,17 @@ console.log(JSON.stringify({
     assert.equal(report.operationsPulse.n8n.webhookEnv, 'ACCESS_SNAPSHOT_N8N_WEBHOOK_URL')
     assert.equal(report.operationsPulse.localLlm.enabled, false)
     assert.equal(report.operationsPulse.localLlm.delivery.status, 'disabled')
-    assert.equal(report.operationsPulse.metrics.requests, 7)
+    assert.equal(report.operationsPulse.metrics.requests, 8)
     assert.equal(report.sources.find((source) => source.id === 'faithschool').sample.truncated, false)
     assert.equal(report.operationsPulse.metrics.aiCrawlerRequests, 1)
     assert.equal(report.operationsPulse.metrics.actionableErrors, 1)
-    assert.equal(report.operationsPulse.metrics.knownNoiseErrors, 2)
+    assert.equal(report.operationsPulse.metrics.knownNoiseErrors, 3)
     assert.equal(report.operationsPulse.metrics.sampledSources, 0)
     assert.equal(report.sources.find((source) => source.id === 'cantustudio').intent.topKnownNoiseErrorPaths[0].key, '404 /api/.env')
+    assert.equal(
+      report.sources.find((source) => source.id === 'pierrondi').intent.topKnownNoiseErrorPaths[0].key,
+      '404 /en/_not-found',
+    )
     assert.equal(
       report.sources.find((source) => source.id === 'agenticoscore').intent.topKnownNoiseErrorPaths[0].key,
       '404 /curl/c664b4f6c7b940d89f0a0dd6022a88de',
@@ -178,7 +183,7 @@ console.log(JSON.stringify({
     assert.equal(received[0].automationId, report.operationsPulse.automationId)
     assert.equal(received[0].dedupeKey, report.operationsPulse.n8n.dedupeKey)
     assert.equal(received[0].decisionState.signature, report.operationsPulse.decisionState.signature)
-    assert.equal(received[0].metrics.requests, 7)
+    assert.equal(received[0].metrics.requests, 8)
     assert.equal(received[0].queue.some((item) => item.owner === 'technical_ops'), true)
     assert.equal(JSON.stringify(received[0]).includes(`127.0.0.1:${port}`), false)
 

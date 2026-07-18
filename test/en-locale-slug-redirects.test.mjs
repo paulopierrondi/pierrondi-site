@@ -76,3 +76,10 @@ test('redirects use single-segment :slug so index routes stay 200', () => {
   assert.doesNotMatch(nextConfig, /'\/en\/blog\/:slug\*'/)
   assert.doesNotMatch(nextConfig, /'\/en\/feitos\/:slug\*'/)
 })
+
+test('locale-guessed OG image URLs redirect to the single canonical /og', () => {
+  // Hits reais do monitor de acesso: crawlers constroem <locale>/og apesar de
+  // og:image ser absoluto — /en/og e /pt/og devem servir a imagem via redirect.
+  assert.match(nextConfig, /source:\s*'\/en\/og',\s*destination:\s*'\/og',\s*permanent:\s*true/)
+  assert.match(nextConfig, /source:\s*'\/pt\/og',\s*destination:\s*'\/og',\s*permanent:\s*true/)
+})

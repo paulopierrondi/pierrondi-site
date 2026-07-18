@@ -95,6 +95,11 @@ const EN_LOCALE_SLUG_REDIRECTS = [
   { source: '/en/citations', destination: '/citations', permanent: true },
   { source: '/en/crm', destination: '/crm', permanent: true },
   { source: '/en/crm/login', destination: '/crm/login', permanent: true },
+  // A imagem OG e uma so (/og, absoluta nas metas de todas as paginas);
+  // crawlers que constroem <locale>/og por heuristica geravam 404 recorrente
+  // no monitor de acesso (hits reais em /en/og e /pt/og).
+  { source: '/en/og', destination: '/og', permanent: true },
+  { source: '/pt/og', destination: '/og', permanent: true },
 ]
 
 // Apex -> www so ONE canonical host serves the whole site AND the GEO layer.
