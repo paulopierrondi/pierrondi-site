@@ -18,30 +18,17 @@ const staticRoutes: Array<{
   { path: '/blog', priority: 0.88, changeFrequency: 'weekly' },
   { path: '/contato', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/portfolio', priority: 0.9, changeFrequency: 'weekly' },
-  { path: '/geo.md', priority: 0.45, changeFrequency: 'weekly', lastModified: '2026-07-11T00:00:00.000Z' },
-  { path: '/ai-search', priority: 0.78, changeFrequency: 'weekly', lastModified: '2026-07-11T00:00:00.000Z' },
-  { path: '/citations', priority: 0.76, changeFrequency: 'weekly', lastModified: '2026-07-11T00:00:00.000Z' },
-  { path: '/answers.json', priority: 0.5, changeFrequency: 'weekly', lastModified: '2026-07-11T00:00:00.000Z' },
-  { path: '/llms.txt', priority: 0.5, changeFrequency: 'weekly', lastModified: '2026-07-11T00:00:00.000Z' },
-  { path: '/llms-full.txt', priority: 0.48, changeFrequency: 'weekly', lastModified: '2026-07-11T00:00:00.000Z' },
+  { path: '/ai-search', priority: 0.78, changeFrequency: 'weekly', lastModified: '2026-07-18T00:00:00.000Z' },
   { path: '/en', priority: 0.82, changeFrequency: 'monthly' },
   { path: '/en/about', priority: 0.81, changeFrequency: 'monthly' },
   { path: '/en/atuacao', priority: 0.78, changeFrequency: 'monthly' },
   { path: '/en/studio', priority: 0.82, changeFrequency: 'monthly' },
-  { path: '/en/feitos', priority: 0.76, changeFrequency: 'monthly' },
-  { path: '/en/blog', priority: 0.74, changeFrequency: 'monthly' },
   { path: '/en/contato', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/en/portfolio', priority: 0.84, changeFrequency: 'weekly' },
   { path: '/paulo', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/design', priority: 0.72, changeFrequency: 'monthly' },
   { path: '/design/library', priority: 0.7, changeFrequency: 'monthly' },
-  { path: '/privacy', priority: 0.1, changeFrequency: 'yearly' },
-  { path: '/privacidade', priority: 0.1, changeFrequency: 'yearly' },
-  { path: '/terms', priority: 0.1, changeFrequency: 'yearly' },
-  { path: '/termos', priority: 0.1, changeFrequency: 'yearly' },
 ]
-
-const appDocs = ['support', 'privacy', 'terms'] as const
 
 function routeUrl(path: string) {
   if (path === '/') return BASE_URL
@@ -49,12 +36,10 @@ function routeUrl(path: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const portfolioUpdatedAt = new Date('2026-07-11T00:00:00.000Z')
-
   return [
     ...staticRoutes.map((route) => ({
       url: routeUrl(route.path),
-      lastModified: route.lastModified ? new Date(route.lastModified) : portfolioUpdatedAt,
+      ...(route.lastModified ? { lastModified: new Date(route.lastModified) } : {}),
       changeFrequency: route.changeFrequency,
       priority: route.priority,
     })),
@@ -66,23 +51,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...feitos.map((feito) => ({
       url: `${BASE_URL}/feitos/${feito.slug}`,
-      lastModified: portfolioUpdatedAt,
       changeFrequency: 'monthly' as const,
       priority: 0.82,
     })),
     ...Object.keys(APPS).map((slug) => ({
       url: `${BASE_URL}/apps/${slug}`,
-      lastModified: portfolioUpdatedAt,
       changeFrequency: 'monthly' as const,
       priority: 0.64,
     })),
-    ...Object.keys(APPS).flatMap((slug) =>
-      appDocs.map((doc) => ({
-        url: `${BASE_URL}/apps/${slug}/${doc}`,
-        lastModified: portfolioUpdatedAt,
-        changeFrequency: 'yearly' as const,
-        priority: 0.28,
-      })),
-    ),
   ]
 }

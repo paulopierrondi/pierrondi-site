@@ -11,7 +11,7 @@ export const metadata: Metadata = {
       'en-US': '/privacy',
     },
   },
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: true },
 }
 
 export default function PrivacyPolicyPage() {
@@ -30,9 +30,10 @@ export default function PrivacyPolicyPage() {
 
         <h2>1. Data we collect</h2>
         <p>
-          We collect only what you actively send: name, email, and the message
-          written when contacting us through the form, email, LinkedIn, or
-          WhatsApp. We do not use invasive advertising tracking.
+          We collect the name, email, and message you actively send through the
+          form, email, LinkedIn, or WhatsApp. When analytics is configured, the
+          site may also process aggregate page-view and technical information
+          needed to understand reliability and content performance.
         </p>
 
         <h2>2. How we use it</h2>
@@ -42,28 +43,39 @@ export default function PrivacyPolicyPage() {
           parties for marketing purposes.
         </p>
 
-        <h2>3. Retention</h2>
+        <h2>3. Cookies, local storage, and analytics</h2>
+        <p>
+          The site stores your cookie preference in browser local storage.
+          Plausible may be used for aggregate, privacy-focused traffic
+          measurement. Google Analytics is loaded only after you choose
+          &quot;Accept all&quot;; IP anonymization is requested in its site
+          configuration. Choosing &quot;Essential only&quot; leaves Google
+          Analytics disabled.
+        </p>
+
+        <h2>4. Retention</h2>
         <p>
           Contact data is kept only as long as needed for the conversation or
           project. Minimal records may be kept for tax, contractual, or security
-          obligations. You can request deletion at any time.
+          obligations. Analytics providers apply their own configured retention
+          periods. You can request deletion of contact data at any time.
         </p>
 
-        <h2>4. Your rights</h2>
+        <h2>5. Your rights</h2>
         <p>
           You can request access, correction, or deletion of your data by writing
           to <a href="mailto:pierrondi@gmail.com">pierrondi@gmail.com</a>. We
           respond within a reasonable timeframe.
         </p>
 
-        <h2>5. Security</h2>
+        <h2>6. Security</h2>
         <p>
           We use reasonable technical and organizational measures to protect
           your data. No system is perfectly immune, but we treat your
           information with the same governance rigor applied to projects.
         </p>
 
-        <h2>6. Contact</h2>
+        <h2>7. Contact</h2>
         <p>
           Privacy questions? Email{' '}
           <a href="mailto:pierrondi@gmail.com">pierrondi@gmail.com</a>.

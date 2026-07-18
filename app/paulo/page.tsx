@@ -52,6 +52,7 @@ export const metadata: Metadata = {
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': `${SITE_URL}/#person`,
   name: 'Paulo Pierrondi',
   url: `${SITE_URL}/paulo`,
   image: `${SITE_URL}/assets/paulo-pierrondi-executive-neural.jpg`,

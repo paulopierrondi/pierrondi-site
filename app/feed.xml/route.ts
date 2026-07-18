@@ -30,13 +30,13 @@ export async function GET() {
       <description>${escapeXml(description)}</description>
       <pubDate>${pubDate}</pubDate>
       <category>${escapeXml(post.category)}</category>
-      <author>noreply@pierrondi.com.br (Paulo Pierrondi)</author>
+      <dc:creator>Paulo Pierrondi</dc:creator>
     </item>`
     })
     .join('\n')
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>pierrondi.dev — Blog</title>
     <link>${BASE_URL}/blog</link>

@@ -53,6 +53,13 @@ const languageSwitcherHiddenPrefixes = [
 
 export function getCurrentLanguage(pathname: string): HomeLang {
   if (pathname === '/en' || pathname.startsWith('/en/')) return 'en'
+  if (
+    pathname === '/ai-search' ||
+    pathname === '/answers' ||
+    pathname === '/citations'
+  ) {
+    return 'en'
+  }
   if (pathname === '/privacy' || pathname === '/terms') return 'en'
   if (pathname === '/fso' || pathname.startsWith('/fso/')) return 'en'
   if (pathname === '/apps' || pathname.startsWith('/apps/')) return 'en'
@@ -64,7 +71,12 @@ export function shouldHideLanguageSwitcher(pathname: string) {
   // Article details are canonical PT only; the /en/blog/:slug shape 308s here.
   // Do not present a language choice that immediately returns the visitor to
   // the same article.
-  if (normalizedPath.startsWith('/blog/')) return true
+  if (
+    normalizedPath.startsWith('/blog/') ||
+    normalizedPath.startsWith('/feitos/')
+  ) {
+    return true
+  }
 
   return languageSwitcherHiddenPrefixes.some(
     (prefix) =>

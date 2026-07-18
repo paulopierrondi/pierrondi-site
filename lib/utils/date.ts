@@ -2,8 +2,10 @@ export const TZ_SP = 'America/Sao_Paulo'
 
 const PRESETS = {
   shortDateTime: { dateStyle: 'short', timeStyle: 'short', timeZone: TZ_SP },
-  blogShort: { day: '2-digit', month: 'short', year: 'numeric' },
-  blogLong: { day: '2-digit', month: 'long', year: 'numeric' },
+  // Blog dates are editorial YYYY-MM-DD values, not instants. UTC prevents
+  // them from shifting to the previous day in America/Sao_Paulo.
+  blogShort: { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' },
+  blogLong: { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'UTC' },
   numericFull: {
     year: '2-digit',
     month: '2-digit',
