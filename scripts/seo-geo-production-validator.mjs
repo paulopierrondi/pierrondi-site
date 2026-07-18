@@ -98,10 +98,8 @@ async function bodyCheck({ id, product, area, url, mustInclude = [], mustNotIncl
   }
 }
 
-async function pierrondiChecks() {
-  const apexBase = 'https://pierrondi.dev'
-  const wwwBase = 'https://www.pierrondi.dev'
-  const paths = ['/robots.txt', '/sitemap.xml', '/answers', '/ai-search']
+async function pierrondiEndpointChecks(apexBase, wwwBase) {
+  const paths = ['/robots.txt', '/sitemap.xml', '/ai-search']
   const checks = []
   for (const route of paths) {
     checks.push(await redirectCheck({
@@ -120,15 +118,96 @@ async function pierrondiChecks() {
       expectedStatus: 200,
     }))
   }
-  checks.push(await redirectCheck({
-    id: 'pierrondi-en-app-brewmate-redirect',
+  return checks
+}
+
+async function pierrondiRedirectChecks(wwwBase) {
+  const redirectContracts = [
+    ['answers-canonical', 'canonical_route', '/answers', '/ai-search'],
+    ['citations-canonical', 'canonical_route', '/citations', '/ai-search'],
+    ['en-sobre', 'legacy_locale', '/en/sobre', '/en/about'],
+    ['pt-login', 'legacy_locale', '/pt/login', '/crm/login'],
+    ['en-app-brewmate', 'technical_seo', '/en/apps/brewmate', '/apps/brewmate'],
+  ]
+  const checks = await Promise.all(redirectContracts.map(([id, area, path, expectedLocation]) => redirectCheck({
+    id: `pierrondi-${id}-redirect`,
     product: 'pierrondi.dev',
-    area: 'technical_seo',
-    url: `${wwwBase}/en/apps/brewmate`,
+    area,
+    url: `${wwwBase}${path}`,
     expectedStatus: 308,
-    expectedLocation: '/apps/brewmate',
+    expectedLocation,
+  })))
+  checks.push(await statusCheck({
+    id: 'pierrondi-retired-breach-410',
+    product: 'pierrondi.dev',
+    area: 'retired_route',
+    url: `${wwwBase}/en/breach`,
+    expectedStatus: 410,
   }))
   return checks
+}
+
+async function pierrondiBodyChecks(wwwBase) {
+  return Promise.all([
+    bodyCheck({
+      id: 'pierrondi-sitemap-indexable-html-only',
+      product: 'pierrondi.dev',
+      area: 'sitemap_quality',
+      url: `${wwwBase}/sitemap.xml`,
+      mustInclude: [
+        '<loc>https://www.pierrondi.dev/ai-search</loc>',
+        '<loc>https://www.pierrondi.dev/en</loc>',
+        '<loc>https://www.pierrondi.dev/blog/automacao-com-n8n-brasil</loc>',
+      ],
+      mustNotInclude: [
+        '<loc>https://www.pierrondi.dev/geo.md</loc>',
+        '<loc>https://www.pierrondi.dev/answers.json</loc>',
+        '<loc>https://www.pierrondi.dev/llms.txt</loc>',
+        '<loc>https://www.pierrondi.dev/llms-full.txt</loc>',
+        '<loc>https://www.pierrondi.dev/en/blog</loc>',
+        '<loc>https://www.pierrondi.dev/en/feitos</loc>',
+        '/support</loc>',
+        '/privacy</loc>',
+        '/terms</loc>',
+      ],
+    }),
+    bodyCheck({
+      id: 'pierrondi-robots-crawlable-public-signals',
+      product: 'pierrondi.dev',
+      area: 'robots_quality',
+      url: `${wwwBase}/robots.txt`,
+      mustInclude: [
+        'User-agent: OAI-SearchBot',
+        'Sitemap: https://www.pierrondi.dev/sitemap.xml',
+      ],
+      mustNotInclude: [
+        'Disallow: /login\n',
+        'Disallow: /whypaulo\n',
+      ],
+    }),
+    bodyCheck({
+      id: 'pierrondi-investcoach-schema-catalog-truth',
+      product: 'pierrondi.dev',
+      area: 'structured_data',
+      url: `${wwwBase}/apps/investcoach`,
+      mustInclude: [
+        '"softwareVersion":"1.0.3"',
+        'https://apps.apple.com/br/app/investcoach-ai/id6764355044',
+      ],
+      mustNotInclude: ['"price":"0"'],
+    }),
+  ])
+}
+
+async function pierrondiChecks() {
+  const apexBase = 'https://pierrondi.dev'
+  const wwwBase = 'https://www.pierrondi.dev'
+  const groups = await Promise.all([
+    pierrondiEndpointChecks(apexBase, wwwBase),
+    pierrondiRedirectChecks(wwwBase),
+    pierrondiBodyChecks(wwwBase),
+  ])
+  return groups.flat()
 }
 
 async function agenticoscoreChecks() {

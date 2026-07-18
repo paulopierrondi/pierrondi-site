@@ -5,13 +5,30 @@ const siteSchema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
+      '@id': `${SITE_URL}/#organization`,
+      '@type': 'Organization',
+      name: 'pierrondi.dev',
+      alternateName: 'Paulo Pierrondi Studio',
+      url: SITE_URL,
+      logo: `${SITE_URL}/og`,
+      founder: { '@id': `${SITE_URL}/#person` },
+      knowsAbout: [
+        'Enterprise AI operating models',
+        'ServiceNow',
+        'AgentOps',
+        'AI governance',
+        'Workflow automation',
+        'Digital product engineering',
+      ],
+    },
+    {
       '@id': `${SITE_URL}/#person`,
       '@type': 'Person',
       name: 'Paulo Pierrondi',
       givenName: 'Paulo',
       familyName: 'Pierrondi',
-      url: SITE_URL,
-      image: `${SITE_URL}/og`,
+      url: `${SITE_URL}/paulo`,
+      image: `${SITE_URL}/assets/paulo-pierrondi-executive-neural.jpg`,
       email: 'pierrondi@gmail.com',
       jobTitle: 'Technical Account Executive',
       description:
@@ -19,10 +36,9 @@ const siteSchema = {
       address: {
         '@type': 'PostalAddress',
         addressCountry: 'BR',
-        addressRegion: 'SP',
-        addressLocality: 'São Paulo',
       },
       worksFor: {
+        '@id': 'https://www.servicenow.com/#organization',
         '@type': 'Organization',
         name: 'ServiceNow',
         url: 'https://www.servicenow.com/',
@@ -54,7 +70,10 @@ const siteSchema = {
       applicationCategory: 'EducationalApplication',
       operatingSystem: 'Web, iOS, iPadOS',
       creator: { '@id': `${SITE_URL}/#person` },
-      sameAs: ['https://faithschool.app/answers.json', 'https://faithschool.app/llms.txt'],
+      subjectOf: [
+        { '@type': 'DataFeed', url: 'https://faithschool.app/answers.json' },
+        { '@type': 'DigitalDocument', url: 'https://faithschool.app/llms.txt' },
+      ],
     },
     {
       '@id': 'https://cantustudio.app/#software',
@@ -64,7 +83,10 @@ const siteSchema = {
       applicationCategory: 'MultimediaApplication',
       operatingSystem: 'Web, iOS, iPadOS',
       creator: { '@id': `${SITE_URL}/#person` },
-      sameAs: ['https://cantustudio.app/answers.json', 'https://cantustudio.app/llms.txt'],
+      subjectOf: [
+        { '@type': 'DataFeed', url: 'https://cantustudio.app/answers.json' },
+        { '@type': 'DigitalDocument', url: 'https://cantustudio.app/llms.txt' },
+      ],
     },
     {
       '@id': 'https://agenticoscore.ai/#software',
@@ -75,7 +97,10 @@ const siteSchema = {
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
       creator: { '@id': `${SITE_URL}/#person` },
-      sameAs: ['https://agenticoscore.ai/answers.json', 'https://agenticoscore.ai/llms.txt'],
+      subjectOf: [
+        { '@type': 'DataFeed', url: 'https://agenticoscore.ai/answers.json' },
+        { '@type': 'DigitalDocument', url: 'https://agenticoscore.ai/llms.txt' },
+      ],
     },
     {
       '@id': `${SITE_URL}/feitos/sada-servicenow#work`,
@@ -92,7 +117,7 @@ const siteSchema = {
       description: 'Portfólio profissional pessoal de Paulo Pierrondi.',
       url: SITE_URL,
       inLanguage: ['pt-BR', 'en-US'],
-      publisher: { '@id': `${SITE_URL}/#person` },
+      publisher: { '@id': `${SITE_URL}/#organization` },
       about: { '@id': `${SITE_URL}/#person` },
       potentialAction: {
         '@type': 'ContactAction',

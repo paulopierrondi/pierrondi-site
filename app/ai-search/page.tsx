@@ -374,7 +374,7 @@ const structuredData = [
     name: 'AI Search Portfolio - commercial answer briefs',
     description:
       'Owned-media reference hub linking to commercial answer briefs for FaithSchool, CantuStudio and AgenticosCore.',
-    inLanguage: 'pt-BR',
+    inLanguage: 'en-US',
     isPartOf: { '@id': `${SITE_URL}/#website` },
     author: { '@id': `${SITE_URL}/#person` },
     publisher: { '@id': `${SITE_URL}/#organization` },
@@ -397,7 +397,10 @@ const structuredData = [
       name: product.name,
       applicationCategory: product.type,
       url: product.siteUrl,
-      sameAs: [product.catalogUrl, product.llmsUrl],
+      subjectOf: [
+        { '@type': 'DataFeed', url: product.catalogUrl },
+        { '@type': 'DigitalDocument', url: product.llmsUrl },
+      ],
     })),
   },
   {
@@ -445,7 +448,7 @@ export const metadata: Metadata = {
     url: canonicalPath,
     siteName: 'pierrondi.dev',
     type: 'website',
-    locale: 'pt_BR',
+    locale: 'en_US',
     images: [{ url: '/og', width: 1200, height: 630, alt: 'pierrondi.dev AI Search Portfolio' }],
   },
   twitter: {

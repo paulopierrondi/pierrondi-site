@@ -12,6 +12,7 @@ export const metadata: Metadata = {
       'x-default': '/feitos',
     },
   },
+  robots: { index: false, follow: true },
   openGraph: {
     title: 'Work Index | pierrondi.dev',
     description: 'Projects and systems connecting strategy, brand, architecture, automation, and execution.',

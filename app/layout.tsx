@@ -119,6 +119,9 @@ export const metadata: Metadata = {
       'en-US': '/en',
       'x-default': '/',
     },
+    types: {
+      'application/rss+xml': `${SITE_URL}/feed.xml`,
+    },
   },
   icons: {
     icon: [

@@ -14,6 +14,7 @@
     "automation:push": "/opt/homebrew/bin/python3 scripts/automation-control-snapshot.py --post",
     "analytics:doctor:agenticoscore": "node scripts/agenticoscore-analytics-doctor.mjs",
     "seo:geo:validate:prod": "node scripts/seo-geo-production-validator.mjs",
+    "seo:indexability:audit": "node scripts/seo-indexability-audit.mjs",
     "goal:audit:portfolio": "node scripts/portfolio-goal-audit.mjs",
     "authority:validate": "node scripts/authority/validate-content.mjs",
     "design:sync-21st": "node scripts/design-vault-sync.mjs",

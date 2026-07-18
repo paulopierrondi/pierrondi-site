@@ -21,7 +21,8 @@
 
 /* Content stays legible in SSR/no-JS and on slow hydration. Studio motion is
    progressive enhancement; it must never own visibility. */
-.page [style*='opacity:0'] {
+.page [style*='opacity:0'],
+.page [style*='opacity: 0'] {
   opacity: 1 !important;
   transform: none !important;
   filter: none !important;

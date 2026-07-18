@@ -36,10 +36,14 @@ test('EN app detail URLs redirect to the canonical app catalog routes', () => {
   )
 })
 
-test('single-language citation hub redirects EN variant to canonical URL', () => {
+test('citation aliases consolidate on the canonical AI search hub', () => {
   assert.match(
     nextConfig,
-    /source:\s*'\/en\/citations',\s*destination:\s*'\/citations',\s*permanent:\s*true/,
+    /source:\s*'\/citations',\s*destination:\s*'\/ai-search',\s*permanent:\s*true/,
+  )
+  assert.match(
+    nextConfig,
+    /source:\s*'\/en\/citations',\s*destination:\s*'\/ai-search',\s*permanent:\s*true/,
   )
 })
 

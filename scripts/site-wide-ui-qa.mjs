@@ -25,17 +25,17 @@ const noJavaScriptRoutes = [
   '/kommo', '/paulo', '/fso', '/itau', '/bradesco-26',
 ]
 const legacyRedirects = {
-  '/bio': '/en/about',
-  '/precos': '/en/atuacao',
-  '/ideias': '/en/blog',
-  '/quiz': '/en/atuacao',
-  '/produto-digital': '/en/atuacao',
-  '/calculadora': '/en/atuacao',
-  '/marketing-os': '/en/atuacao',
-  '/marketing-os/demo': '/en/atuacao',
-  '/marketing-os/numeros': '/en/atuacao',
-  '/faq': '/en/contato',
-  '/tech-partner': '/en/atuacao',
+  '/bio': '/about',
+  '/precos': '/atuacao',
+  '/ideias': '/blog',
+  '/quiz': '/atuacao',
+  '/produto-digital': '/atuacao',
+  '/calculadora': '/atuacao',
+  '/marketing-os': '/atuacao',
+  '/marketing-os/demo': '/atuacao',
+  '/marketing-os/numeros': '/atuacao',
+  '/faq': '/contato',
+  '/tech-partner': '/atuacao',
 }
 const representativeRoutes = new Set([
   '/',
@@ -45,6 +45,7 @@ const representativeRoutes = new Set([
   '/studio',
   '/feitos',
   '/blog',
+  '/blog/automacao-com-n8n-brasil',
   '/apps/faithschool',
   '/design',
   '/paulo',
@@ -253,6 +254,8 @@ async function inspectMenu(page, metrics) {
     }
   }
 
+  // Give the client boundary time to hydrate before exercising the mobile menu.
+  await page.waitForTimeout(300)
   await burger.click()
   const opened = await page.evaluate(() => {
     const menu = document.querySelector('[data-public-nav-links]')

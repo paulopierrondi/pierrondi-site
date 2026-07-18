@@ -11,7 +11,7 @@ export const metadata: Metadata = {
       'en-US': '/terms',
     },
   },
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: true },
 }
 
 export default function TermsOfServicePage() {

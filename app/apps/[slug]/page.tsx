@@ -7,10 +7,14 @@ import ProductLogo from '@/components/ProductLogo'
 import JsonLd from '@/components/JsonLd'
 import { SITE_URL } from '@/lib/site'
 import iconManifest from '@/public/app-icons/manifest.json'
+import appStoreCatalog from '@/public/app-icons/app-store-catalog.json'
 import { APPS, getApp, isAppSlug, type AppEntry } from './_apps'
 import styles from './AppLanding.module.css'
 
 const APP_ICONS = iconManifest as Record<string, { file: string; name: string; source: string }>
+const APP_STORE_CATALOG = new Map(
+  appStoreCatalog.apps.map((entry) => [entry.slug, entry]),
+)
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -23,7 +27,7 @@ type ProductSignal = {
   body: string
 }
 
-function getProductSignals(app: AppEntry): ProductSignal[] {
+function getProductSignals(app: AppEntry, appStoreUrl?: string): ProductSignal[] {
   if (app.privacyMode === 'aiPhotoTryOn') {
     return [
       {
@@ -86,8 +90,8 @@ function getProductSignals(app: AppEntry): ProductSignal[] {
     {
       icon: FileText,
       label: 'AVAILABILITY',
-      title: app.appStoreUrl ? 'A direct store path' : 'Documentation-first',
-      body: app.appStoreUrl
+      title: appStoreUrl ? 'A direct store path' : 'Documentation-first',
+      body: appStoreUrl
         ? 'A direct App Store link is published on this product page.'
         : 'Use the support page for the current product and availability information.',
     },
@@ -132,9 +136,11 @@ export default async function AppLandingPage({ params }: Props) {
   const heroTagline = app.tagline ?? app.category
   const description = app.description ?? `${app.name} is a ${app.category}.`
   const iconEntry = APP_ICONS[slug]
+  const storeEntry = APP_STORE_CATALOG.get(slug)
+  const appStoreUrl = storeEntry?.url ?? app.appStoreUrl
   const appNumber = String(Object.keys(APPS).indexOf(slug) + 1).padStart(2, '0')
   const isGame = /game|puzzle|wargame|quiz|mystery|card/i.test(app.category)
-  const signals = getProductSignals(app)
+  const signals = getProductSignals(app, appStoreUrl)
   const appSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -142,14 +148,20 @@ export default async function AppLandingPage({ params }: Props) {
     name: app.name,
     description,
     url: `${SITE_URL}/apps/${slug}`,
-    applicationCategory: isGame ? 'GameApplication' : 'UtilitiesApplication',
+    applicationCategory: storeEntry?.category ?? (isGame ? 'GameApplication' : 'UtilitiesApplication'),
     operatingSystem: 'iOS',
+    inLanguage: 'en-US',
     image: iconEntry ? `${SITE_URL}/app-icons/${iconEntry.file}` : `${SITE_URL}/og`,
     author: { '@id': `${SITE_URL}/#person` },
     publisher: { '@id': `${SITE_URL}/#organization` },
-    // Free to download on the App Store; optional paid features go through Apple IAP.
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-    ...(app.appStoreUrl ? { downloadUrl: app.appStoreUrl, installUrl: app.appStoreUrl } : {}),
+    ...(storeEntry?.version ? { softwareVersion: storeEntry.version } : {}),
+    ...(appStoreUrl
+      ? {
+          sameAs: [appStoreUrl],
+          downloadUrl: appStoreUrl,
+          installUrl: appStoreUrl,
+        }
+      : {}),
   }
 
   return (
@@ -166,8 +178,8 @@ export default async function AppLandingPage({ params }: Props) {
             <p className={styles.tagline}>{heroTagline}</p>
             <p className={styles.description}>{description}</p>
             <div className={styles.heroActions}>
-              {app.appStoreUrl ? (
-                <a className={styles.primaryAction} href={app.appStoreUrl} target="_blank" rel="noreferrer">
+              {appStoreUrl ? (
+                <a className={styles.primaryAction} href={appStoreUrl} target="_blank" rel="noreferrer">
                   View on the App Store <ArrowUpRight aria-hidden="true" />
                 </a>
               ) : (
@@ -195,7 +207,7 @@ export default async function AppLandingPage({ params }: Props) {
               </div>
               <div>
                 <dt>ACCESS</dt>
-                <dd>{app.appStoreUrl ? 'App Store link available' : 'Support information available'}</dd>
+                <dd>{appStoreUrl ? 'App Store link available' : 'Support information available'}</dd>
               </div>
               <div>
                 <dt>DOCUMENTATION</dt>
@@ -235,7 +247,7 @@ export default async function AppLandingPage({ params }: Props) {
               </div>
               <div>
                 <dt>CURRENT PATH</dt>
-                <dd>{app.appStoreUrl ? 'Public App Store listing' : 'Product support and legal documentation'}</dd>
+                <dd>{appStoreUrl ? 'Public App Store listing' : 'Product support and legal documentation'}</dd>
               </div>
             </dl>
           </div>

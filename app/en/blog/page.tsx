@@ -13,6 +13,7 @@ export const metadata: Metadata = {
       'x-default': '/blog',
     },
   },
+  robots: { index: false, follow: true },
   openGraph: {
     title: 'Ideas | pierrondi.dev',
     description: 'Notes on enterprise AI, ServiceNow, AgentOps, and operating model.',

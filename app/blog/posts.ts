@@ -10,6 +10,107 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: 'automacao-com-n8n-brasil',
+    title: 'Automação com n8n no Brasil: arquitetura, custos e segurança em 2026',
+    category: 'Automação',
+    excerpt:
+      'Guia prático para decidir entre n8n Cloud e self-hosted, desenhar workflows confiáveis e operar automações com segurança, evidência e human gates.',
+    date: '2026-07-18',
+    readTime: '10 min',
+    content: `
+<h2>Resposta direta: quando o n8n faz sentido?</h2>
+<p>O n8n faz sentido quando um processo precisa conectar sistemas, aplicar regras e deixar evidência de cada execução. Ele é especialmente útil quando a automação vai além de copiar dados entre duas ferramentas: valida entradas, chama APIs, transforma informações, espera aprovações, trata erros e registra o resultado.</p>
+<p>Para uma empresa brasileira, a decisão não deve começar pela quantidade de integrações. Deve começar por quatro perguntas: qual trabalho será eliminado, quais dados serão processados, quem responde por exceções e como o resultado será auditado.</p>
+<blockquote>Automação confiável não é um diagrama que roda uma vez. É um workflow com dono, limites, tratamento de falha e evidência.</blockquote>
+
+<h2>O que mudou no modelo do n8n</h2>
+<p>O n8n oferece serviço hospedado e opções self-hosted. Nos planos pagos atuais, a unidade central de cobrança é a execução completa do workflow, e não cada nó individual. Preços, limites, retenção de histórico e recursos de colaboração mudam por plano; por isso a fonte correta para uma decisão comercial é a <a href="https://n8n.io/pricing/">página oficial de preços do n8n</a>, consultada na data da contratação.</p>
+<p>A Community Edition self-hosted continua disponível, mas &quot;self-hosted&quot; não significa custo zero. Infraestrutura, banco de dados, backups, observabilidade, atualizações, segurança e suporte viram responsabilidade de quem opera a instância. Recursos empresariais específicos também podem exigir licença própria.</p>
+
+<h2>n8n Cloud ou self-hosted?</h2>
+<h3>Escolha n8n Cloud quando</h3>
+<ul>
+  <li>o time quer começar rápido e não quer operar servidor, banco e atualizações;</li>
+  <li>os requisitos de residência, rede e customização são atendidos pelo serviço;</li>
+  <li>o volume e a concorrência cabem no plano escolhido;</li>
+  <li>a prioridade é reduzir carga operacional de infraestrutura.</li>
+</ul>
+<h3>Escolha self-hosted quando</h3>
+<ul>
+  <li>há requisito real de rede privada, customização, escala ou controle da infraestrutura;</li>
+  <li>o time consegue manter TLS, backups, banco, workers, monitoramento e atualização de segurança;</li>
+  <li>existe um owner operacional e um runbook de recuperação;</li>
+  <li>a decisão de licença e suporte foi validada para o uso comercial pretendido.</li>
+</ul>
+<p>A documentação oficial mantém o caminho de <a href="https://docs.n8n.io/hosting/installation/docker/">instalação com Docker</a>, mas também alerta que self-hosting exige conhecimento de servidores, containers, segurança e configuração. Copiar um compose e abrir a porta não é uma arquitetura de produção.</p>
+
+<h2>Arquitetura mínima de um workflow confiável</h2>
+<p>Um workflow de produção deve ser desenhado como sistema operacional, não como sequência feliz de nós.</p>
+<ol>
+  <li><strong>Trigger autenticado:</strong> webhook assinado, agenda controlada ou evento de sistema com origem conhecida.</li>
+  <li><strong>Validação:</strong> schema, campos obrigatórios, tamanho, formato e autorização antes de chamar serviços externos.</li>
+  <li><strong>Idempotência:</strong> uma chave impede que retry, webhook duplicado ou clique repetido gere cobrança, mensagem ou registro duas vezes.</li>
+  <li><strong>Separação de credenciais:</strong> cada integração usa a menor permissão necessária. Segredos não entram em código, planilha, prompt ou log.</li>
+  <li><strong>Tratamento de erro:</strong> timeout, retry com limite, fila de exceção e alerta com contexto redigido.</li>
+  <li><strong>Human gate:</strong> comunicação externa, gasto, exclusão, mudança de acesso ou ação irreversível espera aprovação explícita.</li>
+  <li><strong>Evidência:</strong> ID da execução, timestamps, decisão, aprovador, resultado e link para o registro de origem.</li>
+</ol>
+<p>Para escala horizontal, o n8n documenta <a href="https://docs.n8n.io/hosting/scaling/queue-mode/">queue mode</a>. Ele exige desenho de workers, Redis, banco e persistência de dados binários compatível com a topologia. Ativar fila sem entender esses componentes apenas muda o lugar da falha.</p>
+
+<h2>Segurança e LGPD: o que precisa ser decidido</h2>
+<p>n8n é o processador do workflow, não uma dispensa de governança. A empresa continua responsável por mapear finalidade, base legal, operadores, retenção, transferência internacional e atendimento ao titular quando houver dados pessoais.</p>
+<ul>
+  <li>Classifique os dados antes de automatizar: público, interno, pessoal, sensível ou segredo.</li>
+  <li>Evite enviar payload completo a um LLM quando campos redigidos ou agregados resolvem a tarefa.</li>
+  <li>Defina retenção para dados de execução e elimine conteúdo que não precisa permanecer no histórico.</li>
+  <li>Restrinja nodes de alto risco e acesso ao filesystem ou shell em ambientes self-hosted.</li>
+  <li>Separe desenvolvimento, homologação e produção; não teste com credenciais ou dados reais.</li>
+  <li>Faça backup e teste restauração. Backup nunca testado é apenas uma hipótese.</li>
+</ul>
+<p>A própria documentação reúne medidas de <a href="https://docs.n8n.io/privacy-security/what-you-can-do/">privacidade e segurança</a> e opções para <a href="https://docs.n8n.io/hosting/configuration/configuration-examples/isolation/">isolar a instância</a>. Para uso comercial, confira também a <a href="https://docs.n8n.io/sustainable-use-license/">Sustainable Use License</a> vigente.</p>
+
+<h2>Casos de uso que costumam entregar valor</h2>
+<h3>Lead e atendimento</h3>
+<p>Receber um evento do formulário, validar consentimento, enriquecer apenas os campos necessários, criar ou atualizar o registro no CRM e alertar o owner. Mensagem ao cliente deve ter template aprovado, limite de frequência e saída para atendimento humano.</p>
+<h3>Operação financeira</h3>
+<p>Consolidar dados de fontes autorizadas, gerar uma prévia e pedir aprovação antes de emitir, pagar, cancelar ou comunicar. O workflow pode preparar a decisão; o sistema financeiro e o aprovador continuam sendo os controles finais.</p>
+<h3>Relatórios e evidência</h3>
+<p>Coletar métricas, validar período e fonte, gerar resumo e armazenar o artefato com data e provenance. Um relatório automático útil mostra também falhas de coleta e dados ausentes, em vez de preencher lacunas silenciosamente.</p>
+<h3>AgentOps e IA</h3>
+<p>Orquestrar classificação, busca de contexto, chamada ao modelo, avaliação e aprovação. A resposta do LLM é um input não confiável até passar por validação de schema, política e risco.</p>
+
+<h2>Quando não usar n8n</h2>
+<ul>
+  <li>Para lógica transacional central que precisa de garantias fortes e já pertence a um serviço de domínio.</li>
+  <li>Para processamento pesado de baixa latência que exige controle fino de memória e concorrência.</li>
+  <li>Quando não existe owner para credenciais, falhas, atualização e suporte.</li>
+  <li>Para automatizar um processo instável que muda toda semana e ainda não tem regra clara.</li>
+</ul>
+<p>Nesses casos, n8n pode continuar útil como camada de integração, mas não deve substituir o sistema que detém a regra de negócio.</p>
+
+<h2>Plano de implantação em 30 dias</h2>
+<ol>
+  <li><strong>Semana 1 — diagnóstico:</strong> escolha um processo, meça volume, tempo, erros e custo atual. Defina owner e stop condition.</li>
+  <li><strong>Semana 2 — workflow controlado:</strong> implemente o caminho feliz com dados de teste, idempotência e logs redigidos.</li>
+  <li><strong>Semana 3 — falhas e gates:</strong> simule timeout, duplicidade, credencial expirada e aprovação negada.</li>
+  <li><strong>Semana 4 — produção limitada:</strong> libere para uma amostra, acompanhe taxa de sucesso, tempo economizado, exceções e custo por execução.</li>
+</ol>
+<p>O indicador de sucesso não é &quot;quantos workflows foram criados&quot;. É quanto trabalho confiável passou a acontecer com menos tempo, menos erro e uma trilha de decisão melhor.</p>
+
+<h2>Checklist de decisão</h2>
+<ul>
+  <li>O processo tem owner, entrada, saída e métrica de valor?</li>
+  <li>Cloud versus self-hosted foi decidido por requisito, não por moda?</li>
+  <li>Credenciais têm menor privilégio e rotação definida?</li>
+  <li>Retries são limitados e operações críticas são idempotentes?</li>
+  <li>Ações externas ou irreversíveis têm human gate?</li>
+  <li>Logs e retenção respeitam segurança e LGPD?</li>
+  <li>Existe rollback, alerta e runbook para falhas?</li>
+</ul>
+<p>Se essas respostas ainda não existem, o próximo passo não é adicionar mais nodes. É fechar o modelo operacional da automação.</p>
+    `,
+  },
+  {
     slug: 'ia-enterprise-modelo-operacional',
     title: 'IA enterprise começa pelo modelo operacional',
     category: 'Tese',
