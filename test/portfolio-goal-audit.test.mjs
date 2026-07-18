@@ -38,6 +38,10 @@ test('portfolio goal audit stays open when production routes or AgenticosCore an
   assert.ok(audit.failures.some((failure) => failure.id === 'cantustudio_seo_geo_routes'))
   assert.ok(audit.failures.some((failure) => failure.id === 'agenticoscore_analytics_restored'))
   assert.ok(audit.failures.some((failure) => failure.id === 'access_snapshot_no_actionable_errors'))
+  assert.match(
+    audit.failures.find((failure) => failure.id === 'agenticoscore_analytics_restored').nextAction,
+    /546092574/,
+  )
 })
 
 test('portfolio goal audit completes only when every SEO/GEO, analytics and snapshot gate is green', () => {
