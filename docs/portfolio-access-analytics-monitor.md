@@ -77,12 +77,12 @@ Current discovery status on 2026-07-06:
 - CantuStudio GA4 UI access works in Chrome for property `543380598`; service account has Viewer access and GA4 Data API readback is `ok`.
 - pierrondi.dev GA4 property `544419741` was created in the Default Account for Firebase account, web stream `www.pierrondi.dev` uses measurement id `G-1CL8PFYY7T`, and GA4 Data API readback is `ok` with the portfolio service account.
 - pierrondi.dev production tagging is gated by `NEXT_PUBLIC_GA_MEASUREMENT_ID`; the site only loads GA4 after `cookie-consent=all`.
-- AgenticosCore public GA4 measurement id is `G-C9XNT5S87W`; numeric property id `543366142` is configured in the secure env provider, but GA4 Data API readback is still blocked until the service account has Viewer access on that property. On 2026-07-06 the logged-in Google Analytics account had no access to `p543366142`; the GA UI access request was emailed to the property administrators.
+- AgenticosCore legacy measurement id `G-C9XNT5S87W` belongs to inaccessible property `543366142`. On 2026-07-18 property `546092574` and web stream `agenticoscore.ai` (`G-7744EKJMWH`) were created under the managed account, connected to the Google tag already installed on the production site, and the portfolio service account received Viewer access. GA4 Data API readback is `ok`.
 - Search Console UI access works for `sc-domain:agenticoscore.ai`, `sc-domain:pierrondi.dev`, `sc-domain:cantustudio.app`, and `sc-domain:faithschool.app`.
 - Search Console DNS verification was completed for `pierrondi.dev` via GoDaddy TXT, `cantustudio.app` via Cloudflare TXT, and `faithschool.app` via Vercel DNS TXT.
 - The service account is listed as a Full user on all four Search Console domain properties and API readback is `ok`.
 - Current GSC data is still sparse for newly verified properties; use query/page/CTR/position decisions only after data accumulates.
-- GA4 Data API readback works for FaithSchool `527930560`, CantuStudio `543380598`, and pierrondi.dev `544419741`; AgenticosCore remains the only GA4 access blocker because the API still returns an access error for `543366142`, and the current browser account cannot manage that property.
+- GA4 Data API readback works for FaithSchool `527930560`, CantuStudio `543380598`, pierrondi.dev `544419741`, and AgenticosCore `546092574`.
 - Local ADC with `cloud-platform` exists, but the default `gcloud` ADC client was blocked by Google when requesting `analytics.readonly` and `webmasters.readonly`; keep recurring reads on the service-account path.
 - Plausible API remains blocked until a Plausible token is configured in the secure env provider.
 
@@ -92,10 +92,10 @@ Known-noise 4xx policy:
 - Protected AgenticosCore API reads such as `/api/v1/me`, `/api/v1/me/onboarding`, and `/api/v1/market-intelligence` remain classified as expected auth probes when they return 401/403.
 - Real public commercial, conversion, or GEO URLs still remain actionable when they return 4xx/5xx.
 
-AgenticosCore GA4 unblock checklist:
+AgenticosCore GA4 verification checklist:
 
-1. In Google Analytics property `543366142`, add `portfolio-analytics-monitor@agentcore-499217.iam.gserviceaccount.com` as Viewer.
-2. Confirm the browser/account used for `pierrondi@gmail.com` can open `https://analytics.google.com/analytics/web/#/a387161272p543366142/admin/suiteusermanagement/property`, or use the real admin account for that property.
+1. Keep `AGENTICOSCORE_GA4_PROPERTY_ID` and `AGENTCORE_GA4_PROPERTY_ID` set to managed property `546092574`.
+2. Confirm `portfolio-analytics-monitor@agentcore-499217.iam.gserviceaccount.com` remains Viewer on that property.
 3. Run the portfolio snapshot in read-only mode:
 
 ```bash

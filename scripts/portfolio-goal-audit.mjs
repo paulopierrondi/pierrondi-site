@@ -129,7 +129,7 @@ export function buildGoalAudit({ generatedAt, seoGeo, agenticoscoreAnalytics, ac
         primaryCandidate: agenticoscoreAnalytics?.decision?.primaryCandidate || null,
         blocker: agenticoscoreAnalytics?.decision?.blocker || null,
       },
-      nextAction: 'Grant Viewer/Analyst on GA4 property 543366142 to the monitoring service account, or configure an AgenticosCore Plausible token.',
+      nextAction: 'Verify GA4 Data API readback on the restored AgenticosCore property 546092574; GA4 is primary and Plausible remains optional.',
     }),
     requirement({
       id: 'access_snapshot_generated',

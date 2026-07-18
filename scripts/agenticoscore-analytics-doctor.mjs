@@ -9,7 +9,7 @@ const GOOGLE_READONLY_SCOPES = [
   'https://www.googleapis.com/auth/analytics.readonly',
   'https://www.googleapis.com/auth/webmasters.readonly',
 ]
-const DEFAULT_PROPERTY_ID = '543366142'
+const DEFAULT_PROPERTY_ID = '546092574'
 const DEFAULT_SITE_ID = 'agenticoscore.ai'
 
 const GA4_PROPERTY_ENV = [
