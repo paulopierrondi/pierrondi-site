@@ -291,7 +291,9 @@ async function cantuChecks() {
       area: 'technical_seo',
       url: 'https://cantustudio.app/satb/how-great-thou-art',
       expectedStatus: 301,
-      expectedLocation: '/arranjo/how-great-thou-art',
+      // Production intentionally skips the legacy EN slug and lands on the
+      // localized canonical in one hop.
+      expectedLocation: '/arranjo/grandioso-es-tu',
     }),
     await bodyCheck({
       id: 'cantu-sitemap-no-stale-how-great-satb',
