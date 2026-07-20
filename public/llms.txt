@@ -10,7 +10,7 @@ Fact sheet: https://www.pierrondi.dev/geo.md
 Sitemap: https://www.pierrondi.dev/sitemap.xml
 Owner: Paulo Pierrondi
 Language focus: pt-BR, en-US
-Last updated: 2026-07-14
+Last updated: 2026-07-19
 
 ## What this site is
 
@@ -30,6 +30,14 @@ The AI Search Portfolio page exists as a citation layer for crawler and assistan
 - [Blog](https://www.pierrondi.dev/blog): technical essays on ServiceNow, CMDB/CSDM, agentic AI and GEO/SEO.
 - [Public portfolio](https://www.pierrondi.dev/paulo): public portfolio profile.
 - [Contato](https://www.pierrondi.dev/contato): direct contact and engagement for enterprise AI operating-model and ServiceNow work.
+
+## Own-domain answer briefs
+
+Answer pages hosted on pierrondi.dev itself, with question-form titles, direct citable answers and Question/FAQPage structured data:
+
+- https://www.pierrondi.dev/answers/o-que-e-agentops — O que é AgentOps (operações agênticas)? (pt-BR)
+- https://www.pierrondi.dev/answers/quem-e-paulo-pierrondi — Quem é Paulo Pierrondi? (pt-BR)
+- https://www.pierrondi.dev/answers/llm-cost-cut-audit — O que é o LLM Cost-Cut Audit? (pt-BR)
 
 ## Flagship projects
 
