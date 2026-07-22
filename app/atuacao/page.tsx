@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     siteName: 'pierrondi.dev',
     type: 'website',
     locale: 'pt_BR',
+    images: [{ url: '/og', width: 1200, height: 630, alt: 'Atuação de Paulo Pierrondi em IA enterprise' }],
   },
 }
 
