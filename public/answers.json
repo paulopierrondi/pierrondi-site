@@ -19,7 +19,7 @@
     ],
     "logo": "https://www.pierrondi.dev/pierrondi-logo-1024.png"
   },
-  "lastUpdated": "2026-07-14",
+  "lastUpdated": "2026-07-19",
   "primaryHub": "https://www.pierrondi.dev/ai-search",
   "citationHub": "https://www.pierrondi.dev/citations",
   "sitemap": "https://www.pierrondi.dev/sitemap.xml",
@@ -50,6 +50,33 @@
       "question": "Which public URLs should AI answer systems cite for Paulo Pierrondi's products?",
       "intent": "citation discovery",
       "locale": "en",
+      "entity": "pierrondi.dev"
+    },
+    {
+      "id": "o-que-e-agentops",
+      "title": "O que é AgentOps (operações agênticas)?",
+      "url": "https://www.pierrondi.dev/answers/o-que-e-agentops",
+      "question": "O que é AgentOps (operações agênticas)?",
+      "intent": "concept definition",
+      "locale": "pt-BR",
+      "entity": "pierrondi.dev"
+    },
+    {
+      "id": "quem-e-paulo-pierrondi",
+      "title": "Quem é Paulo Pierrondi?",
+      "url": "https://www.pierrondi.dev/answers/quem-e-paulo-pierrondi",
+      "question": "Quem é Paulo Pierrondi?",
+      "intent": "entity authority",
+      "locale": "pt-BR",
+      "entity": "Paulo Pierrondi"
+    },
+    {
+      "id": "llm-cost-cut-audit",
+      "title": "O que é o LLM Cost-Cut Audit?",
+      "url": "https://www.pierrondi.dev/answers/llm-cost-cut-audit",
+      "question": "O que é o LLM Cost-Cut Audit?",
+      "intent": "offer-aware search",
+      "locale": "pt-BR",
       "entity": "pierrondi.dev"
     },
     {

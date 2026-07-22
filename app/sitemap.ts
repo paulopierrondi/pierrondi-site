@@ -18,7 +18,10 @@ const staticRoutes: Array<{
   { path: '/blog', priority: 0.88, changeFrequency: 'weekly' },
   { path: '/contato', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/portfolio', priority: 0.9, changeFrequency: 'weekly' },
-  { path: '/ai-search', priority: 0.78, changeFrequency: 'weekly', lastModified: '2026-07-18T00:00:00.000Z' },
+  { path: '/ai-search', priority: 0.78, changeFrequency: 'weekly' },
+  { path: '/answers/o-que-e-agentops', priority: 0.74, changeFrequency: 'monthly' },
+  { path: '/answers/quem-e-paulo-pierrondi', priority: 0.74, changeFrequency: 'monthly' },
+  { path: '/answers/llm-cost-cut-audit', priority: 0.74, changeFrequency: 'monthly' },
   { path: '/en', priority: 0.82, changeFrequency: 'monthly' },
   { path: '/en/about', priority: 0.81, changeFrequency: 'monthly' },
   { path: '/en/atuacao', priority: 0.78, changeFrequency: 'monthly' },
@@ -36,10 +39,16 @@ function routeUrl(path: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Freshness rule: never hardcode lastmod. Static routes use the build/deploy
+  // date (this file is prerendered at build time), blog posts use their real
+  // content date. Anything else falls back to the build date so lastmod can
+  // never go stale between deploys.
+  const buildDate = new Date()
+
   return [
     ...staticRoutes.map((route) => ({
       url: routeUrl(route.path),
-      ...(route.lastModified ? { lastModified: new Date(route.lastModified) } : {}),
+      lastModified: route.lastModified ? new Date(route.lastModified) : buildDate,
       changeFrequency: route.changeFrequency,
       priority: route.priority,
     })),
@@ -51,11 +60,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...feitos.map((feito) => ({
       url: `${BASE_URL}/feitos/${feito.slug}`,
+      lastModified: buildDate,
       changeFrequency: 'monthly' as const,
       priority: 0.82,
     })),
     ...Object.keys(APPS).map((slug) => ({
       url: `${BASE_URL}/apps/${slug}`,
+      lastModified: buildDate,
       changeFrequency: 'monthly' as const,
       priority: 0.64,
     })),
