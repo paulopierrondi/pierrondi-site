@@ -5,7 +5,13 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown, ArrowRight, ExternalLink, Layers3, MessageSquareMore, Smartphone, Workflow } from 'lucide-react'
 import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import ProjectVisual, { CaseMark } from './ProjectVisual'
-import { APP_STORE_CATALOG, PORTFOLIO_CASES, type PortfolioLang } from './portfolio-data'
+import PortfolioEvidenceMosaic from './PortfolioEvidenceMosaic'
+import {
+  APP_STORE_CATALOG,
+  PORTFOLIO_CASES,
+  type PortfolioCase,
+  type PortfolioLang,
+} from './portfolio-data'
 import styles from './PortfolioExperience.module.css'
 
 const COPY = {
@@ -84,6 +90,8 @@ const CATEGORY_PT: Record<string, string> = {
   Entertainment: 'Entretenimento',
 }
 
+type PortfolioCopy = (typeof COPY)[PortfolioLang]
+
 export default function PortfolioExperience({ lang }: { lang: PortfolioLang }) {
   const t = COPY[lang]
   const cases = PORTFOLIO_CASES[lang]
@@ -106,19 +114,7 @@ export default function PortfolioExperience({ lang }: { lang: PortfolioLang }) {
             <a href="#cases">{t.explore}<ArrowDown aria-hidden="true" /></a>
           </div>
         </motion.div>
-        <div className={styles.heroMosaic} aria-hidden="true">
-          {APP_STORE_CATALOG.apps.slice(0, 12).map((app, index) => (
-            <motion.span
-              key={app.trackId}
-              initial={reduceMotion ? false : { opacity: 0, scale: 0.7, y: 18 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: reduceMotion ? 0 : 0.18 + index * 0.045, duration: reduceMotion ? 0 : 0.48, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <Image src={app.icon} alt="" fill sizes="96px" />
-            </motion.span>
-          ))}
-          <span className={styles.mosaicCount}>21<small>APPS</small></span>
-        </div>
+        <PortfolioEvidenceMosaic lang={lang} reduceMotion={reduceMotion} />
         <div className={styles.heroProof}>
           <span><Smartphone aria-hidden="true" /> App Store</span>
           <span><Layers3 aria-hidden="true" /> Web · iOS · Android</span>
@@ -127,6 +123,27 @@ export default function PortfolioExperience({ lang }: { lang: PortfolioLang }) {
         </div>
       </header>
 
+      <PortfolioCases lang={lang} cases={cases} t={t} reduceMotion={reduceMotion} />
+      <AppCatalog lang={lang} t={t} reduceMotion={reduceMotion} />
+      <Capabilities t={t} reduceMotion={reduceMotion} />
+      <PortfolioClosing lang={lang} t={t} />
+    </main>
+  )
+}
+
+function PortfolioCases({
+  lang,
+  cases,
+  t,
+  reduceMotion,
+}: {
+  lang: PortfolioLang
+  cases: PortfolioCase[]
+  t: PortfolioCopy
+  reduceMotion: boolean
+}) {
+  return (
+    <>
       <section id="cases" className={styles.casesIntro}>
         <p>{t.casesKicker}</p>
         <h2>{t.casesTitle}</h2>
@@ -145,73 +162,113 @@ export default function PortfolioExperience({ lang }: { lang: PortfolioLang }) {
 
       <div className={styles.caseList}>
         {cases.map((item, index) => (
-          <motion.section
-            id={item.id}
+          <PortfolioCaseStudy
             key={item.id}
-            className={styles.case}
-            initial={reduceMotion ? false : { opacity: 0, y: 36 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: reduceMotion ? 0 : 0.62, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className={styles.caseVisual} data-order={index % 2 === 0 ? 'visual-first' : 'copy-first'}>
-              <ProjectVisual item={item} lang={lang} />
-            </div>
-            <article className={styles.caseCopy}>
-              <div className={styles.caseMeta}>
-                <span>{item.index} / {String(cases.length).padStart(2, '0')}</span>
-                <span>{item.status}</span>
-              </div>
-              <p className={styles.caseEyebrow}>{item.eyebrow}</p>
-              <h2>{item.headline}</h2>
-
-              <div className={styles.caseNarrative}>
-                <div>
-                  <small>{t.problem}</small>
-                  <p>{item.description}</p>
-                </div>
-                <div>
-                  <small>{t.evidence}</small>
-                  <p>{item.proof}</p>
-                </div>
-              </div>
-
-              <dl className={styles.caseFacts}>
-                {item.facts.map((fact) => (
-                  <div key={fact.label}>
-                    <dt>{fact.label}</dt>
-                    <dd>{fact.value}</dd>
-                  </div>
-                ))}
-              </dl>
-
-              <div className={styles.taxonomy}>
-                <div>
-                  <small>{t.platforms}</small>
-                  <p>{item.platforms.join(' · ')}</p>
-                </div>
-                <div>
-                  <small>{t.stack}</small>
-                  <p>{item.stack.join(' · ')}</p>
-                </div>
-              </div>
-
-              <div className={styles.caseActions}>
-                <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined}>
-                  {item.cta}{item.external ? <ExternalLink aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
-                </a>
-                {item.secondaryHref && (
-                  <a href={item.secondaryHref} target="_blank" rel="noreferrer" className={styles.secondaryLink}>
-                    {item.secondaryCta}<ExternalLink aria-hidden="true" />
-                  </a>
-                )}
-              </div>
-            </article>
-          </motion.section>
+            item={item}
+            index={index}
+            total={cases.length}
+            lang={lang}
+            t={t}
+            reduceMotion={reduceMotion}
+          />
         ))}
       </div>
+    </>
+  )
+}
 
-      <section id="app-store" className={styles.appsSection} aria-labelledby="app-store-title">
+function PortfolioCaseStudy({
+  item,
+  index,
+  total,
+  lang,
+  t,
+  reduceMotion,
+}: {
+  item: PortfolioCase
+  index: number
+  total: number
+  lang: PortfolioLang
+  t: PortfolioCopy
+  reduceMotion: boolean
+}) {
+  return (
+    <motion.section
+      id={item.id}
+      className={styles.case}
+      initial={reduceMotion ? false : { opacity: 0, y: 36 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: reduceMotion ? 0 : 0.62, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className={styles.caseVisual} data-order={index % 2 === 0 ? 'visual-first' : 'copy-first'}>
+        <ProjectVisual item={item} lang={lang} />
+      </div>
+      <article className={styles.caseCopy}>
+        <div className={styles.caseMeta}>
+          <span>{item.index} / {String(total).padStart(2, '0')}</span>
+          <span>{item.status}</span>
+        </div>
+        <p className={styles.caseEyebrow}>{item.eyebrow}</p>
+        <h2>{item.headline}</h2>
+
+        <div className={styles.caseNarrative}>
+          <div>
+            <small>{t.problem}</small>
+            <p>{item.description}</p>
+          </div>
+          <div>
+            <small>{t.evidence}</small>
+            <p>{item.proof}</p>
+          </div>
+        </div>
+
+        <dl className={styles.caseFacts}>
+          {item.facts.map((fact) => (
+            <div key={fact.label}>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <div className={styles.taxonomy}>
+          <div>
+            <small>{t.platforms}</small>
+            <p>{item.platforms.join(' · ')}</p>
+          </div>
+          <div>
+            <small>{t.stack}</small>
+            <p>{item.stack.join(' · ')}</p>
+          </div>
+        </div>
+
+        <div className={styles.caseActions}>
+          <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined}>
+            {item.cta}{item.external ? <ExternalLink aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+          </a>
+          {item.secondaryHref && (
+            <a href={item.secondaryHref} target="_blank" rel="noreferrer" className={styles.secondaryLink}>
+              {item.secondaryCta}<ExternalLink aria-hidden="true" />
+            </a>
+          )}
+        </div>
+      </article>
+    </motion.section>
+  )
+}
+
+function AppCatalog({
+  lang,
+  t,
+  reduceMotion,
+}: {
+  lang: PortfolioLang
+  t: PortfolioCopy
+  reduceMotion: boolean
+}) {
+  return (
+    <section id="app-store" className={styles.appsSection} aria-labelledby="app-store-title">
         <header>
           <p>{t.appsKicker}</p>
           <h2 id="app-store-title">{t.appsTitle}</h2>
@@ -239,9 +296,19 @@ export default function PortfolioExperience({ lang }: { lang: PortfolioLang }) {
           ))}
         </div>
         <p className={styles.catalogNote}>Apple developer ID {APP_STORE_CATALOG.developerId} · storefront {APP_STORE_CATALOG.storefront.toUpperCase()} · {APP_STORE_CATALOG.count} apps</p>
-      </section>
+    </section>
+  )
+}
 
-      <section className={styles.capabilities} aria-labelledby="capabilities-title">
+function Capabilities({
+  t,
+  reduceMotion,
+}: {
+  t: PortfolioCopy
+  reduceMotion: boolean
+}) {
+  return (
+    <section className={styles.capabilities} aria-labelledby="capabilities-title">
         <header>
           <p>{t.systemKicker}</p>
           <h2 id="capabilities-title">{t.systemTitle}</h2>
@@ -262,14 +329,17 @@ export default function PortfolioExperience({ lang }: { lang: PortfolioLang }) {
             </motion.article>
           ))}
         </div>
-      </section>
+    </section>
+  )
+}
 
-      <section className={styles.closing}>
-        <p>{t.ctaKicker}</p>
-        <h2>{t.ctaTitle}</h2>
-        <span>{t.ctaBody}</span>
-        <a href={lang === 'pt' ? '/contato' : '/en/contato'}>{t.cta}<ArrowRight aria-hidden="true" /></a>
-      </section>
-    </main>
+function PortfolioClosing({ lang, t }: { lang: PortfolioLang; t: PortfolioCopy }) {
+  return (
+    <section className={styles.closing}>
+      <p>{t.ctaKicker}</p>
+      <h2>{t.ctaTitle}</h2>
+      <span>{t.ctaBody}</span>
+      <a href={lang === 'pt' ? '/contato' : '/en/contato'}>{t.cta}<ArrowRight aria-hidden="true" /></a>
+    </section>
   )
 }
