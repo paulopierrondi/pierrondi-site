@@ -4,6 +4,7 @@ export type PortfolioLang = 'pt' | 'en'
 
 export type PortfolioVisualKind =
   | 'cantustudio'
+  | 'luar-do-campo'
   | 'faithschool'
   | 'app-store'
   | 'kommo'
@@ -87,8 +88,33 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
       cta: 'Conhecer o Pierrondi Studio',
     },
     {
-      id: 'cantustudio',
+      id: 'luar-do-campo',
       index: '02',
+      navLabel: 'Luar do Campo',
+      title: 'Luar do Campo',
+      eyebrow: 'E-COMMERCE · MODA · OPERAÇÃO',
+      headline: 'Do editorial ao pedido: uma loja pensada como operação.',
+      description:
+        'Storefront de moda feminina com catálogo de 50 produtos, variações por tamanho e cor, busca, filtros, favoritos, carrinho, checkout demonstrativo e painel administrativo.',
+      proof:
+        'Projeto contratado por um cliente confidencial do varejo de moda. “Luar do Campo” é a identidade conceitual da demo pública.',
+      status: 'Projeto contratado · demo pública',
+      accent: 'sand',
+      visual: 'luar-do-campo',
+      platforms: ['Loja', 'Checkout', 'Painel'],
+      stack: ['React', 'TypeScript', 'Vite', 'Commerce UX', 'SEO'],
+      facts: [
+        { value: '50', label: 'produtos' },
+        { value: 'Tamanho + cor', label: 'variantes' },
+        { value: '4', label: 'superfícies conectadas' },
+      ],
+      href: 'https://luar-do-campo-demo.vercel.app',
+      cta: 'Abrir demo da loja',
+      external: true,
+    },
+    {
+      id: 'cantustudio',
+      index: '03',
       navLabel: 'CantuStudio',
       title: 'CantuStudio',
       eyebrow: 'PRODUTO DE IA · MÚSICA · MULTIPLATAFORMA',
@@ -116,7 +142,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'faithschool',
-      index: '03',
+      index: '04',
       navLabel: 'FaithSchool',
       title: 'FaithSchool',
       eyebrow: 'EDTECH · SAAS · MOBILE',
@@ -144,7 +170,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'app-portfolio',
-      index: '04',
+      index: '05',
       navLabel: '21 apps',
       title: 'App portfolio',
       eyebrow: 'APP STORE · PRODUTOS PUBLICADOS',
@@ -168,7 +194,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'kommo-whatsapp',
-      index: '05',
+      index: '06',
       navLabel: 'Kommo + WA',
       title: 'Kommo + WhatsApp',
       eyebrow: 'CRM · AUTOMAÇÃO · HANDOFF HUMANO',
@@ -192,7 +218,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'studio-crm',
-      index: '06',
+      index: '07',
       navLabel: 'Studio CRM',
       title: 'Studio CRM',
       eyebrow: 'FULL-STACK · OPERAÇÃO · DADOS',
@@ -216,7 +242,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'agenticoscore',
-      index: '07',
+      index: '08',
       navLabel: 'AgenticosCore',
       title: 'AgenticosCore',
       eyebrow: 'REVENUE OS · AGENTES · HUMAN GATES',
@@ -242,7 +268,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'sada',
-      index: '08',
+      index: '09',
       navLabel: 'SADA',
       title: 'SADA',
       eyebrow: 'FRAMEWORK DESENVOLVIDO POR PAULO PIERRONDI',
@@ -291,8 +317,33 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
       cta: 'Explore Pierrondi Studio',
     },
     {
-      id: 'cantustudio',
+      id: 'luar-do-campo',
       index: '02',
+      navLabel: 'Luar do Campo',
+      title: 'Luar do Campo',
+      eyebrow: 'E-COMMERCE · FASHION · OPERATIONS',
+      headline: 'From editorial storefront to order flow—designed as one operation.',
+      description:
+        'A women’s fashion storefront with a 50-product catalog, size and color variants, search, filters, wishlists, cart, a demonstrative checkout, and an admin dashboard.',
+      proof:
+        'Contracted by a confidential fashion retail client. “Luar do Campo” is the conceptual identity of the public demo.',
+      status: 'Client-contracted · public demo',
+      accent: 'sand',
+      visual: 'luar-do-campo',
+      platforms: ['Storefront', 'Checkout', 'Admin'],
+      stack: ['React', 'TypeScript', 'Vite', 'Commerce UX', 'SEO'],
+      facts: [
+        { value: '50', label: 'products' },
+        { value: 'Size + color', label: 'variants' },
+        { value: '4', label: 'connected surfaces' },
+      ],
+      href: 'https://luar-do-campo-demo.vercel.app',
+      cta: 'Open the store demo',
+      external: true,
+    },
+    {
+      id: 'cantustudio',
+      index: '03',
       navLabel: 'CantuStudio',
       title: 'CantuStudio',
       eyebrow: 'AI PRODUCT · MUSIC · MULTI-PLATFORM',
@@ -320,7 +371,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'faithschool',
-      index: '03',
+      index: '04',
       navLabel: 'FaithSchool',
       title: 'FaithSchool',
       eyebrow: 'EDTECH · SAAS · MOBILE',
@@ -348,7 +399,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'app-portfolio',
-      index: '04',
+      index: '05',
       navLabel: '21 apps',
       title: 'App portfolio',
       eyebrow: 'APP STORE · SHIPPED PRODUCTS',
@@ -372,7 +423,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'kommo-whatsapp',
-      index: '05',
+      index: '06',
       navLabel: 'Kommo + WA',
       title: 'Kommo + WhatsApp',
       eyebrow: 'CRM · AUTOMATION · HUMAN HANDOFF',
@@ -396,7 +447,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'studio-crm',
-      index: '06',
+      index: '07',
       navLabel: 'Studio CRM',
       title: 'Studio CRM',
       eyebrow: 'FULL-STACK · OPERATIONS · DATA',
@@ -420,7 +471,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'agenticoscore',
-      index: '07',
+      index: '08',
       navLabel: 'AgenticosCore',
       title: 'AgenticosCore',
       eyebrow: 'REVENUE OS · AGENTS · HUMAN GATES',
@@ -446,7 +497,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'sada',
-      index: '08',
+      index: '09',
       navLabel: 'SADA',
       title: 'SADA',
       eyebrow: 'FRAMEWORK DEVELOPED BY PAULO PIERRONDI',

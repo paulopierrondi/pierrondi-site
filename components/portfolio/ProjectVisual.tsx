@@ -56,6 +56,14 @@ export function CaseMark({ item, size = 42 }: { item: PortfolioCase; size?: numb
     )
   }
 
+  if (item.visual === 'luar-do-campo') {
+    return (
+      <span className={`${styles.caseMark} ${styles.luarMark}`} style={{ width: size, height: size }} aria-hidden="true">
+        LC
+      </span>
+    )
+  }
+
   if (item.visual === 'pierrondi-studio') {
     return (
       <span className={`${styles.caseMark} ${styles.studioMark}`} style={{ width: size, height: size }} aria-hidden="true">
@@ -89,6 +97,7 @@ export default function ProjectVisual({
     <div className={className} data-visual={item.visual}>
       <span className={styles.grid} aria-hidden="true" />
       {item.visual === 'cantustudio' && <CantuVisual />}
+      {item.visual === 'luar-do-campo' && <LuarVisual lang={lang} />}
       {item.visual === 'faithschool' && <FaithVisual reduceMotion={reduceMotion} />}
       {item.visual === 'app-store' && <AppStoreVisual lang={lang} reduceMotion={reduceMotion} />}
       {item.visual === 'kommo' && <KommoVisual lang={lang} reduceMotion={reduceMotion} />}
@@ -96,6 +105,38 @@ export default function ProjectVisual({
       {item.visual === 'pierrondi-studio' && <StudioVisual lang={lang} />}
       {item.visual === 'agenticoscore' && <AgenticosVisual />}
       {item.visual === 'sada' && <SadaVisual lang={lang} reduceMotion={reduceMotion} />}
+    </div>
+  )
+}
+
+function LuarVisual({ lang }: { lang: PortfolioLang }) {
+  return (
+    <div className={styles.luarVisual}>
+      <div className={styles.luarIdentity}>
+        <span>LUAR</span>
+        <small>DO CAMPO</small>
+      </div>
+      <div className={`${styles.luarFrame} ${styles.luarStorefront}`}>
+        <Image
+          src="/portfolio/luar-do-campo/storefront-desktop.png"
+          alt={lang === 'pt' ? 'Storefront editorial da Luar do Campo' : 'Luar do Campo editorial storefront'}
+          fill
+          sizes="(max-width: 780px) 72vw, 42vw"
+        />
+      </div>
+      <div className={`${styles.luarFrame} ${styles.luarOperations}`}>
+        <Image
+          src="/portfolio/luar-do-campo/operations-desktop.png"
+          alt={lang === 'pt' ? 'Painel operacional da demo Luar do Campo' : 'Luar do Campo demo operations dashboard'}
+          fill
+          sizes="(max-width: 780px) 40vw, 24vw"
+        />
+      </div>
+      <div className={styles.luarProof}>
+        <span>50 {lang === 'pt' ? 'PRODUTOS' : 'PRODUCTS'}</span>
+        <span>{lang === 'pt' ? 'PEDIDO → OPERAÇÃO' : 'ORDER → OPERATIONS'}</span>
+        <span>{lang === 'pt' ? 'DEMO AO VIVO' : 'LIVE DEMO'}</span>
+      </div>
     </div>
   )
 }
