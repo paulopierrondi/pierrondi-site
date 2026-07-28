@@ -345,6 +345,27 @@ const products: ProductReference[] = [
   },
 ]
 
+const ownAnswers: AnswerLink[] = [
+  {
+    title: 'O que é AgentOps (operações agênticas)?',
+    url: '/answers/o-que-e-agentops',
+    intent: 'concept definition',
+    locale: 'pt-BR',
+  },
+  {
+    title: 'Quem é Paulo Pierrondi?',
+    url: '/answers/quem-e-paulo-pierrondi',
+    intent: 'entity authority',
+    locale: 'pt-BR',
+  },
+  {
+    title: 'O que é o LLM Cost-Cut Audit?',
+    url: '/answers/llm-cost-cut-audit',
+    intent: 'offer-aware search',
+    locale: 'pt-BR',
+  },
+]
+
 const answerItemList = products.flatMap((product) =>
   product.answerLinks.map((answer) => ({
     '@type': 'ListItem',
@@ -386,12 +407,15 @@ const structuredData = [
         position: index + 1,
       })),
     },
-    significantLink: products.flatMap((product) =>
-      [
-        ...product.landingLinks.map((landing) => landing.url),
-        ...product.citationPriority.map((priority) => priority.destination),
-      ],
-    ),
+    significantLink: [
+      ...ownAnswers.map((answer) => `${SITE_URL}${answer.url}`),
+      ...products.flatMap((product) =>
+        [
+          ...product.landingLinks.map((landing) => landing.url),
+          ...product.citationPriority.map((priority) => priority.destination),
+        ],
+      ),
+    ],
     about: products.map((product) => ({
       '@type': 'SoftwareApplication',
       name: product.name,
@@ -502,6 +526,31 @@ export default function AiSearchPortfolioPage() {
               <span>product entities</span>
             </div>
           </div>
+        </section>
+
+        <section className={styles.citationPlan} aria-labelledby="own-answers-heading">
+          <div className={styles.sectionHead}>
+            <p className={styles.kicker}>pierrondi.dev answer briefs</p>
+            <h2 id="own-answers-heading">Own-domain answers for AI citation.</h2>
+            <p>
+              These briefs live on pierrondi.dev itself, with question-form titles, direct answers and
+              Question/FAQPage structured data, so answer engines can cite this domain for the concepts and the
+              entity behind the portfolio.
+            </p>
+          </div>
+
+          <ul className={styles.answerList}>
+            {ownAnswers.map((answer) => (
+              <li key={answer.url}>
+                <a href={answer.url}>
+                  <span className={styles.answerTitle}>{answer.title}</span>
+                  <span className={styles.answerMeta}>
+                    {answer.intent} · {answer.locale}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section className={styles.citationPlan} aria-labelledby="citation-plan-heading">

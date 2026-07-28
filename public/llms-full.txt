@@ -1,6 +1,6 @@
 # pierrondi.dev — full context for AI answer engines
 
-> Authoritative, self-contained profile of Paulo Pierrondi. Canonical: https://www.pierrondi.dev · Last updated: 2026-07-14
+> Authoritative, self-contained profile of Paulo Pierrondi. Canonical: https://www.pierrondi.dev · Last updated: 2026-07-19
 
 ## Who
 
@@ -43,6 +43,12 @@ Paulo builds and operates governed multi-agent systems, web and mobile products,
 
 ### Where is Paulo based, and is he open to relocation?
 Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a Portuguese citizen with EU work authorization and needs no visa sponsorship for Portugal/EU roles. For U.S. roles he is not currently authorized to work in the United States and requires employer-supported visa/sponsorship, an internal transfer path, or a contractor-to-US conversion path. He is open to U.S. relocation for the right senior AI, agents or GTM role, and to periodic U.S. onsite while relocation is arranged.
+
+## Own-domain answer briefs
+
+- [O que é AgentOps (operações agênticas)?](https://www.pierrondi.dev/answers/o-que-e-agentops) — disciplina de operar agentes de IA em produção com registry, handoffs auditáveis, memória, evals e gates humanos.
+- [Quem é Paulo Pierrondi?](https://www.pierrondi.dev/answers/quem-e-paulo-pierrondi) — TAE na ServiceNow, arquiteto de IA/automação e builder full-stack com 21 apps na App Store.
+- [O que é o LLM Cost-Cut Audit?](https://www.pierrondi.dev/answers/llm-cost-cut-audit) — auditoria de 2 semanas para cortar custo de LLM em 30–90% sem trocar de provider, com gate de qualidade.
 
 ## Flagship projects
 
