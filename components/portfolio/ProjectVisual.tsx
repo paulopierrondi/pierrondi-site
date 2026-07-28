@@ -56,6 +56,19 @@ export function CaseMark({ item, size = 42 }: { item: PortfolioCase; size?: numb
     )
   }
 
+  if (item.visual === 'entrelinhas') {
+    return (
+      <span className={`${styles.caseMark} ${styles.caseMarkImage}`} style={{ width: size, height: size }}>
+        <Image
+          src="/portfolio/entrelinhas/entrelinhas-mark.svg"
+          alt="Entrelinhas"
+          width={size}
+          height={size}
+        />
+      </span>
+    )
+  }
+
   if (item.visual === 'pierrondi-studio') {
     return (
       <span className={`${styles.caseMark} ${styles.studioMark}`} style={{ width: size, height: size }} aria-hidden="true">
@@ -95,7 +108,27 @@ export default function ProjectVisual({
       {item.visual === 'studio-crm' && <CrmVisual lang={lang} reduceMotion={reduceMotion} />}
       {item.visual === 'pierrondi-studio' && <StudioVisual lang={lang} />}
       {item.visual === 'agenticoscore' && <AgenticosVisual />}
+      {item.visual === 'entrelinhas' && <EntrelinhasVisual />}
       {item.visual === 'sada' && <SadaVisual lang={lang} reduceMotion={reduceMotion} />}
+    </div>
+  )
+}
+
+function EntrelinhasVisual() {
+  return (
+    <div className={styles.entrelinhasVisual}>
+      <Image
+        src="/portfolio/entrelinhas/feature-graphic.png"
+        alt="Entrelinhas — catálogo de leitura com capas e categorias"
+        fill
+        sizes="(max-width: 780px) 92vw, 56vw"
+        className={styles.coverImage}
+      />
+      <div className={styles.visualProof}>
+        <span>PWA</span>
+        <span>OFFLINE</span>
+        <span>WCAG AA</span>
+      </div>
     </div>
   )
 }

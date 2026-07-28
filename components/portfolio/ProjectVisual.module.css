@@ -124,6 +124,7 @@
 }
 
 .cantuVisual,
+.entrelinhasVisual,
 .agenticosVisual,
 .faithVisual,
 .appStoreVisual,
@@ -140,6 +141,7 @@
 }
 
 .cantuVisual::after,
+.entrelinhasVisual::after,
 .agenticosVisual::after {
   content: "";
   position: absolute;
@@ -152,6 +154,14 @@
 
 .cantuVisual {
   background: #0b2926;
+}
+
+.entrelinhasVisual {
+  background: #f8f3ea;
+}
+
+.entrelinhasVisual .coverImage {
+  object-position: top center;
 }
 
 .cantuVisual .coverImage {

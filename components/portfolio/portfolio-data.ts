@@ -10,6 +10,7 @@ export type PortfolioVisualKind =
   | 'studio-crm'
   | 'pierrondi-studio'
   | 'agenticoscore'
+  | 'entrelinhas'
   | 'sada'
 
 export type PortfolioAccent = 'gold' | 'sand' | 'blue' | 'violet' | 'cyan' | 'green' | 'prism'
@@ -264,6 +265,31 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
       href: '/feitos/sada-servicenow',
       cta: 'Explorar o framework',
     },
+    {
+      id: 'entrelinhas',
+      index: '09',
+      navLabel: 'Entrelinhas',
+      title: 'Entrelinhas',
+      eyebrow: 'LEITURA · PWA · SUPABASE',
+      headline: 'Uma biblioteca que devolve o leitor ao mesmo parágrafo.',
+      description:
+        'Plataforma de leitura mobile-first com catálogo editorial, leitor por capítulos, biblioteca pessoal com progresso por obra, comentários moderados e painel administrativo.',
+      proof:
+        'O leitor retoma no parágrafo exato, com tipografia acessível, fonte para dislexia, leitura em voz alta e capítulos disponíveis offline.',
+      status: 'Web + PWA instalável',
+      accent: 'violet',
+      visual: 'entrelinhas',
+      platforms: ['Web', 'PWA instalável', 'Offline'],
+      stack: ['Next.js 16', 'React 19', 'Supabase', 'RLS', 'TypeScript'],
+      facts: [
+        { value: 'WCAG AA', label: 'contraste verificado' },
+        { value: 'Offline', label: 'capítulos em cache' },
+        { value: 'RLS', label: 'segurança no banco' },
+      ],
+      href: 'https://entrelinhas-reader.vercel.app',
+      cta: 'Abrir o Entrelinhas',
+      external: true,
+    },
   ],
   en: [
     {
@@ -467,6 +493,31 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
       ],
       href: '/feitos/sada-servicenow',
       cta: 'Explore the framework',
+    },
+    {
+      id: 'entrelinhas',
+      index: '09',
+      navLabel: 'Entrelinhas',
+      title: 'Entrelinhas',
+      eyebrow: 'READING · PWA · SUPABASE',
+      headline: 'A library that returns the reader to the exact paragraph.',
+      description:
+        'Mobile-first reading platform with an editorial catalogue, chapter reader, personal library with per-title progress, moderated comments and an admin panel.',
+      proof:
+        'The reader resumes at the exact paragraph, with accessible typography, a dyslexia-friendly typeface, text-to-speech and chapters available offline.',
+      status: 'Web + installable PWA',
+      accent: 'violet',
+      visual: 'entrelinhas',
+      platforms: ['Web', 'Installable PWA', 'Offline'],
+      stack: ['Next.js 16', 'React 19', 'Supabase', 'RLS', 'TypeScript'],
+      facts: [
+        { value: 'WCAG AA', label: 'verified contrast' },
+        { value: 'Offline', label: 'cached chapters' },
+        { value: 'RLS', label: 'database security' },
+      ],
+      href: 'https://entrelinhas-reader.vercel.app',
+      cta: 'Open Entrelinhas',
+      external: true,
     },
   ],
 }
