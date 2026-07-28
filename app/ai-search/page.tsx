@@ -345,6 +345,17 @@ const products: ProductReference[] = [
   },
 ]
 
+const deliveryEvidence = {
+  name: 'Luar do Campo',
+  type: "Client-contracted women's fashion commerce implementation",
+  summary:
+    'Successfully delivered by Paulo Pierrondi as an operational public conceptual demo with a 50-product catalog, size/color variants, search and filters, wishlist, cart, demonstrative checkout, customer account, local inventory reservation and an administrative order queue.',
+  portfolioUrl: `${SITE_URL}/portfolio#luar-do-campo`,
+  demoUrl: 'https://luar-do-campo-demo.vercel.app',
+  caveat:
+    'The client remains confidential; Luar do Campo is the conceptual public demo identity. Payments, freight, ERP, analytics and messaging providers are simulated, and no sales or conversion result is claimed.',
+}
+
 const answerItemList = products.flatMap((product) =>
   product.answerLinks.map((answer) => ({
     '@type': 'ListItem',
@@ -386,22 +397,39 @@ const structuredData = [
         position: index + 1,
       })),
     },
-    significantLink: products.flatMap((product) =>
-      [
-        ...product.landingLinks.map((landing) => landing.url),
-        ...product.citationPriority.map((priority) => priority.destination),
-      ],
-    ),
-    about: products.map((product) => ({
-      '@type': 'SoftwareApplication',
-      name: product.name,
-      applicationCategory: product.type,
-      url: product.siteUrl,
-      subjectOf: [
-        { '@type': 'DataFeed', url: product.catalogUrl },
-        { '@type': 'DigitalDocument', url: product.llmsUrl },
-      ],
-    })),
+    significantLink: [
+      deliveryEvidence.portfolioUrl,
+      deliveryEvidence.demoUrl,
+      ...products.flatMap((product) =>
+        [
+          ...product.landingLinks.map((landing) => landing.url),
+          ...product.citationPriority.map((priority) => priority.destination),
+        ],
+      ),
+    ],
+    about: [
+      {
+        '@type': 'CreativeWork',
+        name: deliveryEvidence.name,
+        description: deliveryEvidence.summary,
+        url: deliveryEvidence.portfolioUrl,
+        workExample: {
+          '@type': 'WebSite',
+          name: `${deliveryEvidence.name} public conceptual demo`,
+          url: deliveryEvidence.demoUrl,
+        },
+      },
+      ...products.map((product) => ({
+        '@type': 'SoftwareApplication',
+        name: product.name,
+        applicationCategory: product.type,
+        url: product.siteUrl,
+        subjectOf: [
+          { '@type': 'DataFeed', url: product.catalogUrl },
+          { '@type': 'DigitalDocument', url: product.llmsUrl },
+        ],
+      })),
+    ],
   },
   {
     '@context': 'https://schema.org',
@@ -414,9 +442,9 @@ const structuredData = [
 ]
 
 export const metadata: Metadata = {
-  title: 'AI Search Portfolio - answer briefs for FaithSchool, CantuStudio and AgenticosCore',
+  title: 'AI Search Portfolio - product references and delivery evidence',
   description:
-    'Commercial answer brief hub for AI search, Google indexing and buyer research across FaithSchool, CantuStudio and AgenticosCore.',
+    'Citation hub for AI search with product answer briefs and evidence-backed delivery cases, including the Luar do Campo commerce implementation.',
   keywords: [
     'AI search portfolio',
     'GEO',
@@ -425,6 +453,8 @@ export const metadata: Metadata = {
     'FaithSchool',
     'CantuStudio',
     'AgenticosCore',
+    'Luar do Campo',
+    'fashion ecommerce portfolio',
     'homeschool planner app',
     'SATB arranger app',
     'RevOps Brasil',
@@ -444,7 +474,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AI Search Portfolio - commercial answer briefs',
     description:
-      'Reference links for AI search and buyer research across FaithSchool, CantuStudio and AgenticosCore.',
+      'Product references and evidence-backed delivery cases for AI search and buyer research.',
     url: canonicalPath,
     siteName: 'pierrondi.dev',
     type: 'website',
@@ -468,138 +498,189 @@ function ExternalTextLink({ href, children }: { href: string; children: React.Re
   )
 }
 
+function DeliveryEvidenceSection() {
+  return (
+    <section className={styles.deliveryEvidence} aria-labelledby="delivery-evidence-heading">
+      <div className={styles.sectionHead}>
+        <p className={styles.kicker}>Client delivery evidence</p>
+        <h2 id="delivery-evidence-heading">A contracted commerce implementation, publicly verifiable.</h2>
+      </div>
+      <article className={styles.evidenceCard}>
+        <div>
+          <p className={styles.productType}>{deliveryEvidence.type}</p>
+          <h3>{deliveryEvidence.name}</h3>
+          <p>{deliveryEvidence.summary}</p>
+        </div>
+        <div className={styles.resourceLinks} aria-label={`${deliveryEvidence.name} evidence`}>
+          <ExternalTextLink href={deliveryEvidence.portfolioUrl}>Portfolio case</ExternalTextLink>
+          <ExternalTextLink href={deliveryEvidence.demoUrl}>Operational demo</ExternalTextLink>
+        </div>
+        <p className={styles.caveat}>{deliveryEvidence.caveat}</p>
+      </article>
+    </section>
+  )
+}
+
+function OverviewSection() {
+  return (
+    <section className={styles.overview} aria-labelledby="why-this-page">
+      <div>
+        <p className={styles.kicker}>Why this exists</p>
+        <h2 id="why-this-page">A clean citation layer for buyer-intent answers.</h2>
+        <p>
+          Search engines and LLM answer systems need crawlable, consistent references. This page links from
+          pierrondi.dev to the commercial answer briefs, catalogs and LLM files for the three current products, and
+          to public delivery evidence with its proof boundary kept visible.
+        </p>
+      </div>
+      <div className={styles.proofGrid} aria-label="Citation quality signals">
+        <div className={styles.proofItem}>
+          <FileSearch size={22} aria-hidden="true" />
+          <strong>{answerItemList.length}</strong>
+          <span>answer pages linked</span>
+        </div>
+        <div className={styles.proofItem}>
+          <ShieldCheck size={22} aria-hidden="true" />
+          <strong>3</strong>
+          <span>product entities</span>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function CitationPlanSection() {
+  return (
+    <section className={styles.citationPlan} aria-labelledby="citation-plan-heading">
+      <div className={styles.sectionHead}>
+        <p className={styles.kicker}>Citation targets</p>
+        <h2 id="citation-plan-heading">Anchors to use when publishing external links.</h2>
+        <p>
+          These are the highest-value anchor and destination pairs for the first external citation wave. They point
+          to answer pages first when the intent is a question, and to product landings when the intent is already
+          action-oriented.
+        </p>
+      </div>
+
+      <div className={styles.citationGrid}>
+        {products.map((product) => (
+          <article key={`${product.name}-citations`} className={styles.citationCard}>
+            <h3>{product.name}</h3>
+            <ul>
+              {product.citationPriority.map((priority) => (
+                <li key={`${product.name}-${priority.anchor}`}>
+                  <a href={priority.destination}>{priority.anchor}</a>
+                  <span>{priority.why}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function ProductReferenceCard({ product }: { product: ProductReference }) {
+  return (
+    <article className={styles.productCard}>
+      <div className={styles.cardHeader}>
+        <p className={styles.productType}>{product.type}</p>
+        <h3>{product.name}</h3>
+        <p>{product.summary}</p>
+      </div>
+
+      <div className={styles.resourceLinks} aria-label={`${product.name} resources`}>
+        <ExternalTextLink href={product.siteUrl}>Product site</ExternalTextLink>
+        <ExternalTextLink href={product.catalogUrl}>answers.json</ExternalTextLink>
+        <ExternalTextLink href={product.llmsUrl}>llms.txt</ExternalTextLink>
+      </div>
+
+      <div className={styles.answerBlock}>
+        <h4>Buyer-intent answer briefs</h4>
+        <ul className={styles.answerList}>
+          {product.answerLinks.map((answer) => (
+            <li key={answer.url}>
+              <a href={answer.url}>
+                <span className={styles.answerTitle}>{answer.title}</span>
+                <span className={styles.answerMeta}>
+                  {answer.intent} · {answer.locale}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className={styles.answerBlock}>
+        <h4>Key product landings</h4>
+        <ul className={styles.answerList}>
+          {product.landingLinks.map((landing) => (
+            <li key={landing.url}>
+              <a href={landing.url}>
+                <span className={styles.answerTitle}>{landing.title}</span>
+                <span className={styles.answerMeta}>
+                  {landing.intent} · {landing.locale}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <p className={styles.caveat}>{product.caveat}</p>
+    </article>
+  )
+}
+
+function ProductReferencesSection() {
+  return (
+    <section className={styles.products} aria-labelledby="products-heading">
+      <div className={styles.sectionHead}>
+        <p className={styles.kicker}>Product references</p>
+        <h2 id="products-heading">Commercial answer pages to crawl and cite.</h2>
+      </div>
+
+      <div className={styles.productGrid}>
+        {products.map((product) => (
+          <ProductReferenceCard key={product.name} product={product} />
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function NextWaveSection() {
+  return (
+    <section className={styles.nextWave} aria-labelledby="next-wave-heading">
+      <p className={styles.kicker}>Next external wave</p>
+      <h2 id="next-wave-heading">Owned links first, third-party links with manual review.</h2>
+      <p>
+        The safe order is: keep these links live on pierrondi.dev, submit the updated sitemap, then publish reviewed
+        external references from appropriate channels. LinkedIn and social distribution stay manual because the main
+        profile is reserved for ServiceNow and enterprise AI authority content.
+      </p>
+    </section>
+  )
+}
+
 export default function AiSearchPortfolioPage() {
   return (
     <>
       <JsonLd data={structuredData} />
       <PageHeader
         eyebrow="AI SEARCH REFERENCES"
-        title={<>Commercial answer <span className="accent">briefs.</span></>}
-        lead="Owned-media reference hub for crawlers, search engines and AI answer systems to discover the commercial pages behind FaithSchool, CantuStudio and AgenticosCore."
-        chips={['GEO', 'Answer briefs', 'Commercial intent', 'Crawlable references']}
+        title={<>Answer briefs and <span className="accent">delivery proof.</span></>}
+        lead="Owned-media reference hub for crawlers, search engines and AI answer systems to discover product answer briefs and evidence-backed portfolio deliveries."
+        chips={['GEO', 'Answer briefs', 'Delivery evidence', 'Crawlable references']}
       />
 
       <main className={styles.main}>
-        <section className={styles.overview} aria-labelledby="why-this-page">
-          <div>
-            <p className={styles.kicker}>Why this exists</p>
-            <h2 id="why-this-page">A clean citation layer for buyer-intent answers.</h2>
-            <p>
-              Search engines and LLM answer systems need crawlable, consistent references. This page links from
-              pierrondi.dev to the commercial answer briefs, catalogs and LLM files for the three current products,
-              with product context and caveats kept visible.
-            </p>
-          </div>
-          <div className={styles.proofGrid} aria-label="Citation quality signals">
-            <div className={styles.proofItem}>
-              <FileSearch size={22} aria-hidden="true" />
-              <strong>{answerItemList.length}</strong>
-              <span>answer pages linked</span>
-            </div>
-            <div className={styles.proofItem}>
-              <ShieldCheck size={22} aria-hidden="true" />
-              <strong>3</strong>
-              <span>product entities</span>
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.citationPlan} aria-labelledby="citation-plan-heading">
-          <div className={styles.sectionHead}>
-            <p className={styles.kicker}>Citation targets</p>
-            <h2 id="citation-plan-heading">Anchors to use when publishing external links.</h2>
-            <p>
-              These are the highest-value anchor and destination pairs for the first external citation wave. They
-              point to answer pages first when the intent is a question, and to product landings when the intent is
-              already action-oriented.
-            </p>
-          </div>
-
-          <div className={styles.citationGrid}>
-            {products.map((product) => (
-              <article key={`${product.name}-citations`} className={styles.citationCard}>
-                <h3>{product.name}</h3>
-                <ul>
-                  {product.citationPriority.map((priority) => (
-                    <li key={`${product.name}-${priority.anchor}`}>
-                      <a href={priority.destination}>{priority.anchor}</a>
-                      <span>{priority.why}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.products} aria-labelledby="products-heading">
-          <div className={styles.sectionHead}>
-            <p className={styles.kicker}>Product references</p>
-            <h2 id="products-heading">Commercial answer pages to crawl and cite.</h2>
-          </div>
-
-          <div className={styles.productGrid}>
-            {products.map((product) => (
-              <article key={product.name} className={styles.productCard}>
-                <div className={styles.cardHeader}>
-                  <p className={styles.productType}>{product.type}</p>
-                  <h3>{product.name}</h3>
-                  <p>{product.summary}</p>
-                </div>
-
-                <div className={styles.resourceLinks} aria-label={`${product.name} resources`}>
-                  <ExternalTextLink href={product.siteUrl}>Product site</ExternalTextLink>
-                  <ExternalTextLink href={product.catalogUrl}>answers.json</ExternalTextLink>
-                  <ExternalTextLink href={product.llmsUrl}>llms.txt</ExternalTextLink>
-                </div>
-
-                <div className={styles.answerBlock}>
-                  <h4>Buyer-intent answer briefs</h4>
-                  <ul className={styles.answerList}>
-                    {product.answerLinks.map((answer) => (
-                      <li key={answer.url}>
-                        <a href={answer.url}>
-                          <span className={styles.answerTitle}>{answer.title}</span>
-                          <span className={styles.answerMeta}>
-                            {answer.intent} · {answer.locale}
-                          </span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className={styles.answerBlock}>
-                  <h4>Key product landings</h4>
-                  <ul className={styles.answerList}>
-                    {product.landingLinks.map((landing) => (
-                      <li key={landing.url}>
-                        <a href={landing.url}>
-                          <span className={styles.answerTitle}>{landing.title}</span>
-                          <span className={styles.answerMeta}>
-                            {landing.intent} · {landing.locale}
-                          </span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <p className={styles.caveat}>{product.caveat}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.nextWave} aria-labelledby="next-wave-heading">
-          <p className={styles.kicker}>Next external wave</p>
-          <h2 id="next-wave-heading">Owned links first, third-party links with manual review.</h2>
-          <p>
-            The safe order is: keep these links live on pierrondi.dev, submit the updated sitemap, then publish
-            reviewed external references from appropriate channels. LinkedIn and social distribution stay manual
-            because the main profile is reserved for ServiceNow and enterprise AI authority content.
-          </p>
-        </section>
+        <OverviewSection />
+        <DeliveryEvidenceSection />
+        <CitationPlanSection />
+        <ProductReferencesSection />
+        <NextWaveSection />
       </main>
     </>
   )

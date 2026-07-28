@@ -7,7 +7,7 @@ import { SITE_URL } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Portfólio de produtos, Studio e sistemas | Paulo Pierrondi',
   description:
-    'Cases de Pierrondi Studio, CantuStudio, FaithSchool, 21 apps, CRM, automação, AgenticosCore e SADA — estratégia, arquitetura e execução ponta a ponta.',
+    'Cases de Pierrondi Studio, Luar do Campo, CantuStudio, FaithSchool, 21 apps, CRM, automação, AgenticosCore e SADA — estratégia, arquitetura e execução ponta a ponta.',
   alternates: {
     canonical: '/portfolio',
     languages: { 'pt-BR': '/portfolio', 'en-US': '/en/portfolio', 'x-default': '/portfolio' },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Portfólio de IA, apps e sistemas | Paulo Pierrondi',
-    description: 'Pierrondi Studio, CantuStudio, FaithSchool, apps publicados, CRM, AgenticosCore e SADA.',
+    description: 'Pierrondi Studio, Luar do Campo, CantuStudio, FaithSchool, apps publicados, CRM, AgenticosCore e SADA.',
     images: ['/og'],
   },
 }

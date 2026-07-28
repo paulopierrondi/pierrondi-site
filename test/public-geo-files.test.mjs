@@ -59,6 +59,28 @@ test('public GEO files advertise /ai-search as the canonical hub', () => {
   }
 })
 
+test('Luar do Campo delivery evidence stays aligned across public AI surfaces', () => {
+  const publicSurfaces = [
+    ['ai-search page', aiSearchPage],
+    ['llms.txt', llmsText],
+    ['llms-full.txt', llmsFullText],
+    ['geo.md', geoText],
+    ['answers.json', JSON.stringify(answersJson)],
+  ]
+
+  for (const [name, body] of publicSurfaces) {
+    assert.match(body, /Luar do Campo/, `${name} should name the public conceptual demo`)
+    assert.match(body, /luar-do-campo-demo\.vercel\.app/, `${name} should cite the operational demo`)
+  }
+
+  const project = answersJson.projectGraph.find((item) => item.name === 'Luar do Campo')
+  assert.ok(project)
+  assert.equal(project.url, 'https://www.pierrondi.dev/portfolio#luar-do-campo')
+  assert.equal(project.demoUrl, 'https://luar-do-campo-demo.vercel.app')
+  assert.match(project.description, /Successfully delivered by Paulo Pierrondi/i)
+  assert.doesNotMatch(project.description, /revenue|conversion|sales generated|production client store/i)
+})
+
 test('product answer-brief citations are identical across hub page, llms.txt and answers.json', () => {
   // The /ai-search page, llms.txt and answers.json are three owned-media
   // surfaces that must cite the SAME set of commercial answer pages per product.

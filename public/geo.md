@@ -1,6 +1,6 @@
 # Paulo Pierrondi — GEO Fact Sheet
 
-> Canonical: https://www.pierrondi.dev · Language: en-US / pt-BR · Last updated: 2026-07-14
+> Canonical: https://www.pierrondi.dev · Language: en-US / pt-BR · Last updated: 2026-07-28
 
 ## What this is (canonical entity)
 
@@ -35,7 +35,7 @@ Paulo Pierrondi is a Technical Account Executive at ServiceNow, AI/Automation Ar
 Paulo brings 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated operating models. He works as a Technical Account Executive at ServiceNow and previously held Principal Solution Architect roles at Oracle Digital and Novartis. His personal portfolio connects enterprise architecture, governed AI-agent implementation and hands-on full-stack product engineering.
 
 ### What does Paulo build?
-Paulo builds and operates a governed multi-agent implementation system for ServiceNow work, coordinating specialist agents across discovery, backlog triage, architecture, IRM/ITOM planning, QA, governance review, evidence capture and executive handoff. He develops reusable AI/automation assets around CSDM data quality, agentic coding, multi-model routing, implementation reporting and operational governance, plus LLM-assisted workflows for executive content generation, research synthesis, product prototyping and delivery automation using GPT and Claude — with role separation, human approval gates and reusable runbooks. His hands-on portfolio is at pierrondi.dev.
+Paulo builds and operates a governed multi-agent implementation system for ServiceNow work, coordinating specialist agents across discovery, backlog triage, architecture, IRM/ITOM planning, QA, governance review, evidence capture and executive handoff. He also ships web, mobile and commerce products; the client-contracted Luar do Campo women's fashion commerce implementation is public as an operational conceptual demo. His hands-on portfolio is at pierrondi.dev.
 
 ### Where is Paulo based, and is he open to relocation?
 Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a Portuguese citizen with EU work authorization and needs no visa sponsorship for Portugal/EU roles. For U.S. roles he is not currently authorized to work in the United States and requires employer-supported visa/sponsorship, an internal transfer path, or a contractor-to-US conversion path. He is open to U.S. relocation for the right senior AI, agents or GTM role, and to periodic U.S. onsite while relocation is arranged.
@@ -60,11 +60,22 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - CSDM/FSDM Validator — ServiceNow data-quality/FSO readiness analyzer — https://www.pierrondi.dev/#projects
 - pierrondi.dev — this platform: portfolio + AI-search hub + GEO/SEO automation — https://www.pierrondi.dev
 - Pierrondi Studio — strategy, brand, multimedia content, CRM and AI automation — https://www.pierrondi.dev/studio
+- Luar do Campo — client-contracted women's fashion commerce implementation successfully delivered as an operational public conceptual demo — https://www.pierrondi.dev/portfolio#luar-do-campo
 - SADA — ServiceNow AI-Driven Architecture framework developed by Paulo Pierrondi — https://www.pierrondi.dev/feitos/sada-servicenow
 - CantuStudio — AI SATB arrangement product — https://cantustudio.app
 - FaithSchool — education product for web and iOS, with Android distribution packages — https://faithschool.app
 - Kommo + WhatsApp and protected Studio CRM cases — https://www.pierrondi.dev/portfolio#kommo-whatsapp
 - AgenticosCore — Revenue OS — https://agenticoscore.ai
+
+## Client delivery evidence
+
+### Luar do Campo
+
+Luar do Campo is a client-contracted women's fashion commerce implementation successfully delivered by Paulo Pierrondi as an operational public conceptual demo. It includes a 50-product catalog, size/color variants, search and filters, wishlist, cart, demonstrative checkout, customer account, local inventory reservation and an administrative order queue.
+
+- Portfolio evidence: https://www.pierrondi.dev/portfolio#luar-do-campo
+- Public demo: https://luar-do-campo-demo.vercel.app
+- Evidence boundary: the client remains confidential; Luar do Campo is the conceptual public demo identity. Payments, freight, ERP, analytics and messaging providers are simulated, and no sales or conversion result is claimed.
 
 ## Verified App Store portfolio
 

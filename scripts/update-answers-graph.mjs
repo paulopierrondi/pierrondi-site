@@ -1,9 +1,9 @@
 // Sync public/answers.json with the live app catalog and flagship projects.
 //
 // - entity: adds sameAs + logo (idempotent)
-// - projectGraph: the 6 flagship projects from the homepage
-// - appsPortfolio: every app in app/apps/[slug]/_apps.ts, with official icon
-//   URLs from public/app-icons/manifest.json when available
+// - projectGraph: flagship projects and evidence-backed public portfolio cases
+// - appsPortfolio: only apps in the verified public App Store catalog, with
+//   official App Store and icon URLs
 // - lastUpdated: bumped to today (UTC date)
 //
 // Run: node scripts/update-answers-graph.mjs
@@ -13,8 +13,7 @@ import path from 'node:path'
 
 const ROOT = new URL('..', import.meta.url).pathname
 const ANSWERS = path.join(ROOT, 'public/answers.json')
-const APPS_TS = path.join(ROOT, 'app/apps/[slug]/_apps.ts')
-const MANIFEST = path.join(ROOT, 'public/app-icons/manifest.json')
+const APP_STORE_CATALOG = path.join(ROOT, 'public/app-icons/app-store-catalog.json')
 const SITE = 'https://www.pierrondi.dev'
 
 const FLAGSHIP_PROJECTS = [
@@ -48,9 +47,27 @@ const FLAGSHIP_PROJECTS = [
     relationship: 'flagship project',
   },
   {
+    name: 'Pierrondi Studio',
+    category: 'Brand, content and AI growth systems',
+    description:
+      'Author-led practice combining positioning, brand systems, multimedia content, CRM and AI automation with explicit human handoffs and a five-stage implementation method.',
+    url: `${SITE}/studio`,
+    relationship: 'author-led portfolio practice',
+  },
+  {
+    name: 'Luar do Campo',
+    category: "Client-contracted women's fashion commerce implementation",
+    description:
+      'Successfully delivered by Paulo Pierrondi as an operational public conceptual demo with a 50-product catalog, size/color variants, search and filters, wishlist, cart, demonstrative checkout, customer account, local inventory reservation and an administrative order queue.',
+    url: `${SITE}/portfolio#luar-do-campo`,
+    demoUrl: 'https://luar-do-campo-demo.vercel.app',
+    relationship: 'confidential client delivery represented by a public conceptual demo',
+  },
+  {
     name: 'SADA',
     category: 'Enterprise AI operating-model framework',
-    description: 'ServiceNow AI-Driven Architecture: a prescriptive value-architecture framework connecting strategy, architecture decisions, workflow execution and measured value.',
+    description:
+      'Framework developed by Paulo Pierrondi: ServiceNow AI-Driven Architecture connects strategy, architecture decisions, workflow execution and measured value.',
     url: `${SITE}/feitos/sada-servicenow`,
     relationship: 'flagship project',
   },
@@ -61,28 +78,42 @@ const FLAGSHIP_PROJECTS = [
     url: 'https://cantustudio.app',
     relationship: 'flagship project',
   },
+  {
+    name: 'FaithSchool',
+    category: 'Education product for web and mobile',
+    description:
+      'Christian homeschool planning and family-record workflow delivered across web and iOS, with Android packages prepared for distribution.',
+    url: 'https://faithschool.app',
+    relationship: 'flagship project',
+  },
+  {
+    name: 'Kommo + WhatsApp',
+    category: 'CRM integration and conversational operations',
+    description:
+      'Controlled Kommo implementation with two operational pipelines, qualification fields, Salesbot routing and documented human handoff.',
+    url: `${SITE}/portfolio#kommo-whatsapp`,
+    relationship: 'protected case study',
+  },
+  {
+    name: 'Studio CRM',
+    category: 'Custom CRM application',
+    description:
+      'Protected CRM system covering clients, projects, contracts, payments and operational activity without exposing private records.',
+    url: `${SITE}/portfolio#studio-crm`,
+    relationship: 'protected case study',
+  },
+  {
+    name: 'AgenticosCore',
+    category: 'Revenue operations system',
+    description: 'Revenue OS connecting diagnosis, scorecard, commercial action plan and operational evidence.',
+    url: 'https://agenticoscore.ai/diagnostico',
+    relationship: 'flagship project',
+  },
 ]
-
-async function parseApps() {
-  const src = await readFile(APPS_TS, 'utf8')
-  const apps = []
-  const entryRe = /^\s{2}(?:'([^']+)'|([A-Za-z0-9_-]+)):\s*\{([\s\S]*?)^\s{2}\},/gm
-  let m
-  while ((m = entryRe.exec(src))) {
-    const slug = m[1] ?? m[2]
-    const body = m[3]
-    const name = body.match(/name:\s*'([^']+)'/)?.[1] ?? slug
-    const category = body.match(/category:\s*'([^']+)'/)?.[1] ?? ''
-    const appStoreUrl = body.match(/appStoreUrl:\s*'([^']+)'/)?.[1]
-    apps.push({ slug, name, category, appStoreUrl })
-  }
-  return apps
-}
 
 async function main() {
   const answers = JSON.parse(await readFile(ANSWERS, 'utf8'))
-  const manifest = JSON.parse(await readFile(MANIFEST, 'utf8'))
-  const apps = await parseApps()
+  const appStoreCatalog = JSON.parse(await readFile(APP_STORE_CATALOG, 'utf8'))
 
   if (answers.entity) {
     answers.entity.sameAs = [
@@ -94,12 +125,12 @@ async function main() {
 
   answers.projectGraph = FLAGSHIP_PROJECTS
 
-  answers.appsPortfolio = apps.map((app) => ({
+  answers.appsPortfolio = appStoreCatalog.apps.map((app) => ({
     name: app.name,
     category: app.category,
     url: `${SITE}/apps/${app.slug}`,
-    ...(app.appStoreUrl ? { appStoreUrl: app.appStoreUrl } : {}),
-    ...(manifest[app.slug] ? { image: `${SITE}/app-icons/${manifest[app.slug].file}` } : {}),
+    appStoreUrl: app.url.replace(/\?uo=4$/, ''),
+    image: `${SITE}${app.icon}`,
   }))
 
   answers.lastUpdated = new Date().toISOString().slice(0, 10)

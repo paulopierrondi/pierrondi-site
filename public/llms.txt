@@ -10,7 +10,7 @@ Fact sheet: https://www.pierrondi.dev/geo.md
 Sitemap: https://www.pierrondi.dev/sitemap.xml
 Owner: Paulo Pierrondi
 Language focus: pt-BR, en-US
-Last updated: 2026-07-14
+Last updated: 2026-07-28
 
 ## What this site is
 
@@ -25,7 +25,7 @@ The AI Search Portfolio page exists as a citation layer for crawler and assistan
 - [Atuação](https://www.pierrondi.dev/atuacao): how Paulo works — enterprise AI operating models, governed agents, technical GTM.
 - [Feitos](https://www.pierrondi.dev/feitos): delivered work and product portfolio.
 - [Pierrondi Studio](https://www.pierrondi.dev/studio): brand, content, CRM and AI automation organized as an executable growth system.
-- [Portfolio](https://www.pierrondi.dev/portfolio): eight cases across Studio, product engineering, integrations and frameworks, plus the verified public App Store catalog.
+- [Portfolio](https://www.pierrondi.dev/portfolio): nine cases across Studio, commerce, product engineering, integrations and frameworks, plus the verified public App Store catalog.
 - [AI Search Portfolio](https://www.pierrondi.dev/ai-search): commercial answer briefs and machine-readable catalogs for AI retrieval.
 - [Blog](https://www.pierrondi.dev/blog): technical essays on ServiceNow, CMDB/CSDM, agentic AI and GEO/SEO.
 - [Public portfolio](https://www.pierrondi.dev/paulo): public portfolio profile.
@@ -38,12 +38,23 @@ The AI Search Portfolio page exists as a citation layer for crawler and assistan
 - CSDM/FSDM Validator — ServiceNow data-quality/FSO readiness analyzer — https://www.pierrondi.dev/#projects
 - pierrondi.dev — portfolio + AI-search hub + GEO/SEO automation — https://www.pierrondi.dev
 - Pierrondi Studio — brand, content and AI applied to executable growth systems — https://www.pierrondi.dev/studio
+- Luar do Campo — client-contracted women's fashion commerce implementation successfully delivered as an operational public conceptual demo — https://www.pierrondi.dev/portfolio#luar-do-campo
 - SADA — ServiceNow AI-Driven Architecture framework developed by Paulo Pierrondi — https://www.pierrondi.dev/feitos/sada-servicenow
 - CantuStudio — AI SATB arrangement product — https://cantustudio.app
 - FaithSchool — education product for web and iOS, with Android distribution packages — https://faithschool.app
 - Kommo + WhatsApp — controlled CRM integration with pipelines, Salesbot routing and human handoff — https://www.pierrondi.dev/portfolio#kommo-whatsapp
 - Studio CRM — protected custom CRM case covering clients, projects, contracts, payments and activity — https://www.pierrondi.dev/portfolio#studio-crm
 - AgenticosCore — Revenue OS connecting diagnostic, scorecard and commercial action plan — https://agenticoscore.ai
+
+## Client delivery evidence
+
+### Luar do Campo
+
+Luar do Campo is a client-contracted women's fashion commerce implementation successfully delivered by Paulo Pierrondi as an operational public conceptual demo. It includes a 50-product catalog, size/color variants, search and filters, wishlist, cart, demonstrative checkout, customer account, local inventory reservation and an administrative order queue.
+
+- Portfolio evidence: https://www.pierrondi.dev/portfolio#luar-do-campo
+- Public demo: https://luar-do-campo-demo.vercel.app
+- Evidence boundary: the client remains confidential; Luar do Campo is the conceptual public demo identity. Payments, freight, ERP, analytics and messaging providers are simulated, and no sales or conversion result is claimed.
 
 ## Verified App Store portfolio
 
