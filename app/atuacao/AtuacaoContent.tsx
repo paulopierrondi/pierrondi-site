@@ -14,7 +14,13 @@ interface Service {
   items: Array<{ k: string; t: string }>
 }
 
-const copy: Record<AtuacaoLang, { header: { eyebrow: string; title: React.ReactNode; lead: string; chips: string[] }; final: { h2: string; p: string; cta: string } }> = {
+const copy: Record<
+  AtuacaoLang,
+  {
+    header: { eyebrow: string; title: React.ReactNode; lead: string; chips: string[] }
+    final: { h2: string; p: string; cta: string; trainingCta: string; trainingHref: string }
+  }
+> = {
   pt: {
     header: {
       eyebrow: 'ATUAÇÃO',
@@ -24,8 +30,10 @@ const copy: Record<AtuacaoLang, { header: { eyebrow: string; title: React.ReactN
     },
     final: {
       h2: 'Quer ver aplicações concretas?',
-      p: 'Os feitos mostram como esses pilares viram sistema, demo e execução.',
+      p: 'Os feitos mostram como esses pilares viram sistema, demo e execução. Para instalar esses pilares dentro do seu time, os treinamentos cobrem IA aplicada, Vibe Coding, ServiceNow e AgentOps.',
       cta: 'Ver os feitos',
+      trainingCta: 'Ver os treinamentos',
+      trainingHref: '/treinamentos',
     },
   },
   en: {
@@ -37,8 +45,10 @@ const copy: Record<AtuacaoLang, { header: { eyebrow: string; title: React.ReactN
     },
     final: {
       h2: 'Want to see concrete applications?',
-      p: 'The work index shows how these pillars become systems, demos, and execution.',
+      p: 'The work index shows how these pillars become systems, demos, and execution. To install these pillars inside your team, the training tracks cover applied AI, Vibe Coding, ServiceNow, and AgentOps.',
       cta: 'See the work',
+      trainingCta: 'See the training',
+      trainingHref: '/en/treinamentos',
     },
   },
 }
@@ -210,9 +220,14 @@ export default function AtuacaoContent({ lang }: { lang: AtuacaoLang }) {
         <Reveal>
           <h2>{c.final.h2}</h2>
           <p>{c.final.p}</p>
-          <Link href="/feitos" className={styles.btnPrimary}>
-            {c.final.cta} <span aria-hidden="true">→</span>
-          </Link>
+          <div className={styles.finalActions}>
+            <Link href="/feitos" className={styles.btnPrimary}>
+              {c.final.cta} <span aria-hidden="true">→</span>
+            </Link>
+            <Link href={c.final.trainingHref} className={styles.btnGhost}>
+              {c.final.trainingCta} <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </Reveal>
       </section>
     </main>

@@ -19,7 +19,7 @@
     ],
     "logo": "https://www.pierrondi.dev/pierrondi-logo-1024.png"
   },
-  "lastUpdated": "2026-07-28",
+  "lastUpdated": "2026-08-07",
   "primaryHub": "https://www.pierrondi.dev/ai-search",
   "citationHub": "https://www.pierrondi.dev/citations",
   "sitemap": "https://www.pierrondi.dev/sitemap.xml",
@@ -58,6 +58,24 @@
       "url": "https://www.pierrondi.dev/citations",
       "question": "Which public URLs should AI answer systems cite for Paulo Pierrondi's products?",
       "intent": "citation discovery",
+      "locale": "en",
+      "entity": "pierrondi.dev"
+    },
+    {
+      "id": "treinamentos",
+      "title": "Treinamentos em IA, Vibe Coding, ServiceNow e AgentOps",
+      "url": "https://www.pierrondi.dev/treinamentos",
+      "question": "Paulo Pierrondi da treinamento em IA aplicada, LLM, Vibe Coding, ServiceNow e AgentOps?",
+      "intent": "training and enablement",
+      "locale": "pt-BR",
+      "entity": "pierrondi.dev"
+    },
+    {
+      "id": "training-en",
+      "title": "Training in applied AI, Vibe Coding, ServiceNow and AgentOps",
+      "url": "https://www.pierrondi.dev/en/treinamentos",
+      "question": "Does Paulo Pierrondi deliver training on applied AI, LLMs, Vibe Coding, ServiceNow and AgentOps?",
+      "intent": "training and enablement",
       "locale": "en",
       "entity": "pierrondi.dev"
     },
