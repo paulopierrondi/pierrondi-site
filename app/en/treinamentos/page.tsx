@@ -6,7 +6,7 @@ import { TREINAMENTOS_COPY } from '@/app/treinamentos/treinamentos-content'
 import { buildTrainingSchema } from '@/app/treinamentos/training-schema'
 
 export const metadata: Metadata = {
-  title: 'Training',
+  title: 'Training in AI, Vibe Coding and ServiceNow',
   description:
     'Training and coaching with Paulo Pierrondi on applied AI, LLMs, Vibe Coding, ServiceNow and AgentOps — hands-on, focused on value and installed capability.',
   alternates: {

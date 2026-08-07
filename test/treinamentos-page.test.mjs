@@ -68,6 +68,50 @@ test('training is reachable from the global nav, footer and sitemap', async () =
   assert.match(sitemap, /path:\s*'\/en\/treinamentos'/)
 })
 
+test('training is published on every machine-readable GEO surface', async () => {
+  const [llms, llmsFull, geo, answersRaw, atuacao] = await Promise.all([
+    read('public/llms.txt'),
+    read('public/llms-full.txt'),
+    read('public/geo.md'),
+    read('public/answers.json'),
+    read('app/atuacao/AtuacaoContent.tsx'),
+  ])
+  const answers = JSON.parse(answersRaw)
+
+  for (const [name, body] of [['llms.txt', llms], ['llms-full.txt', llmsFull], ['geo.md', geo]]) {
+    assert.match(body, /https:\/\/www\.pierrondi\.dev\/treinamentos/, `${name} must advertise the training page`)
+  }
+
+  const trainingDocs = answers.answerDocs.filter((doc) => doc.url.includes('/treinamentos'))
+  assert.equal(trainingDocs.length, 2, 'answers.json must expose the PT and EN training briefs')
+  assert.deepEqual(trainingDocs.map((doc) => doc.locale).sort(), ['en', 'pt-BR'])
+
+  // A contextual in-content link from the closest topic page is a stronger
+  // relevance signal than the nav/footer boilerplate that every page carries.
+  assert.match(atuacao, /trainingHref: '\/treinamentos'/)
+  assert.match(atuacao, /trainingHref: '\/en\/treinamentos'/)
+})
+
+test('training titles carry the query terms instead of a bare label', async () => {
+  const [ptPage, enPage] = await Promise.all([
+    read('app/treinamentos/page.tsx'),
+    read('app/en/treinamentos/page.tsx'),
+  ])
+
+  assert.match(ptPage, /title: 'Treinamentos em IA, Vibe Coding e ServiceNow'/)
+  assert.match(enPage, /title: 'Training in AI, Vibe Coding and ServiceNow'/)
+
+  // Rendered as `%s | pierrondi.dev`; keep the full title inside the SERP budget.
+  for (const title of ['Treinamentos em IA, Vibe Coding e ServiceNow', 'Training in AI, Vibe Coding and ServiceNow']) {
+    assert.ok(`${title} | pierrondi.dev`.length <= 62, `title too long: ${title}`)
+  }
+
+  for (const source of [ptPage, enPage]) {
+    const description = source.match(/description:\s*\n?\s*'([^']+)'/)[1]
+    assert.ok(description.length >= 120 && description.length <= 160, `description length off: ${description.length}`)
+  }
+})
+
 test('the language switcher maps both training routes explicitly', async () => {
   const siteLanguage = await read('lib/i18n/site-language.ts')
   const { resolveLocalizedPath } = await import('../lib/i18n/site-language.ts')

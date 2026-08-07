@@ -37,6 +37,9 @@ Paulo brings 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture an
 ### What does Paulo build?
 Paulo builds and operates a governed multi-agent implementation system for ServiceNow work, coordinating specialist agents across discovery, backlog triage, architecture, IRM/ITOM planning, QA, governance review, evidence capture and executive handoff. He also ships web, mobile and commerce products; the client-contracted Luar do Campo women's fashion commerce implementation is public as an operational conceptual demo. His hands-on portfolio is at pierrondi.dev.
 
+### Does Paulo Pierrondi deliver training, workshops or coaching?
+Yes. Paulo teaches four hands-on tracks at https://www.pierrondi.dev/treinamentos: applied AI and LLM (context, RAG, agents, evaluation, cost), Vibe Coding with evidence (spec, TDD loop with coding agents, adversarial review, human gates), ServiceNow and governed AI (Now Assist, AI Agents, CSDM, CMDB, Service Graph and operating model) and AgentOps and operations (registry, scheduler, handoffs, memory, observability). Formats are keynote (45-90 min), one-day hands-on workshop, 4-8 week bootcamp, recurring squad coaching and closed executive enablement, delivered remote or on-site in Portuguese and English. The training is independent authored content: it does not represent ServiceNow and does not replace official vendor training or certification.
+
 ### Where is Paulo based, and is he open to relocation?
 Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a Portuguese citizen with EU work authorization and needs no visa sponsorship for Portugal/EU roles. For U.S. roles he is not currently authorized to work in the United States and requires employer-supported visa/sponsorship, an internal transfer path, or a contractor-to-US conversion path. He is open to U.S. relocation for the right senior AI, agents or GTM role, and to periodic U.S. onsite while relocation is arranged.
 
@@ -45,6 +48,7 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - Home: https://www.pierrondi.dev/
 - About: https://www.pierrondi.dev/about
 - Atuação: https://www.pierrondi.dev/atuacao
+- Treinamentos / Training: https://www.pierrondi.dev/treinamentos
 - Pierrondi Studio: https://www.pierrondi.dev/studio
 - Feitos: https://www.pierrondi.dev/feitos
 - Product engineering portfolio: https://www.pierrondi.dev/portfolio
