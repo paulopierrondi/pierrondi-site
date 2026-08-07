@@ -1,7 +1,15 @@
 import type { HomeLang } from '@/lib/i18n/site-language'
 import type { SectionId } from '@/components/home-v2/types'
 
-export type PublicNavKey = 'bio' | 'work' | 'studio' | 'portfolio' | 'proof' | 'ideas' | 'contact'
+export type PublicNavKey =
+  | 'bio'
+  | 'work'
+  | 'training'
+  | 'studio'
+  | 'portfolio'
+  | 'proof'
+  | 'ideas'
+  | 'contact'
 
 export interface PublicNavLink {
   key: PublicNavKey
@@ -29,6 +37,7 @@ export const PUBLIC_NAV_COPY: Record<HomeLang, PublicNavCopy> = {
     links: [
       { key: 'bio', label: 'Bio', href: '/about', homeSection: 'about' },
       { key: 'work', label: 'Atuação', href: '/atuacao', homeSection: 'skills' },
+      { key: 'training', label: 'Treinamentos', href: '/treinamentos' },
       { key: 'studio', label: 'Studio', href: '/studio' },
       { key: 'portfolio', label: 'Portfólio', href: '/portfolio', homeSection: 'projects' },
       { key: 'proof', label: 'Feitos', href: '/feitos' },
@@ -45,6 +54,7 @@ export const PUBLIC_NAV_COPY: Record<HomeLang, PublicNavCopy> = {
     links: [
       { key: 'bio', label: 'About', href: '/en/about', homeSection: 'about' },
       { key: 'work', label: 'Work', href: '/en/atuacao', homeSection: 'skills' },
+      { key: 'training', label: 'Training', href: '/en/treinamentos' },
       { key: 'studio', label: 'Studio', href: '/en/studio' },
       { key: 'portfolio', label: 'Portfolio', href: '/en/portfolio', homeSection: 'projects' },
       { key: 'proof', label: 'Proof', href: '/en/feitos' },
