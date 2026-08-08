@@ -1666,6 +1666,12 @@
   font: 600 14px/1.2 var(--font-sans, ui-sans-serif, sans-serif);
 }
 
+.catalogSearch input::-webkit-search-cancel-button,
+.catalogSearch input::-webkit-search-decoration {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 .catalogSearch input::placeholder {
   color: rgba(255, 255, 255, 0.32);
 }

@@ -74,6 +74,14 @@ test('catalog search corpus includes both locales and EN internal links stay loc
   assert.equal(resolvePortfolioHref({ href: '/feitos/llm-inferencia' }, 'en'), '/en/feitos')
 })
 
+test('catalog search exposes only the designed clear control', () => {
+  const css = readFileSync(
+    new URL('../components/portfolio/PortfolioExperience.module.css', import.meta.url),
+    'utf8',
+  )
+  assert.match(css, /input::\-webkit-search-cancel-button[\s\S]*appearance:\s*none/)
+})
+
 test('machine-readable portfolio totals stay aligned with the typed catalog', () => {
   const answers = JSON.parse(readFileSync(new URL('../public/answers.json', import.meta.url), 'utf8'))
   const surfaces = ['llms.txt', 'llms-full.txt', 'geo.md'].map((name) =>
