@@ -345,6 +345,29 @@ const products: ProductReference[] = [
   },
 ]
 
+// Answer briefs hosted on pierrondi.dev itself, so answer engines can cite this
+// domain for the concepts and the entity — not only the product sites.
+const ownAnswers: AnswerLink[] = [
+  {
+    title: 'O que é AgentOps (operações agênticas)?',
+    url: '/answers/o-que-e-agentops',
+    intent: 'concept definition',
+    locale: 'pt-BR',
+  },
+  {
+    title: 'Quem é Paulo Pierrondi?',
+    url: '/answers/quem-e-paulo-pierrondi',
+    intent: 'entity authority',
+    locale: 'pt-BR',
+  },
+  {
+    title: 'O que é o LLM Cost-Cut Audit?',
+    url: '/answers/llm-cost-cut-audit',
+    intent: 'offer-aware search',
+    locale: 'pt-BR',
+  },
+]
+
 const deliveryEvidence = {
   name: 'Luar do Campo',
   type: "Client-contracted women's fashion commerce implementation",
@@ -398,6 +421,7 @@ const structuredData = [
       })),
     },
     significantLink: [
+      ...ownAnswers.map((answer) => `${SITE_URL}${answer.url}`),
       deliveryEvidence.portfolioUrl,
       deliveryEvidence.demoUrl,
       ...products.flatMap((product) =>
@@ -549,6 +573,35 @@ function OverviewSection() {
   )
 }
 
+function OwnAnswersSection() {
+  return (
+    <section className={styles.citationPlan} aria-labelledby="own-answers-heading">
+      <div className={styles.sectionHead}>
+        <p className={styles.kicker}>pierrondi.dev answer briefs</p>
+        <h2 id="own-answers-heading">Own-domain answers for AI citation.</h2>
+        <p>
+          These briefs live on pierrondi.dev itself, with question-form titles, direct answers and
+          Question/FAQPage structured data, so answer engines can cite this domain for the concepts and the
+          entity behind the portfolio.
+        </p>
+      </div>
+
+      <ul className={styles.answerList}>
+        {ownAnswers.map((answer) => (
+          <li key={answer.url}>
+            <a href={answer.url}>
+              <span className={styles.answerTitle}>{answer.title}</span>
+              <span className={styles.answerMeta}>
+                {answer.intent} · {answer.locale}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
 function CitationPlanSection() {
   return (
     <section className={styles.citationPlan} aria-labelledby="citation-plan-heading">
@@ -677,6 +730,7 @@ export default function AiSearchPortfolioPage() {
 
       <main className={styles.main}>
         <OverviewSection />
+        <OwnAnswersSection />
         <DeliveryEvidenceSection />
         <CitationPlanSection />
         <ProductReferencesSection />
