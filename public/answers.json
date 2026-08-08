@@ -80,6 +80,33 @@
       "entity": "pierrondi.dev"
     },
     {
+      "id": "o-que-e-agentops",
+      "title": "O que é AgentOps (operações agênticas)?",
+      "url": "https://www.pierrondi.dev/answers/o-que-e-agentops",
+      "question": "O que é AgentOps (operações agênticas)?",
+      "intent": "concept definition",
+      "locale": "pt-BR",
+      "entity": "pierrondi.dev"
+    },
+    {
+      "id": "quem-e-paulo-pierrondi",
+      "title": "Quem é Paulo Pierrondi?",
+      "url": "https://www.pierrondi.dev/answers/quem-e-paulo-pierrondi",
+      "question": "Quem é Paulo Pierrondi?",
+      "intent": "entity authority",
+      "locale": "pt-BR",
+      "entity": "Paulo Pierrondi"
+    },
+    {
+      "id": "llm-cost-cut-audit",
+      "title": "O que é o LLM Cost-Cut Audit?",
+      "url": "https://www.pierrondi.dev/answers/llm-cost-cut-audit",
+      "question": "O que é o LLM Cost-Cut Audit?",
+      "intent": "offer-aware search",
+      "locale": "pt-BR",
+      "entity": "pierrondi.dev"
+    },
+    {
       "id": "faithschool-christian-homeschool-planner",
       "title": "Best Christian homeschool planner for family records",
       "url": "https://faithschool.app/answers/christian-homeschool-planner.md",
