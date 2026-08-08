@@ -263,6 +263,210 @@
   transform: rotate(1.8deg);
 }
 
+.luarStorefront {
+  color: #202117;
+  background: #f6f0e7;
+}
+
+.luarStoreHeader {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(35, 38, 27, 0.14);
+}
+
+.luarStoreHeader > strong {
+  font-family: var(--font-display);
+  font-size: clamp(10px, 1.35vw, 17px);
+  letter-spacing: -0.03em;
+}
+
+.luarStoreHeader > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(32, 33, 23, 0.58);
+  font: 700 clamp(5px, 0.6vw, 8px)/1 var(--font-mono);
+  text-transform: uppercase;
+}
+
+.luarStoreHeader > div i {
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(32, 33, 23, 0.4);
+  border-radius: 50%;
+}
+
+.luarHeroCard {
+  display: grid;
+  min-height: 41%;
+  align-content: end;
+  gap: 5px;
+  padding: clamp(14px, 2vw, 28px);
+  color: #f7f0e4;
+  background:
+    radial-gradient(circle at 78% 20%, rgba(222, 196, 141, 0.28), transparent 25%),
+    linear-gradient(135deg, #74785b, #454b37 52%, #292e22);
+}
+
+.luarHeroCard small,
+.luarHeroCard span {
+  font: 800 clamp(5px, 0.58vw, 8px)/1.2 var(--font-mono);
+  letter-spacing: 0.08em;
+}
+
+.luarHeroCard strong {
+  max-width: 13ch;
+  font-family: var(--font-display);
+  font-size: clamp(14px, 2.15vw, 29px);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+
+.luarHeroCard span {
+  margin-top: 3px;
+  color: rgba(247, 240, 228, 0.72);
+  text-transform: uppercase;
+}
+
+.luarProductRail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px;
+}
+
+.luarProductCard {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.luarProductCard > i {
+  display: block;
+  min-height: clamp(34px, 5.5vw, 74px);
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.42), transparent 42%),
+    #c6b89e;
+}
+
+.luarProductCard > i[data-tone="1"] {
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.4), transparent 42%),
+    #878b70;
+}
+
+.luarProductCard > i[data-tone="2"] {
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.34), transparent 42%),
+    #736454;
+}
+
+.luarProductCard small {
+  color: rgba(32, 33, 23, 0.4);
+  font: 800 5px/1 var(--font-mono);
+}
+
+.luarProductCard strong {
+  overflow: hidden;
+  color: #292b20;
+  font-size: clamp(5px, 0.65vw, 8px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.luarOperations {
+  color: #edf0e7;
+  background:
+    radial-gradient(circle at 85% 0, rgba(216, 188, 129, 0.13), transparent 30%),
+    #11150f;
+}
+
+.luarOpsHeader {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 13px;
+  border-bottom: 1px solid rgba(247, 238, 224, 0.1);
+  font: 800 clamp(5px, 0.58vw, 8px)/1 var(--font-mono);
+  letter-spacing: 0.1em;
+}
+
+.luarOpsHeader i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #8ee6a8;
+  box-shadow: 0 0 12px rgba(142, 230, 168, 0.52);
+}
+
+.luarOpsMetrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 12px;
+  border: 1px solid rgba(247, 238, 224, 0.1);
+}
+
+.luarOpsMetrics > div {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+}
+
+.luarOpsMetrics > div + div {
+  border-left: 1px solid rgba(247, 238, 224, 0.1);
+}
+
+.luarOpsMetrics strong {
+  font-family: var(--font-display);
+  font-size: clamp(13px, 1.8vw, 24px);
+}
+
+.luarOpsMetrics small {
+  color: rgba(247, 238, 224, 0.42);
+  font: 700 5px/1 var(--font-mono);
+  text-transform: uppercase;
+}
+
+.luarOpsQueue {
+  display: grid;
+  gap: 7px;
+  padding: 0 12px 12px;
+}
+
+.luarOpsQueue > div {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 7px;
+  color: rgba(247, 238, 224, 0.52);
+  font: 700 5px/1 var(--font-mono);
+}
+
+.luarOpsQueue i {
+  position: relative;
+  height: 2px;
+  overflow: hidden;
+  background: rgba(247, 238, 224, 0.1);
+}
+
+.luarOpsQueue i::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--queue-width);
+  background: #d8bc81;
+}
+
+.luarOpsQueue small {
+  color: #d8bc81;
+  font: inherit;
+}
+
 .luarProof {
   position: absolute;
   z-index: 7;

@@ -2,10 +2,12 @@
 
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, ArrowRight, ExternalLink, Layers3, MessageSquareMore, Smartphone, Workflow } from 'lucide-react'
+import { ArrowDown, ArrowRight, BrainCircuit, ExternalLink, Globe2, Layers3, Smartphone } from 'lucide-react'
 import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
+import PortfolioAtlas from './PortfolioAtlas'
 import ProjectVisual, { CaseMark } from './ProjectVisual'
 import PortfolioEvidenceMosaic from './PortfolioEvidenceMosaic'
+import { MULTI_LLM_ROSTER, PORTFOLIO_CATALOG, PUBLIC_APP_STORE_APPS } from './portfolio-catalog'
 import {
   APP_STORE_CATALOG,
   PORTFOLIO_CASES,
@@ -16,29 +18,31 @@ import styles from './PortfolioExperience.module.css'
 
 const COPY = {
   pt: {
-    eyebrow: 'PORTFÓLIO DE PRODUTO · ARQUITETURA DE IA · ENGENHARIA',
-    title: <>Produtos e sistemas que provam <em>execução ponta a ponta.</em></>,
-    lead: 'Do framework enterprise ao app publicado: web, iOS, Android, CRM, WhatsApp e automação com identidade, testes, governança e evidência pública.',
-    explore: 'Explorar os cases',
-    casesKicker: 'NOVE PROJETOS / UMA DISCIPLINA DE ENTREGA',
-    casesTitle: 'Cada projeto mostra uma parte diferente do trabalho.',
-    casesLead: 'Produto, mobile, integração, operação e arquitetura — com papel técnico, plataformas e status verificável.',
+    eyebrow: 'PORTFÓLIO TOTAL · PRODUTO · IA · ENGENHARIA',
+    title: <>Tudo o que construí. <em>Organizado para encontrar rápido.</em></>,
+    lead: 'Do framework enterprise ao produto publicado: um catálogo completo de sistemas, apps, sites, automações e operações multi-LLM — além de um capability pack verificável para WordPress e Elementor.',
+    explore: 'Explorar o portfólio',
+    casesKicker: 'CASES EM DESTAQUE · PROFUNDIDADE ANTES DA ESCALA',
+    casesTitle: 'Os projetos que melhor explicam como eu construo.',
+    casesLead: 'Uma leitura editorial dos produtos emblemáticos. O catálogo total, pesquisável e filtrável, vem logo depois.',
     problem: 'O que construí',
     evidence: 'Evidência',
     platforms: 'Plataformas',
     stack: 'Stack e método',
     appsKicker: 'CATÁLOGO PÚBLICO · APP STORE',
-    appsTitle: '21 apps publicados. 21 identidades reais.',
-    appsLead: 'A vitrine abaixo é sincronizada com o storefront público da Apple. Os links e artworks são oficiais; nenhum monograma ou status inventado.',
+    appsTitle: '20 apps independentes. 20 identidades reais.',
+    appsLead: 'A vitrine pública abaixo é sincronizada com o storefront da Apple. Os links e artworks são oficiais; trabalhos enterprise reservados ficam fora desta superfície.',
     appCta: 'Ver na App Store',
     systemKicker: 'CAPACIDADE DE ENGENHARIA',
-    systemTitle: 'Da interface ao pacote de distribuição.',
-    systemLead: 'O portfólio não para no front-end: inclui arquitetura, APIs, persistência, automação, builds mobile e operação protegida.',
+    systemTitle: 'Uma disciplina. Muitas superfícies.',
+    systemLead: 'Do CMS à App Store, do workflow ao multi-LLM: arquitetura, interface, dados, automação, distribuição, governança e handoff.',
     capabilities: [
-      ['Web + produto', 'Next.js, React, APIs, dados e produção', 'WEB'],
-      ['iPhone e iPad', 'Swift, SwiftUI, Capacitor, StoreKit e App Store', 'IOS'],
-      ['Android build', 'Kotlin, Compose, Gradle e pacotes AAB', 'AAB'],
-      ['CRM + WhatsApp', 'Funis, webhooks, Salesbot e handoff humano', 'CRM'],
+      ['Produtos web', 'Next.js, React, APIs, dados, autenticação e operação', 'WEB'],
+      ['Apps & mobile', 'SwiftUI, Capacitor, StoreKit, iOS, iPadOS e Android', 'APP'],
+      ['Multi-LLM & agentes', 'Roteamento, RAG, MCP, evals, cache, fallback e human gates', 'LLM'],
+      ['Automação & CRM', 'n8n, webhooks, filas, WhatsApp, Kommo e observabilidade', 'OPS'],
+      ['WordPress & Elementor', 'Páginas, templates, blogs, formulários, SEO, tracking e handoff', 'CMS'],
+      ['Creative systems', 'Brand OS, conteúdo, slides, áudio, vídeo e design systems', 'LAB'],
     ],
     ctaKicker: 'ARQUITETURA QUE VIRA SOFTWARE',
     ctaTitle: 'Quer conversar sobre um problema técnico real?',
@@ -46,29 +50,31 @@ const COPY = {
     cta: 'Conversar sobre arquitetura e produtos',
   },
   en: {
-    eyebrow: 'PRODUCT PORTFOLIO · AI ARCHITECTURE · ENGINEERING',
-    title: <>Products and systems that prove <em>end-to-end execution.</em></>,
-    lead: 'From enterprise frameworks to published apps: web, iOS, Android, CRM, WhatsApp, and automation with identity, testing, governance, and public evidence.',
-    explore: 'Explore the cases',
-    casesKicker: 'NINE PROJECTS / ONE DELIVERY DISCIPLINE',
-    casesTitle: 'Each project reveals a different part of the work.',
-    casesLead: 'Product, mobile, integration, operations, and architecture — with a clear technical role, platforms, and verifiable status.',
+    eyebrow: 'COMPLETE PORTFOLIO · PRODUCT · AI · ENGINEERING',
+    title: <>Everything I built. <em>Organized for fast discovery.</em></>,
+    lead: 'From enterprise frameworks to shipped products: a complete catalog of systems, apps, websites, automation, and multi-LLM operations—plus a verifiable WordPress and Elementor capability pack.',
+    explore: 'Explore the portfolio',
+    casesKicker: 'FEATURED CASES · DEPTH BEFORE SCALE',
+    casesTitle: 'The projects that best explain how I build.',
+    casesLead: 'An editorial view of the flagship products. The complete searchable, filterable catalog follows next.',
     problem: 'What I built',
     evidence: 'Evidence',
     platforms: 'Platforms',
     stack: 'Stack and method',
     appsKicker: 'PUBLIC CATALOG · APP STORE',
-    appsTitle: '21 published apps. 21 real identities.',
-    appsLead: 'This catalog is synchronized with Apple’s public storefront. Links and artworks are official—no invented monograms or release statuses.',
+    appsTitle: '20 independent apps. 20 real identities.',
+    appsLead: 'This public showcase is synchronized with Apple’s storefront. Links and artworks are official; reserved enterprise work stays off this surface.',
     appCta: 'View on the App Store',
     systemKicker: 'ENGINEERING CAPABILITY',
-    systemTitle: 'From interface to distribution package.',
-    systemLead: 'The portfolio goes beyond front-end work: architecture, APIs, persistence, automation, mobile builds, and protected operations.',
+    systemTitle: 'One discipline. Many surfaces.',
+    systemLead: 'From CMS to App Store and workflow to multi-LLM: architecture, interface, data, automation, distribution, governance, and handoff.',
     capabilities: [
-      ['Web + product', 'Next.js, React, APIs, data, and production', 'WEB'],
-      ['iPhone and iPad', 'Swift, SwiftUI, Capacitor, StoreKit, and App Store', 'IOS'],
-      ['Android build', 'Kotlin, Compose, Gradle, and AAB packages', 'AAB'],
-      ['CRM + WhatsApp', 'Pipelines, webhooks, Salesbot, and human handoff', 'CRM'],
+      ['Web products', 'Next.js, React, APIs, data, authentication, and operations', 'WEB'],
+      ['Apps & mobile', 'SwiftUI, Capacitor, StoreKit, iOS, iPadOS, and Android', 'APP'],
+      ['Multi-LLM & agents', 'Routing, RAG, MCP, evals, cache, fallback, and human gates', 'LLM'],
+      ['Automation & CRM', 'n8n, webhooks, queues, WhatsApp, Kommo, and observability', 'OPS'],
+      ['WordPress & Elementor', 'Pages, templates, blogs, forms, SEO, tracking, and handoff', 'CMS'],
+      ['Creative systems', 'Brand OS, content, slides, audio, video, and design systems', 'LAB'],
     ],
     ctaKicker: 'ARCHITECTURE THAT BECOMES SOFTWARE',
     ctaTitle: 'Want to discuss a real technical problem?',
@@ -116,14 +122,15 @@ export default function PortfolioExperience({ lang }: { lang: PortfolioLang }) {
         </motion.div>
         <PortfolioEvidenceMosaic lang={lang} reduceMotion={reduceMotion} />
         <div className={styles.heroProof}>
-          <span><Smartphone aria-hidden="true" /> App Store</span>
-          <span><Layers3 aria-hidden="true" /> Web · iOS · Android</span>
-          <span><MessageSquareMore aria-hidden="true" /> CRM + WhatsApp</span>
-          <span><Workflow aria-hidden="true" /> Enterprise AI</span>
+          <span><Layers3 aria-hidden="true" /> {PORTFOLIO_CATALOG.length} {lang === 'pt' ? 'entradas' : 'entries'}</span>
+          <span><Smartphone aria-hidden="true" /> {PUBLIC_APP_STORE_APPS.length} App Store</span>
+          <span><BrainCircuit aria-hidden="true" /> {MULTI_LLM_ROSTER.length} Multi-LLM</span>
+          <span><Globe2 aria-hidden="true" /> Web · CMS · Enterprise</span>
         </div>
       </header>
 
       <PortfolioCases lang={lang} cases={cases} t={t} reduceMotion={reduceMotion} />
+      <PortfolioAtlas lang={lang} reduceMotion={reduceMotion} />
       <AppCatalog lang={lang} t={t} reduceMotion={reduceMotion} />
       <Capabilities t={t} reduceMotion={reduceMotion} />
       <PortfolioClosing lang={lang} t={t} />
@@ -150,28 +157,30 @@ function PortfolioCases({
         <span>{t.casesLead}</span>
       </section>
 
-      <nav className={styles.caseIndex} aria-label={lang === 'pt' ? 'Índice de projetos' : 'Project index'}>
-        {cases.map((item) => (
-          <a key={item.id} href={`#${item.id}`}>
-            <CaseMark item={item} size={34} />
-            <span>{item.index}</span>
-            <strong>{item.navLabel}</strong>
-          </a>
-        ))}
-      </nav>
+      <div className={styles.caseCollection}>
+        <nav className={styles.caseIndex} aria-label={lang === 'pt' ? 'Índice de projetos' : 'Project index'}>
+          {cases.map((item) => (
+            <a key={item.id} href={`#${item.id}`}>
+              <CaseMark item={item} size={34} />
+              <span>{item.index}</span>
+              <strong>{item.navLabel}</strong>
+            </a>
+          ))}
+        </nav>
 
-      <div className={styles.caseList}>
-        {cases.map((item, index) => (
-          <PortfolioCaseStudy
-            key={item.id}
-            item={item}
-            index={index}
-            total={cases.length}
-            lang={lang}
-            t={t}
-            reduceMotion={reduceMotion}
-          />
-        ))}
+        <div className={styles.caseList}>
+          {cases.map((item, index) => (
+            <PortfolioCaseStudy
+              key={item.id}
+              item={item}
+              index={index}
+              total={cases.length}
+              lang={lang}
+              t={t}
+              reduceMotion={reduceMotion}
+            />
+          ))}
+        </div>
       </div>
     </>
   )
@@ -275,7 +284,7 @@ function AppCatalog({
           <span>{t.appsLead}</span>
         </header>
         <div className={styles.appsGrid}>
-          {APP_STORE_CATALOG.apps.map((app, index) => (
+          {PUBLIC_APP_STORE_APPS.map((app, index) => (
             <motion.a
               key={app.trackId}
               href={app.url}
@@ -286,7 +295,7 @@ function AppCatalog({
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: reduceMotion ? 0 : 0.36, delay: reduceMotion ? 0 : (index % 5) * 0.035 }}
             >
-              <Image src={app.icon} alt={`Ícone de ${app.name}`} width={72} height={72} />
+              <Image src={app.icon} alt={lang === 'pt' ? `Ícone de ${app.name}` : `Icon for ${app.name}`} width={72} height={72} />
               <span>
                 <strong>{app.name}</strong>
                 <small>{lang === 'pt' ? CATEGORY_PT[app.category] ?? app.category : app.category}</small>
@@ -295,7 +304,7 @@ function AppCatalog({
             </motion.a>
           ))}
         </div>
-        <p className={styles.catalogNote}>Apple developer ID {APP_STORE_CATALOG.developerId} · storefront {APP_STORE_CATALOG.storefront.toUpperCase()} · {APP_STORE_CATALOG.count} apps</p>
+        <p className={styles.catalogNote}>Apple developer ID {APP_STORE_CATALOG.developerId} · storefront {APP_STORE_CATALOG.storefront.toUpperCase()} · {PUBLIC_APP_STORE_APPS.length} {lang === 'pt' ? 'apps independentes exibidos' : 'independent apps shown'}</p>
     </section>
   )
 }

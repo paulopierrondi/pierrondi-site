@@ -8,6 +8,7 @@ const manifest = JSON.parse(await readFile(new URL('public/app-icons/manifest.js
 const portfolioData = await readFile(new URL('components/portfolio/portfolio-data.ts', root), 'utf8')
 const projectVisual = await readFile(new URL('components/portfolio/ProjectVisual.tsx', root), 'utf8')
 const portfolioExperience = await readFile(new URL('components/portfolio/PortfolioExperience.tsx', root), 'utf8')
+const totalCatalog = await readFile(new URL('components/portfolio/portfolio-catalog.ts', root), 'utf8')
 
 test('public App Store portfolio contains the verified 21-app developer catalog', () => {
   assert.equal(catalog.developerId, '1895717587')
@@ -44,9 +45,9 @@ test('Luar do Campo is a localized, evidence-backed confidential client case', a
   assert.equal(portfolioData.match(/href: 'https:\/\/luar-do-campo-demo\.vercel\.app'/g)?.length, 2)
   assert.match(portfolioData, /Projeto contratado por um cliente confidencial/)
   assert.match(portfolioData, /Contracted by a confidential fashion retail client/)
-  assert.match(portfolioData, /identidade conceitual da demo pública/)
-  assert.match(portfolioExperience, /NOVE PROJETOS/)
-  assert.match(portfolioExperience, /NINE PROJECTS/)
+  assert.match(portfolioData, /identidade conceitual pública criada para preservar esse cliente/)
+  assert.match(portfolioExperience, /PORTFÓLIO TOTAL/)
+  assert.match(portfolioExperience, /COMPLETE PORTFOLIO/)
   const localizedCases = portfolioData
     .split("id: 'luar-do-campo'")
     .slice(1)
@@ -56,8 +57,16 @@ test('Luar do Campo is a localized, evidence-backed confidential client case', a
     assert.doesNotMatch(localizedCase, /R\$|receita gerada|revenue generated|conversion uplift|nome do cliente/i)
   }
   assert.match(projectVisual, /visual === 'luar-do-campo'/)
-  await Promise.all([
-    access(new URL('public/portfolio/luar-do-campo/storefront-desktop.png', root)),
-    access(new URL('public/portfolio/luar-do-campo/operations-desktop.png', root)),
-  ])
+  assert.doesNotMatch(projectVisual, /luar-do-campo\/storefront-desktop\.png/)
+  assert.doesNotMatch(projectVisual, /luar-do-campo\/operations-desktop\.png/)
+})
+
+test('portfolio total exposes a searchable bilingual catalog and governed Multi-LLM system', () => {
+  assert.match(portfolioExperience, /PortfolioAtlas/)
+  assert.match(totalCatalog, /WordPress & Elementor Delivery Kit/)
+  assert.match(totalCatalog, /não é apresentado como case de cliente/)
+  for (const model of ['Codex', 'Claude Code', 'Kimi K3', 'DeepSeek V4', 'GLM', 'Grok']) {
+    assert.match(totalCatalog, new RegExp(model))
+  }
+  assert.doesNotMatch(totalCatalog.match(/MULTI_LLM_ROSTER = \[[\s\S]*?\] as const/)?.[0] ?? '', /Qwen|Ornith/)
 })

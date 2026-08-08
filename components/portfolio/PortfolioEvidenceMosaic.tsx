@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import type { PortfolioLang } from './portfolio-data'
-import { APP_STORE_CATALOG } from './portfolio-data'
+import { PUBLIC_APP_STORE_APPS } from './portfolio-data'
 import styles from './PortfolioExperience.module.css'
 
 const EVIDENCE_FRAMES = [
@@ -81,14 +81,14 @@ export default function PortfolioEvidenceMosaic({
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: reduceMotion ? 0 : 0.5, duration: reduceMotion ? 0 : 0.52 }}
       >
-        {APP_STORE_CATALOG.apps.slice(0, 4).map((app) => (
+        {PUBLIC_APP_STORE_APPS.slice(0, 4).map((app) => (
           <Image key={app.trackId} src={app.icon} alt="" width={44} height={44} />
         ))}
       </motion.div>
 
       <div className={styles.evidenceCounter}>
-        <strong>21</strong>
-        <span>{lang === 'pt' ? 'apps públicos' : 'public apps'}</span>
+        <strong>{PUBLIC_APP_STORE_APPS.length}</strong>
+        <span>{lang === 'pt' ? 'apps independentes' : 'independent apps'}</span>
         <small>{lang === 'pt' ? 'prova, não promessa' : 'proof, not promise'}</small>
       </div>
     </div>

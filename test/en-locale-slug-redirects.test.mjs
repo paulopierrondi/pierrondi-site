@@ -54,6 +54,17 @@ test('localized portfolio hub is not shadowed by a redirect', () => {
   )
 })
 
+test('common portfolio misspelling redirects to the canonical localized hubs', () => {
+  assert.match(
+    nextConfig,
+    /source:\s*'\/portifolio',\s*destination:\s*'\/portfolio',\s*permanent:\s*true/,
+  )
+  assert.match(
+    nextConfig,
+    /source:\s*'\/en\/portifolio',\s*destination:\s*'\/en\/portfolio',\s*permanent:\s*true/,
+  )
+})
+
 test('legacy AI search portfolio URLs redirect to canonical AI search hub', () => {
   assert.match(
     nextConfig,

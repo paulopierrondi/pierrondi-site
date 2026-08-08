@@ -8,13 +8,13 @@ import { ArrowRight, Bot, Check, MessageCircleMore, ShieldCheck } from 'lucide-r
 import ProductLogo from '@/components/ProductLogo'
 import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import {
-  APP_STORE_CATALOG,
+  PUBLIC_APP_STORE_APPS,
   type PortfolioCase,
   type PortfolioLang,
 } from './portfolio-data'
 import styles from './ProjectVisual.module.css'
 
-const APP_WALL = APP_STORE_CATALOG.apps.slice(0, 15)
+const APP_WALL = PUBLIC_APP_STORE_APPS.slice(0, 15)
 const StudioGrowthCore = dynamic(() => import('@/components/studio/StudioGrowthCore'), {
   ssr: false,
   loading: () => <div className={styles.studioCoreLoading} aria-hidden="true" />,
@@ -34,7 +34,7 @@ export function CaseMark({ item, size = 42 }: { item: PortfolioCase; size?: numb
   if (item.visual === 'app-store') {
     return (
       <span className={`${styles.caseMark} ${styles.appMark}`} style={{ width: size + 8, height: size }} aria-hidden="true">
-        {APP_STORE_CATALOG.apps.slice(0, 3).map((app, index) => (
+        {PUBLIC_APP_STORE_APPS.slice(0, 3).map((app, index) => (
           <Image
             key={app.trackId}
             src={app.icon}
@@ -116,26 +116,49 @@ function LuarVisual({ lang }: { lang: PortfolioLang }) {
         <span>LUAR</span>
         <small>DO CAMPO</small>
       </div>
-      <div className={`${styles.luarFrame} ${styles.luarStorefront}`}>
-        <Image
-          src="/portfolio/luar-do-campo/storefront-desktop.png"
-          alt={lang === 'pt' ? 'Storefront editorial da Luar do Campo' : 'Luar do Campo editorial storefront'}
-          fill
-          sizes="(max-width: 780px) 72vw, 42vw"
-        />
+      <div className={`${styles.luarFrame} ${styles.luarStorefront}`} aria-hidden="true">
+        <div className={styles.luarStoreHeader}>
+          <strong>Luar do Campo</strong>
+          <div><span>{lang === 'pt' ? 'Novidades' : 'New in'}</span><span>{lang === 'pt' ? 'Coleções' : 'Collections'}</span><i /></div>
+        </div>
+        <div className={styles.luarHeroCard}>
+          <small>{lang === 'pt' ? 'COLEÇÃO ESSENCIAIS' : 'ESSENTIALS COLLECTION'}</small>
+          <strong>{lang === 'pt' ? 'Leveza para todos os dias.' : 'Ease for every day.'}</strong>
+          <span>{lang === 'pt' ? 'Explorar coleção' : 'Explore collection'} →</span>
+        </div>
+        <div className={styles.luarProductRail}>
+          {['01', '02', '03'].map((code, index) => (
+            <div key={code} className={styles.luarProductCard}>
+              <i data-tone={index} />
+              <small>LC · {code}</small>
+              <strong>{lang === 'pt' ? ['Vestido Siena', 'Camisa Aurora', 'Calça Oliva'][index] : ['Siena Dress', 'Aurora Shirt', 'Olive Trousers'][index]}</strong>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className={`${styles.luarFrame} ${styles.luarOperations}`}>
-        <Image
-          src="/portfolio/luar-do-campo/operations-desktop.png"
-          alt={lang === 'pt' ? 'Painel operacional da demo Luar do Campo' : 'Luar do Campo demo operations dashboard'}
-          fill
-          sizes="(max-width: 780px) 40vw, 24vw"
-        />
+      <div className={`${styles.luarFrame} ${styles.luarOperations}`} aria-hidden="true">
+        <div className={styles.luarOpsHeader}>
+          <span>{lang === 'pt' ? 'OPERAÇÃO' : 'OPERATIONS'}</span>
+          <i />
+        </div>
+        <div className={styles.luarOpsMetrics}>
+          <div><strong>12</strong><small>{lang === 'pt' ? 'na fila' : 'in queue'}</small></div>
+          <div><strong>04</strong><small>{lang === 'pt' ? 'separação' : 'packing'}</small></div>
+        </div>
+        <div className={styles.luarOpsQueue}>
+          {['#1048', '#1047', '#1046', '#1045'].map((order, index) => (
+            <div key={order}>
+              <span>{order}</span>
+              <i style={{ '--queue-width': `${84 - index * 13}%` } as CSSProperties} />
+              <small>{index < 2 ? (lang === 'pt' ? 'PRONTO' : 'READY') : (lang === 'pt' ? 'REVISÃO' : 'REVIEW')}</small>
+            </div>
+          ))}
+        </div>
       </div>
       <div className={styles.luarProof}>
         <span>50 {lang === 'pt' ? 'PRODUTOS' : 'PRODUCTS'}</span>
         <span>{lang === 'pt' ? 'PEDIDO → OPERAÇÃO' : 'ORDER → OPERATIONS'}</span>
-        <span>{lang === 'pt' ? 'DEMO AO VIVO' : 'LIVE DEMO'}</span>
+        <span>{lang === 'pt' ? 'PRODUTO FUNCIONAL' : 'FUNCTIONAL PRODUCT'}</span>
       </div>
     </div>
   )
@@ -198,7 +221,7 @@ function AppStoreVisual({ lang, reduceMotion }: { lang: PortfolioLang; reduceMot
       <div className={styles.appStoreHeadline}>
         <span>{lang === 'pt' ? 'PUBLICADOS NA' : 'PUBLISHED ON THE'}</span>
         <strong>App Store</strong>
-        <small>{APP_STORE_CATALOG.count} {lang === 'pt' ? 'apps públicos' : 'public apps'}</small>
+        <small>{PUBLIC_APP_STORE_APPS.length} {lang === 'pt' ? 'apps independentes' : 'independent apps'}</small>
       </div>
       <div className={styles.appWall} aria-hidden="true">
         {APP_WALL.map((app, index) => (

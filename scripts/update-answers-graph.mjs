@@ -15,6 +15,7 @@ const ROOT = new URL('..', import.meta.url).pathname
 const ANSWERS = path.join(ROOT, 'public/answers.json')
 const APP_STORE_CATALOG = path.join(ROOT, 'public/app-icons/app-store-catalog.json')
 const SITE = 'https://www.pierrondi.dev'
+const RESERVED_APP_SLUGS = new Set(['superapp-servicenow'])
 
 const FLAGSHIP_PROJECTS = [
   {
@@ -58,10 +59,10 @@ const FLAGSHIP_PROJECTS = [
     name: 'Luar do Campo',
     category: "Client-contracted women's fashion commerce implementation",
     description:
-      'Successfully delivered by Paulo Pierrondi as an operational public conceptual demo with a 50-product catalog, size/color variants, search and filters, wishlist, cart, demonstrative checkout, customer account, local inventory reservation and an administrative order queue.',
+      'Successfully delivered by Paulo Pierrondi and represented by a public functional storefront with a 50-product catalog, size/color variants, search and filters, wishlist, cart, simulated checkout, customer account, local inventory reservation and an administrative order queue.',
     url: `${SITE}/portfolio#luar-do-campo`,
-    demoUrl: 'https://luar-do-campo-demo.vercel.app',
-    relationship: 'confidential client delivery represented by a public conceptual demo',
+    publicProductUrl: 'https://luar-do-campo-demo.vercel.app',
+    relationship: 'confidential client delivery represented by a public functional storefront',
   },
   {
     name: 'SADA',
@@ -114,6 +115,7 @@ const FLAGSHIP_PROJECTS = [
 async function main() {
   const answers = JSON.parse(await readFile(ANSWERS, 'utf8'))
   const appStoreCatalog = JSON.parse(await readFile(APP_STORE_CATALOG, 'utf8'))
+  const publicApps = appStoreCatalog.apps.filter((app) => !RESERVED_APP_SLUGS.has(app.slug))
 
   if (answers.entity) {
     answers.entity.sameAs = [
@@ -125,7 +127,22 @@ async function main() {
 
   answers.projectGraph = FLAGSHIP_PROJECTS
 
-  answers.appsPortfolio = appStoreCatalog.apps.map((app) => ({
+  answers.appStorePortfolio.publicShowcaseCount = publicApps.length
+  answers.appStorePortfolio.scope =
+    'Apple returned 21 public records at the last verified refresh; the portfolio showcases 20 independent products and excludes reserved enterprise work.'
+
+  answers.portfolioCatalog = {
+    ...answers.portfolioCatalog,
+    canonicalUrl: `${SITE}/portfolio`,
+    publicEntryCount: 77,
+    categoryCount: 8,
+    independentAppShowcaseCount: publicApps.length,
+    multiLlmLaneCount: 6,
+    scope:
+      'Distinct public-safe catalog entries typed by kind, evidence and visibility. Aliases, maintenance branches and reserved client or enterprise work are consolidated or excluded.',
+  }
+
+  answers.appsPortfolio = publicApps.map((app) => ({
     name: app.name,
     category: app.category,
     url: `${SITE}/apps/${app.slug}`,
@@ -137,7 +154,7 @@ async function main() {
 
   await writeFile(ANSWERS, `${JSON.stringify(answers, null, 2)}\n`)
   console.log(
-    `answers.json updated: ${FLAGSHIP_PROJECTS.length} flagship projects, ${answers.appsPortfolio.length} apps, entity sameAs/logo set`,
+    `answers.json updated: ${FLAGSHIP_PROJECTS.length} flagship projects, ${answers.appsPortfolio.length} public-showcase apps, entity sameAs/logo set`,
   )
 }
 

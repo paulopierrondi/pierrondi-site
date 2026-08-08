@@ -33,16 +33,31 @@ test('pierrondi GEO files expose the product portfolio graph', () => {
   assert.equal(answersJson.primaryHub, 'https://www.pierrondi.dev/ai-search')
   assert.ok(answersJson.answerDocs.length >= 10)
   assert.ok(answersJson.ownedSiteGraph.length >= 3)
+  assert.deepEqual(answersJson.portfolioCatalog, {
+    canonicalUrl: 'https://www.pierrondi.dev/portfolio',
+    publicEntryCount: 77,
+    categoryCount: 8,
+    independentAppShowcaseCount: 20,
+    multiLlmLaneCount: 6,
+    scope: 'Distinct public-safe catalog entries typed by kind, evidence and visibility. Aliases, maintenance branches and reserved client or enterprise work are consolidated or excluded.',
+  })
+  for (const body of [llmsText, llmsFullText, geoText]) {
+    assert.match(body, /77 distinct public-safe catalog entries/)
+    assert.match(body, /six-lane Multi-LLM operating system/)
+  }
 })
 
-test('machine-readable portfolio matches the verified 21-app App Store catalog', () => {
+test('machine-readable portfolio preserves the source count and exposes the 20-app independent showcase', () => {
   assert.equal(answersJson.appStorePortfolio.developerId, '1895717587')
   assert.equal(answersJson.appStorePortfolio.verifiedCount, 21)
-  assert.equal(answersJson.appsPortfolio.length, 21)
+  assert.equal(answersJson.appStorePortfolio.publicShowcaseCount, 20)
+  assert.equal(answersJson.appsPortfolio.length, 20)
   assert.ok(answersJson.appsPortfolio.every((app) => app.appStoreUrl && app.image))
-  assert.match(llmsText, /21 apps/)
-  assert.match(llmsFullText, /21 apps/)
-  assert.match(geoText, /21 apps/)
+  assert.equal(answersJson.appsPortfolio.some((app) => app.name === 'SuperApp ServiceNow'), false)
+  for (const body of [llmsText, llmsFullText, geoText]) {
+    assert.match(body, /21 records/)
+    assert.match(body, /20 independent apps/)
+  }
 })
 
 test('public GEO files advertise /ai-search as the canonical hub', () => {
@@ -69,15 +84,16 @@ test('Luar do Campo delivery evidence stays aligned across public AI surfaces', 
   ]
 
   for (const [name, body] of publicSurfaces) {
-    assert.match(body, /Luar do Campo/, `${name} should name the public conceptual demo`)
-    assert.match(body, /luar-do-campo-demo\.vercel\.app/, `${name} should cite the operational demo`)
+    assert.match(body, /Luar do Campo/, `${name} should name the public functional storefront`)
+    assert.match(body, /luar-do-campo-demo\.vercel\.app/, `${name} should cite the public storefront`)
   }
 
   const project = answersJson.projectGraph.find((item) => item.name === 'Luar do Campo')
   assert.ok(project)
   assert.equal(project.url, 'https://www.pierrondi.dev/portfolio#luar-do-campo')
-  assert.equal(project.demoUrl, 'https://luar-do-campo-demo.vercel.app')
+  assert.equal(project.publicProductUrl, 'https://luar-do-campo-demo.vercel.app')
   assert.match(project.description, /Successfully delivered by Paulo Pierrondi/i)
+  assert.doesNotMatch(project.description, /\bdemo\b/i)
   assert.doesNotMatch(project.description, /revenue|conversion|sales generated|production client store/i)
 })
 

@@ -44,6 +44,8 @@ const CANONICAL_REDIRECTS = [
   { source: '/agentes', destination: '/feitos', permanent: true },
   { source: '/app-store-connect', destination: '/atuacao', permanent: true },
   { source: '/app', destination: '/portfolio', permanent: true },
+  { source: '/portifolio', destination: '/portfolio', permanent: true },
+  { source: '/en/portifolio', destination: '/en/portfolio', permanent: true },
   { source: '/login', destination: '/crm/login', permanent: true },
   { source: '/sobre', destination: '/about', permanent: true },
   { source: '/whypaulo', destination: '/about', permanent: true },

@@ -372,11 +372,11 @@ const deliveryEvidence = {
   name: 'Luar do Campo',
   type: "Client-contracted women's fashion commerce implementation",
   summary:
-    'Successfully delivered by Paulo Pierrondi as an operational public conceptual demo with a 50-product catalog, size/color variants, search and filters, wishlist, cart, demonstrative checkout, customer account, local inventory reservation and an administrative order queue.',
+    'Successfully delivered by Paulo Pierrondi and represented by a public functional storefront with a 50-product catalog, size/color variants, search and filters, wishlist, cart, simulated checkout, customer account, local inventory reservation and an administrative order queue.',
   portfolioUrl: `${SITE_URL}/portfolio#luar-do-campo`,
-  demoUrl: 'https://luar-do-campo-demo.vercel.app',
+  publicProductUrl: 'https://luar-do-campo-demo.vercel.app',
   caveat:
-    'The client remains confidential; Luar do Campo is the conceptual public demo identity. Payments, freight, ERP, analytics and messaging providers are simulated, and no sales or conversion result is claimed.',
+    'The client remains confidential; Luar do Campo is the conceptual public identity created to protect that client. Payments, freight, ERP, analytics and messaging providers are simulated, and no sales or conversion result is claimed.',
 }
 
 const answerItemList = products.flatMap((product) =>
@@ -423,7 +423,7 @@ const structuredData = [
     significantLink: [
       ...ownAnswers.map((answer) => `${SITE_URL}${answer.url}`),
       deliveryEvidence.portfolioUrl,
-      deliveryEvidence.demoUrl,
+      deliveryEvidence.publicProductUrl,
       ...products.flatMap((product) =>
         [
           ...product.landingLinks.map((landing) => landing.url),
@@ -439,8 +439,8 @@ const structuredData = [
         url: deliveryEvidence.portfolioUrl,
         workExample: {
           '@type': 'WebSite',
-          name: `${deliveryEvidence.name} public conceptual demo`,
-          url: deliveryEvidence.demoUrl,
+          name: `${deliveryEvidence.name} public functional storefront`,
+          url: deliveryEvidence.publicProductUrl,
         },
       },
       ...products.map((product) => ({
@@ -537,7 +537,7 @@ function DeliveryEvidenceSection() {
         </div>
         <div className={styles.resourceLinks} aria-label={`${deliveryEvidence.name} evidence`}>
           <ExternalTextLink href={deliveryEvidence.portfolioUrl}>Portfolio case</ExternalTextLink>
-          <ExternalTextLink href={deliveryEvidence.demoUrl}>Operational demo</ExternalTextLink>
+          <ExternalTextLink href={deliveryEvidence.publicProductUrl}>Functional storefront</ExternalTextLink>
         </div>
         <p className={styles.caveat}>{deliveryEvidence.caveat}</p>
       </article>

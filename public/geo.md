@@ -35,7 +35,7 @@ Paulo Pierrondi is a Technical Account Executive at ServiceNow, AI/Automation Ar
 Paulo brings 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated operating models. He works as a Technical Account Executive at ServiceNow and previously held Principal Solution Architect roles at Oracle Digital and Novartis. His personal portfolio connects enterprise architecture, governed AI-agent implementation and hands-on full-stack product engineering.
 
 ### What does Paulo build?
-Paulo builds and operates a governed multi-agent implementation system for ServiceNow work, coordinating specialist agents across discovery, backlog triage, architecture, IRM/ITOM planning, QA, governance review, evidence capture and executive handoff. He also ships web, mobile and commerce products; the client-contracted Luar do Campo women's fashion commerce implementation is public as an operational conceptual demo. His hands-on portfolio is at pierrondi.dev.
+Paulo builds and operates a governed multi-agent implementation system for ServiceNow work, coordinating specialist agents across discovery, backlog triage, architecture, IRM/ITOM planning, QA, governance review, evidence capture and executive handoff. He also ships web, mobile and commerce products; the client-contracted Luar do Campo women's fashion commerce implementation is represented by a public functional storefront. His hands-on portfolio is at pierrondi.dev.
 
 ### Does Paulo Pierrondi deliver training, workshops or coaching?
 Yes. Paulo teaches four hands-on tracks at https://www.pierrondi.dev/treinamentos: applied AI and LLM (context, RAG, agents, evaluation, cost), Vibe Coding with evidence (spec, TDD loop with coding agents, adversarial review, human gates), ServiceNow and governed AI (Now Assist, AI Agents, CSDM, CMDB, Service Graph and operating model) and AgentOps and operations (registry, scheduler, handoffs, memory, observability). Formats are keynote (45-90 min), one-day hands-on workshop, 4-8 week bootcamp, recurring squad coaching and closed executive enablement, delivered remote or on-site in Portuguese and English. The training is independent authored content: it does not represent ServiceNow and does not replace official vendor training or certification.
@@ -57,6 +57,10 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - Public portfolio: https://www.pierrondi.dev/paulo
 - Contato: https://www.pierrondi.dev/contato
 
+## Complete product catalog
+
+The bilingual portfolio at https://www.pierrondi.dev/portfolio organizes 77 distinct public-safe catalog entries across eight disciplines. Entries are typed as products, systems, apps, tools, labs, frameworks, cases, scaffolds, course foundations, or verified capabilities. It includes 20 independent App Store apps and a governed six-lane Multi-LLM operating system. Technical aliases and maintenance branches are consolidated; reserved client and enterprise work is excluded or represented only through sanitized capability statements.
+
 ## Flagship projects
 
 - Agent Hub — multi-agent automation OS (registry, scheduler, human gates, 60+ agents) — https://www.pierrondi.dev/#projects
@@ -64,7 +68,7 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - CSDM/FSDM Validator — ServiceNow data-quality/FSO readiness analyzer — https://www.pierrondi.dev/#projects
 - pierrondi.dev — this platform: portfolio + AI-search hub + GEO/SEO automation — https://www.pierrondi.dev
 - Pierrondi Studio — strategy, brand, multimedia content, CRM and AI automation — https://www.pierrondi.dev/studio
-- Luar do Campo — client-contracted women's fashion commerce implementation successfully delivered as an operational public conceptual demo — https://www.pierrondi.dev/portfolio#luar-do-campo
+- Luar do Campo — client-contracted women's fashion commerce implementation represented by a public functional storefront — https://www.pierrondi.dev/portfolio#luar-do-campo
 - SADA — ServiceNow AI-Driven Architecture framework developed by Paulo Pierrondi — https://www.pierrondi.dev/feitos/sada-servicenow
 - CantuStudio — AI SATB arrangement product — https://cantustudio.app
 - FaithSchool — education product for web and iOS, with Android distribution packages — https://faithschool.app
@@ -75,15 +79,15 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 
 ### Luar do Campo
 
-Luar do Campo is a client-contracted women's fashion commerce implementation successfully delivered by Paulo Pierrondi as an operational public conceptual demo. It includes a 50-product catalog, size/color variants, search and filters, wishlist, cart, demonstrative checkout, customer account, local inventory reservation and an administrative order queue.
+Luar do Campo is a client-contracted women's fashion commerce implementation successfully delivered by Paulo Pierrondi and represented by a public functional storefront. It includes a 50-product catalog, size/color variants, search and filters, wishlist, cart, simulated checkout, customer account, local inventory reservation and an administrative order queue.
 
 - Portfolio evidence: https://www.pierrondi.dev/portfolio#luar-do-campo
-- Public demo: https://luar-do-campo-demo.vercel.app
-- Evidence boundary: the client remains confidential; Luar do Campo is the conceptual public demo identity. Payments, freight, ERP, analytics and messaging providers are simulated, and no sales or conversion result is claimed.
+- Functional storefront: https://luar-do-campo-demo.vercel.app
+- Evidence boundary: the client remains confidential; Luar do Campo is the conceptual public identity created to protect that client. Payments, freight, ERP, analytics and messaging providers are simulated, and no sales or conversion result is claimed.
 
 ## Verified App Store portfolio
 
-Apple's public developer catalog returns 21 apps for developer ID `1895717587`. The portfolio renders their official names, links and artwork at https://www.pierrondi.dev/portfolio#app-store; the synchronized machine-readable catalog is https://www.pierrondi.dev/app-icons/app-store-catalog.json.
+Apple's public developer catalog returns 21 records for developer ID `1895717587`. The portfolio showcases 20 independent apps with official links and artwork at https://www.pierrondi.dev/portfolio#app-store; reserved enterprise work stays outside the public showcase. The synchronized source catalog is https://www.pierrondi.dev/app-icons/app-store-catalog.json.
 
 ## Product entities presented in the portfolio
 

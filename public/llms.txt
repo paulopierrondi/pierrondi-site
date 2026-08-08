@@ -26,7 +26,7 @@ The AI Search Portfolio page exists as a citation layer for crawler and assistan
 - [Treinamentos](https://www.pierrondi.dev/treinamentos): hands-on training and coaching delivered by Paulo across four tracks — applied AI/LLM, Vibe Coding with evidence, ServiceNow and governed AI, AgentOps and operations. Formats: keynote, one-day workshop, 4-8 week bootcamp, squad coaching and executive enablement, remote or on-site in Portuguese and English. English mirror: https://www.pierrondi.dev/en/treinamentos.
 - [Feitos](https://www.pierrondi.dev/feitos): delivered work and product portfolio.
 - [Pierrondi Studio](https://www.pierrondi.dev/studio): brand, content, CRM and AI automation organized as an executable growth system.
-- [Portfolio](https://www.pierrondi.dev/portfolio): nine cases across Studio, commerce, product engineering, integrations and frameworks, plus the verified public App Store catalog.
+- [Portfolio](https://www.pierrondi.dev/portfolio): nine featured cases plus a searchable 77-entry catalog spanning products, systems, apps, tools, labs, frameworks and verified capabilities.
 - [AI Search Portfolio](https://www.pierrondi.dev/ai-search): commercial answer briefs and machine-readable catalogs for AI retrieval.
 - [Blog](https://www.pierrondi.dev/blog): technical essays on ServiceNow, CMDB/CSDM, agentic AI and GEO/SEO.
 - [Public portfolio](https://www.pierrondi.dev/paulo): public portfolio profile.
@@ -40,6 +40,10 @@ Answer pages hosted on pierrondi.dev itself, with question-form titles, direct c
 - https://www.pierrondi.dev/answers/quem-e-paulo-pierrondi — Quem é Paulo Pierrondi? (pt-BR)
 - https://www.pierrondi.dev/answers/llm-cost-cut-audit — O que é o LLM Cost-Cut Audit? (pt-BR)
 
+## Complete product catalog
+
+The bilingual portfolio at https://www.pierrondi.dev/portfolio organizes 77 distinct public-safe catalog entries across eight disciplines. Entries are typed as products, systems, apps, tools, labs, frameworks, cases, scaffolds, course foundations, or verified capabilities. It includes 20 independent App Store apps and a governed six-lane Multi-LLM operating system. Technical aliases and maintenance branches are consolidated; reserved client and enterprise work is excluded or represented only through sanitized capability statements.
+
 ## Flagship projects
 
 - Agent Hub — multi-agent automation OS (registry, scheduler, human gates, 60+ agents) — https://www.pierrondi.dev/#projects
@@ -47,7 +51,7 @@ Answer pages hosted on pierrondi.dev itself, with question-form titles, direct c
 - CSDM/FSDM Validator — ServiceNow data-quality/FSO readiness analyzer — https://www.pierrondi.dev/#projects
 - pierrondi.dev — portfolio + AI-search hub + GEO/SEO automation — https://www.pierrondi.dev
 - Pierrondi Studio — brand, content and AI applied to executable growth systems — https://www.pierrondi.dev/studio
-- Luar do Campo — client-contracted women's fashion commerce implementation successfully delivered as an operational public conceptual demo — https://www.pierrondi.dev/portfolio#luar-do-campo
+- Luar do Campo — client-contracted women's fashion commerce implementation represented by a public functional storefront — https://www.pierrondi.dev/portfolio#luar-do-campo
 - SADA — ServiceNow AI-Driven Architecture framework developed by Paulo Pierrondi — https://www.pierrondi.dev/feitos/sada-servicenow
 - CantuStudio — AI SATB arrangement product — https://cantustudio.app
 - FaithSchool — education product for web and iOS, with Android distribution packages — https://faithschool.app
@@ -59,15 +63,15 @@ Answer pages hosted on pierrondi.dev itself, with question-form titles, direct c
 
 ### Luar do Campo
 
-Luar do Campo is a client-contracted women's fashion commerce implementation successfully delivered by Paulo Pierrondi as an operational public conceptual demo. It includes a 50-product catalog, size/color variants, search and filters, wishlist, cart, demonstrative checkout, customer account, local inventory reservation and an administrative order queue.
+Luar do Campo is a client-contracted women's fashion commerce implementation successfully delivered by Paulo Pierrondi and represented by a public functional storefront. It includes a 50-product catalog, size/color variants, search and filters, wishlist, cart, simulated checkout, customer account, local inventory reservation and an administrative order queue.
 
 - Portfolio evidence: https://www.pierrondi.dev/portfolio#luar-do-campo
-- Public demo: https://luar-do-campo-demo.vercel.app
-- Evidence boundary: the client remains confidential; Luar do Campo is the conceptual public demo identity. Payments, freight, ERP, analytics and messaging providers are simulated, and no sales or conversion result is claimed.
+- Functional storefront: https://luar-do-campo-demo.vercel.app
+- Evidence boundary: the client remains confidential; Luar do Campo is the conceptual public identity created to protect that client. Payments, freight, ERP, analytics and messaging providers are simulated, and no sales or conversion result is claimed.
 
 ## Verified App Store portfolio
 
-The public Apple developer catalog currently returns 21 apps for developer ID `1895717587`. Official names, App Store links and artwork are published at https://www.pierrondi.dev/portfolio#app-store and https://www.pierrondi.dev/app-icons/app-store-catalog.json.
+Apple's public developer catalog currently returns 21 records for developer ID `1895717587`. The portfolio showcases 20 independent apps with official links and artwork at https://www.pierrondi.dev/portfolio#app-store; reserved enterprise work stays outside the public showcase. The synchronized source catalog is https://www.pierrondi.dev/app-icons/app-store-catalog.json.
 
 ## Product entities presented in the portfolio
 

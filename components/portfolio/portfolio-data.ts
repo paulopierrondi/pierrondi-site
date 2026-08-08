@@ -58,6 +58,10 @@ type AppStoreCatalog = {
 
 export const APP_STORE_CATALOG = appStoreCatalog as AppStoreCatalog
 
+export const PUBLIC_APP_STORE_APPS = APP_STORE_CATALOG.apps.filter(
+  (app) => app.slug !== 'superapp-servicenow',
+)
+
 const appStoreUrl = (trackId: string) =>
   APP_STORE_CATALOG.apps.find((app) => app.trackId === trackId)?.url ?? '#app-store'
 
@@ -95,10 +99,10 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
       eyebrow: 'E-COMMERCE · MODA · OPERAÇÃO',
       headline: 'Do editorial ao pedido: uma loja pensada como operação.',
       description:
-        'Storefront de moda feminina com catálogo de 50 produtos, variações por tamanho e cor, busca, filtros, favoritos, carrinho, checkout demonstrativo e painel administrativo.',
+        'Storefront de moda feminina com catálogo de 50 produtos, variações por tamanho e cor, busca, filtros, favoritos, carrinho, checkout simulado e painel operacional.',
       proof:
-        'Projeto contratado por um cliente confidencial do varejo de moda. “Luar do Campo” é a identidade conceitual da demo pública.',
-      status: 'Projeto contratado · demo pública',
+        'Projeto contratado por um cliente confidencial do varejo de moda. “Luar do Campo” é a identidade conceitual pública criada para preservar esse cliente.',
+      status: 'Projeto contratado · produto funcional',
       accent: 'sand',
       visual: 'luar-do-campo',
       platforms: ['Loja', 'Checkout', 'Painel'],
@@ -109,7 +113,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
         { value: '4', label: 'superfícies conectadas' },
       ],
       href: 'https://luar-do-campo-demo.vercel.app',
-      cta: 'Abrir demo da loja',
+      cta: 'Abrir storefront',
       external: true,
     },
     {
@@ -171,21 +175,21 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     {
       id: 'app-portfolio',
       index: '05',
-      navLabel: '21 apps',
+      navLabel: '20 apps',
       title: 'App portfolio',
       eyebrow: 'APP STORE · PRODUTOS PUBLICADOS',
       headline: 'Apps pequenos, reais e lançados.',
       description:
         'Portfólio público em educação, produtividade, música, finanças, lifestyle, jogos e ferramentas — do conceito à publicação, privacidade, suporte e atualização.',
       proof:
-        'Os 21 produtos e seus artworks foram validados diretamente no storefront público da Apple; cada ícone abre sua página oficial.',
-      status: '21 apps publicados',
+        'Os 20 produtos independentes e seus artworks foram validados diretamente no storefront público da Apple; trabalhos enterprise reservados ficam fora da vitrine.',
+      status: '20 apps independentes exibidos',
       accent: 'blue',
       visual: 'app-store',
       platforms: ['iPhone', 'iPad', 'App Store'],
       stack: ['Swift', 'SwiftUI', 'StoreKit', 'Vision', 'Core ML'],
       facts: [
-        { value: '21', label: 'apps públicos' },
+        { value: '20', label: 'apps independentes' },
         { value: '7+', label: 'categorias' },
         { value: 'BR + US', label: 'storefronts' },
       ],
@@ -202,8 +206,8 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
       description:
         'Implantação Kommo com dois funis operacionais, qualificação, Salesbot, roteamento por origem e handoff humano documentado para jornadas distintas.',
       proof:
-        'A integração com WhatsApp foi conectada e validada em fluxo controlado, preservando gates de canal, LGPD e aprovação humana antes da ampliação.',
-      status: 'Integração validada',
+        'A arquitetura e os cenários foram validados com dados sintéticos, preservando gates de canal, LGPD e aprovação humana antes de qualquer conexão oficial.',
+      status: 'Case de CRM validado',
       accent: 'violet',
       visual: 'kommo',
       platforms: ['Kommo', 'WhatsApp', 'Salesbot'],
@@ -324,10 +328,10 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
       eyebrow: 'E-COMMERCE · FASHION · OPERATIONS',
       headline: 'From editorial storefront to order flow—designed as one operation.',
       description:
-        'A women’s fashion storefront with a 50-product catalog, size and color variants, search, filters, wishlists, cart, a demonstrative checkout, and an admin dashboard.',
+        'A women’s fashion storefront with a 50-product catalog, size and color variants, search, filters, wishlists, cart, a simulated checkout, and an operations dashboard.',
       proof:
-        'Contracted by a confidential fashion retail client. “Luar do Campo” is the conceptual identity of the public demo.',
-      status: 'Client-contracted · public demo',
+        'Contracted by a confidential fashion retail client. “Luar do Campo” is the public conceptual identity created to protect that client.',
+      status: 'Client-contracted · functional product',
       accent: 'sand',
       visual: 'luar-do-campo',
       platforms: ['Storefront', 'Checkout', 'Admin'],
@@ -338,7 +342,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
         { value: '4', label: 'connected surfaces' },
       ],
       href: 'https://luar-do-campo-demo.vercel.app',
-      cta: 'Open the store demo',
+      cta: 'Open the storefront',
       external: true,
     },
     {
@@ -400,21 +404,21 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     {
       id: 'app-portfolio',
       index: '05',
-      navLabel: '21 apps',
+      navLabel: '20 apps',
       title: 'App portfolio',
       eyebrow: 'APP STORE · SHIPPED PRODUCTS',
       headline: 'Small, real products — shipped.',
       description:
         'A public portfolio across education, productivity, music, finance, lifestyle, games, and tools — from concept through release, privacy, support, and iteration.',
       proof:
-        'All 21 products and artworks were verified directly against Apple’s public storefront; every icon opens its official page.',
-      status: '21 published apps',
+        'All 20 independent products and artworks were verified directly against Apple’s public storefront; reserved enterprise work stays off the showcase.',
+      status: '20 independent apps shown',
       accent: 'blue',
       visual: 'app-store',
       platforms: ['iPhone', 'iPad', 'App Store'],
       stack: ['Swift', 'SwiftUI', 'StoreKit', 'Vision', 'Core ML'],
       facts: [
-        { value: '21', label: 'public apps' },
+        { value: '20', label: 'independent apps' },
         { value: '7+', label: 'categories' },
         { value: 'BR + US', label: 'storefronts' },
       ],
@@ -431,8 +435,8 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
       description:
         'A Kommo implementation with two operational pipelines, qualification rules, Salesbot, source routing, and documented human handoff for distinct journeys.',
       proof:
-        'The WhatsApp integration was connected and validated through a controlled flow, preserving channel, privacy, and approval gates before wider automation.',
-      status: 'Integration validated',
+        'The architecture and scenarios were validated with synthetic data, preserving channel, privacy, and approval gates before any official connection.',
+      status: 'Validated CRM case',
       accent: 'violet',
       visual: 'kommo',
       platforms: ['Kommo', 'WhatsApp', 'Salesbot'],

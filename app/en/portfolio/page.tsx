@@ -1,20 +1,20 @@
 import type { Metadata } from 'next'
 import JsonLd from '@/components/JsonLd'
 import PortfolioExperience from '@/components/portfolio/PortfolioExperience'
-import { APP_STORE_CATALOG, PORTFOLIO_CASES } from '@/components/portfolio/portfolio-data'
+import { PORTFOLIO_CATALOG, resolvePortfolioHref } from '@/components/portfolio/portfolio-catalog'
 import { SITE_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Products, Studio, and systems portfolio | Paulo Pierrondi',
   description:
-    'Pierrondi Studio, Luar do Campo, CantuStudio, FaithSchool, 21 published apps, CRM, automation, AgenticosCore, and SADA—strategy, architecture, and end-to-end execution.',
+    'Complete catalog of products, apps, AI, Multi-LLM, automation, websites, commerce, and systems—with search, honest status, and public evidence.',
   alternates: {
     canonical: '/en/portfolio',
     languages: { 'pt-BR': '/portfolio', 'en-US': '/en/portfolio', 'x-default': '/portfolio' },
   },
   openGraph: {
     title: 'Products, Studio, and systems portfolio | Paulo Pierrondi',
-    description: 'Brand, products, systems, and integrations taken from strategy through implementation—with public evidence and real identities.',
+    description: 'Products, apps, systems, Multi-LLM, and integrations taken from strategy through implementation in one searchable catalog.',
     url: '/en/portfolio',
     siteName: 'pierrondi.dev',
     type: 'website',
@@ -25,12 +25,10 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'AI, apps and systems portfolio | Paulo Pierrondi',
-    description: 'Pierrondi Studio, Luar do Campo, CantuStudio, FaithSchool, published apps, CRM, AgenticosCore, and SADA.',
+    description: 'Complete catalog of products, published apps, systems, automation, WordPress/Elementor, and Multi-LLM operations.',
     images: ['/og'],
   },
 }
-
-const cases = PORTFOLIO_CASES.en
 
 const portfolioSchema = {
   '@context': 'https://schema.org',
@@ -43,29 +41,19 @@ const portfolioSchema = {
   about: { '@id': `${SITE_URL}/#person` },
   mainEntity: {
     '@type': 'ItemList',
-    numberOfItems: cases.length + APP_STORE_CATALOG.count,
-    itemListElement: [
-      ...cases.map((item, index) => ({
+    numberOfItems: PORTFOLIO_CATALOG.length,
+    itemListElement: PORTFOLIO_CATALOG.map((item, index) => {
+      const href = resolvePortfolioHref(item, 'en')
+      return {
         '@type': 'ListItem',
         position: index + 1,
-        name: item.title,
-        description: item.description,
-        url: item.href.startsWith('http') ? item.href : `${SITE_URL}${item.href}`,
-      })),
-      ...APP_STORE_CATALOG.apps.map((app, index) => ({
-        '@type': 'ListItem',
-        position: cases.length + index + 1,
-        item: {
-          '@type': 'SoftwareApplication',
-          name: app.name,
-          applicationCategory: app.category,
-          operatingSystem: 'iOS, iPadOS',
-          url: app.url,
-          image: `${SITE_URL}${app.icon}`,
-          author: { '@id': `${SITE_URL}/#person` },
-        },
-      })),
-    ],
+        name: item.name,
+        description: item.summary.en,
+        url: href
+          ? (href.startsWith('http') ? href : `${SITE_URL}${href}`)
+          : `${SITE_URL}/en/portfolio#catalog-${item.id}`,
+      }
+    }),
   },
 }
 

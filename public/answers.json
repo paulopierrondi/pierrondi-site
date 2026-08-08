@@ -19,7 +19,7 @@
     ],
     "logo": "https://www.pierrondi.dev/pierrondi-logo-1024.png"
   },
-  "lastUpdated": "2026-08-07",
+  "lastUpdated": "2026-08-08",
   "primaryHub": "https://www.pierrondi.dev/ai-search",
   "citationHub": "https://www.pierrondi.dev/citations",
   "sitemap": "https://www.pierrondi.dev/sitemap.xml",
@@ -446,7 +446,7 @@
     "FaithSchool is not legal advice, accreditation or a compliance guarantee.",
     "CantuStudio generates musical drafts that require human review.",
     "AgenticosCore should not scale paid acquisition before tracking and lead quality are validated.",
-    "Luar do Campo is the conceptual identity of a public operational demo for a confidential client-contracted project; external commerce providers are simulated and no sales or conversion result is claimed.",
+    "Luar do Campo is the conceptual public identity for a confidential client-contracted project; external commerce providers are simulated and no sales or conversion result is claimed.",
     "pierrondi.dev is a portfolio and reference hub, not a substitute for professional legal, tax, medical or investment advice."
   ],
   "projectGraph": [
@@ -488,10 +488,10 @@
     {
       "name": "Luar do Campo",
       "category": "Client-contracted women's fashion commerce implementation",
-      "description": "Successfully delivered by Paulo Pierrondi as an operational public conceptual demo with a 50-product catalog, size/color variants, search and filters, wishlist, cart, demonstrative checkout, customer account, local inventory reservation and an administrative order queue.",
+      "description": "Successfully delivered by Paulo Pierrondi and represented by a public functional storefront with a 50-product catalog, size/color variants, search and filters, wishlist, cart, simulated checkout, customer account, local inventory reservation and an administrative order queue.",
       "url": "https://www.pierrondi.dev/portfolio#luar-do-campo",
-      "demoUrl": "https://luar-do-campo-demo.vercel.app",
-      "relationship": "confidential client delivery represented by a public conceptual demo"
+      "publicProductUrl": "https://luar-do-campo-demo.vercel.app",
+      "relationship": "confidential client delivery represented by a public functional storefront"
     },
     {
       "name": "SADA",
@@ -536,13 +536,22 @@
       "relationship": "flagship project"
     }
   ],
+  "portfolioCatalog": {
+    "canonicalUrl": "https://www.pierrondi.dev/portfolio",
+    "publicEntryCount": 77,
+    "categoryCount": 8,
+    "independentAppShowcaseCount": 20,
+    "multiLlmLaneCount": 6,
+    "scope": "Distinct public-safe catalog entries typed by kind, evidence and visibility. Aliases, maintenance branches and reserved client or enterprise work are consolidated or excluded."
+  },
   "appStorePortfolio": {
     "developerId": "1895717587",
     "storefront": "BR",
     "verifiedCount": 21,
     "portfolioUrl": "https://www.pierrondi.dev/portfolio#app-store",
     "catalogUrl": "https://www.pierrondi.dev/app-icons/app-store-catalog.json",
-    "scope": "Apps returned by Apple's public developer catalog at the last verified refresh."
+    "scope": "Apple returned 21 public records at the last verified refresh; the portfolio showcases 20 independent products and excludes reserved enterprise work.",
+    "publicShowcaseCount": 20
   },
   "appsPortfolio": [
     {
@@ -670,13 +679,6 @@
       "url": "https://www.pierrondi.dev/apps/snapread",
       "appStoreUrl": "https://apps.apple.com/br/app/snapread-ai-leitor/id6772517083",
       "image": "https://www.pierrondi.dev/app-icons/snapread.jpg"
-    },
-    {
-      "name": "SuperApp ServiceNow",
-      "category": "Business",
-      "url": "https://www.pierrondi.dev/apps/superapp-servicenow",
-      "appStoreUrl": "https://apps.apple.com/br/app/superapp-servicenow/id6768396384",
-      "image": "https://www.pierrondi.dev/app-icons/superapp-servicenow.jpg"
     },
     {
       "name": "Linguagil Flashcards",
