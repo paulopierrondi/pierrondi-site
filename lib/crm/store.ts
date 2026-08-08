@@ -17,9 +17,9 @@ function ensureDir(filePath: string) {
 
 export function readStore(): CRMStore {
   const p = dataPath()
-  if (!fs.existsSync(p)) return structuredClone(SEED_DATA)
+  if (!fs.existsSync(/* turbopackIgnore: true */ p)) return structuredClone(SEED_DATA)
   try {
-    const raw = fs.readFileSync(p, 'utf-8')
+    const raw = fs.readFileSync(/* turbopackIgnore: true */ p, 'utf-8')
     return JSON.parse(raw) as CRMStore
   } catch {
     return structuredClone(SEED_DATA)

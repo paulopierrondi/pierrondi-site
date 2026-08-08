@@ -70,6 +70,8 @@ test('catalog search corpus includes both locales and EN internal links stay loc
   assert.equal(resolvePortfolioHref(studio, 'en'), '/en/studio')
   assert.equal(resolvePortfolioHref(kommo, 'en'), '/en/portfolio#kommo-whatsapp')
   assert.equal(resolvePortfolioHref({ href: '/' }, 'en'), '/en')
+  assert.equal(resolvePortfolioHref({ href: '/feitos/sada-servicenow' }, 'en'), '/en/feitos')
+  assert.equal(resolvePortfolioHref({ href: '/feitos/llm-inferencia' }, 'en'), '/en/feitos')
 })
 
 test('machine-readable portfolio totals stay aligned with the typed catalog', () => {

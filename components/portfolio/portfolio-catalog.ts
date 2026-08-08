@@ -134,6 +134,7 @@ export function resolvePortfolioHref(entry: Pick<PortfolioCatalogEntry, 'href'>,
   if (href === '/') return '/en'
   if (href === '/studio') return '/en/studio'
   if (href.startsWith('/portfolio')) return `/en${href}`
+  if (href.startsWith('/feitos/')) return '/en/feitos'
   return href
 }
 
