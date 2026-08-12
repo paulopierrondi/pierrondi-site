@@ -37,6 +37,8 @@ test('Studio portfolio spotlight preserves an editorial responsive composition',
   assert.match(styles, /\.studioFrameDossier\s*\{\s*grid-area:\s*dossier/)
   assert.match(styles, /@media \(max-width: 820px\)/)
   assert.match(qa, /spotlightFrames === 3/)
+  assert.match(qa, /heroStudioPhoto === 1/)
+  assert.match(qa, /heroStudioVisibility/)
   assert.match(qa, /anchorHash === '#studio-visual'/)
   assert.match(qa, /reduced-motion-mobile-390/)
 })

@@ -8,18 +8,18 @@ import styles from './PortfolioExperience.module.css'
 
 const EVIDENCE_FRAMES = [
   {
-    id: 'cantustudio',
-    src: '/portfolio/cantustudio/feature-graphic.png',
+    id: 'studio-production',
+    src: '/portfolio/studio/pierrondi-studio-production-dossier-v1.webp',
     className: styles.evidenceFrameMain,
-    label: 'CantuStudio',
+    label: 'PIERRONDI STUDIO / PRODUCTION',
     sizes: '(max-width: 820px) 84vw, 36vw',
     priority: true,
   },
   {
-    id: 'studio-review',
-    src: '/portfolio/studio/pierrondi-studio-review-console-v1.webp',
+    id: 'cantustudio',
+    src: '/portfolio/cantustudio/feature-graphic.png',
     className: styles.evidenceFrameStudio,
-    label: 'PIERRONDI STUDIO / REVIEW',
+    label: 'CantuStudio',
     sizes: '(max-width: 820px) 68vw, 31vw',
     priority: false,
   },

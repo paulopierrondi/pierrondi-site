@@ -11,7 +11,7 @@ const evidenceAssets = [
   'public/portfolio/cantustudio/feature-graphic.png',
   'public/portfolio/cantustudio/melodia-satb.png',
   'public/portfolio/faithschool/app-home.png',
-  'public/portfolio/studio/pierrondi-studio-review-console-v1.webp',
+  'public/portfolio/studio/pierrondi-studio-production-dossier-v1.webp',
 ]
 
 test('portfolio hero uses owned product evidence instead of an icon-only mosaic', async () => {
@@ -24,6 +24,8 @@ test('portfolio hero uses owned product evidence instead of an icon-only mosaic'
   }
 
   assert.equal(mosaic.match(/priority:\s*true/g)?.length, 1)
+  assert.match(mosaic, /id: 'studio-production'/)
+  assert.match(mosaic, /label: 'PIERRONDI STUDIO \/ PRODUCTION'/)
   assert.match(mosaic, /aria-hidden="true"/)
   assert.match(mosaic, /reduceMotion/)
   assert.doesNotMatch(mosaic, /agenticoscore\/home-desktop/)

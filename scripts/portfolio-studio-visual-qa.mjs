@@ -67,6 +67,13 @@ async function inspect(check) {
   const response = await page.goto(`${baseUrl}${check.route}`, { waitUntil: 'domcontentloaded' })
   await page.waitForTimeout(700)
 
+  const heroStudioPhoto = page.locator('[class*="heroEvidence"] img[src*="pierrondi-studio-production-dossier-v1.webp"]')
+  const heroStudioLoaded = await waitForImage(heroStudioPhoto)
+  const heroStudioVisibility = await heroStudioPhoto.evaluate((image) => {
+    const rect = image.getBoundingClientRect()
+    return rect.top < window.innerHeight && rect.bottom > 0 && rect.left < window.innerWidth && rect.right > 0
+  })
+
   const english = check.locale === 'en-US'
   const exploreLabel = english ? 'Explore the portfolio' : 'Explorar o portfólio'
   await page.getByRole('link', { name: exploreLabel, exact: true }).click()
@@ -81,6 +88,7 @@ async function inspect(check) {
     h1Count: document.querySelectorAll('h1').length,
     viewportWidth: window.innerWidth,
     scrollWidth: document.documentElement.scrollWidth,
+    heroStudioPhoto: document.querySelectorAll('[class*="heroEvidence"] img[src*="pierrondi-studio-production-dossier-v1.webp"]').length,
     spotlightFrames: document.querySelectorAll('[data-portfolio-studio-frame]').length,
     spotlightImages: document.querySelectorAll('#studio-visual img').length,
     spotlightHref: document.querySelector('#studio-visual a')?.getAttribute('href') ?? '',
@@ -102,6 +110,9 @@ async function inspect(check) {
   const pass = response?.status() === 200
     && metrics.h1Count === 1
     && metrics.scrollWidth <= metrics.viewportWidth
+    && metrics.heroStudioPhoto === 1
+    && heroStudioLoaded
+    && heroStudioVisibility
     && metrics.spotlightFrames === 3
     && metrics.spotlightImages === 3
     && metrics.spotlightHref === expectedHref
@@ -118,7 +129,7 @@ async function inspect(check) {
     && diagnostics.failedRequests.length === 0
     && (!check.reducedMotion || metrics.reducedMotion)
 
-  return { ...check, status: response?.status(), imageLoaded, metrics, ...diagnostics, pass }
+  return { ...check, status: response?.status(), imageLoaded, heroStudioLoaded, heroStudioVisibility, metrics, ...diagnostics, pass }
 }
 
 const report = { baseUrl, generatedAt: new Date().toISOString(), checks: [] }
