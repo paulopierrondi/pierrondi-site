@@ -7,6 +7,7 @@ const experience = await readFile(new URL('components/portfolio/PortfolioExperie
 const spotlight = await readFile(new URL('components/portfolio/PortfolioStudioSpotlight.tsx', root), 'utf8')
 const styles = await readFile(new URL('components/portfolio/PortfolioExperience.module.css', root), 'utf8')
 const qa = await readFile(new URL('scripts/portfolio-studio-visual-qa.mjs', root), 'utf8')
+const nextConfig = await readFile(new URL('next.config.ts', root), 'utf8')
 
 const studioAssets = [
   'public/portfolio/studio/pierrondi-studio-production-dossier-v1.webp',
@@ -44,4 +45,11 @@ test('Studio portfolio spotlight preserves an editorial responsive composition',
   assert.match(spotlight, /initial:\s*false/)
   assert.match(qa, /anchorHash === '#studio-visual'/)
   assert.match(qa, /reduced-motion-mobile-390/)
+})
+
+test('portfolio HTML revalidates quickly after a visual release', () => {
+  for (const route of ["source: '/portfolio'", "source: '/en/portfolio'"]) {
+    assert.ok(nextConfig.includes(route))
+  }
+  assert.match(nextConfig, /s-maxage=300, stale-while-revalidate=60/)
 })

@@ -155,6 +155,14 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: '/portfolio',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=0, s-maxage=300, stale-while-revalidate=60' }],
+      },
+      {
+        source: '/en/portfolio',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=0, s-maxage=300, stale-while-revalidate=60' }],
+      },
+      {
         source: '/bradesco-26',
         headers: [{ key: 'Cache-Control', value: 'no-store, max-age=0, must-revalidate' }],
       },
