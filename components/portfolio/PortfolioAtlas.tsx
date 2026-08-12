@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
@@ -113,6 +114,81 @@ const normalize = (value: string) =>
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
+
+const CREATIVE_MEDIA_SHELF = [
+  {
+    id: 'creative-forge',
+    title: 'Creative Forge',
+    src: '/portfolio/cantustudio/feature-graphic.png',
+    href: { pt: '/studio#creative-forge', en: '/en/studio#creative-forge' },
+    pt: {
+      eyebrow: 'IMAGEM · COMPOSIÇÃO',
+      summary: 'Do briefing à direção visual e às variantes de formato.',
+      classification: 'ARTEFATO DE PRODUTO · CANTUSTUDIO',
+      alt: 'Artefato público do CantuStudio com um fluxo de harmonização musical em interface editorial.',
+    },
+    en: {
+      eyebrow: 'IMAGE · COMPOSITION',
+      summary: 'From brief to visual direction and format variants.',
+      classification: 'PRODUCT ARTIFACT · CANTUSTUDIO',
+      alt: 'Public CantuStudio artifact showing a music-harmonization workflow in an editorial interface.',
+    },
+  },
+  {
+    id: 'creative-video-factory',
+    title: 'Creative Video Factory',
+    src: '/portfolio/studio/pierrondi-studio-review-console-v1.webp',
+    href: { pt: '/studio#creative-video-factory', en: '/en/studio#creative-video-factory' },
+    pt: {
+      eyebrow: 'ROTEIRO · CORTE · ENTREGA',
+      summary: 'Roteiro, voz, legendas, revisão e versões por canal.',
+      classification: 'CENA AUTORAL · PROCESSO',
+      alt: 'Cena autoral do Pierrondi Studio com console de revisão, edição e correção de cor.',
+    },
+    en: {
+      eyebrow: 'SCRIPT · CUT · DELIVERY',
+      summary: 'Scripts, voice, captions, review, and channel-ready versions.',
+      classification: 'AUTHORIAL SCENE · PROCESS',
+      alt: 'Pierrondi Studio authorial scene with a review console, editing, and color grading.',
+    },
+  },
+  {
+    id: 'content-engine',
+    title: 'Pierrondi Content Engine',
+    src: '/portfolio/studio/pierrondi-studio-storyboard-atlas-v1.webp',
+    href: { pt: '/studio#content-engine', en: '/en/studio#content-engine' },
+    pt: {
+      eyebrow: 'BRIEFING · ROTEIRO · QA',
+      summary: 'Uma fila editorial para organizar narrativa, peças e aprovação.',
+      classification: 'CENA AUTORAL · PROCESSO',
+      alt: 'Atlas autoral de storyboard do Pierrondi Studio com frames, marcações e notas de direção.',
+    },
+    en: {
+      eyebrow: 'BRIEF · SCRIPT · QA',
+      summary: 'An editorial queue that organizes narrative, assets, and approval.',
+      classification: 'AUTHORIAL SCENE · PROCESS',
+      alt: 'Pierrondi Studio authorial storyboard atlas with frames, markings, and direction notes.',
+    },
+  },
+  {
+    id: 'brand-os',
+    title: 'Pierrondi Brand OS',
+    src: '/portfolio/luar-do-campo/storefront-desktop.png',
+    href: { pt: '/studio#brand-os', en: '/en/studio#brand-os' },
+    pt: {
+      eyebrow: 'IDENTIDADE · PRESENÇA',
+      summary: 'Tokens, linguagem e superfícies que preservam coerência.',
+      classification: 'DEMO CONCEITUAL · LUAR DO CAMPO',
+      alt: 'Demo conceitual de storefront editorial Luar do Campo com painel de campanha e modelo em vestido marfim.',
+    },
+    en: {
+      eyebrow: 'IDENTITY · PRESENCE',
+      summary: 'Tokens, language, and surfaces that preserve coherence.',
+      classification: 'CONCEPTUAL DEMO · LUAR DO CAMPO',
+      alt: 'Luar do Campo conceptual editorial-storefront demo with a campaign panel and a model in an ivory dress.',
+    },
+  },
+] as const
 
 export default function PortfolioAtlas({
   lang,
@@ -312,6 +388,10 @@ export default function PortfolioAtlas({
           <i />
         </div>
 
+        {activeCategory === 'creative-media' && !query && (
+          <CreativeMediaShelf lang={lang} reduceMotion={reduceMotion} />
+        )}
+
         {filtered.length > 0 ? (
           <div className={styles.catalogGrid}>
             {filtered.map((entry, index) => (
@@ -332,6 +412,71 @@ export default function PortfolioAtlas({
         </footer>
       </section>
     </>
+  )
+}
+
+function CreativeMediaShelf({
+  lang,
+  reduceMotion,
+}: {
+  lang: PortfolioLang
+  reduceMotion: boolean
+}) {
+  const copy = lang === 'pt'
+    ? {
+        eyebrow: 'PIERRONDI STUDIO · FRENTES EM FOCO',
+        title: 'Quatro sistemas para dar forma, ritmo e consistência ao conteúdo.',
+        lead: 'Uma leitura visual das frentes criativas. Os nove itens técnicos permanecem catalogados logo abaixo.',
+        cta: 'Ver sistema',
+        note: 'Cenas autorais, artefatos de produto e demos conceituais — não registros de cliente ou resultados de mídia.',
+      }
+    : {
+        eyebrow: 'PIERRONDI STUDIO · FOCUSED PRACTICES',
+        title: 'Four systems that give content form, rhythm, and consistency.',
+        lead: 'A visual reading of the creative practices. The nine technical items remain cataloged just below.',
+        cta: 'View system',
+        note: 'Authorial scenes, product artifacts, and conceptual demos—not client records or media results.',
+      }
+
+  return (
+    <section className={styles.creativeMediaShelf} data-creative-media-shelf aria-labelledby="creative-media-shelf-title">
+      <header className={styles.creativeMediaShelfHeader}>
+        <p>{copy.eyebrow}</p>
+        <h3 id="creative-media-shelf-title">{copy.title}</h3>
+        <span>{copy.lead}</span>
+      </header>
+
+      <div className={styles.creativeMediaShelfGrid}>
+        {CREATIVE_MEDIA_SHELF.map((item, index) => {
+          const itemCopy = item[lang]
+
+          return (
+            <motion.a
+              key={item.id}
+              href={item.href[lang]}
+              className={styles.creativeMediaShelfCard}
+              initial={false}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.12 }}
+              transition={{ duration: reduceMotion ? 0 : 0.42, delay: reduceMotion ? 0 : index * 0.04 }}
+            >
+              <div className={styles.creativeMediaShelfMedia}>
+                <Image src={item.src} alt={itemCopy.alt} fill sizes="(max-width: 560px) 43vw, (max-width: 1050px) 30vw, 19vw" />
+              </div>
+              <div className={styles.creativeMediaShelfCopy}>
+                <p>{itemCopy.eyebrow}</p>
+                <h4>{item.title}</h4>
+                <span>{itemCopy.summary}</span>
+                <small>{itemCopy.classification}</small>
+                <strong>{copy.cta}<ArrowRight aria-hidden="true" /></strong>
+              </div>
+            </motion.a>
+          )
+        })}
+      </div>
+
+      <p className={styles.creativeMediaShelfNote}>{copy.note}</p>
+    </section>
   )
 }
 
