@@ -26,6 +26,8 @@ test('portfolio hero uses owned product evidence instead of an icon-only mosaic'
   assert.equal(mosaic.match(/priority:\s*true/g)?.length, 1)
   assert.match(mosaic, /id: 'studio-production'/)
   assert.match(mosaic, /label: 'PIERRONDI STUDIO \/ PRODUCTION'/)
+  assert.doesNotMatch(mosaic, /initial=\{reduceMotion \? false : \{ opacity: 0/)
+  assert.match(mosaic, /initial=\{false\}/)
   assert.match(mosaic, /aria-hidden="true"/)
   assert.match(mosaic, /reduceMotion/)
   assert.doesNotMatch(mosaic, /agenticoscore\/home-desktop/)

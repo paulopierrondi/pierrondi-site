@@ -78,7 +78,7 @@ export default function PortfolioStudioSpotlight({
   const studioHref = lang === 'pt' ? '/studio#sistema-criativo' : '/en/studio#sistema-criativo'
 
   const reveal = (delay = 0) => ({
-    initial: reduceMotion ? false : { opacity: 0, y: 22 },
+    initial: false,
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, amount: 0.2 },
     transition: { duration: reduceMotion ? 0 : 0.52, delay: reduceMotion ? 0 : delay, ease: [0.16, 1, 0.3, 1] as const },

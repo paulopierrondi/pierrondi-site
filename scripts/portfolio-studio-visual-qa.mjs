@@ -10,6 +10,7 @@ const checks = [
   { name: 'mobile-390', route: '/portfolio', width: 390, height: 844, locale: 'pt-BR' },
   { name: 'english-mobile-390', route: '/en/portfolio', width: 390, height: 844, locale: 'en-US' },
   { name: 'reduced-motion-mobile-390', route: '/portfolio', width: 390, height: 844, locale: 'pt-BR', reducedMotion: 'reduce' },
+  { name: 'no-js-desktop-1440', route: '/portfolio', width: 1440, height: 1000, locale: 'pt-BR', javaScriptEnabled: false },
 ]
 
 const studioAssets = [
@@ -21,7 +22,7 @@ const studioAssets = [
 await mkdir(outputDir, { recursive: true })
 const browser = await chromium.launch({ headless: true })
 
-function attachDiagnostics(page) {
+function attachDiagnostics(page, { allowDisabledScripts = false } = {}) {
   const consoleErrors = []
   const pageErrors = []
   const failedRequests = []
@@ -32,7 +33,10 @@ function attachDiagnostics(page) {
   page.on('pageerror', (error) => pageErrors.push(error.message))
   page.on('requestfailed', (request) => {
     const requestUrl = new URL(request.url())
-    if (requestUrl.origin === new URL(baseUrl).origin) {
+    const disabledScript = allowDisabledScripts
+      && request.resourceType() === 'script'
+      && request.failure()?.errorText === 'csp'
+    if (requestUrl.origin === new URL(baseUrl).origin && !disabledScript) {
       failedRequests.push(`${request.method()} ${requestUrl.pathname} ${request.failure()?.errorText ?? ''}`)
     }
   })
@@ -60,10 +64,11 @@ async function inspect(check) {
     colorScheme: 'dark',
     locale: check.locale,
     reducedMotion: check.reducedMotion ?? 'no-preference',
+    javaScriptEnabled: check.javaScriptEnabled ?? true,
   })
   await context.addInitScript(() => localStorage.setItem('cookie-consent', 'essential'))
   const page = await context.newPage()
-  const diagnostics = attachDiagnostics(page)
+  const diagnostics = attachDiagnostics(page, { allowDisabledScripts: check.javaScriptEnabled === false })
   const response = await page.goto(`${baseUrl}${check.route}`, { waitUntil: 'domcontentloaded' })
   await page.waitForTimeout(700)
 

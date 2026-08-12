@@ -56,7 +56,7 @@ export default function PortfolioEvidenceMosaic({
         <motion.figure
           key={frame.id}
           className={`${styles.evidenceFrame} ${frame.className}`}
-          initial={reduceMotion ? false : { opacity: 0, clipPath: index % 2 === 0 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)' }}
+          initial={false}
           animate={{ opacity: 1, clipPath: 'inset(0 0 0 0)' }}
           transition={{
             delay: reduceMotion ? 0 : 0.14 + index * 0.08,
@@ -77,7 +77,7 @@ export default function PortfolioEvidenceMosaic({
 
       <motion.div
         className={styles.evidenceApps}
-        initial={reduceMotion ? false : { opacity: 0, x: 18 }}
+        initial={false}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: reduceMotion ? 0 : 0.5, duration: reduceMotion ? 0 : 0.52 }}
       >
