@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { motion, useScroll, useTransform } from 'framer-motion'
@@ -19,6 +20,7 @@ import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import {
   STUDIO_COPY,
   getStudioContactHref,
+  type StudioCreativeProofItem,
   type StudioLang,
 } from './studio-data'
 import styles from './StudioExperience.module.css'
@@ -28,6 +30,15 @@ const StudioGrowthCore = dynamic(() => import('./StudioGrowthCore'), {
   ssr: false,
   loading: () => <div className={styles.growthCoreLoading} aria-hidden="true" />,
 })
+
+const proofLayoutClasses: Record<StudioCreativeProofItem['layout'], string> = {
+  atlas: styles.galleryAtlas,
+  product: styles.galleryProduct,
+  portrait: styles.galleryPortrait,
+  review: styles.galleryReview,
+  diptych: styles.galleryDiptych,
+  demo: styles.galleryDemo,
+}
 
 export function StudioMark({ compact = false }: { compact?: boolean }) {
   return (
@@ -72,7 +83,7 @@ export default function StudioExperience({ lang }: { lang: StudioLang }) {
             <Link href={contactHref} className={styles.primaryAction}>
               {copy.primaryCta} <ArrowRight aria-hidden="true" />
             </Link>
-            <a href="#metodo" className={styles.secondaryAction}>
+            <a href="#sistema-criativo" className={styles.secondaryAction}>
               {copy.secondaryCta} <ArrowDownRight aria-hidden="true" />
             </a>
           </motion.div>
@@ -94,6 +105,7 @@ export default function StudioExperience({ lang }: { lang: StudioLang }) {
 
       <nav className={styles.sectionNav} aria-label={lang === 'pt' ? 'Seções do Studio' : 'Studio sections'}>
         <a href="#frentes">{copy.nav.services}</a>
+        <a href="#sistema-criativo">{copy.nav.creative}</a>
         <a href="#cases">{copy.nav.cases}</a>
         <a href="#metodo">{copy.nav.process}</a>
         <a href="#parcerias">{copy.nav.partnership}</a>
@@ -124,6 +136,121 @@ export default function StudioExperience({ lang }: { lang: StudioLang }) {
             )
           })}
         </div>
+      </section>
+
+      <section className={styles.creativeProof} id="sistema-criativo" aria-labelledby="studio-creative-title">
+        <motion.header className={styles.sectionHeader} {...reveal()}>
+          <p>{copy.creativeSystem.eyebrow}</p>
+          <h2 id="studio-creative-title">{copy.creativeSystem.title}</h2>
+          <span>{copy.creativeSystem.lead}</span>
+        </motion.header>
+
+        <motion.figure className={styles.productionDossier} {...reveal(0.04)}>
+          <div className={styles.dossierVisual}>
+            <Image
+              src="/portfolio/studio/pierrondi-studio-production-dossier-v1.webp"
+              alt={copy.creativeSystem.visualAlt}
+              fill
+              sizes="(max-width: 800px) 100vw, 58vw"
+              priority
+            />
+            <div className={styles.dossierFrame} aria-hidden="true">
+              <span>PIERRONDI STUDIO</span>
+              <i />
+              <span>PRODUCTION / 01</span>
+            </div>
+          </div>
+          <figcaption>
+            <p>{copy.creativeSystem.visualLabel}</p>
+            <span>{copy.creativeSystem.visualCaption}</span>
+          </figcaption>
+        </motion.figure>
+
+        <div className={styles.visualIndex} aria-labelledby="studio-visual-index-title">
+          <motion.header className={styles.visualIndexHeader} {...reveal(0.02)}>
+            <p>{copy.creativeSystem.proofEyebrow}</p>
+            <h3 id="studio-visual-index-title">{copy.creativeSystem.proofTitle}</h3>
+            <span>{copy.creativeSystem.proofLead}</span>
+          </motion.header>
+
+          <div className={styles.galleryGrid}>
+            {copy.creativeSystem.proofItems.map((item, index) => (
+              <motion.article
+                key={item.id}
+                className={`${styles.galleryItem} ${proofLayoutClasses[item.layout]}`}
+                data-studio-proof-item={item.id}
+                {...reveal(index * 0.035)}
+              >
+                <div className={styles.galleryMedia}>
+                  {item.sources.length === 1 ? (
+                    <Image
+                      src={item.sources[0].src}
+                      alt={item.sources[0].alt}
+                      fill
+                      sizes="(max-width: 800px) calc(100vw - 36px), (max-width: 1080px) 50vw, 58vw"
+                    />
+                  ) : (
+                    <div className={styles.galleryDiptychImages}>
+                      {item.sources.map((source) => (
+                        <div key={source.src} className={styles.galleryDiptychImage}>
+                          <Image
+                            src={source.src}
+                            alt={source.alt}
+                            fill
+                            sizes="(max-width: 800px) calc((100vw - 62px) / 2), 24vw"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <span className={styles.galleryIndex} aria-hidden="true">{item.index}</span>
+                </div>
+                <div className={styles.galleryCopy}>
+                  <p>{item.label}</p>
+                  <h3>{item.title}</h3>
+                  <span>{item.caption}</span>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+
+          <p className={styles.visualIndexNote}>{copy.creativeSystem.proofNote}</p>
+        </div>
+
+        <div className={styles.creativeSystemList}>
+          {copy.creativeSystem.systems.map((system, index) => (
+            <motion.article
+              key={system.id}
+              id={system.id}
+              className={styles.creativeSystem}
+              data-studio-creative-system={system.id}
+              {...reveal(index * 0.045)}
+            >
+              <div className={styles.systemIdentity}>
+                <span>{system.index}</span>
+                <h3>{system.title}</h3>
+                <p>{system.strapline}</p>
+              </div>
+              <div className={styles.systemBody}>
+                <p>{system.description}</p>
+                <ol aria-label={`${system.title}: ${copy.creativeSystem.capabilityLabel}`}>
+                  {system.stages.map((stage, stageIndex) => (
+                    <li key={stage}><i>{String(stageIndex + 1).padStart(2, '0')}</i>{stage}</li>
+                  ))}
+                </ol>
+              </div>
+              <div className={styles.systemOutputs}>
+                <span>{copy.creativeSystem.formatLabel}</span>
+                <ul>
+                  {system.formats.map((format) => <li key={format}>{format}</li>)}
+                </ul>
+                <p><strong>{copy.creativeSystem.proofLabel}</strong>{system.proof}</p>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+
+        <p className={styles.creativeNote}>{copy.creativeSystem.note}</p>
       </section>
 
       <section className={styles.cases} id="cases" aria-labelledby="studio-cases-title">

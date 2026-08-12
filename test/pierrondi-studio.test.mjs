@@ -12,6 +12,8 @@ const homeNav = await readFile(new URL('components/home-v2/chrome/NavBar.tsx', r
 const homeV2 = await readFile(new URL('components/home-v2/HomeV2.tsx', root), 'utf8')
 const publicNavigation = await readFile(new URL('components/public-navigation.ts', root), 'utf8')
 const growthCore = await readFile(new URL('components/studio/StudioGrowthCore.tsx', root), 'utf8')
+const studioExperience = await readFile(new URL('components/studio/StudioExperience.tsx', root), 'utf8')
+const studioStyles = await readFile(new URL('components/studio/StudioExperience.module.css', root), 'utf8')
 const feitosIndex = await readFile(new URL('app/feitos/FeitosIndexContent.tsx', root), 'utf8')
 const sitemap = await readFile(new URL('app/sitemap.ts', root), 'utf8')
 const robots = await readFile(new URL('public/robots.txt', root), 'utf8')
@@ -41,6 +43,43 @@ test('Studio content keeps four capabilities, three cases, five stages, and whit
 
   assert.equal(STUDIO_COPY.pt.ctaButton, 'Vamos avaliar um projeto-piloto')
   assert.match(STUDIO_COPY.pt.positioning, /sistemas de crescimento executáveis/i)
+})
+
+test('Studio exposes the creative production system without presenting authorial visuals as client proof', async () => {
+  const expectedSystems = ['creative-forge', 'creative-video-factory', 'content-engine', 'brand-os']
+  const expectedProofItems = [
+    'direction-notebook',
+    'cantustudio-feature',
+    'cantustudio-vertical',
+    'review-console',
+    'faithschool-diptych',
+    'luar-demo',
+  ]
+
+  for (const lang of ['pt', 'en']) {
+    const copy = STUDIO_COPY[lang]
+    assert.deepEqual(copy.creativeSystem.systems.map((system) => system.id), expectedSystems)
+    assert.deepEqual(copy.creativeSystem.proofItems.map((item) => item.id), expectedProofItems)
+    assert.match(copy.creativeSystem.proofNote, /client|cliente/i)
+    assert.ok(copy.creativeSystem.proofItems.every((item) => item.label && item.caption && item.sources.length > 0))
+    assert.match(copy.creativeSystem.visualCaption, /client|cliente/i)
+    assert.match(copy.creativeSystem.note, /approval|aprovação/i)
+  }
+
+  await Promise.all([
+    access(new URL('public/portfolio/studio/pierrondi-studio-production-dossier-v1.webp', root)),
+    access(new URL('public/portfolio/studio/pierrondi-studio-storyboard-atlas-v1.webp', root)),
+    access(new URL('public/portfolio/studio/pierrondi-studio-review-console-v1.webp', root)),
+  ])
+  assert.match(studioExperience, /id="sistema-criativo"/)
+  assert.match(studioExperience, /src="\/portfolio\/studio\/pierrondi-studio-production-dossier-v1\.webp"/)
+  assert.match(studioExperience, /proofItems\.map/)
+  assert.match(studioExperience, /galleryDiptychImages/)
+  assert.match(studioExperience, /id=\{system\.id\}/)
+  assert.match(studioStyles, /\.productionDossier/)
+  assert.match(studioStyles, /\.galleryGrid/)
+  assert.match(studioStyles, /\.visualIndex/)
+  assert.match(studioStyles, /\.creativeSystem/)
 })
 
 test('one shared portfolio case powers the landing, portfolio, and feitos', () => {

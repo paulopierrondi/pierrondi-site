@@ -64,7 +64,9 @@ test('catalog distinguishes products, components, labs, capabilities, and protec
 test('catalog search corpus includes both locales and EN internal links stay localized', () => {
   const studio = PORTFOLIO_CATALOG.find((entry) => entry.id === 'pierrondi-studio')
   const kommo = PORTFOLIO_CATALOG.find((entry) => entry.id === 'kommo-whatsapp')
-  assert.ok(studio && kommo)
+  const creativeVideo = PORTFOLIO_CATALOG.find((entry) => entry.id === 'creative-video-factory')
+  const brandOs = PORTFOLIO_CATALOG.find((entry) => entry.id === 'brand-os')
+  assert.ok(studio && kommo && creativeVideo && brandOs)
   assert.match(portfolioCatalogSearchText(studio), /Marca, conteúdo, CRM e IA/)
   assert.match(portfolioCatalogSearchText(studio), /Brand, content, CRM, and AI/)
   assert.equal(resolvePortfolioHref(studio, 'en'), '/en/studio')
@@ -72,6 +74,24 @@ test('catalog search corpus includes both locales and EN internal links stay loc
   assert.equal(resolvePortfolioHref({ href: '/' }, 'en'), '/en')
   assert.equal(resolvePortfolioHref({ href: '/feitos/sada-servicenow' }, 'en'), '/en/feitos')
   assert.equal(resolvePortfolioHref({ href: '/feitos/llm-inferencia' }, 'en'), '/en/feitos')
+  assert.equal(resolvePortfolioHref(creativeVideo, 'en'), '/en/studio#creative-video-factory')
+  assert.equal(resolvePortfolioHref(brandOs, 'en'), '/en/studio#brand-os')
+})
+
+test('creative media entries lead to inspectable Studio production systems', () => {
+  const expected = {
+    'creative-forge': '/studio#creative-forge',
+    'creative-video-factory': '/studio#creative-video-factory',
+    'content-engine': '/studio#content-engine',
+    'brand-os': '/studio#brand-os',
+  }
+
+  for (const [id, href] of Object.entries(expected)) {
+    const entry = PORTFOLIO_CATALOG.find((item) => item.id === id)
+    assert.equal(entry?.href, href)
+    assert.ok(entry?.cta?.pt)
+    assert.ok(entry?.cta?.en)
+  }
 })
 
 test('catalog search exposes only the designed clear control', () => {

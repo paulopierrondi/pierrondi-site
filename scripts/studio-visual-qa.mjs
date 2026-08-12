@@ -72,6 +72,10 @@ async function inspectViewport(viewport) {
   await page.waitForTimeout(450)
   await page.screenshot({ path: path.join(outputDir, `studio-services-${viewport.name}.png`), fullPage: false })
 
+  await page.locator('#sistema-criativo').scrollIntoViewIfNeeded()
+  await page.waitForTimeout(450)
+  await page.screenshot({ path: path.join(outputDir, `studio-creative-${viewport.name}.png`), fullPage: false })
+
   await page.locator('#cases').scrollIntoViewIfNeeded()
   await page.waitForTimeout(450)
   await page.screenshot({ path: path.join(outputDir, `studio-cases-${viewport.name}.png`), fullPage: false })
@@ -86,12 +90,17 @@ async function inspectViewport(viewport) {
     h1Count: document.querySelectorAll('h1').length,
     mainCount: document.querySelectorAll('main').length,
     serviceCards: document.querySelectorAll('#frentes article').length,
+    creativeCards: document.querySelectorAll('#sistema-criativo article').length,
+    creativeSystems: document.querySelectorAll('[data-studio-creative-system]').length,
+    proofItems: document.querySelectorAll('[data-studio-proof-item]').length,
+    creativeImages: document.querySelectorAll('#sistema-criativo img').length,
     caseCards: document.querySelectorAll('#cases article').length,
     processSteps: document.querySelectorAll('#metodo article').length,
     sectionLinks: document.querySelectorAll('nav[aria-label="Seções do Studio"] a').length,
     primaryCta: document.querySelector('main a[href^="/contato"]')?.getAttribute('href') ?? '',
     webglReady: document.querySelector('[data-studio-growth-core]')?.getAttribute('data-webgl-ready') ?? '',
     growthCoreCanvases: document.querySelectorAll('[data-studio-growth-core] canvas').length,
+    creativeImageLoaded: (document.querySelector('#sistema-criativo img')?.naturalWidth ?? 0) > 0,
     visibleCookieBanners: [...document.querySelectorAll('[aria-label="Consentimento de cookies"]')]
       .filter((element) => element.getBoundingClientRect().height > 0).length,
     casesHeadingTop: document.querySelector('#studio-cases-title')?.getBoundingClientRect().top ?? -1,
@@ -103,12 +112,17 @@ async function inspectViewport(viewport) {
     && metrics.h1Count === 1
     && metrics.mainCount === 1
     && metrics.serviceCards === 4
+    && metrics.creativeCards === 10
+    && metrics.creativeSystems === 4
+    && metrics.proofItems === 6
+    && metrics.creativeImages === 8
     && metrics.caseCards === 3
     && metrics.processSteps === 5
-    && metrics.sectionLinks === 4
+    && metrics.sectionLinks === 5
     && metrics.primaryCta.includes('studio-piloto')
     && metrics.webglReady === 'true'
     && metrics.growthCoreCanvases === 1
+    && metrics.creativeImageLoaded
     && metrics.visibleCookieBanners === 0
     && metrics.casesHeadingTop >= 110
     && metrics.casesHeadingTop < metrics.viewportHeight
@@ -207,6 +221,10 @@ const english = await integrationPage.evaluate(() => ({
   viewportWidth: window.innerWidth,
   h1: document.querySelector('h1')?.textContent?.trim() ?? '',
   serviceCards: document.querySelectorAll('#frentes article').length,
+  creativeCards: document.querySelectorAll('#sistema-criativo article').length,
+  creativeSystems: document.querySelectorAll('[data-studio-creative-system]').length,
+  proofItems: document.querySelectorAll('[data-studio-proof-item]').length,
+  creativeImages: document.querySelectorAll('#sistema-criativo img').length,
   caseCards: document.querySelectorAll('#cases article').length,
 }))
 
@@ -241,6 +259,10 @@ report.integrations = {
     && enResponse?.status() === 200
     && english.scrollWidth <= english.viewportWidth
     && english.serviceCards === 4
+    && english.creativeCards === 10
+    && english.creativeSystems === 4
+    && english.proofItems === 6
+    && english.creativeImages === 8
     && english.caseCards === 3
     && integrationDiagnostics.consoleErrors.length === 0
     && integrationDiagnostics.pageErrors.length === 0

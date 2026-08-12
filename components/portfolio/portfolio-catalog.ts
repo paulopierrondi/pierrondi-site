@@ -132,7 +132,7 @@ export function resolvePortfolioHref(entry: Pick<PortfolioCatalogEntry, 'href'>,
   const href = entry.href
   if (!href || lang === 'pt' || href.startsWith('http')) return href
   if (href === '/') return '/en'
-  if (href === '/studio') return '/en/studio'
+  if (href === '/studio' || href.startsWith('/studio#')) return `/en${href}`
   if (href.startsWith('/portfolio')) return `/en${href}`
   if (href.startsWith('/feitos/')) return '/en/feitos'
   return href
@@ -394,27 +394,27 @@ const CORE_PORTFOLIO_CATALOG: PortfolioCatalogEntry[] = [
 
   item({
     id: 'creative-forge', name: 'Creative Forge', shortCode: 'CF', category: 'creative-media',
-    summary: localized('Briefing para imagem editorial com composição e variantes de formato.', 'Brief-to-editorial-image workflow with composition and format variants.'),
-    proof: localized('Uma entrada produz superfícies reutilizáveis com arte, tipografia e QA.', 'One input produces reusable surfaces with art, typography, and QA.'),
-    status: localized('Laboratório criativo funcional', 'Functional creative lab'), technologies: ['Next.js', 'Image AI', 'Typography', 'QA'],
+    summary: localized('Briefing para imagem editorial, composição, tipografia e variantes de formato orientadas por uma mesma mensagem.', 'Brief-to-editorial-image workflow for composition, typography, and format variants guided by one message.'),
+    proof: localized('Uma entrada organiza superfícies reutilizáveis com arte, tipografia, variantes e revisão antes de qualquer uso externo.', 'One input organizes reusable surfaces with art, typography, variants, and review before any external use.'),
+    status: localized('Sistema criativo local', 'Local creative system'), technologies: ['Next.js', 'Image AI', 'Typography', 'QA'], href: '/studio#creative-forge', cta: localized('Ver sistema criativo', 'View creative system'),
   }),
   item({
     id: 'creative-video-factory', name: 'Creative Video Factory', shortCode: 'CVF', category: 'creative-media',
-    summary: localized('Pipeline de vídeo para roteiro, voz, legenda, render e variantes.', 'Video pipeline for scripts, voice, captions, rendering, and variants.'),
-    proof: localized('Especificações por plataforma e quality gates em um fluxo reproduzível.', 'Platform-specific specifications and quality gates in a reproducible workflow.'),
-    status: localized('Fábrica audiovisual local', 'Local audiovisual factory'), technologies: ['Remotion', 'FFmpeg', 'Voice AI', 'Captions'],
+    summary: localized('Pipeline audiovisual para briefing, roteiro, voz, legendas, render, cortes e variantes por canal.', 'Audiovisual pipeline for brief, scripts, voice, captions, renders, edits, and channel-aware variants.'),
+    proof: localized('Um master consistente e suas versões passam por gates de formato, mensagem e aprovação humana.', 'A consistent master and its versions pass through format, message, and human-approval gates.'),
+    status: localized('Fábrica audiovisual local', 'Local audiovisual factory'), technologies: ['Remotion', 'FFmpeg', 'Voice AI', 'Captions'], href: '/studio#creative-video-factory', cta: localized('Ver pipeline audiovisual', 'View audiovisual pipeline'),
   }),
   item({
     id: 'content-engine', name: 'Pierrondi Content Engine', shortCode: 'PCE', category: 'creative-media',
-    summary: localized('Briefing, roteiro, copy, visual e QA organizados em fila.', 'Briefs, scripts, copy, visuals, and QA organized in a queue.'),
-    proof: localized('Queue-only por padrão, com criação separada de publicação e aprovação humana.', 'Queue-only by default, separating creation from publishing with human approval.'),
-    status: localized('Engine local code-complete', 'Code-complete local engine'), technologies: ['Queues', 'LLM', 'Editorial', 'QA'],
+    summary: localized('Briefing, roteiro, copy, direção visual e QA organizados em uma fila editorial controlada.', 'Brief, script, copy, visual direction, and QA organized in a controlled editorial queue.'),
+    proof: localized('Criação, aprovação e publicação permanecem separadas; a ação externa nunca é disparada pela produção.', 'Creation, approval, and publishing remain separate; production never triggers the external action.'),
+    status: localized('Engine editorial local', 'Local editorial engine'), technologies: ['Queues', 'LLM', 'Editorial', 'QA'], href: '/studio#content-engine', cta: localized('Ver fluxo editorial', 'View editorial flow'),
   }),
   item({
     id: 'brand-os', name: 'Pierrondi Brand OS', shortCode: 'BOS', category: 'creative-media',
-    summary: localized('Sistema de identidade, presença e conteúdo com ações externas gated.', 'Identity, presence, and content system with gated external actions.'),
-    proof: localized('Tokens, regras, superfícies e aprovação preservam consistência e controle.', 'Tokens, rules, surfaces, and approval preserve consistency and control.'),
-    status: localized('Sistema de marca testado', 'Tested brand system'), technologies: ['Brand', 'Design tokens', 'Approvals', 'QA'],
+    summary: localized('Sistema de identidade, presença e conteúdo com regras que mantêm a linguagem de marca coesa em cada superfície.', 'Identity, presence, and content system with rules that keep the brand language coherent across every surface.'),
+    proof: localized('Tokens, regras, superfícies reutilizáveis e aprovação preservam consistência e controle nas entregas.', 'Tokens, rules, reusable surfaces, and approval preserve consistency and control across deliveries.'),
+    status: localized('Sistema de marca testado', 'Tested brand system'), technologies: ['Brand', 'Design tokens', 'Approvals', 'QA'], href: '/studio#brand-os', cta: localized('Ver sistema de marca', 'View brand system'),
   }),
   item({
     id: 'design-system', name: 'Pierrondi Design System', shortCode: 'DS', category: 'creative-media',

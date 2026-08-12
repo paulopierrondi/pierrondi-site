@@ -26,6 +26,47 @@ export interface StudioStep {
   description: string
 }
 
+export interface StudioCreativeProofItem {
+  id: string
+  index: string
+  layout: 'atlas' | 'product' | 'portrait' | 'review' | 'diptych' | 'demo'
+  label: string
+  title: string
+  caption: string
+  sources: {
+    src: string
+    alt: string
+  }[]
+}
+
+export interface StudioCreativeSystem {
+  eyebrow: string
+  title: string
+  lead: string
+  visualLabel: string
+  visualCaption: string
+  visualAlt: string
+  proofEyebrow: string
+  proofTitle: string
+  proofLead: string
+  proofNote: string
+  proofItems: StudioCreativeProofItem[]
+  capabilityLabel: string
+  formatLabel: string
+  proofLabel: string
+  note: string
+  systems: {
+    id: string
+    index: string
+    title: string
+    strapline: string
+    description: string
+    stages: string[]
+    formats: string[]
+    proof: string
+  }[]
+}
+
 export const STUDIO_COPY = {
   pt: {
     lang: 'pt' as const,
@@ -39,6 +80,7 @@ export const STUDIO_COPY = {
     secondaryCta: 'Ver como funciona',
     nav: {
       services: 'Frentes',
+      creative: 'Sistema criativo',
       cases: 'Cases',
       process: 'Método',
       partnership: 'White-label',
@@ -81,7 +123,7 @@ export const STUDIO_COPY = {
         label: 'DISTRIBUIÇÃO',
         title: 'Conteúdo multimídia',
         description:
-          'Vídeos curtos, campanhas, roteiros, narração, legendas e variações desenhados desde o início para cada canal.',
+          'Vídeos curtos, campanhas, roteiros, narração, legendas, cortes e variações planejados desde o início para cada canal.',
         deliverables: ['Roteiro e direção', 'Voz e legendas', 'Versões por canal'],
         signal: 'uma ideia, múltiplas entregas',
       },
@@ -96,6 +138,170 @@ export const STUDIO_COPY = {
         signal: 'automação com controle',
       },
     ] satisfies StudioFront[],
+    creativeSystem: {
+      eyebrow: 'PIERRONDI STUDIO / SISTEMA CRIATIVO',
+      title: 'Uma ideia central. Uma cadeia de produção que a mantém inteira.',
+      lead:
+        'Os produtos criativos funcionam como uma mesa de produção: a mensagem orienta a direção visual, o roteiro organiza o movimento e o QA protege cada variação antes do handoff.',
+      visualLabel: 'VISUAL EDITORIAL AUTORAL',
+      visualCaption:
+        'Composição criada para esta vitrine. Ela representa a linguagem de produção do Studio; não é foto de cliente nem prova de resultado de campanha.',
+      visualAlt:
+        'Visual editorial autoral de uma mesa de produção audiovisual, com storyboard, celular, paleta de cor e detalhes de edição.',
+      proofEyebrow: 'CADERNO DE CAMPO / PROVA VISUAL',
+      proofTitle: 'Direção, frame e sistema deixam rastros visíveis.',
+      proofLead:
+        'Cenas autorais do Studio convivem com artefatos públicos de produto. Cada quadro identifica com precisão se mostra uma cena de processo, uma interface de produto ou um ambiente demonstrativo.',
+      proofNote:
+        'Cenas autorais foram criadas para esta vitrine e não documentam uma produção, campanha ou cliente específico. Os artefatos de produto aparecem somente com a classificação indicada.',
+      proofItems: [
+        {
+          id: 'direction-notebook',
+          index: '02',
+          layout: 'atlas',
+          label: 'CENA AUTORAL DO STUDIO · DIREÇÃO',
+          title: 'Caderno de direção',
+          caption:
+            'Referências, sequência, paleta e pontos de corte organizados como linguagem de produção — não como registro de uma campanha de cliente.',
+          sources: [
+            {
+              src: '/portfolio/studio/pierrondi-studio-storyboard-atlas-v1.webp',
+              alt: 'Cena autoral de direção audiovisual com parede de referências, contato de imagens, paleta de cor e mesa de trabalho.',
+            },
+          ],
+        },
+        {
+          id: 'cantustudio-feature',
+          index: '03',
+          layout: 'product',
+          label: 'ARTEFATO PÚBLICO DE PRODUTO · CANTUSTUDIO',
+          title: 'Composição para produto',
+          caption:
+            'Arte pública do CantuStudio usada aqui como evidência visual de composição e superfície de produto; não é uma alegação de performance.',
+          sources: [
+            {
+              src: '/portfolio/cantustudio/feature-graphic.png',
+              alt: 'Arte de produto pública do CantuStudio mostrando um fluxo móvel de harmonização entre importação, revisão e exportação.',
+            },
+          ],
+        },
+        {
+          id: 'cantustudio-vertical',
+          index: '04',
+          layout: 'portrait',
+          label: 'CRIATIVO AUTORAL DE PRODUTO · CANTUSTUDIO',
+          title: 'Criativo vertical',
+          caption:
+            'Frame vertical de produto para mostrar ritmo, hierarquia e leitura mobile; sem alegação de campanha ou resultado de mídia.',
+          sources: [
+            {
+              src: '/portfolio/cantustudio/melodia-satb.png',
+              alt: 'Criativo vertical do CantuStudio mostrando entrada de melodia e o caminho para harmonização SATB.',
+            },
+          ],
+        },
+        {
+          id: 'review-console',
+          index: '05',
+          layout: 'review',
+          label: 'CENA AUTORAL DO STUDIO · REVIEW + QA',
+          title: 'Sala de revisão',
+          caption:
+            'Um visual de processo para o momento em que grade, som, quadro e entrega recebem revisão antes do handoff.',
+          sources: [
+            {
+              src: '/portfolio/studio/pierrondi-studio-review-console-v1.webp',
+              alt: 'Cena autoral de pós-produção com monitor abstrato, contato de imagens, formas de onda e superfície de revisão.',
+            },
+          ],
+        },
+        {
+          id: 'faithschool-diptych',
+          index: '06',
+          layout: 'diptych',
+          label: 'ARTEFATO PÚBLICO DE PRODUTO · FAITHSCHOOL',
+          title: 'Sistema em duas superfícies',
+          caption:
+            'Duas telas públicas do FaithSchool, apresentadas como evidência de interface e organização de produto — sem atribuir métricas ou resultados de adoção.',
+          sources: [
+            {
+              src: '/portfolio/faithschool/app-home.png',
+              alt: 'Tela pública inicial do app FaithSchool com painel Today e cartões de rotina.',
+            },
+            {
+              src: '/portfolio/faithschool/app-planner.png',
+              alt: 'Tela pública de planejamento do app FaithSchool com cartões de ritmo e cronograma.',
+            },
+          ],
+        },
+        {
+          id: 'luar-demo',
+          index: '07',
+          layout: 'demo',
+          label: 'DEMO CONCEITUAL · LUAR DO CAMPO',
+          title: 'Direção de marca em superfície',
+          caption:
+            'Ambiente demonstrativo de storefront para mostrar direção editorial. Pagamentos, frete, estoque e pedidos são simulados.',
+          sources: [
+            {
+              src: '/portfolio/luar-do-campo/storefront-desktop.png',
+              alt: 'Demo conceitual do Luar do Campo com storefront editorial e uma modelo em vestido marfim.',
+            },
+          ],
+        },
+      ] satisfies StudioCreativeProofItem[],
+      capabilityLabel: 'CAPACIDADE',
+      formatLabel: 'SAÍDAS',
+      proofLabel: 'CONTROLE',
+      note:
+        'Todo material externo permanece sujeito a escopo, direitos de uso, revisão de marca e aprovação humana antes de publicação.',
+      systems: [
+        {
+          id: 'creative-forge',
+          index: '01',
+          title: 'Creative Forge',
+          strapline: 'Do briefing à superfície editorial.',
+          description:
+            'Transforma uma direção de mensagem em peças de imagem com composição, tipografia e variantes de formato — sem começar do zero a cada canal.',
+          stages: ['Brief e mensagem', 'Direção visual', 'Composição editorial', 'Variações + QA'],
+          formats: ['Feed e carrossel', 'Deck e institucional', 'Formatos sociais'],
+          proof: 'Sistema de criação local com revisão antes de qualquer uso externo.',
+        },
+        {
+          id: 'creative-video-factory',
+          index: '02',
+          title: 'Creative Video Factory',
+          strapline: 'Do roteiro ao master, com espaço para variar.',
+          description:
+            'Organiza briefing, hook, roteiro, voz, legendas, render e cortes em uma cadeia audiovisual que produz um master consistente e versões orientadas por canal.',
+          stages: ['Brief e hook', 'Roteiro e direção', 'Voz + legendas', 'Render + QA'],
+          formats: ['Vertical 9:16', 'Master + variações', 'Reels, Shorts e TikTok'],
+          proof: 'Pipeline local com gates de formato, mensagem e aprovação humana.',
+        },
+        {
+          id: 'content-engine',
+          index: '03',
+          title: 'Pierrondi Content Engine',
+          strapline: 'Criação em fila; publicação separada.',
+          description:
+            'Mantém briefing, roteiro, copy, direção visual e QA em uma fila editorial. Criar um ativo não equivale a publicar: a decisão externa permanece controlada.',
+          stages: ['Brief operacional', 'Roteiro e copy', 'Direção visual', 'QA + aprovação'],
+          formats: ['Pacote de produção', 'Assets por canal', 'Handoff organizado'],
+          proof: 'Fila local com criação, aprovação e publicação deliberadamente separadas.',
+        },
+        {
+          id: 'brand-os',
+          index: '04',
+          title: 'Pierrondi Brand OS',
+          strapline: 'Identidade que orienta cada superfície.',
+          description:
+            'Conecta identidade, presença e conteúdo por meio de tokens, regras e superfícies reutilizáveis para que a linguagem da marca sobreviva ao volume de entregas.',
+          stages: ['Princípios de marca', 'Tokens e regras', 'Superfícies de canal', 'QA + aprovação'],
+          formats: ['Kits de marca', 'Guides de produção', 'Presença por canal'],
+          proof: 'Sistema local testado com ações externas mantidas sob aprovação.',
+        },
+      ] satisfies StudioCreativeSystem['systems'],
+    } satisfies StudioCreativeSystem,
     casesEyebrow: 'CASOS DE APLICAÇÃO · PROBLEMA → SISTEMA → RESULTADO',
     casesTitle: 'Prova de capacidade sem teatro de números.',
     casesLead:
@@ -180,7 +386,7 @@ export const STUDIO_COPY = {
       'Strategy that guides. Brand that holds. Content that adapts. Automation that keeps the pace.',
     primaryCta: 'Let’s assess a pilot project',
     secondaryCta: 'See how it works',
-    nav: { services: 'Capabilities', cases: 'Cases', process: 'Method', partnership: 'White-label' },
+    nav: { services: 'Capabilities', creative: 'Creative system', cases: 'Cases', process: 'Method', partnership: 'White-label' },
     proofLabels: ['Offer and message', 'Brand system', 'Multimedia content', 'CRM + AI'],
     signalMap: {
       eyebrow: 'GROWTH SYSTEM / LIVE MAP',
@@ -205,7 +411,7 @@ export const STUDIO_COPY = {
       },
       {
         id: 'content', index: '03', label: 'DISTRIBUTION', title: 'Multimedia content',
-        description: 'Short-form video, campaigns, scripts, narration, captions, and variations designed for each channel from the start.',
+        description: 'Short-form video, campaigns, scripts, narration, captions, edits, and variations planned for each channel from the start.',
         deliverables: ['Script and direction', 'Voice and captions', 'Channel variants'], signal: 'one idea, multiple outputs',
       },
       {
@@ -214,6 +420,170 @@ export const STUDIO_COPY = {
         deliverables: ['CRM and pipelines', 'Salesbots and copilots', 'Knowledge base and gates'], signal: 'automation with control',
       },
     ] satisfies StudioFront[],
+    creativeSystem: {
+      eyebrow: 'PIERRONDI STUDIO / CREATIVE SYSTEM',
+      title: 'One central idea. One production chain that keeps it whole.',
+      lead:
+        'The creative products work as one production desk: the message guides the visual direction, the script organizes movement, and QA protects every variation before handoff.',
+      visualLabel: 'AUTHORIAL EDITORIAL VISUAL',
+      visualCaption:
+        'A composition created for this showcase. It represents the Studio production language; it is not client photography or campaign-performance proof.',
+      visualAlt:
+        'Authorial editorial visual of an audiovisual production desk with a storyboard, phone, colour palette, and editing details.',
+      proofEyebrow: 'FIELD NOTES / VISUAL PROOF',
+      proofTitle: 'Direction, frame, and system leave visible traces.',
+      proofLead:
+        'Authorial Studio scenes sit alongside public product artifacts. Every frame identifies whether it shows a process scene, a product interface, or a demonstration environment.',
+      proofNote:
+        'Authorial scenes were created for this showcase and do not document a specific client production or campaign. Product artifacts appear only with the classification shown.',
+      proofItems: [
+        {
+          id: 'direction-notebook',
+          index: '02',
+          layout: 'atlas',
+          label: 'AUTHORIAL STUDIO SCENE · DIRECTION',
+          title: 'Direction notebook',
+          caption:
+            'References, sequencing, colour, and cut points organized as a production language—not as a record of a client campaign.',
+          sources: [
+            {
+              src: '/portfolio/studio/pierrondi-studio-storyboard-atlas-v1.webp',
+              alt: 'Authorial audiovisual direction scene with a wall of references, image contact sheets, colour palette, and work table.',
+            },
+          ],
+        },
+        {
+          id: 'cantustudio-feature',
+          index: '03',
+          layout: 'product',
+          label: 'PUBLIC PRODUCT ARTIFACT · CANTUSTUDIO',
+          title: 'Product composition',
+          caption:
+            'A public CantuStudio product asset used here as visual evidence of composition and product surface, not as a performance claim.',
+          sources: [
+            {
+              src: '/portfolio/cantustudio/feature-graphic.png',
+              alt: 'Public CantuStudio product artwork showing a mobile harmonization flow from import through review and export.',
+            },
+          ],
+        },
+        {
+          id: 'cantustudio-vertical',
+          index: '04',
+          layout: 'portrait',
+          label: 'AUTHORIAL PRODUCT CREATIVE · CANTUSTUDIO',
+          title: 'Vertical creative',
+          caption:
+            'A vertical product frame showing rhythm, hierarchy, and mobile reading—with no campaign or media-performance claim.',
+          sources: [
+            {
+              src: '/portfolio/cantustudio/melodia-satb.png',
+              alt: 'CantuStudio vertical product creative showing melody input and the path to SATB harmonization.',
+            },
+          ],
+        },
+        {
+          id: 'review-console',
+          index: '05',
+          layout: 'review',
+          label: 'AUTHORIAL STUDIO SCENE · REVIEW + QA',
+          title: 'Review room',
+          caption:
+            'A process visual for the moment grade, sound, frame, and delivery receive review before handoff.',
+          sources: [
+            {
+              src: '/portfolio/studio/pierrondi-studio-review-console-v1.webp',
+              alt: 'Authorial post-production scene with an abstract monitor, image contact sheet, waveforms, and review surface.',
+            },
+          ],
+        },
+        {
+          id: 'faithschool-diptych',
+          index: '06',
+          layout: 'diptych',
+          label: 'PUBLIC PRODUCT ARTIFACT · FAITHSCHOOL',
+          title: 'System across two surfaces',
+          caption:
+            'Two public FaithSchool screens shown as interface and product-organization evidence, without adoption or performance metrics.',
+          sources: [
+            {
+              src: '/portfolio/faithschool/app-home.png',
+              alt: 'Public FaithSchool app home screen with the Today dashboard and routine cards.',
+            },
+            {
+              src: '/portfolio/faithschool/app-planner.png',
+              alt: 'Public FaithSchool planning screen with rhythm cards and schedule.',
+            },
+          ],
+        },
+        {
+          id: 'luar-demo',
+          index: '07',
+          layout: 'demo',
+          label: 'CONCEPTUAL DEMO · LUAR DO CAMPO',
+          title: 'Brand direction on a surface',
+          caption:
+            'A demonstration storefront used to show editorial direction. Payments, freight, inventory, and orders are simulated.',
+          sources: [
+            {
+              src: '/portfolio/luar-do-campo/storefront-desktop.png',
+              alt: 'Luar do Campo conceptual demo with an editorial storefront and a model in an ivory dress.',
+            },
+          ],
+        },
+      ] satisfies StudioCreativeProofItem[],
+      capabilityLabel: 'CAPABILITY',
+      formatLabel: 'OUTPUTS',
+      proofLabel: 'CONTROL',
+      note:
+        'Every external asset remains subject to scope, usage rights, brand review, and human approval before publication.',
+      systems: [
+        {
+          id: 'creative-forge',
+          index: '01',
+          title: 'Creative Forge',
+          strapline: 'From brief to editorial surface.',
+          description:
+            'Turns a message direction into image pieces with composition, typography, and format variants—without starting from scratch for every channel.',
+          stages: ['Brief and message', 'Visual direction', 'Editorial composition', 'Variants + QA'],
+          formats: ['Feed and carousel', 'Deck and institutional', 'Social formats'],
+          proof: 'Local creation system with review before any external use.',
+        },
+        {
+          id: 'creative-video-factory',
+          index: '02',
+          title: 'Creative Video Factory',
+          strapline: 'From script to master, with room to vary.',
+          description:
+            'Organizes brief, hook, script, voice, captions, render, and cuts into an audiovisual chain that creates a consistent master and channel-aware versions.',
+          stages: ['Brief and hook', 'Script and direction', 'Voice + captions', 'Render + QA'],
+          formats: ['Vertical 9:16', 'Master + variations', 'Reels, Shorts, and TikTok'],
+          proof: 'Local pipeline with format, message, and human-approval gates.',
+        },
+        {
+          id: 'content-engine',
+          index: '03',
+          title: 'Pierrondi Content Engine',
+          strapline: 'Creation in queue; publishing kept separate.',
+          description:
+            'Keeps brief, script, copy, visual direction, and QA in one editorial queue. Creating an asset does not publish it: the external decision remains controlled.',
+          stages: ['Operational brief', 'Script and copy', 'Visual direction', 'QA + approval'],
+          formats: ['Production package', 'Channel assets', 'Organized handoff'],
+          proof: 'Local queue that deliberately separates creation, approval, and publishing.',
+        },
+        {
+          id: 'brand-os',
+          index: '04',
+          title: 'Pierrondi Brand OS',
+          strapline: 'Identity that guides every surface.',
+          description:
+            'Connects identity, presence, and content through tokens, rules, and reusable surfaces so the brand language holds through a growing volume of work.',
+          stages: ['Brand principles', 'Tokens and rules', 'Channel surfaces', 'QA + approval'],
+          formats: ['Brand kits', 'Production guides', 'Channel presence'],
+          proof: 'Tested local system with external actions kept under approval.',
+        },
+      ] satisfies StudioCreativeSystem['systems'],
+    } satisfies StudioCreativeSystem,
     casesEyebrow: 'APPLICATION CASES · PROBLEM → SYSTEM → OUTCOME',
     casesTitle: 'Capability proof without metric theater.',
     casesLead:

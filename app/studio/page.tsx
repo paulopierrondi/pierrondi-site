@@ -7,7 +7,7 @@ import { SITE_URL } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Pierrondi Studio — Marca, Conteúdo e IA aplicada ao crescimento',
   description:
-    'Estratégia, branding, conteúdo multimídia, CRM e automação com IA transformados em sistemas de crescimento executáveis.',
+    'Estratégia, branding, conteúdo audiovisual, CRM e automação com IA transformados em sistemas de crescimento executáveis e controlados.',
   alternates: {
     canonical: '/studio',
     languages: { 'pt-BR': '/studio', 'en-US': '/en/studio', 'x-default': '/studio' },
@@ -36,7 +36,7 @@ const studioSchema = {
   '@id': `${SITE_URL}/studio#service`,
   url: `${SITE_URL}/studio`,
   name: 'Pierrondi Studio',
-  serviceType: 'Estratégia de marca, conteúdo multimídia e automação comercial com IA',
+  serviceType: 'Estratégia de marca, conteúdo audiovisual e automação comercial com IA',
   description: STUDIO_COPY.pt.positioning,
   inLanguage: 'pt-BR',
   provider: { '@id': `${SITE_URL}/#person` },
