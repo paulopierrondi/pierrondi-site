@@ -7,6 +7,7 @@ import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import PortfolioAtlas from './PortfolioAtlas'
 import ProjectVisual, { CaseMark } from './ProjectVisual'
 import PortfolioEvidenceMosaic from './PortfolioEvidenceMosaic'
+import PortfolioStudioSpotlight from './PortfolioStudioSpotlight'
 import { MULTI_LLM_ROSTER, PORTFOLIO_CATALOG, PUBLIC_APP_STORE_APPS } from './portfolio-catalog'
 import {
   APP_STORE_CATALOG,
@@ -117,7 +118,7 @@ export default function PortfolioExperience({ lang }: { lang: PortfolioLang }) {
           <h1>{t.title}</h1>
           <div className={styles.heroBottom}>
             <p>{t.lead}</p>
-            <a href="#cases">{t.explore}<ArrowDown aria-hidden="true" /></a>
+            <a href="#studio-visual">{t.explore}<ArrowDown aria-hidden="true" /></a>
           </div>
         </motion.div>
         <PortfolioEvidenceMosaic lang={lang} reduceMotion={reduceMotion} />
@@ -129,6 +130,7 @@ export default function PortfolioExperience({ lang }: { lang: PortfolioLang }) {
         </div>
       </header>
 
+      <PortfolioStudioSpotlight lang={lang} reduceMotion={reduceMotion} />
       <PortfolioCases lang={lang} cases={cases} t={t} reduceMotion={reduceMotion} />
       <PortfolioAtlas lang={lang} reduceMotion={reduceMotion} />
       <AppCatalog lang={lang} t={t} reduceMotion={reduceMotion} />
