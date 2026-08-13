@@ -80,8 +80,11 @@ async function inspect(check) {
   })
 
   const english = check.locale === 'en-US'
-  const exploreLabel = english ? 'Explore the portfolio' : 'Explorar o portfólio'
-  await page.getByRole('link', { name: exploreLabel, exact: true }).click()
+  const shortcutsLabel = english ? 'Portfolio shortcuts' : 'Atalhos do portfólio'
+  await page
+    .getByRole('navigation', { name: shortcutsLabel, exact: true })
+    .getByRole('link', { name: 'Studio', exact: true })
+    .click()
   await page.waitForTimeout(360)
 
   const spotlight = page.locator('#studio-visual')
@@ -112,27 +115,29 @@ async function inspect(check) {
   const expectedHeading = english ? 'From notebook to final cut.' : 'Do caderno ao corte final.'
   const expectedNote = english ? 'not client work' : 'não são registros de cliente'
   const expectedLang = english ? 'en-US' : 'pt-BR'
-  const pass = response?.status() === 200
-    && metrics.h1Count === 1
-    && metrics.scrollWidth <= metrics.viewportWidth
-    && metrics.heroStudioPhoto === 1
-    && heroStudioLoaded
-    && heroStudioVisibility
-    && metrics.spotlightFrames === 3
-    && metrics.spotlightImages === 3
-    && metrics.spotlightHref === expectedHref
-    && metrics.spotlightHeading === expectedHeading
-    && metrics.spotlightNote.includes(expectedNote)
-    && metrics.anchorHash === '#studio-visual'
-    && metrics.spotlightTop >= 56
-    && metrics.spotlightHeadingTop >= 72
-    && studioAssets.every((asset) => metrics.imageSources.some((source) => source.includes(asset)))
-    && metrics.htmlLang === expectedLang
-    && imageLoaded.every(Boolean)
-    && diagnostics.consoleErrors.length === 0
-    && diagnostics.pageErrors.length === 0
-    && diagnostics.failedRequests.length === 0
-    && (!check.reducedMotion || metrics.reducedMotion)
+  const pass = [
+    response?.status() === 200,
+    metrics.h1Count === 1,
+    metrics.scrollWidth <= metrics.viewportWidth,
+    metrics.heroStudioPhoto === 1,
+    heroStudioLoaded,
+    heroStudioVisibility,
+    metrics.spotlightFrames === 3,
+    metrics.spotlightImages === 3,
+    metrics.spotlightHref === expectedHref,
+    metrics.spotlightHeading === expectedHeading,
+    metrics.spotlightNote.includes(expectedNote),
+    metrics.anchorHash === '#studio-visual',
+    metrics.spotlightTop >= 56,
+    metrics.spotlightHeadingTop >= 72,
+    studioAssets.every((asset) => metrics.imageSources.some((source) => source.includes(asset))),
+    metrics.htmlLang === expectedLang,
+    imageLoaded.every(Boolean),
+    diagnostics.consoleErrors.length === 0,
+    diagnostics.pageErrors.length === 0,
+    diagnostics.failedRequests.length === 0,
+    check.reducedMotion ? metrics.reducedMotion : true,
+  ].every(Boolean)
 
   return { ...check, status: response?.status(), imageLoaded, heroStudioLoaded, heroStudioVisibility, metrics, ...diagnostics, pass }
 }

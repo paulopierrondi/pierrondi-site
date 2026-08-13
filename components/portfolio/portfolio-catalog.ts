@@ -88,17 +88,41 @@ export interface PortfolioCatalogEntry {
 type CatalogDraft = Omit<PortfolioCatalogEntry, 'kind' | 'evidence' | 'visibility' | 'publicSafe'> &
   Partial<Pick<PortfolioCatalogEntry, 'kind' | 'evidence' | 'visibility'>>
 
+const CATALOG_KIND_BY_ID: Partial<Record<string, PortfolioCatalogKind>> = {
+  'wordpress-elementor-kit': 'capability',
+  'sap-training-studio': 'course',
+}
+
+const CATALOG_KIND_STATUS_RULES: ReadonlyArray<{
+  kind: PortfolioCatalogKind
+  terms: readonly string[]
+}> = [
+  { kind: 'scaffold', terms: ['scaffold'] },
+  { kind: 'lab', terms: ['laboratório', 'lab'] },
+  { kind: 'framework', terms: ['framework'] },
+  { kind: 'case', terms: ['case'] },
+  { kind: 'app', terms: ['app publicado', 'storefront público'] },
+  { kind: 'tool', terms: ['ferramenta', 'tool', 'engine'] },
+]
+
+const SYSTEM_CATALOG_CATEGORIES: readonly PortfolioCatalogCategory[] = [
+  'ai-systems',
+  'automation-ops',
+  'enterprise-ai',
+]
+
 function inferKind(entry: CatalogDraft): PortfolioCatalogKind {
   const status = `${entry.status.pt} ${entry.status.en}`.toLowerCase()
-  if (entry.id === 'wordpress-elementor-kit') return 'capability'
-  if (entry.id === 'sap-training-studio') return 'course'
-  if (status.includes('scaffold')) return 'scaffold'
-  if (status.includes('laboratório') || status.includes('lab')) return 'lab'
-  if (status.includes('framework')) return 'framework'
-  if (status.includes('case')) return 'case'
-  if (entry.id.startsWith('app-') || status.includes('app publicado') || status.includes('storefront público')) return 'app'
-  if (status.includes('ferramenta') || status.includes('tool') || status.includes('engine')) return 'tool'
-  if (['ai-systems', 'automation-ops', 'enterprise-ai'].includes(entry.category)) return 'system'
+  const explicitKind = CATALOG_KIND_BY_ID[entry.id]
+  if (explicitKind) return explicitKind
+
+  const inferredFromStatus = CATALOG_KIND_STATUS_RULES.find(({ terms }) =>
+    terms.some((term) => status.includes(term)),
+  )?.kind
+  if (inferredFromStatus) return inferredFromStatus
+
+  if (entry.id.startsWith('app-')) return 'app'
+  if (SYSTEM_CATALOG_CATEGORIES.includes(entry.category)) return 'system'
   return 'product'
 }
 
@@ -224,9 +248,9 @@ const CORE_PORTFOLIO_CATALOG: PortfolioCatalogEntry[] = [
   }),
   item({
     id: 'property-partner-search', name: 'Property Partner Search', shortCode: 'PPS', category: 'products-saas', recent: true,
-    summary: localized('Busca de oportunidades imobiliárias com parsing determinístico, filtros e ficha detalhada.', 'Property opportunity search with deterministic parsing, filters, and detailed records.'),
-    proof: localized('Doze imóveis sintéticos e nenhuma integração ou dado de parceiro real.', 'Twelve synthetic properties with no live integration or real partner data.'),
-    status: localized('Produto funcional público', 'Public functional product'), technologies: ['TypeScript', 'Rules Engine', 'Search', 'Railway'], href: 'https://meta-busca-parceiros-production.up.railway.app', external: true, cta: localized('Abrir produto', 'Open product'),
+    summary: localized('Busca complementar de imóveis parceiros com filtros visíveis, ficha detalhada e origem preservada.', 'Partner-inventory search with visible filters, detailed records, and preserved source attribution.'),
+    proof: localized('Doze imóveis sintéticos, duas fontes demonstrativas e parsing determinístico; nenhuma integração ou dado real de parceiro.', 'Twelve synthetic listings, two demonstration sources, and deterministic parsing; no live integration or real partner data.'),
+    status: localized('Protótipo funcional público', 'Public functional prototype'), technologies: ['TypeScript', 'Rules Engine', 'Search', 'Railway'], href: 'https://meta-busca-parceiros-production.up.railway.app/', external: true, featured: true, cta: localized('Testar busca pública', 'Try public search'),
   }),
   item({
     id: 'cotapulse', name: 'CotaPulse', shortCode: 'CP', category: 'products-saas', recent: true,

@@ -65,6 +65,15 @@ const FLAGSHIP_PROJECTS = [
     relationship: 'confidential client delivery represented by a public functional storefront',
   },
   {
+    name: 'Meta Busca Parceiros',
+    category: 'PropTech partner-inventory search prototype',
+    description:
+      'Public functional prototype that normalizes two demonstration catalogs, turns natural-language queries into visible deterministic filters and preserves listing source attribution through the detail view.',
+    url: `${SITE}/portfolio#property-partner-search`,
+    publicProductUrl: 'https://meta-busca-parceiros-production.up.railway.app/',
+    relationship: 'featured public functional prototype',
+  },
+  {
     name: 'SADA',
     category: 'Enterprise AI operating-model framework',
     description:

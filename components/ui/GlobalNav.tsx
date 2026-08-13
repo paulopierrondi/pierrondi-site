@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import styles from './GlobalNav.module.css'
 
 export interface GlobalNavLink {
@@ -77,13 +78,13 @@ export function GlobalNav({
           <ul className={styles.links} role="list">
             {links.map(({ label, href, active }) => (
               <li key={href}>
-                <a
+                <Link
                   href={href}
                   className={[styles.link, active ? styles.linkActive : ''].filter(Boolean).join(' ')}
                   aria-current={active ? 'page' : undefined}
                 >
                   {label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -129,7 +130,7 @@ export function GlobalNav({
         >
           {mobileMenuContent ?? (
             links?.map(({ label, href, active }) => (
-              <a
+              <Link
                 key={href}
                 href={href}
                 className={styles.overlayLink}
@@ -137,7 +138,7 @@ export function GlobalNav({
                 aria-current={active ? 'page' : undefined}
               >
                 {label}
-              </a>
+              </Link>
             ))
           )}
         </div>

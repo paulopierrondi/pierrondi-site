@@ -17,7 +17,8 @@ const studioAssets = [
 
 test('portfolio introduces the Studio through classified authorial visuals', async () => {
   assert.match(experience, /<PortfolioStudioSpotlight lang=\{lang\} reduceMotion=\{reduceMotion\} \/>/)
-  assert.match(experience, /href="#studio-visual"/)
+  assert.match(experience, /<PortfolioSectionNav lang=\{lang\} \/>/)
+  assert.match(experience, /href="#property-partner-search-spotlight"/)
   assert.match(spotlight, /id="studio-visual"/)
   assert.match(spotlight, /Visuais autorais do Pierrondi Studio/)
   assert.match(spotlight, /not client work, published campaigns, or media results/)

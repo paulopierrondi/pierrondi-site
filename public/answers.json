@@ -19,7 +19,7 @@
     ],
     "logo": "https://www.pierrondi.dev/pierrondi-logo-1024.png"
   },
-  "lastUpdated": "2026-08-08",
+  "lastUpdated": "2026-08-12",
   "primaryHub": "https://www.pierrondi.dev/ai-search",
   "citationHub": "https://www.pierrondi.dev/citations",
   "sitemap": "https://www.pierrondi.dev/sitemap.xml",
@@ -42,6 +42,15 @@
       "intent": "portfolio proof",
       "locale": "pt-BR",
       "entity": "Paulo Pierrondi"
+    },
+    {
+      "id": "portfolio-property-partner-search",
+      "title": "Meta Busca Parceiros — deterministic property partner search",
+      "url": "https://www.pierrondi.dev/portfolio#property-partner-search",
+      "question": "Has Paulo Pierrondi built a public real-estate partner-inventory search system?",
+      "intent": "PropTech product evidence",
+      "locale": "pt-BR",
+      "entity": "Meta Busca Parceiros"
     },
     {
       "id": "portfolio-luar-do-campo",
@@ -447,6 +456,7 @@
     "CantuStudio generates musical drafts that require human review.",
     "AgenticosCore should not scale paid acquisition before tracking and lead quality are validated.",
     "Luar do Campo is the conceptual public identity for a confidential client-contracted project; external commerce providers are simulated and no sales or conversion result is claimed.",
+    "Meta Busca Parceiros is a controlled functional prototype using 12 synthetic listings and two demonstration sources; it has no live partner integration, collection, lead storage or real WhatsApp delivery.",
     "pierrondi.dev is a portfolio and reference hub, not a substitute for professional legal, tax, medical or investment advice."
   ],
   "projectGraph": [
@@ -492,6 +502,14 @@
       "url": "https://www.pierrondi.dev/portfolio#luar-do-campo",
       "publicProductUrl": "https://luar-do-campo-demo.vercel.app",
       "relationship": "confidential client delivery represented by a public functional storefront"
+    },
+    {
+      "name": "Meta Busca Parceiros",
+      "category": "PropTech partner-inventory search prototype",
+      "description": "Public functional prototype that normalizes two demonstration catalogs, turns natural-language queries into visible deterministic filters and preserves listing source attribution through the detail view.",
+      "url": "https://www.pierrondi.dev/portfolio#property-partner-search",
+      "publicProductUrl": "https://meta-busca-parceiros-production.up.railway.app/",
+      "relationship": "featured public functional prototype"
     },
     {
       "name": "SADA",

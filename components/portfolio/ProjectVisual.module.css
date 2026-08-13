@@ -54,6 +54,11 @@
   --case-accent-soft: rgba(124, 58, 237, 0.22);
 }
 
+.terracotta {
+  --case-accent: #a9552f;
+  --case-accent-soft: rgba(169, 85, 47, 0.2);
+}
+
 .grid {
   position: absolute;
   inset: 0;
@@ -132,6 +137,17 @@
   font-weight: 800;
   letter-spacing: -0.06em;
   box-shadow: 0 0 20px rgba(216, 188, 129, 0.16);
+}
+
+.propertyMark {
+  color: #f6f2ea;
+  border-color: rgba(231, 182, 146, 0.42);
+  background: linear-gradient(145deg, #12352b, #1b2420 58%, #a9552f);
+  font-family: var(--font-mono);
+  font-size: 0.47rem;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  box-shadow: 0 0 20px rgba(169, 85, 47, 0.2);
 }
 
 .cantuVisual,

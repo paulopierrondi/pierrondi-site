@@ -7,14 +7,14 @@ import { SITE_URL } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Portfólio de produtos, Studio e sistemas | Paulo Pierrondi',
   description:
-    'Catálogo completo de produtos, apps, IA, Multi-LLM, automação, sites, commerce e sistemas — com busca, status honesto e evidência pública.',
+    'PropTech, produtos, apps, IA, Multi-LLM, automação, commerce e sistemas — com navegação rápida, status honesto e evidência pública.',
   alternates: {
     canonical: '/portfolio',
     languages: { 'pt-BR': '/portfolio', 'en-US': '/en/portfolio', 'x-default': '/portfolio' },
   },
   openGraph: {
     title: 'Portfólio de produtos, Studio e sistemas | Paulo Pierrondi',
-    description: 'Produtos, apps, sistemas, Multi-LLM e integrações levados da estratégia à implementação — organizados em um catálogo pesquisável.',
+    description: 'Meta Busca Parceiros, produtos, apps, sistemas, Multi-LLM e integrações levados da estratégia à implementação.',
     url: '/portfolio',
     siteName: 'pierrondi.dev',
     type: 'website',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Portfólio de IA, apps e sistemas | Paulo Pierrondi',
-    description: 'Catálogo completo de produtos, apps publicados, sistemas, automação, WordPress/Elementor e operações Multi-LLM.',
+    description: 'PropTech, produtos, apps publicados, sistemas, automação, WordPress/Elementor e operações Multi-LLM.',
     images: ['/og'],
   },
 }

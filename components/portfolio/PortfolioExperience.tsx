@@ -7,6 +7,9 @@ import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import PortfolioAtlas from './PortfolioAtlas'
 import ProjectVisual, { CaseMark } from './ProjectVisual'
 import PortfolioEvidenceMosaic from './PortfolioEvidenceMosaic'
+import PortfolioLink from './PortfolioLink'
+import PortfolioRealEstateSpotlight from './PortfolioRealEstateSpotlight'
+import PortfolioSectionNav from './PortfolioSectionNav'
 import PortfolioStudioSpotlight from './PortfolioStudioSpotlight'
 import { MULTI_LLM_ROSTER, PORTFOLIO_CATALOG, PUBLIC_APP_STORE_APPS } from './portfolio-catalog'
 import {
@@ -22,7 +25,7 @@ const COPY = {
     eyebrow: 'PORTFÓLIO TOTAL · PRODUTO · IA · ENGENHARIA',
     title: <>Tudo o que construí. <em>Organizado para encontrar rápido.</em></>,
     lead: 'Do framework enterprise ao produto publicado: um catálogo completo de sistemas, apps, sites, automações e operações multi-LLM — além de um capability pack verificável para WordPress e Elementor.',
-    explore: 'Explorar o portfólio',
+    explore: 'Começar pelo novo case',
     casesKicker: 'CASES EM DESTAQUE · PROFUNDIDADE ANTES DA ESCALA',
     casesTitle: 'Os projetos que melhor explicam como eu construo.',
     casesLead: 'Uma leitura editorial dos produtos emblemáticos. O catálogo total, pesquisável e filtrável, vem logo depois.',
@@ -54,7 +57,7 @@ const COPY = {
     eyebrow: 'COMPLETE PORTFOLIO · PRODUCT · AI · ENGINEERING',
     title: <>Everything I built. <em>Organized for fast discovery.</em></>,
     lead: 'From enterprise frameworks to shipped products: a complete catalog of systems, apps, websites, automation, and multi-LLM operations—plus a verifiable WordPress and Elementor capability pack.',
-    explore: 'Explore the portfolio',
+    explore: 'Start with the new case',
     casesKicker: 'FEATURED CASES · DEPTH BEFORE SCALE',
     casesTitle: 'The projects that best explain how I build.',
     casesLead: 'An editorial view of the flagship products. The complete searchable, filterable catalog follows next.',
@@ -118,7 +121,7 @@ export default function PortfolioExperience({ lang }: { lang: PortfolioLang }) {
           <h1>{t.title}</h1>
           <div className={styles.heroBottom}>
             <p>{t.lead}</p>
-            <a href="#studio-visual">{t.explore}<ArrowDown aria-hidden="true" /></a>
+            <a href="#property-partner-search-spotlight">{t.explore}<ArrowDown aria-hidden="true" /></a>
           </div>
         </motion.div>
         <PortfolioEvidenceMosaic lang={lang} reduceMotion={reduceMotion} />
@@ -130,6 +133,8 @@ export default function PortfolioExperience({ lang }: { lang: PortfolioLang }) {
         </div>
       </header>
 
+      <PortfolioSectionNav lang={lang} />
+      <PortfolioRealEstateSpotlight lang={lang} reduceMotion={reduceMotion} />
       <PortfolioStudioSpotlight lang={lang} reduceMotion={reduceMotion} />
       <PortfolioCases lang={lang} cases={cases} t={t} reduceMotion={reduceMotion} />
       <PortfolioAtlas lang={lang} reduceMotion={reduceMotion} />
@@ -160,7 +165,7 @@ function PortfolioCases({
       </section>
 
       <div className={styles.caseCollection}>
-        <nav className={styles.caseIndex} aria-label={lang === 'pt' ? 'Índice de projetos' : 'Project index'}>
+        <nav data-portfolio-case-index className={styles.caseIndex} aria-label={lang === 'pt' ? 'Índice de projetos' : 'Project index'}>
           {cases.map((item) => (
             <a key={item.id} href={`#${item.id}`}>
               <CaseMark item={item} size={34} />
@@ -255,13 +260,13 @@ function PortfolioCaseStudy({
         </div>
 
         <div className={styles.caseActions}>
-          <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined}>
+          <PortfolioLink href={item.href} external={item.external}>
             {item.cta}{item.external ? <ExternalLink aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
-          </a>
+          </PortfolioLink>
           {item.secondaryHref && (
-            <a href={item.secondaryHref} target="_blank" rel="noreferrer" className={styles.secondaryLink}>
+            <PortfolioLink href={item.secondaryHref} external className={styles.secondaryLink}>
               {item.secondaryCta}<ExternalLink aria-hidden="true" />
-            </a>
+            </PortfolioLink>
           )}
         </div>
       </article>
@@ -350,7 +355,7 @@ function PortfolioClosing({ lang, t }: { lang: PortfolioLang; t: PortfolioCopy }
       <p>{t.ctaKicker}</p>
       <h2>{t.ctaTitle}</h2>
       <span>{t.ctaBody}</span>
-      <a href={lang === 'pt' ? '/contato' : '/en/contato'}>{t.cta}<ArrowRight aria-hidden="true" /></a>
+      <PortfolioLink href={lang === 'pt' ? '/contato' : '/en/contato'}>{t.cta}<ArrowRight aria-hidden="true" /></PortfolioLink>
     </section>
   )
 }

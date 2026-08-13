@@ -3,6 +3,7 @@
 import type { RefObject } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
+import PortfolioLink from '@/components/portfolio/PortfolioLink'
 import ProjectVisual, { CaseMark } from '@/components/portfolio/ProjectVisual'
 import type {
   PortfolioCase,
@@ -51,15 +52,15 @@ export function ProjectsHeader({ lang }: { lang: PortfolioLang }) {
         </h2>
       </div>
       <div className={styles.topbarLinks}>
-        <a href={studioHref} className={styles.studioDirectLink}>
+        <PortfolioLink href={studioHref} className={styles.studioDirectLink}>
           <span aria-hidden="true" />
           Pierrondi Studio
           <ArrowRight aria-hidden="true" />
-        </a>
-        <a href={portfolioHref} className={styles.portfolioLink}>
+        </PortfolioLink>
+        <PortfolioLink href={portfolioHref} className={styles.portfolioLink}>
           {lang === 'pt' ? 'portfólio completo' : 'full portfolio'}
           <ArrowRight aria-hidden="true" />
-        </a>
+        </PortfolioLink>
       </div>
     </header>
   )
@@ -171,11 +172,10 @@ function ProjectContent({
       </dl>
 
       <div className={styles.actions}>
-        <a
+        <PortfolioLink
           href={active.href}
           className={styles.primaryAction}
-          target={active.external ? '_blank' : undefined}
-          rel={active.external ? 'noreferrer' : undefined}
+          external={active.external}
         >
           {active.cta}
           {active.external ? (
@@ -183,16 +183,15 @@ function ProjectContent({
           ) : (
             <ArrowRight aria-hidden="true" />
           )}
-        </a>
+        </PortfolioLink>
         {active.secondaryHref && (
-          <a
+          <PortfolioLink
             href={active.secondaryHref}
             className={styles.secondaryAction}
-            target="_blank"
-            rel="noreferrer"
+            external
           >
             {active.secondaryCta}
-          </a>
+          </PortfolioLink>
         )}
       </div>
     </div>
