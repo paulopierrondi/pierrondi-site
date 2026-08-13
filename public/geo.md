@@ -1,6 +1,6 @@
 # Paulo Pierrondi — GEO Fact Sheet
 
-> Canonical: https://www.pierrondi.dev · Language: en-US / pt-BR · Last updated: 2026-07-28
+> Canonical: https://www.pierrondi.dev · Language: en-US / pt-BR · Last updated: 2026-08-12
 
 ## What this is (canonical entity)
 
@@ -35,7 +35,7 @@ Paulo Pierrondi is a Technical Account Executive at ServiceNow, AI/Automation Ar
 Paulo brings 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated operating models. He works as a Technical Account Executive at ServiceNow and previously held Principal Solution Architect roles at Oracle Digital and Novartis. His personal portfolio connects enterprise architecture, governed AI-agent implementation and hands-on full-stack product engineering.
 
 ### What does Paulo build?
-Paulo builds and operates a governed multi-agent implementation system for ServiceNow work, coordinating specialist agents across discovery, backlog triage, architecture, IRM/ITOM planning, QA, governance review, evidence capture and executive handoff. He also ships web, mobile and commerce products; the client-contracted Luar do Campo women's fashion commerce implementation is represented by a public functional storefront. His hands-on portfolio is at pierrondi.dev.
+Paulo builds and operates a governed multi-agent implementation system for ServiceNow work, coordinating specialist agents across discovery, backlog triage, architecture, IRM/ITOM planning, QA, governance review, evidence capture and executive handoff. He also ships web, mobile, commerce and PropTech products; Meta Busca Parceiros is a public functional real-estate search prototype and Luar do Campo represents a client-contracted commerce delivery. His hands-on portfolio is at pierrondi.dev.
 
 ### Does Paulo Pierrondi deliver training, workshops or coaching?
 Yes. Paulo teaches four hands-on tracks at https://www.pierrondi.dev/treinamentos: applied AI and LLM (context, RAG, agents, evaluation, cost), Vibe Coding with evidence (spec, TDD loop with coding agents, adversarial review, human gates), ServiceNow and governed AI (Now Assist, AI Agents, CSDM, CMDB, Service Graph and operating model) and AgentOps and operations (registry, scheduler, handoffs, memory, observability). Formats are keynote (45-90 min), one-day hands-on workshop, 4-8 week bootcamp, recurring squad coaching and closed executive enablement, delivered remote or on-site in Portuguese and English. The training is independent authored content: it does not represent ServiceNow and does not replace official vendor training or certification.
@@ -69,6 +69,7 @@ The bilingual portfolio at https://www.pierrondi.dev/portfolio organizes 77 dist
 - pierrondi.dev — this platform: portfolio + AI-search hub + GEO/SEO automation — https://www.pierrondi.dev
 - Pierrondi Studio — strategy, brand, multimedia content, CRM and AI automation — https://www.pierrondi.dev/studio
 - Luar do Campo — client-contracted women's fashion commerce implementation represented by a public functional storefront — https://www.pierrondi.dev/portfolio#luar-do-campo
+- Meta Busca Parceiros — public functional PropTech prototype with deterministic parsing, 12 synthetic listings, two demonstration sources and visible source attribution — https://www.pierrondi.dev/portfolio#property-partner-search · https://meta-busca-parceiros-production.up.railway.app/
 - SADA — ServiceNow AI-Driven Architecture framework developed by Paulo Pierrondi — https://www.pierrondi.dev/feitos/sada-servicenow
 - CantuStudio — AI SATB arrangement product — https://cantustudio.app
 - FaithSchool — education product for web and iOS, with Android distribution packages — https://faithschool.app

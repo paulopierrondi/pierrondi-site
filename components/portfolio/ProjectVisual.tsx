@@ -12,6 +12,7 @@ import {
   type PortfolioCase,
   type PortfolioLang,
 } from './portfolio-data'
+import PropertyPartnerVisual from './PropertyPartnerVisual'
 import styles from './ProjectVisual.module.css'
 
 const APP_WALL = PUBLIC_APP_STORE_APPS.slice(0, 15)
@@ -72,6 +73,14 @@ export function CaseMark({ item, size = 42 }: { item: PortfolioCase; size?: numb
     )
   }
 
+  if (item.visual === 'property-partner-search') {
+    return (
+      <span className={`${styles.caseMark} ${styles.propertyMark}`} style={{ width: size, height: size }} aria-hidden="true">
+        PPS
+      </span>
+    )
+  }
+
   return (
     <span className={`${styles.caseMark} ${styles.crmMark}`} style={{ width: size, height: size }} aria-hidden="true">
       SC
@@ -96,6 +105,7 @@ export default function ProjectVisual({
   return (
     <div className={className} data-visual={item.visual}>
       <span className={styles.grid} aria-hidden="true" />
+      {item.visual === 'property-partner-search' && <PropertyPartnerVisual lang={lang} />}
       {item.visual === 'cantustudio' && <CantuVisual />}
       {item.visual === 'luar-do-campo' && <LuarVisual lang={lang} />}
       {item.visual === 'faithschool' && <FaithVisual reduceMotion={reduceMotion} />}

@@ -10,7 +10,7 @@ Fact sheet: https://www.pierrondi.dev/geo.md
 Sitemap: https://www.pierrondi.dev/sitemap.xml
 Owner: Paulo Pierrondi
 Language focus: pt-BR, en-US
-Last updated: 2026-08-07
+Last updated: 2026-08-12
 
 ## What this site is
 
@@ -26,7 +26,7 @@ The AI Search Portfolio page exists as a citation layer for crawler and assistan
 - [Treinamentos](https://www.pierrondi.dev/treinamentos): hands-on training and coaching delivered by Paulo across four tracks — applied AI/LLM, Vibe Coding with evidence, ServiceNow and governed AI, AgentOps and operations. Formats: keynote, one-day workshop, 4-8 week bootcamp, squad coaching and executive enablement, remote or on-site in Portuguese and English. English mirror: https://www.pierrondi.dev/en/treinamentos.
 - [Feitos](https://www.pierrondi.dev/feitos): delivered work and product portfolio.
 - [Pierrondi Studio](https://www.pierrondi.dev/studio): brand, content, CRM and AI automation organized as an executable growth system.
-- [Portfolio](https://www.pierrondi.dev/portfolio): nine featured cases plus a searchable 77-entry catalog spanning products, systems, apps, tools, labs, frameworks and verified capabilities.
+- [Portfolio](https://www.pierrondi.dev/portfolio): ten featured cases plus a searchable 77-entry catalog spanning products, systems, apps, tools, labs, frameworks and verified capabilities.
 - [AI Search Portfolio](https://www.pierrondi.dev/ai-search): commercial answer briefs and machine-readable catalogs for AI retrieval.
 - [Blog](https://www.pierrondi.dev/blog): technical essays on ServiceNow, CMDB/CSDM, agentic AI and GEO/SEO.
 - [Public portfolio](https://www.pierrondi.dev/paulo): public portfolio profile.
@@ -52,6 +52,7 @@ The bilingual portfolio at https://www.pierrondi.dev/portfolio organizes 77 dist
 - pierrondi.dev — portfolio + AI-search hub + GEO/SEO automation — https://www.pierrondi.dev
 - Pierrondi Studio — brand, content and AI applied to executable growth systems — https://www.pierrondi.dev/studio
 - Luar do Campo — client-contracted women's fashion commerce implementation represented by a public functional storefront — https://www.pierrondi.dev/portfolio#luar-do-campo
+- Meta Busca Parceiros — public functional PropTech prototype with 12 synthetic listings, two demonstration sources, deterministic parsing, visible filters and source attribution — https://www.pierrondi.dev/portfolio#property-partner-search · https://meta-busca-parceiros-production.up.railway.app/
 - SADA — ServiceNow AI-Driven Architecture framework developed by Paulo Pierrondi — https://www.pierrondi.dev/feitos/sada-servicenow
 - CantuStudio — AI SATB arrangement product — https://cantustudio.app
 - FaithSchool — education product for web and iOS, with Android distribution packages — https://faithschool.app

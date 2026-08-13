@@ -1,0 +1,116 @@
+.nav {
+  position: sticky;
+  z-index: 55;
+  top: calc(64px + env(safe-area-inset-top));
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  gap: 18px;
+  padding: 8px var(--portfolio-x);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(7, 8, 8, 0.86);
+  backdrop-filter: blur(22px) saturate(130%);
+  -webkit-backdrop-filter: blur(22px) saturate(130%);
+}
+
+.label {
+  flex: 0 0 auto;
+  color: rgba(245, 245, 245, 0.36);
+  font: 800 8px/1 var(--font-mono, ui-monospace, monospace);
+  letter-spacing: 0.13em;
+}
+
+.rail {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 5px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.rail::-webkit-scrollbar { display: none; }
+
+.rail a {
+  position: relative;
+  display: inline-flex;
+  min-width: max-content;
+  min-height: 40px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0 13px;
+  color: rgba(245, 245, 245, 0.58);
+  font-size: 11px;
+  font-weight: 750;
+  text-decoration: none;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rail a:hover,
+.rail a:focus-visible {
+  color: #fffdf7;
+  border-color: rgba(240, 166, 107, 0.24);
+  background: rgba(240, 166, 107, 0.07);
+}
+
+.rail a:active { transform: scale(0.97); }
+
+.rail a.active {
+  color: #101713;
+  border-color: rgba(245, 207, 159, 0.82);
+  background: linear-gradient(135deg, #f5cf9f, #f0a66b);
+  box-shadow: 0 8px 28px rgba(240, 166, 107, 0.14);
+}
+
+.rail svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+}
+
+:global(#cases),
+:global(#catalogo),
+:global(#app-store) {
+  scroll-margin-top: 138px;
+}
+
+:global([data-portfolio-case-index]) {
+  top: 134px !important;
+}
+
+@media (max-width: 1080px) {
+  .nav { top: calc(56px + env(safe-area-inset-top)); }
+
+  :global([data-portfolio-case-index]) {
+    top: 114px !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .nav {
+    gap: 10px;
+    padding-right: 0;
+  }
+
+  .label { display: none; }
+  .rail { padding-right: var(--portfolio-x); }
+  .rail a { min-height: 42px; padding-inline: 12px; }
+
+  :global([data-portfolio-case-index] a) {
+    min-height: 32px;
+  }
+
+  :global([data-portfolio-case-index] strong) {
+    display: block !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail a { transition-duration: 0.01ms !important; }
+}

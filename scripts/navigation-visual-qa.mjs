@@ -5,12 +5,12 @@ import { chromium } from 'playwright'
 const baseUrl = process.env.TARGET_URL ?? 'http://127.0.0.1:3108'
 const outputDir = path.resolve(process.env.QA_DIR ?? 'qa/navigation/local')
 const routes = [
-  { name: 'home-pt', path: '/', labels: ['Bio', 'Atuação', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: '' },
-  { name: 'studio-pt', path: '/studio', labels: ['Bio', 'Atuação', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: 'studio' },
-  { name: 'portfolio-pt', path: '/portfolio', labels: ['Bio', 'Atuação', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: 'portfolio' },
-  { name: 'feitos-pt', path: '/feitos', labels: ['Bio', 'Atuação', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: 'proof' },
-  { name: 'home-en', path: '/en', labels: ['About', 'Work', 'Studio', 'Portfolio', 'Proof', 'Ideas', 'Contact'], active: '' },
-  { name: 'studio-en', path: '/en/studio', labels: ['About', 'Work', 'Studio', 'Portfolio', 'Proof', 'Ideas', 'Contact'], active: 'studio' },
+  { name: 'home-pt', path: '/', labels: ['Bio', 'Atuação', 'Treinamentos', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: '' },
+  { name: 'studio-pt', path: '/studio', labels: ['Bio', 'Atuação', 'Treinamentos', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: 'studio' },
+  { name: 'portfolio-pt', path: '/portfolio', labels: ['Bio', 'Atuação', 'Treinamentos', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: 'portfolio' },
+  { name: 'feitos-pt', path: '/feitos', labels: ['Bio', 'Atuação', 'Treinamentos', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: 'proof' },
+  { name: 'home-en', path: '/en', labels: ['About', 'Work', 'Training', 'Studio', 'Portfolio', 'Proof', 'Ideas', 'Contact'], active: '' },
+  { name: 'studio-en', path: '/en/studio', labels: ['About', 'Work', 'Training', 'Studio', 'Portfolio', 'Proof', 'Ideas', 'Contact'], active: 'studio' },
 ]
 
 await mkdir(outputDir, { recursive: true })
@@ -106,25 +106,30 @@ async function inspect(route, viewport, mobile) {
     await page.waitForTimeout(80)
   }
 
-  const pass = response?.status() === 200
-    && metrics.scrollWidth <= metrics.viewportWidth
-    && metrics.headerTop === 0
-    && Math.abs(metrics.headerHeight - (mobile ? 56 : 64)) < 0.5
-    && metrics.brandText === '<pierrondi.dev/>'
-    && JSON.stringify(metrics.labels) === JSON.stringify(route.labels)
-    && metrics.activeKey === route.active
-    && metrics.burgerVisible === mobile
-    && Math.abs(metrics.navCenter - metrics.viewportWidth / 2) < (mobile ? metrics.viewportWidth : 2)
-    && (route.path.startsWith('/en') ? metrics.languageActive === 'EN' : metrics.languageActive === 'PT')
-    && (!mobile || (
-      mobileMenu?.expanded === 'true'
-      && mobileMenu.visibleLinks === 7
-      && Math.abs(mobileMenu.menuTop - 56) < 0.5
-      && mobileMenu.bodyOverflow === 'hidden'
-    ))
-    && diagnostics.consoleErrors.length === 0
-    && diagnostics.pageErrors.length === 0
-    && diagnostics.failedRequests.length === 0
+  const mobileMenuPass = mobile
+    ? [
+      mobileMenu?.expanded === 'true',
+      mobileMenu?.visibleLinks === 8,
+      Math.abs((mobileMenu?.menuTop ?? -1) - 56) < 0.5,
+      mobileMenu?.bodyOverflow === 'hidden',
+    ].every(Boolean)
+    : true
+  const pass = [
+    response?.status() === 200,
+    metrics.scrollWidth <= metrics.viewportWidth,
+    metrics.headerTop === 0,
+    Math.abs(metrics.headerHeight - (mobile ? 56 : 64)) < 0.5,
+    metrics.brandText === '<pierrondi.dev/>',
+    JSON.stringify(metrics.labels) === JSON.stringify(route.labels),
+    metrics.activeKey === route.active,
+    metrics.burgerVisible === mobile,
+    Math.abs(metrics.navCenter - metrics.viewportWidth / 2) < (mobile ? metrics.viewportWidth : 2),
+    route.path.startsWith('/en') ? metrics.languageActive === 'EN' : metrics.languageActive === 'PT',
+    mobileMenuPass,
+    diagnostics.consoleErrors.length === 0,
+    diagnostics.pageErrors.length === 0,
+    diagnostics.failedRequests.length === 0,
+  ].every(Boolean)
 
   await context.close()
   return { route: route.path, status: response?.status(), metrics, mobileMenu, ...diagnostics, pass }

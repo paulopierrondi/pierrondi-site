@@ -3,6 +3,7 @@ import appStoreCatalog from '@/public/app-icons/app-store-catalog.json'
 export type PortfolioLang = 'pt' | 'en'
 
 export type PortfolioVisualKind =
+  | 'property-partner-search'
   | 'cantustudio'
   | 'luar-do-campo'
   | 'faithschool'
@@ -13,7 +14,7 @@ export type PortfolioVisualKind =
   | 'agenticoscore'
   | 'sada'
 
-export type PortfolioAccent = 'gold' | 'sand' | 'blue' | 'violet' | 'cyan' | 'green' | 'prism'
+export type PortfolioAccent = 'gold' | 'sand' | 'blue' | 'violet' | 'cyan' | 'green' | 'prism' | 'terracotta'
 
 export interface AppStoreProduct {
   slug: string
@@ -68,8 +69,33 @@ const appStoreUrl = (trackId: string) =>
 export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
   pt: [
     {
-      id: 'pierrondi-studio',
+      id: 'property-partner-search',
       index: '01',
+      navLabel: 'Meta Busca',
+      title: 'Meta Busca Parceiros',
+      eyebrow: 'PROPTECH · BUSCA COMPLEMENTAR · PROVENIÊNCIA',
+      headline: 'Busca imobiliária que mostra como chegou ao resultado.',
+      description:
+        'Protótipo funcional que normaliza catálogos parceiros, transforma frases de busca em filtros visíveis e mantém a origem do imóvel até a ficha detalhada.',
+      proof:
+        'Doze imóveis sintéticos em duas fontes demonstrativas, parsing determinístico e nenhuma integração, coleta, lead ou envio real de WhatsApp.',
+      status: 'Protótipo funcional público',
+      accent: 'terracotta',
+      visual: 'property-partner-search',
+      platforms: ['Web', 'Busca', 'Ficha detalhada'],
+      stack: ['TypeScript', 'Rules Engine', 'Search UX', 'Railway'],
+      facts: [
+        { value: '12', label: 'imóveis sintéticos' },
+        { value: '2', label: 'fontes demonstrativas' },
+        { value: 'Texto → filtro', label: 'parsing transparente' },
+      ],
+      href: 'https://meta-busca-parceiros-production.up.railway.app/',
+      cta: 'Testar busca pública',
+      external: true,
+    },
+    {
+      id: 'pierrondi-studio',
+      index: '02',
       navLabel: 'Pierrondi Studio',
       title: 'Pierrondi Studio',
       eyebrow: 'MARCA · CONTEÚDO · CRM · IA',
@@ -93,7 +119,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'luar-do-campo',
-      index: '02',
+      index: '03',
       navLabel: 'Luar do Campo',
       title: 'Luar do Campo',
       eyebrow: 'E-COMMERCE · MODA · OPERAÇÃO',
@@ -118,7 +144,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'cantustudio',
-      index: '03',
+      index: '04',
       navLabel: 'CantuStudio',
       title: 'CantuStudio',
       eyebrow: 'PRODUTO DE IA · MÚSICA · MULTIPLATAFORMA',
@@ -146,7 +172,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'faithschool',
-      index: '04',
+      index: '05',
       navLabel: 'FaithSchool',
       title: 'FaithSchool',
       eyebrow: 'EDTECH · SAAS · MOBILE',
@@ -174,7 +200,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'app-portfolio',
-      index: '05',
+      index: '06',
       navLabel: '20 apps',
       title: 'App portfolio',
       eyebrow: 'APP STORE · PRODUTOS PUBLICADOS',
@@ -198,7 +224,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'kommo-whatsapp',
-      index: '06',
+      index: '07',
       navLabel: 'Kommo + WA',
       title: 'Kommo + WhatsApp',
       eyebrow: 'CRM · AUTOMAÇÃO · HANDOFF HUMANO',
@@ -222,7 +248,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'studio-crm',
-      index: '07',
+      index: '08',
       navLabel: 'Studio CRM',
       title: 'Studio CRM',
       eyebrow: 'FULL-STACK · OPERAÇÃO · DADOS',
@@ -246,7 +272,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'agenticoscore',
-      index: '08',
+      index: '09',
       navLabel: 'AgenticosCore',
       title: 'AgenticosCore',
       eyebrow: 'REVENUE OS · AGENTES · HUMAN GATES',
@@ -272,7 +298,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'sada',
-      index: '09',
+      index: '10',
       navLabel: 'SADA',
       title: 'SADA',
       eyebrow: 'FRAMEWORK DESENVOLVIDO POR PAULO PIERRONDI',
@@ -297,8 +323,33 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
   ],
   en: [
     {
-      id: 'pierrondi-studio',
+      id: 'property-partner-search',
       index: '01',
+      navLabel: 'Meta Search',
+      title: 'Meta Partner Search',
+      eyebrow: 'PROPTECH · PARTNER SEARCH · PROVENANCE',
+      headline: 'Property search that shows how it reached the result.',
+      description:
+        'A functional prototype that normalizes partner catalogs, turns natural-language queries into visible filters, and preserves source attribution through the detail view.',
+      proof:
+        'Twelve synthetic listings across two demonstration sources, deterministic parsing, and no live integration, collection, lead storage, or real WhatsApp delivery.',
+      status: 'Public functional prototype',
+      accent: 'terracotta',
+      visual: 'property-partner-search',
+      platforms: ['Web', 'Search', 'Detail view'],
+      stack: ['TypeScript', 'Rules Engine', 'Search UX', 'Railway'],
+      facts: [
+        { value: '12', label: 'synthetic listings' },
+        { value: '2', label: 'demonstration sources' },
+        { value: 'Text → filter', label: 'transparent parsing' },
+      ],
+      href: 'https://meta-busca-parceiros-production.up.railway.app/',
+      cta: 'Try the public search',
+      external: true,
+    },
+    {
+      id: 'pierrondi-studio',
+      index: '02',
       navLabel: 'Pierrondi Studio',
       title: 'Pierrondi Studio',
       eyebrow: 'BRAND · CONTENT · CRM · AI',
@@ -322,7 +373,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'luar-do-campo',
-      index: '02',
+      index: '03',
       navLabel: 'Luar do Campo',
       title: 'Luar do Campo',
       eyebrow: 'E-COMMERCE · FASHION · OPERATIONS',
@@ -347,7 +398,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'cantustudio',
-      index: '03',
+      index: '04',
       navLabel: 'CantuStudio',
       title: 'CantuStudio',
       eyebrow: 'AI PRODUCT · MUSIC · MULTI-PLATFORM',
@@ -375,7 +426,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'faithschool',
-      index: '04',
+      index: '05',
       navLabel: 'FaithSchool',
       title: 'FaithSchool',
       eyebrow: 'EDTECH · SAAS · MOBILE',
@@ -403,7 +454,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'app-portfolio',
-      index: '05',
+      index: '06',
       navLabel: '20 apps',
       title: 'App portfolio',
       eyebrow: 'APP STORE · SHIPPED PRODUCTS',
@@ -427,7 +478,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'kommo-whatsapp',
-      index: '06',
+      index: '07',
       navLabel: 'Kommo + WA',
       title: 'Kommo + WhatsApp',
       eyebrow: 'CRM · AUTOMATION · HUMAN HANDOFF',
@@ -451,7 +502,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'studio-crm',
-      index: '07',
+      index: '08',
       navLabel: 'Studio CRM',
       title: 'Studio CRM',
       eyebrow: 'FULL-STACK · OPERATIONS · DATA',
@@ -475,7 +526,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'agenticoscore',
-      index: '08',
+      index: '09',
       navLabel: 'AgenticosCore',
       title: 'AgenticosCore',
       eyebrow: 'REVENUE OS · AGENTS · HUMAN GATES',
@@ -501,7 +552,7 @@ export const PORTFOLIO_CASES: Record<PortfolioLang, PortfolioCase[]> = {
     },
     {
       id: 'sada',
-      index: '09',
+      index: '10',
       navLabel: 'SADA',
       title: 'SADA',
       eyebrow: 'FRAMEWORK DEVELOPED BY PAULO PIERRONDI',
