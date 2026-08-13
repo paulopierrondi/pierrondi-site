@@ -96,7 +96,7 @@ async function inspect(check) {
     metrics.htmlLang === expectedLang,
     metrics.hash === '#property-partner-search-spotlight',
     metrics.spotlightTop >= 100,
-    metrics.spotlightTop < 280,
+    metrics.spotlightTop < check.height / 2,
     metrics.propertyVisuals === 1,
     metrics.propertyCards === 3,
     metrics.primaryHref === productUrl,
