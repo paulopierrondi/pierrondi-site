@@ -93,13 +93,22 @@ export function getAuthorityPage(lang: AuthorityLang) {
   return authorityOps.pages[lang]
 }
 
+// Google ProfilePage rich results require mainEntity (Person|Organization)
+// with at least `name`. Keep @id aligned with SiteJsonLd's #person so the
+// entity graph stays one Person, not a second #paulo-pierrondi fork.
+export const profilePageMainEntity = {
+  '@id': `${SITE_URL}/#person`,
+  '@type': 'Person',
+  name: 'Paulo Pierrondi',
+  url: SITE_URL,
+  image: `${SITE_URL}/og`,
+  sameAs: ['https://br.linkedin.com/in/paulopierrondi'],
+}
+
 export function authorityProfileJsonLd(lang: AuthorityLang) {
   const page = getAuthorityPage(lang)
   const language = lang === 'pt' ? 'pt-BR' : 'en-US'
 
-  // Reference the single canonical Person/#person and Organization/#website
-  // nodes emitted site-wide by SiteJsonLd instead of forking a second Person
-  // entity (#paulo-pierrondi), which fragmented the entity graph for answer engines.
   return [
     {
       '@context': 'https://schema.org',
@@ -110,6 +119,7 @@ export function authorityProfileJsonLd(lang: AuthorityLang) {
       description: page.metadataDescription,
       inLanguage: language,
       about: { '@id': `${SITE_URL}/#person` },
+      mainEntity: profilePageMainEntity,
       isPartOf: { '@id': `${SITE_URL}/#website` },
     },
   ]

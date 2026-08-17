@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import JsonLd from '@/components/JsonLd'
+import { profilePageMainEntity } from '@/lib/authority/authority'
 import { SITE_URL } from '@/lib/site'
 import HomeV2 from '@/components/home-v2/HomeV2'
 
@@ -80,6 +81,7 @@ const homeWebPageSchema = {
   inLanguage: 'pt-BR',
   isPartOf: { '@id': `${SITE_URL}/#website` },
   about: { '@id': `${SITE_URL}/#person` },
+  mainEntity: profilePageMainEntity,
 }
 
 export default function Home() {
