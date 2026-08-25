@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
+import JsonLd from '@/components/JsonLd'
 import FeitosIndexContent from './FeitosIndexContent'
+import { buildFeitosSchema } from './feitos-schema'
 
 export const metadata: Metadata = {
-  title: 'Feitos — sistemas enterprise de IA governada',
-  description: 'Portfólio e sistemas aplicados por Paulo Pierrondi: Pierrondi Studio, SADA, Agentes Governados, LLM Inference e AI Execution Platforms.',
+  title: 'Paulo Pierrondi — dados, trabalhos e provas de execução',
+  description: 'Dossiê público de Paulo Pierrondi: automação, IA, produtos, cases anonimizados, resultados agregados e arquitetura de pagamento até entrega automática.',
   alternates: {
     canonical: '/feitos',
     languages: {
@@ -13,16 +15,27 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Feitos | pierrondi.dev',
-    description: 'Projetos e sistemas que conectam estratégia, marca, arquitetura, automação e execução.',
+    title: 'Dados, trabalhos e provas de execução | Paulo Pierrondi',
+    description: 'Cases anonimizados, produtos públicos e arquitetura real para automação, pagamentos, IA e entrega automática.',
     url: '/feitos',
     siteName: 'pierrondi.dev',
     type: 'website',
     locale: 'pt_BR',
     images: [{ url: '/og', width: 1200, height: 630, alt: 'Paulo Pierrondi — Feitos' }],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dados, trabalhos e provas de execução | Paulo Pierrondi',
+    description: 'Automação, IA, produtos públicos, cases anonimizados e arquitetura de entrega.',
+    images: ['/og'],
+  },
 }
 
 export default function FeitosIndexPage() {
-  return <FeitosIndexContent lang="pt" />
+  return (
+    <>
+      <JsonLd data={buildFeitosSchema('pt')} />
+      <FeitosIndexContent lang="pt" />
+    </>
+  )
 }
