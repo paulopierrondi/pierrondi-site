@@ -1,0 +1,112 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: clamp(24px, 4vw, 34px);
+  border: 1px solid var(--color-hairline);
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--color-surface), var(--color-canvas));
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--color-body-strong);
+}
+
+.form input,
+.form textarea,
+.form select {
+  width: 100%;
+  background: var(--color-canvas-deep);
+  color: var(--color-body-strong);
+  border: 1px solid var(--color-hairline);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: var(--font-body);
+}
+
+.form select {
+  cursor: pointer;
+}
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+}
+
+.form input::placeholder,
+.form textarea::placeholder {
+  color: var(--color-muted);
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.feedbackOk {
+  color: var(--color-success);
+  font-size: 0.95rem;
+}
+
+.feedbackError {
+  color: var(--color-error);
+  font-size: 0.95rem;
+}
+
+.kickoffIntro {
+  max-width: 62ch;
+  margin-bottom: 28px;
+  color: var(--color-body-strong);
+  line-height: 1.55;
+  font-size: 1.02rem;
+}
+
+.kickoffWarning {
+  margin-bottom: 24px;
+  padding: 16px 18px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 38%, var(--color-hairline));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-canvas));
+  color: var(--color-body-strong);
+  line-height: 1.5;
+  font-size: 0.98rem;
+}
+
+.kickoffMain {
+  max-width: 720px;
+  margin: 0 auto;
+  padding-inline: clamp(20px, 5vw, 64px);
+  padding-bottom: clamp(90px, 13vh, 160px);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 24px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
