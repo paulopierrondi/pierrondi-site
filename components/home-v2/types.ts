@@ -26,6 +26,12 @@ export interface HeroLane {
   href: string
 }
 
+export interface HeroOffer {
+  label: string
+  price: string
+  href: string
+}
+
 export interface HeroCopy {
   /** Compact kicker above the headline — thesis signal, not a role list */
   tagline: string
@@ -39,6 +45,8 @@ export interface HeroCopy {
   ctaSecondary: CTA
   /** Dual entry paths: enterprise collaborators vs products/builders */
   lanes: HeroLane[]
+  /** Optional fixed-offer strip — one direct buy path without turning home into a landing */
+  offer?: HeroOffer
   /** Small mono badges under the description, max 4, value pillars not titles */
   badges: string[]
 }

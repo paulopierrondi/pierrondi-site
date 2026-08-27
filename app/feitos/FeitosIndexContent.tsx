@@ -88,6 +88,7 @@ const COPY = {
     closingLead:
       'A conversa começa por contexto, governança e uma decisão que possa ser colocada em operação.',
     contact: 'Iniciar conversa',
+    sprintOffer: 'Oferta fixa: uma automação no ar',
   },
   en: {
     sectionEyebrow: '04 ORIGINAL FRAMEWORKS AND SYSTEMS',
@@ -109,6 +110,7 @@ const COPY = {
     closingLead:
       'The conversation starts with context, governance, and a decision that can be put into operation.',
     contact: 'Start a conversation',
+    sprintOffer: 'Fixed offer: one automation live',
   },
 } as const
 
@@ -347,6 +349,12 @@ function ClosingSection({ copy, lang }: { copy: FeitosCopy; lang: FeitosLang }) 
         {copy.contact}
         <ArrowRight aria-hidden="true" />
       </Link>
+      {lang === 'pt' ? (
+        <Link href="/sprint" className={styles.sprintOfferLink}>
+          {copy.sprintOffer} · R$ 2.400
+          <ArrowRight aria-hidden="true" />
+        </Link>
+      ) : null}
     </section>
   )
 }

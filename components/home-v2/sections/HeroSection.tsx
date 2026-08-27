@@ -179,6 +179,22 @@ export default function HeroSection({ lang }: SectionProps) {
               </a>
             ))}
           </motion.nav>
+
+          {hero.offer ? (
+            <motion.a
+              className={styles.offer}
+              href={hero.offer.href}
+              variants={itemVariants}
+            >
+              <span className={styles.offerLabel}>{hero.offer.label}</span>
+              <span className={styles.offerMeta}>
+                {hero.offer.price}
+                <span aria-hidden="true"> · </span>
+                /sprint
+              </span>
+              <ArrowUpRight className={styles.offerIcon} aria-hidden="true" />
+            </motion.a>
+          ) : null}
         </motion.div>
       </div>
     </section>

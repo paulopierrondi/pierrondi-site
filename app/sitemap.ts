@@ -16,6 +16,7 @@ const staticRoutes: Array<{
   { path: '/treinamentos', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/studio', priority: 0.92, changeFrequency: 'monthly' },
   { path: '/feitos', priority: 0.86, changeFrequency: 'monthly' },
+  { path: '/sprint', priority: 0.84, changeFrequency: 'monthly' },
   { path: '/blog', priority: 0.88, changeFrequency: 'weekly' },
   { path: '/contato', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/portfolio', priority: 0.9, changeFrequency: 'weekly' },

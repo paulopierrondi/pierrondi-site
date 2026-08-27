@@ -30,6 +30,11 @@ export const COPY: Record<Lang, SiteCopy> = {
           href: '/portfolio',
         },
       ],
+      offer: {
+        label: 'Oferta direta: uma automação no ar',
+        price: 'R$ 2.400',
+        href: '/sprint',
+      },
       badges: [
         'AI Operating Model',
         'AgentOps',

@@ -120,7 +120,7 @@
 
 .heroActions a,
 .caseActions a,
-.closing > a {
+.closing > a:not(.sprintOfferLink) {
   display: inline-flex;
   min-height: 48px;
   align-items: center;
@@ -140,7 +140,7 @@
 
 .heroActions a:hover,
 .caseActions a:hover,
-.closing > a:hover {
+.closing > a:not(.sprintOfferLink):hover {
   background: #72ee9f;
   box-shadow: 0 14px 32px rgba(74, 222, 128, 0.16);
   transform: translateY(-2px);
@@ -163,8 +163,40 @@
 
 .heroActions svg,
 .caseActions svg,
-.closing > a svg {
+.closing > a:not(.sprintOfferLink) svg {
   width: 15px;
+}
+
+.sprintOfferLink {
+  display: inline-flex;
+  min-height: auto;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  color: var(--color-primary);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.sprintOfferLink:hover {
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+  text-decoration: underline;
+}
+
+.closing .sprintOfferLink {
+  grid-column: 1;
+  align-self: start;
 }
 
 .heroAtlas {
@@ -634,10 +666,11 @@
 .closing .eyebrow,
 .closing h2,
 .closing > p,
-.closing > a { position: relative; z-index: 1; }
+.closing > a:not(.sprintOfferLink),
+.closing .sprintOfferLink { position: relative; z-index: 1; }
 .closing .eyebrow { grid-column: 1 / -1; }
 .closing > p { max-width: 53ch; margin: 0; color: var(--color-body); font-size: 17px; line-height: 1.62; }
-.closing > a { width: fit-content; align-self: end; justify-self: start; }
+.closing > a:not(.sprintOfferLink) { width: fit-content; align-self: end; justify-self: start; }
 
 @media (max-width: 980px) {
   .hero,
@@ -649,7 +682,7 @@
   .systemsIntro { grid-template-columns: 1fr; }
   .casePanel { min-height: 0; padding-inline: 0; }
   .caseVisual { max-width: 720px; }
-  .closing > a { grid-column: 1; }
+  .closing > a:not(.sprintOfferLink) { grid-column: 1; }
 }
 
 @media (max-width: 1023px) {
