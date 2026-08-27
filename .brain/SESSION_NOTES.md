@@ -172,3 +172,21 @@ list`/`check` (só nomes) em vez de `grep` direto no `.keys.env`.
 Próxima ação humana: batch de decisão de analytics access (GA4/GSC/Plausible) quando o Paulo tiver
 tempo — a automação já despacha isso como `decision_batch`/`digest_only` (não repetitivo) e agora,
 com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configured`.
+
+---
+
+## Sessão 2026-08-27 — Oferta `/sprint` (Uma automação no ar)
+
+**Branch/PR:** `cursor/sprint-offer-d221` · https://github.com/paulopierrondi/pierrondi-site/pull/42
+
+**O que mudou:**
+- `/sprint` — página comercial fixa: R$ 2.400 / US$ 450 Wise, includes/excludes, aceite testável, prova pública (2 sem → 2 h + 50k+ h em /feitos), FAQ, CTA WhatsApp real.
+- `/sprint/kickoff` — form 15 campos pós-pagamento via `/api/sprint-kickoff` → Formspree (mesmo endpoint do contato).
+- Home hero — faixa única: Oferta direta · R$ 2.400 · /sprint.
+- `/feitos` closing — link secundário PT para /sprint.
+
+**Testes:** `npm run lint`, `npm run build`, `npm test` (136/136) OK.
+
+**Riscos:** links Pix/Wise ainda manuais no WhatsApp; kickoff compartilha Formspree com contato (subject distingue).
+
+**Próximo:** merge + deploy Railway após aprovação; colar links Pix/Wise na conversa WhatsApp quando pronto.
