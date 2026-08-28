@@ -19,7 +19,7 @@
     ],
     "logo": "https://www.pierrondi.dev/pierrondi-logo-1024.png"
   },
-  "lastUpdated": "2026-08-12",
+  "lastUpdated": "2026-08-28",
   "primaryHub": "https://www.pierrondi.dev/ai-search",
   "citationHub": "https://www.pierrondi.dev/citations",
   "sitemap": "https://www.pierrondi.dev/sitemap.xml",
@@ -589,14 +589,14 @@
     {
       "name": "CantuStudio",
       "category": "Music",
-      "url": "https://www.pierrondi.dev/apps/cantustudio-app",
+      "url": "https://apps.apple.com/br/app/cantustudio/id6764287847",
       "appStoreUrl": "https://apps.apple.com/br/app/cantustudio/id6764287847",
       "image": "https://www.pierrondi.dev/app-icons/cantustudio-app.jpg"
     },
     {
       "name": "Muse Edit - Style Closet",
       "category": "Lifestyle",
-      "url": "https://www.pierrondi.dev/apps/muse-edit",
+      "url": "https://apps.apple.com/br/app/muse-edit-style-closet/id6764715502",
       "appStoreUrl": "https://apps.apple.com/br/app/muse-edit-style-closet/id6764715502",
       "image": "https://www.pierrondi.dev/app-icons/muse-edit.jpg"
     },
@@ -610,7 +610,7 @@
     {
       "name": "VibeCode Kids",
       "category": "Education",
-      "url": "https://www.pierrondi.dev/apps/vibecode-kids",
+      "url": "https://apps.apple.com/br/app/vibecode-kids/id6773483083",
       "appStoreUrl": "https://apps.apple.com/br/app/vibecode-kids/id6773483083",
       "image": "https://www.pierrondi.dev/app-icons/vibecode-kids.jpg"
     },
@@ -624,14 +624,14 @@
     {
       "name": "Aura - Afirmacoes Diarias",
       "category": "Lifestyle",
-      "url": "https://www.pierrondi.dev/apps/aura-afirmacoes",
+      "url": "https://apps.apple.com/br/app/aura-afirmacoes-diarias/id6769853592",
       "appStoreUrl": "https://apps.apple.com/br/app/aura-afirmacoes-diarias/id6769853592",
       "image": "https://www.pierrondi.dev/app-icons/aura-afirmacoes.jpg"
     },
     {
       "name": "Álbum de Figurinhas 26",
       "category": "Entertainment",
-      "url": "https://www.pierrondi.dev/apps/album-figurinhas-26",
+      "url": "https://apps.apple.com/br/app/%C3%A1lbum-de-figurinhas-26/id6782724792",
       "appStoreUrl": "https://apps.apple.com/br/app/%C3%A1lbum-de-figurinhas-26/id6782724792",
       "image": "https://www.pierrondi.dev/app-icons/album-figurinhas-26.jpg"
     },
@@ -645,7 +645,7 @@
     {
       "name": "Casa Clara",
       "category": "Productivity",
-      "url": "https://www.pierrondi.dev/apps/casa-clara",
+      "url": "https://apps.apple.com/br/app/casa-clara/id6767297661",
       "appStoreUrl": "https://apps.apple.com/br/app/casa-clara/id6767297661",
       "image": "https://www.pierrondi.dev/app-icons/casa-clara.jpg"
     },
@@ -666,7 +666,7 @@
     {
       "name": "Blockfront Tactics",
       "category": "Games",
-      "url": "https://www.pierrondi.dev/apps/blockfront-tactics",
+      "url": "https://apps.apple.com/br/app/blockfront-tactics/id6772747511",
       "appStoreUrl": "https://apps.apple.com/br/app/blockfront-tactics/id6772747511",
       "image": "https://www.pierrondi.dev/app-icons/blockfront-tactics.jpg"
     },

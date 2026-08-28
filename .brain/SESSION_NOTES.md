@@ -192,3 +192,11 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Added `app/not-found.tsx` so 404 title/H1 are not the homepage title (soft-404 on `/apps` and `/sprint` until PR 43 deploys the hub redirect).
 - Updated SEO contract + indexability audit + production validator expectations.
 - No deploy.
+
+## Sessão 2026-08-28 — answers.json App Store-only /apps 404 remap
+
+- Live HEAD audit found 7 `appsPortfolio` urls pointing at missing `/apps/<slug>` landings: cantustudio-app, muse-edit, vibecode-kids, aura-afirmacoes, album-figurinhas-26, casa-clara, blockfront-tactics.
+- Fixed `scripts/update-answers-graph.mjs` to use local `/apps/<slug>` only when slug exists in `_apps.ts`; otherwise use the App Store URL already used on `/portfolio`.
+- Regenerated `public/answers.json`; added contract test in `test/public-geo-files.test.mjs`.
+- Explicitly not done: no empty `/apps/cantustudio`, no `/sprint` sitemap entry, no redo of PR 43/44, no merge/deploy.
+- Tests: `node --import tsx --test test/public-geo-files.test.mjs` → 7/7 pass.
