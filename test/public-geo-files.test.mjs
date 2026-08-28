@@ -71,6 +71,13 @@ test('public GEO files advertise /ai-search as the canonical hub', () => {
   for (const [name, body] of publicSurfaces) {
     assert.match(body, /https:\/\/www\.pierrondi\.dev\/ai-search/)
     assert.doesNotMatch(body, /https:\/\/www\.pierrondi\.dev\/ai-search-portfolio/, `${name} should not advertise the legacy hub URL`)
+    // Bare /apps is a redirect hub, not an indexable page. Machine files must
+    // not re-advertise it as a crawl target (Ahrefs 2026-08-28 live 404).
+    assert.doesNotMatch(
+      body,
+      /https:\/\/www\.pierrondi\.dev\/apps(?![/\w-])/,
+      `${name} should not advertise a bare /apps hub URL`,
+    )
   }
 })
 

@@ -143,6 +143,8 @@ async function auditRedirects(base) {
     ['/pt/login', 308, '/crm/login'],
     ['/en/privacy', 308, '/privacy'],
     ['/es/terms', 308, '/terms'],
+    ['/apps', 308, '/portfolio'],
+    ['/en/apps', 308, '/en/portfolio'],
   ]
   const results = []
 
