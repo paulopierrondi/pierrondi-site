@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import JsonLd from '@/components/JsonLd'
+import { OFFICIAL_SAME_AS } from '@/lib/contact'
 import { SITE_URL } from '@/lib/site'
 import PauloPortfolioExperience from './PauloPortfolioExperience'
 
@@ -54,7 +55,8 @@ const personSchema = {
   '@type': 'Person',
   '@id': `${SITE_URL}/#person`,
   name: 'Paulo Pierrondi',
-  url: `${SITE_URL}/paulo`,
+  // Keep entity url on the homepage so /paulo does not fork the official brand URL.
+  url: SITE_URL,
   image: `${SITE_URL}/assets/paulo-pierrondi-executive-neural.jpg`,
   jobTitle: 'Technical Account Executive, AI Operator and Agent OS Builder',
   knowsAbout: [
@@ -67,7 +69,7 @@ const personSchema = {
     'Now Assist',
     'Product execution',
   ],
-  sameAs: ['https://br.linkedin.com/in/paulopierrondi'],
+  sameAs: [...OFFICIAL_SAME_AS],
 }
 
 export default function PauloPage() {

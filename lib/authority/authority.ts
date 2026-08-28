@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import authorityOpsRaw from '@/content/authority/paulo-authority-ops.json'
+import { OFFICIAL_SAME_AS } from '@/lib/contact'
 import { SITE_URL } from '@/lib/site'
 
 export type AuthorityLang = 'pt' | 'en'
@@ -102,7 +103,7 @@ export const profilePageMainEntity = {
   name: 'Paulo Pierrondi',
   url: SITE_URL,
   image: `${SITE_URL}/og`,
-  sameAs: ['https://br.linkedin.com/in/paulopierrondi'],
+  sameAs: [...OFFICIAL_SAME_AS],
 }
 
 export function authorityProfileJsonLd(lang: AuthorityLang) {

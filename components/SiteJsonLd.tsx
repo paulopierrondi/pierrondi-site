@@ -1,4 +1,5 @@
 import JsonLd from '@/components/JsonLd'
+import { OFFICIAL_SAME_AS } from '@/lib/contact'
 import { SITE_URL } from '@/lib/site'
 
 const siteSchema = {
@@ -10,7 +11,7 @@ const siteSchema = {
       name: 'pierrondi.dev',
       alternateName: 'Paulo Pierrondi Studio',
       url: SITE_URL,
-      logo: `${SITE_URL}/og`,
+      logo: `${SITE_URL}/pierrondi-logo-1024.png`,
       founder: { '@id': `${SITE_URL}/#person` },
       knowsAbout: [
         'Enterprise AI operating models',
@@ -27,7 +28,8 @@ const siteSchema = {
       name: 'Paulo Pierrondi',
       givenName: 'Paulo',
       familyName: 'Pierrondi',
-      url: `${SITE_URL}/paulo`,
+      // Homepage is the official brand/person entity URL (not /paulo).
+      url: SITE_URL,
       image: `${SITE_URL}/assets/paulo-pierrondi-executive-neural.jpg`,
       email: 'pierrondi@gmail.com',
       jobTitle: 'Technical Account Executive',
@@ -60,7 +62,7 @@ const siteSchema = {
         { '@id': `${SITE_URL}/portfolio#collection` },
         { '@id': `${SITE_URL}/feitos/sada-servicenow#work` },
       ],
-      sameAs: ['https://br.linkedin.com/in/paulopierrondi'],
+      sameAs: [...OFFICIAL_SAME_AS],
     },
     {
       '@id': 'https://faithschool.app/#software',
