@@ -14,8 +14,38 @@ import path from 'node:path'
 const ROOT = new URL('..', import.meta.url).pathname
 const ANSWERS = path.join(ROOT, 'public/answers.json')
 const APP_STORE_CATALOG = path.join(ROOT, 'public/app-icons/app-store-catalog.json')
+const APPS_CATALOG = path.join(ROOT, 'app/apps/[slug]/_apps.ts')
 const SITE = 'https://www.pierrondi.dev'
 const RESERVED_APP_SLUGS = new Set(['superapp-servicenow'])
+
+async function loadLocalAppSlugs() {
+  const src = await readFile(APPS_CATALOG, 'utf8')
+  const match = src.match(/export const APPS = \{([\s\S]*?)\}\s*satisfies/)
+  if (!match) throw new Error('Could not locate APPS const in _apps.ts')
+  const slugs = new Set()
+  for (const line of match[1].split('\n')) {
+    const m = line.match(/^\s\s([A-Za-z][\w-]*|'[^']+'|"[^"]+")\s*:\s*\{/)
+    if (!m) continue
+    let key = m[1]
+    if (
+      (key.startsWith("'") && key.endsWith("'")) ||
+      (key.startsWith('"') && key.endsWith('"'))
+    ) {
+      key = key.slice(1, -1)
+    }
+    slugs.add(key)
+  }
+  if (slugs.size === 0) throw new Error('Parsed 0 slugs from _apps.ts')
+  return slugs
+}
+
+function publicAppUrl(app, localSlugs) {
+  // Prefer the real /apps/<slug> landing when it exists. App Store-only showcase
+  // apps have no local page — use the storefront URL already shown on /portfolio.
+  // Never invent empty /apps/<slug> targets (e.g. cantustudio-app, muse-edit).
+  if (localSlugs.has(app.slug)) return `${SITE}/apps/${app.slug}`
+  return app.url.replace(/\?uo=4$/, '')
+}
 
 const FLAGSHIP_PROJECTS = [
   {
@@ -124,6 +154,7 @@ const FLAGSHIP_PROJECTS = [
 async function main() {
   const answers = JSON.parse(await readFile(ANSWERS, 'utf8'))
   const appStoreCatalog = JSON.parse(await readFile(APP_STORE_CATALOG, 'utf8'))
+  const localSlugs = await loadLocalAppSlugs()
   const publicApps = appStoreCatalog.apps.filter((app) => !RESERVED_APP_SLUGS.has(app.slug))
 
   if (answers.entity) {
@@ -151,19 +182,23 @@ async function main() {
       'Distinct public-safe catalog entries typed by kind, evidence and visibility. Aliases, maintenance branches and reserved client or enterprise work are consolidated or excluded.',
   }
 
-  answers.appsPortfolio = publicApps.map((app) => ({
-    name: app.name,
-    category: app.category,
-    url: `${SITE}/apps/${app.slug}`,
-    appStoreUrl: app.url.replace(/\?uo=4$/, ''),
-    image: `${SITE}${app.icon}`,
-  }))
+  answers.appsPortfolio = publicApps.map((app) => {
+    const appStoreUrl = app.url.replace(/\?uo=4$/, '')
+    return {
+      name: app.name,
+      category: app.category,
+      url: publicAppUrl(app, localSlugs),
+      appStoreUrl,
+      image: `${SITE}${app.icon}`,
+    }
+  })
 
   answers.lastUpdated = new Date().toISOString().slice(0, 10)
 
   await writeFile(ANSWERS, `${JSON.stringify(answers, null, 2)}\n`)
+  const remapped = answers.appsPortfolio.filter((app) => !app.url.includes(`${SITE}/apps/`))
   console.log(
-    `answers.json updated: ${FLAGSHIP_PROJECTS.length} flagship projects, ${answers.appsPortfolio.length} public-showcase apps, entity sameAs/logo set`,
+    `answers.json updated: ${FLAGSHIP_PROJECTS.length} flagship projects, ${answers.appsPortfolio.length} public-showcase apps, ${remapped.length} App Store-only urls (no local /apps page), entity sameAs/logo set`,
   )
 }
 

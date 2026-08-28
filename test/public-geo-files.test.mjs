@@ -60,6 +60,53 @@ test('machine-readable portfolio preserves the source count and exposes the 20-a
   }
 })
 
+test('appsPortfolio urls never invent /apps slugs without a local landing page', async () => {
+  const appsCatalog = await readFile(new URL('../app/apps/[slug]/_apps.ts', import.meta.url), 'utf8')
+  const match = appsCatalog.match(/export const APPS = \{([\s\S]*?)\}\s*satisfies/)
+  assert.ok(match, 'APPS catalog must be parseable')
+  const localSlugs = new Set()
+  for (const line of match[1].split('\n')) {
+    const m = line.match(/^\s\s([A-Za-z][\w-]*|'[^']+'|"[^"]+")\s*:\s*\{/)
+    if (!m) continue
+    let key = m[1]
+    if ((key.startsWith("'") && key.endsWith("'")) || (key.startsWith('"') && key.endsWith('"'))) {
+      key = key.slice(1, -1)
+    }
+    localSlugs.add(key)
+  }
+
+  const invented = []
+  for (const app of answersJson.appsPortfolio) {
+    const appsMatch = app.url.match(/^https:\/\/www\.pierrondi\.dev\/apps\/([^/?#]+)$/)
+    if (appsMatch) {
+      assert.ok(
+        localSlugs.has(appsMatch[1]),
+        `${app.name} points at /apps/${appsMatch[1]} but that slug is not in _apps.ts`,
+      )
+      continue
+    }
+    assert.equal(
+      app.url,
+      app.appStoreUrl,
+      `${app.name} has no local /apps page so url must equal the App Store URL used on /portfolio`,
+    )
+    invented.push(app.name)
+  }
+
+  // Known App Store-only showcase apps (no /apps/<slug> landing).
+  for (const name of [
+    'CantuStudio',
+    'Muse Edit - Style Closet',
+    'VibeCode Kids',
+    'Aura - Afirmacoes Diarias',
+    'Álbum de Figurinhas 26',
+    'Casa Clara',
+    'Blockfront Tactics',
+  ]) {
+    assert.ok(invented.includes(name), `${name} should be remapped away from a 404 /apps URL`)
+  }
+})
+
 test('public GEO files advertise /ai-search as the canonical hub', () => {
   const publicSurfaces = [
     ['llms.txt', llmsText],
