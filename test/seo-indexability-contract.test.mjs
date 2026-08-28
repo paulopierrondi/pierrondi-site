@@ -123,6 +123,17 @@ test('entity graph defines its publisher and machine files are not sameAs identi
   assert.match(siteSchema, /subjectOf:/)
 })
 
+test('homepage entity graph points Person/Organization/WebSite at www without forking to /paulo', () => {
+  assert.match(siteSchema, /'@type':\s*'Person'/)
+  assert.match(siteSchema, /'@type':\s*'Organization'/)
+  assert.match(siteSchema, /'@type':\s*'WebSite'/)
+  assert.match(siteSchema, /url:\s*SITE_URL/)
+  assert.doesNotMatch(siteSchema, /url:\s*`\$\{SITE_URL\}\/paulo`/)
+  assert.match(siteSchema, /logo:\s*`\$\{SITE_URL\}\/pierrondi-logo-1024\.png`/)
+  assert.match(siteSchema, /OFFICIAL_SAME_AS/)
+  assert.match(siteSchema, /from '@\/lib\/contact'/)
+})
+
 test('app schema uses verified catalog data without claiming a zero price', () => {
   assert.match(appLanding, /app-store-catalog\.json/)
   assert.match(appLanding, /softwareVersion/)
