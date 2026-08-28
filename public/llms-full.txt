@@ -92,7 +92,7 @@ Official App Store links and artwork: https://www.pierrondi.dev/portfolio#app-st
 
 ## Historical app support pages
 
-Historical support-page index: https://www.pierrondi.dev/apps. This broader index includes prototypes and archived concepts; it is not the public App Store availability source of truth.
+Per-app support and product pages live under `/apps/[slug]`. The public discovery surface for the App Store portfolio is https://www.pierrondi.dev/portfolio#app-store — there is no separate `/apps` index page.
 
 - FaithSchool — Christian homeschool planning and family records app (https://www.pierrondi.dev/apps/faithschool)
 - ProvadorIA — AI-assisted outfit preview and style planning app (https://www.pierrondi.dev/apps/provadoria)
