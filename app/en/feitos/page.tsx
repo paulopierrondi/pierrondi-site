@@ -14,7 +14,6 @@ export const metadata: Metadata = {
       'x-default': '/feitos',
     },
   },
-  robots: { index: false, follow: true },
   openGraph: {
     title: 'Profile, work, and execution proof | Paulo Pierrondi',
     description: 'Anonymized cases, public products, and architecture for payment, AI, and automated delivery.',

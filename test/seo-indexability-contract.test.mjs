@@ -12,6 +12,10 @@ const [
   proxy,
   enBlog,
   enFeitos,
+  privacy,
+  privacidade,
+  terms,
+  termos,
   appDocs,
   siteSchema,
   appLanding,
@@ -24,6 +28,10 @@ const [
   read('proxy.ts'),
   read('app/en/blog/page.tsx'),
   read('app/en/feitos/page.tsx'),
+  read('app/privacy/page.tsx'),
+  read('app/privacidade/page.tsx'),
+  read('app/terms/page.tsx'),
+  read('app/termos/page.tsx'),
   read('app/apps/[slug]/[doc]/page.tsx'),
   read('components/SiteJsonLd.tsx'),
   read('app/apps/[slug]/page.tsx'),
@@ -38,25 +46,32 @@ test('sitemap contains only canonical indexable HTML routes', () => {
     '/llms.txt',
     '/llms-full.txt',
     '/citations',
+    '/sprint',
+  ]) {
+    assert.doesNotMatch(sitemap, new RegExp(`path:\\s*'${path.replaceAll('/', '\\/')}'`))
+  }
+
+  for (const path of [
     '/en/blog',
     '/en/feitos',
     '/privacy',
     '/privacidade',
     '/terms',
     '/termos',
+    '/ai-search',
   ]) {
-    assert.doesNotMatch(sitemap, new RegExp(`path:\\s*'${path.replaceAll('/', '\\/')}'`))
+    assert.match(sitemap, new RegExp(`path:\\s*'${path.replaceAll('/', '\\/')}'`))
   }
 
   assert.doesNotMatch(sitemap, /const appDocs\b/)
   assert.doesNotMatch(sitemap, /\/apps\/\$\{slug\}\/\$\{doc\}/)
-  assert.match(sitemap, /path:\s*'\/ai-search'/)
 })
 
-test('thin locale hubs and app legal documents remain crawlable but noindex', () => {
-  for (const source of [enBlog, enFeitos, appDocs]) {
-    assert.match(source, /robots:\s*\{\s*index:\s*false,\s*follow:\s*true\s*\}/)
+test('site legal pages and EN hubs are indexable; app legal documents stay noindex', () => {
+  for (const source of [enBlog, enFeitos, privacy, privacidade, terms, termos]) {
+    assert.doesNotMatch(source, /robots:\s*\{\s*index:\s*false/)
   }
+  assert.match(appDocs, /robots:\s*\{\s*index:\s*false,\s*follow:\s*true\s*\}/)
 })
 
 test('robots does not block public redirects or noindex pages', () => {

@@ -71,12 +71,7 @@ async function auditSitemap(base, canonicalBase) {
     '/llms.txt',
     '/llms-full.txt',
     '/citations',
-    '/en/blog',
-    '/en/feitos',
-    '/privacy',
-    '/privacidade',
-    '/terms',
-    '/termos',
+    '/sprint',
   ]
 
   for (const url of urls) {

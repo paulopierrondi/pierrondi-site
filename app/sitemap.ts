@@ -28,11 +28,17 @@ const staticRoutes: Array<{
   { path: '/en/atuacao', priority: 0.78, changeFrequency: 'monthly' },
   { path: '/en/treinamentos', priority: 0.78, changeFrequency: 'monthly' },
   { path: '/en/studio', priority: 0.82, changeFrequency: 'monthly' },
+  { path: '/en/feitos', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/en/blog', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/en/contato', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/en/portfolio', priority: 0.84, changeFrequency: 'weekly' },
   { path: '/paulo', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/design', priority: 0.72, changeFrequency: 'monthly' },
   { path: '/design/library', priority: 0.7, changeFrequency: 'monthly' },
+  { path: '/privacidade', priority: 0.3, changeFrequency: 'yearly' },
+  { path: '/privacy', priority: 0.3, changeFrequency: 'yearly' },
+  { path: '/termos', priority: 0.3, changeFrequency: 'yearly' },
+  { path: '/terms', priority: 0.3, changeFrequency: 'yearly' },
 ]
 
 function routeUrl(path: string) {
