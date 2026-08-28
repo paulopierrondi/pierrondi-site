@@ -200,3 +200,21 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Regenerated `public/answers.json`; added contract test in `test/public-geo-files.test.mjs`.
 - Explicitly not done: no empty `/apps/cantustudio`, no `/sprint` sitemap entry, no redo of PR 43/44, no merge/deploy.
 - Tests: `node --import tsx --test test/public-geo-files.test.mjs` → 7/7 pass.
+
+
+## 2026-08-28 — FULL production ship complete
+
+Paulo authorized full production ship for PRs #43/#44/#45.
+
+Merged to `main`:
+- #43 → `20ffe0fe73d7be0547956e5c121ac17d790a3e34`
+- #44 → `bf728bfeff942ec9af425edb65c0b6f7258eb9bc`
+- #45 → `2b04a7ad5ac9710813163d53e2453a0f525a2201` (main HEAD)
+
+Production live on www.pierrondi.dev updated immediately after merge (Railway service showed fresh uptime ~17–28s; `RAILWAY_TOKEN` was unavailable in the Cloud Agent so `railway up` was not run from this VM — deploy still landed, consistent with GitHub→Railway auto-deploy now being active contrary to older DEPLOY.md note).
+
+Live checks:
+- `/apps` → **308** `/portfolio` (Next permanent redirect; equivalent to requested 301)
+- sitemap **70** locs includes `/privacidade` and `/en/blog`; **no** `/sprint`
+- `/sprint` still **404**; title `Página não encontrada | pierrondi.dev` ≠ homepage title
+- answers.json App Store-only apps remapped (no invented `/apps/<slug>` 404s)
