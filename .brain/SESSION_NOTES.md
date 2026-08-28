@@ -182,3 +182,13 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Local smoke: `/apps` 308→`/portfolio`, `/sprint` still 404, sitemap 64 locs without `/sprint`.
 - No production deploy. PR for Codex/Paulo validation.
 - Suggested Linear/Obsidian: note residual risk that `answers.json` still lists some `/apps/<slug>` URLs without local pages (App Store–only showcase apps); out of scope for the singular Ahrefs hub 404.
+
+## 2026-08-28 — SEO sitemap: legal + EN twins indexable
+
+- Made `/en/blog`, `/en/feitos`, `/privacy`, `/privacidade`, `/terms`, `/termos` indexable (removed intentional noindex from consolidate wave).
+- Added those six locs to `app/sitemap.ts`.
+- Kept `/sprint` unpublished and out of sitemap.
+- Did not touch PR #43 `/apps` hub redirect; skipped `/apps/cantustudio` 404 (App Store–only on portfolio).
+- Added `app/not-found.tsx` so 404 title/H1 are not the homepage title (soft-404 on `/apps` and `/sprint` until PR 43 deploys the hub redirect).
+- Updated SEO contract + indexability audit + production validator expectations.
+- No deploy.

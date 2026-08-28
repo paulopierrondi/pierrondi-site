@@ -11,7 +11,6 @@ export const metadata: Metadata = {
       'en-US': '/privacy',
     },
   },
-  robots: { index: false, follow: true },
 }
 
 export default function PrivacyPolicyPage() {
