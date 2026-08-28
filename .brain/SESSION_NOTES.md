@@ -189,5 +189,6 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Added those six locs to `app/sitemap.ts`.
 - Kept `/sprint` unpublished and out of sitemap.
 - Did not touch PR #43 `/apps` hub redirect; skipped `/apps/cantustudio` 404 (App Store–only on portfolio).
+- Added `app/not-found.tsx` so 404 title/H1 are not the homepage title (soft-404 on `/apps` and `/sprint` until PR 43 deploys the hub redirect).
 - Updated SEO contract + indexability audit + production validator expectations.
 - No deploy.
