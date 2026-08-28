@@ -172,3 +172,13 @@ list`/`check` (só nomes) em vez de `grep` direto no `.keys.env`.
 Próxima ação humana: batch de decisão de analytics access (GA4/GSC/Plausible) quando o Paulo tiver
 tempo — a automação já despacha isso como `decision_batch`/`digest_only` (não repetitivo) e agora,
 com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configured`.
+
+## 2026-08-28 — Cursor overnight SEO: live Ahrefs 404
+
+- Ahrefs Site Explorer: 151 crawled, 131×200, 18 redirects, 1×404, 1 other 4xx.
+- Identified 404: `/apps` (advertised in `public/llms-full.txt` as historical support-page index; no hub page shipped). `/app` already 308→`/portfolio`. `/sprint` intentional 404, kept out of sitemap.
+- Other 4xx consistent with intentional `410 /breach`.
+- Fix on branch `cursor/seo-apps-404-redirect-c74c`: redirect `/apps`→`/portfolio`, `/en/apps`→`/en/portfolio`; remove dead `/apps` hub URL from llms-full.txt; SEO contract/audit guards.
+- Local smoke: `/apps` 308→`/portfolio`, `/sprint` still 404, sitemap 64 locs without `/sprint`.
+- No production deploy. PR for Codex/Paulo validation.
+- Suggested Linear/Obsidian: note residual risk that `answers.json` still lists some `/apps/<slug>` URLs without local pages (App Store–only showcase apps); out of scope for the singular Ahrefs hub 404.
