@@ -12,6 +12,8 @@ const siteSchema = {
       alternateName: 'Paulo Pierrondi Studio',
       url: SITE_URL,
       logo: `${SITE_URL}/pierrondi-logo-1024.png`,
+      disambiguatingDescription:
+        'Official site of Paulo Pierrondi at https://www.pierrondi.dev. Distinct from freelance marketplace listings.',
       founder: { '@id': `${SITE_URL}/#person` },
       knowsAbout: [
         'Enterprise AI operating models',
@@ -35,6 +37,8 @@ const siteSchema = {
       jobTitle: 'Technical Account Executive',
       description:
         'Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder. Constrói sistemas multi-agente, plataformas de automação, apps e frameworks com governança e trilhas de evidência.',
+      disambiguatingDescription:
+        'Official website of Paulo Pierrondi at https://www.pierrondi.dev — Technical Account Executive at ServiceNow. Distinct from freelance marketplace listings.',
       address: {
         '@type': 'PostalAddress',
         addressCountry: 'BR',

@@ -104,6 +104,8 @@ export const profilePageMainEntity = {
   url: SITE_URL,
   image: `${SITE_URL}/og`,
   sameAs: [...OFFICIAL_SAME_AS],
+  disambiguatingDescription:
+    'Official website of Paulo Pierrondi at https://www.pierrondi.dev — Technical Account Executive at ServiceNow. Distinct from freelance marketplace listings.',
 }
 
 export function authorityProfileJsonLd(lang: AuthorityLang) {

@@ -200,3 +200,12 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Regenerated `public/answers.json`; added contract test in `test/public-geo-files.test.mjs`.
 - Explicitly not done: no empty `/apps/cantustudio`, no `/sprint` sitemap entry, no redo of PR 43/44, no merge/deploy.
 - Tests: `node --import tsx --test test/public-geo-files.test.mjs` → 7/7 pass.
+
+## 2026-09-03 — SEO Person/WebPage entity slice (www.pierrondi.dev)
+
+- Live gap: brand query “Paulo Pierrondi” occupied by LinkedIn / freelance marketplaces; production HTML had Person + ProfilePage but no WebPage and no `disambiguatingDescription`.
+- Shipped on `cursor/seo-person-webpage-entity-f101`: home `/` and `/en` emit `@type: [WebPage, ProfilePage]` about `#person`; Person + Organization get honest `disambiguatingDescription` naming `https://www.pierrondi.dev`.
+- sameAs unchanged: `https://br.linkedin.com/in/paulopierrondi`, `https://github.com/paulopierrondi` only. No Fractional claim (not on-page). No Product. `/sprint` still 404. IndexNow key untouched.
+- Local render (`next start :3456`): title/H1 still brand-lead; WebPage + disambiguatingDescription present; Product absent.
+- Tests: `npm test` → 145/145. Draft PR #49. Deploy remains human-gated.
+- Suggested Linear/Obsidian: note this slice on `pierrondi-site` / AGE-1486 project; no new issue created.
