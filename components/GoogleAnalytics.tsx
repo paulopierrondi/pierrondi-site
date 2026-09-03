@@ -30,10 +30,11 @@ export default function GoogleAnalytics({ measurementId }: { measurementId?: str
 
   useEffect(() => {
     if (!measurementId) return
+    const id = measurementId
 
     function syncConsent() {
       if (localStorage.getItem('cookie-consent') === 'all') {
-        grantAnalytics(measurementId, pathname)
+        grantAnalytics(id, pathname)
       }
     }
 
