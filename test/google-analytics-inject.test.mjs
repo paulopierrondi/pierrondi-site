@@ -28,12 +28,13 @@ const [
 
 test('root layout always injects gtag.js for G-1CL8PFYY7T without an env gate', () => {
   assert.match(layout, /const GA4_MEASUREMENT_ID = 'G-1CL8PFYY7T'/)
-  assert.match(layout, /googletagmanager\.com\/gtag\/js\?id=\$\{GA4_MEASUREMENT_ID\}/)
-  assert.match(layout, /strategy="beforeInteractive"/)
+  assert.match(layout, /<script[\s\S]*googletagmanager\.com\/gtag\/js\?id=\$\{GA4_MEASUREMENT_ID\}/)
+  assert.match(layout, /dangerouslySetInnerHTML/)
   assert.match(layout, /gtag\('consent', 'default'/)
   assert.match(layout, /analytics_storage: 'denied'/)
   assert.match(layout, /gtag\('config', '\$\{GA4_MEASUREMENT_ID\}'/)
   assert.doesNotMatch(layout, /NEXT_PUBLIC_GA_MEASUREMENT_ID/)
+  assert.doesNotMatch(layout, /strategy="beforeInteractive"/)
   assert.equal([...layout.matchAll(/G-[A-Z0-9]+/g)].map((match) => match[0]).every((id) => id === GA4_MEASUREMENT_ID), true)
 })
 

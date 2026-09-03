@@ -151,24 +151,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${display.variable} ${body.variable} ${mono.variable}`}
     >
       <head>
-        <Script
+        <script
+          async
           src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
-          strategy="beforeInteractive"
         />
-        <Script id="ga4-init" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            window.gtag = gtag;
-            gtag('consent', 'default', {
-              ad_storage: 'denied',
-              analytics_storage: 'denied',
-              wait_for_update: 500
-            });
-            gtag('js', new Date());
-            gtag('config', '${GA4_MEASUREMENT_ID}', { anonymize_ip: true });
-          `}
-        </Script>
+        <script
+          id="ga4-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
+              gtag('consent', 'default', {
+                ad_storage: 'denied',
+                analytics_storage: 'denied',
+                wait_for_update: 500
+              });
+              gtag('js', new Date());
+              gtag('config', '${GA4_MEASUREMENT_ID}', { anonymize_ip: true });
+            `,
+          }}
+        />
         {plausibleDomain && (
           <>
             <Script
