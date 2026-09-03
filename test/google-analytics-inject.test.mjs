@@ -38,12 +38,13 @@ test('root layout always injects gtag.js for G-1CL8PFYY7T without an env gate', 
 })
 
 test('GA client updates consent on accept and never gates the loader on cookie-consent', () => {
+  assert.doesNotMatch(ga, /useState\(false\)/)
   assert.doesNotMatch(ga, /if \(!measurementId \|\| !enabled\) return null/)
-  assert.doesNotMatch(ga, /cookie-consent'\) === 'all'\)[\s\S]*return null/)
   assert.doesNotMatch(ga, /<Script/)
   assert.match(ga, /cookie-consent-granted/)
   assert.match(ga, /consent',\s*'update'/)
   assert.match(ga, /analytics_storage:\s*'granted'/)
+  assert.match(ga, /return null/)
 })
 
 test('cookie banner can grant consent on immersive home routes', () => {
