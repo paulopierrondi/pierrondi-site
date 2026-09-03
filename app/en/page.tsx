@@ -68,8 +68,8 @@ export const metadata: Metadata = {
 
 const enWebPageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'ProfilePage',
-  '@id': `${SITE_URL}/en`,
+  '@type': ['WebPage', 'ProfilePage'],
+  '@id': `${SITE_URL}/en#webpage`,
   url: `${SITE_URL}/en`,
   name: 'Paulo Pierrondi — Where AI becomes governed operations',
   description:
@@ -78,6 +78,7 @@ const enWebPageSchema = {
   isPartOf: { '@id': `${SITE_URL}/#website` },
   about: { '@id': `${SITE_URL}/#person` },
   mainEntity: profilePageMainEntity,
+  publisher: { '@id': `${SITE_URL}/#organization` },
 }
 
 export default function HomeEn() {

@@ -72,8 +72,8 @@ export const metadata: Metadata = {
 
 const homeWebPageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'ProfilePage',
-  '@id': `${SITE_URL}/#profile-page`,
+  '@type': ['WebPage', 'ProfilePage'],
+  '@id': `${SITE_URL}/#webpage`,
   url: SITE_URL,
   name: 'Paulo Pierrondi — Onde IA vira operação com evidência',
   description:
@@ -82,6 +82,7 @@ const homeWebPageSchema = {
   isPartOf: { '@id': `${SITE_URL}/#website` },
   about: { '@id': `${SITE_URL}/#person` },
   mainEntity: profilePageMainEntity,
+  publisher: { '@id': `${SITE_URL}/#organization` },
 }
 
 export default function Home() {
