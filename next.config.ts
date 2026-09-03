@@ -187,15 +187,15 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io https://www.googletagmanager.com",
               "style-src 'self' 'unsafe-inline' fonts.googleapis.com",
               "font-src 'self' fonts.gstatic.com",
-              "img-src 'self' data: blob:",
+              "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com",
               "media-src 'self' blob:",
               // localhost / 127.0.0.1 allowed so the Studio (browser) can talk
               // to the local-agent (pierrondi-local-agent) on the user's Mac.
               // The local-agent itself enforces token + Origin allowlist.
-              "connect-src 'self' formspree.io https://plausible.io *.sentry.io http://127.0.0.1:* http://localhost:* ws://127.0.0.1:* ws://localhost:*",
+              "connect-src 'self' formspree.io https://plausible.io *.sentry.io https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com http://127.0.0.1:* http://localhost:* ws://127.0.0.1:* ws://localhost:*",
               "frame-src 'self'",
             ].join('; '),
           },

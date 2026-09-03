@@ -35,7 +35,7 @@ const mono = JetBrains_Mono({
 })
 
 const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN
-const googleAnalyticsMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+const GA4_MEASUREMENT_ID = 'G-1CL8PFYY7T'
 
 const CookieBanner = dynamic(() => import('@/components/CookieBanner'))
 
@@ -151,6 +151,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${display.variable} ${body.variable} ${mono.variable}`}
     >
       <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
+          strategy="beforeInteractive"
+        />
+        <Script id="ga4-init" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              analytics_storage: 'denied',
+              wait_for_update: 500
+            });
+            gtag('js', new Date());
+            gtag('config', '${GA4_MEASUREMENT_ID}', { anonymize_ip: true });
+          `}
+        </Script>
         {plausibleDomain && (
           <>
             <Script
@@ -171,7 +189,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <HomeBackground />
         <SiteNav />
         <LanguageSwitcher />
-        <GoogleAnalytics measurementId={googleAnalyticsMeasurementId} />
+        <GoogleAnalytics measurementId={GA4_MEASUREMENT_ID} />
         {children}
         <SiteFooter />
         <CookieBanner />
