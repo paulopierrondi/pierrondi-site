@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { getCurrentLanguage } from '@/lib/i18n/site-language'
-import { isImmersiveHomeRoute, usesOwnAppChrome } from '@/components/home-v2/immersive-routes'
+import { usesOwnAppChrome } from '@/components/home-v2/immersive-routes'
 import styles from './CookieBanner.module.css'
 
 const copy = {
@@ -31,7 +31,6 @@ export default function CookieBanner() {
   const t = copy[lang]
   const [visible, setVisible] = useState(false)
   const suppressed =
-    isImmersiveHomeRoute(pathname || '/') ||
     usesOwnAppChrome(pathname || '/') ||
     pathname === '/paulo' ||
     pathname === '/whypaulo' ||

@@ -1,7 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import Script from 'next/script'
+import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 
 declare global {
@@ -11,49 +10,46 @@ declare global {
   }
 }
 
+function pagePath(pathname: string) {
+  if (typeof window === 'undefined') return pathname
+  const query = window.location.search.replace(/^\?/, '')
+  return query ? `${pathname}?${query}` : pathname
+}
+
+function grantAnalytics(measurementId: string, pathname: string) {
+  if (typeof window.gtag !== 'function') return
+  window.gtag('consent', 'update', { analytics_storage: 'granted' })
+  window.gtag('config', measurementId, {
+    page_path: pagePath(pathname),
+    anonymize_ip: true,
+  })
+}
+
 export default function GoogleAnalytics({ measurementId }: { measurementId?: string }) {
   const pathname = usePathname()
-  const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {
     if (!measurementId) return
+    const id = measurementId
 
     function syncConsent() {
-      setEnabled(localStorage.getItem('cookie-consent') === 'all')
+      if (localStorage.getItem('cookie-consent') === 'all') {
+        grantAnalytics(id, pathname)
+      }
     }
 
     syncConsent()
     window.addEventListener('cookie-consent-granted', syncConsent)
     return () => window.removeEventListener('cookie-consent-granted', syncConsent)
-  }, [measurementId])
+  }, [measurementId, pathname])
 
   useEffect(() => {
-    if (!enabled || !measurementId || typeof window.gtag !== 'function') return
-
-    const query = window.location.search.replace(/^\?/, '')
-    const pagePath = query ? `${pathname}?${query}` : pathname
+    if (!measurementId || typeof window.gtag !== 'function') return
     window.gtag('config', measurementId, {
-      page_path: pagePath,
+      page_path: pagePath(pathname),
       anonymize_ip: true,
     })
-  }, [enabled, measurementId, pathname])
+  }, [measurementId, pathname])
 
-  if (!measurementId || !enabled) return null
-
-  return (
-    <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`}
-        strategy="afterInteractive"
-      />
-      <Script id="ga4-init" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          window.gtag = window.gtag || function(){dataLayer.push(arguments);};
-          window.gtag('js', new Date());
-          window.gtag('config', ${JSON.stringify(measurementId)}, { anonymize_ip: true });
-        `}
-      </Script>
-    </>
-  )
+  return null
 }

@@ -209,3 +209,11 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Local render (`next start :3456`): title/H1 still brand-lead; WebPage + disambiguatingDescription present; Product absent.
 - Tests: `npm test` → 145/145. Draft PR #49. Deploy remains human-gated.
 - Suggested Linear/Obsidian: note this slice on `pierrondi-site` / AGE-1486 project; no new issue created.
+
+## 2026-09-03 — GA4 gtag inject (G-1CL8PFYY7T)
+
+- Live gap: `/` and `/en` RSC had `measurementId=G-1CL8PFYY7T` but the DOM had no `gtag.js`. Two blockers: (1) `GoogleAnalytics` gated scripts on `cookie-consent===all` while `CookieBanner` hid itself on immersive home `/` and `/en`; (2) CSP `script-src`/`connect-src`/`img-src` allowed Plausible but not googletagmanager / google-analytics.
+- Fix on `cursor/ga4-gtag-inject-49b6`: layout injects `gtag.js?id=G-1CL8PFYY7T` with Consent Mode default `analytics_storage=denied`; banner now shows on home and grants on accept; CSP allowlists GTM/GA hosts. ID unchanged. No Product schema. `/sprint` still 404.
+- Local `next start :3456`: `/` and `/en` 200 with gtag src+config in HTML; CSP includes GTM/GA and keeps Plausible; `/sprint` 404.
+- Tests: `npm test` 150/150. Ready PR #50. Deploy remains human-gated.
+- Suggested Linear/Obsidian: note GA4 tagging now injects; property 544419741 should start receiving hits after Railway deploy.
