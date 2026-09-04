@@ -7,7 +7,7 @@ import HomeV2 from '@/components/home-v2/HomeV2'
 export const metadata: Metadata = {
   title: 'Paulo Pierrondi — Where AI becomes governed operations',
   description:
-    'Operating system for AI: operating model, AgentOps, governance and evidence trails. Enterprise FSI at ServiceNow and public systems designed, built and shipped by Paulo Pierrondi.',
+    'Operating system for AI: operating model, AgentOps, governance and evidence trails — measurable outcomes and automations (not loose hours). Enterprise FSI at ServiceNow and public systems designed, built and shipped by Paulo Pierrondi.',
   keywords: [
     'Paulo Pierrondi',
     'Enterprise AI Operator',

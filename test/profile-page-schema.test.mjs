@@ -67,3 +67,15 @@ test('home title and H1 still lead with Paulo Pierrondi', () => {
   assert.match(homeCopy, /headlineLine1: 'Paulo Pierrondi'/)
   assert.equal((homeCopy.match(/headlineLine1: 'Paulo Pierrondi'/g) || []).length, 2)
 })
+
+test('home ATF copy and meta name measurable outcomes without Fractional title', () => {
+  assert.match(homeCopy, /resultado e automações mensuráveis, não horas soltas/)
+  assert.match(homeCopy, /measurable outcomes and automations, not loose hours/)
+  assert.match(homeCopy, /'Resultado mensurável'/)
+  assert.match(homeCopy, /'Measurable outcomes'/)
+  assert.match(home, /resultado e automações mensuráveis \(não horas soltas\)/)
+  assert.match(homeEn, /measurable outcomes and automations \(not loose hours\)/)
+  assert.doesNotMatch(homeCopy, /Fractional AI Automation Officer/)
+  assert.doesNotMatch(home, /Fractional AI Automation Officer/)
+  assert.doesNotMatch(homeEn, /Fractional AI Automation Officer/)
+})

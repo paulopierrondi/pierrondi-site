@@ -15,7 +15,7 @@ export const COPY: Record<Lang, SiteCopy> = {
       headlineLine1: 'Paulo Pierrondi',
       headlineLine2: 'Onde IA vira operação com evidência',
       description:
-        'Desenho o sistema operacional da IA: contexto, governança, AgentOps e trilha de evidência — em contas enterprise FSI na ServiceNow e em sistemas que eu mesmo construo e publico.',
+        'Desenho o sistema operacional da IA: contexto, governança, AgentOps e trilha de evidência — para entregar resultado e automações mensuráveis, não horas soltas — em contas enterprise FSI na ServiceNow e em sistemas que eu mesmo construo e publico.',
       ctaPrimary: { label: 'sistemas em produção', href: '#projects' },
       ctaSecondary: { label: 'colaborar', href: '#contact' },
       lanes: [
@@ -35,6 +35,7 @@ export const COPY: Record<Lang, SiteCopy> = {
         'AgentOps',
         'Evidence trails',
         'Full-stack systems',
+        'Resultado mensurável',
       ],
     },
     projects: {
@@ -356,7 +357,7 @@ export const COPY: Record<Lang, SiteCopy> = {
       headlineLine1: 'Paulo Pierrondi',
       headlineLine2: 'Where AI becomes governed operations',
       description:
-        'I design the operating system for AI: context, governance, AgentOps and evidence trails — across enterprise FSI accounts at ServiceNow and systems I build and ship myself.',
+        'I design the operating system for AI: context, governance, AgentOps and evidence trails — to deliver measurable outcomes and automations, not loose hours — across enterprise FSI accounts at ServiceNow and systems I build and ship myself.',
       ctaPrimary: { label: 'systems in production', href: '#projects' },
       ctaSecondary: { label: 'collaborate', href: '#contact' },
       lanes: [
@@ -376,6 +377,7 @@ export const COPY: Record<Lang, SiteCopy> = {
         'AgentOps',
         'Evidence trails',
         'Full-stack systems',
+        'Measurable outcomes',
       ],
     },
     projects: {
