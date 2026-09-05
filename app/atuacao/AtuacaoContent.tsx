@@ -18,7 +18,15 @@ const copy: Record<
   AtuacaoLang,
   {
     header: { eyebrow: string; title: React.ReactNode; lead: string; chips: string[] }
-    final: { h2: string; p: string; cta: string; trainingCta: string; trainingHref: string }
+    final: {
+      h2: string
+      p: string
+      cta: string
+      trainingCta: string
+      trainingHref: string
+      engagementCta: string
+      engagementHref: string
+    }
   }
 > = {
   pt: {
@@ -34,6 +42,8 @@ const copy: Record<
       cta: 'Ver os feitos',
       trainingCta: 'Ver os treinamentos',
       trainingHref: '/treinamentos',
+      engagementCta: 'Modelo de engajamento',
+      engagementHref: '/engajamento',
     },
   },
   en: {
@@ -49,6 +59,8 @@ const copy: Record<
       cta: 'See the work',
       trainingCta: 'See the training',
       trainingHref: '/en/treinamentos',
+      engagementCta: 'Engagement model',
+      engagementHref: '/en/engajamento',
     },
   },
 }
@@ -226,6 +238,9 @@ export default function AtuacaoContent({ lang }: { lang: AtuacaoLang }) {
             </Link>
             <Link href={c.final.trainingHref} className={styles.btnGhost}>
               {c.final.trainingCta} <span aria-hidden="true">→</span>
+            </Link>
+            <Link href={c.final.engagementHref} className={styles.btnGhost}>
+              {c.final.engagementCta} <span aria-hidden="true">→</span>
             </Link>
           </div>
         </Reveal>

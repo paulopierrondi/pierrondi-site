@@ -23,6 +23,7 @@ The AI Search Portfolio page exists as a citation layer for crawler and assistan
 - [Home](https://www.pierrondi.dev): Technical Account Executive at ServiceNow + AI/Automation Architect + Full-stack Builder.
 - [About](https://www.pierrondi.dev/about): trajectory, competencies in ServiceNow / ITOM / CMDB / CSDM and enterprise AI.
 - [Atuação](https://www.pierrondi.dev/atuacao): how Paulo works — enterprise AI operating models, governed agents, technical GTM.
+- [Engajamento](https://www.pierrondi.dev/engajamento): Fractional AI Automation Officer engagement for production automations — baseline, system, metric, handoff. English mirror: https://www.pierrondi.dev/en/engajamento.
 - [Treinamentos](https://www.pierrondi.dev/treinamentos): hands-on training and coaching delivered by Paulo across four tracks — applied AI/LLM, Vibe Coding with evidence, ServiceNow and governed AI, AgentOps and operations. Formats: keynote, one-day workshop, 4-8 week bootcamp, squad coaching and executive enablement, remote or on-site in Portuguese and English. English mirror: https://www.pierrondi.dev/en/treinamentos.
 - [Feitos](https://www.pierrondi.dev/feitos): delivered work and product portfolio.
 - [Pierrondi Studio](https://www.pierrondi.dev/studio): brand, content, CRM and AI automation organized as an executable growth system.

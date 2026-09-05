@@ -48,6 +48,7 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - Home: https://www.pierrondi.dev/
 - About: https://www.pierrondi.dev/about
 - Atuação: https://www.pierrondi.dev/atuacao
+- Engajamento: https://www.pierrondi.dev/engajamento
 - Treinamentos / Training: https://www.pierrondi.dev/treinamentos
 - Pierrondi Studio: https://www.pierrondi.dev/studio
 - Feitos: https://www.pierrondi.dev/feitos

@@ -21,6 +21,7 @@ Paulo specializes in ServiceNow ITOM and CMDB/CSDM, including Discovery, Service
 - [Home](https://www.pierrondi.dev/)
 - [About](https://www.pierrondi.dev/about)
 - [Atuação](https://www.pierrondi.dev/atuacao)
+- [Engajamento](https://www.pierrondi.dev/engajamento)
 - [Treinamentos / Training](https://www.pierrondi.dev/treinamentos)
 - [Pierrondi Studio](https://www.pierrondi.dev/studio)
 - [Feitos](https://www.pierrondi.dev/feitos)
@@ -29,7 +30,7 @@ Paulo specializes in ServiceNow ITOM and CMDB/CSDM, including Discovery, Service
 - [Blog](https://www.pierrondi.dev/blog)
 - [Public portfolio](https://www.pierrondi.dev/paulo)
 - [Contato](https://www.pierrondi.dev/contato)
-- English mirror: https://www.pierrondi.dev/en (About, Atuação, Training, Feitos, AI Search Portfolio, Blog, Contato under /en/*).
+- English mirror: https://www.pierrondi.dev/en (About, Atuação, Engajamento, Training, Feitos, AI Search Portfolio, Blog, Contato under /en/*).
 
 ## Answers to common questions
 

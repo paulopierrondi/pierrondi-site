@@ -231,3 +231,15 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Hero pill “Resultado mensurável” / “Measurable outcomes” already links to `#proof`.
 - Primary CTA is now COLABORAR / COLLABORATE (`#contact`) with copper/amber fill. Secondary “sistemas em produção” / “systems in production” stays ghost/outline to `#projects`.
 - No /sprint, no invented metrics, no Fractional title, gtag untouched.
+
+## 2026-09-05 — /engajamento Fractional AI Automation Officer page
+
+- PR `#53` on `cursor/engajamento-fractional-693f` against `main`. Paulo approved merge. No deploy from this agent.
+- New public page: PT `/engajamento`, EN `/en/engajamento`. H1 `Fractional AI Automation Officer`. Converts to `/contato` + existing WhatsApp pattern. Proof links only to `/feitos`.
+- Sitemap + i18n + geo.md/llms.txt/llms-full.txt list the new URLs. `/sprint` still unpublished and 404.
+- Home ATF gets a quiet `Modelo de engajamento` link (no Fractional title on home). `/atuacao` final actions get a third ghost CTA.
+- Schema: page `WebPage` + `Service`. No Product/offers/price. Sitewide `Person.jobTitle` stays Technical Account Executive. gtag `G-1CL8PFYY7T` unchanged.
+- Rebased/merged `origin/main` after `#52` (home discovery + proof bridge + COLABORAR CTA). Conflict only in this file; both notes kept.
+- Local `next start :3456`: `/engajamento` 200, `/en/engajamento` 200, `/sprint` 404, sitemap has both locs and no `/sprint`.
+- Tests: `npm test` 157/157. `npx tsc --noEmit` + `npm run lint` + `npm run build` OK.
+- Suggested Linear/Obsidian: note this offer page on `pierrondi-site` / AGE-1486. No new Linear issue created. Do not change live jobTitle.

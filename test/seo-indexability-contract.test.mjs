@@ -59,6 +59,8 @@ test('sitemap contains only canonical indexable HTML routes', () => {
     '/terms',
     '/termos',
     '/ai-search',
+    '/engajamento',
+    '/en/engajamento',
   ]) {
     assert.match(sitemap, new RegExp(`path:\\s*'${path.replaceAll('/', '\\/')}'`))
   }

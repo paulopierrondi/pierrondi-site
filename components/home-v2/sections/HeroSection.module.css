@@ -496,6 +496,26 @@
   color: rgba(255, 214, 160, 0.55);
 }
 
+.engagementHint {
+  margin: 12px 0 0;
+  max-width: 34rem;
+}
+
+.engagementLink {
+  font-family: var(--hv2-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(255, 196, 128, 0.62);
+  transition: color var(--hv2-dur-normal) var(--hv2-ease-default);
+}
+
+.engagementLink:hover {
+  color: rgba(255, 214, 160, 0.92);
+}
+
 /* --- responsive --------------------------------------------------------- */
 
 @media (min-width: 640px) {

@@ -189,6 +189,17 @@ export default function HeroSection({ lang }: SectionProps) {
               </a>
             ))}
           </motion.nav>
+
+          <motion.p className={styles.engagementHint} variants={itemVariants}>
+            <a
+              className={styles.engagementLink}
+              data-hero-engagement
+              href={lang === 'pt' ? '/engajamento' : '/en/engajamento'}
+            >
+              {lang === 'pt' ? 'Modelo de engajamento' : 'Engagement model'}
+              <span aria-hidden="true"> →</span>
+            </a>
+          </motion.p>
         </motion.div>
       </div>
     </section>
