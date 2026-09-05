@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState, useRef, type ComponentType } from 'react'
+import { Fragment, useCallback, useEffect, useMemo, useState, useRef, type ComponentType } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
@@ -11,6 +11,7 @@ import NavBar from './chrome/NavBar'
 import SectionDots from './chrome/SectionDots'
 import SectionLabel from './chrome/SectionLabel'
 import HeroSection from './sections/HeroSection'
+import ProofSection from './sections/ProofSection'
 import ProjectsSection from './sections/ProjectsSection'
 import AboutSection from './sections/AboutSection'
 import SkillsSection from './sections/SkillsSection'
@@ -116,16 +117,18 @@ export default function HomeV2({ lang }: HomeV2Props) {
         {copy.sections.map((meta) => {
           const Section = SECTION_COMPONENTS[meta.id]
           return (
-            <section
-              key={meta.id}
-              id={meta.id}
-              data-hv2-section={meta.id}
-              data-hv2-active={meta.id === activeSection ? 'true' : 'false'}
-              className={styles.section}
-              aria-label={meta.label}
-            >
-              <Section lang={lang} />
-            </section>
+            <Fragment key={meta.id}>
+              <section
+                id={meta.id}
+                data-hv2-section={meta.id}
+                data-hv2-active={meta.id === activeSection ? 'true' : 'false'}
+                className={styles.section}
+                aria-label={meta.label}
+              >
+                <Section lang={lang} />
+              </section>
+              {meta.id === 'hero' ? <ProofSection lang={lang} /> : null}
+            </Fragment>
           )
         })}
       </main>

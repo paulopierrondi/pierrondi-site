@@ -5,12 +5,12 @@ import { chromium } from 'playwright'
 const baseUrl = process.env.TARGET_URL ?? 'http://127.0.0.1:3108'
 const outputDir = path.resolve(process.env.QA_DIR ?? 'qa/navigation/local')
 const routes = [
-  { name: 'home-pt', path: '/', labels: ['Bio', 'Atuação', 'Treinamentos', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: '' },
-  { name: 'studio-pt', path: '/studio', labels: ['Bio', 'Atuação', 'Treinamentos', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: 'studio' },
-  { name: 'portfolio-pt', path: '/portfolio', labels: ['Bio', 'Atuação', 'Treinamentos', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: 'portfolio' },
-  { name: 'feitos-pt', path: '/feitos', labels: ['Bio', 'Atuação', 'Treinamentos', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: 'proof' },
-  { name: 'home-en', path: '/en', labels: ['About', 'Work', 'Training', 'Studio', 'Portfolio', 'Proof', 'Ideas', 'Contact'], active: '' },
-  { name: 'studio-en', path: '/en/studio', labels: ['About', 'Work', 'Training', 'Studio', 'Portfolio', 'Proof', 'Ideas', 'Contact'], active: 'studio' },
+  { name: 'home-pt', path: '/', labels: ['Bio', 'Atuação', 'Stack', 'Treinamentos', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: '' },
+  { name: 'studio-pt', path: '/studio', labels: ['Bio', 'Atuação', 'Stack', 'Treinamentos', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: 'studio' },
+  { name: 'portfolio-pt', path: '/portfolio', labels: ['Bio', 'Atuação', 'Stack', 'Treinamentos', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: 'portfolio' },
+  { name: 'feitos-pt', path: '/feitos', labels: ['Bio', 'Atuação', 'Stack', 'Treinamentos', 'Studio', 'Portfólio', 'Feitos', 'Ideias', 'Contato'], active: 'proof' },
+  { name: 'home-en', path: '/en', labels: ['About', 'Work', 'Stack', 'Training', 'Studio', 'Portfolio', 'Proof', 'Ideas', 'Contact'], active: '' },
+  { name: 'studio-en', path: '/en/studio', labels: ['About', 'Work', 'Stack', 'Training', 'Studio', 'Portfolio', 'Proof', 'Ideas', 'Contact'], active: 'studio' },
 ]
 
 await mkdir(outputDir, { recursive: true })
@@ -109,7 +109,7 @@ async function inspect(route, viewport, mobile) {
   const mobileMenuPass = mobile
     ? [
       mobileMenu?.expanded === 'true',
-      mobileMenu?.visibleLinks === 8,
+      mobileMenu?.visibleLinks === 9,
       Math.abs((mobileMenu?.menuTop ?? -1) - 56) < 0.5,
       mobileMenu?.bodyOverflow === 'hidden',
     ].every(Boolean)

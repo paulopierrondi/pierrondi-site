@@ -1,0 +1,196 @@
+/* Compact Evidence Ledger bridge between hero and portfolio. */
+
+.root {
+  scroll-margin-top: var(--hv2-nav-height);
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  padding: clamp(48px, 7vh, 72px) var(--hv2-section-pad-x);
+  border-block: 1px solid rgba(245, 207, 159, 0.12);
+  background:
+    linear-gradient(180deg, rgba(7, 6, 5, 0.92), rgba(10, 9, 8, 0.98)),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 31px,
+      rgba(255, 255, 255, 0.018) 32px
+    );
+}
+
+.inner {
+  width: 100%;
+  max-width: var(--hv2-container-max);
+  margin-inline: auto;
+}
+
+.header {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--hv2-accent-champagne);
+  font-family: var(--hv2-font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ledger {
+  color: var(--hv2-accent-signal);
+}
+
+.titleRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+  gap: 18px 7vw;
+  align-items: end;
+}
+
+.titleRow h2 {
+  margin: 0;
+  max-width: 18ch;
+  color: var(--hv2-text-primary);
+  font-family: var(--hv2-font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.lead {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--hv2-text-secondary);
+  font-family: var(--hv2-font-body);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(245, 207, 159, 0.14);
+}
+
+.card {
+  min-height: 0;
+  padding: clamp(20px, 2.6vw, 32px);
+  background: #0a0a0a;
+}
+
+.topline {
+  display: flex;
+  gap: 12px;
+  color: var(--hv2-text-muted);
+  font-family: var(--hv2-font-mono);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.topline span {
+  color: var(--hv2-accent-champagne);
+}
+
+.card h3 {
+  max-width: 22ch;
+  margin: 18px 0 0;
+  color: var(--hv2-text-primary);
+  font-family: var(--hv2-font-display);
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.card strong {
+  display: block;
+  margin-top: 14px;
+  color: var(--hv2-accent-copper);
+  font-family: var(--hv2-font-display);
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.card p {
+  max-width: 58ch;
+  margin: 12px 0 0;
+  color: var(--hv2-text-secondary);
+  font-family: var(--hv2-font-body);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.card ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card li {
+  border: 1px solid rgba(245, 207, 159, 0.14);
+  border-radius: 4px;
+  padding: 5px 8px;
+  color: var(--hv2-text-muted);
+  font-family: var(--hv2-font-mono);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cta {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  color: var(--hv2-accent-copper);
+  font-family: var(--hv2-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.cta svg {
+  width: 14px;
+  height: 14px;
+}
+
+.cta:hover,
+.cta:focus-visible {
+  color: var(--hv2-accent-champagne);
+}
+
+@media (max-width: 767px) {
+  .root {
+    padding: 40px 20px;
+  }
+
+  .titleRow,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .titleRow h2 {
+    max-width: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .root {
+    padding-right: calc(var(--hv2-section-pad-x) + 72px);
+  }
+}
