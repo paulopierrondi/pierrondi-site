@@ -52,6 +52,19 @@ test('measurable-outcomes pill points at the home proof module', () => {
   assert.match(hero, /Measurable outcomes/)
 })
 
+test('hero primary CTA is collaborate with amber fill; systems CTA stays ghost', async () => {
+  const heroStyles = await readFile(
+    new URL('components/home-v2/sections/HeroSection.module.css', root),
+    'utf8',
+  )
+  assert.match(copy, /ctaPrimary: \{ label: 'colaborar', href: '#contact' \}/)
+  assert.match(copy, /ctaSecondary: \{ label: 'sistemas em produção', href: '#projects' \}/)
+  assert.match(copy, /ctaPrimary: \{ label: 'collaborate', href: '#contact' \}/)
+  assert.match(copy, /ctaSecondary: \{ label: 'systems in production', href: '#projects' \}/)
+  assert.match(heroStyles, /\.ctaPrimary \{[\s\S]*background: var\(--hv2-accent-copper\)/)
+  assert.match(heroStyles, /\.ctaSecondary \{[\s\S]*background: rgba\(2, 2, 2, 0\.58\)/)
+})
+
 test('this change does not publish /sprint or Product schema', () => {
   assert.doesNotMatch(sitemap, /path:\s*'\/sprint'/)
   assert.doesNotMatch(nextConfig, /source:\s*'\/sprint'/)

@@ -225,3 +225,9 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Added a compact Evidence Ledger module between hero and portfolio. Cards reuse the first two anonymized `/feitos` delivery cases; CTA goes to `/feitos` and `/en/feitos`. Hero pill “Resultado mensurável” / “Measurable outcomes” links to `#proof`.
 - Did not invent metrics, change Person jobTitle, add Product schema, publish `/sprint`, or touch GA4 `G-1CL8PFYY7T`.
 - Suggested Linear/Obsidian: note the home claim→proof bridge on `pierrondi-site` / AGE-1486. Deploy remains human-gated.
+
+## 2026-09-05 — Hero engagement CTA swap (same PR #52)
+
+- Hero pill “Resultado mensurável” / “Measurable outcomes” already links to `#proof`.
+- Primary CTA is now COLABORAR / COLLABORATE (`#contact`) with copper/amber fill. Secondary “sistemas em produção” / “systems in production” stays ghost/outline to `#projects`.
+- No /sprint, no invented metrics, no Fractional title, gtag untouched.

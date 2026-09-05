@@ -16,8 +16,8 @@ export const COPY: Record<Lang, SiteCopy> = {
       headlineLine2: 'Onde IA vira operação com evidência',
       description:
         'Desenho o sistema operacional da IA: contexto, governança, AgentOps e trilha de evidência — para entregar resultado e automações mensuráveis, não horas soltas — em contas enterprise FSI na ServiceNow e em sistemas que eu mesmo construo e publico.',
-      ctaPrimary: { label: 'sistemas em produção', href: '#projects' },
-      ctaSecondary: { label: 'colaborar', href: '#contact' },
+      ctaPrimary: { label: 'colaborar', href: '#contact' },
+      ctaSecondary: { label: 'sistemas em produção', href: '#projects' },
       lanes: [
         {
           kicker: 'Enterprise',
@@ -366,8 +366,8 @@ export const COPY: Record<Lang, SiteCopy> = {
       headlineLine2: 'Where AI becomes governed operations',
       description:
         'I design the operating system for AI: context, governance, AgentOps and evidence trails — to deliver measurable outcomes and automations, not loose hours — across enterprise FSI accounts at ServiceNow and systems I build and ship myself.',
-      ctaPrimary: { label: 'systems in production', href: '#projects' },
-      ctaSecondary: { label: 'collaborate', href: '#contact' },
+      ctaPrimary: { label: 'collaborate', href: '#contact' },
+      ctaSecondary: { label: 'systems in production', href: '#projects' },
       lanes: [
         {
           kicker: 'Enterprise',
