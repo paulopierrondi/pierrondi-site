@@ -43,6 +43,14 @@ export interface HeroCopy {
   badges: string[]
 }
 
+export interface ProofCopy {
+  eyebrow: string
+  heading: string
+  lead: string
+  ledgerLabel: string
+  cta: CTA
+}
+
 export type MockupKind = 'code' | 'terminal' | 'dashboard'
 
 export type MockupTone =
@@ -152,6 +160,7 @@ export interface ContactCopy {
 export interface SiteCopy {
   sections: SectionMeta[]
   hero: HeroCopy
+  proof: ProofCopy
   projects: { heading: string; items: ProjectItem[] }
   about: AboutCopy
   skills: SkillsCopy

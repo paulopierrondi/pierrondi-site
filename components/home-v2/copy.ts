@@ -16,8 +16,8 @@ export const COPY: Record<Lang, SiteCopy> = {
       headlineLine2: 'Onde IA vira operação com evidência',
       description:
         'Desenho o sistema operacional da IA: contexto, governança, AgentOps e trilha de evidência — para entregar resultado e automações mensuráveis, não horas soltas — em contas enterprise FSI na ServiceNow e em sistemas que eu mesmo construo e publico.',
-      ctaPrimary: { label: 'sistemas em produção', href: '#projects' },
-      ctaSecondary: { label: 'colaborar', href: '#contact' },
+      ctaPrimary: { label: 'colaborar', href: '#contact' },
+      ctaSecondary: { label: 'sistemas em produção', href: '#projects' },
       lanes: [
         {
           kicker: 'Enterprise',
@@ -37,6 +37,14 @@ export const COPY: Record<Lang, SiteCopy> = {
         'Full-stack systems',
         'Resultado mensurável',
       ],
+    },
+    proof: {
+      eyebrow: 'TRABALHOS SELECIONADOS',
+      heading: 'O mecanismo muda. A disciplina de entrega permanece.',
+      lead:
+        'Clientes e empresas permanecem anonimizados. Os resultados, a escala e a arquitetura descritos abaixo vêm do histórico de execução registrado.',
+      ledgerLabel: 'EVIDENCE LEDGER / 2026',
+      cta: { label: 'Ver provas de execução', href: '/feitos' },
     },
     projects: {
       heading: 'Projetos selecionados',
@@ -358,8 +366,8 @@ export const COPY: Record<Lang, SiteCopy> = {
       headlineLine2: 'Where AI becomes governed operations',
       description:
         'I design the operating system for AI: context, governance, AgentOps and evidence trails — to deliver measurable outcomes and automations, not loose hours — across enterprise FSI accounts at ServiceNow and systems I build and ship myself.',
-      ctaPrimary: { label: 'systems in production', href: '#projects' },
-      ctaSecondary: { label: 'collaborate', href: '#contact' },
+      ctaPrimary: { label: 'collaborate', href: '#contact' },
+      ctaSecondary: { label: 'systems in production', href: '#projects' },
       lanes: [
         {
           kicker: 'Enterprise',
@@ -379,6 +387,14 @@ export const COPY: Record<Lang, SiteCopy> = {
         'Full-stack systems',
         'Measurable outcomes',
       ],
+    },
+    proof: {
+      eyebrow: 'SELECTED WORK',
+      heading: 'The mechanism changes. Delivery discipline remains.',
+      lead:
+        'Clients and companies remain anonymized. The results, scale, and architecture below come from the recorded delivery history.',
+      ledgerLabel: 'EVIDENCE LEDGER / 2026',
+      cta: { label: 'View execution proof', href: '/en/feitos' },
     },
     projects: {
       heading: 'Selected projects',

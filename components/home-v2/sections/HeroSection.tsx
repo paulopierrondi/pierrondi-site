@@ -139,11 +139,21 @@ export default function HeroSection({ lang }: SectionProps) {
           </motion.p>
 
           <motion.ul className={styles.badges} variants={itemVariants}>
-            {hero.badges.map((badge) => (
-              <li key={badge} className={styles.badge}>
-                {badge}
-              </li>
-            ))}
+            {hero.badges.map((badge) => {
+              const isProofBadge =
+                badge === 'Resultado mensurável' || badge === 'Measurable outcomes'
+              return (
+                <li key={badge} className={styles.badge}>
+                  {isProofBadge ? (
+                    <a className={styles.badgeLink} href="#proof">
+                      {badge}
+                    </a>
+                  ) : (
+                    badge
+                  )}
+                </li>
+              )
+            })}
           </motion.ul>
 
           <motion.div
