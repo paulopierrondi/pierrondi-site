@@ -46,8 +46,10 @@ test('hero parallax travel stays small and honors reduced motion', () => {
   assert.match(hero, /stiffness: 88/)
   assert.match(hero, /damping: 28/)
   assert.match(hero, /y: 14/)
-  assert.doesNotMatch(heroStyles, /filter:\s*blur/)
-  assert.match(heroStyles, /@keyframes heroThesisReveal/)
+  assert.match(
+    heroStyles,
+    /@keyframes heroThesisReveal \{\s*from \{\s*opacity: 0;\s*transform: translateY\(8px\);\s*\}\s*to \{\s*opacity: 1;\s*transform: translateY\(0\);\s*\}\s*\}/,
+  )
   assert.match(
     heroStyles,
     /@media \(prefers-reduced-motion: no-preference\)[\s\S]*will-change: transform/,
