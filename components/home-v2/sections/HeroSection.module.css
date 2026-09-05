@@ -356,6 +356,16 @@
   white-space: nowrap;
 }
 
+.badgeLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.badgeLink:hover,
+.badgeLink:focus-visible {
+  color: rgba(255, 226, 184, 0.96);
+}
+
 /* --- CTAs --------------------------------------------------------------- */
 
 .ctas {

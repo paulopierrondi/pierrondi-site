@@ -217,3 +217,11 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Local `next start :3456`: `/` and `/en` 200 with gtag src+config in HTML; CSP includes GTM/GA and keeps Plausible; `/sprint` 404.
 - Tests: `npm test` 150/150. Ready PR #50. Deploy remains human-gated.
 - Suggested Linear/Obsidian: note GA4 tagging now injects; property 544419741 should start receiving hits after Railway deploy.
+
+## 2026-09-05 — Home discovery + claim→proof bridge (P0)
+
+- Bug: home nav Atuação/Work used `homeSection: 'skills'`, so `/` and `/en` jumped to Stack instead of `/atuacao` and `/en/atuacao`.
+- Fix: Atuação → `/atuacao`, Work → `/en/atuacao`. Stack is its own nav item (`/#skills`, `/en#skills`).
+- Added a compact Evidence Ledger module between hero and portfolio. Cards reuse the first two anonymized `/feitos` delivery cases; CTA goes to `/feitos` and `/en/feitos`. Hero pill “Resultado mensurável” / “Measurable outcomes” links to `#proof`.
+- Did not invent metrics, change Person jobTitle, add Product schema, publish `/sprint`, or touch GA4 `G-1CL8PFYY7T`.
+- Suggested Linear/Obsidian: note the home claim→proof bridge on `pierrondi-site` / AGE-1486. Deploy remains human-gated.

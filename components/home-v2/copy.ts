@@ -38,6 +38,14 @@ export const COPY: Record<Lang, SiteCopy> = {
         'Resultado mensurável',
       ],
     },
+    proof: {
+      eyebrow: 'TRABALHOS SELECIONADOS',
+      heading: 'O mecanismo muda. A disciplina de entrega permanece.',
+      lead:
+        'Clientes e empresas permanecem anonimizados. Os resultados, a escala e a arquitetura descritos abaixo vêm do histórico de execução registrado.',
+      ledgerLabel: 'EVIDENCE LEDGER / 2026',
+      cta: { label: 'Ver provas de execução', href: '/feitos' },
+    },
     projects: {
       heading: 'Projetos selecionados',
       items: [
@@ -379,6 +387,14 @@ export const COPY: Record<Lang, SiteCopy> = {
         'Full-stack systems',
         'Measurable outcomes',
       ],
+    },
+    proof: {
+      eyebrow: 'SELECTED WORK',
+      heading: 'The mechanism changes. Delivery discipline remains.',
+      lead:
+        'Clients and companies remain anonymized. The results, scale, and architecture below come from the recorded delivery history.',
+      ledgerLabel: 'EVIDENCE LEDGER / 2026',
+      cta: { label: 'View execution proof', href: '/en/feitos' },
     },
     projects: {
       heading: 'Selected projects',
