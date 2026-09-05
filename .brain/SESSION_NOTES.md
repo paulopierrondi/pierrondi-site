@@ -217,3 +217,14 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Local `next start :3456`: `/` and `/en` 200 with gtag src+config in HTML; CSP includes GTM/GA and keeps Plausible; `/sprint` 404.
 - Tests: `npm test` 150/150. Ready PR #50. Deploy remains human-gated.
 - Suggested Linear/Obsidian: note GA4 tagging now injects; property 544419741 should start receiving hits after Railway deploy.
+
+## 2026-09-05 — /engajamento Fractional AI Automation Officer page
+
+- Draft PR `#53` on `cursor/engajamento-fractional-693f` against `main`. Parent decides merge. No deploy.
+- New public page: PT `/engajamento`, EN `/en/engajamento`. H1 `Fractional AI Automation Officer`. Converts to `/contato` + existing WhatsApp pattern. Proof links only to `/feitos`.
+- Sitemap + i18n + geo.md/llms.txt/llms-full.txt list the new URLs. `/sprint` still unpublished and 404.
+- Home ATF gets a quiet `Modelo de engajamento` link (no Fractional title on home). `/atuacao` final actions get a third ghost CTA.
+- Schema: page `WebPage` + `Service`. No Product/offers/price. Sitewide `Person.jobTitle` stays Technical Account Executive. gtag `G-1CL8PFYY7T` unchanged.
+- Local `next start :3456`: `/engajamento` 200, `/en/engajamento` 200, `/sprint` 404, sitemap has both locs and no `/sprint`.
+- Tests: `npm test` 157/157. `npx tsc --noEmit` + `npm run lint` + `npm run build` OK.
+- Suggested Linear/Obsidian: note this offer page on `pierrondi-site` / AGE-1486. No new Linear issue created. Do not change live jobTitle.
