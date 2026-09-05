@@ -1,7 +1,15 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { motion, type Variants } from 'framer-motion'
+import { useRef } from 'react'
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionValue,
+  type Variants,
+} from 'framer-motion'
 import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import { ArrowDown, ArrowUpRight } from 'lucide-react'
 import { COPY } from '../copy'
@@ -40,30 +48,40 @@ function itemVariantsFor(reducedMotion: boolean): Variants {
         visible: { opacity: 1, transition: { duration: 0.1 } },
       }
     : {
-        hidden: { opacity: 0, y: 24 },
+        hidden: { opacity: 0, y: 14 },
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.5, ease: EXPO_OUT },
+          transition: { duration: 0.45, ease: EXPO_OUT },
         },
       }
 }
 
-function HeroBackdrop() {
+const SCENE_SPRING = { stiffness: 88, damping: 28, mass: 0.55, restDelta: 0.001 }
+
+function HeroBackdrop({
+  sceneY,
+  veilOpacity,
+}: {
+  sceneY: MotionValue<number>
+  veilOpacity: MotionValue<number>
+}) {
   return (
     <>
       <div className={styles.bg} aria-hidden="true">
         {/* Scene root first: the universally supported `.root + .fallback`
             sibling rule retires the static fallback once WebGL is live. */}
-        <FrontierEventHorizon />
-        <div className={sceneStyles.fallback} data-frontier-fallback>
-          <span className={sceneStyles.fallbackDisk} />
-          <span className={sceneStyles.fallbackVoid} />
-          <span className={sceneStyles.fallbackHorizon} />
-          <span className={sceneStyles.fallbackObserver} />
-        </div>
+        <motion.div className={styles.sceneLayer} style={{ y: sceneY }}>
+          <FrontierEventHorizon />
+          <div className={sceneStyles.fallback} data-frontier-fallback>
+            <span className={sceneStyles.fallbackDisk} />
+            <span className={sceneStyles.fallbackVoid} />
+            <span className={sceneStyles.fallbackHorizon} />
+            <span className={sceneStyles.fallbackObserver} />
+          </div>
+        </motion.div>
       </div>
-      <div className={styles.vignette} aria-hidden="true" />
+      <motion.div className={styles.vignette} style={{ opacity: veilOpacity }} aria-hidden="true" />
       <div className={styles.chromaticVeil} aria-hidden="true" />
       <div className={styles.gravityWell} aria-hidden="true" />
     </>
@@ -71,8 +89,22 @@ function HeroBackdrop() {
 }
 
 export default function HeroSection({ lang }: SectionProps) {
+  const heroRef = useRef<HTMLElement>(null)
   const hero = COPY[lang].hero
   const reducedMotion = useHydratedReducedMotion()
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  })
+  const sceneTravel = reducedMotion ? 0 : -24
+  const sceneY = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, sceneTravel]),
+    SCENE_SPRING,
+  )
+  const veilOpacity = useSpring(
+    useTransform(scrollYProgress, [0, 0.9], [1, reducedMotion ? 1 : 0.78]),
+    SCENE_SPRING,
+  )
   // Keep the full headline in the DOM at every stage. CSS reveals it visually,
   // avoiding the post-hydration text collapse caused by a JS typewriter.
   const fullLine2 = hero.headlineLine2
@@ -80,8 +112,8 @@ export default function HeroSection({ lang }: SectionProps) {
   const itemVariants = itemVariantsFor(reducedMotion)
 
   return (
-    <section className={styles.hero} aria-labelledby={HEADING_ID}>
-      <HeroBackdrop />
+    <section ref={heroRef} className={styles.hero} aria-labelledby={HEADING_ID}>
+      <HeroBackdrop sceneY={sceneY} veilOpacity={veilOpacity} />
       <HeroTelemetry lang={lang} />
 
       <div className={styles.content}>

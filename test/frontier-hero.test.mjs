@@ -198,3 +198,9 @@ test('mobile section navigation unlocks before scroll and keeps the hash synchro
   assert.match(home, /new HashChangeEvent\('hashchange'\)/)
   assert.match(home, /el\?\.scrollIntoView/)
 })
+
+test('home scroll tracking observes sections and never snaps the document', () => {
+  assert.match(home, /IntersectionObserver/)
+  assert.doesNotMatch(home, /snapTo/)
+  assert.doesNotMatch(home, /from 'gsap'/)
+})

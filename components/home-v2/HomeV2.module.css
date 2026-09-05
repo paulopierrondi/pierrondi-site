@@ -66,13 +66,13 @@
 .section::before {
   inset: -18%;
   opacity: 0.34;
-  transform: scale(0.94) translate3d(0, 18px, 0);
+  transform: scale(0.985) translate3d(0, 8px, 0);
   background:
     radial-gradient(circle at 72% 38%, rgb(var(--hv2-section-rgb) / 0.13), transparent 34%),
     radial-gradient(circle at 18% 74%, rgb(var(--hv2-section-rgb) / 0.055), transparent 30%);
   transition:
-    opacity 900ms var(--hv2-ease-expo-out),
-    transform 1100ms var(--hv2-ease-expo-out);
+    opacity 600ms var(--hv2-ease-expo-out),
+    transform 700ms var(--hv2-ease-expo-out);
 }
 
 .section::after {
@@ -88,8 +88,8 @@
     transparent
   );
   transition:
-    opacity 700ms var(--hv2-ease-expo-out),
-    transform 900ms var(--hv2-ease-expo-out);
+    opacity 500ms var(--hv2-ease-expo-out),
+    transform 600ms var(--hv2-ease-expo-out);
 }
 
 .section[data-hv2-active='true']::before {

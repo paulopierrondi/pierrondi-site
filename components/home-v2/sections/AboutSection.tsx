@@ -99,8 +99,8 @@ export default function AboutSection({ lang }: SectionProps) {
   const ref = useRef<HTMLElement>(null)
   const statsRef = useRef<HTMLDListElement>(null)
   const reducedMotion = useHydratedReducedMotion()
-  const isInView = useInView(ref, { margin: '-20% 0px', once: false })
-  const statsInView = useInView(statsRef, { margin: '-10% 0px', once: false })
+  const isInView = useInView(ref, { margin: '-12% 0px', once: true })
+  const statsInView = useInView(statsRef, { margin: '-10% 0px', once: true })
 
   const copy = COPY[lang]
   const about = copy.about
@@ -113,8 +113,8 @@ export default function AboutSection({ lang }: SectionProps) {
       visible: {
         opacity: 1,
         transition: {
-          staggerChildren: reducedMotion ? 0 : 0.12,
-          delayChildren: reducedMotion ? 0 : 0.05,
+          staggerChildren: reducedMotion ? 0 : 0.08,
+          delayChildren: reducedMotion ? 0 : 0.04,
         },
       },
     }),
@@ -123,12 +123,12 @@ export default function AboutSection({ lang }: SectionProps) {
 
   const itemVariants = useMemo<Variants>(
     () => ({
-      hidden: { opacity: reducedMotion ? 0.6 : 0, y: reducedMotion ? 0 : 40 },
+      hidden: { opacity: reducedMotion ? 0.6 : 0, y: reducedMotion ? 0 : 16 },
       visible: {
         opacity: 1,
         y: 0,
         transition: {
-          duration: reducedMotion ? 0.1 : 0.7,
+          duration: reducedMotion ? 0.1 : 0.5,
           ease: [0.16, 1, 0.3, 1],
         },
       },

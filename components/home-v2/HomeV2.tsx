@@ -1,8 +1,6 @@
 'use client'
 
 import { Fragment, useCallback, useEffect, useMemo, useState, useRef, type ComponentType } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import { COPY } from './copy'
 import type { Lang, SectionId, SectionProps } from './types'
@@ -57,44 +55,44 @@ export default function HomeV2({ lang }: HomeV2Props) {
   )
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
     const root = rootRef.current
     if (!root) return
 
-    const ctx = gsap.context(() => {
-      const sections = gsap.utils.toArray<HTMLElement>('[data-hv2-section]', root)
+    const sections = Array.from(root.querySelectorAll<HTMLElement>('[data-hv2-section]'))
+    const ratios = new Map<string, number>()
 
-      sections.forEach((el) => {
-        ScrollTrigger.create({
-          trigger: el,
-          start: 'top center',
-          end: 'bottom center',
-          onToggle: (self) => {
-            if (self.isActive) {
-              setActiveSection(el.dataset.hv2Section as SectionId)
-            }
-          },
-        })
-      })
+    const pickActive = () => {
+      let bestId: SectionId | null = null
+      let bestRatio = 0
+      for (const [id, ratio] of ratios) {
+        if (ratio > bestRatio) {
+          bestId = id as SectionId
+          bestRatio = ratio
+        }
+      }
+      if (bestId) setActiveSection(bestId)
+    }
 
-      const mm = gsap.matchMedia()
-      mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference) and (pointer: fine)', () => {
-        const snapTrigger = ScrollTrigger.create({
-          trigger: root,
-          start: 'top top',
-          end: 'bottom bottom',
-          snap: {
-            snapTo: 1 / (sections.length - 1),
-            duration: { min: 0.35, max: 0.8 },
-            delay: 0.08,
-            ease: 'power2.inOut',
-          },
-        })
-        return () => snapTrigger.kill()
-      })
-    }, root)
+    // Observe only. Never snap or scrub the document — GSAP snap + the
+    // non-section proof bridge made scroll land between 100svh slides.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const id = (entry.target as HTMLElement).dataset.hv2Section
+          if (!id) continue
+          if (entry.isIntersecting) ratios.set(id, entry.intersectionRatio)
+          else ratios.delete(id)
+        }
+        pickActive()
+      },
+      {
+        threshold: [0.2, 0.35, 0.5, 0.65, 0.8],
+        rootMargin: '-8% 0px -8% 0px',
+      },
+    )
 
-    return () => ctx.revert()
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
     // sectionIds is a stable serialization of the section list for this lang
   }, [sectionIds])
 

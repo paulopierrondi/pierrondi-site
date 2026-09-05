@@ -243,3 +243,11 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Local `next start :3456`: `/engajamento` 200, `/en/engajamento` 200, `/sprint` 404, sitemap has both locs and no `/sprint`.
 - Tests: `npm test` 157/157. `npx tsc --noEmit` + `npm run lint` + `npm run build` OK.
 - Suggested Linear/Obsidian: note this offer page on `pierrondi-site` / AGE-1486. No new Linear issue created. Do not change live jobTitle.
+
+## 2026-09-05 — Home motion retune (keep framer-motion, fix jank)
+
+- Paulo rejected stripping framer-motion from `/` and `/en`. Keep movement; repair the broken parallax feel.
+- Cause: GSAP ScrollTrigger `snapTo: 1/(n-1)` assumed five equal 100svh slides. The proof bridge sits between hero and projects and is not a snap target, so wheel scroll landed mid-section. Combined with `once: false` 24–40px reverse reveals and Event Horizon pointer tracking during scroll, the sphere/page fought native scroll.
+- Fix: drop GSAP snap; observe sections with IntersectionObserver. Add a damped 24px `useScroll`/`useSpring` recede on the Event Horizon layer. Freeze pointer coupling while scrolling. Smaller once-only section travel. No `filter: blur` on the thesis. Particle count 5200/2600.
+- Kept: framer-motion on home, gtag, nav → `/atuacao`, proof bridge, `/engajamento` links. `/sprint` unpublished.
+- Suggested Linear/Obsidian: note the motion retune on `pierrondi-site` / AGE-1486. Deploy remains human-gated.

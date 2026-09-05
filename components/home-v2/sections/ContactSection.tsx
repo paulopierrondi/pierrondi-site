@@ -28,29 +28,29 @@ export default function ContactSection({ lang }: SectionProps) {
       }
   const containerRef = useRef<HTMLElement>(null)
   const prefersReducedMotion = useHydratedReducedMotion()
-  const isInView = useInView(containerRef, { margin: '-20% 0px', once: false })
+  const isInView = useInView(containerRef, { margin: '-12% 0px', once: true })
 
   const [formStatus, setFormStatus] = useState<FormStatus>('idle')
 
   const baseVariants: Variants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 24 },
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 14 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: prefersReducedMotion ? 0.1 : 0.6,
+        duration: prefersReducedMotion ? 0.1 : 0.45,
         ease: [0.16, 1, 0.3, 1],
       },
     },
   }
 
   const formVariants: Variants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 40 },
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 16 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: prefersReducedMotion ? 0.1 : 0.7,
+        duration: prefersReducedMotion ? 0.1 : 0.5,
         ease: [0.16, 1, 0.3, 1],
       },
     },

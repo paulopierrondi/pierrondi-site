@@ -23,6 +23,17 @@
   transform-origin: 66% 44%;
 }
 
+.sceneLayer {
+  position: absolute;
+  inset: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sceneLayer {
+    will-change: transform;
+  }
+}
+
 .vignette {
   position: absolute;
   inset: 0;
@@ -310,13 +321,11 @@
 @keyframes heroThesisReveal {
   from {
     opacity: 0;
-    transform: translateY(12px);
-    filter: blur(4px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
   }
 }
 

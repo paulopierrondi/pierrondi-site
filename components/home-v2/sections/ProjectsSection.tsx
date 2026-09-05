@@ -18,7 +18,7 @@ export default function ProjectsSection({ lang }: SectionProps) {
   const items = PORTFOLIO_CASES[lang]
   const rootRef = useRef<HTMLElement>(null)
   const railRef = useRef<HTMLDivElement>(null)
-  const inView = useInView(rootRef, { margin: '-18% 0px', once: false })
+  const inView = useInView(rootRef, { margin: '-12% 0px', once: true })
   const reduceMotion = useHydratedReducedMotion()
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState(1)
@@ -92,14 +92,10 @@ export default function ProjectsSection({ lang }: SectionProps) {
 
       <motion.div
         className={styles.stage}
-        initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-        animate={
-          inView
-            ? { opacity: 1, y: 0 }
-            : { opacity: 0, y: reduceMotion ? 0 : 22 }
-        }
+        initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: reduceMotion ? 0 : 14 }}
         transition={{
-          duration: reduceMotion ? 0 : 0.5,
+          duration: reduceMotion ? 0 : 0.42,
           ease: [0.16, 1, 0.3, 1],
         }}
         onTouchStart={onTouchStart}

@@ -222,11 +222,11 @@ export function ProjectStory({
           className={styles.story}
           custom={direction}
           initial={
-            reduceMotion ? { opacity: 0 } : { opacity: 0, x: direction * 34 }
+            reduceMotion ? { opacity: 0 } : { opacity: 0, x: direction * 16 }
           }
           animate={{ opacity: 1, x: 0 }}
           exit={
-            reduceMotion ? { opacity: 0 } : { opacity: 0, x: direction * -26 }
+            reduceMotion ? { opacity: 0 } : { opacity: 0, x: direction * -12 }
           }
           transition={{
             duration: reduceMotion ? 0.08 : 0.4,

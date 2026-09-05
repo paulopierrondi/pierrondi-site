@@ -130,7 +130,7 @@ function useDisposable(
 
 function StarField({ compact }: { compact: boolean }) {
   const geometry = useMemo(() => {
-    const count = compact ? 500 : 1_000
+    const count = compact ? 360 : 720
     const positions = new Float32Array(count * 3)
     const colors = new Float32Array(count * 3)
     const warm = new THREE.Color('#f6b85f')
@@ -177,7 +177,7 @@ function AccretionDisk({
   reducedMotion: boolean
 }) {
   const materialRef = useRef<THREE.ShaderMaterial>(null)
-  const count = compact ? 4_000 : 8_000
+  const count = compact ? 2_600 : 5_200
   const geometry = useMemo(() => {
     const positions = new Float32Array(count * 3)
     const radii = new Float32Array(count)
@@ -430,7 +430,7 @@ function CosmicSystem({
   pointer,
 }: {
   reducedMotion: boolean
-  pointer: MutableRefObject<{ x: number; y: number }>
+  pointer: MutableRefObject<{ x: number; y: number; scrolling: boolean }>
 }) {
   const rig = useRef<THREE.Group>(null)
   const { viewport } = useThree()
@@ -444,19 +444,23 @@ function CosmicSystem({
 
   useFrame(({ clock }) => {
     if (!rig.current || reducedMotion) return
+    // Freeze pointer coupling while the document is scrolling so the disk
+    // does not fight native wheel / the damped CSS parallax layer.
+    const pointerX = pointer.current.scrolling ? 0 : pointer.current.x
+    const pointerY = pointer.current.scrolling ? 0 : pointer.current.y
     rig.current.rotation.y = THREE.MathUtils.lerp(
       rig.current.rotation.y,
-      pointer.current.x * 0.045,
-      0.028,
+      pointerX * 0.02,
+      0.04,
     )
     rig.current.rotation.x = THREE.MathUtils.lerp(
       rig.current.rotation.x,
-      -pointer.current.y * 0.025,
-      0.028,
+      -pointerY * 0.012,
+      0.04,
     )
     // Bounded breathing drift: an unbounded += rotation slowly turned the
     // disk vertical after a few minutes, breaking the hero composition.
-    rig.current.rotation.z = Math.sin(clock.elapsedTime * 0.055) * 0.05
+    rig.current.rotation.z = Math.sin(clock.elapsedTime * 0.04) * 0.028
   })
 
   return (
@@ -493,7 +497,7 @@ class FrontierBoundary extends Component<
 
 export default function FrontierEventHorizon() {
   const rootRef = useRef<HTMLDivElement>(null)
-  const pointerRef = useRef({ x: 0, y: 0 })
+  const pointerRef = useRef({ x: 0, y: 0, scrolling: false })
   const reducedMotion = useHydratedReducedMotion()
   const [supported, setSupported] = useState<boolean | null>(null)
   const [ready, setReady] = useState(false)
@@ -517,7 +521,7 @@ export default function FrontierEventHorizon() {
 
     const observer = new IntersectionObserver(
       ([entry]) => setInViewport(entry.isIntersecting),
-      { rootMargin: '12% 0px', threshold: 0.01 },
+      { rootMargin: '0px', threshold: 0.01 },
     )
     if (rootRef.current) observer.observe(rootRef.current)
 
@@ -532,11 +536,30 @@ export default function FrontierEventHorizon() {
     if (reducedMotion || !finePointer.matches) return
 
     const trackPointer = (event: PointerEvent) => {
+      if (pointerRef.current.scrolling) return
       pointerRef.current.x = (event.clientX / window.innerWidth) * 2 - 1
       pointerRef.current.y = -(event.clientY / window.innerHeight) * 2 + 1
     }
     window.addEventListener('pointermove', trackPointer, { passive: true })
     return () => window.removeEventListener('pointermove', trackPointer)
+  }, [reducedMotion])
+
+  useEffect(() => {
+    if (reducedMotion) return
+
+    let settle = 0
+    const markScrolling = () => {
+      pointerRef.current.scrolling = true
+      window.clearTimeout(settle)
+      settle = window.setTimeout(() => {
+        pointerRef.current.scrolling = false
+      }, 140)
+    }
+    window.addEventListener('scroll', markScrolling, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', markScrolling)
+      window.clearTimeout(settle)
+    }
   }, [reducedMotion])
 
   const active = inViewport && !hidden
