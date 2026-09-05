@@ -143,7 +143,6 @@
     border-color var(--hv2-dur-normal) var(--hv2-ease-default),
     transform var(--hv2-dur-normal) var(--hv2-ease-default),
     box-shadow var(--hv2-dur-normal) var(--hv2-ease-default);
-  will-change: transform;
 }
 
 .statCard:hover {

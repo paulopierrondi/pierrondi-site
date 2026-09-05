@@ -61,13 +61,13 @@ function getSkillsMeta(lang: Lang) {
 }
 
 const DEFAULT_MOTION = {
-  stagger: 0.12,
-  delay: 0.05,
-  headerY: 30,
-  cardY: 40,
-  badgeY: 12,
-  duration: 0.6,
-  badgeDuration: 0.38,
+  stagger: 0.08,
+  delay: 0.04,
+  headerY: 14,
+  cardY: 16,
+  badgeY: 8,
+  duration: 0.45,
+  badgeDuration: 0.3,
 } as const
 
 const REDUCED_MOTION = {
@@ -121,8 +121,8 @@ function SkillCard({ category, cardVariants, badgeVariants }: SkillCardProps) {
 export default function SkillsSection({ lang }: SectionProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, {
-    margin: '-20% 0px',
-    once: false,
+    margin: '-12% 0px',
+    once: true,
   })
   const shouldReduceMotion = useHydratedReducedMotion()
   const motionTokens = shouldReduceMotion ? REDUCED_MOTION : DEFAULT_MOTION
