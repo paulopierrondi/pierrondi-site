@@ -152,7 +152,7 @@ function CaseStudies({ lang }: { lang: FeitosLang }) {
       </header>
       <div className={styles.caseGrid}>
         {deliveryCases.map((item, index) => (
-          <article key={item.result}>
+          <article key={item.sector.pt}>
             <div className={styles.caseTopline}><span>{String(index + 1).padStart(2, '0')}</span>{item.sector[lang]}</div>
             <h3>{item.headline[lang]}</h3>
             <strong>{item.result[lang]}</strong>

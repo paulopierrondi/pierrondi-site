@@ -29,13 +29,13 @@ export default function ProofSection({ lang }: SectionProps) {
 
         <div className={styles.grid}>
           {HOME_PROOF_CASES.map((item, index) => (
-            <article key={item.result} className={styles.card}>
+            <article key={item.sector.pt} className={styles.card}>
               <div className={styles.topline}>
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 {item.sector[lang]}
               </div>
               <h3>{item.headline[lang]}</h3>
-              <strong>{item.result}</strong>
+              <strong>{item.result[lang]}</strong>
               <p>{item.detail[lang]}</p>
               <ul aria-label={lang === 'pt' ? 'Tecnologias e métodos' : 'Technologies and methods'}>
                 {item.methods.map((method) => (

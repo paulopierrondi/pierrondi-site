@@ -68,7 +68,7 @@ export default function FractionalAiAutomationOfficerAnswerPage() {
         {
           heading: 'Como começar',
           paragraphs: [
-            'O caminho comercial é a página de engajamento. A prova pública está em /feitos. Para conversar, use /contato ou o WhatsApp já usado no restante do site — sem “Book a demo” e sem agenda de pacote.',
+            'O caminho comercial é a página de engajamento. A prova pública está em /feitos. Para conversar, use /contato ou o WhatsApp já usado no restante do site — sem agenda de pacote.',
           ],
         },
       ]}

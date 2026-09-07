@@ -103,4 +103,5 @@ test('fractional officer brief converts to engagement, proof and contact without
   assert.doesNotMatch(source, /href: '\/sprint'/)
   assert.doesNotMatch(source, /Book a demo/)
   assert.doesNotMatch(source, /'@type': 'Product'/)
-}))
+})
+
