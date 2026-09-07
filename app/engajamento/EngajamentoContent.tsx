@@ -69,6 +69,11 @@ export default function EngajamentoContent({ lang }: { lang: EngajamentoLang }) 
           <div className={styles.body}>
             <Reveal>
               <p className={styles.desc}>{copy.proof.p}</p>
+              <p className={styles.desc}>
+                <Link href={route.answer}>{copy.proof.answer}</Link>
+                {' — '}
+                {copy.proof.answerLead}
+              </p>
             </Reveal>
           </div>
         </div>

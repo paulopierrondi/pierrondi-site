@@ -366,6 +366,12 @@ const ownAnswers: AnswerLink[] = [
     intent: 'offer-aware search',
     locale: 'pt-BR',
   },
+  {
+    title: 'O que é Fractional AI Automation Officer?',
+    url: '/answers/o-que-e-fractional-ai-automation-officer',
+    intent: 'offer definition',
+    locale: 'pt-BR',
+  },
 ]
 
 const deliveryEvidence = {

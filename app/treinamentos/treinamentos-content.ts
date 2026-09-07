@@ -61,8 +61,8 @@ export const TREINAMENTOS_COPY: Record<HomeLang, TreinamentosCopy> = {
   pt: {
     header: {
       eyebrow: 'TREINAMENTOS',
-      lead: 'Formação prática em IA aplicada, engenharia com agentes, ServiceNow e Vibe Coding. O critério não é conteúdo entregue — é capacidade instalada: no fim, o time executa com contexto, gate e evidência.',
-      chips: ['IA & LLM', 'Vibe Coding', 'ServiceNow', 'AgentOps', 'Liderança'],
+      lead: 'Formação prática em IA aplicada, engenharia com agentes, ServiceNow e Vibe Coding. O critério não é conteúdo entregue — é capacidade instalada: no fim, o time executa com contexto, gate e evidência, em direção a resultado e automações mensuráveis, não horas soltas.',
+      chips: ['IA & LLM', 'Vibe Coding', 'ServiceNow', 'AgentOps', 'Resultado mensurável', 'Liderança'],
     },
     thesis: {
       eyebrow: 'Por que treinar agora',
@@ -190,7 +190,7 @@ export const TREINAMENTOS_COPY: Record<HomeLang, TreinamentosCopy> = {
     },
     final: {
       h2: 'Vamos desenhar a trilha do seu time?',
-      p: 'Me conte o time, o nível e o problema que precisa sair do papel. Eu volto com uma trilha, um formato e o critério de saída.',
+      p: 'Me conte o time, o nível e o problema que precisa sair do papel. Eu volto com uma trilha, um formato e o critério de saída — resultado mensurável, não horas soltas.',
       primary: 'Falar sobre um treinamento',
       secondary: 'Ver os feitos',
     },
@@ -201,8 +201,8 @@ export const TREINAMENTOS_COPY: Record<HomeLang, TreinamentosCopy> = {
   en: {
     header: {
       eyebrow: 'TRAINING',
-      lead: 'Hands-on training in applied AI, agent-assisted engineering, ServiceNow and Vibe Coding. The bar is not content delivered — it is capability installed: by the end, the team ships with context, gates and evidence.',
-      chips: ['AI & LLM', 'Vibe Coding', 'ServiceNow', 'AgentOps', 'Leadership'],
+      lead: 'Hands-on training in applied AI, agent-assisted engineering, ServiceNow and Vibe Coding. The bar is not content delivered — it is capability installed: by the end, the team ships with context, gates and evidence, toward measurable outcomes and automations, not loose hours.',
+      chips: ['AI & LLM', 'Vibe Coding', 'ServiceNow', 'AgentOps', 'Measurable outcomes', 'Leadership'],
     },
     thesis: {
       eyebrow: 'Why train now',
@@ -330,7 +330,7 @@ export const TREINAMENTOS_COPY: Record<HomeLang, TreinamentosCopy> = {
     },
     final: {
       h2: 'Shall we design your team’s track?',
-      p: 'Tell me the team, the level and the problem that needs to leave the slide. I come back with a track, a format and the exit criterion.',
+      p: 'Tell me the team, the level and the problem that needs to leave the slide. I come back with a track, a format and the exit criterion — a measurable outcome, not loose hours.',
       primary: 'Talk about training',
       secondary: 'See the work',
     },

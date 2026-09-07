@@ -2,7 +2,12 @@ import assert from 'node:assert/strict'
 import { access, readFile } from 'node:fs/promises'
 import test from 'node:test'
 
-const SLUGS = ['o-que-e-agentops', 'quem-e-paulo-pierrondi', 'llm-cost-cut-audit']
+const SLUGS = [
+  'o-que-e-agentops',
+  'quem-e-paulo-pierrondi',
+  'llm-cost-cut-audit',
+  'o-que-e-fractional-ai-automation-officer',
+]
 
 const sitemapSource = await readFile(new URL('../app/sitemap.ts', import.meta.url), 'utf8')
 const briefComponent = await readFile(
@@ -83,3 +88,19 @@ test('restored answer briefs stay wired to every retrieval surface', () => {
   assert.ok(answersJson.answerDocs.some((doc) => doc.url.endsWith('/treinamentos')))
   assert.match(sitemapSource, /path: '\/treinamentos'/)
 })
+
+test('fractional officer brief converts to engagement, proof and contact without publishing /sprint', async () => {
+  const source = await readFile(
+    new URL('../app/answers/o-que-e-fractional-ai-automation-officer/page.tsx', import.meta.url),
+    'utf8',
+  )
+
+  assert.match(source, /href: '\/engajamento'/)
+  assert.match(source, /href: '\/feitos'/)
+  assert.match(source, /href: '\/contato'/)
+  assert.match(source, /WhatsApp/)
+  assert.match(source, /Technical Account Executive/)
+  assert.doesNotMatch(source, /href: '\/sprint'/)
+  assert.doesNotMatch(source, /Book a demo/)
+  assert.doesNotMatch(source, /'@type': 'Product'/)
+}))

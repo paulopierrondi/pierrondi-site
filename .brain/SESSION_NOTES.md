@@ -251,3 +251,14 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Fix: drop GSAP snap; observe sections with IntersectionObserver. Add a damped 24px `useScroll`/`useSpring` recede on the Event Horizon layer. Freeze pointer coupling while scrolling. Smaller once-only section travel. No `filter: blur` on the thesis. Particle count 5200/2600.
 - Kept: framer-motion on home, gtag, nav → `/atuacao`, proof bridge, `/engajamento` links. `/sprint` unpublished.
 - Suggested Linear/Obsidian: note the motion retune on `pierrondi-site` / AGE-1486. Deploy remains human-gated.
+
+## 2026-09-07 — Weekly growth P0: GEO answer + mensurável/CTA
+
+- Do not duplicate `#52` proof bridge/nav, `#53` `/engajamento`, `#54` motion retune.
+- New PT answer brief: `/answers/o-que-e-fractional-ai-automation-officer` (FAQPage/Question/Article via shared `AnswerBrief`). No `/en/answers` pattern on this site — PT-first, linked from `/ai-search` and `/engajamento` (not home ATF).
+- Sitemap + `answers.json` + `llms.txt` + `llms-full.txt` + `geo.md` list the URL. `/sprint` stays unpublished.
+- About + treinamentos (PT/EN) now carry the home claim: resultado e automações mensuráveis, não horas soltas. No new numbers.
+- `/en/feitos` case results were PT-only (`2 semanas`, `Governança`, clínicas). Results are now bilingual; method tag is `Governance`.
+- After the `/feitos` metrics block: terminal CLI CTA to `/contato` + WhatsApp (PT/EN). Not “Book a demo”.
+- Hard gates kept: no Product schema, Person `jobTitle` remains TAE, gtag `G-1CL8PFYY7T` untouched, no invented clients/metrics.
+- Suggested Linear/Obsidian: note this GEO/conversion slice on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.

@@ -14,10 +14,20 @@ type Block = {
 
 export const ENGAJAMENTO_ROUTES: Record<
   EngajamentoLang,
-  { contact: string; proof: string; self: string }
+  { contact: string; proof: string; self: string; answer: string }
 > = {
-  pt: { contact: '/contato', proof: '/feitos', self: '/engajamento' },
-  en: { contact: '/en/contato', proof: '/en/feitos', self: '/en/engajamento' },
+  pt: {
+    contact: '/contato',
+    proof: '/feitos',
+    self: '/engajamento',
+    answer: '/answers/o-que-e-fractional-ai-automation-officer',
+  },
+  en: {
+    contact: '/en/contato',
+    proof: '/en/feitos',
+    self: '/en/engajamento',
+    answer: '/answers/o-que-e-fractional-ai-automation-officer',
+  },
 }
 
 export const ENGAJAMENTO_WHATSAPP: Record<EngajamentoLang, string> = {
@@ -33,7 +43,7 @@ export const ENGAJAMENTO_COPY: Record<
     metaDescription: string
     serviceType: string
     blocks: Block[]
-    proof: { h2: string; p: string; cta: string }
+    proof: { h2: string; p: string; cta: string; answer: string; answerLead: string }
     final: { h2: string; p: string; contact: string; whatsapp: string }
     disclaimer: string
   }
@@ -92,6 +102,8 @@ export const ENGAJAMENTO_COPY: Record<
       h2: 'Prova pública',
       p: 'A prova deste site é o índice de feitos — sistemas, demos e execução com recorte público. Esta página não inventa métrica, cliente ou case.',
       cta: 'Ver os feitos',
+      answer: 'O que é Fractional AI Automation Officer?',
+      answerLead: 'Definição citável da oferta — sem métrica nova e sem twin EN (o site não tem /en/answers).',
     },
     final: {
       h2: 'Vamos abrir o engajamento.',
@@ -156,6 +168,8 @@ export const ENGAJAMENTO_COPY: Record<
       h2: 'Public proof',
       p: 'The public proof on this site is the work index — systems, demos, and execution with a public cut. This page does not invent a metric, client, or case.',
       cta: 'See the work',
+      answer: 'What is a Fractional AI Automation Officer?',
+      answerLead: 'Citable definition of the offer — no new metric. PT-first: there is no /en/answers pattern on this site.',
     },
     final: {
       h2: 'Let’s open the engagement.',

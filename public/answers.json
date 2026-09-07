@@ -116,6 +116,15 @@
       "entity": "pierrondi.dev"
     },
     {
+      "id": "o-que-e-fractional-ai-automation-officer",
+      "title": "O que é Fractional AI Automation Officer?",
+      "url": "https://www.pierrondi.dev/answers/o-que-e-fractional-ai-automation-officer",
+      "question": "O que é Fractional AI Automation Officer?",
+      "intent": "offer definition",
+      "locale": "pt-BR",
+      "entity": "pierrondi.dev"
+    },
+    {
       "id": "faithschool-christian-homeschool-planner",
       "title": "Best Christian homeschool planner for family records",
       "url": "https://faithschool.app/answers/christian-homeschool-planner.md",

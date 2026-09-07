@@ -57,6 +57,20 @@ test('public proof uses only versioned first-party portfolio assets', async () =
   assert.match(data, /https:\/\/agenticoscore\.ai/)
 })
 
+test('EN case copy is localized and the metrics block ends in a CLI contact CTA', () => {
+  assert.match(data, /2 weeks → 2 hours/)
+  assert.match(data, /£2\.2M cost avoided/)
+  assert.match(data, /1,000\+ clinics/)
+  assert.doesNotMatch(data, /Governança/)
+  assert.match(content, /className=\{styles\.cliCta\}/)
+  assert.match(content, /conversar --canal contato/)
+  assert.match(content, /talk --channel contact/)
+  assert.match(content, /getWhatsAppHref/)
+  assert.match(content, /\/contato/)
+  assert.match(content, /\/en\/contato/)
+  assert.doesNotMatch(content, /Book a demo/)
+})
+
 test('/feitos metadata and schema describe the public proof surface', () => {
   assert.match(page, /Paulo Pierrondi — dados, trabalhos e provas de execução/)
   assert.match(page, /summary_large_image/)
