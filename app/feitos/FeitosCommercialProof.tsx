@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowDown, ArrowRight, Download, ExternalLink, ShieldCheck } from 'lucide-react'
+import { getWhatsAppHref } from '@/lib/contact'
 import type { FeitosLang } from './FeitosIndexContent'
 import { deliveryCases, paidAiFlow, proofMetrics, publicProofs } from './feitos-proof-data'
 import styles from './FeitosCommercialProof.module.css'
@@ -35,6 +36,10 @@ const copy = {
       'Produtos e sistemas reais para avaliar acabamento, profundidade técnica e capacidade de levar uma ideia até uma experiência navegável.',
     open: 'Abrir produto',
     allPortfolio: 'Ver portfólio completo',
+    cliPrompt: 'conversar --canal contato',
+    cliLead: 'Números com contexto. Próximo passo: conversar.',
+    cliContact: 'abrir /contato',
+    cliWhatsapp: 'chamar no WhatsApp',
   },
   en: {
     eyebrow: 'PAULO PIERRONDI · PROFILE · WORK · PROOF',
@@ -63,8 +68,17 @@ const copy = {
       'Real products and systems for assessing craft, technical depth, and the ability to turn an idea into a navigable experience.',
     open: 'Open product',
     allPortfolio: 'View full portfolio',
+    cliPrompt: 'talk --channel contact',
+    cliLead: 'Numbers with context. Next step: talk.',
+    cliContact: 'open /en/contato',
+    cliWhatsapp: 'message on WhatsApp',
   },
 } as const
+
+const FEITOS_WHATSAPP: Record<FeitosLang, string> = {
+  pt: 'Olá, Paulo! Vim pelos feitos e quero conversar sobre automações mensuráveis.',
+  en: 'Hi Paulo! I came from the work/proof page and would like to discuss measurable automations.',
+}
 
 function Metrics({ lang }: { lang: FeitosLang }) {
   const t = copy[lang]
@@ -84,6 +98,19 @@ function Metrics({ lang }: { lang: FeitosLang }) {
         ))}
       </div>
       <p className={styles.disclaimer}><ShieldCheck aria-hidden="true" />{t.note}</p>
+      <aside className={styles.cliCta} aria-label={lang === 'pt' ? 'Conversar a partir da prova' : 'Talk from this proof'}>
+        <p className={styles.cliHeader}>
+          <span aria-hidden="true">$</span>
+          <code>{t.cliPrompt}</code>
+        </p>
+        <p className={styles.cliLead}>{t.cliLead}</p>
+        <div className={styles.cliActions}>
+          <Link href={lang === 'pt' ? '/contato' : '/en/contato'}>{t.cliContact}</Link>
+          <a href={getWhatsAppHref(FEITOS_WHATSAPP[lang])} target="_blank" rel="noopener noreferrer">
+            {t.cliWhatsapp}
+          </a>
+        </div>
+      </aside>
     </section>
   )
 }
@@ -125,10 +152,10 @@ function CaseStudies({ lang }: { lang: FeitosLang }) {
       </header>
       <div className={styles.caseGrid}>
         {deliveryCases.map((item, index) => (
-          <article key={item.result}>
+          <article key={item.sector.pt}>
             <div className={styles.caseTopline}><span>{String(index + 1).padStart(2, '0')}</span>{item.sector[lang]}</div>
             <h3>{item.headline[lang]}</h3>
-            <strong>{item.result}</strong>
+            <strong>{item.result[lang]}</strong>
             <p>{item.detail[lang]}</p>
             <ul aria-label={lang === 'pt' ? 'Tecnologias e métodos' : 'Technologies and methods'}>
               {item.methods.map((method) => <li key={method}>{method}</li>)}

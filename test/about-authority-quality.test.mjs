@@ -17,6 +17,8 @@ test('about presents bilingual operating qualities from the authority registry',
   assert.equal(registry.pages.pt.evidence.items.length, registry.pages.en.evidence.items.length)
   assert.match(registry.pages.pt.hero.title, /para de improvisar e começa a operar/)
   assert.match(registry.pages.en.hero.title, /stops improvising and starts operating/)
+  assert.match(registry.pages.pt.hero.lead, /automações mensuráveis, não horas soltas/)
+  assert.match(registry.pages.en.hero.lead, /measurable outcomes and automations, not loose hours/)
   assert.match(experience, /page\.qualities\.items\.map/)
   assert.match(experience, /page\.evidence\.items\.map/)
   assert.doesNotMatch(experience, /SP_BR/)

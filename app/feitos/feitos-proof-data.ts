@@ -9,7 +9,7 @@ export type ProofMetric = {
 export type DeliveryCase = {
   sector: Record<FeitosLang, string>
   headline: Record<FeitosLang, string>
-  result: string
+  result: Record<FeitosLang, string>
   detail: Record<FeitosLang, string>
   methods: string[]
 }
@@ -64,7 +64,7 @@ export const deliveryCases: DeliveryCase[] = [
       pt: 'Uma nova fonte de dados deixou de levar duas semanas.',
       en: 'A new data source stopped taking two weeks to onboard.',
     },
-    result: '2 semanas → 2 horas',
+    result: { pt: '2 semanas → 2 horas', en: '2 weeks → 2 hours' },
     detail: {
       pt: 'Arquitetura de integração com mais de 700 workflows e processamento de 2–3 milhões de documentos por mês.',
       en: 'Integration architecture with 700+ workflows processing 2–3 million documents per month.',
@@ -77,12 +77,12 @@ export const deliveryCases: DeliveryCase[] = [
       pt: 'Operações repetitivas viraram uma malha SOAR modular.',
       en: 'Repetitive operations became a modular SOAR fabric.',
     },
-    result: '£2,2M de custo evitado',
+    result: { pt: '£2,2M de custo evitado', en: '£2.2M cost avoided' },
     detail: {
       pt: 'Trinta e três workflows coordenados, mais de 5.000 person-days poupados e trilha auditável de decisão.',
       en: 'Thirty-three coordinated workflows, 5,000+ person-days saved, and an auditable decision trail.',
     },
-    methods: ['n8n', 'SOAR', 'Governança', 'Observability'],
+    methods: ['n8n', 'SOAR', 'Governance', 'Observability'],
   },
   {
     sector: { pt: 'Health SaaS · case anonimizado', en: 'Health SaaS · anonymized case' },
@@ -90,7 +90,7 @@ export const deliveryCases: DeliveryCase[] = [
       pt: 'A operação saiu do zero para uma base recorrente de clínicas.',
       en: 'The operation went from zero to a recurring clinic base.',
     },
-    result: '1.000+ clínicas · US$ 5,6M',
+    result: { pt: '1.000+ clínicas · US$ 5,6M', en: '1,000+ clinics · US$5.6M' },
     detail: {
       pt: 'Produto white-label, automações de aquisição e operação, com mais de US$ 300K de MRR no período registrado.',
       en: 'White-label product plus acquisition and operating automations, with US$300K+ MRR in the recorded period.',
@@ -103,7 +103,7 @@ export const deliveryCases: DeliveryCase[] = [
       pt: 'Implementação, automação e receita operando no mesmo modelo.',
       en: 'Implementation, automation, and revenue operating as one model.',
     },
-    result: '250+ clientes · US$ 120K+ MRR',
+    result: { pt: '250+ clientes · US$ 120K+ MRR', en: '250+ clients · US$120K+ MRR' },
     detail: {
       pt: 'Oito trimestres consecutivos de crescimento com oferta productizada de setup e recorrência.',
       en: 'Eight consecutive growth quarters with a productized setup and recurring offer.',

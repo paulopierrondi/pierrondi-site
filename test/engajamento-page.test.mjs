@@ -136,6 +136,8 @@ test('engagement copy stays honest: no invented clients, metrics or published sp
   assert.match(copySource, /AgentOps/)
   assert.match(copySource, /AI Operating Model/)
   assert.match(content, /href=\{route\.proof\}/)
+  assert.match(content, /href=\{route\.answer\}/)
+  assert.match(copySource, /\/answers\/o-que-e-fractional-ai-automation-officer/)
   assert.match(content, /getWhatsAppHref/)
   assert.match(content, /route\.contact/)
   assert.match(ptPage, /buildEngajamentoSchema\('pt'\)/)

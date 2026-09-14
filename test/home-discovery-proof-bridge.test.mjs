@@ -38,6 +38,7 @@ test('home proof bridge sits between hero and portfolio and reuses /feitos cases
   assert.match(proofSection, /id="proof"/)
   assert.match(proofSection, /from '@\/app\/feitos\/feitos-proof-data'/)
   assert.match(proofSection, /deliveryCases\.slice\(0, 2\)/)
+  assert.match(proofSection, /item\.result\[lang\]/)
   assert.match(copy, /cta: \{ label: 'Ver provas de execução', href: '\/feitos' \}/)
   assert.match(copy, /cta: \{ label: 'View execution proof', href: '\/en\/feitos' \}/)
   assert.match(copy, /EVIDENCE LEDGER \/ 2026/)

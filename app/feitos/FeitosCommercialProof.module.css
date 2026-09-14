@@ -195,6 +195,59 @@
 .disclaimer { max-width: var(--proof-max); display: flex; gap: 10px; align-items: flex-start; margin: 22px auto 0; color: var(--color-muted); font: 600 10px/1.55 var(--font-mono); }
 .disclaimer svg { flex: 0 0 auto; width: 15px; color: var(--hv2-accent-signal); }
 
+.cliCta {
+  max-width: var(--proof-max);
+  margin: 28px auto 0;
+  padding: 18px 20px 16px;
+  border: 1px solid var(--color-hairline);
+  background: #070707;
+}
+
+.cliHeader {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 0;
+  color: var(--color-accent-gold);
+  font: 700 11px/1.4 var(--font-mono);
+}
+
+.cliHeader span { color: var(--hv2-terminal-prompt, var(--color-accent-gold)); }
+
+.cliHeader code {
+  color: var(--color-ink);
+  font: inherit;
+}
+
+.cliLead {
+  max-width: 62ch;
+  margin: 12px 0 0;
+  color: var(--color-body);
+  font: 600 12px/1.55 var(--font-mono);
+}
+
+.cliActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.cliActions a {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid rgba(240, 166, 107, 0.35);
+  color: var(--color-primary);
+  font: 800 10px/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: lowercase;
+}
+
+.cliActions a:hover { border-color: var(--color-primary); }
+
 .flow { overflow: hidden; padding: clamp(86px, 11vw, 150px) var(--proof-x); border-bottom: 1px solid var(--color-hairline); background: #0a0908; }
 .flowHeader { max-width: var(--proof-max); display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr); gap: 40px 7vw; align-items: end; margin: 0 auto 58px; }
 .flowHeader > p { max-width: 56ch; margin: 0; color: var(--color-body); font-size: 17px; line-height: 1.65; }
@@ -300,7 +353,8 @@
   .actions button,
   .portfolioLink,
   .productCard,
-  .productMedia img { transition: none; }
+  .productMedia img,
+  .cliActions a { transition: none; }
   .actions a:hover,
   .actions button:hover,
   .portfolioLink:hover,
@@ -318,6 +372,7 @@
   .heroGrid,
   .heroSignal,
   .actions,
+  .cliCta,
   .publicProof { display: none; }
   .hero h1,
   .sectionHeader h2,

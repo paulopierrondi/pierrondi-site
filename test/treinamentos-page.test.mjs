@@ -159,6 +159,13 @@ test('public training copy never leaks private commercial claims', () => {
   }
 })
 
+test('training copy mirrors the home measurable-outcomes claim', () => {
+  assert.match(TREINAMENTOS_COPY.pt.header.lead, /automações mensuráveis, não horas soltas/)
+  assert.match(TREINAMENTOS_COPY.en.header.lead, /measurable outcomes and automations, not loose hours/)
+  assert.match(TREINAMENTOS_COPY.pt.final.p, /resultado mensurável/)
+  assert.match(TREINAMENTOS_COPY.en.final.p, /measurable outcome/)
+})
+
 test('the ServiceNow track carries the independence disclaimer in both languages', () => {
   assert.match(TREINAMENTOS_COPY.pt.disclaimer, /não representa a ServiceNow/i)
   assert.match(TREINAMENTOS_COPY.pt.disclaimer, /substitui treinamento ou certificação oficial/i)

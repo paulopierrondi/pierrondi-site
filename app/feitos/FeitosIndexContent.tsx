@@ -34,31 +34,35 @@ const HOME_SECTION_HREFS: Record<FeitosLang, Record<SectionId, string>> = {
   },
 }
 
-type IndexCaseCopy = Pick<Feito, 'cardLabel' | 'cardTitle' | 'headline' | 'cardCopy'>
+type IndexCaseCopy = Pick<Feito, 'navLabel' | 'cardLabel' | 'cardTitle' | 'headline' | 'cardCopy'>
 
 const ENGLISH_CASE_COPY: Record<string, IndexCaseCopy> = {
   'sada-servicenow': {
+    navLabel: 'SADA',
     cardLabel: 'ServiceNow / SADA',
     cardTitle: 'SADA: a value architecture for governed AI',
     headline: 'From executive intent to a measured workflow.',
     cardCopy:
       'A framework developed by Paulo Pierrondi to connect strategy, architecture decisions, workflow execution, and measurable value.',
   },
-  'agentops-governanca': {
+  'agentes-governados': {
+    navLabel: 'Governed agents',
     cardLabel: 'AgentOps / Governance',
     cardTitle: 'Governed agents built on data and context',
     headline: 'Autonomy only scales when an agent knows what it may do.',
     cardCopy:
       'A study of operational data, contextual inference, policies, evaluations, and human gates for autonomy that leaves an evidence trail.',
   },
-  'llmops-inferencia': {
+  'llm-inferencia': {
+    navLabel: 'LLM inference',
     cardLabel: 'LLMOps / Inference',
     cardTitle: 'LLM creation, evaluation, and inference',
     headline: 'The scientific work sits between the model and the decision.',
     cardCopy:
       'LLM pipelines for routing, RAG, prompt caching, evaluations, latency, cost, and observable quality.',
   },
-  'automation-os': {
+  'plataformas-automacao-ia': {
+    navLabel: 'AI platforms',
     cardLabel: 'Automation OS',
     cardTitle: 'Platforms for AI-powered automation and execution',
     headline: 'AI creates value when it becomes a reliable execution pipeline.',
@@ -231,7 +235,7 @@ function CaseRail({ lang, selected, onSelect, onFocus }: CaseRailProps) {
             }}
           >
             <span>{String(index + 1).padStart(2, '0')}</span>
-            <strong>{feito.navLabel}</strong>
+            <strong>{feitoCopy.navLabel}</strong>
             <small>{feitoCopy.cardLabel}</small>
           </button>
         )
