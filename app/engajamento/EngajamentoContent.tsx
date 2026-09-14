@@ -74,6 +74,11 @@ export default function EngajamentoContent({ lang }: { lang: EngajamentoLang }) 
                 {' — '}
                 {copy.proof.answerLead}
               </p>
+              <p className={styles.desc}>
+                <Link href={route.measure}>{copy.proof.measure}</Link>
+                {' — '}
+                {copy.proof.measureLead}
+              </p>
             </Reveal>
           </div>
         </div>

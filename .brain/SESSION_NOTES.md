@@ -262,3 +262,13 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - After the `/feitos` metrics block: terminal CLI CTA to `/contato` + WhatsApp (PT/EN). Not “Book a demo”.
 - Hard gates kept: no Product schema, Person `jobTitle` remains TAE, gtag `G-1CL8PFYY7T` untouched, no invented clients/metrics.
 - Suggested Linear/Obsidian: note this GEO/conversion slice on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
+
+## 2026-09-14 — Weekly growth P0: medir resultado de IA operacional
+
+- Do not duplicate `#51`–`#55` (home copy, nav/proof/CTA, `/engajamento`, motion, Fractional brief + mensurável CTAs).
+- New PT answer brief: `/answers/como-medir-resultado-de-ia-operacional` via shared `AnswerBrief` (Question/FAQPage/Article). Honest framework: baseline → métrica → evidência / AgentOps. No invented client numbers.
+- PT-first: site still has no `/en/answers` pattern. EN `/engajamento` links to the PT measuring brief.
+- Funnel (light, not home ATF): `/engajamento` + Fractional brief ↔ measuring brief; CTAs to `/engajamento`, `/feitos`, `/contato` (WhatsApp pattern). Listed on `/ai-search`.
+- Sitemap + `answers.json` + `llms.txt` + `llms-full.txt` + `geo.md` list the URL. `/sprint` stays unpublished.
+- Hard gates kept: no Product schema, Person `jobTitle` remains TAE, gtag `G-1CL8PFYY7T` untouched, no home/motion edits.
+- Suggested Linear/Obsidian: note this measuring-answer slice on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.

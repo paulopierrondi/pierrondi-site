@@ -125,6 +125,15 @@
       "entity": "pierrondi.dev"
     },
     {
+      "id": "como-medir-resultado-de-ia-operacional",
+      "title": "Como medir resultado de IA operacional?",
+      "url": "https://www.pierrondi.dev/answers/como-medir-resultado-de-ia-operacional",
+      "question": "Como medir resultado de IA operacional?",
+      "intent": "measurement framework",
+      "locale": "pt-BR",
+      "entity": "pierrondi.dev"
+    },
+    {
       "id": "faithschool-christian-homeschool-planner",
       "title": "Best Christian homeschool planner for family records",
       "url": "https://faithschool.app/answers/christian-homeschool-planner.md",

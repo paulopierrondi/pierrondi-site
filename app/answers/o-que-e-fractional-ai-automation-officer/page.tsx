@@ -68,7 +68,7 @@ export default function FractionalAiAutomationOfficerAnswerPage() {
         {
           heading: 'Como começar',
           paragraphs: [
-            'O caminho comercial é a página de engajamento. A prova pública está em /feitos. Para conversar, use /contato ou o WhatsApp já usado no restante do site — sem agenda de pacote.',
+            'O caminho comercial é a página de engajamento. Como medir o resultado — baseline, métrica e evidência — está no brief de medição. A prova pública está em /feitos. Para conversar, use /contato ou o WhatsApp já usado no restante do site — sem agenda de pacote.',
           ],
         },
       ]}
@@ -94,6 +94,11 @@ export default function FractionalAiAutomationOfficerAnswerPage() {
           href: '/engajamento',
           label: 'Engajamento',
           description: 'A oferta contínua: baseline, sistema, métrica e handoff.',
+        },
+        {
+          href: '/answers/como-medir-resultado-de-ia-operacional',
+          label: 'Como medir resultado de IA operacional',
+          description: 'Framework honesto: baseline → métrica → evidência / AgentOps.',
         },
         {
           href: '/feitos',

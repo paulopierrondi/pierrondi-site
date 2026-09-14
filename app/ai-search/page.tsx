@@ -372,6 +372,12 @@ const ownAnswers: AnswerLink[] = [
     intent: 'offer definition',
     locale: 'pt-BR',
   },
+  {
+    title: 'Como medir resultado de IA operacional?',
+    url: '/answers/como-medir-resultado-de-ia-operacional',
+    intent: 'measurement framework',
+    locale: 'pt-BR',
+  },
 ]
 
 const deliveryEvidence = {

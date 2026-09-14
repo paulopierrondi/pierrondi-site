@@ -7,6 +7,7 @@ const SLUGS = [
   'quem-e-paulo-pierrondi',
   'llm-cost-cut-audit',
   'o-que-e-fractional-ai-automation-officer',
+  'como-medir-resultado-de-ia-operacional',
 ]
 
 const sitemapSource = await readFile(new URL('../app/sitemap.ts', import.meta.url), 'utf8')
@@ -98,10 +99,38 @@ test('fractional officer brief converts to engagement, proof and contact without
   assert.match(source, /href: '\/engajamento'/)
   assert.match(source, /href: '\/feitos'/)
   assert.match(source, /href: '\/contato'/)
+  assert.match(source, /href: '\/answers\/como-medir-resultado-de-ia-operacional'/)
   assert.match(source, /WhatsApp/)
   assert.match(source, /Technical Account Executive/)
   assert.doesNotMatch(source, /href: '\/sprint'/)
   assert.doesNotMatch(source, /Book a demo/)
   assert.doesNotMatch(source, /'@type': 'Product'/)
+})
+
+test('measurement brief uses the honest framework and converts without invented metrics', async () => {
+  const source = await readFile(
+    new URL('../app/answers/como-medir-resultado-de-ia-operacional/page.tsx', import.meta.url),
+    'utf8',
+  )
+
+  assert.match(source, /baseline/)
+  assert.match(source, /métrica/)
+  assert.match(source, /evidência/)
+  assert.match(source, /AgentOps/)
+  assert.match(source, /href: '\/engajamento'/)
+  assert.match(source, /href: '\/feitos'/)
+  assert.match(source, /href: '\/contato'/)
+  assert.match(source, /href: '\/answers\/o-que-e-fractional-ai-automation-officer'/)
+  assert.match(source, /WhatsApp/)
+  assert.match(source, /Technical Account Executive/)
+  assert.doesNotMatch(source, /href: '\/sprint'/)
+  assert.doesNotMatch(source, /Book a demo/)
+  assert.doesNotMatch(source, /'@type': 'Product'/)
+  assert.doesNotMatch(source, /R\$\s?\d/)
+  assert.doesNotMatch(source, /US\$\s?\d/)
+  assert.doesNotMatch(source, /\$\d/)
+  assert.doesNotMatch(source, /\bMRR\b/)
+  assert.doesNotMatch(source, /50\+|100\+|200\+/)
+  assert.doesNotMatch(source, /SentinelSOAR|DataFlow Nexus|AccessHub|ClinicPro|AutoCRM|FinFlow/i)
 })
 

@@ -41,6 +41,7 @@ Answer pages hosted on pierrondi.dev itself, with question-form titles, direct c
 - https://www.pierrondi.dev/answers/quem-e-paulo-pierrondi — Quem é Paulo Pierrondi? (pt-BR)
 - https://www.pierrondi.dev/answers/llm-cost-cut-audit — O que é o LLM Cost-Cut Audit? (pt-BR)
 - https://www.pierrondi.dev/answers/o-que-e-fractional-ai-automation-officer — O que é Fractional AI Automation Officer? (pt-BR)
+- https://www.pierrondi.dev/answers/como-medir-resultado-de-ia-operacional — Como medir resultado de IA operacional? (pt-BR)
 
 ## Complete product catalog
 
