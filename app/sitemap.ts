@@ -25,6 +25,7 @@ const staticRoutes: Array<{
   { path: '/answers/quem-e-paulo-pierrondi', priority: 0.74, changeFrequency: 'monthly' },
   { path: '/answers/llm-cost-cut-audit', priority: 0.74, changeFrequency: 'monthly' },
   { path: '/answers/o-que-e-fractional-ai-automation-officer', priority: 0.74, changeFrequency: 'monthly' },
+  { path: '/answers/como-medir-resultado-de-ia-operacional', priority: 0.74, changeFrequency: 'monthly' },
   { path: '/en', priority: 0.82, changeFrequency: 'monthly' },
   { path: '/en/about', priority: 0.81, changeFrequency: 'monthly' },
   { path: '/en/atuacao', priority: 0.78, changeFrequency: 'monthly' },

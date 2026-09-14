@@ -14,19 +14,21 @@ type Block = {
 
 export const ENGAJAMENTO_ROUTES: Record<
   EngajamentoLang,
-  { contact: string; proof: string; self: string; answer: string }
+  { contact: string; proof: string; self: string; answer: string; measure: string }
 > = {
   pt: {
     contact: '/contato',
     proof: '/feitos',
     self: '/engajamento',
     answer: '/answers/o-que-e-fractional-ai-automation-officer',
+    measure: '/answers/como-medir-resultado-de-ia-operacional',
   },
   en: {
     contact: '/en/contato',
     proof: '/en/feitos',
     self: '/en/engajamento',
     answer: '/answers/o-que-e-fractional-ai-automation-officer',
+    measure: '/answers/como-medir-resultado-de-ia-operacional',
   },
 }
 
@@ -43,7 +45,15 @@ export const ENGAJAMENTO_COPY: Record<
     metaDescription: string
     serviceType: string
     blocks: Block[]
-    proof: { h2: string; p: string; cta: string; answer: string; answerLead: string }
+    proof: {
+      h2: string
+      p: string
+      cta: string
+      answer: string
+      answerLead: string
+      measure: string
+      measureLead: string
+    }
     final: { h2: string; p: string; contact: string; whatsapp: string }
     disclaimer: string
   }
@@ -104,6 +114,8 @@ export const ENGAJAMENTO_COPY: Record<
       cta: 'Ver os feitos',
       answer: 'O que é Fractional AI Automation Officer?',
       answerLead: 'Definição citável da oferta — sem métrica nova e sem twin EN (o site não tem /en/answers).',
+      measure: 'Como medir resultado de IA operacional?',
+      measureLead: 'Framework honesto: baseline → métrica → evidência / AgentOps — sem número inventado.',
     },
     final: {
       h2: 'Vamos abrir o engajamento.',
@@ -170,6 +182,9 @@ export const ENGAJAMENTO_COPY: Record<
       cta: 'See the work',
       answer: 'What is a Fractional AI Automation Officer?',
       answerLead: 'Citable definition of the offer — no new metric. PT-first: there is no /en/answers pattern on this site.',
+      measure: 'How to measure operational AI results?',
+      measureLead:
+        'Honest framework: baseline → metric → evidence / AgentOps — no invented number. PT-first: there is no /en/answers pattern.',
     },
     final: {
       h2: 'Let’s open the engagement.',
