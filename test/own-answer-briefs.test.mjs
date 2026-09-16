@@ -10,6 +10,21 @@ const SLUGS = [
   'como-medir-resultado-de-ia-operacional',
 ]
 
+const EN_TWINS = [
+  {
+    slug: 'who-is-paulo-pierrondi',
+    path: '/en/answers/who-is-paulo-pierrondi',
+    ptPath: '/answers/quem-e-paulo-pierrondi',
+    titleLead: 'Who is Paulo Pierrondi?',
+  },
+  {
+    slug: 'what-is-agentops',
+    path: '/en/answers/what-is-agentops',
+    ptPath: '/answers/o-que-e-agentops',
+    titleLead: 'What is AgentOps?',
+  },
+]
+
 const sitemapSource = await readFile(new URL('../app/sitemap.ts', import.meta.url), 'utf8')
 const briefComponent = await readFile(
   new URL('../app/answers/_components/AnswerBrief.tsx', import.meta.url),
@@ -26,7 +41,7 @@ test('own-domain answer brief pages exist and use the shared brief renderer', as
     await access(pageUrl)
     const source = await readFile(pageUrl, 'utf8')
     assert.match(source, /AnswerBrief/, `${slug} should render via the shared AnswerBrief`)
-    assert.match(source, new RegExp(`alternates: \\{ canonical: path \\}`), `${slug} should set a canonical`)
+    assert.match(source, /canonical: path/, `${slug} should set a canonical`)
   }
 })
 
@@ -88,6 +103,53 @@ test('restored answer briefs stay wired to every retrieval surface', () => {
   // The training work landed after this branch was cut; the rebase must not drop it.
   assert.ok(answersJson.answerDocs.some((doc) => doc.url.endsWith('/treinamentos')))
   assert.match(sitemapSource, /path: '\/treinamentos'/)
+})
+
+test('EN who-is / what-is twins exist, self-canonicalize and hreflang to the PT pages', async () => {
+  const enHub = await readFile(new URL('../app/en/answers/page.tsx', import.meta.url), 'utf8')
+  assert.match(enHub, /who-is-paulo-pierrondi/)
+  assert.match(enHub, /what-is-agentops/)
+
+  for (const twin of EN_TWINS) {
+    const pageUrl = new URL(`../app/en/answers/${twin.slug}/page.tsx`, import.meta.url)
+    await access(pageUrl)
+    const source = await readFile(pageUrl, 'utf8')
+    assert.match(source, /AnswerBrief/, `${twin.slug} should render via the shared AnswerBrief`)
+    assert.match(source, /inLanguage="en"/)
+    assert.match(source, /canonical: path/)
+    assert.match(source, /'en-US': path/)
+    assert.match(source, new RegExp(`'pt-BR': '${twin.ptPath.replaceAll('/', '\\/')}'`))
+    assert.match(source, new RegExp(`title: '${twin.titleLead.replace(/[?]/g, '\\?')}'`))
+    assert.match(source, new RegExp(`question="${twin.titleLead.replace(/[?]/g, '\\?')}"`))
+    assert.doesNotMatch(source, /Book a demo/)
+    assert.doesNotMatch(source, /'@type': 'Product'/)
+    assert.doesNotMatch(source, /R\$\s?\d/)
+    assert.doesNotMatch(source, /50\+|100\+|200\+/)
+
+    const title = source.match(/^ {2}title: '(.*?)',$/m)[1]
+    assert.doesNotMatch(title, /pierrondi\.dev/, `${twin.slug} title must not repeat the brand`)
+    assert.ok(
+      `${title} | pierrondi.dev`.length <= 62,
+      `${twin.slug} rendered title exceeds the SERP budget: ${title.length + 16}`,
+    )
+
+    const url = `https://www.pierrondi.dev${twin.path}`
+    assert.match(sitemapSource, new RegExp(`path: '${twin.path.replaceAll('/', '\\/')}'`))
+    assert.ok(llmsText.includes(url), `llms.txt must cite ${twin.slug}`)
+    assert.ok(llmsFullText.includes(url), `llms-full.txt must cite ${twin.slug}`)
+    assert.ok(
+      answersJson.answerDocs.some((doc) => doc.url === url),
+      `answers.json must expose ${twin.slug}`,
+    )
+    assert.match(aiSearchPage, new RegExp(`'${twin.path.replaceAll('/', '\\/')}'`))
+  }
+})
+
+test('PT brand/AgentOps briefs get reciprocal hreflang to the EN twins', async () => {
+  const quem = await readFile(new URL('../app/answers/quem-e-paulo-pierrondi/page.tsx', import.meta.url), 'utf8')
+  const agentops = await readFile(new URL('../app/answers/o-que-e-agentops/page.tsx', import.meta.url), 'utf8')
+  assert.match(quem, /'en-US': '\/en\/answers\/who-is-paulo-pierrondi'/)
+  assert.match(agentops, /'en-US': '\/en\/answers\/what-is-agentops'/)
 })
 
 test('fractional officer brief converts to engagement, proof and contact without publishing /sprint', async () => {
