@@ -26,11 +26,30 @@ async function walkPages(dir) {
   return files
 }
 
+const STRING = `'(?:[^'\\\\]|\\\\.)*'|"(?:[^"\\\\]|\\\\.)*"`
+
+const unquote = (token) => token.slice(1, -1).replace(/\\(['"\\])/g, '$1')
+
 function firstMetadataDescription(source) {
   const start = source.indexOf('export const metadata')
   if (start < 0) return null
-  const match = source.slice(start).match(/description:\s*\n?\s*'([^']+)'/)
-  return match?.[1] ?? null
+  const block = source.slice(start)
+
+  // Read only the page-level description, never a later (shorter) twitter/og
+  // literal, so an unresolvable value is skipped instead of passing by accident.
+  const at = block.search(/\bdescription:/)
+  if (at < 0) return null
+  const match = block
+    .slice(at)
+    .match(new RegExp(`^description:\\s*\\n?\\s*(?:(${STRING})|([A-Za-z_$][\\w$]*)\\s*,)`))
+  if (!match) return null
+  if (match[1]) return unquote(match[1])
+
+  // A page can assign `description: DESCRIPTION` from a module const.
+  const declared = source.match(
+    new RegExp(`const\\s+${match[2]}\\s*(?::[^=]+)?=\\s*\\n?\\s*(${STRING})`),
+  )
+  return declared ? unquote(declared[1]) : null
 }
 
 test('clampMetaDescription fits the project SERP max without emptying copy', () => {
@@ -55,25 +74,39 @@ test('clampMetaDescription fits the project SERP max without emptying copy', () 
   assert.ok(provadoria.length <= META_DESCRIPTION_MAX)
   assert.doesNotMatch(provadoria, /Google$/)
   assert.match(provadoria, /ProvadorIA/)
+
+  // An early sentence end must not win over the SERP budget, or Ahrefs simply
+  // swaps "meta description too long" for "meta description too short".
+  const earlyPeriod =
+    'SuperCode is a fast, local-first notebook for snippets, commands and short scratch notes. Built for developers who want their notes on-device, searchable and private.'
+  const supercode = clampMetaDescription(earlyPeriod)
+  assert.ok(
+    supercode.length >= META_DESCRIPTION_MIN && supercode.length <= META_DESCRIPTION_MAX,
+    `early sentence end collapsed the snippet to ${supercode.length}`,
+  )
 })
 
 test('data-driven public metadata emit within the 160-char project max', () => {
+  // Sources already inside the budget are published verbatim; anything the
+  // clamp rewrites has to land in the 120–160 window, never just under it.
+  const assertEmitted = (id, source) => {
+    const emitted = clampMetaDescription(source)
+    assert.ok(emitted.length > 0, `${id} description emptied`)
+    assert.ok(emitted.length <= META_DESCRIPTION_MAX, `${id} emitted ${emitted.length}: ${emitted}`)
+    if (source.length > META_DESCRIPTION_MAX) {
+      assert.ok(
+        emitted.length >= META_DESCRIPTION_MIN,
+        `${id} clamped to ${emitted.length}, which Ahrefs reads as too short: ${emitted}`,
+      )
+    }
+  }
+
   for (const [slug, app] of Object.entries(APPS)) {
-    const emitted = clampMetaDescription(app.description ?? `${app.name} — ${app.category}.`)
-    assert.ok(emitted.length > 0, `/apps/${slug} description emptied`)
-    assert.ok(
-      emitted.length <= META_DESCRIPTION_MAX,
-      `/apps/${slug} emitted ${emitted.length}: ${emitted}`,
-    )
+    assertEmitted(`/apps/${slug}`, app.description ?? `${app.name} — ${app.category}.`)
   }
 
   for (const feito of feitos) {
-    const emitted = clampMetaDescription(feito.lead)
-    assert.ok(emitted.length > 0, `/feitos/${feito.slug} description emptied`)
-    assert.ok(
-      emitted.length <= META_DESCRIPTION_MAX,
-      `/feitos/${feito.slug} emitted ${emitted.length}: ${emitted}`,
-    )
+    assertEmitted(`/feitos/${feito.slug}`, feito.lead)
   }
 
   for (const post of posts) {
@@ -116,13 +149,16 @@ test('static metadata descriptions stay inside the 120–160 convention', async 
     )
   }
 
-  assert.ok(checked.length >= 20, `expected to scan public metadata, got ${checked.length}`)
+  // Guards the resolver itself: a regex regression that stops reading
+  // descriptions would otherwise make this whole scan pass vacuously.
+  assert.ok(checked.length >= 35, `expected to scan public metadata, got ${checked.length}`)
 
   for (const file of [
     'app/page.tsx',
     'app/en/page.tsx',
     'app/layout.tsx',
     'app/paulo/page.tsx',
+    'app/fso/page.tsx',
     'app/answers/quem-e-paulo-pierrondi/page.tsx',
     'app/answers/llm-cost-cut-audit/page.tsx',
     'app/answers/o-que-e-agentops/page.tsx',
