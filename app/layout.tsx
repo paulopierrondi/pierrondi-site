@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     template: '%s | pierrondi.dev',
   },
   description:
-    'Sistema operacional da IA: operating model, AgentOps, governança e trilha de evidência. Enterprise FSI na ServiceNow e sistemas públicos construídos e publicados.',
+    'Sistema operacional da IA: operating model, AgentOps, governança e evidência. Enterprise FSI na ServiceNow e sistemas públicos publicados.',
   keywords: [
     'Paulo Pierrondi',
     'ServiceNow',

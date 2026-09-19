@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUpRight, FileText, LockKeyhole, ShieldCheck, Smartphon
 import WhatsApp from '@/components/WhatsApp'
 import ProductLogo from '@/components/ProductLogo'
 import JsonLd from '@/components/JsonLd'
+import { clampMetaDescription } from '@/lib/seo/meta-description'
 import { SITE_URL } from '@/lib/site'
 import iconManifest from '@/public/app-icons/manifest.json'
 import appStoreCatalog from '@/public/app-icons/app-store-catalog.json'
@@ -110,7 +111,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // brand-free to avoid "FaithSchool · pierrondi.dev | pierrondi.dev".
   const title = app.name
   const socialTitle = `${app.name} · pierrondi.dev`
-  const description = app.description ?? `${app.name} — ${app.category}.`
+  const description = clampMetaDescription(app.description ?? `${app.name} — ${app.category}.`)
   const canonical = `/apps/${slug}`
   return {
     title,

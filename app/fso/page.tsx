@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 const TITLE = 'Automation-first ServiceNow implementation — FSO, IRM and AI Control Tower'
 const DESCRIPTION =
-  'A blueprint for using LLM coding agents, Fluent SDK, MCP, Action Fabric, IRM and AI Control Tower to implement Financial Services Operations end to end — automation-first, risk-governed, and evidence-ready.'
+  'Blueprint for LLM coding agents, Fluent SDK, MCP, Action Fabric, IRM and AI Control Tower in Financial Services Operations — automation-first, risk-governed.'
 
 export const metadata: Metadata = {
   title: TITLE,

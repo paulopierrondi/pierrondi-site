@@ -7,7 +7,7 @@ const path = '/answers/o-que-e-fractional-ai-automation-officer'
 export const metadata: Metadata = {
   title: 'O que é Fractional AI Automation Officer?',
   description:
-    'No enquadramento de Paulo Pierrondi, Fractional AI Automation Officer é um engajamento contínuo para resultado e automações mensuráveis — AgentOps e evidência, não horas soltas.',
+    'Fractional AI Automation Officer: engajamento contínuo para automações mensuráveis — AgentOps e evidência, não horas soltas.',
   keywords: [
     'Fractional AI Automation Officer',
     'automações mensuráveis',

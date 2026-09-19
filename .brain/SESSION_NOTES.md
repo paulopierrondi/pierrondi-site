@@ -1,3 +1,17 @@
+# Sessão 2026-09-19 — Ahrefs meta description too long (23 URLs)
+
+- Ahrefs Site Audit (Pierrondi): **Meta description too long** on 23 indexable URLs.
+- Extra email context: project `10292667`, crawl `18-09-2026T033434`, issue `+2` vs prior crawl. Explorer URL Cloudflare-blocked; Ahrefs MCP `needsAuth`.
+- Live fallback: crawled `https://www.pierrondi.dev/sitemap.xml` (74 URLs) + 14 extras. **Exactly 23 pages > 160 chars** — same set already fixed on PR #58. Seven more sit at 156–160 (inside the project max). `/fso` and `/itau` are robots Disallow and redirect to `/about`.
+- Project max is the existing 120–160 convention (`test/treinamentos-page.test.mjs`, `test/engajamento-page.test.mjs`).
+- Shared helper `lib/seo/meta-description.ts` (`clampMetaDescription`, max 160) now wraps `/apps/[slug]` and `/feitos/[slug]` metadata so long body copy is not dumped into `<meta name="description">`.
+- **Lesson:** a naive clamp that stops at the first clean break traded one Ahrefs issue for another — 5 pages fell under 110 chars, which is Ahrefs' "meta description too short" threshold. The clamp now biases cuts toward the top of the 120–160 window (whole sentence → clause → word gap), so all 15 clamped snippets land in range.
+- **Lesson:** the first contract test read `description:` only as a quoted single-quote literal, so `app/fso/page.tsx` (`description: DESCRIPTION` const, 206 chars) and the double-quoted `/privacy` + `/terms` silently passed. The resolver now handles both quote styles plus module consts, anchors on the first `description:` so it cannot fall through to a shorter og/twitter literal, and asserts a minimum scan count so a regex regression cannot pass vacuously.
+- Rewrote the 8 unique static meta descriptions (home PT/EN, layout default, `/paulo`, 5 `/answers/*`) to 120–160 without emptying meaning. Home still names “resultado e automações mensuráveis (não horas soltas)”.
+- Body copy (`feito.lead`, `app.description`, JSON-LD) unchanged. No ads. Deploy remains human-gated.
+- Verified: `npm test` 176/176, `tsc --noEmit` + `lint` clean, `next build` then HTML scan of 183 rendered pages → 0 over 160, 0 empty, longest exactly 160.
+- Suggested Linear/Obsidian: note the Ahrefs meta-description slice on `pierrondi-site` / AGE-1486. Recrawl after deploy.
+
 # Sessão 2026-06-13 — Melhoria completa do pierrondi.dev
 
 ## Objetivo
