@@ -1,11 +1,13 @@
 # Sessão 2026-09-19 — Ahrefs meta description too long (23 URLs)
 
 - Ahrefs Site Audit (Pierrondi): **Meta description too long** on 23 indexable URLs.
+- Extra email context: project `10292667`, crawl `18-09-2026T033434`, issue `+2` vs prior crawl. Explorer URL Cloudflare-blocked; Ahrefs MCP `needsAuth`.
+- Live fallback: crawled `https://www.pierrondi.dev/sitemap.xml` (74 URLs) + 14 extras. **Exactly 23 pages > 160 chars** — same set already fixed on PR #58. Seven more sit at 156–160 (inside the project max). `/fso` and `/itau` are robots Disallow and redirect to `/about`.
 - Project max is the existing 120–160 convention (`test/treinamentos-page.test.mjs`, `test/engajamento-page.test.mjs`).
 - Shared helper `lib/seo/meta-description.ts` (`clampMetaDescription`, max 160) now wraps `/apps/[slug]` and `/feitos/[slug]` metadata so long body copy is not dumped into `<meta name="description">`.
 - Rewrote the 8 unique static meta descriptions (home PT/EN, layout default, `/paulo`, 5 `/answers/*`) to 120–160 without emptying meaning. Home still names “resultado e automações mensuráveis (não horas soltas)”.
 - Body copy (`feito.lead`, `app.description`, JSON-LD) unchanged. No ads. Deploy remains human-gated.
-- Suggested Linear/Obsidian: note the Ahrefs meta-description slice on `pierrondi-site` / AGE-1486.
+- Suggested Linear/Obsidian: note the Ahrefs meta-description slice on `pierrondi-site` / AGE-1486. Recrawl after deploy.
 
 # Sessão 2026-06-13 — Melhoria completa do pierrondi.dev
 
