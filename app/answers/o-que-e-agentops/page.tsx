@@ -7,7 +7,7 @@ const path = '/answers/o-que-e-agentops'
 export const metadata: Metadata = {
   title: 'O que é AgentOps (operações agênticas)?',
   description:
-    'AgentOps é a disciplina de operar agentes de IA em produção com registro, orquestração, handoffs auditáveis, memória persistente e gates humanos para ações irreversíveis.',
+    'AgentOps é operar agentes de IA em produção com registro, orquestração, handoffs auditáveis, memória persistente e gates humanos.',
   keywords: [
     'AgentOps',
     'operações agênticas',

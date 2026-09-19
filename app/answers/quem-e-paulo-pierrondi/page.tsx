@@ -7,7 +7,7 @@ const path = '/answers/quem-e-paulo-pierrondi'
 export const metadata: Metadata = {
   title: 'Quem é Paulo Pierrondi?',
   description:
-    'Paulo Pierrondi é Technical Account Executive na ServiceNow, arquiteto de IA/automação e builder full-stack: modelos operacionais de IA enterprise, AgentOps e 21 apps publicados na App Store.',
+    'Paulo Pierrondi é TAE na ServiceNow, arquiteto de IA/automação e builder full-stack: AgentOps, operating model e 21 apps na App Store.',
   keywords: [
     'Paulo Pierrondi',
     'Technical Account Executive ServiceNow',

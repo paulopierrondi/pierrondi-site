@@ -7,7 +7,7 @@ const path = '/answers/llm-cost-cut-audit'
 export const metadata: Metadata = {
   title: 'O que é o LLM Cost-Cut Audit?',
   description:
-    'Auditoria técnica de 2 semanas que reduz o custo de LLM em 30–90% sem trocar de provider nem reescrever código: compressão de contexto, serialização compacta, routing por complexidade e cache — com gate de qualidade.',
+    'Auditoria de 2 semanas que corta custo de LLM em 30–90% sem trocar de provider: contexto, routing, cache e gate de qualidade.',
   keywords: [
     'LLM cost reduction',
     'redução de custo de LLM',

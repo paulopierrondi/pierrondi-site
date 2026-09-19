@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import JsonLd from '@/components/JsonLd'
 import SwarmEffectsLoader from '@/components/SwarmEffectsLoader'
 import { feitos, getFeito, type Feito } from '../feitos-data'
+import { clampMetaDescription } from '@/lib/seo/meta-description'
 import { SITE_URL } from '@/lib/site'
 import styles from './page.module.css'
 
@@ -25,16 +26,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const feito = getFeito(slug)
   if (!feito) return {}
+  const description = clampMetaDescription(feito.lead)
 
   return {
     title: `${feito.title} - Paulo Pierrondi`,
-    description: feito.lead,
+    description,
     alternates: {
       canonical: `/feitos/${feito.slug}`,
     },
     openGraph: {
       title: `${feito.title} - Paulo Pierrondi`,
-      description: feito.lead,
+      description,
       url: `/feitos/${feito.slug}`,
       siteName: 'pierrondi.dev',
       locale: 'pt_BR',
@@ -44,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: 'summary_large_image',
       title: `${feito.title} - Paulo Pierrondi`,
-      description: feito.lead,
+      description,
       images: ['/og'],
     },
   }
