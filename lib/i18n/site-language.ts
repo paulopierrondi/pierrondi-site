@@ -21,6 +21,24 @@ const localizedRoutes: Record<string, Record<HomeLang, string>> = {
   '/en/engajamento': { pt: '/engajamento', en: '/en/engajamento' },
   '/treinamentos': { pt: '/treinamentos', en: '/en/treinamentos' },
   '/en/treinamentos': { pt: '/treinamentos', en: '/en/treinamentos' },
+  '/answers/quem-e-paulo-pierrondi': {
+    pt: '/answers/quem-e-paulo-pierrondi',
+    en: '/en/answers/who-is-paulo-pierrondi',
+  },
+  '/en/answers/who-is-paulo-pierrondi': {
+    pt: '/answers/quem-e-paulo-pierrondi',
+    en: '/en/answers/who-is-paulo-pierrondi',
+  },
+  '/answers/o-que-e-agentops': {
+    pt: '/answers/o-que-e-agentops',
+    en: '/en/answers/what-is-agentops',
+  },
+  '/en/answers/what-is-agentops': {
+    pt: '/answers/o-que-e-agentops',
+    en: '/en/answers/what-is-agentops',
+  },
+  '/answers': { pt: '/answers', en: '/en/answers' },
+  '/en/answers': { pt: '/answers', en: '/en/answers' },
   '/studio': { pt: '/studio', en: '/en/studio' },
   '/en/studio': { pt: '/studio', en: '/en/studio' },
   '/contato': { pt: '/contato', en: '/en/contato' },
@@ -40,6 +58,7 @@ const localizedRoutes: Record<string, Record<HomeLang, string>> = {
 const languageSwitcherHiddenPrefixes = [
   '/ai-search',
   '/answers',
+  '/en/answers',
   '/apps',
   '/bradesco-26',
   '/citations',

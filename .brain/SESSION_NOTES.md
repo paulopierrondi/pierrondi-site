@@ -286,3 +286,11 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Sitemap + `answers.json` + `llms.txt` + `llms-full.txt` + `geo.md` list the URL. `/sprint` stays unpublished.
 - Hard gates kept: no Product schema, Person `jobTitle` remains TAE, gtag `G-1CL8PFYY7T` untouched, no home/motion edits.
 - Suggested Linear/Obsidian: note this measuring-answer slice on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
+
+## 2026-09-16 — Weekday SEO hold: EN twins for who-is-paulo + what-is-agentops
+
+- Live gap (verified 2026-09-16): PT `/answers/quem-e-paulo-pierrondi` and `/answers/o-que-e-agentops` 200; EN `/en/answers/who-is-paulo-pierrondi` and `/en/answers/what-is-agentops` 404; `/en/answers` hub 404.
+- Added EN answer twins via shared `AnswerBrief` (Question/FAQPage/Article). Honest copy only. PT pages kept; reciprocal hreflang added.
+- `/en/answers` hub lists the two EN twins. Registered in sitemap, `/ai-search`, `answers.json`, `llms.txt`, `llms-full.txt`, `geo.md`.
+- Fractional/measuring briefs stay PT-only. No IndexNow, no merge, no deploy. AgenticosCore and CantuStudio untouched.
+- Suggested Linear/Obsidian: note EN brand/AgentOps twins on `pierrondi-site` / AGE-1486. CoS weekday hold — no merge/deploy without Paulo.
