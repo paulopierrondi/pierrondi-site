@@ -286,3 +286,13 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Sitemap + `answers.json` + `llms.txt` + `llms-full.txt` + `geo.md` list the URL. `/sprint` stays unpublished.
 - Hard gates kept: no Product schema, Person `jobTitle` remains TAE, gtag `G-1CL8PFYY7T` untouched, no home/motion edits.
 - Suggested Linear/Obsidian: note this measuring-answer slice on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
+
+## 2026-09-21 — Weekly growth P0: /feitos → /engajamento CTA
+
+- Do not duplicate `#51`–`#56` (home copy, nav/proof/CTA, `/engajamento`, motion, Fractional brief, measuring brief). Do not merge or recreate PR `#57` EN twins (CoS hold).
+- After the `/feitos` and `/en/feitos` public metrics block, the CLI CTA now opens `/engajamento` / `/en/engajamento` (noir/CLI tone, not “Book a demo”). WhatsApp remains the secondary CLI action. No new metrics.
+- About + treinamentos (PT/EN) already carry “resultado e automações mensuráveis, não horas soltas” — no copy rewrite this slice.
+- Home COLABORAR already has copper/amber fill vs ghost secondary (`#52`/`#55`). No home redesign this slice.
+- `/en/feitos` case-card residue: system-map meta used PT `feito.navLabel` (`Agentes governados`). It now uses localized `activeCopy.navLabel` (`Governed agents`).
+- No new public URLs. `/sprint` stays unpublished. No Product schema. No ads.
+- Suggested Linear/Obsidian: note this proof→engagement CTA on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.

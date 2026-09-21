@@ -183,14 +183,22 @@ function DiagramNodes({ feito }: { feito: Feito }) {
   ))
 }
 
-function SystemDiagram({ feito, label }: { feito: Feito; label: string }) {
+function SystemDiagram({
+  feito,
+  label,
+  navLabel,
+}: {
+  feito: Feito
+  label: string
+  navLabel: string
+}) {
   const captionId = `system-map-${feito.slug}`
 
   return (
     <figure className={styles.diagram} aria-labelledby={captionId}>
       <div className={styles.diagramMeta}>
         <span>{label}</span>
-        <span>{feito.navLabel}</span>
+        <span>{navLabel}</span>
       </div>
       <svg viewBox="0 0 360 248" className={styles.svg} role="img">
         <DiagramGrid />
@@ -270,7 +278,7 @@ function CasePanel({ active, copy, lang, reduceMotion, selected }: CasePanelProp
         transition={{ duration: reduceMotion ? 0.08 : 0.38, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className={styles.caseVisual}>
-          <SystemDiagram feito={active} label={copy.map} />
+          <SystemDiagram feito={active} label={copy.map} navLabel={activeCopy.navLabel} />
           <div className={styles.visualFooter}>
             <span>{activeCopy.cardLabel}</span>
             <span>{copy.publicFramework}</span>

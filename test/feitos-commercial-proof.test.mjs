@@ -57,7 +57,7 @@ test('public proof uses only versioned first-party portfolio assets', async () =
   assert.match(data, /https:\/\/agenticoscore\.ai/)
 })
 
-test('EN case copy is localized and the metrics block ends in a CLI contact CTA', () => {
+test('EN case copy is localized and the metrics block ends in a CLI engagement CTA', () => {
   assert.match(data, /2 weeks → 2 hours/)
   assert.match(data, /£2\.2M cost avoided/)
   assert.match(data, /1,000\+ clinics/)
@@ -65,14 +65,16 @@ test('EN case copy is localized and the metrics block ends in a CLI contact CTA'
   assert.match(index, /'agentes-governados':/)
   assert.match(index, /cardLabel: 'AgentOps \/ Governance'/)
   assert.match(index, /navLabel: 'Governed agents'/)
+  assert.match(index, /navLabel=\{activeCopy\.navLabel\}/)
   assert.doesNotMatch(index, /'agentops-governanca'/)
+  assert.doesNotMatch(index, /<span>\{feito\.navLabel\}<\/span>/)
   assert.match(content, /className=\{styles\.cliCta\}/)
-  assert.match(content, /conversar --canal contato/)
-  assert.match(content, /talk --channel contact/)
+  assert.match(content, /abrir --rota engajamento/)
+  assert.match(content, /open --route engagement/)
   assert.match(content, /getWhatsAppHref/)
-  assert.match(content, /\/contato/)
-  assert.match(content, /\/en\/contato/)
+  assert.match(content, /href=\{lang === 'pt' \? '\/engajamento' : '\/en\/engajamento'\}/)
   assert.doesNotMatch(content, /Book a demo/)
+  assert.doesNotMatch(content, /href=\{lang === 'pt' \? '\/contato' : '\/en\/contato'\}/)
 })
 
 test('/feitos metadata and schema describe the public proof surface', () => {
@@ -82,6 +84,10 @@ test('/feitos metadata and schema describe the public proof surface', () => {
   assert.match(schema, /'@type': 'CollectionPage'/)
   assert.match(schema, /'@type': 'ItemList'/)
   assert.match(schema, /'@id': `\$\{SITE_URL\}\/\#person`/)
+  assert.doesNotMatch(schema, /'@type': 'Product'/)
+  assert.doesNotMatch(content, /'@type': 'Product'/)
+  assert.doesNotMatch(content, /\/sprint/)
+  assert.doesNotMatch(index, /\/sprint/)
 })
 
 test('the proof surface recomposes on mobile, reduced motion, and print', () => {
