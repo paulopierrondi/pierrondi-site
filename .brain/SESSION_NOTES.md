@@ -296,3 +296,9 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - `/en/feitos` case-card residue: system-map meta used PT `feito.navLabel` (`Agentes governados`). It now uses localized `activeCopy.navLabel` (`Governed agents`).
 - No new public URLs. `/sprint` stays unpublished. No Product schema. No ads.
 - Suggested Linear/Obsidian: note this proof→engagement CTA on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
+
+## 2026-09-28 — Follow-up: /feitos closing CTA → /engajamento
+
+- Same draft PR `#59` / `cursor/growth-p0-feitos-cta-2027`. Do not merge `#57`.
+- Closing section on `/feitos` and `/en/feitos` now primaries to `/engajamento` / `/en/engajamento` (`abrir /engajamento` / `open /en/engajamento`). `/contato` and WhatsApp stay secondary CLI actions.
+- No new metrics, no new URLs, `/sprint` unpublished, no Product schema.

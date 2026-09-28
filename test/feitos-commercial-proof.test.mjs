@@ -75,6 +75,14 @@ test('EN case copy is localized and the metrics block ends in a CLI engagement C
   assert.match(content, /href=\{lang === 'pt' \? '\/engajamento' : '\/en\/engajamento'\}/)
   assert.doesNotMatch(content, /Book a demo/)
   assert.doesNotMatch(content, /href=\{lang === 'pt' \? '\/contato' : '\/en\/contato'\}/)
+  assert.match(index, /engage: 'abrir \/engajamento'/)
+  assert.match(index, /engage: 'open \/en\/engajamento'/)
+  assert.match(index, /href=\{lang === 'pt' \? '\/engajamento' : '\/en\/engajamento'\}/)
+  assert.match(index, /href=\{lang === 'pt' \? '\/contato' : '\/en\/contato'\}/)
+  assert.match(index, /getWhatsAppHref/)
+  assert.doesNotMatch(index, /Iniciar conversa/)
+  assert.doesNotMatch(index, /Start a conversation/)
+  assert.doesNotMatch(index, /Book a demo/)
 })
 
 test('/feitos metadata and schema describe the public proof surface', () => {
