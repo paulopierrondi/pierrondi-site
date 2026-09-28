@@ -164,6 +164,7 @@ test('static metadata descriptions stay inside the 120–160 convention', async 
     'app/answers/o-que-e-agentops/page.tsx',
     'app/answers/o-que-e-fractional-ai-automation-officer/page.tsx',
     'app/answers/como-medir-resultado-de-ia-operacional/page.tsx',
+    'app/answers/fractional-vs-consultoria-vs-agencia/page.tsx',
     'app/treinamentos/page.tsx',
     'app/engajamento/page.tsx',
   ]) {

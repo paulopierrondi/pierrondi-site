@@ -286,3 +286,11 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Sitemap + `answers.json` + `llms.txt` + `llms-full.txt` + `geo.md` list the URL. `/sprint` stays unpublished.
 - Hard gates kept: no Product schema, Person `jobTitle` remains TAE, gtag `G-1CL8PFYY7T` untouched, no home/motion edits.
 - Suggested Linear/Obsidian: note this measuring-answer slice on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
+
+## 2026-09-28 — Growth P2-to-P0: fractional vs consultoria vs agência vs interno
+
+- New PT answer brief: `/answers/fractional-vs-consultoria-vs-agencia` via shared `AnswerBrief` (Question/FAQPage/Article/BreadcrumbList). Compares four formats: Fractional AI Automation Officer, consultoria tradicional, agência de automação, contratação interna. Axes: dono após o go-live, medição (baseline, métrica, handoff), formato do engajamento, riscos. Neutral; no prices, clients, logos or ROI.
+- PT only. `app/en/answers` does not exist on main. PR #57 EN twins stays untouched.
+- CTA to `/engajamento`. Links to the Fractional and measurement briefs, plus `/feitos` and `/contato`. Listed on `/ai-search` (the `/answers` index redirects there).
+- Sitemap + `answers.json` + `llms.txt` + `llms-full.txt` + `geo.md` list the URL. `/sprint` stays unpublished. No Product schema. jobTitle stays Technical Account Executive.
+- Suggested Linear/Obsidian: note this comparison brief on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
