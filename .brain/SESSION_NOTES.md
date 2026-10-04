@@ -286,3 +286,15 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Sitemap + `answers.json` + `llms.txt` + `llms-full.txt` + `geo.md` list the URL. `/sprint` stays unpublished.
 - Hard gates kept: no Product schema, Person `jobTitle` remains TAE, gtag `G-1CL8PFYY7T` untouched, no home/motion edits.
 - Suggested Linear/Obsidian: note this measuring-answer slice on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
+
+## 2026-10-04 — Static /og and SEO meta (draft PR #61)
+
+- Branch `cursor/seo-static-og-900f`. Draft PR `#61`. No merge, no deploy.
+- `GET /og` is `force-static`. Build route table marks `○ /og`. Production `next start :3456`: `HEAD` and `GET /og` return `200` `image/png`, 1200×630, cache `HIT`, body matches `.next/server/app/og.body`.
+- Image copy: `Onde IA vira operação` / `com evidência.` Footer: `Paulo Pierrondi | ServiceNow | AgentOps`.
+- `/contato` and `/en/contato` publish `og:image` `/og` with page-specific alt. One document title and one meta description on those pages.
+- Apps without a catalog description use `fallbackAppDescription`, clamped to 120–160. All 30 app landings emit one valid `BreadcrumbList` (3 ListItems, absolute https item URLs).
+- Legal descriptions updated on `/privacidade`, `/privacy`, `/termos`, `/terms` (137–149 chars). `public/llms.txt` gained Citation and crawl policy, last updated 2026-10-04.
+- `/sprint`, prices, secrets, DNS and auth were not touched. Feitos SVG `<title>` labels (diagram names) are pre-existing and are not a second document `<title>`.
+- Checks: `npm ci`, `npm run build`, `npx tsc --noEmit`, `npm test` 176/176.
+- Suggested Linear/Obsidian: note the static `/og` fix and meta slice on `pierrondi-site` / AGE-1486. Merge and Railway deploy remain human-gated. Production `/og` 502 is not rechecked against Railway from this agent.
