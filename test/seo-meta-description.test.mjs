@@ -139,6 +139,56 @@ test('data-driven public metadata emit within the 160-char project max', () => {
   }
 })
 
+const TITLE_SUFFIX = ' | pierrondi.dev'
+const DOCUMENT_TITLE_MAX = 60
+
+test('shortened document titles stay within 60 once the brand suffix is applied', () => {
+  const rendered = (title) => `${title}${TITLE_SUFFIX}`
+  const assertTitle = (id, title) => {
+    const full = rendered(title)
+    assert.ok(full.length <= DOCUMENT_TITLE_MAX, `${id} is ${full.length}: ${full}`)
+    assert.equal(title.includes(' | pierrondi.dev'), false, `${id} duplicates the layout brand`)
+  }
+
+  for (const post of posts) {
+    const title = post.seoTitle ?? post.title
+    const full = rendered(title)
+    if (post.seoTitle || rendered(post.title).length > 65) {
+      assertTitle(`/blog/${post.slug}`, title)
+    } else {
+      assert.ok(full.length <= 65, `/blog/${post.slug} is ${full.length}: ${full}`)
+    }
+  }
+
+  for (const feito of feitos) {
+    const title = feito.slug === 'agentes-governados'
+      ? 'Agentes governados: dados e contexto'
+      : feito.title
+    assertTitle(`/feitos/${feito.slug}`, title)
+  }
+
+  for (const lang of ['pt', 'en']) {
+    assertTitle(`/about:${lang}`, authorityOps.pages[lang].metadataTitle)
+  }
+
+  for (const title of [
+    'Paulo Pierrondi — portfólio ServiceNow',
+    'Citations: FaithSchool, Cantu, Agenticos',
+    'Pierrondi Studio — marca, conteúdo e IA',
+    'Pierrondi Studio — brand, content and AI',
+    'AI Search Portfolio — delivery evidence',
+    'Design Vault — componentes e sistemas',
+    'Portfólio de produtos, Studio e sistemas',
+    'Products, Studio and systems portfolio',
+    'Dados, trabalhos e provas de execução',
+    'Profile, work and execution proof',
+    'Paulo Pierrondi — governed AI operations',
+    'ServiceNow FSO and AI Control Tower',
+  ]) {
+    assertTitle(title, title)
+  }
+})
+
 test('apps and feitos generateMetadata clamp the shared source copy', async () => {
   const [appsPage, feitosPage] = await Promise.all([
     read('app/apps/[slug]/page.tsx'),
@@ -148,6 +198,8 @@ test('apps and feitos generateMetadata clamp the shared source copy', async () =
   assert.match(appsPage, /fallbackAppDescription\(app\)/)
   assert.match(appsPage, /Official product page with support, privacy policy and terms/)
   assert.match(feitosPage, /clampMetaDescription/)
+  assert.match(feitosPage, /Agentes governados: dados e contexto/)
+  assert.doesNotMatch(feitosPage, /feito\.title\} - Paulo Pierrondi/)
 })
 
 test('static metadata descriptions stay inside the 120–160 convention', async () => {

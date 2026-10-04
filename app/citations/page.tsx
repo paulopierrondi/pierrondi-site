@@ -231,7 +231,7 @@ const structuredData = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Citation Targets for FaithSchool, CantuStudio and AgenticosCore',
+  title: 'Citations: FaithSchool, Cantu, Agenticos',
   description:
     'Public GEO citation hub with priority answer pages and commercial URLs for FaithSchool, CantuStudio and AgenticosCore.',
   keywords: [
