@@ -15,6 +15,14 @@ import {
 
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), 'utf8')
 
+function fallbackAppDescription(app) {
+  const category = /^[A-Z][a-z]/.test(app.category) && !/^Christian\b/.test(app.category)
+    ? app.category.charAt(0).toLowerCase() + app.category.slice(1)
+    : app.category
+  const article = /^[aeiou]/i.test(category) ? 'an' : 'a'
+  return `${app.name} is ${article} ${category}. Official product page with support, privacy policy and terms, published by Paulo Pierrondi at pierrondi.dev.`
+}
+
 async function walkPages(dir) {
   const entries = await readdir(dir, { withFileTypes: true })
   const files = []
@@ -102,7 +110,15 @@ test('data-driven public metadata emit within the 160-char project max', () => {
   }
 
   for (const [slug, app] of Object.entries(APPS)) {
-    assertEmitted(`/apps/${slug}`, app.description ?? `${app.name} — ${app.category}.`)
+    const source = app.description ?? fallbackAppDescription(app)
+    assertEmitted(`/apps/${slug}`, source)
+    if (!app.description) {
+      const emitted = clampMetaDescription(source)
+      assert.ok(
+        emitted.length >= META_DESCRIPTION_MIN && emitted.length <= META_DESCRIPTION_MAX,
+        `/apps/${slug} fallback emitted ${emitted.length}: ${emitted}`,
+      )
+    }
   }
 
   for (const feito of feitos) {
@@ -129,6 +145,8 @@ test('apps and feitos generateMetadata clamp the shared source copy', async () =
     read('app/feitos/[slug]/page.tsx'),
   ])
   assert.match(appsPage, /clampMetaDescription/)
+  assert.match(appsPage, /fallbackAppDescription\(app\)/)
+  assert.match(appsPage, /Official product page with support, privacy policy and terms/)
   assert.match(feitosPage, /clampMetaDescription/)
 })
 
@@ -166,6 +184,10 @@ test('static metadata descriptions stay inside the 120–160 convention', async 
     'app/answers/como-medir-resultado-de-ia-operacional/page.tsx',
     'app/treinamentos/page.tsx',
     'app/engajamento/page.tsx',
+    'app/privacidade/page.tsx',
+    'app/privacy/page.tsx',
+    'app/termos/page.tsx',
+    'app/terms/page.tsx',
   ]) {
     const row = checked.find((item) => item.file === file)
     assert.ok(row, `missing ${file}`)
