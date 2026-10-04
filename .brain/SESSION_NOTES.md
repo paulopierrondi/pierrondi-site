@@ -298,3 +298,12 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - `/sprint`, prices, secrets, DNS and auth were not touched. Feitos SVG `<title>` labels (diagram names) are pre-existing and are not a second document `<title>`.
 - Checks: `npm ci`, `npm run build`, `npx tsc --noEmit`, `npm test` 176/176.
 - Suggested Linear/Obsidian: note the static `/og` fix and meta slice on `pierrondi-site` / AGE-1486. Merge and Railway deploy remain human-gated. Production `/og` 502 is not rechecked against Railway from this agent.
+
+## 2026-10-04 — Same PR #61: titles, dead OG file, CSP
+
+- Removed `public/assets/og-image.jpg` (79-byte `NOT_FOUND` text). No references. `GET /assets/og-image.jpg` is 404. Live image stays `/og`.
+- Document titles that rendered above 65 characters now render at or under 60, with the layout suffix ` | pierrondi.dev` as the single brand. H1s stay. Four titles at 61–65 were left (`/blog`, `/en/blog`, two posts). `/citations` 308s to `/ai-search`; both titles are short. `/fso` 307s to `/about`; its unused document title is also short.
+- Permissions-Policy is `camera=(), microphone=(), geolocation=(self)`. No `getUserMedia` / device camera / microphone in app code. Three.js `camera` is a scene camera.
+- `unsafe-eval` removed from CSP. `next start :3457` plus headless Chrome on `/`, `/en`, `/studio`, `/portfolio`, `/feitos/agentes-governados`, `/blog/automacao-com-n8n-brasil`: 200, no CSP/console errors. Client chunks have no `eval(` or `new Function`.
+- Draft review, not merged: #57 EN answer twins (conflict on `llms.txt`, `app/ai-search/page.tsx`, session notes; content is sound, rebase before merge). #59 `/feitos` CTA (small overlap on the feitos proof test and session notes; safe to merge after rebase). #60 fractional comparison brief (conflict on `llms.txt`, `ai-search`, `test/seo-meta-description.test.mjs`, session notes; content is sound, rebase before merge). #42 `/sprint` untouched.
+- `npm test` 177/177. `npm run build` OK, `/og` still static.
