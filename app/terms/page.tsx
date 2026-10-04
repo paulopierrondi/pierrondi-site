@@ -3,7 +3,7 @@ import LegalDocument from '@/components/LegalDocument'
 
 export const metadata: Metadata = {
   title: 'Legal Notice',
-  description: "Legal notice for Paulo Pierrondi's personal site.",
+  description: "Legal notice for Paulo Pierrondi's personal site: about the site, content and opinions, intellectual property, no warranties and contact.",
   alternates: {
     canonical: '/terms',
     languages: {

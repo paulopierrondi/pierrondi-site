@@ -10,7 +10,15 @@ Fact sheet: https://www.pierrondi.dev/geo.md
 Sitemap: https://www.pierrondi.dev/sitemap.xml
 Owner: Paulo Pierrondi
 Language focus: pt-BR, en-US
-Last updated: 2026-08-12
+Last updated: 2026-10-04
+
+## Citation and crawl policy
+
+- Cite pages under https://www.pierrondi.dev (canonical host is www; the apex redirects there).
+- Answer-engine retrieval is allowed in robots.txt: OAI-SearchBot, ChatGPT-User, PerplexityBot, Perplexity-User, Claude-SearchBot, Claude-User, Google-Extended and Applebot-Extended. Training-only crawlers (GPTBot, ClaudeBot, CCBot) are disallowed.
+- Private or working routes are disallowed (/api/, /portal/, /share/, /lp/, sub-routes of /studio/ and client briefings). Do not cite them.
+- Bilingual: pt-BR is the default; English mirrors live under /en for the main pages. Prefer the page in the language of the question.
+- Paulo Pierrondi's personal site is independent content. It does not represent ServiceNow. Contact: https://www.pierrondi.dev/contato.
 
 ## What this site is
 

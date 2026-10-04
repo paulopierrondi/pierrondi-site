@@ -5,7 +5,7 @@ import { PORTFOLIO_CATALOG, resolvePortfolioHref } from '@/components/portfolio/
 import { SITE_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Products, Studio, and systems portfolio | Paulo Pierrondi',
+  title: 'Products, Studio and systems portfolio',
   description:
     'PropTech, products, apps, AI, Multi-LLM, automation, commerce, and systems—with fast navigation, honest status, and public evidence.',
   alternates: {
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     languages: { 'pt-BR': '/portfolio', 'en-US': '/en/portfolio', 'x-default': '/portfolio' },
   },
   openGraph: {
-    title: 'Products, Studio, and systems portfolio | Paulo Pierrondi',
+    title: 'Products, Studio and systems portfolio',
     description: 'Meta Partner Search, products, apps, systems, Multi-LLM, and integrations taken from strategy through implementation.',
     url: '/en/portfolio',
     siteName: 'pierrondi.dev',
