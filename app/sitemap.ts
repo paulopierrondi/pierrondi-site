@@ -26,6 +26,7 @@ const staticRoutes: Array<{
   { path: '/en/answers', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/en/answers/what-is-agentops', priority: 0.74, changeFrequency: 'monthly' },
   { path: '/en/answers/who-is-paulo-pierrondi', priority: 0.74, changeFrequency: 'monthly' },
+  { path: '/en/answers/fractional-vs-consultancy-vs-agency', priority: 0.74, changeFrequency: 'monthly' },
   { path: '/answers/llm-cost-cut-audit', priority: 0.74, changeFrequency: 'monthly' },
   { path: '/answers/o-que-e-fractional-ai-automation-officer', priority: 0.74, changeFrequency: 'monthly' },
   { path: '/answers/como-medir-resultado-de-ia-operacional', priority: 0.74, changeFrequency: 'monthly' },

@@ -37,6 +37,14 @@ const localizedRoutes: Record<string, Record<HomeLang, string>> = {
     pt: '/answers/o-que-e-agentops',
     en: '/en/answers/what-is-agentops',
   },
+  '/answers/fractional-vs-consultoria-vs-agencia': {
+    pt: '/answers/fractional-vs-consultoria-vs-agencia',
+    en: '/en/answers/fractional-vs-consultancy-vs-agency',
+  },
+  '/en/answers/fractional-vs-consultancy-vs-agency': {
+    pt: '/answers/fractional-vs-consultoria-vs-agencia',
+    en: '/en/answers/fractional-vs-consultancy-vs-agency',
+  },
   '/answers': { pt: '/answers', en: '/en/answers' },
   '/en/answers': { pt: '/answers', en: '/en/answers' },
   '/studio': { pt: '/studio', en: '/en/studio' },

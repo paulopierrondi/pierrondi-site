@@ -24,6 +24,12 @@ const EN_TWINS = [
     ptPath: '/answers/o-que-e-agentops',
     titleLead: 'What is AgentOps?',
   },
+  {
+    slug: 'fractional-vs-consultancy-vs-agency',
+    path: '/en/answers/fractional-vs-consultancy-vs-agency',
+    ptPath: '/answers/fractional-vs-consultoria-vs-agencia',
+    titleLead: 'Fractional, consultancy, agency or internal?',
+  },
 ]
 
 const sitemapSource = await readFile(new URL('../app/sitemap.ts', import.meta.url), 'utf8')
@@ -35,6 +41,7 @@ const aiSearchPage = await readFile(new URL('../app/ai-search/page.tsx', import.
 const llmsText = await readFile(new URL('../public/llms.txt', import.meta.url), 'utf8')
 const llmsFullText = await readFile(new URL('../public/llms-full.txt', import.meta.url), 'utf8')
 const answersJson = JSON.parse(await readFile(new URL('../public/answers.json', import.meta.url), 'utf8'))
+const geoText = await readFile(new URL('../public/geo.md', import.meta.url), 'utf8')
 
 test('own-domain answer brief pages exist and use the shared brief renderer', async () => {
   for (const slug of SLUGS) {
@@ -112,6 +119,7 @@ test('EN who-is / what-is twins exist, self-canonicalize and hreflang to the PT 
   assert.match(enHub, /what-is-agentops/)
 
   for (const twin of EN_TWINS) {
+    assert.match(enHub, new RegExp(twin.slug))
     const pageUrl = new URL(`../app/en/answers/${twin.slug}/page.tsx`, import.meta.url)
     await access(pageUrl)
     const source = await readFile(pageUrl, 'utf8')
@@ -139,6 +147,7 @@ test('EN who-is / what-is twins exist, self-canonicalize and hreflang to the PT 
     assert.match(sitemapSource, new RegExp(`path: '${twin.path.replaceAll('/', '\\/')}'`))
     assert.ok(llmsText.includes(url), `llms.txt must cite ${twin.slug}`)
     assert.ok(llmsFullText.includes(url), `llms-full.txt must cite ${twin.slug}`)
+    assert.ok(geoText.includes(url), `geo.md must cite ${twin.slug}`)
     assert.ok(
       answersJson.answerDocs.some((doc) => doc.url === url),
       `answers.json must expose ${twin.slug}`,
@@ -152,6 +161,12 @@ test('PT brand/AgentOps briefs get reciprocal hreflang to the EN twins', async (
   const agentops = await readFile(new URL('../app/answers/o-que-e-agentops/page.tsx', import.meta.url), 'utf8')
   assert.match(quem, /'en-US': '\/en\/answers\/who-is-paulo-pierrondi'/)
   assert.match(agentops, /'en-US': '\/en\/answers\/what-is-agentops'/)
+  const compare = await readFile(
+    new URL('../app/answers/fractional-vs-consultoria-vs-agencia/page.tsx', import.meta.url),
+    'utf8',
+  )
+  assert.match(compare, /'en-US': '\/en\/answers\/fractional-vs-consultancy-vs-agency'/)
+  assert.match(compare, /href: enPath/)
 })
 
 test('fractional officer brief converts to engagement, proof and contact without publishing /sprint', async () => {
@@ -227,5 +242,48 @@ test('comparison brief stays neutral and converts without prices, sprint or Prod
   assert.doesNotMatch(source, /\$\d/)
   assert.doesNotMatch(source, /\bMRR\b/)
   assert.doesNotMatch(source, /50\+|100\+|200\+/)
+})
+
+test('EN comparison twin mirrors the PT brief and converts to /en/engajamento', async () => {
+  const source = await readFile(
+    new URL('../app/en/answers/fractional-vs-consultancy-vs-agency/page.tsx', import.meta.url),
+    'utf8',
+  )
+  const siteLanguage = await readFile(new URL('../lib/i18n/site-language.ts', import.meta.url), 'utf8')
+  const description = source.match(/description:\s*\n\s*'([^']+)'/)[1]
+
+  assert.ok(description.length >= 140 && description.length <= 155, `meta description ${description.length}`)
+  assert.ok(
+    'Fractional, consultancy, agency or internal? | pierrondi.dev'.length <= 60,
+    'rendered title must stay within 60 characters',
+  )
+  assert.match(source, /Fractional AI Automation Officer/)
+  assert.match(source, /Traditional consultancy/)
+  assert.match(source, /Automation agency/)
+  assert.match(source, /Internal hire/)
+  assert.match(source, /go-live/)
+  assert.match(source, /baseline/)
+  assert.match(source, /metric/)
+  assert.match(source, /handoff/)
+  assert.match(source, /Technical Account Executive/)
+  assert.match(source, /href: '\/en\/engajamento'/)
+  assert.match(source, /href: '\/answers\/o-que-e-fractional-ai-automation-officer'/)
+  assert.match(source, /href: '\/answers\/como-medir-resultado-de-ia-operacional'/)
+  assert.match(source, /href: '\/en\/feitos'/)
+  assert.match(source, /href: '\/en\/contato'/)
+  assert.match(source, /href: ptPath/)
+  assert.match(source, /WhatsApp/)
+  assert.match(siteLanguage, /'\/en\/answers\/fractional-vs-consultancy-vs-agency'/)
+  assert.match(siteLanguage, /'\/answers\/fractional-vs-consultoria-vs-agencia'/)
+  assert.doesNotMatch(source, /href: '\/sprint'/)
+  assert.doesNotMatch(source, /href: "\/sprint"/)
+  assert.doesNotMatch(source, /Book a demo/)
+  assert.doesNotMatch(source, /'@type': 'Product'/)
+  assert.doesNotMatch(source, /R\$\s?\d/)
+  assert.doesNotMatch(source, /US\$\s?\d/)
+  assert.doesNotMatch(source, /\$\d/)
+  assert.doesNotMatch(source, /\bMRR\b/)
+  assert.doesNotMatch(source, /50\+|100\+|200\+/)
+  assert.doesNotMatch(sitemapSource, /path:\s*'\/sprint'/)
 })
 
