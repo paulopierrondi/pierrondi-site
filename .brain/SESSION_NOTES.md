@@ -287,6 +287,22 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Hard gates kept: no Product schema, Person `jobTitle` remains TAE, gtag `G-1CL8PFYY7T` untouched, no home/motion edits.
 - Suggested Linear/Obsidian: note this measuring-answer slice on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
 
+## 2026-09-21 — Weekly growth P0: /feitos → /engajamento CTA
+
+- Do not duplicate `#51`–`#56` (home copy, nav/proof/CTA, `/engajamento`, motion, Fractional brief, measuring brief). Do not merge or recreate PR `#57` EN twins (CoS hold).
+- After the `/feitos` and `/en/feitos` public metrics block, the CLI CTA now opens `/engajamento` / `/en/engajamento` (noir/CLI tone, not “Book a demo”). WhatsApp remains the secondary CLI action. No new metrics.
+- About + treinamentos (PT/EN) already carry “resultado e automações mensuráveis, não horas soltas” — no copy rewrite this slice.
+- Home COLABORAR already has copper/amber fill vs ghost secondary (`#52`/`#55`). No home redesign this slice.
+- `/en/feitos` case-card residue: system-map meta used PT `feito.navLabel` (`Agentes governados`). It now uses localized `activeCopy.navLabel` (`Governed agents`).
+- No new public URLs. `/sprint` stays unpublished. No Product schema. No ads.
+- Suggested Linear/Obsidian: note this proof→engagement CTA on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
+
+## 2026-09-28 — Follow-up: /feitos closing CTA → /engajamento
+
+- Same draft PR `#59` / `cursor/growth-p0-feitos-cta-2027`. Do not merge `#57`.
+- Closing section on `/feitos` and `/en/feitos` now primaries to `/engajamento` / `/en/engajamento` (`abrir /engajamento` / `open /en/engajamento`). `/contato` and WhatsApp stay secondary CLI actions.
+- No new metrics, no new URLs, `/sprint` unpublished, no Product schema.
+
 ## 2026-09-28 — Growth P2-to-P0: fractional vs consultoria vs agência vs interno
 
 - New PT answer brief: `/answers/fractional-vs-consultoria-vs-agencia` via shared `AnswerBrief` (Question/FAQPage/Article/BreadcrumbList). Compares four formats: Fractional AI Automation Officer, consultoria tradicional, agência de automação, contratação interna. Axes: dono após o go-live, medição (baseline, métrica, handoff), formato do engajamento, riscos. Neutral; no prices, clients, logos or ROI.
@@ -322,3 +338,15 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Conflict was only `.brain/SESSION_NOTES.md`. Both the 2026-09-28 comparison brief note and the 2026-10-04 #61 notes are kept.
 - `public/llms.txt`, `app/ai-search/page.tsx` and `test/seo-meta-description.test.mjs` auto-merged. Citation and crawl policy stays. The comparison URL stays. AI Search document title stays `AI Search Portfolio — delivery evidence`.
 - Document title `Fractional, consultoria, agência ou interno?` renders at 60 with the layout suffix. Meta description is 148 characters. `/sprint` stays unpublished.
+
+## 2026-10-05 — Merge main into #59
+
+- `origin/main` at `5f8abc8` (#61) merged into `cursor/growth-p0-feitos-cta-2027`.
+- Conflict was only `.brain/SESSION_NOTES.md`. Both the 2026-09-21/09-28 `/feitos` CTA notes and the 2026-10-04 #61 notes are kept.
+- `/feitos` document title stays `Dados, trabalhos e provas de execução`. Closing and metrics CTAs still open `/engajamento`.
+
+## 2026-10-05 — Merge main e89a1fe into #60
+
+- `origin/main` at `e89a1fe` (#59) merged into `cursor/fractional-vs-consultoria-agencia-45f2`.
+- Conflict was only `.brain/SESSION_NOTES.md`. Kept the comparison brief, both `/feitos` CTA notes, both #61 notes, and both earlier merge notes.
+- Comparison brief and `/engajamento` CTAs stay. `/sprint` stays unpublished.

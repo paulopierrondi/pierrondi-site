@@ -36,9 +36,9 @@ const copy = {
       'Produtos e sistemas reais para avaliar acabamento, profundidade técnica e capacidade de levar uma ideia até uma experiência navegável.',
     open: 'Abrir produto',
     allPortfolio: 'Ver portfólio completo',
-    cliPrompt: 'conversar --canal contato',
-    cliLead: 'Números com contexto. Próximo passo: conversar.',
-    cliContact: 'abrir /contato',
+    cliPrompt: 'abrir --rota engajamento',
+    cliLead: 'Números com contexto. Próximo passo: o modelo de engajamento.',
+    cliEngage: 'abrir /engajamento',
     cliWhatsapp: 'chamar no WhatsApp',
   },
   en: {
@@ -68,9 +68,9 @@ const copy = {
       'Real products and systems for assessing craft, technical depth, and the ability to turn an idea into a navigable experience.',
     open: 'Open product',
     allPortfolio: 'View full portfolio',
-    cliPrompt: 'talk --channel contact',
-    cliLead: 'Numbers with context. Next step: talk.',
-    cliContact: 'open /en/contato',
+    cliPrompt: 'open --route engagement',
+    cliLead: 'Numbers with context. Next step: the engagement model.',
+    cliEngage: 'open /en/engajamento',
     cliWhatsapp: 'message on WhatsApp',
   },
 } as const
@@ -98,14 +98,14 @@ function Metrics({ lang }: { lang: FeitosLang }) {
         ))}
       </div>
       <p className={styles.disclaimer}><ShieldCheck aria-hidden="true" />{t.note}</p>
-      <aside className={styles.cliCta} aria-label={lang === 'pt' ? 'Conversar a partir da prova' : 'Talk from this proof'}>
+      <aside className={styles.cliCta} aria-label={lang === 'pt' ? 'Abrir o modelo de engajamento' : 'Open the engagement model'}>
         <p className={styles.cliHeader}>
           <span aria-hidden="true">$</span>
           <code>{t.cliPrompt}</code>
         </p>
         <p className={styles.cliLead}>{t.cliLead}</p>
         <div className={styles.cliActions}>
-          <Link href={lang === 'pt' ? '/contato' : '/en/contato'}>{t.cliContact}</Link>
+          <Link href={lang === 'pt' ? '/engajamento' : '/en/engajamento'}>{t.cliEngage}</Link>
           <a href={getWhatsAppHref(FEITOS_WHATSAPP[lang])} target="_blank" rel="noopener noreferrer">
             {t.cliWhatsapp}
           </a>
