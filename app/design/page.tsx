@@ -24,7 +24,7 @@ import {
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'Design Vault - componentes, referências e sistemas visuais',
+  title: 'Design Vault — componentes e sistemas',
   description:
     'Design vault do pierrondi.dev para catalogar componentes React/Tailwind, referências 21st.dev, padrões de portfólio e sistemas visuais reutilizáveis.',
   alternates: { canonical: '/design' },

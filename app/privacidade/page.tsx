@@ -3,7 +3,7 @@ import LegalDocument from '@/components/LegalDocument'
 
 export const metadata: Metadata = {
   title: 'Privacidade',
-  description: 'Como a pierrondi.dev trata dados de contato no site pessoal de Paulo Pierrondi.',
+  description: 'Como a pierrondi.dev trata dados de contato no site pessoal de Paulo Pierrondi: o que é coletado, para quê, analytics, cookies e como pedir remoção.',
   alternates: {
     canonical: '/privacidade',
     languages: {

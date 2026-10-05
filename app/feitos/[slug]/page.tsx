@@ -22,20 +22,28 @@ export function generateStaticParams() {
   return feitos.map((feito) => ({ slug: feito.slug }))
 }
 
+function feitoDocumentTitle(feito: Feito): string {
+  // app/layout.tsx appends " | pierrondi.dev". Repeating the personal name
+  // here made four proof pages exceed 65 characters.
+  if (feito.slug === 'agentes-governados') return 'Agentes governados: dados e contexto'
+  return feito.title
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const feito = getFeito(slug)
   if (!feito) return {}
   const description = clampMetaDescription(feito.lead)
+  const documentTitle = feitoDocumentTitle(feito)
 
   return {
-    title: `${feito.title} - Paulo Pierrondi`,
+    title: documentTitle,
     description,
     alternates: {
       canonical: `/feitos/${feito.slug}`,
     },
     openGraph: {
-      title: `${feito.title} - Paulo Pierrondi`,
+      title: documentTitle,
       description,
       url: `/feitos/${feito.slug}`,
       siteName: 'pierrondi.dev',
@@ -45,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${feito.title} - Paulo Pierrondi`,
+      title: documentTitle,
       description,
       images: ['/og'],
     },
