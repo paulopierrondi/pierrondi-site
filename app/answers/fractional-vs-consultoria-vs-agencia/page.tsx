@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     canonical: path,
     languages: {
       'pt-BR': path,
-      'en-US': enPath,
+      'en-US': '/en/answers/fractional-vs-consultancy-vs-agency',
       'x-default': path,
     },
   },

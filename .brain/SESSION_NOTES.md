@@ -1,3 +1,16 @@
+# Sessão 2026-10-05 — EN twin of the fractional comparison brief
+
+- Draft PR only. Do not merge. Deploy stays human-gated. Paulo merges.
+- Added `/en/answers/fractional-vs-consultancy-vs-agency` as the English mirror of live `/answers/fractional-vs-consultoria-vs-agencia`.
+- Axes: ownership after go-live, measurement (baseline → metric → handoff), engagement shape, risks. Primary CTA `/en/engajamento`. No price, client, logo, ROI, Product schema, named competitors, or `/sprint` link.
+- Title: `Fractional, consultancy, agency or internal? | pierrondi.dev` (60). Meta description 155 chars. Canonical `https://www.pierrondi.dev/en/answers/fractional-vs-consultancy-vs-agency`.
+- hreflang both ways (`pt-BR`, `en-US`, `x-default` → PT). In-page alternate links both ways. Hub `/en/answers` lists the twin. `localizedRoutes` maps both paths. Language switcher stays hidden on `/answers` and `/en/answers`, same as the other briefs.
+- Registered on sitemap, `answers.json`, `geo.md`, `llms.txt`, `llms-full.txt`, `/ai-search`. Did not touch `/sprint`, Oferta Sprint, IndexNow (#62), or sameAs/llms crawl policy (#63).
+- JSON-LD from shared `AnswerBrief`: Question + FAQPage + Article + BreadcrumbList. Global site graph still emits its existing types; this page does not add Product.
+- Verified local: `npm test` 181/181, `npm run lint` clean, `npx tsc --noEmit` clean, `npm run build` prerenders the route as static (`○`). HTML scan of the prerender confirms title, description, canonical, hreflang. `next start` on port 3456: EN page 200, `/sprint` 404. Playwright click: CTA lands on `/en/engajamento`; Portuguese link lands on the PT brief.
+- Screenshots: `/opt/cursor/artifacts/en-comparison-hero.png`, `/opt/cursor/artifacts/en-comparison-links.png`.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #65. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-09-19 — Ahrefs meta description too long (23 URLs)
 
 - Ahrefs Site Audit (Pierrondi): **Meta description too long** on 23 indexable URLs.
