@@ -226,9 +226,13 @@ export default function HeroSection({ lang }: SectionProps) {
             <a
               className={styles.engagementLink}
               data-hero-engagement
-              href={lang === 'pt' ? '/engajamento' : '/en/engajamento'}
+              href={
+                lang === 'pt'
+                  ? '/answers/fractional-vs-consultoria-vs-agencia'
+                  : '/en/answers/fractional-vs-consultancy-vs-agency'
+              }
             >
-              {lang === 'pt' ? 'Modelo de engajamento' : 'Engagement model'}
+              {lang === 'pt' ? 'Fractional, consultoria ou interno' : 'Fractional, consultancy or internal'}
               <span aria-hidden="true"> →</span>
             </a>
           </motion.p>

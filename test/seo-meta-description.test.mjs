@@ -182,7 +182,7 @@ test('shortened document titles stay within 60 once the brand suffix is applied'
     'Products, Studio and systems portfolio',
     'Dados, trabalhos e provas de execução',
     'Profile, work and execution proof',
-    'Paulo Pierrondi — governed AI operations',
+    'Paulo Pierrondi — Fractional AI Officer',
     'ServiceNow FSO and AI Control Tower',
   ]) {
     assertTitle(title, title)

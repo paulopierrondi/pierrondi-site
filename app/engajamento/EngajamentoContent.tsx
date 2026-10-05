@@ -26,9 +26,9 @@ export default function EngajamentoContent({ lang }: { lang: EngajamentoLang }) 
                 <span className={styles.no}>{block.no}</span>
                 <h2 id={`${block.id}-title`}>{block.category}</h2>
                 <p className={styles.outcome}>{block.outcome}</p>
-                <Link href={route.contact} className={styles.cta}>
-                  {lang === 'pt' ? 'Conversar sobre isso' : 'Talk about this'} <span aria-hidden="true">→</span>
-                </Link>
+                <a href="#proximo-passo" className={styles.cta}>
+                  {copy.blockCta} <span aria-hidden="true">→</span>
+                </a>
               </Reveal>
             </aside>
 
@@ -84,22 +84,22 @@ export default function EngajamentoContent({ lang }: { lang: EngajamentoLang }) 
         </div>
       </section>
 
-      <section className={styles.final}>
+      <section className={styles.final} id="proximo-passo">
         <Reveal>
           <h2>{copy.final.h2}</h2>
           <p>{copy.final.p}</p>
           <div className={styles.finalActions}>
-            <Link href={route.contact} className={styles.btnPrimary}>
-              {copy.final.contact} <span aria-hidden="true">→</span>
-            </Link>
             <a
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.btnGhost}
+              className={styles.btnPrimary}
             >
               {copy.final.whatsapp} <span aria-hidden="true">↗</span>
             </a>
+            <Link href={route.contact} className={styles.btnGhost}>
+              {copy.final.contact} <span aria-hidden="true">→</span>
+            </Link>
           </div>
           <p>{copy.disclaimer}</p>
         </Reveal>

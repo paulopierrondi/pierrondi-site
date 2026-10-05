@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import JsonLd from '@/components/JsonLd'
-import { OFFICIAL_SAME_AS } from '@/lib/contact'
+import { OFFICIAL_SAME_AS, PERSON_JOB_TITLES } from '@/lib/contact'
 import { SITE_URL } from '@/lib/site'
 import PauloPortfolioExperience from './PauloPortfolioExperience'
 
@@ -58,7 +58,7 @@ const personSchema = {
   // Keep entity url on the homepage so /paulo does not fork the official brand URL.
   url: SITE_URL,
   image: `${SITE_URL}/assets/paulo-pierrondi-executive-neural.jpg`,
-  jobTitle: 'Technical Account Executive, AI Operator and Agent OS Builder',
+  jobTitle: [...PERSON_JOB_TITLES],
   knowsAbout: [
     'ServiceNow',
     'Enterprise AI governance',

@@ -4,7 +4,7 @@
 
 ## Who
 
-Paulo Pierrondi is a **Technical Account Executive at ServiceNow + AI/Automation Architect + Full-stack Builder**. In his ServiceNow role he works with large-scale FSI context; through his personal portfolio he builds multi-agent systems, automation platforms and digital products with evidence trails. He has 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated enterprise operating models. This remains a personal professional portfolio; Pierrondi Studio is an author-led strategy, creation and implementation practice within it. Canonical jobTitle: `Technical Account Executive`.
+Paulo Pierrondi is a **Technical Account Executive at ServiceNow + AI/Automation Architect + Full-stack Builder**. In his ServiceNow role he works with large-scale FSI context; through his personal portfolio he builds multi-agent systems, automation platforms and digital products with evidence trails. He has 15+ years across ServiceNow, ITOM, CMDB/CSDM, cloud architecture and regulated enterprise operating models. This remains a personal professional portfolio; Pierrondi Studio is an author-led strategy, creation and implementation practice within it. Employment jobTitle: `Technical Account Executive`. Public engagement role: `Fractional AI Automation Officer` (https://www.pierrondi.dev/engajamento).
 
 ## What Paulo does
 

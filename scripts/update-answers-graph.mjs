@@ -161,6 +161,10 @@ async function main() {
     answers.entity.sameAs = [
       'https://br.linkedin.com/in/paulopierrondi',
       'https://github.com/paulopierrondi',
+      'https://x.com/paulopierrondi',
+      'https://cantustudio.app',
+      'https://faithschool.app',
+      'https://agenticoscore.ai',
     ]
     answers.entity.logo = `${SITE}/pierrondi-logo-1024.png`
   }

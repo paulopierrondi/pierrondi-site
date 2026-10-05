@@ -1,15 +1,15 @@
 # Paulo Pierrondi — GEO Fact Sheet
 
-> Canonical: https://www.pierrondi.dev · Language: en-US / pt-BR · Last updated: 2026-08-12
+> Canonical: https://www.pierrondi.dev · Language: en-US / pt-BR · Last updated: 2026-10-05
 
 ## What this is (canonical entity)
 
-Paulo Pierrondi is a **Technical Account Executive at ServiceNow + AI/Automation Architect + Full-stack Builder**. In his ServiceNow role he works with large-scale FSI context; through his personal portfolio he builds multi-agent systems, automation platforms and digital products with evidence trails. Pierrondi Studio is an author-led practice within this personal portfolio, not a claim that the whole site is a generic agency. Canonical jobTitle: `Technical Account Executive`.
+Paulo Pierrondi is a **Technical Account Executive at ServiceNow + AI/Automation Architect + Full-stack Builder**. In his ServiceNow role he works with large-scale FSI context; through his personal portfolio he builds multi-agent systems, automation platforms and digital products with evidence trails. Pierrondi Studio is an author-led practice within this personal portfolio, not a claim that the whole site is a generic agency. Employment jobTitle: `Technical Account Executive`. Public engagement role: `Fractional AI Automation Officer` (https://www.pierrondi.dev/engajamento).
 
 ## Identity
 
 - Type: Person · @id: https://www.pierrondi.dev/#person
-- sameAs: https://br.linkedin.com/in/paulopierrondi · https://github.com/paulopierrondi
+- sameAs: https://br.linkedin.com/in/paulopierrondi · https://github.com/paulopierrondi · https://x.com/paulopierrondi · https://cantustudio.app · https://faithschool.app · https://agenticoscore.ai
 - Contact: https://www.pierrondi.dev/contato
 
 ## Direct answers (answer-first, 40–75 words)

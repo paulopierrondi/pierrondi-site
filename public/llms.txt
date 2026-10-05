@@ -10,13 +10,13 @@ Fact sheet: https://www.pierrondi.dev/geo.md
 Sitemap: https://www.pierrondi.dev/sitemap.xml
 Owner: Paulo Pierrondi
 Language focus: pt-BR, en-US
-Last updated: 2026-10-04
+Last updated: 2026-10-05
 
 ## Citation and crawl policy
 
 - Cite pages under https://www.pierrondi.dev (canonical host is www; the apex redirects there).
 - Answer-engine retrieval is allowed in robots.txt: OAI-SearchBot, ChatGPT-User, PerplexityBot, Perplexity-User, Claude-SearchBot, Claude-User, Google-Extended and Applebot-Extended. Training-only crawlers (GPTBot, ClaudeBot, CCBot) are disallowed.
-- Private or working routes are disallowed (/api/, /portal/, /share/, /lp/, sub-routes of /studio/ and client briefings). Do not cite them.
+- Do not cite routes disallowed in robots.txt: /api/, /automacoes, /studio/ (subpaths only; /studio itself is public), /login-v2, /obrigado, /ai-command-center, /bradesco-26, /control_tower, /fso, /itau, /lp/, /portal/, /share/.
 - Bilingual: pt-BR is the default; English mirrors live under /en for the main pages. Prefer the page in the language of the question.
 - Paulo Pierrondi's personal site is independent content. It does not represent ServiceNow. Contact: https://www.pierrondi.dev/contato.
 
@@ -28,7 +28,7 @@ The AI Search Portfolio page exists as a citation layer for crawler and assistan
 
 ## Primary public pages
 
-- [Home](https://www.pierrondi.dev): Technical Account Executive at ServiceNow + AI/Automation Architect + Full-stack Builder.
+- [Home](https://www.pierrondi.dev): Technical Account Executive at ServiceNow. Public engagement role: Fractional AI Automation Officer — https://www.pierrondi.dev/engajamento.
 - [About](https://www.pierrondi.dev/about): trajectory, competencies in ServiceNow / ITOM / CMDB / CSDM and enterprise AI.
 - [Atuação](https://www.pierrondi.dev/atuacao): how Paulo works — enterprise AI operating models, governed agents, technical GTM.
 - [Engajamento](https://www.pierrondi.dev/engajamento): Fractional AI Automation Officer engagement for production automations — baseline, system, metric, handoff. English mirror: https://www.pierrondi.dev/en/engajamento.

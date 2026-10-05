@@ -36,7 +36,14 @@ test('Person and Organization name the official site and keep real sameAs only',
   assert.match(contact, /export const OFFICIAL_SAME_AS/)
   assert.match(contact, /linkedin\.com\/in\/paulopierrondi/)
   assert.match(contact, /github\.com\/paulopierrondi/)
-  assert.doesNotMatch(contact, /instagram\.com|twitter\.com|x\.com|facebook\.com/)
+  assert.match(contact, /https:\/\/x\.com\/paulopierrondi/)
+  assert.match(contact, /https:\/\/cantustudio\.app/)
+  assert.match(contact, /https:\/\/faithschool\.app/)
+  assert.match(contact, /https:\/\/agenticoscore\.ai/)
+  assert.match(contact, /PERSON_JOB_TITLES/)
+  assert.match(contact, /'Technical Account Executive'/)
+  assert.match(contact, /'Fractional AI Automation Officer'/)
+  assert.doesNotMatch(contact, /instagram\.com|twitter\.com\/|facebook\.com/)
 
   assert.match(siteSchema, /'@type': 'Person'/)
   assert.match(siteSchema, /'@type': 'Organization'/)
@@ -49,6 +56,7 @@ test('Person and Organization name the official site and keep real sameAs only',
     /disambiguatingDescription:\s*'Official site of Paulo Pierrondi at https:\/\/www\.pierrondi\.dev/,
   )
   assert.match(siteSchema, /sameAs: \[\.\.\.OFFICIAL_SAME_AS\]/)
+  assert.match(siteSchema, /jobTitle: \[\.\.\.PERSON_JOB_TITLES\]/)
   assert.doesNotMatch(siteSchema, /@type': 'Product'/)
   assert.doesNotMatch(siteSchema, /instagram\.com|twitter\.com|x\.com|facebook\.com/)
 
@@ -68,14 +76,16 @@ test('home title and H1 still lead with Paulo Pierrondi', () => {
   assert.equal((homeCopy.match(/headlineLine1: 'Paulo Pierrondi'/g) || []).length, 2)
 })
 
-test('home ATF copy and meta name measurable outcomes without Fractional title', () => {
+test('home document title names the Fractional offer and the H1 stays the evidence line', () => {
   assert.match(homeCopy, /resultado e automações mensuráveis, não horas soltas/)
   assert.match(homeCopy, /measurable outcomes and automations, not loose hours/)
   assert.match(homeCopy, /'Resultado mensurável'/)
   assert.match(homeCopy, /'Measurable outcomes'/)
   assert.match(home, /resultado e automações mensuráveis \(não horas soltas\)/)
   assert.match(homeEn, /measurable outcomes and automations \(not loose hours\)/)
+  assert.match(home, /title: 'Paulo Pierrondi — Fractional AI Officer'/)
+  assert.match(homeEn, /title: 'Paulo Pierrondi — Fractional AI Officer'/)
+  assert.match(home, /Fractional AI Automation Officer/)
+  assert.match(homeEn, /Fractional AI Automation Officer/)
   assert.doesNotMatch(homeCopy, /Fractional AI Automation Officer/)
-  assert.doesNotMatch(home, /Fractional AI Automation Officer/)
-  assert.doesNotMatch(homeEn, /Fractional AI Automation Officer/)
 })
