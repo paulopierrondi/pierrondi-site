@@ -303,6 +303,14 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Closing section on `/feitos` and `/en/feitos` now primaries to `/engajamento` / `/en/engajamento` (`abrir /engajamento` / `open /en/engajamento`). `/contato` and WhatsApp stay secondary CLI actions.
 - No new metrics, no new URLs, `/sprint` unpublished, no Product schema.
 
+## 2026-09-28 — Growth P2-to-P0: fractional vs consultoria vs agência vs interno
+
+- New PT answer brief: `/answers/fractional-vs-consultoria-vs-agencia` via shared `AnswerBrief` (Question/FAQPage/Article/BreadcrumbList). Compares four formats: Fractional AI Automation Officer, consultoria tradicional, agência de automação, contratação interna. Axes: dono após o go-live, medição (baseline, métrica, handoff), formato do engajamento, riscos. Neutral; no prices, clients, logos or ROI.
+- PT only. `app/en/answers` does not exist on main. PR #57 EN twins stays untouched.
+- CTA to `/engajamento`. Links to the Fractional and measurement briefs, plus `/feitos` and `/contato`. Listed on `/ai-search` (the `/answers` index redirects there).
+- Sitemap + `answers.json` + `llms.txt` + `llms-full.txt` + `geo.md` list the URL. `/sprint` stays unpublished. No Product schema. jobTitle stays Technical Account Executive.
+- Suggested Linear/Obsidian: note this comparison brief on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
+
 ## 2026-10-04 — Static /og and SEO meta (draft PR #61)
 
 - Branch `cursor/seo-static-og-900f`. Draft PR `#61`. No merge, no deploy.
@@ -324,8 +332,21 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Draft review, not merged: #57 EN answer twins (conflict on `llms.txt`, `app/ai-search/page.tsx`, session notes; content is sound, rebase before merge). #59 `/feitos` CTA (small overlap on the feitos proof test and session notes; safe to merge after rebase). #60 fractional comparison brief (conflict on `llms.txt`, `ai-search`, `test/seo-meta-description.test.mjs`, session notes; content is sound, rebase before merge). #42 `/sprint` untouched.
 - `npm test` 177/177. `npm run build` OK, `/og` still static.
 
+## 2026-10-05 — Merge main into #60
+
+- origin/main at 5f8abc8 (#61) merged into `cursor/fractional-vs-consultoria-agencia-45f2`.
+- Conflict was only `.brain/SESSION_NOTES.md`. Both the 2026-09-28 comparison brief note and the 2026-10-04 #61 notes are kept.
+- `public/llms.txt`, `app/ai-search/page.tsx` and `test/seo-meta-description.test.mjs` auto-merged. Citation and crawl policy stays. The comparison URL stays. AI Search document title stays `AI Search Portfolio — delivery evidence`.
+- Document title `Fractional, consultoria, agência ou interno?` renders at 60 with the layout suffix. Meta description is 148 characters. `/sprint` stays unpublished.
+
 ## 2026-10-05 — Merge main into #59
 
 - `origin/main` at `5f8abc8` (#61) merged into `cursor/growth-p0-feitos-cta-2027`.
 - Conflict was only `.brain/SESSION_NOTES.md`. Both the 2026-09-21/09-28 `/feitos` CTA notes and the 2026-10-04 #61 notes are kept.
 - `/feitos` document title stays `Dados, trabalhos e provas de execução`. Closing and metrics CTAs still open `/engajamento`.
+
+## 2026-10-05 — Merge main e89a1fe into #60
+
+- `origin/main` at `e89a1fe` (#59) merged into `cursor/fractional-vs-consultoria-agencia-45f2`.
+- Conflict was only `.brain/SESSION_NOTES.md`. Kept the comparison brief, both `/feitos` CTA notes, both #61 notes, and both earlier merge notes.
+- Comparison brief and `/engajamento` CTAs stay. `/sprint` stays unpublished.
