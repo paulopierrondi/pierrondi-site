@@ -390,6 +390,12 @@ const ownAnswers: AnswerLink[] = [
     intent: 'measurement framework',
     locale: 'pt-BR',
   },
+  {
+    title: 'Fractional, consultoria, agência ou interno?',
+    url: '/answers/fractional-vs-consultoria-vs-agencia',
+    intent: 'option comparison',
+    locale: 'pt-BR',
+  },
 ]
 
 const deliveryEvidence = {

@@ -152,6 +152,15 @@
       "entity": "pierrondi.dev"
     },
     {
+      "id": "fractional-vs-consultoria-vs-agencia",
+      "title": "Fractional, consultoria, agência ou interno?",
+      "url": "https://www.pierrondi.dev/answers/fractional-vs-consultoria-vs-agencia",
+      "question": "Fractional, consultoria, agência ou interno?",
+      "intent": "option comparison",
+      "locale": "pt-BR",
+      "entity": "pierrondi.dev"
+    },
+    {
       "id": "faithschool-christian-homeschool-planner",
       "title": "Best Christian homeschool planner for family records",
       "url": "https://faithschool.app/answers/christian-homeschool-planner.md",

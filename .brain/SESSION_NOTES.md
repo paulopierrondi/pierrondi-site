@@ -295,6 +295,30 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Fractional/measuring briefs stay PT-only. No IndexNow, no merge, no deploy. AgenticosCore and CantuStudio untouched.
 - Suggested Linear/Obsidian: note EN brand/AgentOps twins on `pierrondi-site` / AGE-1486. CoS weekday hold — no merge/deploy without Paulo.
 
+## 2026-09-21 — Weekly growth P0: /feitos → /engajamento CTA
+
+- Do not duplicate `#51`–`#56` (home copy, nav/proof/CTA, `/engajamento`, motion, Fractional brief, measuring brief). Do not merge or recreate PR `#57` EN twins (CoS hold).
+- After the `/feitos` and `/en/feitos` public metrics block, the CLI CTA now opens `/engajamento` / `/en/engajamento` (noir/CLI tone, not “Book a demo”). WhatsApp remains the secondary CLI action. No new metrics.
+- About + treinamentos (PT/EN) already carry “resultado e automações mensuráveis, não horas soltas” — no copy rewrite this slice.
+- Home COLABORAR already has copper/amber fill vs ghost secondary (`#52`/`#55`). No home redesign this slice.
+- `/en/feitos` case-card residue: system-map meta used PT `feito.navLabel` (`Agentes governados`). It now uses localized `activeCopy.navLabel` (`Governed agents`).
+- No new public URLs. `/sprint` stays unpublished. No Product schema. No ads.
+- Suggested Linear/Obsidian: note this proof→engagement CTA on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
+
+## 2026-09-28 — Follow-up: /feitos closing CTA → /engajamento
+
+- Same draft PR `#59` / `cursor/growth-p0-feitos-cta-2027`. Do not merge `#57`.
+- Closing section on `/feitos` and `/en/feitos` now primaries to `/engajamento` / `/en/engajamento` (`abrir /engajamento` / `open /en/engajamento`). `/contato` and WhatsApp stay secondary CLI actions.
+- No new metrics, no new URLs, `/sprint` unpublished, no Product schema.
+
+## 2026-09-28 — Growth P2-to-P0: fractional vs consultoria vs agência vs interno
+
+- New PT answer brief: `/answers/fractional-vs-consultoria-vs-agencia` via shared `AnswerBrief` (Question/FAQPage/Article/BreadcrumbList). Compares four formats: Fractional AI Automation Officer, consultoria tradicional, agência de automação, contratação interna. Axes: dono após o go-live, medição (baseline, métrica, handoff), formato do engajamento, riscos. Neutral; no prices, clients, logos or ROI.
+- PT only. `app/en/answers` does not exist on main. PR #57 EN twins stays untouched.
+- CTA to `/engajamento`. Links to the Fractional and measurement briefs, plus `/feitos` and `/contato`. Listed on `/ai-search` (the `/answers` index redirects there).
+- Sitemap + `answers.json` + `llms.txt` + `llms-full.txt` + `geo.md` list the URL. `/sprint` stays unpublished. No Product schema. jobTitle stays Technical Account Executive.
+- Suggested Linear/Obsidian: note this comparison brief on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
+
 ## 2026-10-04 — Static /og and SEO meta (draft PR #61)
 
 - Branch `cursor/seo-static-og-900f`. Draft PR `#61`. No merge, no deploy.
@@ -323,3 +347,28 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - `public/llms.txt` auto-merged: Citation and crawl policy plus the EN answer URLs. AI Search document title stays `AI Search Portfolio — delivery evidence` (≤60 with the layout suffix).
 - EN titles stay short: `Who is Paulo Pierrondi?`, `What is AgentOps?`, `English answer briefs`.
 - The two EN meta descriptions were 197 and 173 characters, which the #61 160-char check rejects. They are now 153 and 149. Page body copy is unchanged.
+
+## 2026-10-05 — Merge main into #60
+
+- origin/main at 5f8abc8 (#61) merged into `cursor/fractional-vs-consultoria-agencia-45f2`.
+- Conflict was only `.brain/SESSION_NOTES.md`. Both the 2026-09-28 comparison brief note and the 2026-10-04 #61 notes are kept.
+- `public/llms.txt`, `app/ai-search/page.tsx` and `test/seo-meta-description.test.mjs` auto-merged. Citation and crawl policy stays. The comparison URL stays. AI Search document title stays `AI Search Portfolio — delivery evidence`.
+- Document title `Fractional, consultoria, agência ou interno?` renders at 60 with the layout suffix. Meta description is 148 characters. `/sprint` stays unpublished.
+
+## 2026-10-05 — Merge main into #59
+
+- `origin/main` at `5f8abc8` (#61) merged into `cursor/growth-p0-feitos-cta-2027`.
+- Conflict was only `.brain/SESSION_NOTES.md`. Both the 2026-09-21/09-28 `/feitos` CTA notes and the 2026-10-04 #61 notes are kept.
+- `/feitos` document title stays `Dados, trabalhos e provas de execução`. Closing and metrics CTAs still open `/engajamento`.
+
+## 2026-10-05 — Merge main e89a1fe into #60
+
+- `origin/main` at `e89a1fe` (#59) merged into `cursor/fractional-vs-consultoria-agencia-45f2`.
+- Conflict was only `.brain/SESSION_NOTES.md`. Kept the comparison brief, both `/feitos` CTA notes, both #61 notes, and both earlier merge notes.
+- Comparison brief and `/engajamento` CTAs stay. `/sprint` stays unpublished.
+
+## 2026-10-05 — Merge main bb8d5a4 into #57
+
+- `origin/main` at `bb8d5a4` (#60) merged into `cursor/seo-en-answer-twins-bd6a`.
+- Conflict was only `.brain/SESSION_NOTES.md`. Kept the EN-twin note, the `/feitos` CTA notes, the comparison brief, the #61 notes, and the earlier merge notes.
+- `llms.txt`, sitemap, `answers.json`, `geo.md`, `llms-full.txt` and the answer tests auto-merged. EN twin URLs and the fractional comparison URL both stay. Citation and crawl policy stays.

@@ -120,7 +120,7 @@
 
 .heroActions a,
 .caseActions a,
-.closing > a {
+.closingActions a {
   display: inline-flex;
   min-height: 48px;
   align-items: center;
@@ -140,21 +140,23 @@
 
 .heroActions a:hover,
 .caseActions a:hover,
-.closing > a:hover {
+.closingActions a:hover {
   background: #72ee9f;
   box-shadow: 0 14px 32px rgba(74, 222, 128, 0.16);
   transform: translateY(-2px);
 }
 
 .heroActions a:last-child,
-.caseActions .secondaryAction {
+.caseActions .secondaryAction,
+.closingActions .secondaryAction {
   color: var(--color-body-strong);
   border-color: var(--color-hairline-strong);
   background: rgba(255, 255, 255, 0.025);
 }
 
 .heroActions a:last-child:hover,
-.caseActions .secondaryAction:hover {
+.caseActions .secondaryAction:hover,
+.closingActions .secondaryAction:hover {
   color: var(--color-primary);
   border-color: rgba(74, 222, 128, 0.5);
   background: rgba(74, 222, 128, 0.06);
@@ -163,7 +165,7 @@
 
 .heroActions svg,
 .caseActions svg,
-.closing > a svg {
+.closingActions a svg {
   width: 15px;
 }
 
@@ -634,10 +636,17 @@
 .closing .eyebrow,
 .closing h2,
 .closing > p,
-.closing > a { position: relative; z-index: 1; }
+.closingActions { position: relative; z-index: 1; }
 .closing .eyebrow { grid-column: 1 / -1; }
 .closing > p { max-width: 53ch; margin: 0; color: var(--color-body); font-size: 17px; line-height: 1.62; }
-.closing > a { width: fit-content; align-self: end; justify-self: start; }
+.closingActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: fit-content;
+  align-self: end;
+  justify-self: start;
+}
 
 @media (max-width: 980px) {
   .hero,
@@ -649,7 +658,7 @@
   .systemsIntro { grid-template-columns: 1fr; }
   .casePanel { min-height: 0; padding-inline: 0; }
   .caseVisual { max-width: 720px; }
-  .closing > a { grid-column: 1; }
+  .closingActions { grid-column: 1; }
 }
 
 @media (max-width: 1023px) {

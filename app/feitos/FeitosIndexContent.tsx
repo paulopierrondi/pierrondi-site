@@ -9,6 +9,7 @@ import { hv2Body, hv2Display } from '@/components/home-v2/fonts'
 import HomeNavBar from '@/components/home-v2/chrome/NavBar'
 import ProjectsSection from '@/components/home-v2/sections/ProjectsSection'
 import type { SectionId } from '@/components/home-v2/types'
+import { getWhatsAppHref } from '@/lib/contact'
 import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import FeitosCommercialProof from './FeitosCommercialProof'
 import { feitos, type Feito, type FeitoAccent } from './feitos-data'
@@ -91,7 +92,9 @@ const COPY = {
     closingTitle: 'Tem um problema técnico que precisa virar sistema?',
     closingLead:
       'A conversa começa por contexto, governança e uma decisão que possa ser colocada em operação.',
-    contact: 'Iniciar conversa',
+    engage: 'abrir /engajamento',
+    contact: 'abrir /contato',
+    whatsapp: 'chamar no WhatsApp',
   },
   en: {
     sectionEyebrow: '04 ORIGINAL FRAMEWORKS AND SYSTEMS',
@@ -112,9 +115,16 @@ const COPY = {
     closingTitle: 'Have a technical problem that needs to become a system?',
     closingLead:
       'The conversation starts with context, governance, and a decision that can be put into operation.',
-    contact: 'Start a conversation',
+    engage: 'open /en/engajamento',
+    contact: 'open /en/contato',
+    whatsapp: 'message on WhatsApp',
   },
 } as const
+
+const FEITOS_WHATSAPP: Record<FeitosLang, string> = {
+  pt: 'Olá, Paulo! Vim pelos feitos e quero conversar sobre automações mensuráveis.',
+  en: 'Hi Paulo! I came from the work/proof page and would like to discuss measurable automations.',
+}
 
 const accentClass: Record<FeitoAccent, string> = {
   green: styles.nodeGreen,
@@ -183,14 +193,22 @@ function DiagramNodes({ feito }: { feito: Feito }) {
   ))
 }
 
-function SystemDiagram({ feito, label }: { feito: Feito; label: string }) {
+function SystemDiagram({
+  feito,
+  label,
+  navLabel,
+}: {
+  feito: Feito
+  label: string
+  navLabel: string
+}) {
   const captionId = `system-map-${feito.slug}`
 
   return (
     <figure className={styles.diagram} aria-labelledby={captionId}>
       <div className={styles.diagramMeta}>
         <span>{label}</span>
-        <span>{feito.navLabel}</span>
+        <span>{navLabel}</span>
       </div>
       <svg viewBox="0 0 360 248" className={styles.svg} role="img">
         <DiagramGrid />
@@ -270,7 +288,7 @@ function CasePanel({ active, copy, lang, reduceMotion, selected }: CasePanelProp
         transition={{ duration: reduceMotion ? 0.08 : 0.38, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className={styles.caseVisual}>
-          <SystemDiagram feito={active} label={copy.map} />
+          <SystemDiagram feito={active} label={copy.map} navLabel={activeCopy.navLabel} />
           <div className={styles.visualFooter}>
             <span>{activeCopy.cardLabel}</span>
             <span>{copy.publicFramework}</span>
@@ -347,10 +365,23 @@ function ClosingSection({ copy, lang }: { copy: FeitosCopy; lang: FeitosLang }) 
       <p className={styles.eyebrow}>{copy.closingEyebrow}</p>
       <h2 id="feitos-contact-title">{copy.closingTitle}</h2>
       <p>{copy.closingLead}</p>
-      <Link href={lang === 'pt' ? '/contato' : '/en/contato'}>
-        {copy.contact}
-        <ArrowRight aria-hidden="true" />
-      </Link>
+      <div className={styles.closingActions} aria-label={lang === 'pt' ? 'Abrir o modelo de engajamento' : 'Open the engagement model'}>
+        <Link href={lang === 'pt' ? '/engajamento' : '/en/engajamento'}>
+          {copy.engage}
+          <ArrowRight aria-hidden="true" />
+        </Link>
+        <Link href={lang === 'pt' ? '/contato' : '/en/contato'} className={styles.secondaryAction}>
+          {copy.contact}
+        </Link>
+        <a
+          href={getWhatsAppHref(FEITOS_WHATSAPP[lang])}
+          className={styles.secondaryAction}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {copy.whatsapp}
+        </a>
+      </div>
     </section>
   )
 }

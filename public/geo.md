@@ -55,6 +55,7 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - Answer brief (en): https://www.pierrondi.dev/en/answers/what-is-agentops
 - Answer brief (pt-BR): https://www.pierrondi.dev/answers/o-que-e-fractional-ai-automation-officer
 - Answer brief (pt-BR): https://www.pierrondi.dev/answers/como-medir-resultado-de-ia-operacional
+- Answer brief (pt-BR): https://www.pierrondi.dev/answers/fractional-vs-consultoria-vs-agencia
 - Treinamentos / Training: https://www.pierrondi.dev/treinamentos
 - Pierrondi Studio: https://www.pierrondi.dev/studio
 - Feitos: https://www.pierrondi.dev/feitos
