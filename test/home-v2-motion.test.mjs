@@ -12,6 +12,7 @@ const [
   skills,
   projects,
   contact,
+  copy,
   sitemap,
   nextConfig,
 ] = await Promise.all([
@@ -23,6 +24,7 @@ const [
   readFile(new URL('components/home-v2/sections/SkillsSection.tsx', root), 'utf8'),
   readFile(new URL('components/home-v2/sections/ProjectsSection.tsx', root), 'utf8'),
   readFile(new URL('components/home-v2/sections/ContactSection.tsx', root), 'utf8'),
+  readFile(new URL('components/home-v2/copy.ts', root), 'utf8'),
   readFile(new URL('app/sitemap.ts', root), 'utf8'),
   readFile(new URL('next.config.ts', root), 'utf8'),
 ])
@@ -88,6 +90,8 @@ test('motion retune does not publish /sprint or drop home proof/engagement contr
   assert.doesNotMatch(sitemap, /path:\s*'\/sprint'/)
   assert.doesNotMatch(nextConfig, /source:\s*'\/sprint'/)
   assert.match(home, /meta\.id === 'hero' \? <ProofSection lang=\{lang\} \/>/)
-  assert.match(hero, /href=\{lang === 'pt' \? '\/engajamento' : '\/en\/engajamento'\}/)
+  assert.match(copy, /href: '\/engajamento'/)
+  assert.match(copy, /href: '\/en\/engajamento'/)
+  assert.match(hero, /\/answers\/fractional-vs-consultoria-vs-agencia/)
   assert.match(hero, /href="#proof"/)
 })

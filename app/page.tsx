@@ -5,9 +5,9 @@ import { SITE_URL } from '@/lib/site'
 import HomeV2 from '@/components/home-v2/HomeV2'
 
 export const metadata: Metadata = {
-  title: 'Paulo Pierrondi — Onde IA vira operação com evidência',
+  title: 'Paulo Pierrondi — Fractional AI Officer',
   description:
-    'Sistema operacional da IA: AgentOps, governança e evidência — resultado e automações mensuráveis (não horas soltas). FSI na ServiceNow e sistemas públicos.',
+    'Fractional AI Automation Officer: resultado e automações mensuráveis (não horas soltas), com baseline, métrica e handoff. FSI na ServiceNow.',
   keywords: [
     'Paulo Pierrondi',
     'AI Architect',
@@ -51,9 +51,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi — Onde IA vira operação com evidência',
+    title: 'Paulo Pierrondi — Fractional AI Officer',
     description:
-      'Operating model de IA, AgentOps e sistemas com trilha de evidência — enterprise FSI na ServiceNow e produtos públicos.',
+      'Fractional AI Automation Officer: resultado e automações mensuráveis (não horas soltas), com baseline, métrica e handoff. FSI na ServiceNow.',
     url: '/',
     siteName: 'pierrondi.dev',
     locale: 'pt_BR',
@@ -63,9 +63,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Paulo Pierrondi — Onde IA vira operação com evidência',
+    title: 'Paulo Pierrondi — Fractional AI Officer',
     description:
-      'Sistema operacional da IA: contexto, governança, AgentOps e evidência — em contas enterprise e em sistemas construídos e publicados.',
+      'Fractional AI Automation Officer: resultado e automações mensuráveis (não horas soltas), com baseline, métrica e handoff. FSI na ServiceNow.',
     images: ['/og'],
   },
 }
@@ -75,9 +75,9 @@ const homeWebPageSchema = {
   '@type': ['WebPage', 'ProfilePage'],
   '@id': `${SITE_URL}/#webpage`,
   url: SITE_URL,
-  name: 'Paulo Pierrondi — Onde IA vira operação com evidência',
+  name: 'Paulo Pierrondi — Fractional AI Officer',
   description:
-    'Perfil de Paulo Pierrondi: operating model de IA, AgentOps, sistemas multi-agente, produtos e frameworks com trilha de evidência, e liderança de contas enterprise FSI na ServiceNow.',
+    'Fractional AI Automation Officer: resultado e automações mensuráveis, com baseline, métrica e handoff. Cargo na ServiceNow: Technical Account Executive.',
   inLanguage: 'pt-BR',
   isPartOf: { '@id': `${SITE_URL}/#website` },
   about: { '@id': `${SITE_URL}/#person` },

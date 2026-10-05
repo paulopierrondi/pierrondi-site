@@ -41,11 +41,11 @@ const CookieBanner = dynamic(() => import('@/components/CookieBanner'))
 
 export const metadata: Metadata = {
   title: {
-    default: 'Paulo Pierrondi — Onde IA vira operação com evidência',
+    default: 'Paulo Pierrondi — Fractional AI Officer',
     template: '%s | pierrondi.dev',
   },
   description:
-    'Sistema operacional da IA: operating model, AgentOps, governança e evidência. Enterprise FSI na ServiceNow e sistemas públicos publicados.',
+    'Fractional AI Automation Officer: resultado e automações mensuráveis (não horas soltas), com baseline, métrica e handoff. FSI na ServiceNow.',
   keywords: [
     'Paulo Pierrondi',
     'ServiceNow',
@@ -95,9 +95,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi — Onde IA vira operação com evidência',
+    title: 'Paulo Pierrondi — Fractional AI Officer',
     description:
-      'Operating model de IA, AgentOps e sistemas com trilha de evidência — enterprise FSI na ServiceNow e produtos públicos.',
+      'Fractional AI Automation Officer: resultado e automações mensuráveis (não horas soltas), com baseline, métrica e handoff. FSI na ServiceNow.',
     url: '/',
     siteName: 'pierrondi.dev',
     type: 'website',

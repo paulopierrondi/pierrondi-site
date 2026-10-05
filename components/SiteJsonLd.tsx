@@ -1,5 +1,5 @@
 import JsonLd from '@/components/JsonLd'
-import { OFFICIAL_SAME_AS } from '@/lib/contact'
+import { OFFICIAL_SAME_AS, PERSON_JOB_TITLES } from '@/lib/contact'
 import { SITE_URL } from '@/lib/site'
 
 const siteSchema = {
@@ -34,11 +34,11 @@ const siteSchema = {
       url: SITE_URL,
       image: `${SITE_URL}/assets/paulo-pierrondi-executive-neural.jpg`,
       email: 'pierrondi@gmail.com',
-      jobTitle: 'Technical Account Executive',
+      jobTitle: [...PERSON_JOB_TITLES],
       description:
-        'Technical Account Executive na ServiceNow, arquiteto de IA e full-stack builder. Constrói sistemas multi-agente, plataformas de automação, apps e frameworks com governança e trilhas de evidência.',
+        'Technical Account Executive na ServiceNow e Fractional AI Automation Officer no portfólio pessoal. Constrói sistemas multi-agente, plataformas de automação, apps e frameworks com governança e trilhas de evidência.',
       disambiguatingDescription:
-        'Official website of Paulo Pierrondi at https://www.pierrondi.dev — Technical Account Executive at ServiceNow. Distinct from freelance marketplace listings.',
+        'Official website of Paulo Pierrondi at https://www.pierrondi.dev — Technical Account Executive at ServiceNow. The personal engagement offer is Fractional AI Automation Officer. Distinct from freelance marketplace listings.',
       address: {
         '@type': 'PostalAddress',
         addressCountry: 'BR',

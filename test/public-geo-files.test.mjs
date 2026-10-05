@@ -212,6 +212,13 @@ test('llms.txt citation policy names the same bots and disallow paths as robots.
     'https://br.linkedin.com/in/paulopierrondi',
     'https://github.com/paulopierrondi',
     'https://x.com/paulopierrondi',
+    'https://cantustudio.app',
+    'https://faithschool.app',
+    'https://agenticoscore.ai',
   ])
   assert.match(geoText, /https:\/\/x\.com\/paulopierrondi/)
+  assert.match(geoText, /https:\/\/cantustudio\.app/)
+  assert.match(geoText, /https:\/\/faithschool\.app/)
+  assert.match(geoText, /https:\/\/agenticoscore\.ai/)
+  assert.match(geoText, /Fractional AI Automation Officer/)
 })

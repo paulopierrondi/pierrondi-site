@@ -65,6 +65,27 @@
   letter-spacing: 0.06em;
 }
 
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+.answers a {
+  color: var(--hv2-accent-copper);
+  font-family: var(--hv2-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.answers a:hover,
+.answers a:focus-visible {
+  color: var(--hv2-accent-champagne);
+}
+
 .steps {
   display: grid;
   gap: 1px;

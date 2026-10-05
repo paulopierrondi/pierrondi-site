@@ -73,18 +73,19 @@ test('sitemap and language switcher register both engagement locales', () => {
   assert.equal(resolveLocalizedPath('/en/engajamento', 'pt'), '/engajamento')
 })
 
-test('home keeps a subtle engagement CTA without claiming the Fractional title', () => {
+test('home title names the Fractional offer and the hero links the comparison', () => {
   assert.match(hero, /data-hero-engagement/)
-  assert.match(hero, /href=\{lang === 'pt' \? '\/engajamento' : '\/en\/engajamento'\}/)
-  assert.match(hero, /Modelo de engajamento/)
-  assert.match(hero, /Engagement model/)
+  assert.match(hero, /\/answers\/fractional-vs-consultoria-vs-agencia/)
+  assert.match(hero, /\/en\/answers\/fractional-vs-consultancy-vs-agency/)
+  assert.match(hero, /Fractional, consultoria ou interno/)
   assert.match(heroStyles, /\.engagementLink/)
-  const ctaBlock = hero.match(/data-hero-ctas[\s\S]*?<\/motion\.div>/)?.[0] ?? ''
-  assert.match(ctaBlock, /data-hero-ctas/)
-  assert.doesNotMatch(ctaBlock, /engajamento/)
+  assert.match(homeCopy, /ctaPrimary: \{ label: 'ver o engajamento', href: '\/engajamento' \}/)
+  assert.match(homeCopy, /ctaPrimary: \{ label: 'see the engagement', href: '\/en\/engajamento' \}/)
+  assert.match(home, /title: 'Paulo Pierrondi — Fractional AI Officer'/)
+  assert.match(homeEn, /title: 'Paulo Pierrondi — Fractional AI Officer'/)
+  assert.match(homeCopy, /headlineLine2: 'Onde IA vira operação com evidência'/)
   assert.doesNotMatch(homeCopy, /Fractional AI Automation Officer/)
-  assert.doesNotMatch(home, /Fractional AI Automation Officer/)
-  assert.doesNotMatch(homeEn, /Fractional AI Automation Officer/)
+  assert.doesNotMatch(sitemap, /path:\s*'\/sprint'/)
 })
 
 test('atuacao links to the engagement page without publishing /sprint', () => {
@@ -94,7 +95,7 @@ test('atuacao links to the engagement page without publishing /sprint', () => {
   assert.doesNotMatch(atuacao, /\/sprint/)
 })
 
-test('engagement schema is WebPage + Service, never Product, and leaves TAE jobTitle alone', () => {
+test('engagement schema is WebPage + Service, with a next step and no published price', () => {
   for (const lang of ['pt', 'en']) {
     const schema = buildEngajamentoSchema(lang)
     const serialized = JSON.stringify(schema)
@@ -104,12 +105,14 @@ test('engagement schema is WebPage + Service, never Product, and leaves TAE jobT
     assert.doesNotMatch(serialized, /"Product"/)
     assert.doesNotMatch(serialized, /"offers"/)
     assert.doesNotMatch(serialized, /"price"/)
+    assert.match(serialized, /CommunicateAction/)
+    assert.match(serialized, /#proximo-passo/)
     assert.match(serialized, /#person/)
     assert.match(serialized, /Fractional AI Automation Officer/)
   }
 
-  assert.match(siteSchema, /jobTitle: 'Technical Account Executive'/)
-  assert.doesNotMatch(siteSchema, /Fractional AI Automation Officer/)
+  assert.match(siteSchema, /jobTitle: \[\.\.\.PERSON_JOB_TITLES\]/)
+  assert.doesNotMatch(siteSchema, /"price"/)
 })
 
 test('engagement copy stays honest: no invented clients, metrics or published sprint', () => {
@@ -141,6 +144,14 @@ test('engagement copy stays honest: no invented clients, metrics or published sp
   assert.match(copySource, /\/answers\/o-que-e-fractional-ai-automation-officer/)
   assert.match(copySource, /\/answers\/como-medir-resultado-de-ia-operacional/)
   assert.match(content, /getWhatsAppHref/)
+  assert.match(content, /className=\{styles\.btnPrimary\}/)
+  assert.match(content, /href=\{whatsappHref\}/)
+  assert.match(content, /id="proximo-passo"/)
+  assert.match(content, /copy\.blockCta/)
+  assert.match(copySource, /Começar no WhatsApp/)
+  assert.match(copySource, /Start on WhatsApp/)
+  assert.match(copySource, /não publica valor/)
+  assert.match(copySource, /does not publish a number/)
   assert.match(content, /route\.contact/)
   assert.match(ptPage, /buildEngajamentoSchema\('pt'\)/)
   assert.match(enPage, /buildEngajamentoSchema\('en'\)/)

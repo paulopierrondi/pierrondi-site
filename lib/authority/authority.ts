@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 import authorityOpsRaw from '@/content/authority/paulo-authority-ops.json'
-import { OFFICIAL_SAME_AS } from '@/lib/contact'
+import { OFFICIAL_SAME_AS, PERSON_JOB_TITLES } from '@/lib/contact'
 import { SITE_URL } from '@/lib/site'
 
 export type AuthorityLang = 'pt' | 'en'
@@ -103,9 +103,10 @@ export const profilePageMainEntity = {
   name: 'Paulo Pierrondi',
   url: SITE_URL,
   image: `${SITE_URL}/og`,
+  jobTitle: [...PERSON_JOB_TITLES],
   sameAs: [...OFFICIAL_SAME_AS],
   disambiguatingDescription:
-    'Official website of Paulo Pierrondi at https://www.pierrondi.dev — Technical Account Executive at ServiceNow. Distinct from freelance marketplace listings.',
+    'Official website of Paulo Pierrondi at https://www.pierrondi.dev — Technical Account Executive at ServiceNow. The personal engagement offer is Fractional AI Automation Officer. Distinct from freelance marketplace listings.',
 }
 
 export function authorityProfileJsonLd(lang: AuthorityLang) {

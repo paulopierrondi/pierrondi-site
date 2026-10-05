@@ -44,6 +44,7 @@ export const ENGAJAMENTO_COPY: Record<
     metaName: string
     metaDescription: string
     serviceType: string
+    blockCta: string
     blocks: Block[]
     proof: {
       h2: string
@@ -64,6 +65,7 @@ export const ENGAJAMENTO_COPY: Record<
     metaDescription:
       'Engajamento contínuo para mid-market e ops que precisam de automação em produção: baseline, sistema, métrica e handoff — resultado mensurável, não horas soltas.',
     serviceType: 'Engajamento Fractional AI Automation Officer',
+    blockCta: 'Ir para o próximo passo',
     blocks: [
       {
         id: 'para-quem',
@@ -118,13 +120,13 @@ export const ENGAJAMENTO_COPY: Record<
       measureLead: 'Framework honesto: baseline → métrica → evidência / AgentOps — sem número inventado.',
     },
     final: {
-      h2: 'Vamos abrir o engajamento.',
-      p: 'Contato para trazer contexto. WhatsApp para começar direto. Sem agenda de pacote e sem /sprint publicado.',
-      contact: 'Ir para contato',
-      whatsapp: 'Chamar no WhatsApp',
+      h2: 'Próximo passo: abrir o engajamento.',
+      p: 'Comece no WhatsApp com o trabalho atual, o baseline e o que fica fora. O formulário serve para enviar contexto. Preço e escopo saem dessa conversa — esta página não publica valor.',
+      contact: 'Enviar contexto',
+      whatsapp: 'Começar no WhatsApp',
     },
     disclaimer:
-      'Oferta independente de engajamento pessoal. Não representa a ServiceNow e não é um produto oficial do fabricante. O job title canônico no site continua Technical Account Executive.',
+      'Oferta independente. Não representa a ServiceNow e não é um produto oficial do fabricante. O cargo na ServiceNow continua Technical Account Executive. O papel público desta oferta é Fractional AI Automation Officer.',
   },
   en: {
     locale: 'en-US',
@@ -132,6 +134,7 @@ export const ENGAJAMENTO_COPY: Record<
     metaDescription:
       'Ongoing engagement for mid-market and ops teams that need production automations: baseline, system, metric, and handoff — measurable outcomes, not loose hours.',
     serviceType: 'Fractional AI Automation Officer engagement',
+    blockCta: 'Go to the next step',
     blocks: [
       {
         id: 'para-quem',
@@ -187,13 +190,13 @@ export const ENGAJAMENTO_COPY: Record<
         'Honest framework: baseline → metric → evidence / AgentOps — no invented number. PT-first: there is no /en/answers pattern.',
     },
     final: {
-      h2: 'Let’s open the engagement.',
-      p: 'Contact to bring context. WhatsApp to start directly. No packaged sprint and no published /sprint offer.',
-      contact: 'Go to contact',
-      whatsapp: 'Message on WhatsApp',
+      h2: 'Next step: open the engagement.',
+      p: 'Start on WhatsApp with the current work, the baseline, and what stays out. The form is for sending context. Price and scope come out of that conversation — this page does not publish a number.',
+      contact: 'Send context',
+      whatsapp: 'Start on WhatsApp',
     },
     disclaimer:
-      'Independent personal engagement offer. It does not represent ServiceNow and is not an official vendor product. The canonical on-site jobTitle remains Technical Account Executive.',
+      'Independent offer. It does not represent ServiceNow and is not an official vendor product. The ServiceNow role remains Technical Account Executive. The public role of this offer is Fractional AI Automation Officer.',
   },
 }
 
@@ -226,6 +229,11 @@ export function buildEngajamentoSchema(lang: EngajamentoLang) {
         inLanguage: copy.locale,
         provider: { '@id': `${SITE_URL}/#person` },
         areaServed: { '@type': 'AdministrativeArea', name: 'Brazil' },
+        potentialAction: {
+          '@type': 'CommunicateAction',
+          name: lang === 'pt' ? 'Começar o engajamento' : 'Start the engagement',
+          target: `${pageUrl}#proximo-passo`,
+        },
       },
     ],
   }

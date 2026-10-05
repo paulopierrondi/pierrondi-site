@@ -1,3 +1,11 @@
+# Sessão 2026-10-05 — Fractional deal path + sameAs on PR #63
+
+- Rebased `cursor/seo-geo-sameas-llms-f8c4` onto `main` (`#64`, `#65`). Conflict was only `.brain/SESSION_NOTES.md`. Kept the home engage bridge note and the X sameAs / llms crawl-policy note.
+- Extended `OFFICIAL_SAME_AS` with the three owned homepages already in the site graph: `https://cantustudio.app`, `https://faithschool.app`, `https://agenticoscore.ai`, plus the confirmed `https://x.com/paulopierrondi`. Same list on `answers.json`, `geo.md`, and `scripts/update-answers-graph.mjs`.
+- `PERSON_JOB_TITLES` is `Technical Account Executive` then `Fractional AI Automation Officer`. Employment stays TAE. Fractional is the public engagement role, not a ServiceNow title. No price, no Offer, no Product. `/sprint` and PR `#42` stay unpublished.
+- Home document title is `Paulo Pierrondi — Fractional AI Officer` (55 with the brand suffix). H1 line stays `Onde IA vira operação com evidência`. Hero primary opens `/engajamento`. Hero hint opens the comparison brief. Engage bridge links the definition, measurement, and comparison answers. Final `/engajamento` action is WhatsApp; contact is the context form.
+- Suggested Linear/Obsidian: on `02_Projects/pierrondi-site` / AGE-1486, note PR #63 is the merge candidate. Do not merge `#42`. Deploy stays human-gated.
+
 # Sessão 2026-10-05 — EN twin of the fractional comparison brief
 
 - Draft PR only. Do not merge. Deploy stays human-gated. Paulo merges.
