@@ -1,3 +1,17 @@
+# Sessão 2026-09-19 — Ahrefs meta description too long (23 URLs)
+
+- Ahrefs Site Audit (Pierrondi): **Meta description too long** on 23 indexable URLs.
+- Extra email context: project `10292667`, crawl `18-09-2026T033434`, issue `+2` vs prior crawl. Explorer URL Cloudflare-blocked; Ahrefs MCP `needsAuth`.
+- Live fallback: crawled `https://www.pierrondi.dev/sitemap.xml` (74 URLs) + 14 extras. **Exactly 23 pages > 160 chars** — same set already fixed on PR #58. Seven more sit at 156–160 (inside the project max). `/fso` and `/itau` are robots Disallow and redirect to `/about`.
+- Project max is the existing 120–160 convention (`test/treinamentos-page.test.mjs`, `test/engajamento-page.test.mjs`).
+- Shared helper `lib/seo/meta-description.ts` (`clampMetaDescription`, max 160) now wraps `/apps/[slug]` and `/feitos/[slug]` metadata so long body copy is not dumped into `<meta name="description">`.
+- **Lesson:** a naive clamp that stops at the first clean break traded one Ahrefs issue for another — 5 pages fell under 110 chars, which is Ahrefs' "meta description too short" threshold. The clamp now biases cuts toward the top of the 120–160 window (whole sentence → clause → word gap), so all 15 clamped snippets land in range.
+- **Lesson:** the first contract test read `description:` only as a quoted single-quote literal, so `app/fso/page.tsx` (`description: DESCRIPTION` const, 206 chars) and the double-quoted `/privacy` + `/terms` silently passed. The resolver now handles both quote styles plus module consts, anchors on the first `description:` so it cannot fall through to a shorter og/twitter literal, and asserts a minimum scan count so a regex regression cannot pass vacuously.
+- Rewrote the 8 unique static meta descriptions (home PT/EN, layout default, `/paulo`, 5 `/answers/*`) to 120–160 without emptying meaning. Home still names “resultado e automações mensuráveis (não horas soltas)”.
+- Body copy (`feito.lead`, `app.description`, JSON-LD) unchanged. No ads. Deploy remains human-gated.
+- Verified: `npm test` 176/176, `tsc --noEmit` + `lint` clean, `next build` then HTML scan of 183 rendered pages → 0 over 160, 0 empty, longest exactly 160.
+- Suggested Linear/Obsidian: note the Ahrefs meta-description slice on `pierrondi-site` / AGE-1486. Recrawl after deploy.
+
 # Sessão 2026-06-13 — Melhoria completa do pierrondi.dev
 
 ## Objetivo
@@ -280,3 +294,32 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - `/en/answers` hub lists the two EN twins. Registered in sitemap, `/ai-search`, `answers.json`, `llms.txt`, `llms-full.txt`, `geo.md`.
 - Fractional/measuring briefs stay PT-only. No IndexNow, no merge, no deploy. AgenticosCore and CantuStudio untouched.
 - Suggested Linear/Obsidian: note EN brand/AgentOps twins on `pierrondi-site` / AGE-1486. CoS weekday hold — no merge/deploy without Paulo.
+
+## 2026-10-04 — Static /og and SEO meta (draft PR #61)
+
+- Branch `cursor/seo-static-og-900f`. Draft PR `#61`. No merge, no deploy.
+- `GET /og` is `force-static`. Build route table marks `○ /og`. Production `next start :3456`: `HEAD` and `GET /og` return `200` `image/png`, 1200×630, cache `HIT`, body matches `.next/server/app/og.body`.
+- Image copy: `Onde IA vira operação` / `com evidência.` Footer: `Paulo Pierrondi | ServiceNow | AgentOps`.
+- `/contato` and `/en/contato` publish `og:image` `/og` with page-specific alt. One document title and one meta description on those pages.
+- Apps without a catalog description use `fallbackAppDescription`, clamped to 120–160. All 30 app landings emit one valid `BreadcrumbList` (3 ListItems, absolute https item URLs).
+- Legal descriptions updated on `/privacidade`, `/privacy`, `/termos`, `/terms` (137–149 chars). `public/llms.txt` gained Citation and crawl policy, last updated 2026-10-04.
+- `/sprint`, prices, secrets, DNS and auth were not touched. Feitos SVG `<title>` labels (diagram names) are pre-existing and are not a second document `<title>`.
+- Checks: `npm ci`, `npm run build`, `npx tsc --noEmit`, `npm test` 176/176.
+- Suggested Linear/Obsidian: note the static `/og` fix and meta slice on `pierrondi-site` / AGE-1486. Merge and Railway deploy remain human-gated. Production `/og` 502 is not rechecked against Railway from this agent.
+
+## 2026-10-04 — Same PR #61: titles, dead OG file, CSP
+
+- Removed `public/assets/og-image.jpg` (79-byte `NOT_FOUND` text). No references. `GET /assets/og-image.jpg` is 404. Live image stays `/og`.
+- Document titles that rendered above 65 characters now render at or under 60, with the layout suffix ` | pierrondi.dev` as the single brand. H1s stay. Four titles at 61–65 were left (`/blog`, `/en/blog`, two posts). `/citations` 308s to `/ai-search`; both titles are short. `/fso` 307s to `/about`; its unused document title is also short.
+- Permissions-Policy is `camera=(), microphone=(), geolocation=(self)`. No `getUserMedia` / device camera / microphone in app code. Three.js `camera` is a scene camera.
+- `unsafe-eval` removed from CSP. `next start :3457` plus headless Chrome on `/`, `/en`, `/studio`, `/portfolio`, `/feitos/agentes-governados`, `/blog/automacao-com-n8n-brasil`: 200, no CSP/console errors. Client chunks have no `eval(` or `new Function`.
+- Draft review, not merged: #57 EN answer twins (conflict on `llms.txt`, `app/ai-search/page.tsx`, session notes; content is sound, rebase before merge). #59 `/feitos` CTA (small overlap on the feitos proof test and session notes; safe to merge after rebase). #60 fractional comparison brief (conflict on `llms.txt`, `ai-search`, `test/seo-meta-description.test.mjs`, session notes; content is sound, rebase before merge). #42 `/sprint` untouched.
+- `npm test` 177/177. `npm run build` OK, `/og` still static.
+
+## 2026-10-05 — Merge main into #57
+
+- `origin/main` at `5f8abc8` (#61) merged into `cursor/seo-en-answer-twins-bd6a`.
+- Conflict was only `.brain/SESSION_NOTES.md`. Both the 2026-09-16 EN-twin note and the 2026-10-04 #61 notes are kept.
+- `public/llms.txt` auto-merged: Citation and crawl policy plus the EN answer URLs. AI Search document title stays `AI Search Portfolio — delivery evidence` (≤60 with the layout suffix).
+- EN titles stay short: `Who is Paulo Pierrondi?`, `What is AgentOps?`, `English answer briefs`.
+- The two EN meta descriptions were 197 and 173 characters, which the #61 160-char check rejects. They are now 153 and 149. Page body copy is unchanged.

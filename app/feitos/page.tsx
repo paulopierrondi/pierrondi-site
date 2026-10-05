@@ -4,7 +4,7 @@ import FeitosIndexContent from './FeitosIndexContent'
 import { buildFeitosSchema } from './feitos-schema'
 
 export const metadata: Metadata = {
-  title: 'Paulo Pierrondi — dados, trabalhos e provas de execução',
+  title: 'Dados, trabalhos e provas de execução',
   description: 'Dossiê público de Paulo Pierrondi: automação, IA, produtos, cases anonimizados, resultados agregados e arquitetura de pagamento até entrega automática.',
   alternates: {
     canonical: '/feitos',

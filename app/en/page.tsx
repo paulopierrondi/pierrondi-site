@@ -5,9 +5,9 @@ import { SITE_URL } from '@/lib/site'
 import HomeV2 from '@/components/home-v2/HomeV2'
 
 export const metadata: Metadata = {
-  title: 'Paulo Pierrondi — Where AI becomes governed operations',
+  title: 'Paulo Pierrondi — governed AI operations',
   description:
-    'Operating system for AI: operating model, AgentOps, governance and evidence trails — measurable outcomes and automations (not loose hours). Enterprise FSI at ServiceNow and public systems designed, built and shipped by Paulo Pierrondi.',
+    'Operating system for AI: AgentOps, governance and evidence — measurable outcomes and automations (not loose hours). FSI at ServiceNow and public systems.',
   keywords: [
     'Paulo Pierrondi',
     'Enterprise AI Operator',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Paulo Pierrondi — Where AI becomes governed operations',
+    title: 'Paulo Pierrondi — governed AI operations',
     description:
       'AI operating model, AgentOps and systems with evidence trails — enterprise FSI at ServiceNow and public products.',
     url: '/en',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Paulo Pierrondi — Where AI becomes governed operations',
+    title: 'Paulo Pierrondi — governed AI operations',
     description:
       'Operating system for AI: context, governance, AgentOps and evidence — across enterprise accounts and shipped systems.',
     images: ['/og'],
@@ -71,7 +71,7 @@ const enWebPageSchema = {
   '@type': ['WebPage', 'ProfilePage'],
   '@id': `${SITE_URL}/en#webpage`,
   url: `${SITE_URL}/en`,
-  name: 'Paulo Pierrondi — Where AI becomes governed operations',
+  name: 'Paulo Pierrondi — governed AI operations',
   description:
     'Profile of Paulo Pierrondi: AI operating model, AgentOps, multi-agent systems, products and frameworks with evidence trails, and enterprise FSI account leadership at ServiceNow.',
   inLanguage: 'en-US',

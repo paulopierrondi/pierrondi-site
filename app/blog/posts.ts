@@ -1,6 +1,8 @@
 export interface Post {
   slug: string
   title: string
+  /** SERP title when `title` plus the layout brand suffix would pass 60 characters. */
+  seoTitle?: string
   category: string
   excerpt: string
   date: string
@@ -12,6 +14,7 @@ export const posts: Post[] = [
   {
     slug: 'automacao-com-n8n-brasil',
     title: 'Automação com n8n no Brasil: arquitetura, custos e segurança em 2026',
+    seoTitle: 'Automação com n8n no Brasil',
     category: 'Automação',
     excerpt:
       'Guia prático para decidir entre n8n Cloud e self-hosted, desenhar workflows confiáveis e operar automações com segurança, evidência e human gates.',

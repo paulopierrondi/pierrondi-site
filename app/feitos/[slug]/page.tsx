@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import JsonLd from '@/components/JsonLd'
 import SwarmEffectsLoader from '@/components/SwarmEffectsLoader'
 import { feitos, getFeito, type Feito } from '../feitos-data'
+import { clampMetaDescription } from '@/lib/seo/meta-description'
 import { SITE_URL } from '@/lib/site'
 import styles from './page.module.css'
 
@@ -21,20 +22,29 @@ export function generateStaticParams() {
   return feitos.map((feito) => ({ slug: feito.slug }))
 }
 
+function feitoDocumentTitle(feito: Feito): string {
+  // app/layout.tsx appends " | pierrondi.dev". Repeating the personal name
+  // here made four proof pages exceed 65 characters.
+  if (feito.slug === 'agentes-governados') return 'Agentes governados: dados e contexto'
+  return feito.title
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const feito = getFeito(slug)
   if (!feito) return {}
+  const description = clampMetaDescription(feito.lead)
+  const documentTitle = feitoDocumentTitle(feito)
 
   return {
-    title: `${feito.title} - Paulo Pierrondi`,
-    description: feito.lead,
+    title: documentTitle,
+    description,
     alternates: {
       canonical: `/feitos/${feito.slug}`,
     },
     openGraph: {
-      title: `${feito.title} - Paulo Pierrondi`,
-      description: feito.lead,
+      title: documentTitle,
+      description,
       url: `/feitos/${feito.slug}`,
       siteName: 'pierrondi.dev',
       locale: 'pt_BR',
@@ -43,8 +53,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${feito.title} - Paulo Pierrondi`,
-      description: feito.lead,
+      title: documentTitle,
+      description,
       images: ['/og'],
     },
   }

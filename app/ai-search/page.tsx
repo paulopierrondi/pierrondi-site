@@ -490,7 +490,7 @@ const structuredData = [
 ]
 
 export const metadata: Metadata = {
-  title: 'AI Search Portfolio - product references and delivery evidence',
+  title: 'AI Search Portfolio — delivery evidence',
   description:
     'Citation hub for AI search with product answer briefs and evidence-backed delivery cases, including the Luar do Campo commerce implementation.',
   keywords: [

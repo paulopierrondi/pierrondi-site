@@ -8,7 +8,7 @@ const ptPath = '/answers/o-que-e-agentops'
 export const metadata: Metadata = {
   title: 'What is AgentOps?',
   description:
-    'AgentOps is the discipline of running AI agents in production with a registry, orchestration, auditable handoffs, persistent memory and human gates for irreversible actions.',
+    'AgentOps runs AI agents in production with a registry, orchestration, auditable handoffs, persistent memory and human gates for irreversible actions.',
   keywords: [
     'AgentOps',
     'agentic operations',

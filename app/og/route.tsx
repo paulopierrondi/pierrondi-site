@@ -5,6 +5,11 @@ import { ImageResponse } from 'next/og'
 // "Using edge runtime on a page currently disables static generation" warning
 // without buying anything. Default Node runtime is what Railway actually runs.
 
+// Prerender at build time. Generating the PNG on demand crashes the Railway
+// Node process (502 "Application failed to respond" on /og in production),
+// while build-time generation works (same as app/fso/opengraph-image.tsx).
+export const dynamic = 'force-static'
+
 export async function GET() {
   return new ImageResponse(
     (
@@ -66,7 +71,7 @@ export async function GET() {
               letterSpacing: 0,
             }}
           >
-            AI Architect. Builder.
+            Onde IA vira operação
           </div>
           <div
             style={{
@@ -77,7 +82,7 @@ export async function GET() {
               letterSpacing: 0,
             }}
           >
-            Enterprise Director.
+            com evidência.
           </div>
         </div>
 
@@ -91,7 +96,7 @@ export async function GET() {
               textTransform: 'uppercase',
             }}
           >
-            AI Systems | Full-stack | Enterprise Accounts
+            Paulo Pierrondi | ServiceNow | AgentOps
           </span>
           <span
             style={{

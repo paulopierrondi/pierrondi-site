@@ -76,7 +76,7 @@ test('EN case copy is localized and the metrics block ends in a CLI contact CTA'
 })
 
 test('/feitos metadata and schema describe the public proof surface', () => {
-  assert.match(page, /Paulo Pierrondi — dados, trabalhos e provas de execução/)
+  assert.match(page, /Dados, trabalhos e provas de execução/)
   assert.match(page, /summary_large_image/)
   assert.match(page, /buildFeitosSchema\('pt'\)/)
   assert.match(schema, /'@type': 'CollectionPage'/)

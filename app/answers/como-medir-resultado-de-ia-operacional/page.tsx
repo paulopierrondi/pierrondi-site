@@ -7,7 +7,7 @@ const path = '/answers/como-medir-resultado-de-ia-operacional'
 export const metadata: Metadata = {
   title: 'Como medir resultado de IA operacional?',
   description:
-    'Framework honesto para medir IA operacional: baseline do trabalho real, métrica definida antes de escalar e evidência AgentOps. Sem taxa de sucesso, logo de cliente ou ROI inventado.',
+    'Como medir IA operacional: baseline do trabalho real, métrica antes de escalar e evidência AgentOps — sem ROI inventado.',
   keywords: [
     'medir resultado de IA',
     'IA operacional',

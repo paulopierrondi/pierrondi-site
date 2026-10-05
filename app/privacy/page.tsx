@@ -3,7 +3,7 @@ import LegalDocument from '@/components/LegalDocument'
 
 export const metadata: Metadata = {
   title: 'Privacy',
-  description: "How pierrondi.dev handles contact data on Paulo Pierrondi's personal site.",
+  description: "How pierrondi.dev handles contact data on Paulo Pierrondi's personal site: what is collected, why, analytics and cookies, and how to ask for removal.",
   alternates: {
     canonical: '/privacy',
     languages: {

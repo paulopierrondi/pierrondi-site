@@ -8,7 +8,7 @@ const siteLanguageSource = await readFile(new URL('../lib/i18n/site-language.ts'
 
 test('FSO page positions automation as FSO + IRM + governed action', () => {
   const requiredTerms = [
-    'Automation-first ServiceNow implementation',
+    'ServiceNow FSO and AI Control Tower',
     'Integrated Risk Management',
     'Action Fabric',
     'AI Control Tower',

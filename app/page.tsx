@@ -7,7 +7,7 @@ import HomeV2 from '@/components/home-v2/HomeV2'
 export const metadata: Metadata = {
   title: 'Paulo Pierrondi — Onde IA vira operação com evidência',
   description:
-    'Sistema operacional da IA: operating model, AgentOps, governança e trilha de evidência — resultado e automações mensuráveis (não horas soltas). Enterprise FSI na ServiceNow e sistemas públicos construídos e publicados por Paulo Pierrondi.',
+    'Sistema operacional da IA: AgentOps, governança e evidência — resultado e automações mensuráveis (não horas soltas). FSI na ServiceNow e sistemas públicos.',
   keywords: [
     'Paulo Pierrondi',
     'AI Architect',

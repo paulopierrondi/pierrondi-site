@@ -6,9 +6,9 @@ import PauloPortfolioExperience from './PauloPortfolioExperience'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Paulo Pierrondi - Portfólio executivo de IA, ServiceNow e Agent OS',
+  title: 'Paulo Pierrondi — portfólio ServiceNow',
   description:
-    'Portfólio executivo de Paulo Pierrondi: ServiceNow, IA governada, treinamento e inferência de LLMs, sistemas operacionais de agentes, produto digital e execução enterprise.',
+    'Portfólio executivo de Paulo Pierrondi: ServiceNow, IA governada, inferência de LLMs, Agent OS, produto digital e execução enterprise.',
   keywords: [
     'Paulo Pierrondi',
     'portfólio executivo IA',
