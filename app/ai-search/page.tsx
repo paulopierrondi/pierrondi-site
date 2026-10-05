@@ -396,6 +396,12 @@ const ownAnswers: AnswerLink[] = [
     intent: 'option comparison',
     locale: 'pt-BR',
   },
+  {
+    title: 'Fractional, consultancy, agency or internal?',
+    url: '/en/answers/fractional-vs-consultancy-vs-agency',
+    intent: 'option comparison',
+    locale: 'en',
+  },
 ]
 
 const deliveryEvidence = {

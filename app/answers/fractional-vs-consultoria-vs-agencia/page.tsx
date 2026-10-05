@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import AnswerBrief from '../_components/AnswerBrief'
 
 const path = '/answers/fractional-vs-consultoria-vs-agencia'
+const enPath = '/en/answers/fractional-vs-consultancy-vs-agency'
 
 export const metadata: Metadata = {
   title: 'Fractional, consultoria, agência ou interno?',
@@ -17,7 +18,14 @@ export const metadata: Metadata = {
     'baseline',
     'IA operacional',
   ],
-  alternates: { canonical: path },
+  alternates: {
+    canonical: path,
+    languages: {
+      'pt-BR': path,
+      'en-US': enPath,
+      'x-default': path,
+    },
+  },
   robots: { index: true, follow: true },
   openGraph: {
     title: 'Fractional, consultoria, agência ou interno?',
@@ -136,9 +144,14 @@ export default function FractionalVsConsultoriaVsAgenciaAnswerPage() {
           label: 'Contato / WhatsApp',
           description: 'Conversar com contexto, ou começar direto no WhatsApp do site.',
         },
+        {
+          href: enPath,
+          label: 'Versão em inglês',
+          description: 'A mesma comparação em inglês: dono após o go-live, medição e risco.',
+        },
       ]}
       datePublished="2026-09-28"
-      dateModified="2026-09-28"
+      dateModified="2026-10-05"
     />
   )
 }

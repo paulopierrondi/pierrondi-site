@@ -19,12 +19,18 @@ const enTwins = [
     description: 'The discipline of running AI agents in production with governance and human gates.',
     ptHref: '/answers/o-que-e-agentops',
   },
+  {
+    href: '/en/answers/fractional-vs-consultancy-vs-agency',
+    title: 'Fractional, consultancy, agency or internal?',
+    description: 'Ownership after go-live, measurement and risk across four engagement shapes.',
+    ptHref: '/answers/fractional-vs-consultoria-vs-agencia',
+  },
 ]
 
 export const metadata: Metadata = {
   title: 'English answer briefs',
   description:
-    'English answer-page twins on pierrondi.dev: who Paulo Pierrondi is, and what AgentOps is.',
+    'English answer briefs: who Paulo Pierrondi is, what AgentOps is, and fractional versus consultancy, agency or internal hire.',
   alternates: {
     canonical: path,
     languages: {
@@ -42,7 +48,7 @@ export default function EnAnswersHubPage() {
       <PageHeader
         eyebrow="ANSWER BRIEFS — EN"
         title="English answer briefs"
-        lead="Citable English twins for the Paulo Pierrondi and AgentOps briefs. Portuguese originals stay canonical for pt-BR."
+        lead="Citable English twins for the Paulo Pierrondi, AgentOps and fractional-versus-consultancy briefs. Portuguese originals stay canonical for pt-BR."
         chips={['Answer brief', 'GEO', 'en']}
       />
       <main className={styles.main}>
