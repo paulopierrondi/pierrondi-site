@@ -1,0 +1,167 @@
+/* Compact how-to-engage bridge. Sits after the proof ledger, before the portfolio. */
+
+.root {
+  scroll-margin-top: var(--hv2-nav-height);
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  padding: clamp(36px, 5vh, 56px) var(--hv2-section-pad-x);
+  border-bottom: 1px solid rgba(245, 207, 159, 0.12);
+  background:
+    linear-gradient(180deg, rgba(8, 7, 6, 0.96), rgba(7, 6, 5, 0.98));
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+  gap: 22px 6vw;
+  align-items: end;
+  width: 100%;
+  max-width: var(--hv2-container-max);
+  margin-inline: auto;
+}
+
+.header {
+  display: grid;
+  gap: 12px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--hv2-accent-signal);
+  font-family: var(--hv2-font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 0;
+  max-width: 18ch;
+  color: var(--hv2-text-primary);
+  font-family: var(--hv2-font-display);
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.lead {
+  margin: 0;
+  max-width: 52ch;
+  color: var(--hv2-text-secondary);
+  font-family: var(--hv2-font-body);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.chain {
+  margin: 0;
+  color: var(--hv2-accent-copper);
+  font-family: var(--hv2-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.steps {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: rgba(245, 207, 159, 0.14);
+}
+
+.steps li {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  background: #0a0a0a;
+}
+
+.steps span {
+  color: var(--hv2-accent-champagne);
+  font-family: var(--hv2-font-mono);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.steps strong {
+  color: var(--hv2-text-primary);
+  font-family: var(--hv2-font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.steps p {
+  margin: 0;
+  color: var(--hv2-text-secondary);
+  font-family: var(--hv2-font-body);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 22px;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--hv2-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.primary {
+  color: var(--hv2-accent-copper);
+}
+
+.primary svg {
+  width: 14px;
+  height: 14px;
+}
+
+.secondary {
+  color: var(--hv2-text-muted);
+}
+
+.primary:hover,
+.primary:focus-visible,
+.secondary:hover,
+.secondary:focus-visible {
+  color: var(--hv2-accent-champagne);
+}
+
+@media (max-width: 767px) {
+  .root {
+    padding: 32px 20px;
+  }
+
+  .inner {
+    grid-template-columns: 1fr;
+  }
+
+  .header h2 {
+    max-width: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .root {
+    padding-right: calc(var(--hv2-section-pad-x) + 72px);
+  }
+}
