@@ -179,3 +179,39 @@ test('robots allows answer-engine retrieval while preserving private route block
     assert.match(robotsText, new RegExp(`Disallow: ${privatePath.replace('/', '\\/')}`))
   }
 })
+
+test('llms.txt citation policy names the same bots and disallow paths as robots.txt', () => {
+  const policy = llmsText.slice(llmsText.indexOf('## Citation and crawl policy'))
+  assert.ok(policy.length > 0, 'llms.txt is missing the citation policy')
+  assert.match(llmsText, /Last updated: 2026-10-05/)
+
+  for (const agent of [
+    'OAI-SearchBot',
+    'ChatGPT-User',
+    'PerplexityBot',
+    'Perplexity-User',
+    'Claude-SearchBot',
+    'Claude-User',
+    'Google-Extended',
+    'Applebot-Extended',
+    'GPTBot',
+    'ClaudeBot',
+    'CCBot',
+  ]) {
+    assert.match(robotsText, new RegExp(`User-agent: ${agent}`))
+    assert.ok(policy.includes(agent), `llms.txt citation policy missing ${agent}`)
+  }
+
+  const disallows = [...new Set([...robotsText.matchAll(/^Disallow:\s*(\S+)/gm)].map((match) => match[1]))]
+  assert.ok(disallows.length >= 10, `expected the full private-route list, got ${disallows.length}`)
+  for (const path of disallows) {
+    assert.ok(policy.includes(path), `llms.txt citation policy missing robots Disallow ${path}`)
+  }
+
+  assert.deepEqual(answersJson.entity.sameAs, [
+    'https://br.linkedin.com/in/paulopierrondi',
+    'https://github.com/paulopierrondi',
+    'https://x.com/paulopierrondi',
+  ])
+  assert.match(geoText, /https:\/\/x\.com\/paulopierrondi/)
+})

@@ -1,6 +1,6 @@
 # Paulo Pierrondi — GEO Fact Sheet
 
-> Canonical: https://www.pierrondi.dev · Language: en-US / pt-BR · Last updated: 2026-08-12
+> Canonical: https://www.pierrondi.dev · Language: en-US / pt-BR · Last updated: 2026-10-05
 
 ## What this is (canonical entity)
 
@@ -9,7 +9,7 @@ Paulo Pierrondi is a **Technical Account Executive at ServiceNow + AI/Automation
 ## Identity
 
 - Type: Person · @id: https://www.pierrondi.dev/#person
-- sameAs: https://br.linkedin.com/in/paulopierrondi · https://github.com/paulopierrondi
+- sameAs: https://br.linkedin.com/in/paulopierrondi · https://github.com/paulopierrondi · https://x.com/paulopierrondi
 - Contact: https://www.pierrondi.dev/contato
 
 ## Direct answers (answer-first, 40–75 words)

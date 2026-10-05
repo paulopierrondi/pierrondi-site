@@ -392,3 +392,14 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Primary CTA: `abrir /engajamento` and `open /en/engajamento`. Secondary stays the existing home contact anchor (`#contact`), where the form and WhatsApp already live.
 - `Person.jobTitle` stays `Technical Account Executive`. No Product schema. `/sprint` stays unpublished. Hero Framer Motion and Event Horizon untouched.
 - Suggested Linear/Obsidian: note the home bridge on `pierrondi-site` / AGE-1486. Do not merge. Deploy stays human-gated. Paulo merges.
+
+## 2026-10-05 — SEO/GEO polish: X sameAs + llms citation parity
+
+- Production already matches main for the 2026-10-04 P0/P1: `GET /og` is `200 image/png` (50128 bytes, 1200×630). `/contato` publishes `og:image` `https://www.pierrondi.dev/og`. `/assets/og-image.jpg` is `404 text/html` and the file is already gone from the repo.
+- Money-page document titles on production are at or under 61 characters. Longest checked: `/blog` 61, `/treinamentos` 60, `/answers/fractional-vs-consultoria-vs-agencia` 60. No remaining title above 65 on the money set. No title rewrite.
+- Person `sameAs` now includes the confirmed personal account `https://x.com/paulopierrondi` via `OFFICIAL_SAME_AS` (`lib/contact.ts`). The same URL is on `public/answers.json`, `public/geo.md`, and `scripts/update-answers-graph.mjs` so a regen does not drop it. No footer or contact link was added. Instagram, Facebook, and twitter.com stay out.
+- `public/llms.txt` last updated `2026-10-05`. Citation policy now lists every `robots.txt` Disallow path and the same retrieval vs training bots. IndexNow key files are unchanged and live (`/indexnow-key.txt` and `/3d7f20ab4bc8ee42f1223a5c924737dc.txt` both 200 with the key).
+- Permissions-Policy and CSP left as shipped in #61 (`camera=()`, `microphone=()`, `geolocation=(self)`, no `unsafe-eval`, `unsafe-inline` kept). No page calls geolocation. HSTS preload, COOP, and CORP were not added.
+- Open PRs not merged: #31 (July sitemap/answers draft, already superseded on main), #32 Entrelinhas (conflicting, portfolio content), #6 site evolution (58 files, June, no checks). #42 `/sprint` left untouched.
+- `npm test` 181/181. No deploy, no IndexNow submit (URLs change only after merge).
+- Suggested Linear/Obsidian: note this sameAs + llms parity slice on `pierrondi-site` / AGE-1486. Merge remains human-gated; Railway deploys from `main`. After deploy, curl `/`, `/llms.txt`, `/answers.json`, `/geo.md` for `x.com/paulopierrondi`.

@@ -36,7 +36,9 @@ test('Person and Organization name the official site and keep real sameAs only',
   assert.match(contact, /export const OFFICIAL_SAME_AS/)
   assert.match(contact, /linkedin\.com\/in\/paulopierrondi/)
   assert.match(contact, /github\.com\/paulopierrondi/)
-  assert.doesNotMatch(contact, /instagram\.com|twitter\.com|x\.com|facebook\.com/)
+  assert.match(contact, /https:\/\/x\.com\/paulopierrondi/)
+  assert.match(contact, /OFFICIAL_SAME_AS = \[CONTACT\.linkedin, CONTACT\.github, CONTACT\.x\]/)
+  assert.doesNotMatch(contact, /instagram\.com|twitter\.com\/|facebook\.com/)
 
   assert.match(siteSchema, /'@type': 'Person'/)
   assert.match(siteSchema, /'@type': 'Organization'/)
