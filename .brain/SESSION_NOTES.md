@@ -287,6 +287,14 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Hard gates kept: no Product schema, Person `jobTitle` remains TAE, gtag `G-1CL8PFYY7T` untouched, no home/motion edits.
 - Suggested Linear/Obsidian: note this measuring-answer slice on `pierrondi-site` / AGE-1486. Merge and deploy remain human-gated.
 
+## 2026-09-16 — Weekday SEO hold: EN twins for who-is-paulo + what-is-agentops
+
+- Live gap (verified 2026-09-16): PT `/answers/quem-e-paulo-pierrondi` and `/answers/o-que-e-agentops` 200; EN `/en/answers/who-is-paulo-pierrondi` and `/en/answers/what-is-agentops` 404; `/en/answers` hub 404.
+- Added EN answer twins via shared `AnswerBrief` (Question/FAQPage/Article). Honest copy only. PT pages kept; reciprocal hreflang added.
+- `/en/answers` hub lists the two EN twins. Registered in sitemap, `/ai-search`, `answers.json`, `llms.txt`, `llms-full.txt`, `geo.md`.
+- Fractional/measuring briefs stay PT-only. No IndexNow, no merge, no deploy. AgenticosCore and CantuStudio untouched.
+- Suggested Linear/Obsidian: note EN brand/AgentOps twins on `pierrondi-site` / AGE-1486. CoS weekday hold — no merge/deploy without Paulo.
+
 ## 2026-09-21 — Weekly growth P0: /feitos → /engajamento CTA
 
 - Do not duplicate `#51`–`#56` (home copy, nav/proof/CTA, `/engajamento`, motion, Fractional brief, measuring brief). Do not merge or recreate PR `#57` EN twins (CoS hold).
@@ -332,6 +340,14 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - Draft review, not merged: #57 EN answer twins (conflict on `llms.txt`, `app/ai-search/page.tsx`, session notes; content is sound, rebase before merge). #59 `/feitos` CTA (small overlap on the feitos proof test and session notes; safe to merge after rebase). #60 fractional comparison brief (conflict on `llms.txt`, `ai-search`, `test/seo-meta-description.test.mjs`, session notes; content is sound, rebase before merge). #42 `/sprint` untouched.
 - `npm test` 177/177. `npm run build` OK, `/og` still static.
 
+## 2026-10-05 — Merge main into #57
+
+- `origin/main` at `5f8abc8` (#61) merged into `cursor/seo-en-answer-twins-bd6a`.
+- Conflict was only `.brain/SESSION_NOTES.md`. Both the 2026-09-16 EN-twin note and the 2026-10-04 #61 notes are kept.
+- `public/llms.txt` auto-merged: Citation and crawl policy plus the EN answer URLs. AI Search document title stays `AI Search Portfolio — delivery evidence` (≤60 with the layout suffix).
+- EN titles stay short: `Who is Paulo Pierrondi?`, `What is AgentOps?`, `English answer briefs`.
+- The two EN meta descriptions were 197 and 173 characters, which the #61 160-char check rejects. They are now 153 and 149. Page body copy is unchanged.
+
 ## 2026-10-05 — Merge main into #60
 
 - origin/main at 5f8abc8 (#61) merged into `cursor/fractional-vs-consultoria-agencia-45f2`.
@@ -350,3 +366,9 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - `origin/main` at `e89a1fe` (#59) merged into `cursor/fractional-vs-consultoria-agencia-45f2`.
 - Conflict was only `.brain/SESSION_NOTES.md`. Kept the comparison brief, both `/feitos` CTA notes, both #61 notes, and both earlier merge notes.
 - Comparison brief and `/engajamento` CTAs stay. `/sprint` stays unpublished.
+
+## 2026-10-05 — Merge main bb8d5a4 into #57
+
+- `origin/main` at `bb8d5a4` (#60) merged into `cursor/seo-en-answer-twins-bd6a`.
+- Conflict was only `.brain/SESSION_NOTES.md`. Kept the EN-twin note, the `/feitos` CTA notes, the comparison brief, the #61 notes, and the earlier merge notes.
+- `llms.txt`, sitemap, `answers.json`, `geo.md`, `llms-full.txt` and the answer tests auto-merged. EN twin URLs and the fractional comparison URL both stay. Citation and crawl policy stays.

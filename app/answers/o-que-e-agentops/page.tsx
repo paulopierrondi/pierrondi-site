@@ -17,7 +17,14 @@ export const metadata: Metadata = {
     'human gates',
     'multi-agent system',
   ],
-  alternates: { canonical: path },
+  alternates: {
+    canonical: path,
+    languages: {
+      'pt-BR': path,
+      'en-US': '/en/answers/what-is-agentops',
+      'x-default': path,
+    },
+  },
   robots: { index: true, follow: true },
   openGraph: {
     title: 'O que é AgentOps (operações agênticas)?',

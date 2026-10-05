@@ -132,6 +132,10 @@ export default function AnswerBrief({
     dateModified,
     inLanguage,
   })
+  const isEnglish = inLanguage === 'en'
+  const faqHeading = isEnglish ? 'Related questions' : 'Perguntas relacionadas'
+  const relatedKicker = isEnglish ? 'Keep exploring' : 'Continue explorando'
+  const relatedHeading = isEnglish ? 'Related pages' : 'Páginas relacionadas'
 
   return (
     <>
@@ -161,7 +165,7 @@ export default function AnswerBrief({
 
         <section className={styles.section} aria-labelledby="faq-heading">
           <p className={styles.kicker}>FAQ</p>
-          <h2 id="faq-heading">Perguntas relacionadas</h2>
+          <h2 id="faq-heading">{faqHeading}</h2>
           {faq.map((item) => (
             <div key={item.question} className={styles.faqItem}>
               <h3>{item.question}</h3>
@@ -171,8 +175,8 @@ export default function AnswerBrief({
         </section>
 
         <section className={styles.section} aria-labelledby="related-heading">
-          <p className={styles.kicker}>Continue explorando</p>
-          <h2 id="related-heading">Páginas relacionadas</h2>
+          <p className={styles.kicker}>{relatedKicker}</p>
+          <h2 id="related-heading">{relatedHeading}</h2>
           <div className={styles.links}>
             {internalLinks.map((link) => (
               <Link key={link.href} href={link.href}>

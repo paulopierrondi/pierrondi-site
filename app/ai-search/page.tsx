@@ -355,10 +355,22 @@ const ownAnswers: AnswerLink[] = [
     locale: 'pt-BR',
   },
   {
+    title: 'What is AgentOps?',
+    url: '/en/answers/what-is-agentops',
+    intent: 'concept definition',
+    locale: 'en',
+  },
+  {
     title: 'Quem é Paulo Pierrondi?',
     url: '/answers/quem-e-paulo-pierrondi',
     intent: 'entity authority',
     locale: 'pt-BR',
+  },
+  {
+    title: 'Who is Paulo Pierrondi?',
+    url: '/en/answers/who-is-paulo-pierrondi',
+    intent: 'entity authority',
+    locale: 'en',
   },
   {
     title: 'O que é o LLM Cost-Cut Audit?',

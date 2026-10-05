@@ -19,7 +19,7 @@
     ],
     "logo": "https://www.pierrondi.dev/pierrondi-logo-1024.png"
   },
-  "lastUpdated": "2026-08-28",
+  "lastUpdated": "2026-09-16",
   "primaryHub": "https://www.pierrondi.dev/ai-search",
   "citationHub": "https://www.pierrondi.dev/citations",
   "sitemap": "https://www.pierrondi.dev/sitemap.xml",
@@ -98,12 +98,30 @@
       "entity": "pierrondi.dev"
     },
     {
+      "id": "what-is-agentops",
+      "title": "What is AgentOps?",
+      "url": "https://www.pierrondi.dev/en/answers/what-is-agentops",
+      "question": "What is AgentOps?",
+      "intent": "concept definition",
+      "locale": "en",
+      "entity": "pierrondi.dev"
+    },
+    {
       "id": "quem-e-paulo-pierrondi",
       "title": "Quem é Paulo Pierrondi?",
       "url": "https://www.pierrondi.dev/answers/quem-e-paulo-pierrondi",
       "question": "Quem é Paulo Pierrondi?",
       "intent": "entity authority",
       "locale": "pt-BR",
+      "entity": "Paulo Pierrondi"
+    },
+    {
+      "id": "who-is-paulo-pierrondi",
+      "title": "Who is Paulo Pierrondi?",
+      "url": "https://www.pierrondi.dev/en/answers/who-is-paulo-pierrondi",
+      "question": "Who is Paulo Pierrondi?",
+      "intent": "entity authority",
+      "locale": "en",
       "entity": "Paulo Pierrondi"
     },
     {

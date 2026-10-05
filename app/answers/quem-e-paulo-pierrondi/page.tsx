@@ -16,7 +16,14 @@ export const metadata: Metadata = {
     'CMDB CSDM',
     'full-stack builder',
   ],
-  alternates: { canonical: path },
+  alternates: {
+    canonical: path,
+    languages: {
+      'pt-BR': path,
+      'en-US': '/en/answers/who-is-paulo-pierrondi',
+      'x-default': path,
+    },
+  },
   robots: { index: true, follow: true },
   openGraph: {
     title: 'Quem é Paulo Pierrondi?',
