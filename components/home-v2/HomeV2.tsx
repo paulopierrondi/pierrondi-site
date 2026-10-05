@@ -10,6 +10,7 @@ import SectionDots from './chrome/SectionDots'
 import SectionLabel from './chrome/SectionLabel'
 import HeroSection from './sections/HeroSection'
 import ProofSection from './sections/ProofSection'
+import EngageSection from './sections/EngageSection'
 import ProjectsSection from './sections/ProjectsSection'
 import AboutSection from './sections/AboutSection'
 import SkillsSection from './sections/SkillsSection'
@@ -126,6 +127,7 @@ export default function HomeV2({ lang }: HomeV2Props) {
                 <Section lang={lang} />
               </section>
               {meta.id === 'hero' ? <ProofSection lang={lang} /> : null}
+              {meta.id === 'hero' ? <EngageSection lang={lang} /> : null}
             </Fragment>
           )
         })}

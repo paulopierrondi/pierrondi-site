@@ -372,3 +372,10 @@ com o fix do env, o n8n delivery deve parar de oscilar entre `sent`/`not_configu
 - `origin/main` at `bb8d5a4` (#60) merged into `cursor/seo-en-answer-twins-bd6a`.
 - Conflict was only `.brain/SESSION_NOTES.md`. Kept the EN-twin note, the `/feitos` CTA notes, the comparison brief, the #61 notes, and the earlier merge notes.
 - `llms.txt`, sitemap, `answers.json`, `geo.md`, `llms-full.txt` and the answer tests auto-merged. EN twin URLs and the fractional comparison URL both stay. Citation and crawl policy stays.
+
+## 2026-10-05 — Home how-to-engage bridge
+
+- Compact module on `/` and `/en`, after the proof ledger and before the portfolio. PT eyebrow `COMO ENGAJAR`, EN `HOW TO ENGAGE`. Offer name `Fractional AI Automation Officer`. Chain already public on `/engajamento`: baseline → métrica → handoff. No price, client, logo, or ROI.
+- Primary CTA: `abrir /engajamento` and `open /en/engajamento`. Secondary stays the existing home contact anchor (`#contact`), where the form and WhatsApp already live.
+- `Person.jobTitle` stays `Technical Account Executive`. No Product schema. `/sprint` stays unpublished. Hero Framer Motion and Event Horizon untouched.
+- Suggested Linear/Obsidian: note the home bridge on `pierrondi-site` / AGE-1486. Do not merge. Deploy stays human-gated. Paulo merges.
