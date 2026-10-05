@@ -99,6 +99,14 @@ function getProductSignals(app: AppEntry, appStoreUrl?: string): ProductSignal[]
   ]
 }
 
+function fallbackAppDescription(app: AppEntry): string {
+  const category = /^[A-Z][a-z]/.test(app.category) && !/^Christian\b/.test(app.category)
+    ? app.category.charAt(0).toLowerCase() + app.category.slice(1)
+    : app.category
+  const article = /^[aeiou]/i.test(category) ? 'an' : 'a'
+  return `${app.name} is ${article} ${category}. Official product page with support, privacy policy and terms, published by Paulo Pierrondi at pierrondi.dev.`
+}
+
 export function generateStaticParams() {
   return Object.keys(APPS).map((slug) => ({ slug }))
 }
@@ -111,7 +119,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // brand-free to avoid "FaithSchool · pierrondi.dev | pierrondi.dev".
   const title = app.name
   const socialTitle = `${app.name} · pierrondi.dev`
-  const description = clampMetaDescription(app.description ?? `${app.name} — ${app.category}.`)
+  const description = clampMetaDescription(app.description ?? fallbackAppDescription(app))
   const canonical = `/apps/${slug}`
   return {
     title,
@@ -165,9 +173,20 @@ export default async function AppLandingPage({ params }: Props) {
       : {}),
   }
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Paulo Pierrondi', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Portfolio', item: `${SITE_URL}/portfolio` },
+      { '@type': 'ListItem', position: 3, name: app.name, item: `${SITE_URL}/apps/${slug}` },
+    ],
+  }
+
   return (
     <>
       <JsonLd data={appSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <main className={styles.page}>
         <section className={styles.hero} aria-labelledby="app-title">
           <div className={styles.heroGrid} aria-hidden="true" />

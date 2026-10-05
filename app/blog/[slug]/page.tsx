@@ -23,14 +23,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug)
   if (!post) return {}
   const url = `/blog/${post.slug}`
+  const documentTitle = post.seoTitle ?? post.title
   return {
-    title: post.title,
+    title: documentTitle,
     description: post.excerpt,
     keywords: [post.category.toLowerCase(), 'pierrondi.dev', 'ia enterprise', 'agentops', post.title.toLowerCase()],
     authors: [{ name: 'Paulo Pierrondi', url: `${SITE_URL}/about` }],
     alternates: { canonical: url },
     openGraph: {
-      title: post.title,
+      title: documentTitle,
       description: post.excerpt,
       url,
       siteName: 'pierrondi.dev',
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title,
+      title: documentTitle,
       description: post.excerpt,
       images: ['/og'],
     },

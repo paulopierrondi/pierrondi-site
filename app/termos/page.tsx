@@ -3,7 +3,7 @@ import LegalDocument from '@/components/LegalDocument'
 
 export const metadata: Metadata = {
   title: 'Aviso legal',
-  description: 'Aviso legal do site pessoal de Paulo Pierrondi.',
+  description: 'Aviso legal do site pessoal de Paulo Pierrondi: sobre o site, conteúdo e opiniões, propriedade intelectual, ausência de garantias e contato.',
   alternates: {
     canonical: '/termos',
     languages: {

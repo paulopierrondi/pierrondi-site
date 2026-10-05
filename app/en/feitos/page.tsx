@@ -4,7 +4,7 @@ import FeitosIndexContent from '@/app/feitos/FeitosIndexContent'
 import { buildFeitosSchema } from '@/app/feitos/feitos-schema'
 
 export const metadata: Metadata = {
-  title: 'Paulo Pierrondi — profile, work, and execution proof',
+  title: 'Profile, work and execution proof',
   description: 'Public dossier with Paulo Pierrondi’s automation and AI work, anonymized cases, aggregate results, and paid-AI delivery architecture.',
   alternates: {
     canonical: '/en/feitos',

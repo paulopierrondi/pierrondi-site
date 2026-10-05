@@ -15,6 +15,14 @@ import {
 
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), 'utf8')
 
+function fallbackAppDescription(app) {
+  const category = /^[A-Z][a-z]/.test(app.category) && !/^Christian\b/.test(app.category)
+    ? app.category.charAt(0).toLowerCase() + app.category.slice(1)
+    : app.category
+  const article = /^[aeiou]/i.test(category) ? 'an' : 'a'
+  return `${app.name} is ${article} ${category}. Official product page with support, privacy policy and terms, published by Paulo Pierrondi at pierrondi.dev.`
+}
+
 async function walkPages(dir) {
   const entries = await readdir(dir, { withFileTypes: true })
   const files = []
@@ -102,7 +110,15 @@ test('data-driven public metadata emit within the 160-char project max', () => {
   }
 
   for (const [slug, app] of Object.entries(APPS)) {
-    assertEmitted(`/apps/${slug}`, app.description ?? `${app.name} — ${app.category}.`)
+    const source = app.description ?? fallbackAppDescription(app)
+    assertEmitted(`/apps/${slug}`, source)
+    if (!app.description) {
+      const emitted = clampMetaDescription(source)
+      assert.ok(
+        emitted.length >= META_DESCRIPTION_MIN && emitted.length <= META_DESCRIPTION_MAX,
+        `/apps/${slug} fallback emitted ${emitted.length}: ${emitted}`,
+      )
+    }
   }
 
   for (const feito of feitos) {
@@ -123,13 +139,67 @@ test('data-driven public metadata emit within the 160-char project max', () => {
   }
 })
 
+const TITLE_SUFFIX = ' | pierrondi.dev'
+const DOCUMENT_TITLE_MAX = 60
+
+test('shortened document titles stay within 60 once the brand suffix is applied', () => {
+  const rendered = (title) => `${title}${TITLE_SUFFIX}`
+  const assertTitle = (id, title) => {
+    const full = rendered(title)
+    assert.ok(full.length <= DOCUMENT_TITLE_MAX, `${id} is ${full.length}: ${full}`)
+    assert.equal(title.includes(' | pierrondi.dev'), false, `${id} duplicates the layout brand`)
+  }
+
+  for (const post of posts) {
+    const title = post.seoTitle ?? post.title
+    const full = rendered(title)
+    if (post.seoTitle || rendered(post.title).length > 65) {
+      assertTitle(`/blog/${post.slug}`, title)
+    } else {
+      assert.ok(full.length <= 65, `/blog/${post.slug} is ${full.length}: ${full}`)
+    }
+  }
+
+  for (const feito of feitos) {
+    const title = feito.slug === 'agentes-governados'
+      ? 'Agentes governados: dados e contexto'
+      : feito.title
+    assertTitle(`/feitos/${feito.slug}`, title)
+  }
+
+  for (const lang of ['pt', 'en']) {
+    assertTitle(`/about:${lang}`, authorityOps.pages[lang].metadataTitle)
+  }
+
+  for (const title of [
+    'Paulo Pierrondi — portfólio ServiceNow',
+    'Citations: FaithSchool, Cantu, Agenticos',
+    'Pierrondi Studio — marca, conteúdo e IA',
+    'Pierrondi Studio — brand, content and AI',
+    'AI Search Portfolio — delivery evidence',
+    'Design Vault — componentes e sistemas',
+    'Portfólio de produtos, Studio e sistemas',
+    'Products, Studio and systems portfolio',
+    'Dados, trabalhos e provas de execução',
+    'Profile, work and execution proof',
+    'Paulo Pierrondi — governed AI operations',
+    'ServiceNow FSO and AI Control Tower',
+  ]) {
+    assertTitle(title, title)
+  }
+})
+
 test('apps and feitos generateMetadata clamp the shared source copy', async () => {
   const [appsPage, feitosPage] = await Promise.all([
     read('app/apps/[slug]/page.tsx'),
     read('app/feitos/[slug]/page.tsx'),
   ])
   assert.match(appsPage, /clampMetaDescription/)
+  assert.match(appsPage, /fallbackAppDescription\(app\)/)
+  assert.match(appsPage, /Official product page with support, privacy policy and terms/)
   assert.match(feitosPage, /clampMetaDescription/)
+  assert.match(feitosPage, /Agentes governados: dados e contexto/)
+  assert.doesNotMatch(feitosPage, /feito\.title\} - Paulo Pierrondi/)
 })
 
 test('static metadata descriptions stay inside the 120–160 convention', async () => {
@@ -167,6 +237,10 @@ test('static metadata descriptions stay inside the 120–160 convention', async 
     'app/answers/fractional-vs-consultoria-vs-agencia/page.tsx',
     'app/treinamentos/page.tsx',
     'app/engajamento/page.tsx',
+    'app/privacidade/page.tsx',
+    'app/privacy/page.tsx',
+    'app/termos/page.tsx',
+    'app/terms/page.tsx',
   ]) {
     const row = checked.find((item) => item.file === file)
     assert.ok(row, `missing ${file}`)

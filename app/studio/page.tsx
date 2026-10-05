@@ -5,7 +5,7 @@ import { STUDIO_COPY } from '@/components/studio/studio-data'
 import { SITE_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Pierrondi Studio — Marca, Conteúdo e IA aplicada ao crescimento',
+  title: 'Pierrondi Studio — marca, conteúdo e IA',
   description:
     'Estratégia, branding, conteúdo audiovisual, CRM e automação com IA transformados em sistemas de crescimento executáveis e controlados.',
   alternates: {

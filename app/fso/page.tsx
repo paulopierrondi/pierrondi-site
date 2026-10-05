@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
-const TITLE = 'Automation-first ServiceNow implementation — FSO, IRM and AI Control Tower'
+const TITLE = 'ServiceNow FSO and AI Control Tower'
 const DESCRIPTION =
   'Blueprint for LLM coding agents, Fluent SDK, MCP, Action Fabric, IRM and AI Control Tower in Financial Services Operations — automation-first, risk-governed.'
 
