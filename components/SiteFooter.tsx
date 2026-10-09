@@ -95,6 +95,7 @@ const footerCopy: Record<HomeLang, {
       { label: 'AgentOps', href: '/en/atuacao#agentops' },
       { label: 'Training', href: '/en/treinamentos' },
       { label: 'AI Search Index', href: '/ai-search' },
+      { label: 'Answer briefs', href: '/en/answers' },
       { label: 'Strategy', href: '/en/atuacao#lideranca' },
     ],
     productHead: 'Sites',

@@ -1,3 +1,14 @@
+# Sessão 2026-10-15 — hreflang hub rebase onto #67
+
+- Draft PR #66 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow not submitted.
+- Rebased onto `main` after #67. `AnswerBrief` keeps the comparison table from #67 and still prepends the English hub link plus BreadcrumbList entry on `/en/answers/*`.
+- Ahrefs: `/en/answers` declared `pt-BR` and `x-default` at `/answers`, which 308s to `/ai-search`. The pair was not reciprocal.
+- Decision stands: they are not equivalent hubs. `/ai-search` is an English citation portfolio (`inLanguage: en-US`). `/en/answers` is an English index of three briefs. No hreflang between them. Canonicals stay self-referencing on `www`.
+- Real PT/EN pairs stay on the individual briefs: each lists `pt-BR`, self `en-US` or `pt-BR`, and `x-default` to the Portuguese URL.
+- Language picker: `/answers` resolves to `/ai-search`; `/en/answers` stays on itself. Switcher remains hidden on both prefixes.
+- Inbound links: EN footer “Answer briefs” → `/en/answers`. `/sprint` stays unpublished. GA4 id unchanged.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #66 rebased onto #67. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-10-10 — SEO/GEO sweep (draft)
 
 - Draft only. Do not merge. Do not deploy. Do not IndexNow until Paulo says so.
