@@ -1,3 +1,14 @@
+# Sessão 2026-10-09 — hreflang /en/answers vs /ai-search
+
+- Draft PR only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow not submitted.
+- Ahrefs: `/en/answers` declared `pt-BR` and `x-default` at `/answers`, which 308s to `/ai-search`. The pair was not reciprocal, and nothing linked `/en/answers`.
+- Decision: they are not equivalent hubs. `/ai-search` is an English citation portfolio (`inLanguage: en-US`, OG `en_US`). `/en/answers` is an English index of three briefs. Marking the portfolio as `pt-BR` would publish a false language pair. Real PT/EN pairs stay on the individual briefs, which already 200.
+- Removed the hub `languages` block. Canonical stays `https://www.pierrondi.dev/en/answers`. `/ai-search` stays canonical-only at `https://www.pierrondi.dev/ai-search`.
+- Language picker: `/answers` resolves to `/ai-search`; `/en/answers` stays on itself. Switcher remains hidden on both prefixes.
+- Inbound links: EN footer “Answer briefs” → `/en/answers` (including `/en`). EN answer briefs prepend a related link and a BreadcrumbList entry to `/en/answers`.
+- Did not touch `/sprint`, Product/Offer schema, prices, `Person.jobTitle`, PR #62, or PR #63.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note the draft PR. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-10-05 — EN twin of the fractional comparison brief
 
 - Draft PR only. Do not merge. Deploy stays human-gated. Paulo merges.
