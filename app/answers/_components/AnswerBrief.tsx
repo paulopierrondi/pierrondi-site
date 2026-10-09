@@ -38,10 +38,11 @@ export type AnswerBriefProps = {
 
 type BriefSchemaInput = Pick<
   AnswerBriefProps,
-  'question' | 'directAnswer' | 'faq' | 'datePublished' | 'dateModified'
+  'path' | 'question' | 'directAnswer' | 'faq' | 'datePublished' | 'dateModified'
 > & { canonicalUrl: string; inLanguage: NonNullable<AnswerBriefProps['inLanguage']> }
 
 function buildBriefSchema({
+  path,
   canonicalUrl,
   question,
   directAnswer,
@@ -50,6 +51,24 @@ function buildBriefSchema({
   dateModified,
   inLanguage,
 }: BriefSchemaInput) {
+  const englishHub = inLanguage === 'en' && path.startsWith('/en/answers/')
+  const breadcrumb = englishHub
+    ? [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'English answer briefs',
+          item: `${SITE_URL}/en/answers`,
+        },
+        { '@type': 'ListItem', position: 3, name: question, item: canonicalUrl },
+      ]
+    : [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'AI Search Portfolio', item: `${SITE_URL}/ai-search` },
+        { '@type': 'ListItem', position: 3, name: question, item: canonicalUrl },
+      ]
+
   return [
     {
       '@context': 'https://schema.org',
@@ -101,11 +120,7 @@ function buildBriefSchema({
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-        { '@type': 'ListItem', position: 2, name: 'AI Search Portfolio', item: `${SITE_URL}/ai-search` },
-        { '@type': 'ListItem', position: 3, name: question, item: canonicalUrl },
-      ],
+      itemListElement: breadcrumb,
     },
   ]
 }
@@ -124,6 +139,7 @@ export default function AnswerBrief({
 }: AnswerBriefProps) {
   const canonicalUrl = `${SITE_URL}${path}`
   const structuredData = buildBriefSchema({
+    path,
     canonicalUrl,
     question,
     directAnswer,
@@ -133,6 +149,17 @@ export default function AnswerBrief({
     inLanguage,
   })
   const isEnglish = inLanguage === 'en'
+  const relatedLinks: AnswerInternalLink[] =
+    isEnglish && path.startsWith('/en/answers/')
+      ? [
+          {
+            href: '/en/answers',
+            label: 'English answer briefs',
+            description: 'Index of the English twins on this site.',
+          },
+          ...internalLinks,
+        ]
+      : internalLinks
   const faqHeading = isEnglish ? 'Related questions' : 'Perguntas relacionadas'
   const relatedKicker = isEnglish ? 'Keep exploring' : 'Continue explorando'
   const relatedHeading = isEnglish ? 'Related pages' : 'Páginas relacionadas'
@@ -178,7 +205,7 @@ export default function AnswerBrief({
           <p className={styles.kicker}>{relatedKicker}</p>
           <h2 id="related-heading">{relatedHeading}</h2>
           <div className={styles.links}>
-            {internalLinks.map((link) => (
+            {relatedLinks.map((link) => (
               <Link key={link.href} href={link.href}>
                 <span className={styles.linkLabel}>{link.label}</span>
                 <span className={styles.linkDesc}>{link.description}</span>

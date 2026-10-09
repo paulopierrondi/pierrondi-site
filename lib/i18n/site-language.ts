@@ -45,8 +45,11 @@ const localizedRoutes: Record<string, Record<HomeLang, string>> = {
     pt: '/answers/fractional-vs-consultoria-vs-agencia',
     en: '/en/answers/fractional-vs-consultancy-vs-agency',
   },
-  '/answers': { pt: '/answers', en: '/en/answers' },
-  '/en/answers': { pt: '/answers', en: '/en/answers' },
+  // /answers 308s to /ai-search. That portfolio is English, and /en/answers
+  // is a separate English index, so the picker must not send either path
+  // to the redirect or invent a pt-BR pair between them.
+  '/answers': { pt: '/ai-search', en: '/ai-search' },
+  '/en/answers': { pt: '/en/answers', en: '/en/answers' },
   '/studio': { pt: '/studio', en: '/en/studio' },
   '/en/studio': { pt: '/studio', en: '/en/studio' },
   '/contato': { pt: '/contato', en: '/en/contato' },
