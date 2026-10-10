@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 
 import type { AuthorityLang } from '@/lib/authority/authority'
+import { publicAnswerLinks } from '@/lib/seo/public-answer-links'
 import { authorityOps, getAuthorityPage } from '@/lib/authority/authority'
 import { AboutReveal, AboutStagger, AboutStaggerItem } from './AboutMotion'
 import styles from './AboutAuthorityExperience.module.css'
@@ -327,6 +328,17 @@ function PeerCta({
         </a>
         <Link href={portfolioHref}>{page.cta.secondary}</Link>
       </div>
+      <nav
+        className={styles.answerLinks}
+        aria-label={lang === 'pt' ? 'Respostas públicas' : 'Public answers'}
+        data-about-answer-links
+      >
+        {publicAnswerLinks[lang].map((link) => (
+          <Link key={link.href} href={link.href}>
+            {link.label}
+          </Link>
+        ))}
+      </nav>
     </AboutReveal>
   )
 }

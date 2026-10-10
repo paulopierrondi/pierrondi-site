@@ -1,3 +1,14 @@
+# Sessão 2026-10-10 — SEO/GEO sweep (draft)
+
+- Draft only. Do not merge. Do not deploy. Do not IndexNow until Paulo says so.
+- Live audit of https://www.pierrondi.dev: apex 308 to www; `/sprint` 404; sitemap 79 URLs, no `/sprint`. Person + ProfilePage on `/` and `/about`. Comparison brief already had Question, FAQPage and Article, canonical and hreflang. It had no comparison table. Home, `/feitos` and `/about` did not link `/answers`.
+- Meta descriptions under the 120-character floor: `/atuacao` 98, `/en/atuacao` 103, `/blog` 89, `/en/blog` 86, `/contato` 115, `/en/contato` 106, `/en/studio` 114, `/design/library` 74. Rewritten into 120–160.
+- `/answers/fractional-vs-consultoria-vs-agencia` and the EN twin gained a comparison table, a decision section and four FAQs. FAQPage JSON-LD still comes from `AnswerBrief`. No price, client, ROI, Product schema or `/sprint`.
+- Home (`data-home-answer-links`), `/feitos` (`data-feitos-answer-links`) and `/about` (`data-about-answer-links`) link the public answer briefs via `lib/seo/public-answer-links.ts`. `/feitos` primary CTA stays `/engajamento`.
+- Left untouched: draft #42 (`/sprint`), #46 (session notes only), merged #57/#59/#60, open #63 (sameAs, Fractional title, engage CTA) and draft #66 (hreflang on `/en/answers`). #63 also edits `EngageSection`; keep one answer-link row if both land.
+- Verified: `npm test` 185/185, `npx tsc --noEmit` clean, `npm run lint` clean, `npm run build` 202 pages, `/sprint` absent from the route table. Prerendered HTML: comparison title 60, description 133, canonical www, one `<table>`, FAQPage + Article, no Product, no `/sprint`. Home, `/feitos` and `/about` each emit the six PT answer hrefs. The eight rewritten descriptions land at 125–141 characters.
+- Suggested Obsidian/Linear: note this draft on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-10-05 — EN twin of the fractional comparison brief
 
 - Draft PR only. Do not merge. Deploy stays human-gated. Paulo merges.

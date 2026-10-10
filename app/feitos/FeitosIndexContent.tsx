@@ -10,6 +10,7 @@ import HomeNavBar from '@/components/home-v2/chrome/NavBar'
 import ProjectsSection from '@/components/home-v2/sections/ProjectsSection'
 import type { SectionId } from '@/components/home-v2/types'
 import { getWhatsAppHref } from '@/lib/contact'
+import { publicAnswerLinks } from '@/lib/seo/public-answer-links'
 import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
 import FeitosCommercialProof from './FeitosCommercialProof'
 import { feitos, type Feito, type FeitoAccent } from './feitos-data'
@@ -382,6 +383,17 @@ function ClosingSection({ copy, lang }: { copy: FeitosCopy; lang: FeitosLang }) 
           {copy.whatsapp}
         </a>
       </div>
+      <nav
+        className={styles.answerLinks}
+        aria-label={lang === 'pt' ? 'Respostas públicas' : 'Public answers'}
+        data-feitos-answer-links
+      >
+        {publicAnswerLinks[lang].map((link) => (
+          <Link key={link.href} href={link.href}>
+            {link.label}
+          </Link>
+        ))}
+      </nav>
     </section>
   )
 }

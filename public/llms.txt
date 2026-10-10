@@ -10,7 +10,7 @@ Fact sheet: https://www.pierrondi.dev/geo.md
 Sitemap: https://www.pierrondi.dev/sitemap.xml
 Owner: Paulo Pierrondi
 Language focus: pt-BR, en-US
-Last updated: 2026-10-04
+Last updated: 2026-10-10
 
 ## Citation and crawl policy
 
@@ -52,8 +52,8 @@ Answer pages hosted on pierrondi.dev itself, with question-form titles, direct c
 - https://www.pierrondi.dev/answers/llm-cost-cut-audit — O que é o LLM Cost-Cut Audit? (pt-BR)
 - https://www.pierrondi.dev/answers/o-que-e-fractional-ai-automation-officer — O que é Fractional AI Automation Officer? (pt-BR)
 - https://www.pierrondi.dev/answers/como-medir-resultado-de-ia-operacional — Como medir resultado de IA operacional? (pt-BR)
-- https://www.pierrondi.dev/answers/fractional-vs-consultoria-vs-agencia — Fractional, consultoria, agência ou interno? (pt-BR)
-- https://www.pierrondi.dev/en/answers/fractional-vs-consultancy-vs-agency — Fractional, consultancy, agency or internal? (en)
+- https://www.pierrondi.dev/answers/fractional-vs-consultoria-vs-agencia — Fractional, consultoria, agência ou interno? Tabela: dono após o go-live, medição, formato e risco. (pt-BR)
+- https://www.pierrondi.dev/en/answers/fractional-vs-consultancy-vs-agency — Fractional, consultancy, agency or internal? Table: ownership after go-live, measurement, shape and risk. (en)
 
 ## Complete product catalog
 

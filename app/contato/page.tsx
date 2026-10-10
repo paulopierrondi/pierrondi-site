@@ -4,7 +4,8 @@ import ContatoPageContent from './ContatoPageContent'
 
 export const metadata: Metadata = {
   title: 'Contato',
-  description: 'Entre em contato com Paulo Pierrondi para conversar sobre IA enterprise, ServiceNow, AgentOps e modelo operacional.',
+  description:
+    'Entre em contato com Paulo Pierrondi para conversar sobre IA enterprise, ServiceNow, AgentOps, modelo operacional e automações com evidência.',
   alternates: {
     canonical: '/contato',
     languages: {

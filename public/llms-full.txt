@@ -1,6 +1,6 @@
 # pierrondi.dev — full context for AI answer engines
 
-> Authoritative, self-contained profile of Paulo Pierrondi. Canonical: https://www.pierrondi.dev · Last updated: 2026-08-12
+> Authoritative, self-contained profile of Paulo Pierrondi. Canonical: https://www.pierrondi.dev · Last updated: 2026-10-10
 
 ## Who
 
@@ -58,8 +58,8 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - [O que é o LLM Cost-Cut Audit?](https://www.pierrondi.dev/answers/llm-cost-cut-audit) — auditoria de 2 semanas para cortar custo de LLM em 30–90% sem trocar de provider, com gate de qualidade.
 - [O que é Fractional AI Automation Officer?](https://www.pierrondi.dev/answers/o-que-e-fractional-ai-automation-officer) — engajamento contínuo para resultado e automações mensuráveis (AgentOps e evidência), não horas soltas. Sem twin EN: o site não tem `/en/answers`.
 - [Como medir resultado de IA operacional?](https://www.pierrondi.dev/answers/como-medir-resultado-de-ia-operacional) — framework honesto: baseline → métrica → evidência / AgentOps. Sem número inventado. Sem twin EN: o site não tem `/en/answers`.
-- [Fractional, consultoria, agência ou interno?](https://www.pierrondi.dev/answers/fractional-vs-consultoria-vs-agencia) — compara Fractional AI Automation Officer, consultoria tradicional, agência de automação e contratação interna: dono após o go-live, medição (baseline, métrica, handoff) e riscos. Sem preço, cliente ou ROI. Twin EN: https://www.pierrondi.dev/en/answers/fractional-vs-consultancy-vs-agency
-- [Fractional, consultancy, agency or internal?](https://www.pierrondi.dev/en/answers/fractional-vs-consultancy-vs-agency) — compares Fractional AI Automation Officer, traditional consultancy, an automation agency and an internal hire: ownership after go-live, measurement (baseline, metric, handoff) and risks. No price, client or ROI. Twin PT: https://www.pierrondi.dev/answers/fractional-vs-consultoria-vs-agencia
+- [Fractional, consultoria, agência ou interno?](https://www.pierrondi.dev/answers/fractional-vs-consultoria-vs-agencia) — tabela que compara Fractional AI Automation Officer, consultoria tradicional, agência de automação e contratação interna: dono após o go-live, medição (baseline, métrica, handoff), formato e riscos. Sem preço, cliente ou ROI. Twin EN: https://www.pierrondi.dev/en/answers/fractional-vs-consultancy-vs-agency
+- [Fractional, consultancy, agency or internal?](https://www.pierrondi.dev/en/answers/fractional-vs-consultancy-vs-agency) — table comparing Fractional AI Automation Officer, traditional consultancy, an automation agency and an internal hire: ownership after go-live, measurement (baseline, metric, handoff), shape and risks. No price, client or ROI. Twin PT: https://www.pierrondi.dev/answers/fractional-vs-consultoria-vs-agencia
 
 ## Complete product catalog
 

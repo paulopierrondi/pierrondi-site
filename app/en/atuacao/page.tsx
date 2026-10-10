@@ -4,7 +4,8 @@ import AtuacaoContent from '@/app/atuacao/AtuacaoContent'
 
 export const metadata: Metadata = {
   title: 'Work',
-  description: 'Where Paulo Pierrondi creates value: AI Operating Model, ServiceNow, AgentOps, and enterprise strategy.',
+  description:
+    'Where Paulo Pierrondi creates value: AI Operating Model, ServiceNow, AgentOps and enterprise strategy, from diagnosis to governed execution.',
   alternates: {
     canonical: '/en/atuacao',
     languages: {

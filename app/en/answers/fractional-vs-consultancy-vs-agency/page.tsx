@@ -59,7 +59,60 @@ export default function FractionalVsConsultancyVsAgencyAnswerPage() {
       inLanguage="en"
       eyebrow="ANSWER BRIEF — COMPARISON"
       question="Fractional, consultancy, agency or internal?"
-      directAnswer="For a mid-size operations team that needs AI automations in production, the four common paths are a Fractional AI Automation Officer, traditional consultancy, an automation agency and an internal hire. The difference that matters is structural: who owns the system after go-live, how the result is measured (baseline, metric and handoff) and which risk the team takes on. This page describes the shape of each path. It does not publish a price, a client, a logo or an ROI."
+      directAnswer="For a mid-size operations team that needs AI automations in production, the four common paths are a Fractional AI Automation Officer, traditional consultancy, an automation agency and an internal hire. The difference that matters is structural: who owns the system after go-live, how the result is measured (baseline, metric and handoff) and which risk the team takes on. The table compares those shapes on the same axes. This page does not publish a price, a client, a logo or an ROI."
+      comparison={{
+        heading: 'Comparison on the same axes',
+        caption:
+          'Usual shape of each category. It does not describe a specific firm, and it does not recommend a path without knowing who operates after go-live.',
+        columns: ['Axis', 'Fractional', 'Consultancy', 'Agency', 'Internal'],
+        rows: [
+          {
+            criterion: 'Owner after go-live',
+            cells: [
+              'The client’s team, after the handoff.',
+              'The client, only if implementation and transfer are in scope.',
+              'The client, only if access, code, exceptions and the runbook are transferred.',
+              'The hired person, if the role covers operations.',
+            ],
+          },
+          {
+            criterion: 'Measurement',
+            cells: [
+              'Baseline, an observable metric and AgentOps evidence.',
+              'Usually starts in the diagnosis and can stop on a slide.',
+              'Usually starts when the flow is delivered.',
+              'Exists only if the company already has a baseline and a metric owner.',
+            ],
+          },
+          {
+            criterion: 'Shape',
+            cells: [
+              'A continuous engagement, with gates on what is irreversible.',
+              'A project with a start and an end.',
+              'A project or retainer to build flows.',
+              'Employment, with a ramp and management.',
+            ],
+          },
+          {
+            criterion: 'Main risk',
+            cells: [
+              'Dependence until the handoff is complete.',
+              'A recommendation without an operable system.',
+              'Automation only the vendor can maintain.',
+              'A long ramp and a single person.',
+            ],
+          },
+          {
+            criterion: 'When it fits',
+            cells: [
+              'The team wants an external operator who installs and hands off.',
+              'The problem is still a diagnosis.',
+              'The flows are already specified and still need to be built.',
+              'The company wants a permanent owner and accepts the ramp.',
+            ],
+          },
+        ],
+      }}
       sections={[
         {
           heading: 'Who owns the system after go-live',
@@ -101,6 +154,18 @@ export default function FractionalVsConsultancyVsAgencyAnswerPage() {
             'Internal hire: time until the person produces, single-person risk, and the need for the method (baseline, metric, evidence) to already exist in the company.',
           ],
         },
+        {
+          heading: 'How to decide before hiring',
+          paragraphs: [
+            'The choice is not a brand. It is who has to operate afterwards. The table lines up the usual shape of each category. Answer the four questions below with the team’s real work, not with the proposal slide.',
+          ],
+          bullets: [
+            'Who keeps access, code, exceptions and the runbook the day after go-live?',
+            'Are baseline, an observable metric and handoff written into the scope, or only the delivery?',
+            'If the vendor or the person leaves, can the team still operate?',
+            'Is the proof the work that changed, or the number of published flows?',
+          ],
+        },
       ]}
       faq={[
         {
@@ -117,6 +182,26 @@ export default function FractionalVsConsultancyVsAgencyAnswerPage() {
           question: 'Where is the commercial path, and how do you measure?',
           answer:
             'The commercial path is the engagement page. The definition of the term is on the Fractional brief. The baseline, metric and evidence chain is on the measurement brief. There is no sprint published in this answer, and there is no Product schema.',
+        },
+        {
+          question: 'What is the practical difference between fractional and consultancy?',
+          answer:
+            'Traditional consultancy usually ends at the diagnosis or the recommendation. The fractional format of this portfolio continues until the system is in production and the handoff gives ownership to the team. If the scope is only a report, the name fractional does not describe the work.',
+        },
+        {
+          question: 'Do an automation agency and a fractional engagement deliver the same thing?',
+          answer:
+            'No. An agency, in the usual format, optimizes building flows. Fractional work optimizes the operating model: baseline, metric, evidence and what the team inherits. If operations stay at the agency, go-live did not transfer ownership.',
+        },
+        {
+          question: 'Does hiring internally replace an external operator?',
+          answer:
+            'It replaces one when the company wants a permanent owner and accepts the ramp, the management and the single-person risk. It does not replace the method. The role does not create a baseline, a metric and evidence by itself. An external operator can install that method and leave at the handoff; the internal person stays to run it.',
+        },
+        {
+          question: 'What should you ask before choosing a path?',
+          answer:
+            'Four questions are enough: who operates after go-live; whether baseline, metric and handoff are in scope; what happens when the vendor or the person leaves; and whether the proof is the work that changed or only a published flow. Price answers none of them.',
         },
       ]}
       internalLinks={[
@@ -146,13 +231,33 @@ export default function FractionalVsConsultancyVsAgencyAnswerPage() {
           description: 'Talk with context, or start on the site WhatsApp.',
         },
         {
+          href: '/en/about',
+          label: 'About Paulo Pierrondi',
+          description: 'Trajectory and the public profile. The jobTitle stays Technical Account Executive.',
+        },
+        {
+          href: '/en/atuacao',
+          label: 'Work',
+          description: 'Where the work creates value: operating model, ServiceNow, AgentOps and strategy.',
+        },
+        {
+          href: '/en/answers/what-is-agentops',
+          label: 'What is AgentOps?',
+          description: 'The evidence layer: what ran, who approved it and what the team inherits.',
+        },
+        {
+          href: '/en/answers/who-is-paulo-pierrondi',
+          label: 'Who is Paulo Pierrondi?',
+          description: 'Citable brief of the author, distinct from any marketplace listing.',
+        },
+        {
           href: ptPath,
           label: 'Portuguese original',
           description: 'The pt-BR brief this page mirrors.',
         },
       ]}
       datePublished="2026-10-05"
-      dateModified="2026-10-05"
+      dateModified="2026-10-10"
     />
   )
 }

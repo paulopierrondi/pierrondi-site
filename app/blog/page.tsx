@@ -4,7 +4,8 @@ import BlogContent from './BlogContent'
 
 export const metadata: Metadata = {
   title: 'Ideias — IA enterprise, ServiceNow e AgentOps',
-  description: 'Notas sobre IA enterprise, ServiceNow, AgentOps, modelo operacional e execução governada.',
+  description:
+    'Notas sobre IA enterprise, ServiceNow, AgentOps, modelo operacional e execução governada — ensaios curtos de campo, sem hype.',
   alternates: {
     canonical: '/blog',
     languages: {

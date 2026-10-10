@@ -10,7 +10,8 @@ import { Separator } from '@/components/design-system/ui/separator'
 
 export const metadata: Metadata = {
   title: 'Library — Componentes reais',
-  description: 'Biblioteca de componentes React prontos para uso no ecossistema Pierrondi.',
+  description:
+    'Biblioteca de componentes React do ecossistema Pierrondi: blocos reais com Tailwind, prontos para copiar, remixar e usar em produtos.',
   alternates: { canonical: '/design/library' },
 }
 
