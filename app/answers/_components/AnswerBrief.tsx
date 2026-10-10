@@ -16,6 +16,13 @@ export type AnswerInternalLink = {
   description: string
 }
 
+export type AnswerComparison = {
+  heading: string
+  caption: string
+  columns: string[]
+  rows: Array<{ criterion: string; cells: string[] }>
+}
+
 export type AnswerBriefProps = {
   /** Route path, e.g. /answers/o-que-e-agentops */
   path: string
@@ -29,6 +36,7 @@ export type AnswerBriefProps = {
     paragraphs?: string[]
     bullets?: string[]
   }>
+  comparison?: AnswerComparison
   faq: AnswerFaqItem[]
   internalLinks: AnswerInternalLink[]
   datePublished: string
@@ -116,6 +124,7 @@ export default function AnswerBrief({
   question,
   directAnswer,
   sections,
+  comparison,
   faq,
   internalLinks,
   datePublished,
@@ -146,6 +155,36 @@ export default function AnswerBrief({
         <div className={styles.directAnswer}>
           <p>{directAnswer}</p>
         </div>
+
+        {comparison ? (
+          <section className={styles.section} aria-labelledby="comparison-heading">
+            <h2 id="comparison-heading">{comparison.heading}</h2>
+            <div className={styles.tableWrap}>
+              <table className={styles.table}>
+                <caption>{comparison.caption}</caption>
+                <thead>
+                  <tr>
+                    {comparison.columns.map((column) => (
+                      <th key={column} scope="col">
+                        {column}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparison.rows.map((row) => (
+                    <tr key={row.criterion}>
+                      <th scope="row">{row.criterion}</th>
+                      {row.cells.map((cell, index) => (
+                        <td key={`${row.criterion}-${index}`}>{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ) : null}
 
         {sections.map((section) => (
           <section key={section.heading} className={styles.section}>

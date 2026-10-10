@@ -636,7 +636,8 @@
 .closing .eyebrow,
 .closing h2,
 .closing > p,
-.closingActions { position: relative; z-index: 1; }
+.closingActions,
+.answerLinks { position: relative; z-index: 1; }
 .closing .eyebrow { grid-column: 1 / -1; }
 .closing > p { max-width: 53ch; margin: 0; color: var(--color-body); font-size: 17px; line-height: 1.62; }
 .closingActions {
@@ -646,6 +647,27 @@
   width: fit-content;
   align-self: end;
   justify-self: start;
+}
+
+.answerLinks {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  max-width: 72ch;
+}
+
+.answerLinks a {
+  color: var(--color-body-strong);
+  font-size: 13px;
+  line-height: 1.45;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.answerLinks a:hover,
+.answerLinks a:focus-visible {
+  color: var(--color-primary);
 }
 
 @media (max-width: 980px) {

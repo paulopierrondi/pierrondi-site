@@ -243,6 +243,14 @@ test('static metadata descriptions stay inside the 120–160 convention', async 
     'app/privacy/page.tsx',
     'app/termos/page.tsx',
     'app/terms/page.tsx',
+    'app/atuacao/page.tsx',
+    'app/en/atuacao/page.tsx',
+    'app/blog/page.tsx',
+    'app/en/blog/page.tsx',
+    'app/contato/page.tsx',
+    'app/en/contato/page.tsx',
+    'app/en/studio/page.tsx',
+    'app/design/library/page.tsx',
   ]) {
     const row = checked.find((item) => item.file === file)
     assert.ok(row, `missing ${file}`)

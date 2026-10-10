@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
+import { publicAnswerLinks } from '@/lib/seo/public-answer-links'
 import type { Lang, SectionProps } from '../types'
 import styles from './EngageSection.module.css'
 
@@ -16,6 +17,7 @@ type EngageCopy = {
   primary: { label: string; href: string }
   secondary: { label: string; href: string }
   actionsLabel: string
+  answersLabel: string
 }
 
 const ENGAGE: Record<Lang, EngageCopy> = {
@@ -32,6 +34,7 @@ const ENGAGE: Record<Lang, EngageCopy> = {
     primary: { label: 'abrir /engajamento', href: '/engajamento' },
     secondary: { label: 'contato', href: '#contact' },
     actionsLabel: 'Como engajar',
+    answersLabel: 'Respostas públicas',
   },
   en: {
     eyebrow: 'HOW TO ENGAGE',
@@ -46,6 +49,7 @@ const ENGAGE: Record<Lang, EngageCopy> = {
     primary: { label: 'open /en/engajamento', href: '/en/engajamento' },
     secondary: { label: 'contact', href: '#contact' },
     actionsLabel: 'How to engage',
+    answersLabel: 'Public answers',
   },
 }
 
@@ -86,6 +90,13 @@ export default function EngageSection({ lang }: SectionProps) {
             {copy.secondary.label}
           </a>
         </div>
+        <nav className={styles.answers} aria-label={copy.answersLabel} data-home-answer-links>
+          {publicAnswerLinks[lang].map((link) => (
+            <Link key={link.href} href={link.href}>
+              {link.label}
+            </Link>
+          ))}
+        </nav>
       </div>
     </aside>
   )

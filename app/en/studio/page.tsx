@@ -7,7 +7,7 @@ import { SITE_URL } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Pierrondi Studio — brand, content and AI',
   description:
-    'Strategy, branding, audiovisual content, CRM, and AI automation turned into controlled, executable growth systems.',
+    'Strategy, branding, audiovisual content, CRM and AI automation turned into controlled, executable growth systems by Pierrondi Studio.',
   alternates: {
     canonical: '/en/studio',
     languages: { 'pt-BR': '/studio', 'en-US': '/en/studio', 'x-default': '/studio' },

@@ -729,6 +729,28 @@
   max-width: 760px;
 }
 
+.answerLinks {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  max-width: 760px;
+  margin-top: 8px;
+}
+
+.answerLinks a {
+  color: var(--color-body-strong);
+  font-size: 14px;
+  line-height: 1.45;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.answerLinks a:hover,
+.answerLinks a:focus-visible {
+  color: var(--color-primary);
+}
+
 @media (max-width: 1040px) {
   .heroGrid,
   .qualitiesSection,
