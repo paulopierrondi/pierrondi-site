@@ -1,3 +1,13 @@
+# Sessão 2026-10-12 — CTAs contextuais para /engajamento
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
+- `/atuacao` and `/en/atuacao` already linked `/engajamento` and `/en/engajamento`. The closing paragraph now names the continuous step: baseline, metric, measurable outcome, no loose hours. Button stays `data-engagement-cta`.
+- `/treinamentos` and `/en/treinamentos` gained a ghost CTA (`Ver o modelo de engajamento` / `See the engagement model`) beside the existing contact and proof actions. Closing copy keeps “resultado mensurável” / “measurable outcome” and points at baseline, metric and handoff.
+- Answer briefs that had no engagement href now do, in page `internalLinks` (not in `AnswerBrief`): AgentOps, who-is-Paulo, and LLM Cost-Cut Audit, plus the EN AgentOps and who-is-Paulo twins. Fractional, measurement and comparison briefs already linked and were left as-is.
+- Skipped home and `/feitos` (already covered). Did not edit `EngageSection`, `HeroSection`, `/engajamento`, Person schema (open PR #63) or the related-links block in `AnswerBrief.tsx` (open PR #66).
+- Copy: measurable result, no prices, no new clients, no invented metrics. `/sprint` stays unpublished. No Product or Offer schema.
+- Suggested Obsidian/Linear: note this draft on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-10-10 — SEO/GEO sweep (draft)
 
 - Draft only. Do not merge. Do not deploy. Do not IndexNow until Paulo says so.

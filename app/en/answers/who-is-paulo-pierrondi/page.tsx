@@ -94,6 +94,12 @@ export default function WhoIsPauloPierrondiAnswerPage() {
         },
       ]}
       internalLinks={[
+        {
+          href: '/en/engajamento',
+          label: 'Engagement model',
+          description:
+            'The continuous offer in this portfolio: a measurable outcome with baseline, system, metric and handoff.',
+        },
         { href: '/en/about', label: 'About', description: 'Full trajectory, competencies and certifications.' },
         { href: '/en/portfolio', label: 'Portfolio', description: 'Product-engineering cases and the verified App Store catalog.' },
         { href: '/paulo', label: 'Public profile', description: 'Public summary of the professional profile.' },

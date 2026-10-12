@@ -38,7 +38,7 @@ const copy: Record<
     },
     final: {
       h2: 'Quer ver aplicações concretas?',
-      p: 'Os feitos mostram como esses pilares viram sistema, demo e execução. Para instalar esses pilares dentro do seu time, os treinamentos cobrem IA aplicada, Vibe Coding, ServiceNow e AgentOps.',
+      p: 'Os feitos mostram como esses pilares viram sistema, demo e execução. Para instalar esses pilares dentro do seu time, os treinamentos cobrem IA aplicada, Vibe Coding, ServiceNow e AgentOps. O modelo de engajamento é o passo contínuo: baseline, métrica e resultado mensurável, sem horas soltas.',
       cta: 'Ver os feitos',
       trainingCta: 'Ver os treinamentos',
       trainingHref: '/treinamentos',
@@ -55,7 +55,7 @@ const copy: Record<
     },
     final: {
       h2: 'Want to see concrete applications?',
-      p: 'The work index shows how these pillars become systems, demos, and execution. To install these pillars inside your team, the training tracks cover applied AI, Vibe Coding, ServiceNow, and AgentOps.',
+      p: 'The work index shows how these pillars become systems, demos, and execution. To install these pillars inside your team, the training tracks cover applied AI, Vibe Coding, ServiceNow, and AgentOps. The engagement model is the continuous step: baseline, metric, and a measurable outcome, not loose hours.',
       cta: 'See the work',
       trainingCta: 'See the training',
       trainingHref: '/en/treinamentos',
@@ -239,7 +239,7 @@ export default function AtuacaoContent({ lang }: { lang: AtuacaoLang }) {
             <Link href={c.final.trainingHref} className={styles.btnGhost}>
               {c.final.trainingCta} <span aria-hidden="true">→</span>
             </Link>
-            <Link href={c.final.engagementHref} className={styles.btnGhost}>
+            <Link href={c.final.engagementHref} className={styles.btnGhost} data-engagement-cta>
               {c.final.engagementCta} <span aria-hidden="true">→</span>
             </Link>
           </div>

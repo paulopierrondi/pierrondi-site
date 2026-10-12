@@ -92,6 +92,12 @@ export default function QuemEPauloPierrondiAnswerPage() {
         },
       ]}
       internalLinks={[
+        {
+          href: '/engajamento',
+          label: 'Modelo de engajamento',
+          description:
+            'A oferta contínua neste portfólio: resultado mensurável com baseline, sistema, métrica e handoff.',
+        },
         { href: '/about', label: 'About', description: 'Trajetória completa, competências e certificações.' },
         { href: '/portfolio', label: 'Portfolio', description: 'Cases de engenharia de produto e o catálogo verificado da App Store.' },
         { href: '/paulo', label: 'Perfil público', description: 'Resumo público do perfil profissional.' },
