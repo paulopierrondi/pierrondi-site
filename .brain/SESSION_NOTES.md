@@ -6,7 +6,8 @@
 - Answer briefs that had no engagement href now do, in page `internalLinks` (not in `AnswerBrief`): AgentOps, who-is-Paulo, and LLM Cost-Cut Audit, plus the EN AgentOps and who-is-Paulo twins. Fractional, measurement and comparison briefs already linked and were left as-is.
 - Skipped home and `/feitos` (already covered). Did not edit `EngageSection`, `HeroSection`, `/engajamento`, Person schema (open PR #63) or the related-links block in `AnswerBrief.tsx` (open PR #66).
 - Copy: measurable result, no prices, no new clients, no invented metrics. `/sprint` stays unpublished. No Product or Offer schema.
-- Suggested Obsidian/Linear: note this draft on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+- Verified: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 188/188, `npm run build` 202 pages, `/sprint` absent from the route table. Prerendered HTML for `/atuacao`, `/en/atuacao`, `/treinamentos`, `/en/treinamentos`, and the five newly linked briefs contains the locale href and no Product/Offer. `next start` on port 3456: training and AgentOps clicks land on `/engajamento`; EN training lands on `/en/engajamento`; `/sprint` is 404.
+- Suggested Obsidian/Linear: note draft PR #68 on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
 
 # Sessão 2026-10-10 — SEO/GEO sweep (draft)
 
