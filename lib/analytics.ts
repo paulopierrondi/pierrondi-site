@@ -1,3 +1,5 @@
+import { trackGa4Conversion } from '@/lib/ga4-conversions'
+
 declare global {
   interface Window {
     plausible?: (eventName: string, options?: { props?: Record<string, string | number | boolean> }) => void
@@ -35,6 +37,10 @@ export function trackEvent(eventName: string, props: EventProps = {}) {
       Contact_Form_Error: 'contact_form_error',
       ThankYou_Viewed: 'lead_confirmation_viewed',
     }[eventName] || eventName.toLowerCase().replace(/[^a-z0-9_]/g, '_').slice(0, 40)
+    if (ga4EventName === 'generate_lead') {
+      trackGa4Conversion(ga4EventName, cleanProps)
+      return
+    }
     window.gtag('event', ga4EventName, cleanProps)
   }
 }

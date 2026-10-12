@@ -6,6 +6,7 @@ import LanguageSwitcher from '@/components/LanguageSwitcher'
 import SiteJsonLdWrapper from '@/components/SiteJsonLdWrapper'
 import DocumentLangSync from '@/components/DocumentLangSync'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
+import Ga4ConversionListener from '@/components/Ga4ConversionListener'
 import SiteNav from '@/components/SiteNav'
 import SiteFooter from '@/components/SiteFooter'
 import HomeBackground from '@/components/HomeBackground'
@@ -193,6 +194,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteNav />
         <LanguageSwitcher />
         <GoogleAnalytics measurementId={GA4_MEASUREMENT_ID} />
+        <Ga4ConversionListener />
         {children}
         <SiteFooter />
         <CookieBanner />
