@@ -7,7 +7,15 @@ import { resolveLocalizedPath } from '../lib/i18n/site-language.ts'
 
 const root = new URL('..', import.meta.url)
 
-const redirectingAnswersUrl = /['"](?:pt-BR|en-US|x-default|pt|en)['"]\s*:\s*['"](?:\/answers|https:\/\/www\.pierrondi\.dev\/answers)['"]/
+// Quoted or bare keys. The value must be the bare /answers URL, not a brief under it.
+const redirectingAnswersUrl =
+  /(?:['"](?:pt-BR|en-US|x-default|pt|en)['"]|\b(?:pt-BR|en-US|x-default|pt|en))\s*:\s*['"](?:\/answers|https:\/\/www\.pierrondi\.dev\/answers)['"]/
+
+const BRIEF_PAIRS = [
+  ['/answers/quem-e-paulo-pierrondi', '/en/answers/who-is-paulo-pierrondi'],
+  ['/answers/o-que-e-agentops', '/en/answers/what-is-agentops'],
+  ['/answers/fractional-vs-consultoria-vs-agencia', '/en/answers/fractional-vs-consultancy-vs-agency'],
+]
 
 async function sourceFiles(dir) {
   const entries = await readdir(dir, { withFileTypes: true })
@@ -76,6 +84,8 @@ test('English surfaces link internally to /en/answers', async () => {
   assert.match(footer, /label: 'Answer briefs', href: '\/en\/answers'/)
   assert.match(brief, /href: '\/en\/answers'/)
   assert.match(brief, /item: `\$\{SITE_URL\}\/en\/answers`/)
+  assert.match(brief, /comparison\?/)
+  assert.match(brief, /comparison\.rows\.map/)
 
   for (const slug of [
     'who-is-paulo-pierrondi',
@@ -86,5 +96,25 @@ test('English surfaces link internally to /en/answers', async () => {
     assert.match(page, /AnswerBrief/)
     assert.match(page, /inLanguage="en"/)
     assert.match(page, new RegExp(`const path = '/en/answers/${slug}'`))
+  }
+})
+
+test('answer brief hreflang pairs are reciprocal, self-referencing, and x-default to Portuguese', async () => {
+  for (const [ptPath, enPath] of BRIEF_PAIRS) {
+    const pt = await readFile(new URL(`../app${ptPath}/page.tsx`, import.meta.url), 'utf8')
+    const en = await readFile(new URL(`../app${enPath}/page.tsx`, import.meta.url), 'utf8')
+
+    assert.match(pt, new RegExp(`const path = '${ptPath}'`))
+    assert.match(pt, /canonical:\s*path/)
+    assert.match(pt, /'pt-BR':\s*path/)
+    assert.match(pt, new RegExp(`'en-US':\\s*'${enPath}'`))
+    assert.match(pt, /'x-default':\s*path/)
+
+    assert.match(en, new RegExp(`const path = '${enPath}'`))
+    assert.match(en, new RegExp(`const ptPath = '${ptPath}'`))
+    assert.match(en, /canonical:\s*path/)
+    assert.match(en, /'en-US':\s*path/)
+    assert.match(en, /'pt-BR':\s*ptPath/)
+    assert.match(en, /'x-default':\s*ptPath/)
   }
 })
