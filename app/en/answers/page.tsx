@@ -31,13 +31,11 @@ export const metadata: Metadata = {
   title: 'English answer briefs',
   description:
     'English answer briefs: who Paulo Pierrondi is, what AgentOps is, and fractional versus consultancy, agency or internal hire.',
+  // No pt-BR / x-default alternate. /answers 308s to /ai-search, and
+  // /ai-search is an English citation portfolio, not a translation of
+  // this English brief index. Individual briefs keep their own pairs.
   alternates: {
     canonical: path,
-    languages: {
-      'pt-BR': '/answers',
-      'en-US': path,
-      'x-default': '/answers',
-    },
   },
   robots: { index: true, follow: true },
 }
