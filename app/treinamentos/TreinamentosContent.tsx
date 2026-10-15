@@ -6,9 +6,9 @@ import styles from './Treinamentos.module.css'
 
 const LINKEDIN_URL = 'https://br.linkedin.com/in/paulopierrondi'
 
-const routes: Record<HomeLang, { contact: string; proof: string }> = {
-  pt: { contact: '/contato', proof: '/feitos' },
-  en: { contact: '/en/contato', proof: '/en/feitos' },
+const routes: Record<HomeLang, { contact: string; proof: string; engagement: string }> = {
+  pt: { contact: '/contato', proof: '/feitos', engagement: '/engajamento' },
+  en: { contact: '/en/contato', proof: '/en/feitos', engagement: '/en/engajamento' },
 }
 
 export default function TreinamentosContent({ lang }: { lang: HomeLang }) {
@@ -129,6 +129,9 @@ export default function TreinamentosContent({ lang }: { lang: HomeLang }) {
           <div className={styles.finalActions}>
             <Link href={route.contact} className={styles.btnPrimary}>
               {copy.final.primary} <span aria-hidden="true">→</span>
+            </Link>
+            <Link href={route.engagement} className={styles.btnGhost} data-engagement-cta>
+              {copy.final.engagement} <span aria-hidden="true">→</span>
             </Link>
             <Link href={route.proof} className={styles.btnGhost}>
               {copy.final.secondary} <span aria-hidden="true">→</span>
