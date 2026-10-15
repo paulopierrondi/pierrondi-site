@@ -1,3 +1,12 @@
+# Sessão 2026-10-15 — recheck /engajamento links after #67
+
+- Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow not submitted.
+- Branch was already on current `main` (`c9df1d4`, comparison table and EngageSection from #67). Rebase was a no-op. No conflict with those files.
+- New hrefs still return 200: `/engajamento` and `/en/engajamento`. Touched pages keep self-referencing www canonicals. Existing brief hreflang pairs stay reciprocal with `x-default` on the Portuguese URL.
+- `/sprint` stays 404 and out of the sitemap. GA4 id unchanged. No Product or Offer schema added.
+- Verified: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 188/188, `npm run build` 202 pages, `/sprint` absent from the route table. Browser: training, English training, atuação, and the AgentOps related link open the locale engagement page. The training CTA stays visible at phone width.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #68 was rechecked after #67 and stays merge-ready. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-10-12 — CTAs contextuais para /engajamento
 
 - Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
