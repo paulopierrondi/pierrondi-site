@@ -4,11 +4,11 @@ import styles from '@/app/apps/directory.module.css'
 
 export const metadata: Metadata = {
   title: 'App information & support',
-  description: 'Find product information, support and privacy details for apps by Paulo Pierrondi.',
+  description: 'Browse app information and support pages from Paulo Pierrondi, with product details, privacy policies, terms and contact options for each app.',
   alternates: { canonical: '/apps' },
   openGraph: {
     title: 'App information & support',
-    description: 'Find product information, support and privacy details for each app.',
+    description: 'Browse app information and support pages from Paulo Pierrondi, with product details, privacy policies, terms and contact options for each app.',
     url: '/apps', type: 'website', locale: 'en_US',
     images: [{ url: '/og', width: 1200, height: 630, alt: 'App information and support — Paulo Pierrondi' }],
   },
