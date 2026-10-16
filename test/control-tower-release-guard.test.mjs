@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
 const controlTowerPage = await readFile(
-  new URL('../app/control_tower/page.tsx', import.meta.url),
+  new URL('../app/(pt)/control_tower/page.tsx', import.meta.url),
   'utf8',
 )
 const planActionRoute = await readFile(

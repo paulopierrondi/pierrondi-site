@@ -3,10 +3,10 @@ import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
 const guardedPages = await Promise.all([
-  readFile(new URL('../app/fso/page.tsx', import.meta.url), 'utf8'),
-  readFile(new URL('../app/itau/page.tsx', import.meta.url), 'utf8'),
-  readFile(new URL('../app/bradesco-26/page.tsx', import.meta.url), 'utf8'),
-  readFile(new URL('../app/bradesco-26/slides/page.tsx', import.meta.url), 'utf8'),
+  readFile(new URL('../app/(en)/fso/page.tsx', import.meta.url), 'utf8'),
+  readFile(new URL('../app/(pt)/itau/page.tsx', import.meta.url), 'utf8'),
+  readFile(new URL('../app/(pt)/bradesco-26/page.tsx', import.meta.url), 'utf8'),
+  readFile(new URL('../app/(pt)/bradesco-26/slides/page.tsx', import.meta.url), 'utf8'),
 ])
 
 const sitemapSource = await readFile(new URL('../app/sitemap.ts', import.meta.url), 'utf8')

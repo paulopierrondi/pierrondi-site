@@ -16,13 +16,13 @@ const [
   homeEn,
   siteSchema,
 ] = await Promise.all([
-  read('app/layout.tsx'),
+  read('components/SiteRootDocument.tsx'),
   read('components/GoogleAnalytics.tsx'),
   read('components/CookieBanner.tsx'),
   read('next.config.ts'),
   read('app/sitemap.ts'),
-  read('app/page.tsx'),
-  read('app/en/page.tsx'),
+  read('app/(pt)/page.tsx'),
+  read('app/(en)/en/page.tsx'),
   read('components/SiteJsonLd.tsx'),
 ])
 

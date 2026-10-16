@@ -37,7 +37,7 @@ test('portfolio copy avoids freelancer and ownership positioning', () => {
 })
 
 test('localized English portfolio route exists', async () => {
-  await access(new URL('app/en/portfolio/page.tsx', root))
+  await access(new URL('app/(en)/en/portfolio/page.tsx', root))
 })
 
 test('Luar do Campo is a localized, evidence-backed confidential client case', async () => {
