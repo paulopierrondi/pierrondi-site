@@ -136,7 +136,7 @@ test('course schema stays honest: no invented price and no dangling references',
       assert.ok(course.name)
       assert.ok(course.teaches.length > 0)
       assert.match(course.provider['@id'], /#organization$/)
-      assert.match(course.instructor['@id'], /#person$/)
+      assert.equal(course.instructor, undefined)
     }
   }
 })

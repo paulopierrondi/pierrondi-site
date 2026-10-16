@@ -44,10 +44,7 @@ const CANONICAL_REDIRECTS = [
   { source: '/agentes', destination: '/feitos', permanent: true },
   { source: '/app-store-connect', destination: '/atuacao', permanent: true },
   { source: '/app', destination: '/portfolio', permanent: true },
-  // /apps was advertised as a historical support-page index in llms-full.txt but
-  // never shipped a hub page (AGE-2790). /app already aliases to /portfolio; keep
-  // the plural hub on the same destination so crawlers stop recording a live 404.
-  { source: '/apps', destination: '/portfolio', permanent: true },
+  // /apps now serves the static product/support directory (AGE-4006).
   { source: '/en/apps', destination: '/en/portfolio', permanent: true },
   { source: '/portifolio', destination: '/portfolio', permanent: true },
   { source: '/en/portifolio', destination: '/en/portfolio', permanent: true },

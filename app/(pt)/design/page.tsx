@@ -65,6 +65,7 @@ export default function DesignVaultPage() {
               <LayoutGrid aria-hidden="true" />
               Ver componentes
             </a>
+            <a href="/design/library">Abrir biblioteca</a>
             <a href="#operacao">
               <Braces aria-hidden="true" />
               Ver operação
