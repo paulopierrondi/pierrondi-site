@@ -1,0 +1,85 @@
+import type { Metadata } from 'next'
+import LegalDocument from '@/components/LegalDocument'
+
+export const metadata: Metadata = {
+  title: 'Privacy',
+  description: "How pierrondi.dev handles contact data on Paulo Pierrondi's personal site: what is collected, why, analytics and cookies, and how to ask for removal.",
+  openGraph: { url: '/privacy', locale: 'en_US', type: 'website', siteName: 'pierrondi.dev', images: ['/og'] },
+  alternates: {
+    canonical: '/privacy',
+    languages: {
+      'pt-BR': '/privacidade',
+      'en-US': '/privacy',
+    },
+  },
+}
+
+export default function PrivacyPolicyPage() {
+  return (
+    <LegalDocument
+      eyebrow="Legal"
+      title="Privacy."
+      lead={
+        <>
+        How we handle your data when you contact pierrondi.dev. Direct, without
+        unnecessary legalese.
+        </>
+      }
+    >
+        <p>Last updated: June 2026.</p>
+
+        <h2>1. Data we collect</h2>
+        <p>
+          We collect the name, email, and message you actively send through the
+          form, email, LinkedIn, or WhatsApp. When analytics is configured, the
+          site may also process aggregate page-view and technical information
+          needed to understand reliability and content performance.
+        </p>
+
+        <h2>2. How we use it</h2>
+        <p>
+          Your data is used exclusively to reply to your contact and continue
+          the conversation. We do not sell, rent, or share your data with third
+          parties for marketing purposes.
+        </p>
+
+        <h2>3. Cookies, local storage, and analytics</h2>
+        <p>
+          The site stores your cookie preference in browser local storage.
+          Plausible may be used for aggregate, privacy-focused traffic
+          measurement. Google Analytics is loaded only after you choose
+          &quot;Accept all&quot;; IP anonymization is requested in its site
+          configuration. Choosing &quot;Essential only&quot; leaves Google
+          Analytics disabled.
+        </p>
+
+        <h2>4. Retention</h2>
+        <p>
+          Contact data is kept only as long as needed for the conversation or
+          project. Minimal records may be kept for tax, contractual, or security
+          obligations. Analytics providers apply their own configured retention
+          periods. You can request deletion of contact data at any time.
+        </p>
+
+        <h2>5. Your rights</h2>
+        <p>
+          You can request access, correction, or deletion of your data by writing
+          to <a href="mailto:pierrondi@gmail.com">pierrondi@gmail.com</a>. We
+          respond within a reasonable timeframe.
+        </p>
+
+        <h2>6. Security</h2>
+        <p>
+          We use reasonable technical and organizational measures to protect
+          your data. No system is perfectly immune, but we treat your
+          information with the same governance rigor applied to projects.
+        </p>
+
+        <h2>7. Contact</h2>
+        <p>
+          Privacy questions? Email{' '}
+          <a href="mailto:pierrondi@gmail.com">pierrondi@gmail.com</a>.
+        </p>
+    </LegalDocument>
+  )
+}

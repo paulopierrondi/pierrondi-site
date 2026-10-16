@@ -22,8 +22,8 @@ const answers = JSON.parse(await readFile(new URL('public/answers.json', root), 
 
 test('Pierrondi Studio has complete PT and EN public routes', async () => {
   await Promise.all([
-    access(new URL('app/studio/page.tsx', root)),
-    access(new URL('app/en/studio/page.tsx', root)),
+    access(new URL('app/(pt)/studio/page.tsx', root)),
+    access(new URL('app/(en)/en/studio/page.tsx', root)),
   ])
 
   assert.equal(resolveLocalizedPath('/studio', 'en'), '/en/studio')

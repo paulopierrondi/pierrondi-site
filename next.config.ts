@@ -147,6 +147,7 @@ const HOST_REDIRECTS = [
 const nextConfig: NextConfig = {
   serverExternalPackages: ['ffmpeg-static', 'ffprobe-static'],
   experimental: {
+    globalNotFound: true,
     optimizePackageImports: ['lucide-react', 'framer-motion', '@base-ui/react'],
   },
   // CI runs `tsc --noEmit` and `eslint` as separate steps. Next 16 already
