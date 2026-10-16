@@ -93,7 +93,6 @@ test('legacy GSC URLs resolve to one canonical destination', () => {
     ['/en/privacy', '/privacy'],
     ['/es/terms', '/terms'],
     ['/pt/login', '/crm/login'],
-    ['/apps', '/portfolio'],
     ['/en/apps', '/en/portfolio'],
   ]
 

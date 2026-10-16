@@ -38,7 +38,6 @@ const studioSchema = {
   name: 'Pierrondi Studio',
   serviceType: 'Estratégia de marca, conteúdo audiovisual e automação comercial com IA',
   description: STUDIO_COPY.pt.positioning,
-  inLanguage: 'pt-BR',
   provider: { '@id': `${SITE_URL}/#person` },
   brand: { '@type': 'Brand', name: 'Pierrondi Studio' },
   hasOfferCatalog: {
