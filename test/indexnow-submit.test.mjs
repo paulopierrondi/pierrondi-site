@@ -6,6 +6,9 @@ import { fileURLToPath } from 'node:url'
 
 const root = new URL('..', import.meta.url)
 const publicDir = new URL('../public/', import.meta.url)
+// Preloaded into the child process so the sitemap is served from a local fixture
+// instead of the live site (which returns 502 while a deploy is swapping).
+const mockFetchPreload = fileURLToPath(new URL('./fixtures/indexnow-mock-fetch.mjs', import.meta.url))
 
 test('IndexNow key is 32 hex chars and served as /{key}.txt at site root', async () => {
   const pointer = (await readFile(new URL('../public/indexnow-key.txt', import.meta.url), 'utf8')).trim()
@@ -29,7 +32,7 @@ test('IndexNow submit script excludes /sprint and defaults to dry-run', async ()
   assert.match(script, /dry-run/)
   assert.doesNotMatch(script, /shouldSubmit\s*=\s*true/)
 
-  const result = spawnSync(process.execPath, ['scripts/indexnow-submit.mjs'], {
+  const result = spawnSync(process.execPath, ['--import', mockFetchPreload, 'scripts/indexnow-submit.mjs'], {
     cwd: fileURLToPath(root),
     encoding: 'utf8',
     timeout: 60000,
@@ -42,6 +45,10 @@ test('IndexNow submit script excludes /sprint and defaults to dry-run', async ()
 
   const summary = JSON.parse(result.stdout.split('\n\n')[0])
   assert.ok(summary.submitUrlCount > 0)
+  // Fixture has 8 <loc> entries: 2 under /sprint (skipped) and 1 duplicate (deduped).
+  assert.equal(summary.sitemapUrlCount, 8)
+  assert.equal(summary.skippedSprintCount, 2)
+  assert.equal(summary.submitUrlCount, 5)
   for (const url of summary.skippedSprint || []) {
     assert.match(url, /\/sprint/)
   }
