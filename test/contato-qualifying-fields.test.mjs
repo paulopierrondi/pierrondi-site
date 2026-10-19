@@ -7,8 +7,8 @@ const read = (file) => readFile(new URL(`../${file}`, import.meta.url), 'utf8')
 const [form, content, ptPage, enPage, route, sitemap, nextConfig] = await Promise.all([
   read('app/contato/ContatoForm.tsx'),
   read('app/contato/ContatoPageContent.tsx'),
-  read('app/contato/page.tsx'),
-  read('app/en/contato/page.tsx'),
+  read('app/(pt)/contato/page.tsx'),
+  read('app/(en)/en/contato/page.tsx'),
   read('app/api/contact/route.ts'),
   read('app/sitemap.ts'),
   read('next.config.ts'),

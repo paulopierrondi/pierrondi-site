@@ -1,3 +1,9 @@
+# Sessão 2026-10-19 — Qualificadores de /contato no layout SSR
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- CI `build` on `a01474c` failed because `test/contato-qualifying-fields.test.mjs` still opened `app/contato/page.tsx` and `app/en/contato/page.tsx`. #71 moved those routes to `app/(pt)/contato/page.tsx` and `app/(en)/en/contato/page.tsx`. The form, labels and `POST /api/contact` already lived in `app/contato/ContatoForm.tsx`, `app/contato/ContatoPageContent.tsx` and `app/api/contact/route.ts`, which both locale pages still render.
+- The test now reads the route-group pages. Qualifier fields, honeypot and scope-diagnosis copy are unchanged. `/sprint` stays unpublished. No Product/Offer schema. GA4 untouched.
+
 # Sessão 2026-10-12 — Qualificadores opcionais em /contato
 
 - Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
