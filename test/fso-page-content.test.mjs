@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
-const pageSource = await readFile(new URL('../app/fso/page.tsx', import.meta.url), 'utf8')
+const pageSource = await readFile(new URL('../app/(en)/fso/page.tsx', import.meta.url), 'utf8')
 const experienceSource = await readFile(new URL('../app/fso/FsoExperience.tsx', import.meta.url), 'utf8')
 const siteLanguageSource = await readFile(new URL('../lib/i18n/site-language.ts', import.meta.url), 'utf8')
 

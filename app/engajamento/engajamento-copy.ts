@@ -223,7 +223,6 @@ export function buildEngajamentoSchema(lang: EngajamentoLang) {
         name: copy.metaName,
         serviceType: copy.serviceType,
         description: copy.metaDescription,
-        inLanguage: copy.locale,
         provider: { '@id': `${SITE_URL}/#person` },
         areaServed: { '@type': 'AdministrativeArea', name: 'Brazil' },
       },
