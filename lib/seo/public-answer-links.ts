@@ -23,6 +23,7 @@ export const publicAnswerLinks: Record<'pt' | 'en', readonly PublicAnswerLink[]>
     { href: '/answers/llm-cost-cut-audit', label: 'O que é o LLM Cost-Cut Audit?' },
   ],
   en: [
+    { href: '/en/answers', label: 'All public answers' },
     {
       href: '/en/answers/fractional-vs-consultancy-vs-agency',
       label: 'Fractional, consultancy, agency or internal?',

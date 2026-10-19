@@ -8,7 +8,7 @@ const geoText = await readFile(new URL('../public/geo.md', import.meta.url), 'ut
 const answersJson = JSON.parse(await readFile(new URL('../public/answers.json', import.meta.url), 'utf8'))
 const robotsText = await readFile(new URL('../public/robots.txt', import.meta.url), 'utf8')
 const aiSearchPage = await readFile(
-  new URL('../app/ai-search/page.tsx', import.meta.url),
+  new URL('../app/(en)/ai-search/page.tsx', import.meta.url),
   'utf8',
 )
 

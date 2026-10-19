@@ -19,6 +19,7 @@ const staticRoutes: Array<{
   { path: '/feitos', priority: 0.86, changeFrequency: 'monthly' },
   { path: '/blog', priority: 0.88, changeFrequency: 'weekly' },
   { path: '/contato', priority: 0.7, changeFrequency: 'monthly' },
+  { path: '/apps', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/portfolio', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/ai-search', priority: 0.78, changeFrequency: 'weekly' },
   { path: '/answers/o-que-e-agentops', priority: 0.74, changeFrequency: 'monthly' },

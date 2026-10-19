@@ -39,7 +39,7 @@ const STRING = `'(?:[^'\\\\]|\\\\.)*'|"(?:[^"\\\\]|\\\\.)*"`
 const unquote = (token) => token.slice(1, -1).replace(/\\(['"\\])/g, '$1')
 
 function firstMetadataDescription(source) {
-  const start = source.indexOf('export const metadata')
+  const start = source.search(/export const (?:rootMetadata|metadata)/)
   if (start < 0) return null
   const block = source.slice(start)
 
@@ -191,8 +191,8 @@ test('shortened document titles stay within 60 once the brand suffix is applied'
 
 test('apps and feitos generateMetadata clamp the shared source copy', async () => {
   const [appsPage, feitosPage] = await Promise.all([
-    read('app/apps/[slug]/page.tsx'),
-    read('app/feitos/[slug]/page.tsx'),
+    read('app/(en)/apps/[slug]/page.tsx'),
+    read('app/(pt)/feitos/[slug]/page.tsx'),
   ])
   assert.match(appsPage, /clampMetaDescription/)
   assert.match(appsPage, /fallbackAppDescription\(app\)/)
@@ -203,12 +203,12 @@ test('apps and feitos generateMetadata clamp the shared source copy', async () =
 })
 
 test('static metadata descriptions stay inside the 120–160 convention', async () => {
-  const files = await walkPages('app')
+  const files = [...await walkPages('app'), 'components/SiteRootDocument.tsx']
   const checked = []
 
   for (const file of files) {
     const source = await readFile(file, 'utf8')
-    if (!/export const metadata/.test(source)) continue
+    if (!/export const (?:rootMetadata|metadata)/.test(source)) continue
     const description = firstMetadataDescription(source)
     if (!description) continue
     checked.push({ file, description, length: description.length })
@@ -224,33 +224,33 @@ test('static metadata descriptions stay inside the 120–160 convention', async 
   assert.ok(checked.length >= 35, `expected to scan public metadata, got ${checked.length}`)
 
   for (const file of [
-    'app/page.tsx',
-    'app/en/page.tsx',
-    'app/layout.tsx',
-    'app/paulo/page.tsx',
-    'app/fso/page.tsx',
-    'app/answers/quem-e-paulo-pierrondi/page.tsx',
-    'app/answers/llm-cost-cut-audit/page.tsx',
-    'app/answers/o-que-e-agentops/page.tsx',
-    'app/answers/o-que-e-fractional-ai-automation-officer/page.tsx',
-    'app/answers/como-medir-resultado-de-ia-operacional/page.tsx',
-    'app/answers/fractional-vs-consultoria-vs-agencia/page.tsx',
-    'app/en/answers/fractional-vs-consultancy-vs-agency/page.tsx',
-    'app/en/answers/page.tsx',
-    'app/treinamentos/page.tsx',
-    'app/engajamento/page.tsx',
-    'app/privacidade/page.tsx',
-    'app/privacy/page.tsx',
-    'app/termos/page.tsx',
-    'app/terms/page.tsx',
-    'app/atuacao/page.tsx',
-    'app/en/atuacao/page.tsx',
-    'app/blog/page.tsx',
-    'app/en/blog/page.tsx',
-    'app/contato/page.tsx',
-    'app/en/contato/page.tsx',
-    'app/en/studio/page.tsx',
-    'app/design/library/page.tsx',
+    'app/(pt)/page.tsx',
+    'app/(en)/en/page.tsx',
+    'components/SiteRootDocument.tsx',
+    'app/(pt)/paulo/page.tsx',
+    'app/(en)/fso/page.tsx',
+    'app/(pt)/answers/quem-e-paulo-pierrondi/page.tsx',
+    'app/(pt)/answers/llm-cost-cut-audit/page.tsx',
+    'app/(pt)/answers/o-que-e-agentops/page.tsx',
+    'app/(pt)/answers/o-que-e-fractional-ai-automation-officer/page.tsx',
+    'app/(pt)/answers/como-medir-resultado-de-ia-operacional/page.tsx',
+    'app/(pt)/answers/fractional-vs-consultoria-vs-agencia/page.tsx',
+    'app/(en)/en/answers/fractional-vs-consultancy-vs-agency/page.tsx',
+    'app/(en)/en/answers/page.tsx',
+    'app/(pt)/treinamentos/page.tsx',
+    'app/(pt)/engajamento/page.tsx',
+    'app/(pt)/privacidade/page.tsx',
+    'app/(en)/privacy/page.tsx',
+    'app/(pt)/termos/page.tsx',
+    'app/(en)/terms/page.tsx',
+    'app/(pt)/atuacao/page.tsx',
+    'app/(en)/en/atuacao/page.tsx',
+    'app/(pt)/blog/page.tsx',
+    'app/(en)/en/blog/page.tsx',
+    'app/(pt)/contato/page.tsx',
+    'app/(en)/en/contato/page.tsx',
+    'app/(en)/en/studio/page.tsx',
+    'app/(pt)/design/library/page.tsx',
   ]) {
     const row = checked.find((item) => item.file === file)
     assert.ok(row, `missing ${file}`)

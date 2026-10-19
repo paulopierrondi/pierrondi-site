@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown, ArrowRight, BrainCircuit, ExternalLink, Globe2, Layers3, Smartphone } from 'lucide-react'
 import { useHydratedReducedMotion } from '@/lib/use-hydrated-reduced-motion'
@@ -139,7 +140,7 @@ export default function PortfolioExperience({ lang }: { lang: PortfolioLang }) {
       <PortfolioCases lang={lang} cases={cases} t={t} reduceMotion={reduceMotion} />
       <PortfolioAtlas lang={lang} reduceMotion={reduceMotion} />
       <AppCatalog lang={lang} t={t} reduceMotion={reduceMotion} />
-      <Capabilities t={t} reduceMotion={reduceMotion} />
+      <Capabilities lang={lang} t={t} reduceMotion={reduceMotion} />
       <PortfolioClosing lang={lang} t={t} />
     </main>
   )
@@ -289,6 +290,7 @@ function AppCatalog({
           <p>{t.appsKicker}</p>
           <h2 id="app-store-title">{t.appsTitle}</h2>
           <span>{t.appsLead}</span>
+          {lang === 'en' && <Link href="/apps" prefetch={false}>App information &amp; support <ArrowRight aria-hidden="true" /></Link>}
         </header>
         <div className={styles.appsGrid}>
           {PUBLIC_APP_STORE_APPS.map((app, index) => (
@@ -317,9 +319,11 @@ function AppCatalog({
 }
 
 function Capabilities({
+  lang,
   t,
   reduceMotion,
 }: {
+  lang: PortfolioLang
   t: PortfolioCopy
   reduceMotion: boolean
 }) {
@@ -340,7 +344,7 @@ function Capabilities({
               transition={{ duration: reduceMotion ? 0 : 0.44, delay: reduceMotion ? 0 : index * 0.06 }}
             >
               <span>{String(index + 1).padStart(2, '0')}</span>
-              <div><h3>{title}</h3><p>{copy}</p></div>
+              <div><h3>{code === 'LAB' && lang === 'pt' ? <Link href="/design/library" prefetch={false}>{title}</Link> : title}</h3><p>{copy}</p></div>
               <strong>{code}</strong>
             </motion.article>
           ))}

@@ -126,7 +126,7 @@ const siteSchema = {
       publisher: { '@id': `${SITE_URL}/#organization` },
       about: { '@id': `${SITE_URL}/#person` },
       potentialAction: {
-        '@type': 'ContactAction',
+        '@type': 'CommunicateAction',
         target: `${SITE_URL}/#contact`,
         name: 'Contato por email',
       },
