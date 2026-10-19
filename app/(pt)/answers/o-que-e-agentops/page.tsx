@@ -88,6 +88,12 @@ export default function AgentopsAnswerPage() {
         },
       ]}
       internalLinks={[
+        {
+          href: '/engajamento',
+          label: 'Modelo de engajamento',
+          description:
+            'Como AgentOps vira operação contínua com resultado mensurável: baseline, métrica e handoff.',
+        },
         { href: '/atuacao', label: 'Atuação', description: 'Como Paulo trabalha: modelos operacionais de IA enterprise e agentes governados.' },
         { href: '/ai-search', label: 'AI Search Portfolio', description: 'Hub de referências citáveis para mecanismos de busca e answer engines.' },
         { href: '/blog', label: 'Blog', description: 'Ensaios técnicos sobre IA agêntica, ServiceNow e GEO/SEO.' },
