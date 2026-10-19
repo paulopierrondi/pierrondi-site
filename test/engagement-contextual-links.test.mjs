@@ -9,17 +9,17 @@ const read = (file) => readFile(path.join(root, file), 'utf8')
 const { TREINAMENTOS_COPY } = await import('../app/treinamentos/treinamentos-content.ts')
 
 const ADDED_BRIEFS = [
-  ['app/answers/o-que-e-agentops/page.tsx', '/engajamento', /resultado mensurável/],
-  ['app/answers/quem-e-paulo-pierrondi/page.tsx', '/engajamento', /resultado mensurável/],
-  ['app/answers/llm-cost-cut-audit/page.tsx', '/engajamento', /resultado/],
-  ['app/en/answers/what-is-agentops/page.tsx', '/en/engajamento', /measurable outcome/],
-  ['app/en/answers/who-is-paulo-pierrondi/page.tsx', '/en/engajamento', /measurable outcome/],
+  ['app/(pt)/answers/o-que-e-agentops/page.tsx', '/engajamento', /resultado mensurável/],
+  ['app/(pt)/answers/quem-e-paulo-pierrondi/page.tsx', '/engajamento', /resultado mensurável/],
+  ['app/(pt)/answers/llm-cost-cut-audit/page.tsx', '/engajamento', /resultado/],
+  ['app/(en)/en/answers/what-is-agentops/page.tsx', '/en/engajamento', /measurable outcome/],
+  ['app/(en)/en/answers/who-is-paulo-pierrondi/page.tsx', '/en/engajamento', /measurable outcome/],
 ]
 
 async function answerBriefs() {
   const groups = [
-    { dir: 'app/answers', href: '/engajamento' },
-    { dir: 'app/en/answers', href: '/en/engajamento' },
+    { dir: 'app/(pt)/answers', href: '/engajamento' },
+    { dir: 'app/(en)/en/answers', href: '/en/engajamento' },
   ]
   const found = []
 
@@ -94,7 +94,7 @@ test('engagement CTAs stay in page data and do not alter the shared brief render
   const brief = await read('app/answers/_components/AnswerBrief.tsx')
   const engage = await read('components/home-v2/sections/EngageSection.tsx')
   const hero = await read('components/home-v2/sections/HeroSection.tsx')
-  const engagementPage = await read('app/engajamento/page.tsx')
+  const engagementPage = await read('app/(pt)/engajamento/page.tsx')
 
   assert.doesNotMatch(brief, /\/engajamento/)
   assert.match(engage, /href: '\/engajamento'/)

@@ -1,3 +1,10 @@
+# Sessão 2026-10-19 — /engajamento links rebased onto #71–#74
+
+- Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `main` at `f6ea6f9` (#71–#74). Git followed the route-group renames, so the five new `internalLinks` landed on `app/(pt)/answers/...` and `app/(en)/en/answers/...` instead of the pre-#71 paths. Atuação and treinamentos CTAs stayed on the unmoved content files.
+- Kept main's behavior: SSR locale layouts, orphan navigation, `/apps` directory, schema-domain corrections, and the single GA4 config `G-1CL8PFYY7T` in `components/SiteRootDocument.tsx`. No Product/Offer schema, no prices, no invented metrics or client names. `/sprint` stays out of the tree and the sitemap.
+- The contextual-link test now reads those route-group pages and `app/(pt)/engajamento/page.tsx`.
+
 # Sessão 2026-10-15 — recheck /engajamento links after #67
 
 - Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow not submitted.
