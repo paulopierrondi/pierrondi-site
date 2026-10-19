@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
+import { createElement } from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
 import test from 'node:test'
+import GoogleAnalytics, { subscribeToAnalyticsConsent } from '../components/GoogleAnalytics.tsx'
 
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), 'utf8')
 
@@ -33,19 +36,54 @@ test('root layout always injects gtag.js for G-1CL8PFYY7T without an env gate', 
   assert.match(layout, /gtag\('consent', 'default'/)
   assert.match(layout, /analytics_storage: 'denied'/)
   assert.match(layout, /gtag\('config', '\$\{GA4_MEASUREMENT_ID\}'/)
+  assert.equal((layout.match(/googletagmanager\.com\/gtag\/js\?id=/g) ?? []).length, 1)
+  assert.equal((layout.match(/gtag\('config',/g) ?? []).length, 1)
   assert.doesNotMatch(layout, /NEXT_PUBLIC_GA_MEASUREMENT_ID/)
   assert.doesNotMatch(layout, /strategy="beforeInteractive"/)
   assert.equal([...layout.matchAll(/G-[A-Z0-9]+/g)].map((match) => match[0]).every((id) => id === GA4_MEASUREMENT_ID), true)
 })
 
-test('GA client updates consent on accept and never gates the loader on cookie-consent', () => {
-  assert.doesNotMatch(ga, /useState\(false\)/)
-  assert.doesNotMatch(ga, /if \(!measurementId \|\| !enabled\) return null/)
-  assert.doesNotMatch(ga, /<Script/)
-  assert.match(ga, /cookie-consent-granted/)
-  assert.match(ga, /consent',\s*'update'/)
-  assert.match(ga, /analytics_storage:\s*'granted'/)
-  assert.match(ga, /return null/)
+test('GA client renders no UI and leaves route page views to the root config plus Enhanced Measurement', () => {
+  assert.equal(renderToStaticMarkup(createElement(GoogleAnalytics, { measurementId: GA4_MEASUREMENT_ID })), '')
+  assert.doesNotMatch(ga, /usePathname/)
+  assert.doesNotMatch(ga, /gtag\(\s*['"]config['"]/)
+  assert.doesNotMatch(ga, /page_view|page_path/)
+  assert.doesNotMatch(ga, /googletagmanager\.com\/gtag\/js/)
+  assert.match(ga, /subscribeToAnalyticsConsent\(window,\s*window\.localStorage\)/)
+  assert.match(ga, /\},\s*\[measurementId\]\)/)
+})
+
+test('GA consent sync only grants stored all-consent and removes its listener', () => {
+  const target = new EventTarget()
+  const calls = []
+  target.gtag = (...args) => calls.push(args)
+  let consent = 'essential'
+  const storage = { getItem: (key) => key === 'cookie-consent' ? consent : null }
+
+  const cleanup = subscribeToAnalyticsConsent(target, storage)
+  assert.deepEqual(calls, [])
+
+  consent = 'all'
+  target.dispatchEvent(new Event('cookie-consent-granted'))
+  assert.deepEqual(calls, [['consent', 'update', { analytics_storage: 'granted' }]])
+
+  cleanup()
+  target.dispatchEvent(new Event('cookie-consent-granted'))
+  assert.equal(calls.length, 1)
+  assert.ok(calls.every(([command]) => command === 'consent'))
+})
+
+test('GA consent sync applies an existing all-consent grant once on mount', () => {
+  const target = new EventTarget()
+  const calls = []
+  target.gtag = (...args) => calls.push(args)
+  const storage = { getItem: (key) => key === 'cookie-consent' ? 'all' : null }
+
+  const cleanup = subscribeToAnalyticsConsent(target, storage)
+  assert.deepEqual(calls, [['consent', 'update', { analytics_storage: 'granted' }]])
+  target.dispatchEvent(new Event('popstate'))
+  assert.equal(calls.length, 1)
+  cleanup()
 })
 
 test('cookie banner can grant consent on immersive home routes', () => {
