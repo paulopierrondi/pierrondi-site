@@ -1,3 +1,25 @@
+# Sessão 2026-10-19 — GA4 conversions rebased onto single gtag config
+
+- Draft PR #70 merged current main (`6aa07e99..f6ea6f9f`, including #74).
+- #74 keeps the only `gtag('config')` in `components/SiteRootDocument.tsx`. `GoogleAnalytics` only calls `consent` update via `subscribeToAnalyticsConsent`.
+- `Ga4ConversionListener` stays mounted in that shared document. Conversion events remain consent-gated on `cookie-consent === 'all'`.
+- The unit test now reads `components/SiteRootDocument.tsx` and asserts one config, no config inside `GoogleAnalytics` or the listener.
+- Verified after the merge: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 197/197, `npm run build` 203 pages, `/sprint` absent. PR stays draft. Do not merge.
+
+# Sessão 2026-10-12 — GA4 conversion events (draft)
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
+- Draft PR: https://github.com/paulopierrondi/pierrondi-site/pull/70 on `cursor/ga4-conversion-events-04cc`.
+- Existing gtag `G-1CL8PFYY7T` only. No new vendor. No GA4 admin change.
+- `cta_engajamento_click` `{source}` = current pathname, for any link to `/engajamento` or `/en/engajamento`. Capture-phase listener in `components/Ga4ConversionListener.tsx`, mounted from `app/layout.tsx`.
+- `whatsapp_click` `{page}` = current pathname, for `wa.me` links. Same listener.
+- `generate_lead` `{form}` stays on successful submit: `/contato` sends `contato_page`, home sends `home_v2`, via `trackEvent('Contact_Form_Submitted')`. That GA4 call now uses the consent gate.
+- Consent: events call `gtag` only when `localStorage['cookie-consent'] === 'all'`, the same grant as `GoogleAnalytics`.
+- Untouched: EngageSection, hero, `/engajamento`, Person schema (open PR #63). No Product/Offer schema. No prices. `/sprint` stays off the route table.
+- Verified: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 190/190, `npm run build` 202 pages, no `/sprint` route. `next start` on port 3456: `/` 200 with `G-1CL8PFYY7T` and `analytics_storage: 'denied'`; `/sprint` 404; client chunks contain `cta_engajamento_click`, `whatsapp_click`, and `generate_lead`. Homepage HTML has zero Product/Offer schema.
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS.md + `.brain` snapshot. cached_tokens: null.
+- Suggested Obsidian/Linear: note draft PR #70 on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-10-10 — SEO/GEO sweep (draft)
 
 - Draft only. Do not merge. Do not deploy. Do not IndexNow until Paulo says so.
