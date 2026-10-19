@@ -7,7 +7,7 @@ const content = await readFile(new URL('app/feitos/FeitosCommercialProof.tsx', r
 const data = await readFile(new URL('app/feitos/feitos-proof-data.ts', root), 'utf8')
 const index = await readFile(new URL('app/feitos/FeitosIndexContent.tsx', root), 'utf8')
 const styles = await readFile(new URL('app/feitos/FeitosCommercialProof.module.css', root), 'utf8')
-const page = await readFile(new URL('app/feitos/page.tsx', root), 'utf8')
+const page = await readFile(new URL('app/(pt)/feitos/page.tsx', root), 'utf8')
 const schema = await readFile(new URL('app/feitos/feitos-schema.ts', root), 'utf8')
 
 test('/feitos leads with a client-facing proof dossier before the shared project rail', () => {

@@ -35,8 +35,8 @@ test('training covers the four announced domains', () => {
 
 test('training pages publish canonical, hreflang and a complete Open Graph image', async () => {
   const [ptPage, enPage] = await Promise.all([
-    read('app/treinamentos/page.tsx'),
-    read('app/en/treinamentos/page.tsx'),
+    read('app/(pt)/treinamentos/page.tsx'),
+    read('app/(en)/en/treinamentos/page.tsx'),
   ])
 
   assert.match(ptPage, /canonical:\s*'\/treinamentos'/)
@@ -94,8 +94,8 @@ test('training is published on every machine-readable GEO surface', async () => 
 
 test('training titles carry the query terms instead of a bare label', async () => {
   const [ptPage, enPage] = await Promise.all([
-    read('app/treinamentos/page.tsx'),
-    read('app/en/treinamentos/page.tsx'),
+    read('app/(pt)/treinamentos/page.tsx'),
+    read('app/(en)/en/treinamentos/page.tsx'),
   ])
 
   assert.match(ptPage, /title: 'Treinamentos em IA, Vibe Coding e ServiceNow'/)
@@ -136,7 +136,7 @@ test('course schema stays honest: no invented price and no dangling references',
       assert.ok(course.name)
       assert.ok(course.teaches.length > 0)
       assert.match(course.provider['@id'], /#organization$/)
-      assert.match(course.instructor['@id'], /#person$/)
+      assert.equal(course.instructor, undefined)
     }
   }
 })

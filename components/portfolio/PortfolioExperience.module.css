@@ -2676,3 +2676,10 @@
     transform: none;
   }
 }
+
+/* Contextual directory entry; existing App Store calls to action stay intact. */
+.appsSection > header > a { display: inline-flex; align-items: center; gap: var(--space-xs); min-height: var(--font-size-display-md); margin-top: var(--space-md); color: var(--color-primary); }
+.appsSection > header > a:focus-visible { outline: 2px solid var(--color-primary); outline-offset: var(--space-xxs); }
+
+.capabilities h3 a { display: inline-flex; align-items: center; min-height: var(--font-size-display-md); color: var(--color-primary); }
+.capabilities h3 a:focus-visible { outline: 2px solid var(--color-primary); outline-offset: var(--space-xxs); }
