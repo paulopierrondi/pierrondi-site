@@ -1,3 +1,19 @@
+# Sessão 2026-10-19 — Qualificadores de /contato no layout SSR
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- CI `build` on `a01474c` failed because `test/contato-qualifying-fields.test.mjs` still opened `app/contato/page.tsx` and `app/en/contato/page.tsx`. #71 moved those routes to `app/(pt)/contato/page.tsx` and `app/(en)/en/contato/page.tsx`. The form, labels and `POST /api/contact` already lived in `app/contato/ContatoForm.tsx`, `app/contato/ContatoPageContent.tsx` and `app/api/contact/route.ts`, which both locale pages still render.
+- The test now reads the route-group pages. Qualifier fields, honeypot and scope-diagnosis copy are unchanged. `/sprint` stays unpublished. No Product/Offer schema. GA4 untouched.
+
+# Sessão 2026-10-12 — Qualificadores opcionais em /contato
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
+- `/contato` and `/en/contato` gained three optional fields: process to automate (`processo`), KPI to move (`kpi`), desired timeframe (`prazo`). They post through `POST /api/contact`. Empty values stay valid. A filled `_gotcha` still returns ok and does not reach Formspree.
+- Next-step copy: “Paulo responde com um diagnóstico de escopo.” / “Paulo replies with a scope diagnosis.” No SLA number, price, ROI or named client in that line. The existing channel card still says “Em até 48h” / “Within 48h”.
+- Left untouched: `/engajamento`, `EngageSection`, hero, Person schema (open PR #63). `/sprint` is not a route (404). No Product or Offer schema added.
+- Files: `app/contato/ContatoForm.tsx`, `app/contato/ContatoPageContent.tsx`, `app/contato/Contato.module.css`, `app/api/contact/route.ts`, `test/contato-qualifying-fields.test.mjs`.
+- Verified: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 191/191, `npm run build` 202 pages, `/sprint` absent from the route table. Prerendered HTML has the three fields, the honeypot and the scope-diagnosis line, and no Product/Offer. Playwright on `next dev` port 3456: both locales 200, fields optional and visible, honeypot 1×1, submit body includes the three values plus empty `_gotcha`, `/sprint` 404.
+- Suggested Obsidian/Linear: note draft PR #69 on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-10-10 — SEO/GEO sweep (draft)
 
 - Draft only. Do not merge. Do not deploy. Do not IndexNow until Paulo says so.
