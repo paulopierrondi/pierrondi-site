@@ -111,22 +111,28 @@ test('gtag conversion events respect cookie-consent and the lead forms', () => {
   assert.equal(other[0][1], 'lead_confirmation_viewed')
 })
 
-test('layout mounts one delegated listener and the public forms keep their success events', async () => {
-  const [layout, listener, contato, home, sitemap] = await Promise.all([
-    read('app/layout.tsx'),
+test('shared document mounts one delegated listener and keeps the single root gtag config', async () => {
+  const [layout, listener, ga, contato, home, sitemap] = await Promise.all([
+    read('components/SiteRootDocument.tsx'),
     read('components/Ga4ConversionListener.tsx'),
+    read('components/GoogleAnalytics.tsx'),
     read('app/contato/ContatoForm.tsx'),
     read('components/home-v2/sections/ContactSection.tsx'),
     read('app/sitemap.ts'),
   ])
 
   assert.match(layout, /<Ga4ConversionListener \/>/)
+  assert.equal((layout.match(/gtag\('config',/g) ?? []).length, 1)
+  assert.equal((layout.match(/googletagmanager\.com\/gtag\/js\?id=/g) ?? []).length, 1)
+  assert.doesNotMatch(ga, /gtag\(\s*['"]config['"]/)
+  assert.doesNotMatch(listener, /gtag\(\s*['"]config['"]/)
+  assert.match(ga, /subscribeToAnalyticsConsent\(window,\s*window\.localStorage\)/)
   assert.match(listener, /document\.addEventListener\('click', onClick, true\)/)
   assert.match(listener, /classifyConversionClick\(href, window\.location\.pathname\)/)
   assert.match(contato, /trackEvent\('Contact_Form_Submitted', \{ form: 'contato_page' \}\)/)
   assert.match(home, /trackEvent\('Contact_Form_Submitted', \{ form: 'home_v2', language: lang \}\)/)
   assert.doesNotMatch(sitemap, /path:\s*'\/sprint'/)
-  for (const source of [layout, listener]) {
+  for (const source of [layout, listener, ga]) {
     assert.doesNotMatch(source, /@type': 'Product'/)
     assert.doesNotMatch(source, /@type': 'Offer'/)
   }

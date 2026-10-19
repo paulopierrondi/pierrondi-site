@@ -1,3 +1,11 @@
+# Sessão 2026-10-19 — GA4 conversions rebased onto single gtag config
+
+- Draft PR #70 merged current main (`6aa07e99..f6ea6f9f`, including #74).
+- #74 keeps the only `gtag('config')` in `components/SiteRootDocument.tsx`. `GoogleAnalytics` only calls `consent` update via `subscribeToAnalyticsConsent`.
+- `Ga4ConversionListener` stays mounted in that shared document. Conversion events remain consent-gated on `cookie-consent === 'all'`.
+- The unit test now reads `components/SiteRootDocument.tsx` and asserts one config, no config inside `GoogleAnalytics` or the listener.
+- Verified after the merge: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 197/197, `npm run build` 203 pages, `/sprint` absent. PR stays draft. Do not merge.
+
 # Sessão 2026-10-12 — GA4 conversion events (draft)
 
 - Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
