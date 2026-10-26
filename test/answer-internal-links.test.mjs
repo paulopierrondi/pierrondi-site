@@ -15,6 +15,7 @@ const [links, home, feitos, about, sitemap] = await Promise.all([
 
 const expected = [
   '/answers/fractional-vs-consultoria-vs-agencia',
+  '/answers/automacao-com-ia-preco-fixo',
   '/answers/o-que-e-fractional-ai-automation-officer',
   '/answers/como-medir-resultado-de-ia-operacional',
   '/answers/o-que-e-agentops',
