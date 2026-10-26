@@ -3,7 +3,7 @@ import PageHeader from '@/components/PageHeader'
 import AtuacaoContent from '@/app/atuacao/AtuacaoContent'
 
 export const metadata: Metadata = {
-  title: 'Atuação',
+  title: 'Atuação em IA enterprise e AgentOps',
   description:
     'Onde Paulo Pierrondi gera valor: AI Operating Model, ServiceNow, AgentOps e estratégia enterprise, do diagnóstico à execução governada.',
   alternates: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Atuação | pierrondi.dev',
+    title: 'Atuação em IA enterprise e AgentOps | pierrondi.dev',
     description: 'AI Operating Model, ServiceNow e AgentOps para ambientes enterprise regulados.',
     url: '/atuacao',
     siteName: 'pierrondi.dev',
