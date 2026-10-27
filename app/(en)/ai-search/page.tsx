@@ -397,6 +397,12 @@ const ownAnswers: AnswerLink[] = [
     locale: 'pt-BR',
   },
   {
+    title: 'Automação com IA com preço fixo e escopo fechado',
+    url: '/answers/automacao-com-ia-preco-fixo',
+    intent: 'fixed-scope engagement',
+    locale: 'pt-BR',
+  },
+  {
     title: 'Fractional, consultancy, agency or internal?',
     url: '/en/answers/fractional-vs-consultancy-vs-agency',
     intent: 'option comparison',

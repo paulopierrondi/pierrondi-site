@@ -161,6 +161,15 @@
       "entity": "pierrondi.dev"
     },
     {
+      "id": "automacao-com-ia-preco-fixo",
+      "title": "Automação com IA com preço fixo e escopo fechado",
+      "url": "https://www.pierrondi.dev/answers/automacao-com-ia-preco-fixo",
+      "question": "Automação com IA com preço fixo e escopo fechado",
+      "intent": "fixed-scope engagement",
+      "locale": "pt-BR",
+      "entity": "pierrondi.dev"
+    },
+    {
       "id": "fractional-vs-consultancy-vs-agency",
       "title": "Fractional, consultancy, agency or internal?",
       "url": "https://www.pierrondi.dev/en/answers/fractional-vs-consultancy-vs-agency",

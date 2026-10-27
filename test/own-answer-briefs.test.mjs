@@ -9,6 +9,7 @@ const SLUGS = [
   'o-que-e-fractional-ai-automation-officer',
   'como-medir-resultado-de-ia-operacional',
   'fractional-vs-consultoria-vs-agencia',
+  'automacao-com-ia-preco-fixo',
 ]
 
 const EN_TWINS = [
@@ -298,5 +299,49 @@ test('EN comparison twin mirrors the PT brief and converts to /en/engajamento', 
   assert.doesNotMatch(source, /\bMRR\b/)
   assert.doesNotMatch(source, /50\+|100\+|200\+/)
   assert.doesNotMatch(sitemapSource, /path:\s*'\/sprint'/)
+})
+
+test('fixed-price brief answers scope, acceptance and result without a price or /sprint', async () => {
+  const source = await readFile(
+    new URL('../app/(pt)/answers/automacao-com-ia-preco-fixo/page.tsx', import.meta.url),
+    'utf8',
+  )
+  const directAnswer = source.match(/directAnswer="([^"]+)"/)[1]
+  const words = directAnswer.split(/\s+/).filter(Boolean)
+
+  assert.ok(words.length <= 80, `direct answer is ${words.length} words; the first 80 must carry the definition`)
+  assert.match(directAnswer, /preço fixo/)
+  assert.match(directAnswer, /escopo fechado/)
+  assert.match(directAnswer, /critério de aceite/)
+  assert.match(source, /question="Automação com IA com preço fixo e escopo fechado"/)
+  assert.match(source, /title: 'Automação com IA com preço fixo'/)
+  assert.match(source, /canonical: path/)
+  assert.match(source, /robots: \{ index: true, follow: true \}/)
+  assert.doesNotMatch(source, /languages:/)
+  assert.match(source, /Escopo, critério de aceite, resultado/)
+  assert.match(source, /Quando o preço fixo cabe/)
+  assert.match(source, /Quando o preço fixo não cabe/)
+  assert.match(source, /Como se compara a hora e agência/)
+  assert.match(source, /href: '\/engajamento'/)
+  assert.match(source, /href: '\/contato'/)
+  assert.match(source, /href: '\/answers\/fractional-vs-consultoria-vs-agencia'/)
+  assert.match(source, /href: '\/answers\/como-medir-resultado-de-ia-operacional'/)
+  assert.match(source, /href: '\/feitos'/)
+  assert.match(source, /Technical Account Executive/)
+  assert.match(source, /WhatsApp/)
+  assert.doesNotMatch(source, /href: '\/sprint'/)
+  assert.doesNotMatch(source, /Book a demo/)
+  assert.doesNotMatch(source, /'@type': 'Product'/)
+  assert.doesNotMatch(source, /R\$\s?\d/)
+  assert.doesNotMatch(source, /US\$\s?\d/)
+  assert.doesNotMatch(source, /\$\d/)
+  assert.doesNotMatch(source, /\bMRR\b/)
+  assert.doesNotMatch(source, /50\+|100\+|200\+/)
+
+  const comparison = await readFile(
+    new URL('../app/(pt)/answers/fractional-vs-consultoria-vs-agencia/page.tsx', import.meta.url),
+    'utf8',
+  )
+  assert.match(comparison, /href: '\/answers\/automacao-com-ia-preco-fixo'/)
 })
 
