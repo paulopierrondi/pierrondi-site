@@ -1,3 +1,14 @@
+# Sessão 2026-10-26 — títulos de /atuacao (draft)
+
+- Draft only. Do not merge. Do not deploy. Do not IndexNow.
+- Live audit of https://www.pierrondi.dev/sitemap.xml: 80 URLs, all HTTP 200, no `/sprint`, JSON-LD parsed on every URL, meta descriptions inside 120–160. Homepage canonical is `https://www.pierrondi.dev`.
+- Highest uncovered gap: `/atuacao` title `Atuação | pierrondi.dev` (23) and `/en/atuacao` title `Work | pierrondi.dev` (20). Both are priority indexable pages whose body is AI Operating Model, ServiceNow, AgentOps and enterprise strategy. The title slot named none of that.
+- Left alone because other drafts already own them: #63 (sameAs, Fractional title, `llms.txt` / `llms-full.txt` / `geo.md` / `answers.json`), #66 (`/en/answers` hreflang), #68 (engajamento links), #69 (contato form), #70 (GA4). Analytics id `G-1CL8PFYY7T` untouched. `/sprint` stays unpublished.
+- Fix: document titles `Atuação em IA enterprise e AgentOps` (rendered 51) and `Enterprise AI work and AgentOps` (rendered 47). Self-canonicals and hreflang pairs unchanged. No new clients, metrics, prices or testimonials. H1 copy unchanged.
+- Residual: `/contato` and `/en/contato` titles stay `Contato` / `Contact` (accurate for that URL; #69 is editing the form). Three proof cases (`/feitos/agentes-governados`, `/feitos/llm-inferencia`, `/feitos/plataformas-automacao-ia`) are in the sitemap and absent from `llms.txt` / `llms-full.txt`; do not patch those files while #63 is open. Case pages still have no in-body `/contato` link (the footer and `/feitos` index do).
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS + `.brain/PROJECT_CONTEXT.md`. cached_tokens: null (CLI hides telemetry).
+- Suggested Obsidian/Linear: note this draft on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-10-10 — SEO/GEO sweep (draft)
 
 - Draft only. Do not merge. Do not deploy. Do not IndexNow until Paulo says so.
