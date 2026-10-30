@@ -171,7 +171,7 @@ export default function SiteRootDocument({ children, lang }: { children: React.R
                 wait_for_update: 500
               });
               gtag('js', new Date());
-              gtag('config', '${GA4_MEASUREMENT_ID}', { anonymize_ip: true });
+              gtag('config', '${GA4_MEASUREMENT_ID}', { anonymize_ip: true, send_page_view: false });
             `,
           }}
         />

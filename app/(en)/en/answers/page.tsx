@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+import JsonLd from '@/components/JsonLd'
 import PageHeader from '@/components/PageHeader'
 import styles from '@/app/answers/answers.module.css'
+import { buildCollectionPageSchema } from '@/lib/seo/collection-page'
 
 const path = '/en/answers'
 
@@ -39,9 +41,19 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
+const collectionSchema = buildCollectionPageSchema({
+  path,
+  name: 'English answer briefs',
+  description:
+    'English answer briefs: who Paulo Pierrondi is, what AgentOps is, and fractional versus consultancy, agency or internal hire.',
+  inLanguage: 'en-US',
+  items: enTwins,
+})
+
 export default function EnAnswersHubPage() {
   return (
     <>
+      <JsonLd data={collectionSchema} />
       <PageHeader
         eyebrow="ANSWER BRIEFS — EN"
         title="English answer briefs"
