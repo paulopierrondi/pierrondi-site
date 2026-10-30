@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import test from 'node:test'
-import GoogleAnalytics, { subscribeToAnalyticsConsent } from '../components/GoogleAnalytics.tsx'
+import GoogleAnalytics, { readGa4PageView, subscribeToAnalyticsConsent } from '../components/GoogleAnalytics.tsx'
 
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), 'utf8')
 
@@ -18,6 +18,8 @@ const [
   home,
   homeEn,
   siteSchema,
+  ptLayout,
+  enLayout,
 ] = await Promise.all([
   read('components/SiteRootDocument.tsx'),
   read('components/GoogleAnalytics.tsx'),
@@ -27,6 +29,8 @@ const [
   read('app/(pt)/page.tsx'),
   read('app/(en)/en/page.tsx'),
   read('components/SiteJsonLd.tsx'),
+  read('app/(pt)/layout.tsx'),
+  read('app/(en)/layout.tsx'),
 ])
 
 test('root layout always injects gtag.js for G-1CL8PFYY7T without an env gate', () => {
@@ -35,54 +39,143 @@ test('root layout always injects gtag.js for G-1CL8PFYY7T without an env gate', 
   assert.match(layout, /dangerouslySetInnerHTML/)
   assert.match(layout, /gtag\('consent', 'default'/)
   assert.match(layout, /analytics_storage: 'denied'/)
-  assert.match(layout, /gtag\('config', '\$\{GA4_MEASUREMENT_ID\}'/)
+  assert.match(layout, /gtag\('config', '\$\{GA4_MEASUREMENT_ID\}', \{ anonymize_ip: true, send_page_view: false \}\)/)
   assert.equal((layout.match(/googletagmanager\.com\/gtag\/js\?id=/g) ?? []).length, 1)
   assert.equal((layout.match(/gtag\('config',/g) ?? []).length, 1)
+  assert.equal((layout.match(/send_page_view/g) ?? []).length, 1)
+  assert.match(ptLayout, /<SiteRootDocument lang="pt-BR">/)
+  assert.match(enLayout, /<SiteRootDocument lang="en-US">/)
   assert.doesNotMatch(layout, /NEXT_PUBLIC_GA_MEASUREMENT_ID/)
   assert.doesNotMatch(layout, /strategy="beforeInteractive"/)
   assert.equal([...layout.matchAll(/G-[A-Z0-9]+/g)].map((match) => match[0]).every((id) => id === GA4_MEASUREMENT_ID), true)
 })
 
-test('GA client renders no UI and leaves route page views to the root config plus Enhanced Measurement', () => {
+test('GA client renders no UI and sends page_view itself instead of a second config', () => {
   assert.equal(renderToStaticMarkup(createElement(GoogleAnalytics, { measurementId: GA4_MEASUREMENT_ID })), '')
-  assert.doesNotMatch(ga, /usePathname/)
+  assert.match(ga, /usePathname/)
   assert.doesNotMatch(ga, /gtag\(\s*['"]config['"]/)
-  assert.doesNotMatch(ga, /page_view|page_path/)
+  assert.match(ga, /page_location/)
+  assert.match(ga, /page_path/)
+  assert.match(ga, /page_title/)
+  assert.match(ga, /'page_view'/)
   assert.doesNotMatch(ga, /googletagmanager\.com\/gtag\/js/)
-  assert.match(ga, /subscribeToAnalyticsConsent\(window,\s*window\.localStorage\)/)
+  assert.match(ga, /subscribeToAnalyticsConsent\(window,\s*window\.localStorage/)
   assert.match(ga, /\},\s*\[measurementId\]\)/)
+  assert.deepEqual(
+    readGa4PageView({
+      location: { href: 'https://www.pierrondi.dev/en/feitos?utm_source=x', pathname: '/en/feitos', search: '?utm_source=x' },
+      document: { title: 'Work' },
+    }),
+    {
+      page_location: 'https://www.pierrondi.dev/en/feitos?utm_source=x',
+      page_path: '/en/feitos?utm_source=x',
+      page_title: 'Work',
+    },
+  )
 })
 
-test('GA consent sync only grants stored all-consent and removes its listener', () => {
+function installAnalyticsTarget(initialConsent) {
   const target = new EventTarget()
   const calls = []
   target.gtag = (...args) => calls.push(args)
-  let consent = 'essential'
-  const storage = { getItem: (key) => key === 'cookie-consent' ? consent : null }
+  target.location = { href: 'https://www.pierrondi.dev/contato', pathname: '/contato', search: '' }
+  target.document = { title: 'Contato' }
+  let consent = initialConsent
+  const storage = {
+    getItem: (key) => key === 'cookie-consent' ? consent : null,
+    setConsent: (value) => { consent = value },
+  }
+  const routes = { current: null }
+  return { target, calls, storage, routes }
+}
 
-  const cleanup = subscribeToAnalyticsConsent(target, storage)
+const contatoPageView = [
+  'event',
+  'page_view',
+  {
+    page_location: 'https://www.pierrondi.dev/contato',
+    page_path: '/contato',
+    page_title: 'Contato',
+  },
+]
+
+test('GA consent sync only grants stored all-consent and removes its listener', () => {
+  const { target, calls, storage, routes } = installAnalyticsTarget('essential')
+
+  const cleanup = subscribeToAnalyticsConsent(target, storage, routes)
+  assert.deepEqual(calls, [])
+  routes.current()
   assert.deepEqual(calls, [])
 
-  consent = 'all'
+  storage.setConsent('all')
   target.dispatchEvent(new Event('cookie-consent-granted'))
-  assert.deepEqual(calls, [['consent', 'update', { analytics_storage: 'granted' }]])
+  assert.deepEqual(calls, [
+    ['consent', 'update', { analytics_storage: 'granted' }],
+    contatoPageView,
+  ])
+
+  target.dispatchEvent(new Event('cookie-consent-granted'))
+  assert.equal(calls.length, 2)
 
   cleanup()
+  assert.equal(routes.current, null)
   target.dispatchEvent(new Event('cookie-consent-granted'))
-  assert.equal(calls.length, 1)
-  assert.ok(calls.every(([command]) => command === 'consent'))
+  assert.equal(calls.length, 2)
 })
 
 test('GA consent sync applies an existing all-consent grant once on mount', () => {
-  const target = new EventTarget()
-  const calls = []
-  target.gtag = (...args) => calls.push(args)
-  const storage = { getItem: (key) => key === 'cookie-consent' ? 'all' : null }
+  const { target, calls, storage, routes } = installAnalyticsTarget('all')
 
-  const cleanup = subscribeToAnalyticsConsent(target, storage)
-  assert.deepEqual(calls, [['consent', 'update', { analytics_storage: 'granted' }]])
+  const cleanup = subscribeToAnalyticsConsent(target, storage, routes)
+  assert.deepEqual(calls, [
+    ['consent', 'update', { analytics_storage: 'granted' }],
+    contatoPageView,
+  ])
   target.dispatchEvent(new Event('popstate'))
-  assert.equal(calls.length, 1)
+  routes.current()
+  assert.equal(calls.length, 2)
+  cleanup()
+
+  // Same document remount (React Strict Mode) must not send the URL again.
+  const remountRoutes = { current: null }
+  subscribeToAnalyticsConsent(target, storage, remountRoutes)
+  assert.equal(calls.length, 2)
+  remountRoutes.current()
+  assert.equal(calls.length, 2)
+})
+
+test('GA route changes send one page_view for the new path while consent stays granted', () => {
+  const { target, calls, storage, routes } = installAnalyticsTarget('all')
+  const cleanup = subscribeToAnalyticsConsent(target, storage, routes)
+  assert.equal(calls.length, 2)
+
+  target.location = {
+    href: 'https://www.pierrondi.dev/en/feitos?utm_source=x',
+    pathname: '/en/feitos',
+    search: '?utm_source=x',
+  }
+  target.document = { title: 'Work' }
+  routes.current()
+  assert.deepEqual(calls[2], [
+    'event',
+    'page_view',
+    {
+      page_location: 'https://www.pierrondi.dev/en/feitos?utm_source=x',
+      page_path: '/en/feitos?utm_source=x',
+      page_title: 'Work',
+    },
+  ])
+  assert.equal(calls.filter(([command]) => command === 'consent').length, 1)
+
+  routes.current()
+  assert.equal(calls.length, 3)
+
+  target.location = { href: 'https://www.pierrondi.dev/contato', pathname: '/contato', search: '' }
+  target.document = { title: 'Contato' }
+  routes.current()
+  assert.equal(calls.length, 4)
+  assert.deepEqual(calls[3], contatoPageView)
+
   cleanup()
 })
 
