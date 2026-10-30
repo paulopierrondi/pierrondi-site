@@ -1,3 +1,42 @@
+# Sessão 2026-10-30 — engagement links after #69
+
+- Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `main` at `04e4a39` (#69 contact qualifiers). The only conflict was this notes file.
+- Kept #68's contextual hrefs and CTAs to `/engajamento` and `/en/engajamento`. Kept main's contact form (`processo`, `kpi`, `prazo`, `_gotcha`, consent-gated `generate_lead`) and the single GA4 config (`G-1CL8PFYY7T`, `send_page_view: false`, manual `page_view`). No measurement ID, CSP, or cookie-banner edit. No `/sprint`. No Product/Offer.
+
+# Sessão 2026-10-30 — engagement links on current main
+
+- Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged current `main` at `f4c2142` (#79 page_view after consent, #70 GA4 conversions). The only conflict was this notes file. Did not stack on unmerged #69.
+- Kept the contextual hrefs to `/engajamento` and `/en/engajamento` from atuação, treinamentos, and the five answer briefs. #70's capture listener classifies those hrefs as `cta_engajamento_click`. Measurement ID, CSP, cookie banner, and the single `gtag('config')` with `send_page_view: false` stay as on main. No `/sprint`. No Product/Offer.
+
+# Sessão 2026-10-19 — /engajamento links rebased onto #71–#74
+
+- Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `main` at `f6ea6f9` (#71–#74). Git followed the route-group renames, so the five new `internalLinks` landed on `app/(pt)/answers/...` and `app/(en)/en/answers/...` instead of the pre-#71 paths. Atuação and treinamentos CTAs stayed on the unmoved content files.
+- Kept main's behavior: SSR locale layouts, orphan navigation, `/apps` directory, schema-domain corrections, and the single GA4 config `G-1CL8PFYY7T` in `components/SiteRootDocument.tsx`. No Product/Offer schema, no prices, no invented metrics or client names. `/sprint` stays out of the tree and the sitemap.
+- The contextual-link test now reads those route-group pages and `app/(pt)/engajamento/page.tsx`.
+
+# Sessão 2026-10-15 — recheck /engajamento links after #67
+
+- Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow not submitted.
+- Branch was already on current `main` (`c9df1d4`, comparison table and EngageSection from #67). Rebase was a no-op. No conflict with those files.
+- New hrefs still return 200: `/engajamento` and `/en/engajamento`. Touched pages keep self-referencing www canonicals. Existing brief hreflang pairs stay reciprocal with `x-default` on the Portuguese URL.
+- `/sprint` stays 404 and out of the sitemap. GA4 id unchanged. No Product or Offer schema added.
+- Verified: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 188/188, `npm run build` 202 pages, `/sprint` absent from the route table. Browser: training, English training, atuação, and the AgentOps related link open the locale engagement page. The training CTA stays visible at phone width.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #68 was rechecked after #67 and stays merge-ready. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-10-12 — CTAs contextuais para /engajamento
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
+- `/atuacao` and `/en/atuacao` already linked `/engajamento` and `/en/engajamento`. The closing paragraph now names the continuous step: baseline, metric, measurable outcome, no loose hours. Button stays `data-engagement-cta`.
+- `/treinamentos` and `/en/treinamentos` gained a ghost CTA (`Ver o modelo de engajamento` / `See the engagement model`) beside the existing contact and proof actions. Closing copy keeps “resultado mensurável” / “measurable outcome” and points at baseline, metric and handoff.
+- Answer briefs that had no engagement href now do, in page `internalLinks` (not in `AnswerBrief`): AgentOps, who-is-Paulo, and LLM Cost-Cut Audit, plus the EN AgentOps and who-is-Paulo twins. Fractional, measurement and comparison briefs already linked and were left as-is.
+- Skipped home and `/feitos` (already covered). Did not edit `EngageSection`, `HeroSection`, `/engajamento`, Person schema (open PR #63) or the related-links block in `AnswerBrief.tsx` (open PR #66).
+- Copy: measurable result, no prices, no new clients, no invented metrics. `/sprint` stays unpublished. No Product or Offer schema.
+- Verified: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 188/188, `npm run build` 202 pages, `/sprint` absent from the route table. Prerendered HTML for `/atuacao`, `/en/atuacao`, `/treinamentos`, `/en/treinamentos`, and the five newly linked briefs contains the locale href and no Product/Offer. `next start` on port 3456: training and AgentOps clicks land on `/engajamento`; EN training lands on `/en/engajamento`; `/sprint` is 404.
+- Suggested Obsidian/Linear: note draft PR #68 on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-10-30 — contact qualifiers on current main
 
 - Draft PR #69 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
