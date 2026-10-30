@@ -6,6 +6,7 @@ import LanguageSwitcher from '@/components/LanguageSwitcher'
 import SiteJsonLdWrapper from '@/components/SiteJsonLdWrapper'
 import DocumentLangSync from '@/components/DocumentLangSync'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
+import Ga4ConversionListener from '@/components/Ga4ConversionListener'
 import SiteNav from '@/components/SiteNav'
 import SiteFooter from '@/components/SiteFooter'
 import HomeBackground from '@/components/HomeBackground'
@@ -170,7 +171,7 @@ export default function SiteRootDocument({ children, lang }: { children: React.R
                 wait_for_update: 500
               });
               gtag('js', new Date());
-              gtag('config', '${GA4_MEASUREMENT_ID}', { anonymize_ip: true });
+              gtag('config', '${GA4_MEASUREMENT_ID}', { anonymize_ip: true, send_page_view: false });
             `,
           }}
         />
@@ -195,6 +196,7 @@ export default function SiteRootDocument({ children, lang }: { children: React.R
         <SiteNav />
         <LanguageSwitcher />
         <GoogleAnalytics measurementId={GA4_MEASUREMENT_ID} />
+        <Ga4ConversionListener />
         {children}
         <SiteFooter />
         <CookieBanner />
