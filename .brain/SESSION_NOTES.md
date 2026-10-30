@@ -1,3 +1,12 @@
+# Sessão 2026-10-30 — GA4 page_view after consent (draft)
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
+- Diagnosis confirmed in `components/SiteRootDocument.tsx` and `components/GoogleAnalytics.tsx` after #74 (`f6ea6f9`): one `gtag('config')` with consent default denied and `wait_for_update: 500`. Consent update ran only when `cookie-consent === all`, and no `page_view` followed. Accepts after 500ms, and slow hydrations of a stored grant, produced no view.
+- Fix: `send_page_view: false` on that single config. After consent update (accept click and stored grant on load), one `page_view` with `page_location`, `page_path`, `page_title`. App Router pathname changes inside `(pt)` and `(en)` send another while consent stays granted. Same URL is not sent twice, including a Strict Mode remount. Measurement ID, CSP, cookie banner, `/sprint`, and Product/Offer schema unchanged. No second `gtag('config')`, so draft #70 (`Ga4ConversionListener`, `lib/ga4-conversions.ts`) can land beside this.
+- Residual: GA4 Admin → data stream `G-1CL8PFYY7T` → Enhanced measurement → Page views → advanced → “Page changes based on browser history events” must stay off, or client navigations count twice. Query-only URL changes do not emit a manual page_view. PT↔EN crosses root layouts and reloads, so the load path covers it.
+- Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 195/195, `npm run build` 203 pages and `/sprint` absent. `check-apps-urls` against `next start` 121/121, `/sprint` 404. Headless Chrome dataLayer: no `page_view` before accept or with essential consent; one `page_view` after a late accept and after reload with stored consent; one additional `page_view` on same-document `/contato` → `/about` and `/en/contato` → `/en/about`.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note the draft. Do not mark the property as collecting until Paulo merges, Railway deploys, and DebugView shows one `page_view` after a late accept.
+
 # Sessão 2026-10-10 — SEO/GEO sweep (draft)
 
 - Draft only. Do not merge. Do not deploy. Do not IndexNow until Paulo says so.
