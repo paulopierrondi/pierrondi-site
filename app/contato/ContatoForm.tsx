@@ -8,9 +8,17 @@ interface Labels {
   name: string
   email: string
   message: string
+  process: string
+  kpi: string
+  timeframe: string
+  optional: string
+  nextStep: string
   placeholderName: string
   placeholderEmail: string
   placeholderMessage: string
+  placeholderProcess: string
+  placeholderKpi: string
+  placeholderTimeframe: string
   submit: string
   submitting: string
   ok: string
@@ -33,6 +41,10 @@ export default function ContatoForm({ labels }: { labels: Labels }) {
           nome: formData.get('nome'),
           email: formData.get('email'),
           mensagem: formData.get('mensagem'),
+          processo: String(formData.get('processo') ?? '').trim(),
+          kpi: String(formData.get('kpi') ?? '').trim(),
+          prazo: String(formData.get('prazo') ?? '').trim(),
+          _gotcha: String(formData.get('_gotcha') ?? ''),
         }),
         headers: { 'Content-Type': 'application/json' },
       })
@@ -69,6 +81,52 @@ export default function ContatoForm({ labels }: { labels: Labels }) {
           placeholder={labels.placeholderMessage}
         />
       </label>
+      <p className={styles.nextStep}>{labels.nextStep}</p>
+      <label>
+        <span className={styles.label}>
+          {labels.process} <span className={styles.optional}>({labels.optional})</span>
+        </span>
+        <input
+          type="text"
+          name="processo"
+          maxLength={500}
+          autoComplete="off"
+          placeholder={labels.placeholderProcess}
+        />
+      </label>
+      <label>
+        <span className={styles.label}>
+          {labels.kpi} <span className={styles.optional}>({labels.optional})</span>
+        </span>
+        <input
+          type="text"
+          name="kpi"
+          maxLength={256}
+          autoComplete="off"
+          placeholder={labels.placeholderKpi}
+        />
+      </label>
+      <label>
+        <span className={styles.label}>
+          {labels.timeframe} <span className={styles.optional}>({labels.optional})</span>
+        </span>
+        <input
+          type="text"
+          name="prazo"
+          maxLength={128}
+          autoComplete="off"
+          placeholder={labels.placeholderTimeframe}
+        />
+      </label>
+      <input
+        type="text"
+        name="_gotcha"
+        className={styles.honeypot}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        defaultValue=""
+      />
       <button type="submit" className={styles.submit} disabled={status === 'submitting'}>
         {status === 'submitting' ? labels.submitting : labels.submit}
         <span aria-hidden="true">→</span>

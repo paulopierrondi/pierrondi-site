@@ -1,3 +1,9 @@
+# Sessão 2026-10-30 — engagement links after #69
+
+- Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `main` at `04e4a39` (#69 contact qualifiers). The only conflict was this notes file.
+- Kept #68's contextual hrefs and CTAs to `/engajamento` and `/en/engajamento`. Kept main's contact form (`processo`, `kpi`, `prazo`, `_gotcha`, consent-gated `generate_lead`) and the single GA4 config (`G-1CL8PFYY7T`, `send_page_view: false`, manual `page_view`). No measurement ID, CSP, or cookie-banner edit. No `/sprint`. No Product/Offer.
+
 # Sessão 2026-10-30 — engagement links on current main
 
 - Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
@@ -30,6 +36,29 @@
 - Copy: measurable result, no prices, no new clients, no invented metrics. `/sprint` stays unpublished. No Product or Offer schema.
 - Verified: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 188/188, `npm run build` 202 pages, `/sprint` absent from the route table. Prerendered HTML for `/atuacao`, `/en/atuacao`, `/treinamentos`, `/en/treinamentos`, and the five newly linked briefs contains the locale href and no Product/Offer. `next start` on port 3456: training and AgentOps clicks land on `/engajamento`; EN training lands on `/en/engajamento`; `/sprint` is 404.
 - Suggested Obsidian/Linear: note draft PR #68 on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-10-30 — contact qualifiers on current main
+
+- Draft PR #69 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `main` at `f4c2142` (#79 page_view after consent, #70 GA4 conversions). The only conflict was this notes file.
+- Kept #69: optional `processo`, `kpi`, `prazo` and `_gotcha` on `/contato` and `/en/contato`, posted through `POST /api/contact`. Successful submit still calls `trackEvent('Contact_Form_Submitted')`, which #70 maps to consent-gated `generate_lead`.
+- Kept #79/#70 as on main: one `gtag('config')` for `G-1CL8PFYY7T` with `send_page_view: false`, one manual `page_view` after consent, `Ga4ConversionListener` for `cta_engajamento_click` and `whatsapp_click`. Measurement ID, CSP, and cookie banner unchanged. No `/sprint`. No Product/Offer.
+
+# Sessão 2026-10-19 — Qualificadores de /contato no layout SSR
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- CI `build` on `a01474c` failed because `test/contato-qualifying-fields.test.mjs` still opened `app/contato/page.tsx` and `app/en/contato/page.tsx`. #71 moved those routes to `app/(pt)/contato/page.tsx` and `app/(en)/en/contato/page.tsx`. The form, labels and `POST /api/contact` already lived in `app/contato/ContatoForm.tsx`, `app/contato/ContatoPageContent.tsx` and `app/api/contact/route.ts`, which both locale pages still render.
+- The test now reads the route-group pages. Qualifier fields, honeypot and scope-diagnosis copy are unchanged. `/sprint` stays unpublished. No Product/Offer schema. GA4 untouched.
+
+# Sessão 2026-10-12 — Qualificadores opcionais em /contato
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
+- `/contato` and `/en/contato` gained three optional fields: process to automate (`processo`), KPI to move (`kpi`), desired timeframe (`prazo`). They post through `POST /api/contact`. Empty values stay valid. A filled `_gotcha` still returns ok and does not reach Formspree.
+- Next-step copy: “Paulo responde com um diagnóstico de escopo.” / “Paulo replies with a scope diagnosis.” No SLA number, price, ROI or named client in that line. The existing channel card still says “Em até 48h” / “Within 48h”.
+- Left untouched: `/engajamento`, `EngageSection`, hero, Person schema (open PR #63). `/sprint` is not a route (404). No Product or Offer schema added.
+- Files: `app/contato/ContatoForm.tsx`, `app/contato/ContatoPageContent.tsx`, `app/contato/Contato.module.css`, `app/api/contact/route.ts`, `test/contato-qualifying-fields.test.mjs`.
+- Verified: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 191/191, `npm run build` 202 pages, `/sprint` absent from the route table. Prerendered HTML has the three fields, the honeypot and the scope-diagnosis line, and no Product/Offer. Playwright on `next dev` port 3456: both locales 200, fields optional and visible, honeypot 1×1, submit body includes the three values plus empty `_gotcha`, `/sprint` 404.
+- Suggested Obsidian/Linear: note draft PR #69 on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
 
 # Sessão 2026-10-30 — GA4 conversions on top of page_view consent
 
