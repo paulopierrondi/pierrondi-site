@@ -264,10 +264,20 @@ export const posts: Post[] = [
     excerpt:
       'Valor aparece em resolução, tempo, qualidade, risco reduzido e capacidade de escala. Métricas ruins empurram IA para vanity dashboards.',
     date: '2026-06-10',
-    readTime: '6 min',
+    readTime: '8 min',
     content: `
+<h2>Resposta direta</h2>
+<p>Medir valor em IA operacional é comparar o trabalho de hoje com o que a automação entrega depois. O método cabe em três passos: baseline do trabalho real, uma métrica que o time já consegue observar e evidência do que rodou. Sem baseline, o número posterior é incomparável. Sem evidência, a métrica não se sustenta.</p>
+<p>Esta nota não publica taxa de sucesso, cliente, preço ou ROI. O método citável está em <a href="/answers/como-medir-resultado-de-ia-operacional">como medir resultado de IA operacional</a>. A prova pública já publicada está em <a href="/feitos">feitos</a>.</p>
+
 <h2>Comece pelo resultado operacional</h2>
 <p>Métricas de uso são úteis, mas insuficientes. A pergunta é o que mudou no processo: o tempo caiu, a qualidade subiu, o retrabalho reduziu, a fila andou, o risco foi melhor controlado?</p>
+
+<h2>Baseline antes de qualquer número</h2>
+<p>O baseline descreve o trabalho como ele é hoje: fila, exceção, dono, retrabalho e o que o time já registra. Não é um dashboard novo. É o recorte mínimo para que uma mudança depois tenha com o que se comparar. Se essa fonte ainda não existe, o próximo passo é passar a observá-la, não criar um indicador de vitrine.</p>
+
+<h2>O que entra como métrica</h2>
+<p>Uma métrica útil é uma medida que o time já vê no trabalho: ciclo entre pedido e resolução, retrabalho, fila parada, exceção escalada ou uma decisão que deixou rastro. Adoção e valor só entram quando a fonte é apontável. Volume de prompts, mensagens e agentes ativos descreve atividade. Não descreve resultado.</p>
 
 <h2>Cinco dimensões de valor</h2>
 <ul>
@@ -277,12 +287,19 @@ export const posts: Post[] = [
   <li><strong>Experiência:</strong> menos fricção para usuário, operador e gestor.</li>
   <li><strong>Risco:</strong> melhor controle, mais rastreabilidade e menos decisão informal.</li>
 </ul>
+<p>Essas dimensões nomeiam o que observar. Não são resultados deste site e não substituem a fonte que o time já consegue apontar.</p>
 
 <h2>O cuidado com dashboards bonitos</h2>
 <p>Um painel pode mostrar prompts executados, mensagens enviadas e agentes ativos. Isso não prova valor. Valor exige comparação com baseline, janela de tempo e clareza sobre causa.</p>
 
+<h2>Evidência fecha a conta</h2>
+<p>A evidência responde o que a métrica não responde: o que rodou, quem aprovou e o que o time herda. AgentOps entra como disciplina de registry, gate humano e handoff, não como um número extra. A oferta contínua que usa a mesma cadeia (baseline, sistema, métrica e handoff) está em <a href="/engajamento">engajamento</a>.</p>
+
 <h2>A métrica certa muda comportamento</h2>
 <p>Quando a métrica é resolução governada, o time desenha melhor o fluxo. Quando a métrica é volume de uso, o time otimiza adoção superficial. IA operacional precisa premiar qualidade de execução, não apenas atividade.</p>
+
+<h2>O que fica de fora</h2>
+<p>Fica de fora número sem baseline e economia sem fonte. O ensaio aponta o método. Não substitui o brief de medição nem o dossiê de feitos.</p>
     `,
   },
 ]
