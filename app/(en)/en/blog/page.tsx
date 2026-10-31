@@ -3,7 +3,7 @@ import PageHeader from '@/components/PageHeader'
 import BlogContent from '@/app/blog/BlogContent'
 
 export const metadata: Metadata = {
-  title: 'Ideas — enterprise AI, ServiceNow and AgentOps',
+  title: 'Ideas — AI, ServiceNow and AgentOps',
   description:
     'Notes on enterprise AI, ServiceNow, AgentOps, operating models and governed execution — short field essays, without the hype.',
   alternates: {

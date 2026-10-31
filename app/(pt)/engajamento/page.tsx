@@ -5,7 +5,7 @@ import EngajamentoContent from '@/app/engajamento/EngajamentoContent'
 import { buildEngajamentoSchema } from '@/app/engajamento/engajamento-copy'
 
 export const metadata: Metadata = {
-  title: 'Fractional AI Automation Officer',
+  title: 'Engajamento fractional de automação',
   description:
     'Engajamento contínuo para mid-market e ops que precisam de automação em produção: baseline, sistema, métrica e handoff — resultado mensurável, não horas soltas.',
   alternates: {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Fractional AI Automation Officer | pierrondi.dev',
+    title: 'Engajamento fractional de automação | pierrondi.dev',
     description:
       'Automações em produção com baseline, sistema, métrica e handoff — sem horas soltas e sem sprint publicado.',
     url: '/engajamento',

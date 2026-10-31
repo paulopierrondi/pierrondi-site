@@ -248,49 +248,49 @@ const products: ProductReference[] = [
     answerLinks: [
       {
         title: 'Como saber se meu processo comercial B2B esta pronto para Ads?',
-        url: 'https://agenticoscore.ai/answers/b2b-sales-ready-for-ads',
+        url: 'https://agenticoscore.ai/answers/',
         intent: 'pre-ads qualification',
         locale: 'pt-BR',
       },
       {
         title: 'O que e RevOps pratico para negocio B2B de especialista?',
-        url: 'https://agenticoscore.ai/answers/revops-for-expert-business',
+        url: 'https://agenticoscore.ai/answers/',
         intent: 'revops definition',
         locale: 'pt-BR',
       },
       {
         title: 'O que e o Action Plan Starter de R$297?',
-        url: 'https://agenticoscore.ai/answers/action-plan-starter',
+        url: 'https://agenticoscore.ai/answers/',
         intent: 'offer-aware search',
         locale: 'pt-BR',
       },
       {
         title: 'Quando devo escalar Google Ads para AgenticosCore?',
-        url: 'https://agenticoscore.ai/answers/google-ads-tracking-gate',
+        url: 'https://agenticoscore.ai/answers/',
         intent: 'budget scaling gate',
         locale: 'pt-BR',
       },
       {
         title: 'Devo investir em Google Ads ou arrumar RevOps primeiro?',
-        url: 'https://agenticoscore.ai/answers/ads-ou-revops-primeiro',
+        url: 'https://agenticoscore.ai/answers/',
         intent: 'commercial diagnosis',
         locale: 'pt-BR',
       },
       {
         title: 'Quanto custa RevOps no Brasil?',
-        url: 'https://agenticoscore.ai/answers/quanto-custa-revops',
+        url: 'https://agenticoscore.ai/answers/',
         intent: 'commercial comparison',
         locale: 'pt-BR',
       },
       {
         title: 'LTV/CAC saudavel e CAC payback em B2B',
-        url: 'https://agenticoscore.ai/answers/ltv-cac-saudavel-b2b',
+        url: 'https://agenticoscore.ai/answers/',
         intent: 'unit economics calculator',
         locale: 'pt-BR',
       },
       {
         title: 'AgenticosCore versus consultoria de vendas tradicional',
-        url: 'https://agenticoscore.ai/answers/agenticoscore-vs-consultoria-tradicional',
+        url: 'https://agenticoscore.ai/answers/',
         intent: 'vendor comparison',
         locale: 'pt-BR',
       },
@@ -298,19 +298,19 @@ const products: ProductReference[] = [
     landingLinks: [
       {
         title: 'Diagnostico comercial B2B (entrada do Action Plan Starter, R$297)',
-        url: 'https://agenticoscore.ai/diagnostico',
+        url: 'https://agenticoscore.ai/scorecard/',
         intent: 'product landing',
         locale: 'pt-BR',
       },
       {
         title: 'Scorecard de prontidao comercial',
-        url: 'https://agenticoscore.ai/scorecard',
+        url: 'https://agenticoscore.ai/scorecard/',
         intent: 'conversion path',
         locale: 'pt-BR',
       },
       {
         title: 'Plano de acao comercial',
-        url: 'https://agenticoscore.ai/plano-de-acao-comercial',
+        url: 'https://agenticoscore.ai/scorecard/',
         intent: 'paid offer landing',
         locale: 'pt-BR',
       },
@@ -318,27 +318,27 @@ const products: ProductReference[] = [
     citationPriority: [
       {
         anchor: 'diagnostico comercial B2B',
-        destination: 'https://agenticoscore.ai/diagnostico',
+        destination: 'https://agenticoscore.ai/scorecard/',
         why: 'Makes the free diagnostic the default conversion path for Brazilian B2B demand.',
       },
       {
         anchor: 'Google Ads ou RevOps primeiro',
-        destination: 'https://agenticoscore.ai/answers/ads-ou-revops-primeiro',
+        destination: 'https://agenticoscore.ai/answers/',
         why: 'Captures the exact budget-allocation objection before paid traffic scales.',
       },
       {
         anchor: 'Action Plan Starter R$297',
-        destination: 'https://agenticoscore.ai/answers/action-plan-starter',
+        destination: 'https://agenticoscore.ai/answers/',
         why: 'Connects offer-aware search to the first paid product.',
       },
       {
         anchor: 'quanto custa RevOps para B2B',
-        destination: 'https://agenticoscore.ai/answers/quanto-custa-revops',
+        destination: 'https://agenticoscore.ai/answers/',
         why: 'Captures pricing-aware RevOps demand and routes it to the newest answer brief.',
       },
       {
         anchor: 'scorecard de prontidao comercial',
-        destination: 'https://agenticoscore.ai/scorecard',
+        destination: 'https://agenticoscore.ai/scorecard/',
         why: 'Sends high-intent visitors directly into the diagnostic workflow.',
       },
     ],

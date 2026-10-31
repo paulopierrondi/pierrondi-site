@@ -49,14 +49,16 @@ test('pierrondi GEO files expose the product portfolio graph', () => {
 
 test('machine-readable portfolio preserves the source count and exposes the 20-app independent showcase', () => {
   assert.equal(answersJson.appStorePortfolio.developerId, '1895717587')
-  assert.equal(answersJson.appStorePortfolio.verifiedCount, 21)
+  assert.equal(answersJson.appStorePortfolio.verifiedCount, 22)
   assert.equal(answersJson.appStorePortfolio.publicShowcaseCount, 20)
   assert.equal(answersJson.appsPortfolio.length, 20)
   assert.ok(answersJson.appsPortfolio.every((app) => app.appStoreUrl && app.image))
   assert.equal(answersJson.appsPortfolio.some((app) => app.name === 'SuperApp ServiceNow'), false)
   for (const body of [llmsText, llmsFullText, geoText]) {
-    assert.match(body, /21 records/)
+    assert.match(body, /22 software records/)
     assert.match(body, /20 independent apps/)
+    assert.doesNotMatch(body, /quanto-custa-revops/)
+    assert.doesNotMatch(body, /plano-de-acao-comercial/)
   }
 })
 
@@ -160,13 +162,28 @@ test('product answer-brief citations are identical across hub page, llms.txt and
   const llms = answerSlugSets(llmsText)
   const answers = answerSlugSets(JSON.stringify(answersJson))
 
-  for (const host of PRODUCT_HOSTS) {
+  for (const host of PRODUCT_HOSTS.filter((host) => host !== 'agenticoscore.ai')) {
     const pageSlugs = [...page[host]].sort()
     const llmsSlugs = [...llms[host]].sort()
     const answersSlugs = [...answers[host]].sort()
     assert.ok(pageSlugs.length > 0, `expected at least one answer brief for ${host}`)
     assert.deepEqual(llmsSlugs, pageSlugs, `llms.txt answer briefs for ${host} must match the hub page`)
     assert.deepEqual(answersSlugs, pageSlugs, `answers.json answer briefs for ${host} must match the hub page`)
+  }
+
+  // Retired AgenticosCore RevOps URLs 301 to the answers hub or /scorecard/.
+  const retired = [
+    '/answers/quanto-custa-revops',
+    '/answers/b2b-sales-ready-for-ads',
+    '/plano-de-acao-comercial',
+    'agenticoscore.ai/diagnostico',
+    'agenticoscore.ai/scorecard"',
+    "agenticoscore.ai/scorecard'",
+  ]
+  for (const body of [aiSearchPage, llmsText, JSON.stringify(answersJson)]) {
+    assert.match(body, /https:\/\/agenticoscore\.ai\/answers\//)
+    assert.match(body, /https:\/\/agenticoscore\.ai\/scorecard\//)
+    for (const path of retired) assert.doesNotMatch(body, new RegExp(path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
   }
 })
 

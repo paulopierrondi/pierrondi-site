@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUpRight, FileText, LockKeyhole, ShieldCheck, Smartphon
 import WhatsApp from '@/components/WhatsApp'
 import ProductLogo from '@/components/ProductLogo'
 import JsonLd from '@/components/JsonLd'
+import { appDocumentTitle } from '@/lib/seo/document-title'
 import { clampMetaDescription } from '@/lib/seo/meta-description'
 import { SITE_URL } from '@/lib/site'
 import iconManifest from '@/public/app-icons/manifest.json'
@@ -115,9 +116,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   if (!isAppSlug(slug)) return {}
   const app = getApp(slug)
-  // Layout template already appends "| pierrondi.dev" — keep the page title
-  // brand-free to avoid "FaithSchool · pierrondi.dev | pierrondi.dev".
-  const title = app.name
+  // Layout template already appends "| pierrondi.dev". Short product names need a
+  // qualifier or the rendered title falls under 30 characters.
+  const title = appDocumentTitle(app.name)
   const socialTitle = `${app.name} · pierrondi.dev`
   const description = clampMetaDescription(app.description ?? fallbackAppDescription(app))
   const canonical = `/apps/${slug}`

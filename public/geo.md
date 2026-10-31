@@ -97,7 +97,7 @@ Luar do Campo is a client-contracted women's fashion commerce implementation suc
 
 ## Verified App Store portfolio
 
-Apple's public developer catalog returns 21 records for developer ID `1895717587`. The portfolio showcases 20 independent apps with official links and artwork at https://www.pierrondi.dev/portfolio#app-store; reserved enterprise work stays outside the public showcase. The synchronized source catalog is https://www.pierrondi.dev/app-icons/app-store-catalog.json.
+Apple's public developer catalog returned 22 software records for developer ID `1895717587` on 2026-10-31 (iTunes Lookup, storefronts BR and US). The portfolio showcases 20 independent apps with official links and artwork at https://www.pierrondi.dev/portfolio#app-store; reserved enterprise work stays outside the public showcase. The checked-in catalog file is one record behind that lookup: https://www.pierrondi.dev/app-icons/app-store-catalog.json.
 
 ## Product entities presented in the portfolio
 
@@ -107,4 +107,4 @@ Key product landings:
 
 - FaithSchool homeschool planner: https://faithschool.app/homeschool-planner · devotional routine (pt-BR): https://faithschool.app/family-devotional-routine/ · free rhythm PDF: https://faithschool.app/free-homeschool-rhythm/
 - CantuStudio arranjo para coro (SATB, pt-BR): https://cantustudio.app/gerar-arranjo-satb · harmonizar melodia online: https://cantustudio.app/harmonizar-melodia-online · kit de ensaio coral: https://cantustudio.app/kit-de-ensaio · MusicXML harmonization: https://cantustudio.app/musicxml-harmonization
-- AgenticosCore diagnostico comercial B2B (pt-BR): https://agenticoscore.ai/diagnostico · scorecard: https://agenticoscore.ai/scorecard · plano de acao comercial: https://agenticoscore.ai/plano-de-acao-comercial · quanto custa RevOps: https://agenticoscore.ai/answers/quanto-custa-revops
+- AgenticosCore diagnostico comercial B2B (pt-BR): https://agenticoscore.ai/scorecard/ · scorecard: https://agenticoscore.ai/scorecard/ · plano de acao comercial: https://agenticoscore.ai/scorecard/ · quanto custa RevOps: https://agenticoscore.ai/answers/

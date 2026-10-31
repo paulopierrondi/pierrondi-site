@@ -1,3 +1,15 @@
+# Sessão 2026-10-31 — technical SEO sweep (draft)
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Live audit of https://www.pierrondi.dev: sitemap 80 URLs, all 200; `/sprint` 404 and absent; robots points at the sitemap; apex 308 to www. 172 internal hrefs from those pages returned no 3xx/4xx.
+- Fixed in this branch: short and duplicate document titles (contato, blog hubs, legal, PT engajamento, 15 short app names), legal `x-default`, studio Offer/OfferCatalog removed, AgenticosCore links that 301 (`/answers/quanto-custa-revops`, `/plano-de-acao-comercial`, and the other retired RevOps URLs) now point at `https://agenticoscore.ai/answers/` or `https://agenticoscore.ai/scorecard/`.
+- Apple iTunes Lookup for developer ID 1895717587 returned 22 software records on both BR and US storefronts (2026-10-31). Answer copy and the GEO count now say 22. The checked-in `app-store-catalog.json` still lists 21 and was not regenerated. AgenticosCore stays described as Revenue Operations in the answer briefs; agenticoscore.ai now says Legacy Exit. That positioning was not rewritten.
+- Left to other drafts: `/atuacao` titles (#75), `app/blog/posts.ts` titles over 60 characters (#78), `/answers/automacao-com-ia-preco-fixo` (#76). `/en/answers` hreflang stays with #66.
+- GA4 stays one `gtag('config')` for `G-1CL8PFYY7T` with `send_page_view: false`. Person `jobTitle` stays `Technical Account Executive`. No Product schema. No `/sprint`.
+- Mobile Lighthouse on production before this deploy: `/` and `/en` LCP 1.2s, CLS 0, TBT ~5.0s (home JS chunk); `/engajamento` and `/contato` LCP 1.0s, CLS 0, TBT 70ms. No image/font change. Fonts already use `display: swap`.
+- Verified: `npx tsc --noEmit`, `npm run lint`, `npm test` 214/214, `npm run build` 203 pages and `/sprint` absent, `check-apps-urls` against `next start` 121/121, `/sprint` 404.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note this draft. Do not IndexNow or mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-10-30 — engagement links after #69
 
 - Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
