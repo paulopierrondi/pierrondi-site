@@ -8,6 +8,7 @@
 - GA4 stays one `gtag('config')` for `G-1CL8PFYY7T` with `send_page_view: false`. Person `jobTitle` stays `Technical Account Executive`. No Product schema. No `/sprint`.
 - Mobile Lighthouse on production before this deploy: `/` and `/en` LCP 1.2s, CLS 0, TBT ~5.0s (home JS chunk); `/engajamento` and `/contato` LCP 1.0s, CLS 0, TBT 70ms. No image/font change. Fonts already use `display: swap`.
 - Verified: `npx tsc --noEmit`, `npm run lint`, `npm test` 214/214, `npm run build` 203 pages and `/sprint` absent, `check-apps-urls` against `next start` 121/121, `/sprint` 404.
+- First GitHub `CI / build` failed in `next/font` (`queries have exactly one entry` on Space Grotesk). Lint, typecheck, and tests passed in that run. Local `next build` succeeded. Fonts were not edited.
 - Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note this draft. Do not IndexNow or mark shipped until Paulo merges and Railway deploys.
 
 # Sessão 2026-10-30 — engagement links after #69
