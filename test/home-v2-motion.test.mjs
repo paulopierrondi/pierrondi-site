@@ -91,3 +91,14 @@ test('motion retune does not publish /sprint or drop home proof/engagement contr
   assert.match(hero, /href=\{lang === 'pt' \? '\/engajamento' : '\/en\/engajamento'\}/)
   assert.match(hero, /href="#proof"/)
 })
+
+test('hero keeps the WebGL scene off the load path until idle or a real gesture', () => {
+  assert.match(hero, /const HERO_SCENE_DEFER_MS = 4000/)
+  assert.match(hero, /requestIdleCallback\(\(\) => start\(\), \{ timeout: 1200 \}\)/)
+  assert.match(hero, /window\.scrollY > 32/)
+  assert.match(hero, /sceneReady \? <FrontierEventHorizon \/> : null/)
+  assert.match(hero, /data-hero-scene=\{sceneReady \? 'live' : 'deferred'\}/)
+  assert.match(hero, /dynamic\(\s*\(\) => import\('\.\.\/three\/FrontierEventHorizon'\),/s)
+  assert.match(hero, /ssr: false/)
+  assert.match(hero, /data-frontier-fallback/)
+})

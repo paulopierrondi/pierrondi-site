@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   motion,
   useScroll,
@@ -59,6 +59,58 @@ function itemVariantsFor(reducedMotion: boolean): Variants {
 
 const SCENE_SPRING = { stiffness: 88, damping: 28, mass: 0.55, restDelta: 0.001 }
 
+// Keep three.js / WebGL off the load path. Lighthouse mobile attributes ~9s of
+// main-thread work to that chunk while the CSS disk is already painted.
+// A fixed quiet window lets TTI land first; a real gesture starts it sooner.
+const HERO_SCENE_DEFER_MS = 4000
+
+function useDeferredHeroScene() {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    let cancelled = false
+    let idleId = 0
+    let timer = 0
+
+    const start = () => {
+      if (cancelled) return
+      cancelled = true
+      window.clearTimeout(timer)
+      if (idleId) window.cancelIdleCallback?.(idleId)
+      setReady(true)
+    }
+
+    const armIdle = () => {
+      if (cancelled) return
+      if (typeof window.requestIdleCallback === 'function') {
+        idleId = window.requestIdleCallback(() => start(), { timeout: 1200 })
+        return
+      }
+      start()
+    }
+
+    const onScroll = () => {
+      if (window.scrollY > 32) start()
+    }
+
+    window.addEventListener('pointerdown', start, { passive: true })
+    window.addEventListener('keydown', start)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    timer = window.setTimeout(armIdle, HERO_SCENE_DEFER_MS)
+
+    return () => {
+      cancelled = true
+      window.clearTimeout(timer)
+      if (idleId) window.cancelIdleCallback?.(idleId)
+      window.removeEventListener('pointerdown', start)
+      window.removeEventListener('keydown', start)
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [])
+
+  return ready
+}
+
 function HeroBackdrop({
   sceneY,
   veilOpacity,
@@ -66,13 +118,19 @@ function HeroBackdrop({
   sceneY: MotionValue<number>
   veilOpacity: MotionValue<number>
 }) {
+  const sceneReady = useDeferredHeroScene()
+
   return (
     <>
       <div className={styles.bg} aria-hidden="true">
         {/* Scene root first: the universally supported `.root + .fallback`
             sibling rule retires the static fallback once WebGL is live. */}
-        <motion.div className={styles.sceneLayer} style={{ y: sceneY }}>
-          <FrontierEventHorizon />
+        <motion.div
+          className={styles.sceneLayer}
+          style={{ y: sceneY }}
+          data-hero-scene={sceneReady ? 'live' : 'deferred'}
+        >
+          {sceneReady ? <FrontierEventHorizon /> : null}
           <div className={sceneStyles.fallback} data-frontier-fallback>
             <span className={sceneStyles.fallbackDisk} />
             <span className={sceneStyles.fallbackVoid} />
