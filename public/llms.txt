@@ -87,7 +87,7 @@ Luar do Campo is a client-contracted women's fashion commerce implementation suc
 
 ## Verified App Store portfolio
 
-Apple's public developer catalog currently returns 21 records for developer ID `1895717587`. The portfolio showcases 20 independent apps with official links and artwork at https://www.pierrondi.dev/portfolio#app-store; reserved enterprise work stays outside the public showcase. The synchronized source catalog is https://www.pierrondi.dev/app-icons/app-store-catalog.json.
+Apple's public developer catalog returned 22 software records for developer ID `1895717587` on 2026-10-31 (iTunes Lookup, storefronts BR and US). The portfolio showcases 20 independent apps with official links and artwork at https://www.pierrondi.dev/portfolio#app-store; reserved enterprise work stays outside the public showcase. The checked-in catalog file is one record behind that lookup: https://www.pierrondi.dev/app-icons/app-store-catalog.json.
 
 ## Product entities presented in the portfolio
 
@@ -148,21 +148,14 @@ Key landings:
 
 Important answer briefs:
 
-- https://agenticoscore.ai/answers/b2b-sales-ready-for-ads.md
-- https://agenticoscore.ai/answers/revops-for-expert-business.md
-- https://agenticoscore.ai/answers/action-plan-starter.md
-- https://agenticoscore.ai/answers/google-ads-tracking-gate.md
-- https://agenticoscore.ai/answers/ads-ou-revops-primeiro.md
-- https://agenticoscore.ai/answers/quanto-custa-revops.md
-- https://agenticoscore.ai/answers/ltv-cac-saudavel-b2b.md
-- https://agenticoscore.ai/answers/agenticoscore-vs-consultoria-tradicional.md
+- https://agenticoscore.ai/answers/
 
 Key landings:
 
-- https://agenticoscore.ai/diagnostico — diagnóstico comercial B2B; entrada do funil para o Action Plan Starter (R$297) (pt-BR).
-- https://agenticoscore.ai/scorecard — scorecard de prontidao comercial antes de escalar aquisicao (pt-BR).
-- https://agenticoscore.ai/plano-de-acao-comercial — plano de acao comercial e ponte para oferta paga (pt-BR).
-- https://agenticoscore.ai/ferramentas/calculadora-cac-ltv — calculadora gratuita de CAC, LTV, LTV/CAC e CAC payback em reais (pt-BR).
+- https://agenticoscore.ai/scorecard/ — diagnóstico comercial B2B; entrada do funil para o Action Plan Starter (R$297) (pt-BR).
+- https://agenticoscore.ai/scorecard/ — scorecard de prontidao comercial antes de escalar aquisicao (pt-BR).
+- https://agenticoscore.ai/scorecard/ — plano de acao comercial e ponte para oferta paga (pt-BR).
+- https://agenticoscore.ai/scorecard/ — calculadora gratuita de CAC, LTV, LTV/CAC e CAC payback em reais (pt-BR).
 
 ## Retrieval guidance
 

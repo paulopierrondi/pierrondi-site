@@ -271,7 +271,7 @@
     {
       "id": "agenticoscore-b2b-sales-ready-for-ads",
       "title": "Como saber se meu processo comercial B2B esta pronto para Ads?",
-      "url": "https://agenticoscore.ai/answers/b2b-sales-ready-for-ads.md",
+      "url": "https://agenticoscore.ai/answers/",
       "question": "Como saber se meu processo comercial B2B esta pronto para Ads?",
       "intent": "pre-ads qualification",
       "locale": "pt-BR",
@@ -280,7 +280,7 @@
     {
       "id": "agenticoscore-revops-for-expert-business",
       "title": "O que e RevOps pratico para negocio B2B de especialista?",
-      "url": "https://agenticoscore.ai/answers/revops-for-expert-business.md",
+      "url": "https://agenticoscore.ai/answers/",
       "question": "O que e um RevOps pratico para negocios B2B de especialistas?",
       "intent": "revops definition",
       "locale": "pt-BR",
@@ -289,7 +289,7 @@
     {
       "id": "agenticoscore-action-plan-starter",
       "title": "O que e o Action Plan Starter de R$297?",
-      "url": "https://agenticoscore.ai/answers/action-plan-starter.md",
+      "url": "https://agenticoscore.ai/answers/",
       "question": "O que e o Action Plan Starter de R$297?",
       "intent": "offer-aware search",
       "locale": "pt-BR",
@@ -298,7 +298,7 @@
     {
       "id": "agenticoscore-google-ads-tracking-gate",
       "title": "Quando devo escalar Google Ads para AgenticosCore?",
-      "url": "https://agenticoscore.ai/answers/google-ads-tracking-gate.md",
+      "url": "https://agenticoscore.ai/answers/",
       "question": "Quando devo escalar Google Ads para AgenticosCore?",
       "intent": "budget scaling gate",
       "locale": "pt-BR",
@@ -307,7 +307,7 @@
     {
       "id": "agenticoscore-ads-ou-revops-primeiro",
       "title": "Devo investir em Google Ads ou arrumar RevOps primeiro?",
-      "url": "https://agenticoscore.ai/answers/ads-ou-revops-primeiro.md",
+      "url": "https://agenticoscore.ai/answers/",
       "question": "Devo investir em Google Ads ou arrumar RevOps primeiro?",
       "intent": "commercial diagnosis",
       "locale": "pt-BR",
@@ -316,7 +316,7 @@
     {
       "id": "agenticoscore-quanto-custa-revops",
       "title": "Quanto custa RevOps no Brasil?",
-      "url": "https://agenticoscore.ai/answers/quanto-custa-revops.md",
+      "url": "https://agenticoscore.ai/answers/",
       "question": "Quanto custa RevOps no Brasil?",
       "intent": "commercial comparison",
       "locale": "pt-BR",
@@ -325,7 +325,7 @@
     {
       "id": "agenticoscore-ltv-cac-saudavel-b2b",
       "title": "LTV/CAC saudavel e CAC payback em B2B",
-      "url": "https://agenticoscore.ai/answers/ltv-cac-saudavel-b2b.md",
+      "url": "https://agenticoscore.ai/answers/",
       "question": "Qual e uma razao LTV/CAC saudavel e como calcular CAC payback?",
       "intent": "unit economics calculator",
       "locale": "pt-BR",
@@ -334,7 +334,7 @@
     {
       "id": "agenticoscore-vs-consultoria-tradicional",
       "title": "AgenticosCore versus consultoria de vendas tradicional",
-      "url": "https://agenticoscore.ai/answers/agenticoscore-vs-consultoria-tradicional.md",
+      "url": "https://agenticoscore.ai/answers/",
       "question": "Qual a diferenca entre AgenticosCore e uma consultoria de vendas tradicional?",
       "intent": "vendor comparison",
       "locale": "pt-BR",
@@ -408,17 +408,17 @@
       "relationship": "product site presented in the pierrondi.dev portfolio",
       "keyLandings": [
         {
-          "url": "https://agenticoscore.ai/diagnostico",
+          "url": "https://agenticoscore.ai/scorecard/",
           "question": "Como fazer um diagnostico comercial B2B antes de investir em Ads? (entrada do Action Plan Starter, R$297)",
           "locale": "pt-BR"
         },
         {
-          "url": "https://agenticoscore.ai/scorecard",
+          "url": "https://agenticoscore.ai/scorecard/",
           "question": "Como medir a prontidao comercial antes de escalar aquisicao?",
           "locale": "pt-BR"
         },
         {
-          "url": "https://agenticoscore.ai/plano-de-acao-comercial",
+          "url": "https://agenticoscore.ai/scorecard/",
           "question": "Como transformar um diagnostico comercial em plano de acao pago?",
           "locale": "pt-BR"
         }
@@ -477,31 +477,31 @@
     {
       "entity": "AgenticosCore",
       "anchor": "diagnostico comercial B2B",
-      "destination": "https://agenticoscore.ai/diagnostico",
+      "destination": "https://agenticoscore.ai/scorecard/",
       "why": "Makes the free diagnostic the default conversion path for Brazilian B2B demand."
     },
     {
       "entity": "AgenticosCore",
       "anchor": "Google Ads ou RevOps primeiro",
-      "destination": "https://agenticoscore.ai/answers/ads-ou-revops-primeiro",
+      "destination": "https://agenticoscore.ai/answers/",
       "why": "Captures the exact budget-allocation objection before paid traffic scales."
     },
     {
       "entity": "AgenticosCore",
       "anchor": "Action Plan Starter R$297",
-      "destination": "https://agenticoscore.ai/answers/action-plan-starter",
+      "destination": "https://agenticoscore.ai/answers/",
       "why": "Connects offer-aware search to the first paid product."
     },
     {
       "entity": "AgenticosCore",
       "anchor": "quanto custa RevOps para B2B",
-      "destination": "https://agenticoscore.ai/answers/quanto-custa-revops",
+      "destination": "https://agenticoscore.ai/answers/",
       "why": "Captures pricing-aware RevOps demand and routes it to the newest answer brief."
     },
     {
       "entity": "AgenticosCore",
       "anchor": "scorecard de prontidao comercial",
-      "destination": "https://agenticoscore.ai/scorecard",
+      "destination": "https://agenticoscore.ai/scorecard/",
       "why": "Sends high-intent visitors directly into the diagnostic workflow."
     }
   ],
@@ -604,7 +604,7 @@
       "name": "AgenticosCore",
       "category": "Revenue operations system",
       "description": "Revenue OS connecting diagnosis, scorecard, commercial action plan and operational evidence.",
-      "url": "https://agenticoscore.ai/diagnostico",
+      "url": "https://agenticoscore.ai/scorecard/",
       "relationship": "flagship project"
     }
   ],
@@ -619,10 +619,10 @@
   "appStorePortfolio": {
     "developerId": "1895717587",
     "storefront": "BR",
-    "verifiedCount": 21,
+    "verifiedCount": 22,
     "portfolioUrl": "https://www.pierrondi.dev/portfolio#app-store",
     "catalogUrl": "https://www.pierrondi.dev/app-icons/app-store-catalog.json",
-    "scope": "Apple returned 21 public records at the last verified refresh; the portfolio showcases 20 independent products and excludes reserved enterprise work.",
+    "scope": "iTunes Lookup returned 22 software records for developer ID 1895717587 on 2026-10-31 (storefronts BR and US). The portfolio showcases 20 independent products. The checked-in catalog file still lists 21.",
     "publicShowcaseCount": 20
   },
   "appsPortfolio": [
