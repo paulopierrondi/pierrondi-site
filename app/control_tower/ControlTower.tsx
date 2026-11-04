@@ -306,6 +306,7 @@ export default function ControlTower({
           <a href="#devocionais">Devocionais</a>
           <a href="#planos">Planos</a>
           <a href="#governanca">Governança</a>
+          <a href="/control_tower/ads">Ads Performance →</a>
         </nav>
         <p className={styles.railNote}>
           Vermelho exige decisão. Amber exige triagem. Azul entra em roadmap.
