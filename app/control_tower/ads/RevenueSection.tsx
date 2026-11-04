@@ -33,8 +33,12 @@ export default function RevenueSection({
   const spend30 = econ.reduce((a, r) => a + r.spend30, 0)
   const newPaying = econ.reduce((a, r) => a + r.newPaying30, 0)
   const cac = newPaying > 0 ? spend30 / newPaying : null
-  const roas = spend30 > 0 ? revenue30 / spend30 : null
+  // ROAS só com produtos anunciados; receita orgânica (sem gasto) entra apenas no MER.
+  const paidRevenue = econ.filter((r) => r.spend30 > 0).reduce((a, r) => a + r.revenue30, 0)
+  const roas = spend30 > 0 ? paidRevenue / spend30 : null
+  const mer = spend30 > 0 ? revenue30 / spend30 : null
   const roasTone = roas == null ? undefined : roas >= 1 ? 'good' : 'warn'
+  const roasHint = roas == null ? 'sem gasto' : `produtos anunciados · MER ${fmtRoas(mer)} (receita total ÷ gasto)`
 
   return (
     <section className={styles.panel} aria-labelledby="ads-revenue">
@@ -51,7 +55,7 @@ export default function RevenueSection({
         <Tile label="MRR total" value={fmtMoney(mrr, true)} />
         <Tile label="Receita 30d" value={fmtMoney(revenue30, true)} />
         <Tile label="CAC blended" value={fmtMoney(cac)} hint={newPaying > 0 ? `${newPaying} novos pagantes` : 'sem novos pagantes'} tone={newPaying > 0 ? undefined : 'warn'} />
-        <Tile label="ROAS blended" value={fmtRoas(roas)} tone={roasTone} hint={roas == null ? 'sem gasto' : roas >= 1 ? 'receita cobre o gasto' : 'abaixo de 1x'} />
+        <Tile label="ROAS (anunciados)" value={fmtRoas(roas)} tone={roasTone} hint={roasHint} />
       </div>
 
       <UnitEconomicsTable rows={econ} />

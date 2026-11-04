@@ -2,8 +2,9 @@ import type { RevenueProductRow, UnitEconomicsRow, WindowKey } from '@/lib/ads-c
 import { fmtDec, fmtInt, fmtMoney, fmtRoas } from './format'
 import styles from './AdsDashboard.module.css'
 
-/** good: ROAS >= 1 or payback <= 3 months; otherwise warn (ROAS < 1 with slow/missing payback, or missing data). */
-export function econTone(r: Pick<UnitEconomicsRow, 'roas' | 'paybackMonths'>): 'good' | 'warn' {
+/** flat: sem gasto em ads (nada a julgar); good: ROAS >= 1 ou payback <= 3 meses; senão warn. */
+export function econTone(r: Pick<UnitEconomicsRow, 'roas' | 'paybackMonths' | 'spend30'>): 'good' | 'warn' | 'flat' {
+  if (!r.spend30) return 'flat'
   if (r.roas != null && r.roas >= 1) return 'good'
   if (r.paybackMonths != null && r.paybackMonths <= 3) return 'good'
   return 'warn'
