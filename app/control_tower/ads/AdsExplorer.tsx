@@ -17,6 +17,7 @@ import {
   type Dimension,
   type TableRow,
 } from './format'
+import WebSection from './WebSection'
 import styles from './AdsDashboard.module.css'
 
 const WINDOWS: Array<{ key: WindowKey; label: string }> = [
@@ -136,24 +137,6 @@ export default function AdsExplorer({ snapshot }: { snapshot: AdsControlSnapshot
           {product !== 'all' || platform !== 'all' ? ' · com filtros aplicados' : ' · total da conta'}
           {kpi.derived ? ' · somado dos anúncios listados' : ''}
         </p>
-        {cur ? (
-          <div className={styles.kpis}>
-            <Kpi label="Gasto" value={fmtMoney(cur.spend)} delta={d('spend')} goodWhenDown />
-            <Kpi label="Conversões" value={fmtInt(cur.conversions)} delta={d('conversions')} />
-            <Kpi label="CPA" value={fmtMoney(cur.cpa)} delta={d('cpa')} goodWhenDown />
-            <Kpi label="ROAS" value={fmtRoas(cur.roas)} delta={d('roas')} />
-            <Kpi label="CTR" value={fmtPct(cur.ctr)} delta={d('ctr')} />
-            <Kpi label="Installs" value={fmtInt(cur.installs)} delta={d('installs')} />
-          </div>
-        ) : (
-          <p className={styles.emptyInline}>Sem dados nesta janela para o filtro escolhido.</p>
-        )}
-      </section>
-
-      <section className={styles.panel} aria-labelledby="ads-tables">
-        <div className={styles.panelHeader}>
-          <h2 id="ads-tables">Detalhamento</h2>
-        </div>
         <div className={styles.filters}>
           <label>
             Produto
@@ -177,6 +160,26 @@ export default function AdsExplorer({ snapshot }: { snapshot: AdsControlSnapshot
               ))}
             </select>
           </label>
+        </div>
+        {cur ? (
+          <div className={styles.kpis}>
+            <Kpi label="Gasto" value={fmtMoney(cur.spend)} delta={d('spend')} goodWhenDown />
+            <Kpi label="Conversões" value={fmtInt(cur.conversions)} delta={d('conversions')} />
+            <Kpi label="CPA" value={fmtMoney(cur.cpa)} delta={d('cpa')} goodWhenDown />
+            <Kpi label="ROAS" value={fmtRoas(cur.roas)} delta={d('roas')} />
+            <Kpi label="CTR" value={fmtPct(cur.ctr)} delta={d('ctr')} />
+            <Kpi label="Installs" value={fmtInt(cur.installs)} delta={d('installs')} />
+          </div>
+        ) : (
+          <p className={styles.emptyInline}>Sem dados nesta janela para o filtro escolhido.</p>
+        )}
+      </section>
+
+      {snapshot.web && <WebSection web={snapshot.web} product={product} win={win} winLabel={winLabel} />}
+
+      <section className={styles.panel} aria-labelledby="ads-tables">
+        <div className={styles.panelHeader}>
+          <h2 id="ads-tables">Detalhamento</h2>
         </div>
         <div className={styles.tabs} role="tablist" aria-label="Dimensão">
           {TABS.map((t) => (

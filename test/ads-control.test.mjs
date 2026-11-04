@@ -30,6 +30,32 @@ test('ads schema rejects bad snapshots', () => {
   assert.equal(adsControlSnapshotSchema.safeParse(bad4).success, false)
 })
 
+test('ads schema: web section is optional and validated', () => {
+  const withWeb = fixture()
+  assert.ok(withWeb.web, 'fixture carries a synthetic web section')
+  assert.equal(adsControlSnapshotSchema.safeParse(withWeb).success, true)
+
+  const without = fixture()
+  delete without.web
+  assert.equal(adsControlSnapshotSchema.safeParse(without).success, true)
+
+  const badSource = fixture()
+  badSource.web.connectors[0].source = 'adobe'
+  assert.equal(adsControlSnapshotSchema.safeParse(badSource).success, false)
+
+  const badChannels = fixture()
+  badChannels.web.channels = Array.from({ length: 61 }, () => badChannels.web.channels[0])
+  assert.equal(adsControlSnapshotSchema.safeParse(badChannels).success, false)
+
+  const badQueries = fixture()
+  badQueries.web.topQueries = Array.from({ length: 81 }, () => badQueries.web.topQueries[0])
+  assert.equal(adsControlSnapshotSchema.safeParse(badQueries).success, false)
+
+  const missingWindow = fixture()
+  delete missingWindow.web.channels[0].windows.prev7
+  assert.equal(adsControlSnapshotSchema.safeParse(missingWindow).success, false)
+})
+
 test('ads ingest auth rejects missing or wrong bearer and accepts the right one', () => {
   const script = `
     import { isValidAdsIngestBearer as ok } from './lib/ads-control/auth.ts'

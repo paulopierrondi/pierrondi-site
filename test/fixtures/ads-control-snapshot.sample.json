@@ -5449,5 +5449,373 @@
    "expectedImpact": "Atribuicao mais confiavel",
    "requiresApproval": true
   }
- ]
+ ],
+  "web": {
+    "connectors": [
+      {
+        "source": "ga4",
+        "status": "ok",
+        "properties": 2,
+        "message": ""
+      },
+      {
+        "source": "gsc",
+        "status": "error",
+        "properties": 2,
+        "message": "Fake sample error: permission denied"
+      }
+    ],
+    "traffic": [
+      {
+        "product": "FaithSchool",
+        "property": "Fake Site A",
+        "propertyId": "111111111",
+        "windows": {
+          "yesterday": {
+            "sessions": 14,
+            "users": 10,
+            "newUsers": 6,
+            "engagedSessions": 7,
+            "keyEvents": 3,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.2143
+          },
+          "last7": {
+            "sessions": 100,
+            "users": 70,
+            "newUsers": 42,
+            "engagedSessions": 55,
+            "keyEvents": 10,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1
+          },
+          "prev7": {
+            "sessions": 80,
+            "users": 56,
+            "newUsers": 33,
+            "engagedSessions": 44,
+            "keyEvents": 8,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1
+          },
+          "last30": {
+            "sessions": 400,
+            "users": 300,
+            "newUsers": 180,
+            "engagedSessions": 220,
+            "keyEvents": 33,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0825
+          }
+        }
+      },
+      {
+        "product": "CantuStudio",
+        "property": "Fake Site B",
+        "propertyId": "222222222",
+        "windows": {
+          "yesterday": {
+            "sessions": 8,
+            "users": 6,
+            "newUsers": 3,
+            "engagedSessions": 4,
+            "keyEvents": 3,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.375
+          },
+          "last7": {
+            "sessions": 60,
+            "users": 42,
+            "newUsers": 25,
+            "engagedSessions": 33,
+            "keyEvents": 6,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1
+          },
+          "prev7": {
+            "sessions": 48,
+            "users": 33,
+            "newUsers": 19,
+            "engagedSessions": 26,
+            "keyEvents": 5,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1042
+          },
+          "last30": {
+            "sessions": 240,
+            "users": 180,
+            "newUsers": 108,
+            "engagedSessions": 132,
+            "keyEvents": 20,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0833
+          }
+        }
+      }
+    ],
+    "channels": [
+      {
+        "product": "FaithSchool",
+        "channel": "Organic Search",
+        "windows": {
+          "last7": {
+            "sessions": 50,
+            "users": 33,
+            "newUsers": 19,
+            "engagedSessions": 27,
+            "keyEvents": 2,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.04
+          },
+          "prev7": {
+            "sessions": 33,
+            "users": 25,
+            "newUsers": 15,
+            "engagedSessions": 18,
+            "keyEvents": 1,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0303
+          }
+        }
+      },
+      {
+        "product": "FaithSchool",
+        "channel": "Direct",
+        "windows": {
+          "last7": {
+            "sessions": 33,
+            "users": 25,
+            "newUsers": 15,
+            "engagedSessions": 18,
+            "keyEvents": 2,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0606
+          },
+          "prev7": {
+            "sessions": 25,
+            "users": 20,
+            "newUsers": 12,
+            "engagedSessions": 13,
+            "keyEvents": 1,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.04
+          }
+        }
+      },
+      {
+        "product": "FaithSchool",
+        "channel": "Paid Search",
+        "windows": {
+          "last7": {
+            "sessions": 20,
+            "users": 16,
+            "newUsers": 9,
+            "engagedSessions": 11,
+            "keyEvents": 2,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1
+          },
+          "prev7": {
+            "sessions": 16,
+            "users": 14,
+            "newUsers": 8,
+            "engagedSessions": 8,
+            "keyEvents": 1,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0625
+          }
+        }
+      },
+      {
+        "product": "CantuStudio",
+        "channel": "Organic Search",
+        "windows": {
+          "last7": {
+            "sessions": 30,
+            "users": 20,
+            "newUsers": 12,
+            "engagedSessions": 16,
+            "keyEvents": 2,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0667
+          },
+          "prev7": {
+            "sessions": 20,
+            "users": 15,
+            "newUsers": 9,
+            "engagedSessions": 11,
+            "keyEvents": 1,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.05
+          }
+        }
+      },
+      {
+        "product": "CantuStudio",
+        "channel": "Direct",
+        "windows": {
+          "last7": {
+            "sessions": 20,
+            "users": 15,
+            "newUsers": 9,
+            "engagedSessions": 11,
+            "keyEvents": 2,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1
+          },
+          "prev7": {
+            "sessions": 15,
+            "users": 12,
+            "newUsers": 7,
+            "engagedSessions": 8,
+            "keyEvents": 1,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0667
+          }
+        }
+      },
+      {
+        "product": "CantuStudio",
+        "channel": "Paid Search",
+        "windows": {
+          "last7": {
+            "sessions": 12,
+            "users": 10,
+            "newUsers": 6,
+            "engagedSessions": 6,
+            "keyEvents": 2,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1667
+          },
+          "prev7": {
+            "sessions": 10,
+            "users": 8,
+            "newUsers": 4,
+            "engagedSessions": 5,
+            "keyEvents": 1,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1
+          }
+        }
+      }
+    ],
+    "search": [
+      {
+        "product": "FaithSchool",
+        "site": "sc-domain:example-fake-site-a.test",
+        "windows": {
+          "yesterday": {
+            "clicks": 5,
+            "impressions": 100,
+            "ctr": 0.05,
+            "position": 12.3
+          },
+          "last7": {
+            "clicks": 33,
+            "impressions": 800,
+            "ctr": 0.0413,
+            "position": 11.8
+          },
+          "prev7": {
+            "clicks": 25,
+            "impressions": 700,
+            "ctr": 0.0357,
+            "position": 13.1
+          },
+          "last30": {
+            "clicks": 100,
+            "impressions": 3000,
+            "ctr": 0.0333,
+            "position": 12.0
+          }
+        }
+      },
+      {
+        "product": "CantuStudio",
+        "site": "sc-domain:example-fake-site-b.test",
+        "windows": {
+          "yesterday": {
+            "clicks": 3,
+            "impressions": 60,
+            "ctr": 0.05,
+            "position": 12.3
+          },
+          "last7": {
+            "clicks": 20,
+            "impressions": 480,
+            "ctr": 0.0417,
+            "position": 11.8
+          },
+          "prev7": {
+            "clicks": 15,
+            "impressions": 420,
+            "ctr": 0.0357,
+            "position": 13.1
+          },
+          "last30": {
+            "clicks": 60,
+            "impressions": 1800,
+            "ctr": 0.0333,
+            "position": 12.0
+          }
+        }
+      }
+    ],
+    "topQueries": [
+      {
+        "product": "FaithSchool",
+        "site": "sc-domain:example-a.test",
+        "query": "fake query alpha",
+        "clicks": 12,
+        "impressions": 900,
+        "ctr": 0.0133,
+        "position": 7.4
+      },
+      {
+        "product": "FaithSchool",
+        "site": "sc-domain:example-a.test",
+        "query": "fake query beta",
+        "clicks": 5,
+        "impressions": 1500,
+        "ctr": 0.0033,
+        "position": 14.2
+      },
+      {
+        "product": "FaithSchool",
+        "site": "sc-domain:example-a.test",
+        "query": "fake query gamma",
+        "clicks": 0,
+        "impressions": 300,
+        "ctr": 0.0,
+        "position": 28.9
+      },
+      {
+        "product": "CantuStudio",
+        "site": "sc-domain:example-b.test",
+        "query": "fake query alpha",
+        "clicks": 12,
+        "impressions": 900,
+        "ctr": 0.0133,
+        "position": 7.4
+      },
+      {
+        "product": "CantuStudio",
+        "site": "sc-domain:example-b.test",
+        "query": "fake query beta",
+        "clicks": 5,
+        "impressions": 1500,
+        "ctr": 0.0033,
+        "position": 14.2
+      },
+      {
+        "product": "CantuStudio",
+        "site": "sc-domain:example-b.test",
+        "query": "fake query gamma",
+        "clicks": 0,
+        "impressions": 300,
+        "ctr": 0.0,
+        "position": 28.9
+      }
+    ]
+  }
 }

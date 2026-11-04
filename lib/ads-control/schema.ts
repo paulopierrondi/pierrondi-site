@@ -85,6 +85,64 @@ const recommendation = z.object({
   requiresApproval: z.literal(true),
 })
 
+const gaMetrics = z.object({
+  sessions: num,
+  users: num,
+  newUsers: num,
+  engagedSessions: num,
+  keyEvents: num,
+  engagementRate: nullableNum,
+  keyEventRate: nullableNum,
+})
+
+const gscMetrics = z.object({
+  clicks: num,
+  impressions: num,
+  ctr: nullableNum,
+  position: nullableNum,
+})
+
+const webWindows = <T extends z.ZodTypeAny>(m: T) =>
+  z.object({
+    yesterday: m.optional(),
+    last7: m.optional(),
+    prev7: m.optional(),
+    last30: m.optional(),
+  })
+
+const web = z.object({
+  connectors: z
+    .array(
+      z.object({
+        source: z.enum(['ga4', 'gsc']),
+        status: z.enum(['ok', 'no_data', 'error']),
+        properties: z.number().int().nonnegative(),
+        message: str(500),
+      }),
+    )
+    .max(8),
+  traffic: z
+    .array(z.object({ product: str(120), property: str(200), propertyId: str(60), windows: webWindows(gaMetrics) }))
+    .max(50),
+  channels: z
+    .array(z.object({ product: str(120), channel: str(120), windows: z.object({ last7: gaMetrics, prev7: gaMetrics }) }))
+    .max(60),
+  search: z.array(z.object({ product: str(120), site: str(300), windows: webWindows(gscMetrics) })).max(50),
+  topQueries: z
+    .array(
+      z.object({
+        product: str(120),
+        site: str(300),
+        query: str(300),
+        clicks: num,
+        impressions: num,
+        ctr: num,
+        position: num,
+      }),
+    )
+    .max(80),
+})
+
 export const adsControlSnapshotSchema = z.object({
   schemaVersion: z.literal(1),
   collectedAt: z.string().datetime({ offset: true }),
@@ -116,6 +174,7 @@ export const adsControlSnapshotSchema = z.object({
   ads: z.array(ad).max(500),
   creatives: z.array(creative).max(300),
   recommendations: z.array(recommendation).max(200),
+  web: web.optional(),
 })
 
 export type AdsControlSnapshotInput = z.infer<typeof adsControlSnapshotSchema>

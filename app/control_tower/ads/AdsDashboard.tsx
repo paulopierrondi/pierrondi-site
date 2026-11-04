@@ -15,6 +15,8 @@ const STATUS_LABEL: Record<ConnectorStatus['status'], string> = {
   no_data: 'Sem dados',
 }
 
+const WEB_LABEL = { ga4: 'GA4', gsc: 'Search Console' } as const
+
 function Header({ snapshot }: { snapshot: AdsControlSnapshot | null }) {
   const fresh = snapshot ? freshness(snapshot.collectedAt) : null
   return (
@@ -123,6 +125,13 @@ export default function AdsDashboard({ snapshot }: { snapshot: AdsControlSnapsho
                     {c.accounts} conta(s) · {c.rows} linhas
                   </small>
                 )}
+              </li>
+            ))}
+            {(snapshot.web?.connectors ?? []).map((c) => (
+              <li key={c.source} className={styles.chip} data-status={c.status} title={c.message || undefined}>
+                <strong>{WEB_LABEL[c.source]}</strong>
+                <span>{STATUS_LABEL[c.status]}</span>
+                {c.status === 'ok' ? <small>{c.properties} propriedade(s)</small> : c.message && <small>{c.message}</small>}
               </li>
             ))}
             {noConnectors && <li className={styles.chip} data-status="no_data">Nenhum conector reportado.</li>}

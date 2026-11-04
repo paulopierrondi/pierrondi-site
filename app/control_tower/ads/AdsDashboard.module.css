@@ -475,3 +475,11 @@
 @media (prefers-reduced-motion: reduce) {
   .shell * { transition: none !important; scroll-behavior: auto !important; }
 }
+
+.subTitle {
+  margin: 16px 0 0;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}

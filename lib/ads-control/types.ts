@@ -79,6 +79,67 @@ export interface DailyRow {
   conversionValue: number
 }
 
+export interface GaMetrics {
+  sessions: number
+  users: number
+  newUsers: number
+  engagedSessions: number
+  keyEvents: number
+  engagementRate: number | null
+  keyEventRate: number | null
+}
+
+export interface GscMetrics {
+  clicks: number
+  impressions: number
+  ctr: number | null
+  position: number | null
+}
+
+export interface WebConnector {
+  source: 'ga4' | 'gsc'
+  status: 'ok' | 'no_data' | 'error'
+  properties: number
+  message: string
+}
+
+export interface WebTrafficRow {
+  product: string
+  property: string
+  propertyId: string
+  windows: Partial<Record<WindowKey, GaMetrics>>
+}
+
+export interface WebChannelRow {
+  product: string
+  channel: string
+  windows: { last7: GaMetrics; prev7: GaMetrics }
+}
+
+export interface WebSearchRow {
+  product: string
+  site: string
+  windows: Partial<Record<WindowKey, GscMetrics>>
+}
+
+export interface WebQueryRow {
+  product: string
+  site: string
+  query: string
+  clicks: number
+  impressions: number
+  ctr: number
+  position: number
+}
+
+export interface WebSection {
+  connectors: WebConnector[]
+  traffic: WebTrafficRow[]
+  channels: WebChannelRow[]
+  search: WebSearchRow[]
+  topQueries: WebQueryRow[]
+}
+
 export interface AdsControlSnapshot {
   schemaVersion: 1
   collectedAt: string
@@ -95,4 +156,5 @@ export interface AdsControlSnapshot {
   ads: AdRow[]
   creatives: CreativeRow[]
   recommendations: Recommendation[]
+  web?: WebSection
 }
