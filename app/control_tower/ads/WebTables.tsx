@@ -1,4 +1,4 @@
-import type { WebChannelRow, WebQueryRow, WebSearchRow, WindowKey } from '@/lib/ads-control/types'
+import type { WebAuthorityRow, WebChannelRow, WebQueryRow, WebSearchRow, WindowKey } from '@/lib/ads-control/types'
 import { fmtDec, fmtDelta, fmtInt, fmtPct, relDelta } from './format'
 import styles from './AdsDashboard.module.css'
 
@@ -49,7 +49,20 @@ export function ChannelsTable({ rows }: { rows: WebChannelRow[] }) {
   )
 }
 
-export function SearchTable({ rows, win, showDelta }: { rows: WebSearchRow[]; win: WindowKey; showDelta: boolean }) {
+const siteDomain = (site: string) => site.replace(/^(sc-domain:|https?:\/\/)/, '').replace(/\/$/, '').replace(/^www\./, '')
+
+export function SearchTable({
+  rows,
+  win,
+  showDelta,
+  authority,
+}: {
+  rows: WebSearchRow[]
+  win: WindowKey
+  showDelta: boolean
+  authority: WebAuthorityRow[]
+}) {
+  const dr = new Map(authority.map((a) => [a.domain, a.domainRating]))
   const sorted = [...rows].sort((a, b) => (b.windows[win]?.clicks ?? -1) - (a.windows[win]?.clicks ?? -1))
   return (
     <>
@@ -64,10 +77,11 @@ export function SearchTable({ rows, win, showDelta }: { rows: WebSearchRow[]; wi
               <th scope="col" className={styles.num}>CTR</th>
               <th scope="col" className={styles.num}>Posição média</th>
               <th scope="col" className={styles.num}>Δ cliques vs prev7</th>
+              <th scope="col" className={styles.num} title="Domain Rating by Ahrefs">DR</th>
             </tr>
           </thead>
           <tbody>
-            {sorted.length === 0 && <Empty cols={6} />}
+            {sorted.length === 0 && <Empty cols={7} />}
             {sorted.map((s) => {
               const m = s.windows[win]
               const d = showDelta ? relDelta(m?.clicks, s.windows.prev7?.clicks) : null
@@ -86,6 +100,7 @@ export function SearchTable({ rows, win, showDelta }: { rows: WebSearchRow[]; wi
                   <td className={styles.num}>{fmtPct(m?.ctr)}</td>
                   <td className={styles.num}>{fmtDec(m?.position)}</td>
                   <td className={styles.num} data-tone={tone(d)}>{fmtDelta(d)}</td>
+                  <td className={styles.num}>{dr.has(siteDomain(s.site)) ? fmtDec(dr.get(siteDomain(s.site))) : '—'}</td>
                 </tr>
               )
             })}

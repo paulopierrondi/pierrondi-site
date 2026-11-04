@@ -97,7 +97,7 @@ export interface GscMetrics {
 }
 
 export interface WebConnector {
-  source: 'ga4' | 'gsc'
+  source: 'ga4' | 'gsc' | 'ahrefs'
   status: 'ok' | 'no_data' | 'error'
   properties: number
   message: string
@@ -132,12 +132,21 @@ export interface WebQueryRow {
   position: number
 }
 
+export interface WebAuthorityRow {
+  product: string
+  domain: string
+  domainRating: number
+  ahrefsRank: number | null
+}
+
 export interface WebSection {
   connectors: WebConnector[]
   traffic: WebTrafficRow[]
   channels: WebChannelRow[]
   search: WebSearchRow[]
   topQueries: WebQueryRow[]
+  /** Domain Rating by Ahrefs (endpoint gratuito); ausente em snapshots antigos. */
+  authority?: WebAuthorityRow[]
 }
 
 export interface AdsControlSnapshot {

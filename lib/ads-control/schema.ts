@@ -114,7 +114,7 @@ const web = z.object({
   connectors: z
     .array(
       z.object({
-        source: z.enum(['ga4', 'gsc']),
+        source: z.enum(['ga4', 'gsc', 'ahrefs']),
         status: z.enum(['ok', 'no_data', 'error']),
         properties: z.number().int().nonnegative(),
         message: str(500),
@@ -128,6 +128,10 @@ const web = z.object({
     .array(z.object({ product: str(120), channel: str(120), windows: z.object({ last7: gaMetrics, prev7: gaMetrics }) }))
     .max(60),
   search: z.array(z.object({ product: str(120), site: str(300), windows: webWindows(gscMetrics) })).max(50),
+  authority: z
+    .array(z.object({ product: str(120), domain: str(253), domainRating: num, ahrefsRank: num.nullable() }))
+    .max(50)
+    .optional(),
   topQueries: z
     .array(
       z.object({

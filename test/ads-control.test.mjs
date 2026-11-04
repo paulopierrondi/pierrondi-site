@@ -54,6 +54,15 @@ test('ads schema: web section is optional and validated', () => {
   const missingWindow = fixture()
   delete missingWindow.web.channels[0].windows.prev7
   assert.equal(adsControlSnapshotSchema.safeParse(missingWindow).success, false)
+
+  const withAhrefs = fixture()
+  withAhrefs.web.connectors.push({ source: 'ahrefs', status: 'ok', properties: 1, message: 'DR de 1 domínio(s)' })
+  withAhrefs.web.authority = [{ product: 'Demo', domain: 'demo.test', domainRating: 12.5, ahrefsRank: null }]
+  assert.equal(adsControlSnapshotSchema.safeParse(withAhrefs).success, true)
+
+  const badAuthority = fixture()
+  badAuthority.web.authority = [{ product: 'Demo', domain: 'demo.test', domainRating: 'alto' }]
+  assert.equal(adsControlSnapshotSchema.safeParse(badAuthority).success, false)
 })
 
 test('ads ingest auth rejects missing or wrong bearer and accepts the right one', () => {

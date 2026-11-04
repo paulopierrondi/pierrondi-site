@@ -15,7 +15,7 @@ const STATUS_LABEL: Record<ConnectorStatus['status'], string> = {
   no_data: 'Sem dados',
 }
 
-const WEB_LABEL = { ga4: 'GA4', gsc: 'Search Console' } as const
+const WEB_LABEL = { ga4: 'GA4', gsc: 'Search Console', ahrefs: 'Ahrefs DR' } as const
 
 function Header({ snapshot }: { snapshot: AdsControlSnapshot | null }) {
   const fresh = snapshot ? freshness(snapshot.collectedAt) : null

@@ -82,7 +82,7 @@ export default function WebSection({
       </div>
 
       <ChannelsTable rows={channels} />
-      <SearchTable rows={search} win={win} showDelta={showDelta} />
+      <SearchTable rows={search} win={win} showDelta={showDelta} authority={web.authority ?? []} />
       <QueriesTable rows={queries} />
     </section>
   )
