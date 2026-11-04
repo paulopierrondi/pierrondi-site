@@ -65,6 +65,32 @@ test('ads schema: web section is optional and validated', () => {
   assert.equal(adsControlSnapshotSchema.safeParse(badAuthority).success, false)
 })
 
+test('ads schema: revenue section is optional and validated', () => {
+  const withRevenue = fixture()
+  assert.ok(withRevenue.revenue, 'fixture carries a synthetic revenue section')
+  assert.equal(adsControlSnapshotSchema.safeParse(withRevenue).success, true)
+
+  const without = fixture()
+  delete without.revenue
+  assert.equal(adsControlSnapshotSchema.safeParse(without).success, true)
+
+  const badSource = fixture()
+  badSource.revenue.connectors[0].source = 'paypal'
+  assert.equal(adsControlSnapshotSchema.safeParse(badSource).success, false)
+
+  const badNumber = fixture()
+  badNumber.revenue.byProduct[0].mrr = '2400'
+  assert.equal(adsControlSnapshotSchema.safeParse(badNumber).success, false)
+
+  const badNullable = fixture()
+  badNullable.revenue.unitEconomics[0].cac = 'alto'
+  assert.equal(adsControlSnapshotSchema.safeParse(badNullable).success, false)
+
+  const tooMany = fixture()
+  tooMany.revenue.unitEconomics = Array.from({ length: 51 }, () => tooMany.revenue.unitEconomics[0])
+  assert.equal(adsControlSnapshotSchema.safeParse(tooMany).success, false)
+})
+
 test('ads ingest auth rejects missing or wrong bearer and accepts the right one', () => {
   const script = `
     import { isValidAdsIngestBearer as ok } from './lib/ads-control/auth.ts'

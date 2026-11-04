@@ -17,6 +17,7 @@ import {
   type Dimension,
   type TableRow,
 } from './format'
+import RevenueSection from './RevenueSection'
 import WebSection from './WebSection'
 import styles from './AdsDashboard.module.css'
 
@@ -174,6 +175,8 @@ export default function AdsExplorer({ snapshot }: { snapshot: AdsControlSnapshot
           <p className={styles.emptyInline}>Sem dados nesta janela para o filtro escolhido.</p>
         )}
       </section>
+
+      {snapshot.revenue && <RevenueSection revenue={snapshot.revenue} product={product} win={win} winLabel={winLabel} />}
 
       {snapshot.web && <WebSection web={snapshot.web} product={product} win={win} winLabel={winLabel} />}
 

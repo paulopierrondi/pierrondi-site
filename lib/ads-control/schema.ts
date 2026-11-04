@@ -147,6 +147,46 @@ const web = z.object({
     .max(80),
 })
 
+const revenueWindow = z.object({ revenue: num, payments: num, oneTime: num, newSubscriptions: num })
+
+const revenue = z.object({
+  connectors: z
+    .array(
+      z.object({
+        source: z.enum(['stripe', 'revenuecat']),
+        status: z.enum(['ok', 'no_data', 'error', 'missing_credentials']),
+        message: str(500),
+      }),
+    )
+    .max(4),
+  byProduct: z
+    .array(
+      z.object({
+        product: str(120),
+        windows: webWindows(revenueWindow),
+        mrr: num,
+        activeSubscriptions: num,
+        trialing: num,
+      }),
+    )
+    .max(50),
+  unitEconomics: z
+    .array(
+      z.object({
+        product: str(120),
+        spend30: num,
+        revenue30: num,
+        newPaying30: num,
+        mrr: num,
+        arpu: nullableNum,
+        roas: nullableNum,
+        cac: nullableNum,
+        paybackMonths: nullableNum,
+      }),
+    )
+    .max(50),
+})
+
 export const adsControlSnapshotSchema = z.object({
   schemaVersion: z.literal(1),
   collectedAt: z.string().datetime({ offset: true }),
@@ -179,6 +219,7 @@ export const adsControlSnapshotSchema = z.object({
   creatives: z.array(creative).max(300),
   recommendations: z.array(recommendation).max(200),
   web: web.optional(),
+  revenue: revenue.optional(),
 })
 
 export type AdsControlSnapshotInput = z.infer<typeof adsControlSnapshotSchema>

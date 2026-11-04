@@ -149,6 +149,45 @@ export interface WebSection {
   authority?: WebAuthorityRow[]
 }
 
+export interface RevenueConnector {
+  source: 'stripe' | 'revenuecat'
+  status: 'ok' | 'no_data' | 'error' | 'missing_credentials'
+  message: string
+}
+
+export interface RevenueWindow {
+  revenue: number
+  payments: number
+  oneTime: number
+  newSubscriptions: number
+}
+
+export interface RevenueProductRow {
+  product: string
+  windows: Partial<Record<WindowKey, RevenueWindow>>
+  mrr: number
+  activeSubscriptions: number
+  trialing: number
+}
+
+export interface UnitEconomicsRow {
+  product: string
+  spend30: number
+  revenue30: number
+  newPaying30: number
+  mrr: number
+  arpu: number | null
+  roas: number | null
+  cac: number | null
+  paybackMonths: number | null
+}
+
+export interface RevenueSection {
+  connectors: RevenueConnector[]
+  byProduct: RevenueProductRow[]
+  unitEconomics: UnitEconomicsRow[]
+}
+
 export interface AdsControlSnapshot {
   schemaVersion: 1
   collectedAt: string
@@ -166,4 +205,5 @@ export interface AdsControlSnapshot {
   creatives: CreativeRow[]
   recommendations: Recommendation[]
   web?: WebSection
+  revenue?: RevenueSection
 }

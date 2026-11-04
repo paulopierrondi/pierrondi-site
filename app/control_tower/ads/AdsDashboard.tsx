@@ -15,6 +15,7 @@ const STATUS_LABEL: Record<ConnectorStatus['status'], string> = {
   no_data: 'Sem dados',
 }
 
+const REVENUE_LABEL = { stripe: 'Stripe', revenuecat: 'RevenueCat' } as const
 const WEB_LABEL = { ga4: 'GA4', gsc: 'Search Console', ahrefs: 'Ahrefs DR' } as const
 
 function Header({ snapshot }: { snapshot: AdsControlSnapshot | null }) {
@@ -132,6 +133,13 @@ export default function AdsDashboard({ snapshot }: { snapshot: AdsControlSnapsho
                 <strong>{WEB_LABEL[c.source]}</strong>
                 <span>{STATUS_LABEL[c.status]}</span>
                 {c.status === 'ok' ? <small>{c.properties} propriedade(s)</small> : c.message && <small>{c.message}</small>}
+              </li>
+            ))}
+            {(snapshot.revenue?.connectors ?? []).map((c) => (
+              <li key={c.source} className={styles.chip} data-status={c.status} title={c.message || undefined}>
+                <strong>{REVENUE_LABEL[c.source]}</strong>
+                <span>{STATUS_LABEL[c.status]}</span>
+                {c.status !== 'ok' && c.message && <small>{c.message}</small>}
               </li>
             ))}
             {noConnectors && <li className={styles.chip} data-status="no_data">Nenhum conector reportado.</li>}

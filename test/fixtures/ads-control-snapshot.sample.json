@@ -5817,5 +5817,122 @@
         "position": 28.9
       }
     ]
+  },
+  "revenue": {
+    "connectors": [
+      {
+        "source": "stripe",
+        "status": "ok",
+        "message": ""
+      },
+      {
+        "source": "revenuecat",
+        "status": "missing_credentials",
+        "message": "Fake sample: REVENUECAT_API_KEY ausente"
+      }
+    ],
+    "byProduct": [
+      {
+        "product": "CantuStudio",
+        "windows": {
+          "yesterday": {
+            "revenue": 120.5,
+            "payments": 3,
+            "oneTime": 1,
+            "newSubscriptions": 2
+          },
+          "last7": {
+            "revenue": 980,
+            "payments": 24,
+            "oneTime": 6,
+            "newSubscriptions": 15
+          },
+          "last30": {
+            "revenue": 4100,
+            "payments": 96,
+            "oneTime": 20,
+            "newSubscriptions": 60
+          }
+        },
+        "mrr": 2400,
+        "activeSubscriptions": 48,
+        "trialing": 5
+      },
+      {
+        "product": "FaithSchool",
+        "windows": {
+          "yesterday": {
+            "revenue": 0,
+            "payments": 0,
+            "oneTime": 0,
+            "newSubscriptions": 0
+          },
+          "last7": {
+            "revenue": 150,
+            "payments": 4,
+            "oneTime": 4,
+            "newSubscriptions": 0
+          },
+          "last30": {
+            "revenue": 610,
+            "payments": 15,
+            "oneTime": 12,
+            "newSubscriptions": 3
+          }
+        },
+        "mrr": 90,
+        "activeSubscriptions": 3,
+        "trialing": 0
+      },
+      {
+        "product": "InvestCoach.AI",
+        "windows": {
+          "last30": {
+            "revenue": 80,
+            "payments": 2,
+            "oneTime": 0,
+            "newSubscriptions": 2
+          }
+        },
+        "mrr": 40,
+        "activeSubscriptions": 2,
+        "trialing": 1
+      }
+    ],
+    "unitEconomics": [
+      {
+        "product": "CantuStudio",
+        "spend30": 1800,
+        "revenue30": 4100,
+        "newPaying30": 60,
+        "mrr": 2400,
+        "arpu": 50,
+        "roas": 2.28,
+        "cac": 30,
+        "paybackMonths": 0.6
+      },
+      {
+        "product": "FaithSchool",
+        "spend30": 900,
+        "revenue30": 610,
+        "newPaying30": 3,
+        "mrr": 90,
+        "arpu": 30,
+        "roas": 0.68,
+        "cac": 300,
+        "paybackMonths": 10
+      },
+      {
+        "product": "InvestCoach.AI",
+        "spend30": 300,
+        "revenue30": 80,
+        "newPaying30": 0,
+        "mrr": 40,
+        "arpu": null,
+        "roas": null,
+        "cac": null,
+        "paybackMonths": null
+      }
+    ]
   }
 }

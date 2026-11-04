@@ -272,6 +272,7 @@
 .kpi small { font-size: 11px; font-weight: 800; color: var(--muted); }
 .kpi small[data-tone='good'], .table td[data-tone='good'] { color: var(--green); }
 .kpi small[data-tone='bad'], .table td[data-tone='bad'] { color: var(--red); }
+.kpi small[data-tone='warn'], .table td[data-tone='warn'] { color: var(--amber); }
 
 .recGrid {
   display: grid;
