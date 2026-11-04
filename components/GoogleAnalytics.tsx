@@ -59,6 +59,23 @@ function sendPageView(target: ConsentEventTarget & PageSource, state: Ga4Consent
   target.gtag('event', 'page_view', page)
 }
 
+// Next.js writes document.title after the pathname effect. Two frames wait for
+// that write. The caller still dedupes by page_location.
+export function scheduleGa4RoutePageView(send: () => void) {
+  let cancelled = false
+  let secondFrame = 0
+  const firstFrame = requestAnimationFrame(() => {
+    secondFrame = requestAnimationFrame(() => {
+      if (!cancelled) send()
+    })
+  })
+  return () => {
+    cancelled = true
+    cancelAnimationFrame(firstFrame)
+    cancelAnimationFrame(secondFrame)
+  }
+}
+
 export function subscribeToAnalyticsConsent(
   target: ConsentEventTarget & PageSource,
   storage: ConsentStorage,
@@ -108,7 +125,9 @@ export default function GoogleAnalytics({ measurementId }: { measurementId?: str
 
   useEffect(() => {
     if (!measurementId) return
-    onRouteRef.current?.()
+    return scheduleGa4RoutePageView(() => {
+      onRouteRef.current?.()
+    })
   }, [measurementId, pathname])
 
   return null
