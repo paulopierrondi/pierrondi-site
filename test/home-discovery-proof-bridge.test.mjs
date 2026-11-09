@@ -8,6 +8,7 @@ const [
   homeNav,
   home,
   copy,
+  contact,
   proofSection,
   hero,
   sitemap,
@@ -17,6 +18,7 @@ const [
   readFile(new URL('components/home-v2/chrome/NavBar.tsx', root), 'utf8'),
   readFile(new URL('components/home-v2/HomeV2.tsx', root), 'utf8'),
   readFile(new URL('components/home-v2/copy.ts', root), 'utf8'),
+  readFile(new URL('components/home-v2/sections/ContactSection.tsx', root), 'utf8'),
   readFile(new URL('components/home-v2/sections/ProofSection.tsx', root), 'utf8'),
   readFile(new URL('components/home-v2/sections/HeroSection.tsx', root), 'utf8'),
   readFile(new URL('app/sitemap.ts', root), 'utf8'),
@@ -53,15 +55,22 @@ test('measurable-outcomes pill points at the home proof module', () => {
   assert.match(hero, /Measurable outcomes/)
 })
 
-test('hero primary CTA is collaborate with amber fill; systems CTA stays ghost', async () => {
+test('hero primary CTA asks for one manual workflow and keeps the amber fill', async () => {
   const heroStyles = await readFile(
     new URL('components/home-v2/sections/HeroSection.module.css', root),
     'utf8',
   )
-  assert.match(copy, /ctaPrimary: \{ label: 'colaborar', href: '#contact' \}/)
+  assert.match(copy, /ctaPrimary: \{ label: 'trazer um fluxo manual', href: '#contact' \}/)
   assert.match(copy, /ctaSecondary: \{ label: 'sistemas em produção', href: '#projects' \}/)
-  assert.match(copy, /ctaPrimary: \{ label: 'collaborate', href: '#contact' \}/)
+  assert.match(copy, /ctaPrimary: \{ label: 'bring a manual workflow', href: '#contact' \}/)
   assert.match(copy, /ctaSecondary: \{ label: 'systems in production', href: '#projects' \}/)
+  assert.match(copy, /Qual processo manual você quer automatizar\?/)
+  assert.match(copy, /Which manual process do you want turned into an automation\?/)
+  assert.match(contact, /transformar este processo manual em automação mensurável, no engajamento fractional/)
+  assert.match(contact, /this manual process turned into a measurable automation, as a fractional engagement/)
+  assert.match(hero, /href=\{lang === 'pt' \? '\/engajamento' : '\/en\/engajamento'\}/)
+  assert.doesNotMatch(contact, /IA, produtos ou sistemas/)
+  assert.doesNotMatch(contact, /AI, products, or operating systems/)
   assert.match(heroStyles, /\.ctaPrimary \{[\s\S]*background: var\(--hv2-accent-copper\)/)
   assert.match(heroStyles, /\.ctaSecondary \{[\s\S]*background: rgba\(2, 2, 2, 0\.58\)/)
 })

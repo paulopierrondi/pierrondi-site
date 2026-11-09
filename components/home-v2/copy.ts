@@ -16,7 +16,7 @@ export const COPY: Record<Lang, SiteCopy> = {
       headlineLine2: 'Onde IA vira operação com evidência',
       description:
         'Desenho o sistema operacional da IA: contexto, governança, AgentOps e trilha de evidência — para entregar resultado e automações mensuráveis, não horas soltas — em contas enterprise FSI na ServiceNow e em sistemas que eu mesmo construo e publico.',
-      ctaPrimary: { label: 'colaborar', href: '#contact' },
+      ctaPrimary: { label: 'trazer um fluxo manual', href: '#contact' },
       ctaSecondary: { label: 'sistemas em produção', href: '#projects' },
       lanes: [
         {
@@ -324,7 +324,7 @@ export const COPY: Record<Lang, SiteCopy> = {
     contact: {
       heading: 'Contato',
       intro:
-        'Vamos conversar sobre IA enterprise, arquitetura de agentes, modelos operacionais ou produtos digitais. Resposta por email, sem nomes de clientes.',
+        'Traga um processo ou fluxo manual. Eu respondo com escopo e critério de aceite para uma automação mensurável — engajamento fractional, não horas soltas.',
       email: CONTACT.email,
       form: {
         nameLabel: 'Nome',
@@ -332,7 +332,7 @@ export const COPY: Record<Lang, SiteCopy> = {
         emailLabel: 'Email',
         emailPlaceholder: 'voce@empresa.com',
         messageLabel: 'Mensagem',
-        messagePlaceholder: 'Sobre o que quer conversar?',
+        messagePlaceholder: 'Qual processo manual você quer automatizar?',
         submitLabel: 'Enviar mensagem',
         successMessage: 'Mensagem enviada. Respondo por email em breve.',
         errorMessage: 'Algo deu errado. Tente novamente ou envie um email direto.',
@@ -366,7 +366,7 @@ export const COPY: Record<Lang, SiteCopy> = {
       headlineLine2: 'Where AI becomes governed operations',
       description:
         'I design the operating system for AI: context, governance, AgentOps and evidence trails — to deliver measurable outcomes and automations, not loose hours — across enterprise FSI accounts at ServiceNow and systems I build and ship myself.',
-      ctaPrimary: { label: 'collaborate', href: '#contact' },
+      ctaPrimary: { label: 'bring a manual workflow', href: '#contact' },
       ctaSecondary: { label: 'systems in production', href: '#projects' },
       lanes: [
         {
@@ -674,7 +674,7 @@ export const COPY: Record<Lang, SiteCopy> = {
     contact: {
       heading: 'Contact',
       intro:
-        "Let's talk about enterprise AI, agent architecture, operating models, or digital products. Reply by email, no client names.",
+        'Bring one manual process or workflow. I reply with scope and acceptance criteria for a measurable automation — a fractional engagement, not loose hours.',
       email: CONTACT.email,
       form: {
         nameLabel: 'Name',
@@ -682,7 +682,7 @@ export const COPY: Record<Lang, SiteCopy> = {
         emailLabel: 'Email',
         emailPlaceholder: 'you@company.com',
         messageLabel: 'Message',
-        messagePlaceholder: 'What do you want to talk about?',
+        messagePlaceholder: 'Which manual process do you want turned into an automation?',
         submitLabel: 'Send message',
         successMessage: 'Message sent. I will reply by email soon.',
         errorMessage: 'Something went wrong. Please try again or send an email directly.',

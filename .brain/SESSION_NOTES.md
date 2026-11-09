@@ -1,3 +1,13 @@
+# Sessão 2026-11-09 — home fractional CTA and mailto GA4 event (draft)
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Home `/` and `/en` primary CTA now asks for one manual workflow and still jumps to `#contact`. WhatsApp prefill asks for that process as a fractional engagement. Hero link to `/engajamento` and `/en/engajamento` stays. One H1 per home page. No price, client, metric, or testimonial added.
+- GA4 already tracked `whatsapp_click` (`page`) and `cta_engajamento_click` (`source`) from `Ga4ConversionListener`, only when `cookie-consent=all`. Added `mailto_click` (`page`) on the same path. Removed the home card's extra `Contact_WhatsApp_Clicked` call, which pushed `gtag` without that localStorage check. Measurement ID `G-1CL8PFYY7T`, the gtag loader, CSP, and Person/WebPage/ProfilePage schema were not edited. No Product or Offer. `/sprint` stays out of the tree and the sitemap.
+- Local: `npm test` 220/220, `npx tsc --noEmit` clean, `npm run lint` clean, `npm run build` 203 pages, `/sprint` absent and 404 on `next start`. Browser: PT and EN hero, contact, engagement, and `/sprint`. After Accept all, dataLayer receives `whatsapp_click`, `mailto_click`, and `cta_engajamento_click`. With essential consent, those three do not fire and no `/g/collect` is sent. Headless Chrome in this VM transported only the first `page_view` (`gcs=G101`); a later `page_view` and `select_content` also stayed in the dataLayer.
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: n/a. cached_tokens: null.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note this draft. Do not IndexNow or mark shipped until Paulo merges and Railway deploys.
+- Local council: vault agents were not on this machine. Decision was copy plus the existing consent-gated listener. Human gate: merge and deploy.
+
 # Sessão 2026-10-31 — technical SEO sweep (draft)
 
 - Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
