@@ -379,6 +379,12 @@ const ownAnswers: AnswerLink[] = [
     locale: 'pt-BR',
   },
   {
+    title: 'Consultoria de automação com IA para empresas',
+    url: '/answers/consultoria-de-automacao-com-ia',
+    intent: 'buyer query',
+    locale: 'pt-BR',
+  },
+  {
     title: 'O que é Fractional AI Automation Officer?',
     url: '/answers/o-que-e-fractional-ai-automation-officer',
     intent: 'offer definition',

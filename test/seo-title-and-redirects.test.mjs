@@ -38,8 +38,11 @@ async function walk(dir) {
 function literalTitle(source) {
   const start = source.search(/export const metadata/)
   if (start < 0) return null
-  const match = source.slice(start).match(/\btitle:\s*'([^']+)'/)
-  return match ? match[1] : null
+  const block = source.slice(start)
+  const absolute = block.match(/\btitle:\s*\{\s*absolute:\s*'([^']+)'/)
+  if (absolute) return { title: absolute[1], absolute: true }
+  const match = block.match(/\btitle:\s*'([^']+)'/)
+  return match ? { title: match[1], absolute: false } : null
 }
 
 const PRIVATE_ROUTE = /\/(itau|fso|bradesco-26|crm|obrigado|control_tower|automacoes|kommo|login-v2)\//
@@ -90,19 +93,20 @@ test('indexable document titles are unique, with length exceptions only where an
 
   for (const file of files) {
     const source = await readFile(file, 'utf8')
-    const title = literalTitle(source)
-    if (!title) continue
+    const parsed = literalTitle(source)
+    if (!parsed) continue
     const id = file.slice(file.indexOf('/app/') + 1)
     if (PRIVATE_ROUTE.test(`/${id}`)) continue
     // The PT homepage shares the root layout segment, so Next does not apply the brand template.
-    if (id.endsWith('app/(pt)/page.tsx')) {
-      const length = [...title].length
-      assert.ok(length >= RENDERED_TITLE_MIN && length <= RENDERED_TITLE_MAX, `home ${length}: ${title}`)
-      assert.equal(titles.get(title), undefined)
-      titles.set(title, id)
+    // An absolute title also skips `%s | pierrondi.dev`.
+    if (id.endsWith('app/(pt)/page.tsx') || parsed.absolute) {
+      const length = [...parsed.title].length
+      assert.ok(length >= RENDERED_TITLE_MIN && length <= RENDERED_TITLE_MAX, `${id} ${length}: ${parsed.title}`)
+      assert.equal(titles.get(parsed.title), undefined, `duplicate title "${parsed.title}"`)
+      titles.set(parsed.title, id)
       continue
     }
-    add(title, id)
+    add(parsed.title, id)
   }
 
   for (const post of posts) add(post.seoTitle ?? post.title, `blog/${post.slug}`)

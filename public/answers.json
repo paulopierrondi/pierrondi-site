@@ -134,6 +134,15 @@
       "entity": "pierrondi.dev"
     },
     {
+      "id": "consultoria-de-automacao-com-ia",
+      "title": "Consultoria de automação com IA para empresas",
+      "url": "https://www.pierrondi.dev/answers/consultoria-de-automacao-com-ia",
+      "question": "Consultoria de automação com IA para empresas",
+      "intent": "buyer query",
+      "locale": "pt-BR",
+      "entity": "pierrondi.dev"
+    },
+    {
       "id": "o-que-e-fractional-ai-automation-officer",
       "title": "O que é Fractional AI Automation Officer?",
       "url": "https://www.pierrondi.dev/answers/o-que-e-fractional-ai-automation-officer",

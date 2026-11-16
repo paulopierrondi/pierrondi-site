@@ -51,6 +51,7 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 
 ## Own-domain answer briefs
 
+- [Consultoria de automação com IA para empresas](https://www.pierrondi.dev/answers/consultoria-de-automacao-com-ia) — resultado observável e critério de aceite para mid-market e times de operação. Cadeia baseline, sistema, métrica e handoff, com gates humanos. Sem preço, cliente ou taxa. Sem twin EN.
 - [O que é AgentOps (operações agênticas)?](https://www.pierrondi.dev/answers/o-que-e-agentops) — disciplina de operar agentes de IA em produção com registry, handoffs auditáveis, memória, evals e gates humanos. Twin EN: https://www.pierrondi.dev/en/answers/what-is-agentops
 - [What is AgentOps?](https://www.pierrondi.dev/en/answers/what-is-agentops) — discipline of running AI agents in production with registry, auditable handoffs, memory, evals and human gates. Twin PT: https://www.pierrondi.dev/answers/o-que-e-agentops
 - [Quem é Paulo Pierrondi?](https://www.pierrondi.dev/answers/quem-e-paulo-pierrondi) — TAE na ServiceNow, arquiteto de IA/automação e builder full-stack com 22 apps publicados na App Store. Twin EN: https://www.pierrondi.dev/en/answers/who-is-paulo-pierrondi
