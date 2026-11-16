@@ -45,6 +45,7 @@ The AI Search Portfolio page exists as a citation layer for crawler and assistan
 
 Answer pages hosted on pierrondi.dev itself, with question-form titles, direct citable answers and Question/FAQPage structured data:
 
+- https://www.pierrondi.dev/answers/consultoria-de-automacao-com-ia — Consultoria de automação com IA para empresas. Resultado observável, critério de aceite, baseline, sistema, métrica e handoff. Sem preço publicado. (pt-BR)
 - https://www.pierrondi.dev/answers/o-que-e-agentops — O que é AgentOps (operações agênticas)? (pt-BR)
 - https://www.pierrondi.dev/en/answers/what-is-agentops — What is AgentOps? (en)
 - https://www.pierrondi.dev/answers/quem-e-paulo-pierrondi — Quem é Paulo Pierrondi? (pt-BR)
