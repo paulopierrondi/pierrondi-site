@@ -4,6 +4,7 @@ const SITE_HOSTS = new Set(['pierrondi.dev', 'www.pierrondi.dev', 'localhost', '
 export type Ga4Conversion =
   | { event: 'cta_engajamento_click'; params: { source: string } }
   | { event: 'whatsapp_click'; params: { page: string } }
+  | { event: 'mailto_click'; params: { page: string } }
 
 type Ga4Params = Record<string, string | number | boolean>
 
@@ -33,10 +34,12 @@ function isAbsoluteHref(href: string) {
 /** Classify a clicked href. `page` is the current pathname and becomes `source` or `page`. */
 export function classifyConversionClick(href: string, page: string): Ga4Conversion | null {
   const trimmed = href.trim()
+  if (trimmed.toLowerCase().startsWith('mailto:')) {
+    return { event: 'mailto_click', params: { page: normalizePage(page) } }
+  }
   if (
     !trimmed ||
     trimmed.startsWith('#') ||
-    trimmed.startsWith('mailto:') ||
     trimmed.startsWith('tel:') ||
     trimmed.startsWith('javascript:')
   ) {
