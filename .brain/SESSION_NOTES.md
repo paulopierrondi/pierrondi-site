@@ -1,3 +1,12 @@
+# Sessão 2026-11-18 — rebase hreflang hub onto current main (draft)
+
+- Draft PR #66 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `origin/main` at `70153a4`. Conflicts were this notes file and `app/(en)/en/answers/page.tsx` (the old `app/en/answers/page.tsx` path). Kept main's notes and the 2026-10-15 hreflang note.
+- Kept main's `openGraph`, `buildCollectionPageSchema` and `languages: {}` on `/en/answers`. The language picker sends `/answers` to `/ai-search` and leaves `/en/answers` on itself. English briefs link the hub in the breadcrumb and related links. The English footer has “Answer briefs”. The hub test now reads the route-group pages.
+- Home pages and the GA4 id `G-1CL8PFYY7T` were not edited. `/sprint` stays unpublished.
+- Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 231/231, `npm run build` generated 204 static pages and `/sprint` is absent. One clean Turbopack build hit the known Space Grotesk `next/font` error (`queries have exactly one entry`); fonts were not edited and the retry succeeded.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #66 is rebased and still draft. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-11-18 — rebase do brief preço fixo onto current main (draft)
 
 - Draft PR #76 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
@@ -150,6 +159,17 @@
 - Residual: `/contato` and `/en/contato` titles stay `Contato` / `Contact` (accurate for that URL; #69 is editing the form). Three proof cases (`/feitos/agentes-governados`, `/feitos/llm-inferencia`, `/feitos/plataformas-automacao-ia`) are in the sitemap and absent from `llms.txt` / `llms-full.txt`; do not patch those files while #63 is open. Case pages still have no in-body `/contato` link (the footer and `/feitos` index do).
 - prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS + `.brain/PROJECT_CONTEXT.md`. cached_tokens: null (CLI hides telemetry).
 - Suggested Obsidian/Linear: note this draft on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-10-15 — hreflang hub rebase onto #67
+
+- Draft PR #66 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow not submitted.
+- Rebased onto `main` after #67. `AnswerBrief` keeps the comparison table from #67 and still prepends the English hub link plus BreadcrumbList entry on `/en/answers/*`.
+- Ahrefs: `/en/answers` declared `pt-BR` and `x-default` at `/answers`, which 308s to `/ai-search`. The pair was not reciprocal.
+- Decision stands: they are not equivalent hubs. `/ai-search` is an English citation portfolio (`inLanguage: en-US`). `/en/answers` is an English index of three briefs. No hreflang between them. Canonicals stay self-referencing on `www`.
+- Real PT/EN pairs stay on the individual briefs: each lists `pt-BR`, self `en-US` or `pt-BR`, and `x-default` to the Portuguese URL.
+- Language picker: `/answers` resolves to `/ai-search`; `/en/answers` stays on itself. Switcher remains hidden on both prefixes.
+- Inbound links: EN footer “Answer briefs” → `/en/answers`. `/sprint` stays unpublished. GA4 id unchanged.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #66 rebased onto #67. Do not mark shipped until Paulo merges and Railway deploys.
 
 # Sessão 2026-10-10 — SEO/GEO sweep (draft)
 
