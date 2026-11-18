@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import LegalDocument from '@/components/LegalDocument'
 
 export const metadata: Metadata = {
-  title: 'Legal Notice',
+  title: 'Website legal notice',
   description: "Legal notice for Paulo Pierrondi's personal site: about the site, content and opinions, intellectual property, no warranties and contact.",
   openGraph: { url: '/terms', locale: 'en_US', type: 'website', siteName: 'pierrondi.dev', images: ['/og'] },
   alternates: {
@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     languages: {
       'pt-BR': '/termos',
       'en-US': '/terms',
+      'x-default': '/termos',
     },
   },
 }

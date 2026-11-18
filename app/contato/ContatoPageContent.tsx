@@ -19,7 +19,26 @@ const copy: Record<ContatoLang, {
   channelIntro: { kicker: string; title: string; description: string }
   channels: ContactChannel[]
   creds: { response: string; timezone: string; kResponse: string; kTimezone: string }
-  formLabels: { name: string; email: string; message: string; placeholderName: string; placeholderEmail: string; placeholderMessage: string; submit: string; submitting: string; ok: string; error: string }
+  formLabels: {
+    name: string
+    email: string
+    message: string
+    process: string
+    kpi: string
+    timeframe: string
+    optional: string
+    nextStep: string
+    placeholderName: string
+    placeholderEmail: string
+    placeholderMessage: string
+    placeholderProcess: string
+    placeholderKpi: string
+    placeholderTimeframe: string
+    submit: string
+    submitting: string
+    ok: string
+    error: string
+  }
 }> = {
   pt: {
     channelIntro: {
@@ -72,9 +91,17 @@ const copy: Record<ContatoLang, {
       name: 'Nome',
       email: 'Email',
       message: 'Sobre o que você quer falar?',
+      process: 'Processo a automatizar',
+      kpi: 'KPI a mover',
+      timeframe: 'Prazo desejado',
+      optional: 'opcional',
+      nextStep: 'Paulo responde com um diagnóstico de escopo.',
       placeholderName: 'Como devo te chamar?',
       placeholderEmail: 'seu@email.com',
       placeholderMessage: 'IA enterprise, ServiceNow, AgentOps, estratégia...',
+      placeholderProcess: 'Qual processo você quer automatizar?',
+      placeholderKpi: 'Qual indicador esse processo deve mover?',
+      placeholderTimeframe: 'Qual janela você tem em mente?',
       submit: 'Enviar mensagem',
       submitting: 'Enviando...',
       ok: 'Mensagem enviada. Entro em contato em breve.',
@@ -132,9 +159,17 @@ const copy: Record<ContatoLang, {
       name: 'Name',
       email: 'Email',
       message: 'What do you want to talk about?',
+      process: 'Process to automate',
+      kpi: 'KPI to move',
+      timeframe: 'Desired timeframe',
+      optional: 'optional',
+      nextStep: 'Paulo replies with a scope diagnosis.',
       placeholderName: 'What should I call you?',
       placeholderEmail: 'you@email.com',
       placeholderMessage: 'Enterprise AI, ServiceNow, AgentOps, strategy...',
+      placeholderProcess: 'Which process do you want to automate?',
+      placeholderKpi: 'Which indicator should that process move?',
+      placeholderTimeframe: 'What window do you have in mind?',
       submit: 'Send message',
       submitting: 'Sending...',
       ok: 'Message sent. I will get back to you soon.',

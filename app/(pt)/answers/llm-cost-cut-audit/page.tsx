@@ -85,6 +85,12 @@ export default function LlmCostCutAuditAnswerPage() {
         },
       ]}
       internalLinks={[
+        {
+          href: '/engajamento',
+          label: 'Modelo de engajamento',
+          description:
+            'Depois da auditoria, a operação contínua mede resultado: baseline, métrica e handoff, sem horas soltas.',
+        },
         { href: '/contato', label: 'Contato', description: 'Conversar sobre uma auditoria na sua operação de LLM.' },
         { href: '/atuacao', label: 'Atuação', description: 'Modelos operacionais de IA enterprise e agentes governados.' },
         { href: '/ai-search', label: 'AI Search Portfolio', description: 'Todas as referências citáveis do portfólio.' },

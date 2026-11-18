@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import LegalDocument from '@/components/LegalDocument'
 
 export const metadata: Metadata = {
-  title: 'Privacidade',
+  title: 'Política de privacidade',
   description: 'Como a pierrondi.dev trata dados de contato no site pessoal de Paulo Pierrondi: o que é coletado, para quê, analytics, cookies e como pedir remoção.',
   openGraph: { url: '/privacidade', locale: 'pt_BR', type: 'website', siteName: 'pierrondi.dev', images: ['/og'] },
   alternates: {
@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     languages: {
       'pt-BR': '/privacidade',
       'en-US': '/privacy',
+      'x-default': '/privacidade',
     },
   },
 }

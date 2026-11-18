@@ -12,12 +12,17 @@ const FORMSPREE_URL =
   process.env.NEXT_PUBLIC_FORMSPREE_URL ??
   'https://formspree.io/f/xpqoodnr'
 
+const optionalQualifier = (max: number) => z.string().max(max).optional().nullable()
+
 const contactSchema = z.object({
   nome: z.string().min(1).max(256),
   email: z.string().email().max(255),
   empresa: z.string().max(256).optional().nullable(),
   servico: z.string().max(64).optional().nullable(),
   mensagem: z.string().min(1).max(4000),
+  processo: optionalQualifier(500),
+  kpi: optionalQualifier(256),
+  prazo: optionalQualifier(128),
   trackingContext: z
     .object({
       landingPage: z.string().optional(),
@@ -32,6 +37,23 @@ const contactSchema = z.object({
 
 function firstString(value: FormDataEntryValue | null) {
   return typeof value === 'string' ? value : ''
+}
+
+function cleanQualifier(value: unknown) {
+  if (typeof value !== 'string') return value
+  const trimmed = value.trim()
+  return trimmed.length > 0 ? trimmed : undefined
+}
+
+function normalizeContact(raw: unknown) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return raw
+  const record = raw as Record<string, unknown>
+  return {
+    ...record,
+    processo: cleanQualifier(record.processo),
+    kpi: cleanQualifier(record.kpi),
+    prazo: cleanQualifier(record.prazo),
+  }
 }
 
 async function readContactPayload(request: Request) {
@@ -49,6 +71,9 @@ async function readContactPayload(request: Request) {
     empresa: firstString(formData.get('empresa')),
     servico: firstString(formData.get('servico')),
     mensagem: firstString(formData.get('mensagem')),
+    processo: firstString(formData.get('processo')),
+    kpi: firstString(formData.get('kpi')),
+    prazo: firstString(formData.get('prazo')),
     trackingContext: {
       landingPage: firstString(formData.get('landingPage')),
       campaignId: firstString(formData.get('campaignId')),
@@ -83,7 +108,7 @@ export async function POST(request: Request): Promise<Response> {
   let payload: z.infer<typeof contactSchema>
 
   try {
-    payload = contactSchema.parse(await readContactPayload(request))
+    payload = contactSchema.parse(normalizeContact(await readContactPayload(request)))
   } catch (error) {
     if (!wantsJson) return redirectToContact(request, 'invalid')
 
@@ -112,6 +137,9 @@ export async function POST(request: Request): Promise<Response> {
         empresa: payload.empresa ?? '',
         servico: payload.servico ?? '',
         mensagem: payload.mensagem,
+        processo: payload.processo ?? '',
+        kpi: payload.kpi ?? '',
+        prazo: payload.prazo ?? '',
         _subject: `Novo lead pierrondi.dev - ${payload.servico ?? 'sem servico'}`,
         landingPage: tc.landingPage ?? '',
         campaignId: tc.campaignId ?? '',

@@ -51,6 +51,7 @@ export interface TreinamentosCopy {
     h2: string
     p: string
     primary: string
+    engagement: string
     secondary: string
   }
   disclaimer: string
@@ -190,8 +191,9 @@ export const TREINAMENTOS_COPY: Record<HomeLang, TreinamentosCopy> = {
     },
     final: {
       h2: 'Vamos desenhar a trilha do seu time?',
-      p: 'Me conte o time, o nível e o problema que precisa sair do papel. Eu volto com uma trilha, um formato e o critério de saída — resultado mensurável, não horas soltas.',
+      p: 'Me conte o time, o nível e o problema que precisa sair do papel. Eu volto com uma trilha, um formato e o critério de saída — resultado mensurável, não horas soltas. Para seguir em operação contínua, o modelo de engajamento descreve baseline, métrica e handoff.',
       primary: 'Falar sobre um treinamento',
+      engagement: 'Ver o modelo de engajamento',
       secondary: 'Ver os feitos',
     },
     disclaimer:
@@ -330,8 +332,9 @@ export const TREINAMENTOS_COPY: Record<HomeLang, TreinamentosCopy> = {
     },
     final: {
       h2: 'Shall we design your team’s track?',
-      p: 'Tell me the team, the level and the problem that needs to leave the slide. I come back with a track, a format and the exit criterion — a measurable outcome, not loose hours.',
+      p: 'Tell me the team, the level and the problem that needs to leave the slide. I come back with a track, a format and the exit criterion — a measurable outcome, not loose hours. For continuous operation, the engagement model describes baseline, metric and handoff.',
       primary: 'Talk about training',
+      engagement: 'See the engagement model',
       secondary: 'See the work',
     },
     disclaimer:

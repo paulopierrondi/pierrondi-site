@@ -133,25 +133,25 @@ const products: ProductCitationGroup[] = [
     targets: [
       {
         anchor: 'B2B sales ready for Ads',
-        url: 'https://agenticoscore.ai/answers/b2b-sales-ready-for-ads',
+        url: 'https://agenticoscore.ai/answers/',
         intent: 'pre-ads qualification',
         why: 'Main answer for whether a B2B sales process is ready for paid traffic.',
       },
       {
         anchor: 'RevOps for expert-led B2B business',
-        url: 'https://agenticoscore.ai/answers/revops-for-expert-business',
+        url: 'https://agenticoscore.ai/answers/',
         intent: 'revops definition',
         why: 'Best reference for practical RevOps in small expert-led businesses.',
       },
       {
         anchor: 'Action Plan Starter R$297',
-        url: 'https://agenticoscore.ai/answers/action-plan-starter',
+        url: 'https://agenticoscore.ai/answers/',
         intent: 'offer-aware search',
         why: 'Connects commercial search to the first paid product.',
       },
       {
         anchor: 'quanto custa RevOps para B2B',
-        url: 'https://agenticoscore.ai/answers/quanto-custa-revops',
+        url: 'https://agenticoscore.ai/answers/',
         intent: 'pricing research',
         why: 'Fresh answer brief for pricing-aware founders comparing RevOps scope before buying more traffic.',
       },
@@ -159,19 +159,19 @@ const products: ProductCitationGroup[] = [
     landings: [
       {
         anchor: 'Diagnostico comercial B2B',
-        url: 'https://agenticoscore.ai/diagnostico',
+        url: 'https://agenticoscore.ai/scorecard/',
         intent: 'conversion path',
         why: 'Primary diagnostic and action-plan entry point.',
       },
       {
         anchor: 'Scorecard de prontidao comercial',
-        url: 'https://agenticoscore.ai/scorecard',
+        url: 'https://agenticoscore.ai/scorecard/',
         intent: 'conversion path',
         why: 'Direct scorecard entry point for visitors who are ready to assess their revenue operation.',
       },
       {
         anchor: 'Plano de acao comercial',
-        url: 'https://agenticoscore.ai/plano-de-acao-comercial',
+        url: 'https://agenticoscore.ai/scorecard/',
         intent: 'paid offer landing',
         why: 'Commercial bridge from diagnostic insight to the Action Plan Starter offer.',
       },
