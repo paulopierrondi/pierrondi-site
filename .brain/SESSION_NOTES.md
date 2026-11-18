@@ -1,3 +1,11 @@
+# Sessão 2026-11-18 — rebase /atuacao titles onto current main (draft)
+
+- Draft PR #75 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `origin/main` at `70153a4`. The only conflict was this notes file. Kept main's notes and the 2026-10-26 title note.
+- Titles stay `Atuação em IA enterprise e AgentOps` and `Enterprise AI work and AgentOps`, including the Open Graph titles. Home pages and the GA4 id `G-1CL8PFYY7T` were not edited. `/sprint` stays unpublished.
+- Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 228/228, `npm run build` generated 204 static pages and `/sprint` is absent from the route table.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #75 is rebased and still draft. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-10-31 — technical SEO sweep (draft)
 
 - Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
@@ -111,6 +119,17 @@
 - Residual: GA4 Admin → data stream `G-1CL8PFYY7T` → Enhanced measurement → Page views → advanced → “Page changes based on browser history events” must stay off, or client navigations count twice. Query-only URL changes do not emit a manual page_view. PT↔EN crosses root layouts and reloads, so the load path covers it.
 - Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 195/195, `npm run build` 203 pages and `/sprint` absent. `check-apps-urls` against `next start` 121/121, `/sprint` 404. Headless Chrome dataLayer: no `page_view` before accept or with essential consent; one `page_view` after a late accept and after reload with stored consent; one additional `page_view` on same-document `/contato` → `/about` and `/en/contato` → `/en/about`.
 - Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note the draft. Do not mark the property as collecting until Paulo merges, Railway deploys, and DebugView shows one `page_view` after a late accept.
+
+# Sessão 2026-10-26 — títulos de /atuacao (draft)
+
+- Draft only. Do not merge. Do not deploy. Do not IndexNow.
+- Live audit of https://www.pierrondi.dev/sitemap.xml: 80 URLs, all HTTP 200, no `/sprint`, JSON-LD parsed on every URL, meta descriptions inside 120–160. Homepage canonical is `https://www.pierrondi.dev`.
+- Highest uncovered gap: `/atuacao` title `Atuação | pierrondi.dev` (23) and `/en/atuacao` title `Work | pierrondi.dev` (20). Both are priority indexable pages whose body is AI Operating Model, ServiceNow, AgentOps and enterprise strategy. The title slot named none of that.
+- Left alone because other drafts already own them: #63 (sameAs, Fractional title, `llms.txt` / `llms-full.txt` / `geo.md` / `answers.json`), #66 (`/en/answers` hreflang), #68 (engajamento links), #69 (contato form), #70 (GA4). Analytics id `G-1CL8PFYY7T` untouched. `/sprint` stays unpublished.
+- Fix: document titles `Atuação em IA enterprise e AgentOps` (rendered 51) and `Enterprise AI work and AgentOps` (rendered 47). Self-canonicals and hreflang pairs unchanged. No new clients, metrics, prices or testimonials. H1 copy unchanged.
+- Residual: `/contato` and `/en/contato` titles stay `Contato` / `Contact` (accurate for that URL; #69 is editing the form). Three proof cases (`/feitos/agentes-governados`, `/feitos/llm-inferencia`, `/feitos/plataformas-automacao-ia`) are in the sitemap and absent from `llms.txt` / `llms-full.txt`; do not patch those files while #63 is open. Case pages still have no in-body `/contato` link (the footer and `/feitos` index do).
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS + `.brain/PROJECT_CONTEXT.md`. cached_tokens: null (CLI hides telemetry).
+- Suggested Obsidian/Linear: note this draft on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
 
 # Sessão 2026-10-10 — SEO/GEO sweep (draft)
 
