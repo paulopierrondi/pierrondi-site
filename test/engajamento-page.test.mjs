@@ -20,16 +20,16 @@ const [
   siteSchema,
   atuacao,
 ] = await Promise.all([
-  read('app/engajamento/page.tsx'),
-  read('app/en/engajamento/page.tsx'),
+  read('app/(pt)/engajamento/page.tsx'),
+  read('app/(en)/en/engajamento/page.tsx'),
   read('app/engajamento/EngajamentoContent.tsx'),
   read('app/engajamento/engajamento-copy.ts'),
   read('app/sitemap.ts'),
   read('components/home-v2/sections/HeroSection.tsx'),
   read('components/home-v2/sections/HeroSection.module.css'),
   read('components/home-v2/copy.ts'),
-  read('app/page.tsx'),
-  read('app/en/page.tsx'),
+  read('app/(pt)/page.tsx'),
+  read('app/(en)/en/page.tsx'),
   read('components/SiteJsonLd.tsx'),
   read('app/atuacao/AtuacaoContent.tsx'),
 ])
@@ -48,12 +48,19 @@ test('engagement pages publish canonical, hreflang and a complete Open Graph ima
     assert.match(source, /width:\s*1200/)
     assert.match(source, /height:\s*630/)
     assert.match(source, /alt:\s*'[^']+'/)
-    assert.match(source, /title: 'Fractional AI Automation Officer'/)
     assert.match(source, /<h1>|title=\{<>Fractional AI Automation/)
   }
 
-  for (const title of ['Fractional AI Automation Officer']) {
-    assert.ok(`${title} | pierrondi.dev`.length <= 62, `title too long: ${title}`)
+  assert.match(enPage, /title: 'Fractional AI Automation Officer'/)
+  assert.match(ptPage, /title: 'Engajamento fractional de automação'/)
+  assert.notEqual(
+    ptPage.match(/title: '([^']+)'/)[1],
+    enPage.match(/title: '([^']+)'/)[1],
+  )
+
+  for (const title of ['Fractional AI Automation Officer', 'Engajamento fractional de automação']) {
+    const rendered = `${title} | pierrondi.dev`
+    assert.ok(rendered.length >= 30 && rendered.length <= 60, `title length ${rendered.length}: ${rendered}`)
   }
 
   for (const source of [ptPage, enPage]) {

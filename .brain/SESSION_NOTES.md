@@ -1,3 +1,126 @@
+# Sessão 2026-11-18 — rebase hreflang hub onto current main (draft)
+
+- Draft PR #66 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `origin/main` at `70153a4`. Conflicts were this notes file and `app/(en)/en/answers/page.tsx` (the old `app/en/answers/page.tsx` path). Kept main's notes and the 2026-10-15 hreflang note.
+- Kept main's `openGraph`, `buildCollectionPageSchema` and `languages: {}` on `/en/answers`. The language picker sends `/answers` to `/ai-search` and leaves `/en/answers` on itself. English briefs link the hub in the breadcrumb and related links. The English footer has “Answer briefs”. The hub test now reads the route-group pages.
+- Home pages and the GA4 id `G-1CL8PFYY7T` were not edited. `/sprint` stays unpublished.
+- Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 231/231, `npm run build` generated 204 static pages and `/sprint` is absent. One clean Turbopack build hit the known Space Grotesk `next/font` error (`queries have exactly one entry`); fonts were not edited and the retry succeeded.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #66 is rebased and still draft. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-10-31 — technical SEO sweep (draft)
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Live audit of https://www.pierrondi.dev: sitemap 80 URLs, all 200; `/sprint` 404 and absent; robots points at the sitemap; apex 308 to www. 172 internal hrefs from those pages returned no 3xx/4xx.
+- Fixed in this branch: short and duplicate document titles (contato, blog hubs, legal, PT engajamento, 15 short app names), legal `x-default`, studio Offer/OfferCatalog removed, AgenticosCore links that 301 (`/answers/quanto-custa-revops`, `/plano-de-acao-comercial`, and the other retired RevOps URLs) now point at `https://agenticoscore.ai/answers/` or `https://agenticoscore.ai/scorecard/`.
+- Apple iTunes Lookup for developer ID 1895717587 returned 22 software records on both BR and US storefronts (2026-10-31). Answer copy and the GEO count now say 22. The checked-in `app-store-catalog.json` still lists 21 and was not regenerated. AgenticosCore stays described as Revenue Operations in the answer briefs; agenticoscore.ai now says Legacy Exit. That positioning was not rewritten.
+- Left to other drafts: `/atuacao` titles (#75), `app/blog/posts.ts` titles over 60 characters (#78), `/answers/automacao-com-ia-preco-fixo` (#76). `/en/answers` hreflang stays with #66.
+- GA4 stays one `gtag('config')` for `G-1CL8PFYY7T` with `send_page_view: false`. Person `jobTitle` stays `Technical Account Executive`. No Product schema. No `/sprint`.
+- Mobile Lighthouse on production before this deploy: `/` and `/en` LCP 1.2s, CLS 0, TBT ~5.0s (home JS chunk); `/engajamento` and `/contato` LCP 1.0s, CLS 0, TBT 70ms. No image/font change. Fonts already use `display: swap`.
+- Verified: `npx tsc --noEmit`, `npm run lint`, `npm test` 214/214, `npm run build` 203 pages and `/sprint` absent, `check-apps-urls` against `next start` 121/121, `/sprint` 404.
+- First GitHub `CI / build` failed in `next/font` (`queries have exactly one entry` on Space Grotesk). Lint, typecheck, and tests passed in that run. Local `next build` succeeded. Fonts were not edited.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note this draft. Do not IndexNow or mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-10-30 — engagement links after #69
+
+- Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `main` at `04e4a39` (#69 contact qualifiers). The only conflict was this notes file.
+- Kept #68's contextual hrefs and CTAs to `/engajamento` and `/en/engajamento`. Kept main's contact form (`processo`, `kpi`, `prazo`, `_gotcha`, consent-gated `generate_lead`) and the single GA4 config (`G-1CL8PFYY7T`, `send_page_view: false`, manual `page_view`). No measurement ID, CSP, or cookie-banner edit. No `/sprint`. No Product/Offer.
+
+# Sessão 2026-10-30 — engagement links on current main
+
+- Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged current `main` at `f4c2142` (#79 page_view after consent, #70 GA4 conversions). The only conflict was this notes file. Did not stack on unmerged #69.
+- Kept the contextual hrefs to `/engajamento` and `/en/engajamento` from atuação, treinamentos, and the five answer briefs. #70's capture listener classifies those hrefs as `cta_engajamento_click`. Measurement ID, CSP, cookie banner, and the single `gtag('config')` with `send_page_view: false` stay as on main. No `/sprint`. No Product/Offer.
+
+# Sessão 2026-10-19 — /engajamento links rebased onto #71–#74
+
+- Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `main` at `f6ea6f9` (#71–#74). Git followed the route-group renames, so the five new `internalLinks` landed on `app/(pt)/answers/...` and `app/(en)/en/answers/...` instead of the pre-#71 paths. Atuação and treinamentos CTAs stayed on the unmoved content files.
+- Kept main's behavior: SSR locale layouts, orphan navigation, `/apps` directory, schema-domain corrections, and the single GA4 config `G-1CL8PFYY7T` in `components/SiteRootDocument.tsx`. No Product/Offer schema, no prices, no invented metrics or client names. `/sprint` stays out of the tree and the sitemap.
+- The contextual-link test now reads those route-group pages and `app/(pt)/engajamento/page.tsx`.
+
+# Sessão 2026-10-15 — recheck /engajamento links after #67
+
+- Draft PR #68 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow not submitted.
+- Branch was already on current `main` (`c9df1d4`, comparison table and EngageSection from #67). Rebase was a no-op. No conflict with those files.
+- New hrefs still return 200: `/engajamento` and `/en/engajamento`. Touched pages keep self-referencing www canonicals. Existing brief hreflang pairs stay reciprocal with `x-default` on the Portuguese URL.
+- `/sprint` stays 404 and out of the sitemap. GA4 id unchanged. No Product or Offer schema added.
+- Verified: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 188/188, `npm run build` 202 pages, `/sprint` absent from the route table. Browser: training, English training, atuação, and the AgentOps related link open the locale engagement page. The training CTA stays visible at phone width.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #68 was rechecked after #67 and stays merge-ready. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-10-12 — CTAs contextuais para /engajamento
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
+- `/atuacao` and `/en/atuacao` already linked `/engajamento` and `/en/engajamento`. The closing paragraph now names the continuous step: baseline, metric, measurable outcome, no loose hours. Button stays `data-engagement-cta`.
+- `/treinamentos` and `/en/treinamentos` gained a ghost CTA (`Ver o modelo de engajamento` / `See the engagement model`) beside the existing contact and proof actions. Closing copy keeps “resultado mensurável” / “measurable outcome” and points at baseline, metric and handoff.
+- Answer briefs that had no engagement href now do, in page `internalLinks` (not in `AnswerBrief`): AgentOps, who-is-Paulo, and LLM Cost-Cut Audit, plus the EN AgentOps and who-is-Paulo twins. Fractional, measurement and comparison briefs already linked and were left as-is.
+- Skipped home and `/feitos` (already covered). Did not edit `EngageSection`, `HeroSection`, `/engajamento`, Person schema (open PR #63) or the related-links block in `AnswerBrief.tsx` (open PR #66).
+- Copy: measurable result, no prices, no new clients, no invented metrics. `/sprint` stays unpublished. No Product or Offer schema.
+- Verified: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 188/188, `npm run build` 202 pages, `/sprint` absent from the route table. Prerendered HTML for `/atuacao`, `/en/atuacao`, `/treinamentos`, `/en/treinamentos`, and the five newly linked briefs contains the locale href and no Product/Offer. `next start` on port 3456: training and AgentOps clicks land on `/engajamento`; EN training lands on `/en/engajamento`; `/sprint` is 404.
+- Suggested Obsidian/Linear: note draft PR #68 on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-10-30 — contact qualifiers on current main
+
+- Draft PR #69 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `main` at `f4c2142` (#79 page_view after consent, #70 GA4 conversions). The only conflict was this notes file.
+- Kept #69: optional `processo`, `kpi`, `prazo` and `_gotcha` on `/contato` and `/en/contato`, posted through `POST /api/contact`. Successful submit still calls `trackEvent('Contact_Form_Submitted')`, which #70 maps to consent-gated `generate_lead`.
+- Kept #79/#70 as on main: one `gtag('config')` for `G-1CL8PFYY7T` with `send_page_view: false`, one manual `page_view` after consent, `Ga4ConversionListener` for `cta_engajamento_click` and `whatsapp_click`. Measurement ID, CSP, and cookie banner unchanged. No `/sprint`. No Product/Offer.
+
+# Sessão 2026-10-19 — Qualificadores de /contato no layout SSR
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- CI `build` on `a01474c` failed because `test/contato-qualifying-fields.test.mjs` still opened `app/contato/page.tsx` and `app/en/contato/page.tsx`. #71 moved those routes to `app/(pt)/contato/page.tsx` and `app/(en)/en/contato/page.tsx`. The form, labels and `POST /api/contact` already lived in `app/contato/ContatoForm.tsx`, `app/contato/ContatoPageContent.tsx` and `app/api/contact/route.ts`, which both locale pages still render.
+- The test now reads the route-group pages. Qualifier fields, honeypot and scope-diagnosis copy are unchanged. `/sprint` stays unpublished. No Product/Offer schema. GA4 untouched.
+
+# Sessão 2026-10-12 — Qualificadores opcionais em /contato
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
+- `/contato` and `/en/contato` gained three optional fields: process to automate (`processo`), KPI to move (`kpi`), desired timeframe (`prazo`). They post through `POST /api/contact`. Empty values stay valid. A filled `_gotcha` still returns ok and does not reach Formspree.
+- Next-step copy: “Paulo responde com um diagnóstico de escopo.” / “Paulo replies with a scope diagnosis.” No SLA number, price, ROI or named client in that line. The existing channel card still says “Em até 48h” / “Within 48h”.
+- Left untouched: `/engajamento`, `EngageSection`, hero, Person schema (open PR #63). `/sprint` is not a route (404). No Product or Offer schema added.
+- Files: `app/contato/ContatoForm.tsx`, `app/contato/ContatoPageContent.tsx`, `app/contato/Contato.module.css`, `app/api/contact/route.ts`, `test/contato-qualifying-fields.test.mjs`.
+- Verified: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 191/191, `npm run build` 202 pages, `/sprint` absent from the route table. Prerendered HTML has the three fields, the honeypot and the scope-diagnosis line, and no Product/Offer. Playwright on `next dev` port 3456: both locales 200, fields optional and visible, honeypot 1×1, submit body includes the three values plus empty `_gotcha`, `/sprint` 404.
+- Suggested Obsidian/Linear: note draft PR #69 on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-10-30 — GA4 conversions on top of page_view consent
+
+- Draft PR #70 merged current main through `99ab724` (#79).
+- Kept #79: one `gtag('config')` for `G-1CL8PFYY7T` with `send_page_view: false`, consent default denied, `wait_for_update: 500`, one manual `page_view` after consent grant and one per App Router pathname change, deduped.
+- Layered #70: `Ga4ConversionListener` in `SiteRootDocument` for `cta_engajamento_click`, `whatsapp_click`, and consent-gated `generate_lead`. No second config. Measurement ID, CSP, and cookie banner unchanged. No `/sprint`, no Product/Offer.
+- Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 200/200, `npm run build` 203 pages and `/sprint` absent. `check-apps-urls` against `next start` 121/121, `/sprint` 404.
+- Do not merge. Deploy stays human-gated. Paulo merges.
+
+# Sessão 2026-10-19 — GA4 conversions rebased onto single gtag config
+
+- Draft PR #70 merged current main (`6aa07e99..f6ea6f9f`, including #74).
+- #74 keeps the only `gtag('config')` in `components/SiteRootDocument.tsx`. `GoogleAnalytics` only calls `consent` update via `subscribeToAnalyticsConsent`.
+- `Ga4ConversionListener` stays mounted in that shared document. Conversion events remain consent-gated on `cookie-consent === 'all'`.
+- The unit test now reads `components/SiteRootDocument.tsx` and asserts one config, no config inside `GoogleAnalytics` or the listener.
+- Verified after the merge: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 197/197, `npm run build` 203 pages, `/sprint` absent. PR stays draft. Do not merge.
+
+# Sessão 2026-10-12 — GA4 conversion events (draft)
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
+- Draft PR: https://github.com/paulopierrondi/pierrondi-site/pull/70 on `cursor/ga4-conversion-events-04cc`.
+- Existing gtag `G-1CL8PFYY7T` only. No new vendor. No GA4 admin change.
+- `cta_engajamento_click` `{source}` = current pathname, for any link to `/engajamento` or `/en/engajamento`. Capture-phase listener in `components/Ga4ConversionListener.tsx`, mounted from `app/layout.tsx`.
+- `whatsapp_click` `{page}` = current pathname, for `wa.me` links. Same listener.
+- `generate_lead` `{form}` stays on successful submit: `/contato` sends `contato_page`, home sends `home_v2`, via `trackEvent('Contact_Form_Submitted')`. That GA4 call now uses the consent gate.
+- Consent: events call `gtag` only when `localStorage['cookie-consent'] === 'all'`, the same grant as `GoogleAnalytics`.
+- Untouched: EngageSection, hero, `/engajamento`, Person schema (open PR #63). No Product/Offer schema. No prices. `/sprint` stays off the route table.
+- Verified: `npm run lint` clean, `npx tsc --noEmit` clean, `npm test` 190/190, `npm run build` 202 pages, no `/sprint` route. `next start` on port 3456: `/` 200 with `G-1CL8PFYY7T` and `analytics_storage: 'denied'`; `/sprint` 404; client chunks contain `cta_engajamento_click`, `whatsapp_click`, and `generate_lead`. Homepage HTML has zero Product/Offer schema.
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS.md + `.brain` snapshot. cached_tokens: null.
+- Suggested Obsidian/Linear: note draft PR #70 on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-10-30 — GA4 page_view after consent (draft)
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges.
+- Diagnosis confirmed in `components/SiteRootDocument.tsx` and `components/GoogleAnalytics.tsx` after #74 (`f6ea6f9`): one `gtag('config')` with consent default denied and `wait_for_update: 500`. Consent update ran only when `cookie-consent === all`, and no `page_view` followed. Accepts after 500ms, and slow hydrations of a stored grant, produced no view.
+- Fix: `send_page_view: false` on that single config. After consent update (accept click and stored grant on load), one `page_view` with `page_location`, `page_path`, `page_title`. App Router pathname changes inside `(pt)` and `(en)` send another while consent stays granted. Same URL is not sent twice, including a Strict Mode remount. Measurement ID, CSP, cookie banner, `/sprint`, and Product/Offer schema unchanged. No second `gtag('config')`, so draft #70 (`Ga4ConversionListener`, `lib/ga4-conversions.ts`) can land beside this.
+- Residual: GA4 Admin → data stream `G-1CL8PFYY7T` → Enhanced measurement → Page views → advanced → “Page changes based on browser history events” must stay off, or client navigations count twice. Query-only URL changes do not emit a manual page_view. PT↔EN crosses root layouts and reloads, so the load path covers it.
+- Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 195/195, `npm run build` 203 pages and `/sprint` absent. `check-apps-urls` against `next start` 121/121, `/sprint` 404. Headless Chrome dataLayer: no `page_view` before accept or with essential consent; one `page_view` after a late accept and after reload with stored consent; one additional `page_view` on same-document `/contato` → `/about` and `/en/contato` → `/en/about`.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note the draft. Do not mark the property as collecting until Paulo merges, Railway deploys, and DebugView shows one `page_view` after a late accept.
+
 # Sessão 2026-10-15 — hreflang hub rebase onto #67
 
 - Draft PR #66 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow not submitted.

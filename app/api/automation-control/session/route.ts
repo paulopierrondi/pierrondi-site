@@ -12,7 +12,7 @@ export const runtime = 'nodejs'
 
 const sessionRateLimit = createRateLimit(10, 15 * 60 * 1000)
 
-const ALLOWED_NEXT_PATHS = new Set(['/automacoes', '/control_tower'])
+const ALLOWED_NEXT_PATHS = new Set(['/automacoes', '/control_tower', '/control_tower/ads'])
 
 function safeNextPath(value: FormDataEntryValue | string | null) {
   if (typeof value !== 'string') return '/automacoes'

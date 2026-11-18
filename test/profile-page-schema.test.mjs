@@ -3,10 +3,10 @@ import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
 const authority = await readFile(new URL('../lib/authority/authority.ts', import.meta.url), 'utf8')
-const home = await readFile(new URL('../app/page.tsx', import.meta.url), 'utf8')
-const homeEn = await readFile(new URL('../app/en/page.tsx', import.meta.url), 'utf8')
+const home = await readFile(new URL('../app/(pt)/page.tsx', import.meta.url), 'utf8')
+const homeEn = await readFile(new URL('../app/(en)/en/page.tsx', import.meta.url), 'utf8')
 const contact = await readFile(new URL('../lib/contact.ts', import.meta.url), 'utf8')
-const paulo = await readFile(new URL('../app/paulo/page.tsx', import.meta.url), 'utf8')
+const paulo = await readFile(new URL('../app/(pt)/paulo/page.tsx', import.meta.url), 'utf8')
 const siteSchema = await readFile(new URL('../components/SiteJsonLd.tsx', import.meta.url), 'utf8')
 const homeCopy = await readFile(new URL('../components/home-v2/copy.ts', import.meta.url), 'utf8')
 

@@ -37,7 +37,7 @@ const briefComponent = await readFile(
   new URL('../app/answers/_components/AnswerBrief.tsx', import.meta.url),
   'utf8',
 )
-const aiSearchPage = await readFile(new URL('../app/ai-search/page.tsx', import.meta.url), 'utf8')
+const aiSearchPage = await readFile(new URL('../app/(en)/ai-search/page.tsx', import.meta.url), 'utf8')
 const llmsText = await readFile(new URL('../public/llms.txt', import.meta.url), 'utf8')
 const llmsFullText = await readFile(new URL('../public/llms-full.txt', import.meta.url), 'utf8')
 const answersJson = JSON.parse(await readFile(new URL('../public/answers.json', import.meta.url), 'utf8'))
@@ -45,7 +45,7 @@ const geoText = await readFile(new URL('../public/geo.md', import.meta.url), 'ut
 
 test('own-domain answer brief pages exist and use the shared brief renderer', async () => {
   for (const slug of SLUGS) {
-    const pageUrl = new URL(`../app/answers/${slug}/page.tsx`, import.meta.url)
+    const pageUrl = new URL(`../app/(pt)/answers/${slug}/page.tsx`, import.meta.url)
     await access(pageUrl)
     const source = await readFile(pageUrl, 'utf8')
     assert.match(source, /AnswerBrief/, `${slug} should render via the shared AnswerBrief`)
@@ -81,11 +81,11 @@ test('favicon.png exists for direct crawler requests', async () => {
 })
 
 test('answer brief titles do not duplicate the brand the layout already appends', async () => {
-  const layout = await readFile(new URL('../app/layout.tsx', import.meta.url), 'utf8')
+  const layout = await readFile(new URL('../components/SiteRootDocument.tsx', import.meta.url), 'utf8')
   assert.match(layout, /template: '%s \| pierrondi\.dev'/)
 
   for (const slug of SLUGS) {
-    const source = await readFile(new URL(`../app/answers/${slug}/page.tsx`, import.meta.url), 'utf8')
+    const source = await readFile(new URL(`../app/(pt)/answers/${slug}/page.tsx`, import.meta.url), 'utf8')
     const title = source.match(/^ {2}title: '(.*?)',$/m)[1]
     assert.doesNotMatch(title, /pierrondi\.dev/, `${slug} title must not repeat the brand`)
     assert.ok(
@@ -114,13 +114,13 @@ test('restored answer briefs stay wired to every retrieval surface', () => {
 })
 
 test('EN who-is / what-is twins exist, self-canonicalize and hreflang to the PT pages', async () => {
-  const enHub = await readFile(new URL('../app/en/answers/page.tsx', import.meta.url), 'utf8')
+  const enHub = await readFile(new URL('../app/(en)/en/answers/page.tsx', import.meta.url), 'utf8')
   assert.match(enHub, /who-is-paulo-pierrondi/)
   assert.match(enHub, /what-is-agentops/)
 
   for (const twin of EN_TWINS) {
     assert.match(enHub, new RegExp(twin.slug))
-    const pageUrl = new URL(`../app/en/answers/${twin.slug}/page.tsx`, import.meta.url)
+    const pageUrl = new URL(`../app/(en)/en/answers/${twin.slug}/page.tsx`, import.meta.url)
     await access(pageUrl)
     const source = await readFile(pageUrl, 'utf8')
     assert.match(source, /AnswerBrief/, `${twin.slug} should render via the shared AnswerBrief`)
@@ -157,12 +157,12 @@ test('EN who-is / what-is twins exist, self-canonicalize and hreflang to the PT 
 })
 
 test('PT brand/AgentOps briefs get reciprocal hreflang to the EN twins', async () => {
-  const quem = await readFile(new URL('../app/answers/quem-e-paulo-pierrondi/page.tsx', import.meta.url), 'utf8')
-  const agentops = await readFile(new URL('../app/answers/o-que-e-agentops/page.tsx', import.meta.url), 'utf8')
+  const quem = await readFile(new URL('../app/(pt)/answers/quem-e-paulo-pierrondi/page.tsx', import.meta.url), 'utf8')
+  const agentops = await readFile(new URL('../app/(pt)/answers/o-que-e-agentops/page.tsx', import.meta.url), 'utf8')
   assert.match(quem, /'en-US': '\/en\/answers\/who-is-paulo-pierrondi'/)
   assert.match(agentops, /'en-US': '\/en\/answers\/what-is-agentops'/)
   const compare = await readFile(
-    new URL('../app/answers/fractional-vs-consultoria-vs-agencia/page.tsx', import.meta.url),
+    new URL('../app/(pt)/answers/fractional-vs-consultoria-vs-agencia/page.tsx', import.meta.url),
     'utf8',
   )
   assert.match(compare, /'en-US': '\/en\/answers\/fractional-vs-consultancy-vs-agency'/)
@@ -171,7 +171,7 @@ test('PT brand/AgentOps briefs get reciprocal hreflang to the EN twins', async (
 
 test('fractional officer brief converts to engagement, proof and contact without publishing /sprint', async () => {
   const source = await readFile(
-    new URL('../app/answers/o-que-e-fractional-ai-automation-officer/page.tsx', import.meta.url),
+    new URL('../app/(pt)/answers/o-que-e-fractional-ai-automation-officer/page.tsx', import.meta.url),
     'utf8',
   )
 
@@ -188,7 +188,7 @@ test('fractional officer brief converts to engagement, proof and contact without
 
 test('measurement brief uses the honest framework and converts without invented metrics', async () => {
   const source = await readFile(
-    new URL('../app/answers/como-medir-resultado-de-ia-operacional/page.tsx', import.meta.url),
+    new URL('../app/(pt)/answers/como-medir-resultado-de-ia-operacional/page.tsx', import.meta.url),
     'utf8',
   )
 
@@ -215,7 +215,7 @@ test('measurement brief uses the honest framework and converts without invented 
 
 test('comparison brief stays neutral and converts without prices, sprint or Product schema', async () => {
   const source = await readFile(
-    new URL('../app/answers/fractional-vs-consultoria-vs-agencia/page.tsx', import.meta.url),
+    new URL('../app/(pt)/answers/fractional-vs-consultoria-vs-agencia/page.tsx', import.meta.url),
     'utf8',
   )
 
@@ -253,7 +253,7 @@ test('comparison brief stays neutral and converts without prices, sprint or Prod
 
 test('EN comparison twin mirrors the PT brief and converts to /en/engajamento', async () => {
   const source = await readFile(
-    new URL('../app/en/answers/fractional-vs-consultancy-vs-agency/page.tsx', import.meta.url),
+    new URL('../app/(en)/en/answers/fractional-vs-consultancy-vs-agency/page.tsx', import.meta.url),
     'utf8',
   )
   const siteLanguage = await readFile(new URL('../lib/i18n/site-language.ts', import.meta.url), 'utf8')

@@ -5,7 +5,7 @@ import test from 'node:test'
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), 'utf8')
 
 test('semantic font tokens resolve through distinct next/font loader variables', async () => {
-  const [layout, globals] = await Promise.all([read('app/layout.tsx'), read('app/globals.css')])
+  const [layout, globals] = await Promise.all([read('components/SiteRootDocument.tsx'), read('app/globals.css')])
 
   assert.match(layout, /variable: '--font-space-grotesk'/)
   assert.match(layout, /variable: '--font-inter'/)
@@ -51,7 +51,7 @@ test('shared reveals keep critical content visible before hydration', async () =
     read('app/about/AboutMotion.tsx'),
     read('components/studio/StudioExperience.tsx'),
     read('components/studio/StudioExperience.module.css'),
-    read('app/feitos/[slug]/page.tsx'),
+    read('app/(pt)/feitos/[slug]/page.tsx'),
     read('app/feitos/[slug]/page.module.css'),
     read('app/globals.css'),
     read('scripts/site-wide-ui-qa.mjs'),

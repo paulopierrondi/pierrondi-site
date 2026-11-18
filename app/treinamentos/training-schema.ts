@@ -27,7 +27,6 @@ export function buildTrainingSchema(lang: HomeLang) {
       teaches: track.modules,
       audience: { '@type': 'Audience', audienceType: track.audience },
       provider: { '@id': `${SITE_URL}/#organization` },
-      instructor: { '@id': `${SITE_URL}/#person` },
     })),
   }
 }

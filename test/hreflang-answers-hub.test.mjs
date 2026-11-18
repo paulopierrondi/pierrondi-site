@@ -57,19 +57,22 @@ test('hreflang and language targets are final 200s, never the redirecting /answe
 })
 
 test('/ai-search and /en/answers are not hreflang equivalents', async () => {
-  const enHub = await readFile(new URL('../app/en/answers/page.tsx', import.meta.url), 'utf8')
-  const aiSearch = await readFile(new URL('../app/ai-search/page.tsx', import.meta.url), 'utf8')
+  const enHub = await readFile(new URL('../app/(en)/en/answers/page.tsx', import.meta.url), 'utf8')
+  const aiSearch = await readFile(new URL('../app/(en)/ai-search/page.tsx', import.meta.url), 'utf8')
 
   // /ai-search is an English citation portfolio (inLanguage en-US). /en/answers
   // is a separate English index of three briefs. Pairing them would mark one
-  // English page as the pt-BR version of the other.
+  // English page as the pt-BR version of the other. The hub keeps an empty
+  // languages object, Open Graph and CollectionPage schema from main.
   assert.match(aiSearch, /inLanguage:\s*'en-US'/)
   assert.match(aiSearch, /alternates:\s*\{\s*canonical:\s*canonicalPath\s*\}/)
   assert.doesNotMatch(aiSearch, /['"](?:pt-BR|en-US|x-default)['"]\s*:/)
 
   assert.match(enHub, /canonical:\s*path/)
   assert.match(enHub, /const path = '\/en\/answers'/)
-  assert.doesNotMatch(enHub, /languages:\s*\{/)
+  assert.match(enHub, /openGraph:\s*\{[^}]*url:\s*'\/en\/answers'/)
+  assert.match(enHub, /buildCollectionPageSchema\(/)
+  assert.match(enHub, /languages:\s*\{\s*\}/)
   assert.doesNotMatch(enHub, /['"](?:pt-BR|en-US|x-default)['"]\s*:/)
   assert.doesNotMatch(enHub, /['"]\/ai-search['"]\s*,/)
 })
@@ -92,7 +95,7 @@ test('English surfaces link internally to /en/answers', async () => {
     'what-is-agentops',
     'fractional-vs-consultancy-vs-agency',
   ]) {
-    const page = await readFile(new URL(`../app/en/answers/${slug}/page.tsx`, import.meta.url), 'utf8')
+    const page = await readFile(new URL(`../app/(en)/en/answers/${slug}/page.tsx`, import.meta.url), 'utf8')
     assert.match(page, /AnswerBrief/)
     assert.match(page, /inLanguage="en"/)
     assert.match(page, new RegExp(`const path = '/en/answers/${slug}'`))
@@ -101,8 +104,8 @@ test('English surfaces link internally to /en/answers', async () => {
 
 test('answer brief hreflang pairs are reciprocal, self-referencing, and x-default to Portuguese', async () => {
   for (const [ptPath, enPath] of BRIEF_PAIRS) {
-    const pt = await readFile(new URL(`../app${ptPath}/page.tsx`, import.meta.url), 'utf8')
-    const en = await readFile(new URL(`../app${enPath}/page.tsx`, import.meta.url), 'utf8')
+    const pt = await readFile(new URL(`../app/(pt)${ptPath}/page.tsx`, import.meta.url), 'utf8')
+    const en = await readFile(new URL(`../app/(en)${enPath}/page.tsx`, import.meta.url), 'utf8')
 
     assert.match(pt, new RegExp(`const path = '${ptPath}'`))
     assert.match(pt, /canonical:\s*path/)
