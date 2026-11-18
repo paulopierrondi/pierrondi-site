@@ -89,6 +89,12 @@ export default function WhatIsAgentopsAnswerPage() {
         },
       ]}
       internalLinks={[
+        {
+          href: '/en/engajamento',
+          label: 'Engagement model',
+          description:
+            'How AgentOps becomes a continuous operation with a measurable outcome: baseline, metric and handoff.',
+        },
         { href: '/en/atuacao', label: 'Work', description: 'How Paulo works: enterprise AI operating models and governed agents.' },
         { href: '/ai-search', label: 'AI Search Portfolio', description: 'Citable reference hub for search engines and answer systems.' },
         { href: '/en/blog', label: 'Blog', description: 'Technical essays on agentic AI, ServiceNow and GEO/SEO.' },

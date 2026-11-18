@@ -22,6 +22,7 @@ const staticRoutes: Array<{
   { path: '/apps', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/portfolio', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/ai-search', priority: 0.78, changeFrequency: 'weekly' },
+  { path: '/answers/consultoria-de-automacao-com-ia', priority: 0.74, changeFrequency: 'monthly' },
   { path: '/answers/o-que-e-agentops', priority: 0.74, changeFrequency: 'monthly' },
   { path: '/answers/quem-e-paulo-pierrondi', priority: 0.74, changeFrequency: 'monthly' },
   { path: '/en/answers', priority: 0.7, changeFrequency: 'monthly' },

@@ -40,18 +40,6 @@ const studioSchema = {
   description: STUDIO_COPY.en.positioning,
   provider: { '@id': `${SITE_URL}/#person` },
   brand: { '@type': 'Brand', name: 'Pierrondi Studio' },
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Pierrondi Studio capabilities',
-    itemListElement: STUDIO_COPY.en.fronts.map((front) => ({
-      '@type': 'Offer',
-      itemOffered: {
-        '@type': 'Service',
-        name: front.title,
-        description: front.description,
-      },
-    })),
-  },
 }
 
 export default function StudioEnPage() {

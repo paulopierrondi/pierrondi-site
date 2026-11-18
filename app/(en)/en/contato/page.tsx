@@ -3,7 +3,7 @@ import PageHeader from '@/components/PageHeader'
 import ContatoPageContent from '@/app/contato/ContatoPageContent'
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: 'Contact Paulo Pierrondi',
   description:
     'Get in touch with Paulo Pierrondi about enterprise AI, ServiceNow, AgentOps, operating models and automations with an evidence trail.',
   alternates: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Contact | pierrondi.dev',
+    title: 'Contact Paulo Pierrondi | pierrondi.dev',
     description: 'Let\'s talk about AI that becomes governed execution.',
     url: '/en/contato',
     siteName: 'pierrondi.dev',
