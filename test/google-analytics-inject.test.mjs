@@ -3,7 +3,11 @@ import { readFile } from 'node:fs/promises'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import test from 'node:test'
-import GoogleAnalytics, { readGa4PageView, subscribeToAnalyticsConsent } from '../components/GoogleAnalytics.tsx'
+import GoogleAnalytics, {
+  readGa4PageView,
+  scheduleGa4RoutePageView,
+  subscribeToAnalyticsConsent,
+} from '../components/GoogleAnalytics.tsx'
 
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), 'utf8')
 
@@ -60,6 +64,8 @@ test('GA client renders no UI and sends page_view itself instead of a second con
   assert.match(ga, /'page_view'/)
   assert.doesNotMatch(ga, /googletagmanager\.com\/gtag\/js/)
   assert.match(ga, /subscribeToAnalyticsConsent\(window,\s*window\.localStorage/)
+  assert.match(ga, /scheduleGa4RoutePageView\(\(\) => \{\s*onRouteRef\.current\?\.\(\)\s*\}\)/)
+  assert.match(ga, /\[measurementId, pathname\]/)
   assert.match(ga, /\},\s*\[measurementId\]\)/)
   assert.deepEqual(
     readGa4PageView({
@@ -177,6 +183,83 @@ test('GA route changes send one page_view for the new path while consent stays g
   assert.deepEqual(calls[3], contatoPageView)
 
   cleanup()
+})
+
+function installAnimationFrames() {
+  const frames = []
+  let nextId = 1
+  const original = globalThis.requestAnimationFrame
+  const originalCancel = globalThis.cancelAnimationFrame
+  globalThis.requestAnimationFrame = (callback) => {
+    const id = nextId++
+    frames.push({ id, callback })
+    return id
+  }
+  globalThis.cancelAnimationFrame = (id) => {
+    const index = frames.findIndex((frame) => frame.id === id)
+    if (index >= 0) frames.splice(index, 1)
+  }
+  return {
+    frames,
+    flush() {
+      const frame = frames.shift()
+      frame?.callback()
+    },
+    restore() {
+      globalThis.requestAnimationFrame = original
+      globalThis.cancelAnimationFrame = originalCancel
+    },
+  }
+}
+
+test('GA route page_view waits two frames so the new document.title is sent', () => {
+  const clock = installAnimationFrames()
+  try {
+    const { target, calls, storage, routes } = installAnalyticsTarget('all')
+    const cleanup = subscribeToAnalyticsConsent(target, storage, routes)
+    assert.equal(calls.length, 2)
+
+    target.location = {
+      href: 'https://www.pierrondi.dev/engajamento',
+      pathname: '/engajamento',
+      search: '',
+    }
+    const cancel = scheduleGa4RoutePageView(() => routes.current())
+    clock.flush()
+    assert.equal(calls.length, 2)
+
+    target.document = { title: 'Engajamento fractional de automação | pierrondi.dev' }
+    clock.flush()
+    assert.equal(calls.length, 3)
+    assert.deepEqual(calls[2], [
+      'event',
+      'page_view',
+      {
+        page_location: 'https://www.pierrondi.dev/engajamento',
+        page_path: '/engajamento',
+        page_title: 'Engajamento fractional de automação | pierrondi.dev',
+      },
+    ])
+
+    const repeat = scheduleGa4RoutePageView(() => routes.current())
+    clock.flush()
+    clock.flush()
+    assert.equal(calls.length, 3)
+
+    target.location = { href: 'https://www.pierrondi.dev/feitos', pathname: '/feitos', search: '' }
+    const dropped = scheduleGa4RoutePageView(() => routes.current())
+    clock.flush()
+    const lateFrame = clock.frames[0]
+    dropped()
+    lateFrame.callback()
+    assert.equal(calls.length, 3)
+
+    repeat()
+    cancel()
+    cleanup()
+  } finally {
+    clock.restore()
+  }
 })
 
 test('cookie banner can grant consent on immersive home routes', () => {
