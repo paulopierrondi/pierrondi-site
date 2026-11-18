@@ -1,3 +1,11 @@
+# Sessão 2026-11-18 — rebase do brief preço fixo onto current main (draft)
+
+- Draft PR #76 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `origin/main` at `70153a4`. The only conflict was this notes file. Kept main's notes and the 2026-10-26 brief note.
+- Kept main's `/answers/consultoria-de-automacao-com-ia` entries in the sitemap, `answers.json`, `geo.md`, `llms.txt`, `llms-full.txt` and `/ai-search`, and added `/answers/automacao-com-ia-preco-fixo` beside them. Home pages and the GA4 id `G-1CL8PFYY7T` were not edited. `/sprint` stays unpublished.
+- Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 228/228, `npm run build` generated 205 static pages. Both answer routes are in the route table. `/sprint` is absent.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #76 is rebased and still draft. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-11-18 — rebase /atuacao titles onto current main (draft)
 
 - Draft PR #75 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
@@ -119,6 +127,18 @@
 - Residual: GA4 Admin → data stream `G-1CL8PFYY7T` → Enhanced measurement → Page views → advanced → “Page changes based on browser history events” must stay off, or client navigations count twice. Query-only URL changes do not emit a manual page_view. PT↔EN crosses root layouts and reloads, so the load path covers it.
 - Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 195/195, `npm run build` 203 pages and `/sprint` absent. `check-apps-urls` against `next start` 121/121, `/sprint` 404. Headless Chrome dataLayer: no `page_view` before accept or with essential consent; one `page_view` after a late accept and after reload with stored consent; one additional `page_view` on same-document `/contato` → `/about` and `/en/contato` → `/en/about`.
 - Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note the draft. Do not mark the property as collecting until Paulo merges, Railway deploys, and DebugView shows one `page_view` after a late accept.
+
+# Sessão 2026-10-26 — Answer brief automação com IA preço fixo (draft)
+
+- Draft only. Do not merge. Do not deploy. Do not call IndexNow.
+- New PT-BR brief: `/answers/automacao-com-ia-preco-fixo`. H1: `Automação com IA com preço fixo e escopo fechado`. Rendered title: `Automação com IA com preço fixo | pierrondi.dev` (47). The root template appends `| pierrondi.dev`; a title that also ends in `| Paulo Pierrondi` would duplicate the brand and break the 62-character sibling budget.
+- No EN twin. Canonical only, same as the measurement brief. Rendered HTML has self-canonical `https://www.pierrondi.dev/answers/automacao-com-ia-preco-fixo`, `index, follow`, and no hreflang to a missing English URL.
+- No price, client, testimonial, metric, review, Product schema, or `/sprint` link. `/engajamento` still has no public price, so the brief stays price-free and links there plus `/contato`.
+- Registered on sitemap (80 → 81), `answers.json`, `llms.txt`, `llms-full.txt`, `geo.md`, `/ai-search`. Inbound links from the fractional comparison brief and from `publicAnswerLinks` (home, `/feitos`, `/about`).
+- Left untouched: open #66 (hreflang hub), #68 (`/engajamento` links), #69 (`/contato` fields), #70 (GA4 events), #75 (`/atuacao` titles). GA4 id `G-1CL8PFYY7T` unchanged. `/sprint` still absent from the route table and returns 404.
+- Verified: `npm test` 193/193, `npm run build` prerenders the route as static. `next start` on port 3456: page 200; internal links 200; `/sprint` 404. Direct answer 77 words. Body copy about 1070 words.
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS.md + `.brain/PROJECT_CONTEXT.md`. cached_tokens: null.
+- Suggested Obsidian/Linear: note this draft on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
 
 # Sessão 2026-10-26 — títulos de /atuacao (draft)
 
