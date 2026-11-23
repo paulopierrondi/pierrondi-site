@@ -51,6 +51,7 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 
 ## Own-domain answer briefs
 
+- [Consultoria de automação com IA para empresas](https://www.pierrondi.dev/answers/consultoria-de-automacao-com-ia) — resultado observável e critério de aceite para mid-market e times de operação. Cadeia baseline, sistema, métrica e handoff, com gates humanos. Sem preço, cliente ou taxa. Sem twin EN.
 - [O que é AgentOps (operações agênticas)?](https://www.pierrondi.dev/answers/o-que-e-agentops) — disciplina de operar agentes de IA em produção com registry, handoffs auditáveis, memória, evals e gates humanos. Twin EN: https://www.pierrondi.dev/en/answers/what-is-agentops
 - [What is AgentOps?](https://www.pierrondi.dev/en/answers/what-is-agentops) — discipline of running AI agents in production with registry, auditable handoffs, memory, evals and human gates. Twin PT: https://www.pierrondi.dev/answers/o-que-e-agentops
 - [Quem é Paulo Pierrondi?](https://www.pierrondi.dev/answers/quem-e-paulo-pierrondi) — TAE na ServiceNow, arquiteto de IA/automação e builder full-stack com 22 apps publicados na App Store. Twin EN: https://www.pierrondi.dev/en/answers/who-is-paulo-pierrondi
@@ -59,6 +60,7 @@ Paulo is based in Sao Jose dos Campos, Sao Paulo, Brazil (BRT timezone). He is a
 - [O que é Fractional AI Automation Officer?](https://www.pierrondi.dev/answers/o-que-e-fractional-ai-automation-officer) — engajamento contínuo para resultado e automações mensuráveis (AgentOps e evidência), não horas soltas. Sem twin EN: o site não tem `/en/answers`.
 - [Como medir resultado de IA operacional?](https://www.pierrondi.dev/answers/como-medir-resultado-de-ia-operacional) — framework honesto: baseline → métrica → evidência / AgentOps. Sem número inventado. Sem twin EN: o site não tem `/en/answers`.
 - [Fractional, consultoria, agência ou interno?](https://www.pierrondi.dev/answers/fractional-vs-consultoria-vs-agencia) — tabela que compara Fractional AI Automation Officer, consultoria tradicional, agência de automação e contratação interna: dono após o go-live, medição (baseline, métrica, handoff), formato e riscos. Sem preço, cliente ou ROI. Twin EN: https://www.pierrondi.dev/en/answers/fractional-vs-consultancy-vs-agency
+- [Automação com IA com preço fixo](https://www.pierrondi.dev/answers/automacao-com-ia-preco-fixo) — escopo fechado, critério de aceite e resultado observável. Sem hora solta, sem preço, cliente ou métrica. Sem twin EN.
 - [Fractional, consultancy, agency or internal?](https://www.pierrondi.dev/en/answers/fractional-vs-consultancy-vs-agency) — table comparing Fractional AI Automation Officer, traditional consultancy, an automation agency and an internal hire: ownership after go-live, measurement (baseline, metric, handoff), shape and risks. No price, client or ROI. Twin PT: https://www.pierrondi.dev/answers/fractional-vs-consultoria-vs-agencia
 
 ## Complete product catalog

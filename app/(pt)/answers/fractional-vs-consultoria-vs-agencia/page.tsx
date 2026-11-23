@@ -220,6 +220,11 @@ export default function FractionalVsConsultoriaVsAgenciaAnswerPage() {
           description: 'Framework honesto: baseline → métrica → evidência / AgentOps.',
         },
         {
+          href: '/answers/automacao-com-ia-preco-fixo',
+          label: 'Automação com IA com preço fixo',
+          description: 'Escopo fechado, critério de aceite e resultado observável — sem hora solta e sem preço.',
+        },
+        {
           href: '/feitos',
           label: 'Feitos',
           description: 'Prova pública já publicada — sem métrica nova nesta resposta.',
