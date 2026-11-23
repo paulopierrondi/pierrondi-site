@@ -1,0 +1,5938 @@
+{
+ "schemaVersion": 1,
+ "collectedAt": "2026-11-04T07:05:00.000Z",
+ "timezone": "America/Sao_Paulo",
+ "reportingCurrency": "BRL",
+ "fx": {
+  "USD_BRL": 5.43,
+  "source": "fixture (valores ficticios)",
+  "date": "2026-11-03"
+ },
+ "windows": {
+  "yesterday": {
+   "start": "2026-11-03",
+   "end": "2026-11-03"
+  },
+  "last7": {
+   "start": "2026-10-28",
+   "end": "2026-11-03"
+  },
+  "prev7": {
+   "start": "2026-10-21",
+   "end": "2026-10-27"
+  },
+  "last30": {
+   "start": "2026-10-05",
+   "end": "2026-11-03"
+  }
+ },
+ "connectors": [
+  {
+   "platform": "google_ads",
+   "status": "ok",
+   "accounts": 1,
+   "rows": 4,
+   "message": "ok",
+   "missingEnv": [],
+   "lastSuccessAt": "2026-11-04T07:04:00.000Z"
+  },
+  {
+   "platform": "apple_ads",
+   "status": "ok",
+   "accounts": 1,
+   "rows": 3,
+   "message": "ok",
+   "missingEnv": [],
+   "lastSuccessAt": "2026-11-04T07:04:10.000Z"
+  },
+  {
+   "platform": "meta_ads",
+   "status": "ok",
+   "accounts": 2,
+   "rows": 5,
+   "message": "ok",
+   "missingEnv": [],
+   "lastSuccessAt": "2026-11-04T07:04:30.000Z"
+  },
+  {
+   "platform": "tiktok_ads",
+   "status": "missing_credentials",
+   "accounts": 0,
+   "rows": 0,
+   "message": "Credenciais ausentes; conector ignorado.",
+   "missingEnv": [
+    "TIKTOK_ADS_ACCESS_TOKEN",
+    "TIKTOK_ADS_ADVERTISER_ID"
+   ],
+   "lastSuccessAt": null
+  }
+ ],
+ "totals": {
+  "yesterday": {
+   "spend": 382.28,
+   "impressions": 16517,
+   "clicks": 529,
+   "installs": 92,
+   "conversions": 112.7,
+   "conversionValue": 4875.54,
+   "ctr": 0.03200558693041389,
+   "cpc": 0.7231507798044523,
+   "cpm": 23.144865146827993,
+   "cpa": 3.3930957450850174,
+   "roas": 12.753680430899601,
+   "cvr": 0.2131241892752228
+  },
+  "last7": {
+   "spend": 2842,
+   "impressions": 121852,
+   "clicks": 3577,
+   "installs": 534,
+   "conversions": 685.1,
+   "conversionValue": 29242.49,
+   "ctr": 0.029354609894896203,
+   "cpc": 0.7945372784131635,
+   "cpm": 23.323331854770945,
+   "cpa": 4.14837813289551,
+   "roas": 10.289413981852533,
+   "cvr": 0.19152961783129147
+  },
+  "prev7": {
+   "spend": 2791.33,
+   "impressions": 118914,
+   "clicks": 3456,
+   "installs": 494,
+   "conversions": 653.3,
+   "conversionValue": 27286.66,
+   "ctr": 0.029058947816042114,
+   "cpc": 0.807790638146004,
+   "cpm": 23.47354600017209,
+   "cpa": 4.272343506364541,
+   "roas": 9.77550350687724,
+   "cvr": 0.18907436561283814
+  },
+  "last30": {
+   "spend": 12184.45,
+   "impressions": 521052,
+   "clicks": 15421,
+   "installs": 2384,
+   "conversions": 3070.5,
+   "conversionValue": 131409.55,
+   "ctr": 0.029595103936448326,
+   "cpc": 0.7901408656281618,
+   "cpm": 23.384301042700695,
+   "cpa": 3.968274366372397,
+   "roas": 10.785024286555991,
+   "cvr": 0.19911447462501694
+  }
+ },
+ "daily": [
+  {
+   "date": "2026-10-05",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 87.8,
+   "conversions": 14.5,
+   "clicks": 137,
+   "impressions": 4430,
+   "conversionValue": 93.37
+  },
+  {
+   "date": "2026-10-05",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 22.72,
+   "conversions": 2.4,
+   "clicks": 27,
+   "impressions": 946,
+   "conversionValue": 9.79
+  },
+  {
+   "date": "2026-10-05",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 41.58,
+   "conversions": 0.8,
+   "clicks": 18,
+   "impressions": 1540,
+   "conversionValue": 1.52
+  },
+  {
+   "date": "2026-10-05",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 21.05,
+   "conversions": 19.7,
+   "clicks": 51,
+   "impressions": 702,
+   "conversionValue": 1084.48
+  },
+  {
+   "date": "2026-10-05",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 31.22,
+   "conversions": 37.4,
+   "clicks": 104,
+   "impressions": 1643,
+   "conversionValue": 1684.27
+  },
+  {
+   "date": "2026-10-05",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 21.11,
+   "conversions": 25.4,
+   "clicks": 77,
+   "impressions": 960,
+   "conversionValue": 1521.92
+  },
+  {
+   "date": "2026-10-05",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 74.75,
+   "conversions": 3.8,
+   "clicks": 51,
+   "impressions": 3049,
+   "conversionValue": 51
+  },
+  {
+   "date": "2026-10-05",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 37.1,
+   "conversions": 0.4,
+   "clicks": 9,
+   "impressions": 1325,
+   "conversionValue": 0.38
+  },
+  {
+   "date": "2026-10-05",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 56.14,
+   "conversions": 2.6,
+   "clicks": 38,
+   "impressions": 2253,
+   "conversionValue": 28.16
+  },
+  {
+   "date": "2026-10-06",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 93.71,
+   "conversions": 15.9,
+   "clicks": 141,
+   "impressions": 4784,
+   "conversionValue": 102.72
+  },
+  {
+   "date": "2026-10-06",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 23.06,
+   "conversions": 3.3,
+   "clicks": 29,
+   "impressions": 961,
+   "conversionValue": 13.02
+  },
+  {
+   "date": "2026-10-06",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 47.92,
+   "conversions": 1.1,
+   "clicks": 19,
+   "impressions": 1775,
+   "conversionValue": 2.23
+  },
+  {
+   "date": "2026-10-06",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 17.95,
+   "conversions": 25.9,
+   "clicks": 53,
+   "impressions": 598,
+   "conversionValue": 1424.7
+  },
+  {
+   "date": "2026-10-06",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 35.99,
+   "conversions": 41.6,
+   "clicks": 121,
+   "impressions": 1894,
+   "conversionValue": 1871.68
+  },
+  {
+   "date": "2026-10-06",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 20.36,
+   "conversions": 32,
+   "clicks": 74,
+   "impressions": 925,
+   "conversionValue": 1917.91
+  },
+  {
+   "date": "2026-10-06",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 63.39,
+   "conversions": 4,
+   "clicks": 45,
+   "impressions": 2594,
+   "conversionValue": 61.77
+  },
+  {
+   "date": "2026-10-06",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 34.54,
+   "conversions": 0.3,
+   "clicks": 9,
+   "impressions": 1234,
+   "conversionValue": 0.32
+  },
+  {
+   "date": "2026-10-06",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 62.67,
+   "conversions": 3.1,
+   "clicks": 41,
+   "impressions": 2419,
+   "conversionValue": 35.03
+  },
+  {
+   "date": "2026-10-07",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 91.53,
+   "conversions": 9.4,
+   "clicks": 122,
+   "impressions": 4615,
+   "conversionValue": 58.51
+  },
+  {
+   "date": "2026-10-07",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 27.19,
+   "conversions": 2.4,
+   "clicks": 38,
+   "impressions": 1133,
+   "conversionValue": 9.71
+  },
+  {
+   "date": "2026-10-07",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 52.26,
+   "conversions": 0.9,
+   "clicks": 25,
+   "impressions": 1936,
+   "conversionValue": 1.78
+  },
+  {
+   "date": "2026-10-07",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 22.06,
+   "conversions": 17.6,
+   "clicks": 55,
+   "impressions": 735,
+   "conversionValue": 968
+  },
+  {
+   "date": "2026-10-07",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 29,
+   "conversions": 17.6,
+   "clicks": 81,
+   "impressions": 1526,
+   "conversionValue": 790.36
+  },
+  {
+   "date": "2026-10-07",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 18.57,
+   "conversions": 39.6,
+   "clicks": 81,
+   "impressions": 844,
+   "conversionValue": 2373.26
+  },
+  {
+   "date": "2026-10-07",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 64.23,
+   "conversions": 3.9,
+   "clicks": 52,
+   "impressions": 2635,
+   "conversionValue": 62.37
+  },
+  {
+   "date": "2026-10-07",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 34.1,
+   "conversions": 0.3,
+   "clicks": 10,
+   "impressions": 1218,
+   "conversionValue": 0.26
+  },
+  {
+   "date": "2026-10-07",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 57.65,
+   "conversions": 3.2,
+   "clicks": 40,
+   "impressions": 2285,
+   "conversionValue": 35.48
+  },
+  {
+   "date": "2026-10-08",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 97.36,
+   "conversions": 16,
+   "clicks": 163,
+   "impressions": 4956,
+   "conversionValue": 105.78
+  },
+  {
+   "date": "2026-10-08",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 33.48,
+   "conversions": 3.3,
+   "clicks": 39,
+   "impressions": 1395,
+   "conversionValue": 13.34
+  },
+  {
+   "date": "2026-10-08",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 45.26,
+   "conversions": 0.9,
+   "clicks": 22,
+   "impressions": 1676,
+   "conversionValue": 1.8
+  },
+  {
+   "date": "2026-10-08",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 26.49,
+   "conversions": 26.8,
+   "clicks": 78,
+   "impressions": 883,
+   "conversionValue": 1475.54
+  },
+  {
+   "date": "2026-10-08",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 25.6,
+   "conversions": 34,
+   "clicks": 91,
+   "impressions": 1347,
+   "conversionValue": 1528.01
+  },
+  {
+   "date": "2026-10-08",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 19.03,
+   "conversions": 30.6,
+   "clicks": 67,
+   "impressions": 865,
+   "conversionValue": 1833.79
+  },
+  {
+   "date": "2026-10-08",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 68.69,
+   "conversions": 3.8,
+   "clicks": 54,
+   "impressions": 2819,
+   "conversionValue": 55.79
+  },
+  {
+   "date": "2026-10-08",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 44.45,
+   "conversions": 0.5,
+   "clicks": 12,
+   "impressions": 1587,
+   "conversionValue": 0.48
+  },
+  {
+   "date": "2026-10-08",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 52.4,
+   "conversions": 1.7,
+   "clicks": 32,
+   "impressions": 2052,
+   "conversionValue": 18.98
+  },
+  {
+   "date": "2026-10-09",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 93.28,
+   "conversions": 15,
+   "clicks": 145,
+   "impressions": 4701,
+   "conversionValue": 94.26
+  },
+  {
+   "date": "2026-10-09",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 32.89,
+   "conversions": 2.7,
+   "clicks": 38,
+   "impressions": 1370,
+   "conversionValue": 10.69
+  },
+  {
+   "date": "2026-10-09",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 47.73,
+   "conversions": 0.9,
+   "clicks": 20,
+   "impressions": 1768,
+   "conversionValue": 1.85
+  },
+  {
+   "date": "2026-10-09",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 22.43,
+   "conversions": 23.1,
+   "clicks": 64,
+   "impressions": 748,
+   "conversionValue": 1270.08
+  },
+  {
+   "date": "2026-10-09",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 32.78,
+   "conversions": 38.3,
+   "clicks": 103,
+   "impressions": 1725,
+   "conversionValue": 1721.52
+  },
+  {
+   "date": "2026-10-09",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 16.22,
+   "conversions": 34.5,
+   "clicks": 69,
+   "impressions": 737,
+   "conversionValue": 2068.11
+  },
+  {
+   "date": "2026-10-09",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 67.33,
+   "conversions": 2.9,
+   "clicks": 44,
+   "impressions": 2759,
+   "conversionValue": 43.09
+  },
+  {
+   "date": "2026-10-09",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 47.01,
+   "conversions": 0.4,
+   "clicks": 12,
+   "impressions": 1679,
+   "conversionValue": 0.41
+  },
+  {
+   "date": "2026-10-09",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 51.94,
+   "conversions": 2.1,
+   "clicks": 30,
+   "impressions": 2074,
+   "conversionValue": 22.81
+  },
+  {
+   "date": "2026-10-10",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 105.12,
+   "conversions": 15,
+   "clicks": 159,
+   "impressions": 5296,
+   "conversionValue": 95.87
+  },
+  {
+   "date": "2026-10-10",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 32.98,
+   "conversions": 3,
+   "clicks": 37,
+   "impressions": 1374,
+   "conversionValue": 11.89
+  },
+  {
+   "date": "2026-10-10",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 36.41,
+   "conversions": 0.8,
+   "clicks": 18,
+   "impressions": 1349,
+   "conversionValue": 1.62
+  },
+  {
+   "date": "2026-10-10",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 22.53,
+   "conversions": 24.7,
+   "clicks": 61,
+   "impressions": 751,
+   "conversionValue": 1357.46
+  },
+  {
+   "date": "2026-10-10",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 30.84,
+   "conversions": 21.8,
+   "clicks": 95,
+   "impressions": 1623,
+   "conversionValue": 981.81
+  },
+  {
+   "date": "2026-10-10",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 17.04,
+   "conversions": 25.5,
+   "clicks": 75,
+   "impressions": 775,
+   "conversionValue": 1529.61
+  },
+  {
+   "date": "2026-10-10",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 67.35,
+   "conversions": 3.2,
+   "clicks": 43,
+   "impressions": 2751,
+   "conversionValue": 49.61
+  },
+  {
+   "date": "2026-10-10",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 36.14,
+   "conversions": 0.4,
+   "clicks": 10,
+   "impressions": 1291,
+   "conversionValue": 0.37
+  },
+  {
+   "date": "2026-10-10",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 54.33,
+   "conversions": 1.8,
+   "clicks": 31,
+   "impressions": 2209,
+   "conversionValue": 19.15
+  },
+  {
+   "date": "2026-10-11",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 96.42,
+   "conversions": 13.3,
+   "clicks": 142,
+   "impressions": 4846,
+   "conversionValue": 84.19
+  },
+  {
+   "date": "2026-10-11",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 22.77,
+   "conversions": 2.1,
+   "clicks": 29,
+   "impressions": 949,
+   "conversionValue": 8.38
+  },
+  {
+   "date": "2026-10-11",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 33.67,
+   "conversions": 0.7,
+   "clicks": 15,
+   "impressions": 1247,
+   "conversionValue": 1.38
+  },
+  {
+   "date": "2026-10-11",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 27.31,
+   "conversions": 22.4,
+   "clicks": 67,
+   "impressions": 910,
+   "conversionValue": 1231.65
+  },
+  {
+   "date": "2026-10-11",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 28.94,
+   "conversions": 28.9,
+   "clicks": 81,
+   "impressions": 1523,
+   "conversionValue": 1299.19
+  },
+  {
+   "date": "2026-10-11",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 14.13,
+   "conversions": 37.1,
+   "clicks": 64,
+   "impressions": 642,
+   "conversionValue": 2228.57
+  },
+  {
+   "date": "2026-10-11",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 88.33,
+   "conversions": 4,
+   "clicks": 68,
+   "impressions": 3614,
+   "conversionValue": 61.22
+  },
+  {
+   "date": "2026-10-11",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 41.87,
+   "conversions": 0.5,
+   "clicks": 12,
+   "impressions": 1495,
+   "conversionValue": 0.52
+  },
+  {
+   "date": "2026-10-11",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 67.32,
+   "conversions": 2.7,
+   "clicks": 45,
+   "impressions": 2675,
+   "conversionValue": 29.25
+  },
+  {
+   "date": "2026-10-12",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 102.41,
+   "conversions": 14.6,
+   "clicks": 138,
+   "impressions": 5129,
+   "conversionValue": 90.84
+  },
+  {
+   "date": "2026-10-12",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 30.04,
+   "conversions": 3.7,
+   "clicks": 42,
+   "impressions": 1251,
+   "conversionValue": 14.66
+  },
+  {
+   "date": "2026-10-12",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 41.06,
+   "conversions": 0.9,
+   "clicks": 20,
+   "impressions": 1521,
+   "conversionValue": 1.78
+  },
+  {
+   "date": "2026-10-12",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 24.7,
+   "conversions": 24.1,
+   "clicks": 74,
+   "impressions": 823,
+   "conversionValue": 1327.13
+  },
+  {
+   "date": "2026-10-12",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 33.45,
+   "conversions": 45.5,
+   "clicks": 120,
+   "impressions": 1761,
+   "conversionValue": 2048.56
+  },
+  {
+   "date": "2026-10-12",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 14.83,
+   "conversions": 23.4,
+   "clicks": 62,
+   "impressions": 674,
+   "conversionValue": 1402.2
+  },
+  {
+   "date": "2026-10-12",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 73.67,
+   "conversions": 3.9,
+   "clicks": 51,
+   "impressions": 3025,
+   "conversionValue": 65.47
+  },
+  {
+   "date": "2026-10-12",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 37,
+   "conversions": 0.3,
+   "clicks": 10,
+   "impressions": 1321,
+   "conversionValue": 0.31
+  },
+  {
+   "date": "2026-10-12",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 57.48,
+   "conversions": 2.4,
+   "clicks": 35,
+   "impressions": 2311,
+   "conversionValue": 26.2
+  },
+  {
+   "date": "2026-10-13",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 87.6,
+   "conversions": 11.2,
+   "clicks": 139,
+   "impressions": 4456,
+   "conversionValue": 71.18
+  },
+  {
+   "date": "2026-10-13",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 23.06,
+   "conversions": 2.8,
+   "clicks": 32,
+   "impressions": 961,
+   "conversionValue": 11.21
+  },
+  {
+   "date": "2026-10-13",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 44.01,
+   "conversions": 0.9,
+   "clicks": 17,
+   "impressions": 1630,
+   "conversionValue": 1.77
+  },
+  {
+   "date": "2026-10-13",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 24.62,
+   "conversions": 20.1,
+   "clicks": 65,
+   "impressions": 821,
+   "conversionValue": 1105.56
+  },
+  {
+   "date": "2026-10-13",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 35.48,
+   "conversions": 31.9,
+   "clicks": 113,
+   "impressions": 1867,
+   "conversionValue": 1435.05
+  },
+  {
+   "date": "2026-10-13",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 16.52,
+   "conversions": 32.5,
+   "clicks": 58,
+   "impressions": 751,
+   "conversionValue": 1952.8
+  },
+  {
+   "date": "2026-10-13",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 73.74,
+   "conversions": 4.5,
+   "clicks": 57,
+   "impressions": 3025,
+   "conversionValue": 68.51
+  },
+  {
+   "date": "2026-10-13",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 43.15,
+   "conversions": 0.4,
+   "clicks": 12,
+   "impressions": 1541,
+   "conversionValue": 0.39
+  },
+  {
+   "date": "2026-10-13",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 53.82,
+   "conversions": 2,
+   "clicks": 30,
+   "impressions": 2117,
+   "conversionValue": 21.24
+  },
+  {
+   "date": "2026-10-14",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 113,
+   "conversions": 13.5,
+   "clicks": 164,
+   "impressions": 5676,
+   "conversionValue": 85.03
+  },
+  {
+   "date": "2026-10-14",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 22.59,
+   "conversions": 2.9,
+   "clicks": 28,
+   "impressions": 941,
+   "conversionValue": 11.71
+  },
+  {
+   "date": "2026-10-14",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 39.75,
+   "conversions": 0.7,
+   "clicks": 18,
+   "impressions": 1472,
+   "conversionValue": 1.48
+  },
+  {
+   "date": "2026-10-14",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 22.99,
+   "conversions": 24.4,
+   "clicks": 67,
+   "impressions": 766,
+   "conversionValue": 1344.54
+  },
+  {
+   "date": "2026-10-14",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 30.04,
+   "conversions": 23.3,
+   "clicks": 102,
+   "impressions": 1581,
+   "conversionValue": 1048.89
+  },
+  {
+   "date": "2026-10-14",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 16.88,
+   "conversions": 24.6,
+   "clicks": 70,
+   "impressions": 767,
+   "conversionValue": 1477.53
+  },
+  {
+   "date": "2026-10-14",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 86.16,
+   "conversions": 3.8,
+   "clicks": 56,
+   "impressions": 3516,
+   "conversionValue": 58.39
+  },
+  {
+   "date": "2026-10-14",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 41.31,
+   "conversions": 0.6,
+   "clicks": 13,
+   "impressions": 1475,
+   "conversionValue": 0.58
+  },
+  {
+   "date": "2026-10-14",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 58.01,
+   "conversions": 2.2,
+   "clicks": 37,
+   "impressions": 2399,
+   "conversionValue": 23.49
+  },
+  {
+   "date": "2026-10-15",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 88.31,
+   "conversions": 10.7,
+   "clicks": 128,
+   "impressions": 4446,
+   "conversionValue": 64.87
+  },
+  {
+   "date": "2026-10-15",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 25.64,
+   "conversions": 2.9,
+   "clicks": 31,
+   "impressions": 1068,
+   "conversionValue": 11.64
+  },
+  {
+   "date": "2026-10-15",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 35.4,
+   "conversions": 1,
+   "clicks": 15,
+   "impressions": 1311,
+   "conversionValue": 1.92
+  },
+  {
+   "date": "2026-10-15",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 20.52,
+   "conversions": 21.5,
+   "clicks": 47,
+   "impressions": 684,
+   "conversionValue": 1180.48
+  },
+  {
+   "date": "2026-10-15",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 31.14,
+   "conversions": 34.1,
+   "clicks": 93,
+   "impressions": 1639,
+   "conversionValue": 1533.62
+  },
+  {
+   "date": "2026-10-15",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 18.32,
+   "conversions": 25.7,
+   "clicks": 74,
+   "impressions": 833,
+   "conversionValue": 1543.33
+  },
+  {
+   "date": "2026-10-15",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 83.57,
+   "conversions": 3.3,
+   "clicks": 57,
+   "impressions": 3421,
+   "conversionValue": 51.66
+  },
+  {
+   "date": "2026-10-15",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 37.44,
+   "conversions": 0.4,
+   "clicks": 10,
+   "impressions": 1337,
+   "conversionValue": 0.42
+  },
+  {
+   "date": "2026-10-15",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 65.53,
+   "conversions": 3.2,
+   "clicks": 37,
+   "impressions": 2585,
+   "conversionValue": 34.22
+  },
+  {
+   "date": "2026-10-16",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 108.22,
+   "conversions": 11.3,
+   "clicks": 169,
+   "impressions": 5406,
+   "conversionValue": 70.55
+  },
+  {
+   "date": "2026-10-16",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 32.05,
+   "conversions": 4.4,
+   "clicks": 46,
+   "impressions": 1335,
+   "conversionValue": 17.69
+  },
+  {
+   "date": "2026-10-16",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 44.8,
+   "conversions": 0.9,
+   "clicks": 19,
+   "impressions": 1659,
+   "conversionValue": 1.79
+  },
+  {
+   "date": "2026-10-16",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 24.05,
+   "conversions": 24.5,
+   "clicks": 57,
+   "impressions": 802,
+   "conversionValue": 1346.6
+  },
+  {
+   "date": "2026-10-16",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 26.17,
+   "conversions": 31.5,
+   "clicks": 88,
+   "impressions": 1377,
+   "conversionValue": 1416.04
+  },
+  {
+   "date": "2026-10-16",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 14.78,
+   "conversions": 27.8,
+   "clicks": 52,
+   "impressions": 672,
+   "conversionValue": 1665.87
+  },
+  {
+   "date": "2026-10-16",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 66.13,
+   "conversions": 3.3,
+   "clicks": 42,
+   "impressions": 2701,
+   "conversionValue": 51.53
+  },
+  {
+   "date": "2026-10-16",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 38.05,
+   "conversions": 0.3,
+   "clicks": 11,
+   "impressions": 1359,
+   "conversionValue": 0.35
+  },
+  {
+   "date": "2026-10-16",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 51.14,
+   "conversions": 2.2,
+   "clicks": 28,
+   "impressions": 2053,
+   "conversionValue": 23.1
+  },
+  {
+   "date": "2026-10-17",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 105.42,
+   "conversions": 14.2,
+   "clicks": 153,
+   "impressions": 5268,
+   "conversionValue": 87.63
+  },
+  {
+   "date": "2026-10-17",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 23.61,
+   "conversions": 1.9,
+   "clicks": 25,
+   "impressions": 984,
+   "conversionValue": 7.42
+  },
+  {
+   "date": "2026-10-17",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 33.62,
+   "conversions": 0.8,
+   "clicks": 14,
+   "impressions": 1245,
+   "conversionValue": 1.53
+  },
+  {
+   "date": "2026-10-17",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 27.62,
+   "conversions": 32.3,
+   "clicks": 67,
+   "impressions": 921,
+   "conversionValue": 1773.99
+  },
+  {
+   "date": "2026-10-17",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 27.79,
+   "conversions": 25.1,
+   "clicks": 76,
+   "impressions": 1462,
+   "conversionValue": 1129.83
+  },
+  {
+   "date": "2026-10-17",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 13.49,
+   "conversions": 21.5,
+   "clicks": 61,
+   "impressions": 613,
+   "conversionValue": 1289.95
+  },
+  {
+   "date": "2026-10-17",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 71.91,
+   "conversions": 2.7,
+   "clicks": 50,
+   "impressions": 2933,
+   "conversionValue": 39.7
+  },
+  {
+   "date": "2026-10-17",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 37.55,
+   "conversions": 0.2,
+   "clicks": 9,
+   "impressions": 1341,
+   "conversionValue": 0.24
+  },
+  {
+   "date": "2026-10-17",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 57.32,
+   "conversions": 2.1,
+   "clicks": 36,
+   "impressions": 2368,
+   "conversionValue": 21.48
+  },
+  {
+   "date": "2026-10-18",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 88.59,
+   "conversions": 12.4,
+   "clicks": 135,
+   "impressions": 4461,
+   "conversionValue": 76.15
+  },
+  {
+   "date": "2026-10-18",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 32.93,
+   "conversions": 4.5,
+   "clicks": 42,
+   "impressions": 1372,
+   "conversionValue": 18.01
+  },
+  {
+   "date": "2026-10-18",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 43.31,
+   "conversions": 1.2,
+   "clicks": 21,
+   "impressions": 1604,
+   "conversionValue": 2.47
+  },
+  {
+   "date": "2026-10-18",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 22.74,
+   "conversions": 21.3,
+   "clicks": 56,
+   "impressions": 758,
+   "conversionValue": 1168.77
+  },
+  {
+   "date": "2026-10-18",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 35.95,
+   "conversions": 40,
+   "clicks": 121,
+   "impressions": 1892,
+   "conversionValue": 1799.47
+  },
+  {
+   "date": "2026-10-18",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 16,
+   "conversions": 34.9,
+   "clicks": 75,
+   "impressions": 727,
+   "conversionValue": 2093.7
+  },
+  {
+   "date": "2026-10-18",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 89.16,
+   "conversions": 4.9,
+   "clicks": 69,
+   "impressions": 3633,
+   "conversionValue": 68.02
+  },
+  {
+   "date": "2026-10-18",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 39.21,
+   "conversions": 0.4,
+   "clicks": 11,
+   "impressions": 1400,
+   "conversionValue": 0.43
+  },
+  {
+   "date": "2026-10-18",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 68.16,
+   "conversions": 2.8,
+   "clicks": 39,
+   "impressions": 2733,
+   "conversionValue": 31.06
+  },
+  {
+   "date": "2026-10-19",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 98.15,
+   "conversions": 11.9,
+   "clicks": 145,
+   "impressions": 4906,
+   "conversionValue": 74.67
+  },
+  {
+   "date": "2026-10-19",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 30.15,
+   "conversions": 2.9,
+   "clicks": 40,
+   "impressions": 1256,
+   "conversionValue": 11.55
+  },
+  {
+   "date": "2026-10-19",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 44.42,
+   "conversions": 1,
+   "clicks": 18,
+   "impressions": 1645,
+   "conversionValue": 1.96
+  },
+  {
+   "date": "2026-10-19",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 24.55,
+   "conversions": 28.7,
+   "clicks": 66,
+   "impressions": 818,
+   "conversionValue": 1580.92
+  },
+  {
+   "date": "2026-10-19",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 28.84,
+   "conversions": 28.1,
+   "clicks": 88,
+   "impressions": 1518,
+   "conversionValue": 1265.31
+  },
+  {
+   "date": "2026-10-19",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 17.54,
+   "conversions": 35.4,
+   "clicks": 81,
+   "impressions": 797,
+   "conversionValue": 2126.09
+  },
+  {
+   "date": "2026-10-19",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 81.4,
+   "conversions": 3.2,
+   "clicks": 57,
+   "impressions": 3327,
+   "conversionValue": 47.92
+  },
+  {
+   "date": "2026-10-19",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 35.69,
+   "conversions": 0.3,
+   "clicks": 11,
+   "impressions": 1275,
+   "conversionValue": 0.33
+  },
+  {
+   "date": "2026-10-19",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 52.53,
+   "conversions": 2,
+   "clicks": 34,
+   "impressions": 2092,
+   "conversionValue": 21.37
+  },
+  {
+   "date": "2026-10-20",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 81.96,
+   "conversions": 10.5,
+   "clicks": 116,
+   "impressions": 4100,
+   "conversionValue": 68.59
+  },
+  {
+   "date": "2026-10-20",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 29.76,
+   "conversions": 2.3,
+   "clicks": 34,
+   "impressions": 1240,
+   "conversionValue": 9
+  },
+  {
+   "date": "2026-10-20",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 40.07,
+   "conversions": 0.7,
+   "clicks": 17,
+   "impressions": 1484,
+   "conversionValue": 1.4
+  },
+  {
+   "date": "2026-10-20",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 20.36,
+   "conversions": 18.3,
+   "clicks": 49,
+   "impressions": 679,
+   "conversionValue": 1006.66
+  },
+  {
+   "date": "2026-10-20",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 25.73,
+   "conversions": 21.1,
+   "clicks": 80,
+   "impressions": 1354,
+   "conversionValue": 948.23
+  },
+  {
+   "date": "2026-10-20",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 14.54,
+   "conversions": 30.6,
+   "clicks": 66,
+   "impressions": 661,
+   "conversionValue": 1835.93
+  },
+  {
+   "date": "2026-10-20",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 84.1,
+   "conversions": 4.4,
+   "clicks": 56,
+   "impressions": 3436,
+   "conversionValue": 64.15
+  },
+  {
+   "date": "2026-10-20",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 45.13,
+   "conversions": 0.4,
+   "clicks": 13,
+   "impressions": 1612,
+   "conversionValue": 0.37
+  },
+  {
+   "date": "2026-10-20",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 65.68,
+   "conversions": 3,
+   "clicks": 42,
+   "impressions": 2679,
+   "conversionValue": 31.85
+  },
+  {
+   "date": "2026-10-21",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 83.07,
+   "conversions": 11.5,
+   "clicks": 135,
+   "impressions": 4169,
+   "conversionValue": 74.18
+  },
+  {
+   "date": "2026-10-21",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 32.56,
+   "conversions": 3.4,
+   "clicks": 41,
+   "impressions": 1357,
+   "conversionValue": 13.71
+  },
+  {
+   "date": "2026-10-21",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 39.71,
+   "conversions": 0.8,
+   "clicks": 20,
+   "impressions": 1471,
+   "conversionValue": 1.61
+  },
+  {
+   "date": "2026-10-21",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 26.13,
+   "conversions": 32,
+   "clicks": 63,
+   "impressions": 871,
+   "conversionValue": 1757.28
+  },
+  {
+   "date": "2026-10-21",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 25.58,
+   "conversions": 19.3,
+   "clicks": 74,
+   "impressions": 1346,
+   "conversionValue": 870.7
+  },
+  {
+   "date": "2026-10-21",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 13.87,
+   "conversions": 17.6,
+   "clicks": 52,
+   "impressions": 631,
+   "conversionValue": 1058.14
+  },
+  {
+   "date": "2026-10-21",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 96.1,
+   "conversions": 4.7,
+   "clicks": 67,
+   "impressions": 3927,
+   "conversionValue": 69.86
+  },
+  {
+   "date": "2026-10-21",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 39.88,
+   "conversions": 0.3,
+   "clicks": 13,
+   "impressions": 1424,
+   "conversionValue": 0.32
+  },
+  {
+   "date": "2026-10-21",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 59.08,
+   "conversions": 2.9,
+   "clicks": 39,
+   "impressions": 2360,
+   "conversionValue": 30.45
+  },
+  {
+   "date": "2026-10-22",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 86.86,
+   "conversions": 13.1,
+   "clicks": 116,
+   "impressions": 4329,
+   "conversionValue": 81.15
+  },
+  {
+   "date": "2026-10-22",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 32.12,
+   "conversions": 4.1,
+   "clicks": 44,
+   "impressions": 1339,
+   "conversionValue": 16.5
+  },
+  {
+   "date": "2026-10-22",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 35.62,
+   "conversions": 0.7,
+   "clicks": 15,
+   "impressions": 1319,
+   "conversionValue": 1.38
+  },
+  {
+   "date": "2026-10-22",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 23.71,
+   "conversions": 22.4,
+   "clicks": 56,
+   "impressions": 790,
+   "conversionValue": 1232.31
+  },
+  {
+   "date": "2026-10-22",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 26.76,
+   "conversions": 22.7,
+   "clicks": 90,
+   "impressions": 1408,
+   "conversionValue": 1022.25
+  },
+  {
+   "date": "2026-10-22",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 12.39,
+   "conversions": 29,
+   "clicks": 53,
+   "impressions": 563,
+   "conversionValue": 1739.33
+  },
+  {
+   "date": "2026-10-22",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 76.27,
+   "conversions": 4,
+   "clicks": 57,
+   "impressions": 3123,
+   "conversionValue": 58.33
+  },
+  {
+   "date": "2026-10-22",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 44.2,
+   "conversions": 0.6,
+   "clicks": 13,
+   "impressions": 1579,
+   "conversionValue": 0.58
+  },
+  {
+   "date": "2026-10-22",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 53.3,
+   "conversions": 2.3,
+   "clicks": 32,
+   "impressions": 2143,
+   "conversionValue": 25
+  },
+  {
+   "date": "2026-10-23",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 86.62,
+   "conversions": 10.2,
+   "clicks": 127,
+   "impressions": 4350,
+   "conversionValue": 63.71
+  },
+  {
+   "date": "2026-10-23",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 22.45,
+   "conversions": 2.9,
+   "clicks": 27,
+   "impressions": 935,
+   "conversionValue": 11.78
+  },
+  {
+   "date": "2026-10-23",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 28.86,
+   "conversions": 0.5,
+   "clicks": 12,
+   "impressions": 1069,
+   "conversionValue": 1.04
+  },
+  {
+   "date": "2026-10-23",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 23.64,
+   "conversions": 22.8,
+   "clicks": 67,
+   "impressions": 788,
+   "conversionValue": 1252.66
+  },
+  {
+   "date": "2026-10-23",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 28.78,
+   "conversions": 20.3,
+   "clicks": 95,
+   "impressions": 1515,
+   "conversionValue": 912.37
+  },
+  {
+   "date": "2026-10-23",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 13.27,
+   "conversions": 19.7,
+   "clicks": 47,
+   "impressions": 603,
+   "conversionValue": 1181.95
+  },
+  {
+   "date": "2026-10-23",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 71.9,
+   "conversions": 4.2,
+   "clicks": 53,
+   "impressions": 2953,
+   "conversionValue": 60.87
+  },
+  {
+   "date": "2026-10-23",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 40.65,
+   "conversions": 0.4,
+   "clicks": 13,
+   "impressions": 1452,
+   "conversionValue": 0.4
+  },
+  {
+   "date": "2026-10-23",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 56.32,
+   "conversions": 2.5,
+   "clicks": 35,
+   "impressions": 2284,
+   "conversionValue": 25.88
+  },
+  {
+   "date": "2026-10-24",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 90.69,
+   "conversions": 7.8,
+   "clicks": 121,
+   "impressions": 4527,
+   "conversionValue": 48.04
+  },
+  {
+   "date": "2026-10-24",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 32.61,
+   "conversions": 3.5,
+   "clicks": 44,
+   "impressions": 1359,
+   "conversionValue": 13.89
+  },
+  {
+   "date": "2026-10-24",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 41.15,
+   "conversions": 0.7,
+   "clicks": 16,
+   "impressions": 1524,
+   "conversionValue": 1.37
+  },
+  {
+   "date": "2026-10-24",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 24.34,
+   "conversions": 22.2,
+   "clicks": 62,
+   "impressions": 811,
+   "conversionValue": 1220.68
+  },
+  {
+   "date": "2026-10-24",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 30.34,
+   "conversions": 31.2,
+   "clicks": 84,
+   "impressions": 1597,
+   "conversionValue": 1402.89
+  },
+  {
+   "date": "2026-10-24",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 11.74,
+   "conversions": 15.3,
+   "clicks": 45,
+   "impressions": 534,
+   "conversionValue": 919.81
+  },
+  {
+   "date": "2026-10-24",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 73.03,
+   "conversions": 4.6,
+   "clicks": 52,
+   "impressions": 3003,
+   "conversionValue": 70.58
+  },
+  {
+   "date": "2026-10-24",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 39.31,
+   "conversions": 0.5,
+   "clicks": 12,
+   "impressions": 1404,
+   "conversionValue": 0.52
+  },
+  {
+   "date": "2026-10-24",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 51.14,
+   "conversions": 2.1,
+   "clicks": 27,
+   "impressions": 2070,
+   "conversionValue": 22.96
+  },
+  {
+   "date": "2026-10-25",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 100.6,
+   "conversions": 10.9,
+   "clicks": 140,
+   "impressions": 5018,
+   "conversionValue": 68.07
+  },
+  {
+   "date": "2026-10-25",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 33.32,
+   "conversions": 4.1,
+   "clicks": 35,
+   "impressions": 1388,
+   "conversionValue": 16.41
+  },
+  {
+   "date": "2026-10-25",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 37.96,
+   "conversions": 0.8,
+   "clicks": 17,
+   "impressions": 1406,
+   "conversionValue": 1.56
+  },
+  {
+   "date": "2026-10-25",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 26.38,
+   "conversions": 22.7,
+   "clicks": 74,
+   "impressions": 879,
+   "conversionValue": 1248.73
+  },
+  {
+   "date": "2026-10-25",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 33.36,
+   "conversions": 27.5,
+   "clicks": 103,
+   "impressions": 1756,
+   "conversionValue": 1236.33
+  },
+  {
+   "date": "2026-10-25",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 12.55,
+   "conversions": 20.8,
+   "clicks": 57,
+   "impressions": 570,
+   "conversionValue": 1250.31
+  },
+  {
+   "date": "2026-10-25",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 79.36,
+   "conversions": 3.9,
+   "clicks": 54,
+   "impressions": 3232,
+   "conversionValue": 52.53
+  },
+  {
+   "date": "2026-10-25",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 32.11,
+   "conversions": 0.3,
+   "clicks": 8,
+   "impressions": 1147,
+   "conversionValue": 0.31
+  },
+  {
+   "date": "2026-10-25",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 62.67,
+   "conversions": 2.8,
+   "clicks": 37,
+   "impressions": 2584,
+   "conversionValue": 29.3
+  },
+  {
+   "date": "2026-10-26",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 85.54,
+   "conversions": 14.5,
+   "clicks": 132,
+   "impressions": 4285,
+   "conversionValue": 91.85
+  },
+  {
+   "date": "2026-10-26",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 25.03,
+   "conversions": 3.5,
+   "clicks": 32,
+   "impressions": 1043,
+   "conversionValue": 13.9
+  },
+  {
+   "date": "2026-10-26",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 34.98,
+   "conversions": 0.7,
+   "clicks": 17,
+   "impressions": 1296,
+   "conversionValue": 1.37
+  },
+  {
+   "date": "2026-10-26",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 27.78,
+   "conversions": 20.5,
+   "clicks": 65,
+   "impressions": 926,
+   "conversionValue": 1128.9
+  },
+  {
+   "date": "2026-10-26",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 30.55,
+   "conversions": 40.9,
+   "clicks": 106,
+   "impressions": 1608,
+   "conversionValue": 1839.37
+  },
+  {
+   "date": "2026-10-26",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 14.17,
+   "conversions": 29.5,
+   "clicks": 66,
+   "impressions": 644,
+   "conversionValue": 1767.51
+  },
+  {
+   "date": "2026-10-26",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 69.23,
+   "conversions": 4.4,
+   "clicks": 52,
+   "impressions": 2829,
+   "conversionValue": 63.9
+  },
+  {
+   "date": "2026-10-26",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 44.94,
+   "conversions": 0.5,
+   "clicks": 14,
+   "impressions": 1605,
+   "conversionValue": 0.54
+  },
+  {
+   "date": "2026-10-26",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 57.03,
+   "conversions": 1.8,
+   "clicks": 33,
+   "impressions": 2333,
+   "conversionValue": 18.57
+  },
+  {
+   "date": "2026-10-27",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 90.49,
+   "conversions": 11.9,
+   "clicks": 115,
+   "impressions": 4503,
+   "conversionValue": 73.82
+  },
+  {
+   "date": "2026-10-27",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 27.04,
+   "conversions": 3.6,
+   "clicks": 35,
+   "impressions": 1127,
+   "conversionValue": 14.42
+  },
+  {
+   "date": "2026-10-27",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 34.8,
+   "conversions": 0.8,
+   "clicks": 17,
+   "impressions": 1289,
+   "conversionValue": 1.67
+  },
+  {
+   "date": "2026-10-27",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 24.21,
+   "conversions": 16.4,
+   "clicks": 56,
+   "impressions": 807,
+   "conversionValue": 903.26
+  },
+  {
+   "date": "2026-10-27",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 28.44,
+   "conversions": 22.3,
+   "clicks": 98,
+   "impressions": 1497,
+   "conversionValue": 1002.87
+  },
+  {
+   "date": "2026-10-27",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 12.61,
+   "conversions": 18.7,
+   "clicks": 59,
+   "impressions": 573,
+   "conversionValue": 1121.25
+  },
+  {
+   "date": "2026-10-27",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 90.03,
+   "conversions": 3.5,
+   "clicks": 63,
+   "impressions": 3667,
+   "conversionValue": 49.11
+  },
+  {
+   "date": "2026-10-27",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 46.26,
+   "conversions": 0.6,
+   "clicks": 15,
+   "impressions": 1652,
+   "conversionValue": 0.64
+  },
+  {
+   "date": "2026-10-27",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 55.84,
+   "conversions": 2.5,
+   "clicks": 37,
+   "impressions": 2324,
+   "conversionValue": 25.65
+  },
+  {
+   "date": "2026-10-28",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 85.61,
+   "conversions": 10.9,
+   "clicks": 127,
+   "impressions": 4304,
+   "conversionValue": 70.06
+  },
+  {
+   "date": "2026-10-28",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 31.9,
+   "conversions": 3.1,
+   "clicks": 40,
+   "impressions": 1329,
+   "conversionValue": 12.24
+  },
+  {
+   "date": "2026-10-28",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 26.47,
+   "conversions": 0.7,
+   "clicks": 10,
+   "impressions": 981,
+   "conversionValue": 1.32
+  },
+  {
+   "date": "2026-10-28",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 21.26,
+   "conversions": 24.6,
+   "clicks": 50,
+   "impressions": 709,
+   "conversionValue": 1351.31
+  },
+  {
+   "date": "2026-10-28",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 33,
+   "conversions": 37.7,
+   "clicks": 110,
+   "impressions": 1737,
+   "conversionValue": 1697.54
+  },
+  {
+   "date": "2026-10-28",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 14.14,
+   "conversions": 24.8,
+   "clicks": 60,
+   "impressions": 643,
+   "conversionValue": 1490.9
+  },
+  {
+   "date": "2026-10-28",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 83.41,
+   "conversions": 4.1,
+   "clicks": 62,
+   "impressions": 3392,
+   "conversionValue": 59.19
+  },
+  {
+   "date": "2026-10-28",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 46.84,
+   "conversions": 0.4,
+   "clicks": 15,
+   "impressions": 1673,
+   "conversionValue": 0.42
+  },
+  {
+   "date": "2026-10-28",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 56.12,
+   "conversions": 2.1,
+   "clicks": 35,
+   "impressions": 2392,
+   "conversionValue": 21.33
+  },
+  {
+   "date": "2026-10-29",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 105.88,
+   "conversions": 13.2,
+   "clicks": 151,
+   "impressions": 5262,
+   "conversionValue": 81.52
+  },
+  {
+   "date": "2026-10-29",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 25.33,
+   "conversions": 2.6,
+   "clicks": 31,
+   "impressions": 1055,
+   "conversionValue": 10.27
+  },
+  {
+   "date": "2026-10-29",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 35,
+   "conversions": 0.7,
+   "clicks": 14,
+   "impressions": 1296,
+   "conversionValue": 1.31
+  },
+  {
+   "date": "2026-10-29",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 27.57,
+   "conversions": 28.6,
+   "clicks": 68,
+   "impressions": 919,
+   "conversionValue": 1575.16
+  },
+  {
+   "date": "2026-10-29",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 27.4,
+   "conversions": 27.4,
+   "clicks": 87,
+   "impressions": 1442,
+   "conversionValue": 1233.85
+  },
+  {
+   "date": "2026-10-29",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 13.57,
+   "conversions": 22.8,
+   "clicks": 53,
+   "impressions": 617,
+   "conversionValue": 1366.76
+  },
+  {
+   "date": "2026-10-29",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 80.6,
+   "conversions": 4,
+   "clicks": 61,
+   "impressions": 3296,
+   "conversionValue": 54.83
+  },
+  {
+   "date": "2026-10-29",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 44.24,
+   "conversions": 0.5,
+   "clicks": 12,
+   "impressions": 1580,
+   "conversionValue": 0.52
+  },
+  {
+   "date": "2026-10-29",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 55.37,
+   "conversions": 2.3,
+   "clicks": 36,
+   "impressions": 2318,
+   "conversionValue": 23.26
+  },
+  {
+   "date": "2026-10-30",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 96.23,
+   "conversions": 10,
+   "clicks": 125,
+   "impressions": 4807,
+   "conversionValue": 62.1
+  },
+  {
+   "date": "2026-10-30",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 30.41,
+   "conversions": 3.6,
+   "clicks": 42,
+   "impressions": 1267,
+   "conversionValue": 14.25
+  },
+  {
+   "date": "2026-10-30",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 28.68,
+   "conversions": 0.8,
+   "clicks": 14,
+   "impressions": 1062,
+   "conversionValue": 1.69
+  },
+  {
+   "date": "2026-10-30",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 29.71,
+   "conversions": 23.5,
+   "clicks": 72,
+   "impressions": 990,
+   "conversionValue": 1290.32
+  },
+  {
+   "date": "2026-10-30",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 24.85,
+   "conversions": 20.1,
+   "clicks": 88,
+   "impressions": 1308,
+   "conversionValue": 903.91
+  },
+  {
+   "date": "2026-10-30",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 10.95,
+   "conversions": 18.6,
+   "clicks": 48,
+   "impressions": 498,
+   "conversionValue": 1117.85
+  },
+  {
+   "date": "2026-10-30",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 72.87,
+   "conversions": 3.7,
+   "clicks": 52,
+   "impressions": 2978,
+   "conversionValue": 56.19
+  },
+  {
+   "date": "2026-10-30",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 46.2,
+   "conversions": 0.6,
+   "clicks": 14,
+   "impressions": 1650,
+   "conversionValue": 0.61
+  },
+  {
+   "date": "2026-10-30",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 52.61,
+   "conversions": 2.6,
+   "clicks": 31,
+   "impressions": 2122,
+   "conversionValue": 27.25
+  },
+  {
+   "date": "2026-10-31",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 102.82,
+   "conversions": 10.2,
+   "clicks": 142,
+   "impressions": 5122,
+   "conversionValue": 64.57
+  },
+  {
+   "date": "2026-10-31",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 23.75,
+   "conversions": 2.7,
+   "clicks": 32,
+   "impressions": 989,
+   "conversionValue": 10.83
+  },
+  {
+   "date": "2026-10-31",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 25,
+   "conversions": 0.4,
+   "clicks": 10,
+   "impressions": 926,
+   "conversionValue": 0.9
+  },
+  {
+   "date": "2026-10-31",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 26.8,
+   "conversions": 19.3,
+   "clicks": 63,
+   "impressions": 893,
+   "conversionValue": 1059.36
+  },
+  {
+   "date": "2026-10-31",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 31.29,
+   "conversions": 26.6,
+   "clicks": 92,
+   "impressions": 1647,
+   "conversionValue": 1196.33
+  },
+  {
+   "date": "2026-10-31",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 14.72,
+   "conversions": 21.8,
+   "clicks": 60,
+   "impressions": 669,
+   "conversionValue": 1307.97
+  },
+  {
+   "date": "2026-10-31",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 98.21,
+   "conversions": 4.5,
+   "clicks": 67,
+   "impressions": 4006,
+   "conversionValue": 65.86
+  },
+  {
+   "date": "2026-10-31",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 40.52,
+   "conversions": 0.4,
+   "clicks": 12,
+   "impressions": 1447,
+   "conversionValue": 0.38
+  },
+  {
+   "date": "2026-10-31",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 61.55,
+   "conversions": 2.5,
+   "clicks": 37,
+   "impressions": 2543,
+   "conversionValue": 26.65
+  },
+  {
+   "date": "2026-11-01",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 97.16,
+   "conversions": 11.6,
+   "clicks": 121,
+   "impressions": 4781,
+   "conversionValue": 69.92
+  },
+  {
+   "date": "2026-11-01",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 29.79,
+   "conversions": 2.9,
+   "clicks": 41,
+   "impressions": 1241,
+   "conversionValue": 11.78
+  },
+  {
+   "date": "2026-11-01",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 35.87,
+   "conversions": 0.7,
+   "clicks": 15,
+   "impressions": 1328,
+   "conversionValue": 1.31
+  },
+  {
+   "date": "2026-11-01",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 30.1,
+   "conversions": 23.7,
+   "clicks": 83,
+   "impressions": 1003,
+   "conversionValue": 1301.31
+  },
+  {
+   "date": "2026-11-01",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 34.21,
+   "conversions": 23,
+   "clicks": 109,
+   "impressions": 1801,
+   "conversionValue": 1033.75
+  },
+  {
+   "date": "2026-11-01",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 14.21,
+   "conversions": 21.8,
+   "clicks": 66,
+   "impressions": 646,
+   "conversionValue": 1309.81
+  },
+  {
+   "date": "2026-11-01",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 81.28,
+   "conversions": 4,
+   "clicks": 58,
+   "impressions": 3316,
+   "conversionValue": 57.82
+  },
+  {
+   "date": "2026-11-01",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 35.28,
+   "conversions": 0.5,
+   "clicks": 11,
+   "impressions": 1260,
+   "conversionValue": 0.48
+  },
+  {
+   "date": "2026-11-01",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 61.59,
+   "conversions": 1.9,
+   "clicks": 35,
+   "impressions": 2587,
+   "conversionValue": 20.25
+  },
+  {
+   "date": "2026-11-02",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 103.12,
+   "conversions": 11,
+   "clicks": 133,
+   "impressions": 5114,
+   "conversionValue": 68.11
+  },
+  {
+   "date": "2026-11-02",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 32.29,
+   "conversions": 3.8,
+   "clicks": 44,
+   "impressions": 1345,
+   "conversionValue": 15.34
+  },
+  {
+   "date": "2026-11-02",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 28.34,
+   "conversions": 0.6,
+   "clicks": 11,
+   "impressions": 1050,
+   "conversionValue": 1.16
+  },
+  {
+   "date": "2026-11-02",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 30.77,
+   "conversions": 38.6,
+   "clicks": 78,
+   "impressions": 1026,
+   "conversionValue": 2124.35
+  },
+  {
+   "date": "2026-11-02",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 26.56,
+   "conversions": 22.7,
+   "clicks": 73,
+   "impressions": 1398,
+   "conversionValue": 1022.13
+  },
+  {
+   "date": "2026-11-02",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 10.68,
+   "conversions": 16.4,
+   "clicks": 45,
+   "impressions": 485,
+   "conversionValue": 982.41
+  },
+  {
+   "date": "2026-11-02",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 84.5,
+   "conversions": 4.7,
+   "clicks": 63,
+   "impressions": 3454,
+   "conversionValue": 68.92
+  },
+  {
+   "date": "2026-11-02",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 44.86,
+   "conversions": 0.5,
+   "clicks": 14,
+   "impressions": 1602,
+   "conversionValue": 0.5
+  },
+  {
+   "date": "2026-11-02",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 48.24,
+   "conversions": 1.8,
+   "clicks": 27,
+   "impressions": 2028,
+   "conversionValue": 18.76
+  },
+  {
+   "date": "2026-11-03",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "spend": 87.28,
+   "conversions": 11.6,
+   "clicks": 129,
+   "impressions": 4356,
+   "conversionValue": 70.06
+  },
+  {
+   "date": "2026-11-03",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "spend": 27.08,
+   "conversions": 2.2,
+   "clicks": 32,
+   "impressions": 1128,
+   "conversionValue": 8.78
+  },
+  {
+   "date": "2026-11-03",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "spend": 30.95,
+   "conversions": 0.9,
+   "clicks": 14,
+   "impressions": 1146,
+   "conversionValue": 1.75
+  },
+  {
+   "date": "2026-11-03",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "spend": 29.08,
+   "conversions": 32.2,
+   "clicks": 73,
+   "impressions": 969,
+   "conversionValue": 1772.42
+  },
+  {
+   "date": "2026-11-03",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "spend": 35.63,
+   "conversions": 41.3,
+   "clicks": 127,
+   "impressions": 1875,
+   "conversionValue": 1856.48
+  },
+  {
+   "date": "2026-11-03",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "spend": 11.49,
+   "conversions": 18.1,
+   "clicks": 53,
+   "impressions": 522,
+   "conversionValue": 1085.47
+  },
+  {
+   "date": "2026-11-03",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "spend": 72.43,
+   "conversions": 3.8,
+   "clicks": 55,
+   "impressions": 2966,
+   "conversionValue": 56.17
+  },
+  {
+   "date": "2026-11-03",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "spend": 32.01,
+   "conversions": 0.3,
+   "clicks": 9,
+   "impressions": 1143,
+   "conversionValue": 0.31
+  },
+  {
+   "date": "2026-11-03",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "spend": 56.33,
+   "conversions": 2.3,
+   "clicks": 37,
+   "impressions": 2410,
+   "conversionValue": 24.09
+  }
+ ],
+ "byProduct": [
+  {
+   "product": "FaithSchool",
+   "windows": {
+    "yesterday": {
+     "spend": 171.2,
+     "impressions": 7844,
+     "clicks": 236,
+     "installs": 18,
+     "conversions": 33.5,
+     "conversionValue": 1211.71,
+     "ctr": 0.030126764353888193,
+     "cpc": 0.7244339881681098,
+     "cpm": 21.82485205148807,
+     "cpa": 5.116137729996222,
+     "roas": 7.077789870247316,
+     "cvr": 0.14159782758011183
+    },
+    "last7": {
+     "spend": 1341.15,
+     "impressions": 61234,
+     "clicks": 1730,
+     "installs": 144,
+     "conversions": 251.6,
+     "conversionValue": 9566.53,
+     "ctr": 0.028255856456270125,
+     "cpc": 0.7751394253471282,
+     "cpm": 21.902228336204164,
+     "cpa": 5.331271269334117,
+     "roas": 7.133060572795483,
+     "cvr": 0.1453948572840009
+    },
+    "prev7": {
+     "spend": 1270.4,
+     "impressions": 58033,
+     "clicks": 1663,
+     "installs": 151,
+     "conversions": 259.9,
+     "conversionValue": 9964.32,
+     "ctr": 0.02866477653727032,
+     "cpc": 0.7636972208807855,
+     "cpm": 21.89121017868209,
+     "cpa": 4.887593557637394,
+     "roas": 7.843420874020359,
+     "cvr": 0.15625219484288458
+    },
+    "last30": {
+     "spend": 5623.74,
+     "impressions": 258226,
+     "clicks": 7648,
+     "installs": 776,
+     "conversions": 1261.4,
+     "conversionValue": 50615.81,
+     "ctr": 0.02961613893970968,
+     "cpc": 0.7353528030083044,
+     "cpm": 21.778310783598904,
+     "cpa": 4.45825718908779,
+     "roas": 9.0003899418671,
+     "cvr": 0.16494176352324036
+    }
+   }
+  },
+  {
+   "product": "CantuStudio",
+   "windows": {
+    "yesterday": {
+     "spend": 56.16,
+     "impressions": 2098,
+     "clicks": 105,
+     "installs": 32,
+     "conversions": 34.4,
+     "conversionValue": 1781.2,
+     "ctr": 0.05019108351897028,
+     "cpc": 0.5334102730752056,
+     "cpm": 26.772439565794393,
+     "cpa": 1.6315419117243193,
+     "roas": 31.716347247794094,
+     "cvr": 0.326936298260008
+    },
+    "last7": {
+     "spend": 395.83,
+     "impressions": 14866,
+     "clicks": 748,
+     "installs": 190,
+     "conversions": 211.3,
+     "conversionValue": 10557.73,
+     "ctr": 0.05031598342823586,
+     "cpc": 0.5292048391163098,
+     "cpm": 26.62746191511847,
+     "cpa": 1.8731701891928134,
+     "roas": 26.67228996485075,
+     "cvr": 0.28251829020637725
+    },
+    "prev7": {
+     "spend": 381.32,
+     "impressions": 14420,
+     "clicks": 702,
+     "installs": 159,
+     "conversions": 184.1,
+     "conversionValue": 8844.43,
+     "ctr": 0.04867437891628211,
+     "cpc": 0.543278929334779,
+     "cpm": 26.44376446367308,
+     "cpa": 2.0708965825826793,
+     "roas": 23.19430251147005,
+     "cvr": 0.2623399613018043
+    },
+    "last30": {
+     "spend": 1594.04,
+     "impressions": 60223,
+     "clicks": 2987,
+     "installs": 725,
+     "conversions": 818.3,
+     "conversionValue": 40238.45,
+     "ctr": 0.04959399339871844,
+     "cpc": 0.5337150976756344,
+     "cpm": 26.469063030921784,
+     "cpa": 1.948063369066701,
+     "roas": 25.24313029067478,
+     "cvr": 0.27397214389967833
+    }
+   }
+  },
+  {
+   "product": "InvestCoach.AI",
+   "windows": {
+    "yesterday": {
+     "spend": 62.96,
+     "impressions": 2290,
+     "clicks": 23,
+     "installs": 0,
+     "conversions": 1.2,
+     "conversionValue": 2.06,
+     "ctr": 0.010052241672761154,
+     "cpc": 2.735646067140769,
+     "cpm": 27.4993753980376,
+     "cpa": 53.21095747007101,
+     "roas": 0.032693069035486515,
+     "cvr": 0.051411329493167984
+    },
+    "last7": {
+     "spend": 500.26,
+     "impressions": 18145,
+     "clicks": 175,
+     "installs": 0,
+     "conversions": 7.9,
+     "conversionValue": 12.65,
+     "ctr": 0.00966049384457076,
+     "cpc": 2.8539656436207643,
+     "cpm": 27.570717532814815,
+     "cpa": 63.07635102796119,
+     "roas": 0.025293000641061082,
+     "cvr": 0.045246207130079964
+    },
+    "prev7": {
+     "spend": 540.42,
+     "impressions": 19635,
+     "clicks": 200,
+     "installs": 0,
+     "conversions": 8.3,
+     "conversionValue": 13.3,
+     "ctr": 0.010194934263900852,
+     "cpc": 2.699640079754224,
+     "cpm": 27.52265314928637,
+     "cpa": 65.0800727398804,
+     "roas": 0.024616411086042296,
+     "cvr": 0.04148182333084444
+    },
+    "last30": {
+     "spend": 2341.68,
+     "impressions": 85132,
+     "clicks": 845,
+     "installs": 0,
+     "conversions": 36.5,
+     "conversionValue": 60.4,
+     "ctr": 0.009920581712371396,
+     "cpc": 2.772656717046129,
+     "cpm": 27.506367521811537,
+     "cpa": 64.09650009368603,
+     "roas": 0.025794116363292305,
+     "cvr": 0.04325753688568802
+    }
+   }
+  },
+  {
+   "product": "Muse Edit",
+   "windows": {
+    "yesterday": {
+     "spend": 91.96,
+     "impressions": 4286,
+     "clicks": 164,
+     "installs": 41,
+     "conversions": 43.6,
+     "conversionValue": 1880.57,
+     "ctr": 0.03827211607384568,
+     "cpc": 0.5606922536321092,
+     "cpm": 21.458879012714206,
+     "cpa": 2.1093235751281676,
+     "roas": 20.449316995323674,
+     "cvr": 0.2658161413656225
+    },
+    "last7": {
+     "spend": 604.75,
+     "impressions": 27608,
+     "clicks": 923,
+     "installs": 199,
+     "conversions": 214.3,
+     "conversionValue": 9105.57,
+     "ctr": 0.03344844262882247,
+     "cpc": 0.6548793295462655,
+     "cpm": 21.904693683129985,
+     "cpa": 2.822297125631277,
+     "roas": 15.05678359154337,
+     "cvr": 0.23203769851120312
+    },
+    "prev7": {
+     "spend": 599.19,
+     "impressions": 26826,
+     "clicks": 890,
+     "installs": 184,
+     "conversions": 201,
+     "conversionValue": 8464.6,
+     "ctr": 0.03317527221522073,
+     "cpc": 0.6732794151449337,
+     "cpm": 22.336227874337784,
+     "cpa": 2.981205627448949,
+     "roas": 14.126824106000239,
+     "cvr": 0.22584132035235235
+    },
+    "last30": {
+     "spend": 2625,
+     "impressions": 117471,
+     "clicks": 3942,
+     "installs": 883,
+     "conversions": 954.2,
+     "conversionValue": 40494.9,
+     "ctr": 0.03355452430249202,
+     "cpc": 0.665957525334121,
+     "cpm": 22.345887968251212,
+     "cpa": 2.750867055930019,
+     "roas": 15.426631644040231,
+     "cvr": 0.2420900435368269
+    }
+   }
+  }
+ ],
+ "byPlatform": [
+  {
+   "platform": "google_ads",
+   "windows": {
+    "yesterday": {
+     "spend": 145.31,
+     "impressions": 6631,
+     "clicks": 174,
+     "installs": 0,
+     "conversions": 14.7,
+     "conversionValue": 80.59,
+     "ctr": 0.026303058439427564,
+     "cpc": 0.8331857196111009,
+     "cpm": 21.915332673827294,
+     "cpa": 9.912752517341383,
+     "roas": 0.554608947243444,
+     "cvr": 0.08405190366182598
+    },
+    "last7": {
+     "spend": 1088.96,
+     "impressions": 49891,
+     "clicks": 1276,
+     "installs": 0,
+     "conversions": 104,
+     "conversionValue": 579.3,
+     "ctr": 0.025568067468770744,
+     "cpc": 0.8536683806441115,
+     "cpm": 21.82665075226491,
+     "cpa": 10.468329824971775,
+     "roas": 0.5319778935479833,
+     "cvr": 0.08154771533924354
+    },
+    "prev7": {
+     "spend": 1082.06,
+     "impressions": 49101,
+     "clicks": 1258,
+     "installs": 0,
+     "conversions": 110.1,
+     "conversionValue": 611.44,
+     "ctr": 0.025621777723771052,
+     "cpc": 0.8601096921517504,
+     "cpm": 22.037539350373294,
+     "cpa": 9.82407931917868,
+     "roas": 0.5650721074904724,
+     "cvr": 0.08755117545444024
+    },
+    "last30": {
+     "spend": 4826.09,
+     "impressions": 219868,
+     "clicks": 5683,
+     "installs": 0,
+     "conversions": 485,
+     "conversionValue": 2732.94,
+     "ctr": 0.02584554488017118,
+     "cpc": 0.849273675400032,
+     "cpm": 21.949940893099456,
+     "cpa": 9.949962889270262,
+     "roas": 0.5662844430390017,
+     "cvr": 0.08535445657951779
+    }
+   }
+  },
+  {
+   "platform": "apple_ads",
+   "windows": {
+    "yesterday": {
+     "spend": 76.2,
+     "impressions": 3367,
+     "clicks": 253,
+     "installs": 92,
+     "conversions": 91.6,
+     "conversionValue": 4714.37,
+     "ctr": 0.07511993810730035,
+     "cpc": 0.30128006956436265,
+     "cpm": 22.63214017863806,
+     "cpa": 0.8321035902003023,
+     "roas": 61.87042317507301,
+     "cvr": 0.36207038776486844
+    },
+    "last7": {
+     "spend": 497.99,
+     "impressions": 21797,
+     "clicks": 1558,
+     "installs": 534,
+     "conversions": 533.5,
+     "conversionValue": 28079.4,
+     "ctr": 0.07149528735872063,
+     "cpc": 0.31955507073939543,
+     "cpm": 22.846681609449373,
+     "cpa": 0.9333540658538381,
+     "roas": 56.38546666540421,
+     "cvr": 0.34237282766542027
+    },
+    "prev7": {
+     "spend": 470.62,
+     "impressions": 20719,
+     "clicks": 1470,
+     "installs": 494,
+     "conversions": 493.8,
+     "conversionValue": 26068.89,
+     "ctr": 0.0709659542748416,
+     "cpc": 0.32007613266924073,
+     "cpm": 22.71450819547347,
+     "cpa": 0.9531269879954395,
+     "roas": 55.39230296062214,
+     "cvr": 0.3358168813815733
+    },
+    "last30": {
+     "spend": 2098.92,
+     "impressions": 92894,
+     "clicks": 6670,
+     "installs": 2384,
+     "conversions": 2383.8,
+     "conversionValue": 126157.27,
+     "ctr": 0.07179767852305276,
+     "cpc": 0.31470039632732577,
+     "cpm": 22.594757886586628,
+     "cpa": 0.8805068004172271,
+     "roas": 60.10592083241835,
+     "cvr": 0.35740825190470465
+    }
+   }
+  },
+  {
+   "platform": "meta_ads",
+   "windows": {
+    "yesterday": {
+     "spend": 160.77,
+     "impressions": 6520,
+     "clicks": 101,
+     "installs": 0,
+     "conversions": 6.4,
+     "conversionValue": 80.57,
+     "ctr": 0.015540485046738706,
+     "cpc": 1.5868323674994997,
+     "cpm": 24.660144678806958,
+     "cpa": 24.988181209942745,
+     "roas": 0.5011473159904356,
+     "cvr": 0.06350331599436707
+    },
+    "last7": {
+     "spend": 1255.05,
+     "impressions": 50164,
+     "clicks": 743,
+     "installs": 0,
+     "conversions": 47.5,
+     "conversionValue": 583.79,
+     "ctr": 0.014809748001441957,
+     "cpc": 1.6893595041112643,
+     "cpm": 25.018988539728774,
+     "cpa": 26.41459695849889,
+     "roas": 0.4651493470659148,
+     "cvr": 0.06395552833024444
+    },
+    "prev7": {
+     "spend": 1238.65,
+     "impressions": 49094,
+     "clicks": 727,
+     "installs": 0,
+     "conversions": 49.4,
+     "conversionValue": 606.33,
+     "ctr": 0.014810677757719822,
+     "cpc": 1.7035063250241915,
+     "cpm": 25.230083238170828,
+     "cpa": 25.054663062603645,
+     "roas": 0.48950863026180824,
+     "cvr": 0.0679915878640104
+    },
+    "last30": {
+     "spend": 5259.44,
+     "impressions": 208291,
+     "clicks": 3068,
+     "installs": 0,
+     "conversions": 201.7,
+     "conversionValue": 2519.34,
+     "ctr": 0.01473147190846175,
+     "cpc": 1.7140519321935925,
+     "cpm": 25.25050788875449,
+     "cpa": 26.07941439840461,
+     "roas": 0.47901348170881775,
+     "cvr": 0.06572432593802599
+    }
+   }
+  }
+ ],
+ "byChannel": [
+  {
+   "platform": "google_ads",
+   "channel": "Search",
+   "windows": {
+    "yesterday": {
+     "spend": 83.19,
+     "impressions": 3672,
+     "clicks": 107,
+     "installs": 0,
+     "conversions": 9.1,
+     "conversionValue": 52.94,
+     "ctr": 0.029184191689934292,
+     "cpc": 0.7761963519397176,
+     "cpm": 22.65266312403642,
+     "cpa": 9.11203548335689,
+     "roas": 0.6364266414877043,
+     "cvr": 0.08518364018198112
+    },
+    "last7": {
+     "spend": 594.21,
+     "impressions": 26332,
+     "clicks": 804,
+     "installs": 0,
+     "conversions": 72.7,
+     "conversionValue": 422.73,
+     "ctr": 0.030547237220675108,
+     "cpc": 0.7387336931340028,
+     "cpm": 22.566273367069797,
+     "cpa": 8.17233664250301,
+     "roas": 0.7114171990546782,
+     "cvr": 0.09039442762207904
+    },
+    "prev7": {
+     "spend": 643.8,
+     "impressions": 28231,
+     "clicks": 843,
+     "installs": 0,
+     "conversions": 80.6,
+     "conversionValue": 463.68,
+     "ctr": 0.029878194733542356,
+     "cpc": 0.7632501103526805,
+     "cpm": 22.804535427515084,
+     "cpa": 7.988452791537806,
+     "roas": 0.720224613248544,
+     "cvr": 0.09554417235352432
+    },
+    "last30": {
+     "spend": 2882.84,
+     "impressions": 127332,
+     "clicks": 3831,
+     "installs": 0,
+     "conversions": 353.7,
+     "conversionValue": 2076.42,
+     "ctr": 0.03008975942903892,
+     "cpc": 0.7524250001985582,
+     "cpm": 22.640287244369176,
+     "cpa": 8.149768825544456,
+     "roas": 0.7202700672105141,
+     "cvr": 0.09232470470084672
+    }
+   }
+  },
+  {
+   "platform": "google_ads",
+   "channel": "Performance Max",
+   "windows": {
+    "yesterday": {
+     "spend": 62.12,
+     "impressions": 2958,
+     "clicks": 67,
+     "installs": 0,
+     "conversions": 5.5,
+     "conversionValue": 27.65,
+     "ctr": 0.022726377995684745,
+     "cpc": 0.9240363776395628,
+     "cpm": 21,
+     "cpa": 11.234795599689964,
+     "roas": 0.44504592501335594,
+     "cvr": 0.08224772488651798
+    },
+    "last7": {
+     "spend": 494.75,
+     "impressions": 23560,
+     "clicks": 471,
+     "installs": 0,
+     "conversions": 31.3,
+     "conversionValue": 156.57,
+     "ctr": 0.020003020729154372,
+     "cpc": 1.0498414356683903,
+     "cpm": 20.999999999999993,
+     "cpa": 15.799455112209387,
+     "roas": 0.31646661005012366,
+     "cvr": 0.06644795204722607
+    },
+    "prev7": {
+     "spend": 438.26,
+     "impressions": 20870,
+     "clicks": 415,
+     "installs": 0,
+     "conversions": 29.6,
+     "conversionValue": 147.76,
+     "ctr": 0.019863990597019477,
+     "cpc": 1.0571893848535638,
+     "cpm": 20.999999999999996,
+     "cpa": 14.829864425289069,
+     "roas": 0.33715749899059094,
+     "cvr": 0.07128786579132579
+    },
+    "last30": {
+     "spend": 1943.25,
+     "impressions": 92536,
+     "clicks": 1851,
+     "installs": 0,
+     "conversions": 131.3,
+     "conversionValue": 656.52,
+     "ctr": 0.020005356181206337,
+     "cpc": 1.049718875774282,
+     "cpm": 20.999999999999996,
+     "cpa": 14.799715574327443,
+     "roas": 0.3378443305135761,
+     "cvr": 0.07092831416268519
+    }
+   }
+  },
+  {
+   "platform": "apple_ads",
+   "channel": "Search Results",
+   "windows": {
+    "yesterday": {
+     "spend": 76.2,
+     "impressions": 3367,
+     "clicks": 253,
+     "installs": 92,
+     "conversions": 91.6,
+     "conversionValue": 4714.37,
+     "ctr": 0.07511993810730035,
+     "cpc": 0.30128006956436265,
+     "cpm": 22.63214017863806,
+     "cpa": 0.8321035902003023,
+     "roas": 61.87042317507301,
+     "cvr": 0.36207038776486844
+    },
+    "last7": {
+     "spend": 497.99,
+     "impressions": 21797,
+     "clicks": 1558,
+     "installs": 534,
+     "conversions": 533.5,
+     "conversionValue": 28079.4,
+     "ctr": 0.07149528735872063,
+     "cpc": 0.31955507073939543,
+     "cpm": 22.846681609449373,
+     "cpa": 0.9333540658538381,
+     "roas": 56.38546666540421,
+     "cvr": 0.34237282766542027
+    },
+    "prev7": {
+     "spend": 470.62,
+     "impressions": 20719,
+     "clicks": 1470,
+     "installs": 494,
+     "conversions": 493.8,
+     "conversionValue": 26068.89,
+     "ctr": 0.0709659542748416,
+     "cpc": 0.32007613266924073,
+     "cpm": 22.71450819547347,
+     "cpa": 0.9531269879954395,
+     "roas": 55.39230296062214,
+     "cvr": 0.3358168813815733
+    },
+    "last30": {
+     "spend": 2098.92,
+     "impressions": 92894,
+     "clicks": 6670,
+     "installs": 2384,
+     "conversions": 2383.8,
+     "conversionValue": 126157.27,
+     "ctr": 0.07179767852305276,
+     "cpc": 0.31470039632732577,
+     "cpm": 22.594757886586628,
+     "cpa": 0.8805068004172271,
+     "roas": 60.10592083241835,
+     "cvr": 0.35740825190470465
+    }
+   }
+  },
+  {
+   "platform": "meta_ads",
+   "channel": "Instagram Reels",
+   "windows": {
+    "yesterday": {
+     "spend": 75.52,
+     "impressions": 2844,
+     "clicks": 47,
+     "installs": 0,
+     "conversions": 3.3,
+     "conversionValue": 35.52,
+     "ctr": 0.01649525895324894,
+     "cpc": 1.610096443411656,
+     "cpm": 26.5589577737804,
+     "cpa": 22.99417920027503,
+     "roas": 0.47027538527452584,
+     "cvr": 0.07002191421524617
+    },
+    "last7": {
+     "spend": 616.17,
+     "impressions": 23255,
+     "clicks": 379,
+     "installs": 0,
+     "conversions": 25,
+     "conversionValue": 268.96,
+     "ctr": 0.01628098480273143,
+     "cpc": 1.6274371288029694,
+     "cpm": 26.49627916144202,
+     "cpa": 24.622572005985017,
+     "roas": 0.43649726353307594,
+     "cvr": 0.06609533433011741
+    },
+    "prev7": {
+     "spend": 620.21,
+     "impressions": 23207,
+     "clicks": 376,
+     "installs": 0,
+     "conversions": 26.9,
+     "conversionValue": 290.12,
+     "ctr": 0.016192901899245663,
+     "cpc": 1.6504237374468256,
+     "cpm": 26.725149672662827,
+     "cpa": 23.094686134235417,
+     "roas": 0.46777214296856057,
+     "cvr": 0.0714633542908491
+    },
+    "last30": {
+     "spend": 2653.21,
+     "impressions": 99076,
+     "clicks": 1608,
+     "installs": 0,
+     "conversions": 109,
+     "conversionValue": 1185.47,
+     "ctr": 0.016232693386936975,
+     "cpc": 1.649731876886562,
+     "cpm": 26.77959172815562,
+     "cpa": 24.352119131506704,
+     "roas": 0.4468070335601566,
+     "cvr": 0.06774490006301519
+    }
+   }
+  },
+  {
+   "platform": "meta_ads",
+   "channel": "Instagram Feed",
+   "windows": {
+    "yesterday": {
+     "spend": 51.82,
+     "impressions": 2005,
+     "clicks": 31,
+     "installs": 0,
+     "conversions": 2.1,
+     "conversionValue": 37,
+     "ctr": 0.015659108541164278,
+     "cpc": 1.6509218593524786,
+     "cpm": 25.851964588581207,
+     "cpa": 24.185944379616007,
+     "roas": 0.7139676431473114,
+     "cvr": 0.0682595574288958
+    },
+    "last7": {
+     "spend": 426.85,
+     "impressions": 16308,
+     "clicks": 235,
+     "installs": 0,
+     "conversions": 16.3,
+     "conversionValue": 265.51,
+     "ctr": 0.014414064495278128,
+     "cpc": 1.8159381805323915,
+     "cpm": 26.17505005363191,
+     "cpa": 26.148773932851554,
+     "roas": 0.6220163495057845,
+     "cvr": 0.06944639871818117
+    },
+    "prev7": {
+     "spend": 429.92,
+     "impressions": 16461,
+     "clicks": 237,
+     "installs": 0,
+     "conversions": 16.5,
+     "conversionValue": 267.78,
+     "ctr": 0.014426429573083875,
+     "cpc": 1.8103720697084398,
+     "cpm": 26.117205164726897,
+     "cpa": 26.011182278937664,
+     "roas": 0.6228530293515471,
+     "cvr": 0.06959976099104012
+    },
+    "last30": {
+     "spend": 1797.91,
+     "impressions": 68799,
+     "clicks": 982,
+     "installs": 0,
+     "conversions": 69.4,
+     "conversionValue": 1147.31,
+     "ctr": 0.01427071683473849,
+     "cpc": 1.8312268849595383,
+     "cpm": 26.132920335417804,
+     "cpa": 25.907331794038164,
+     "roas": 0.6381329193815932,
+     "cvr": 0.07068373152116511
+    }
+   }
+  },
+  {
+   "platform": "meta_ads",
+   "channel": "Instagram Stories",
+   "windows": {
+    "yesterday": {
+     "spend": 33.43,
+     "impressions": 1671,
+     "clicks": 23,
+     "installs": 0,
+     "conversions": 1,
+     "conversionValue": 8.05,
+     "ctr": 0.013773728840611872,
+     "cpc": 1.4520396206022257,
+     "cpm": 20,
+     "cpa": 33.20045416497145,
+     "roas": 0.24096055916128098,
+     "cvr": 0.04373553486308083
+    },
+    "last7": {
+     "spend": 212.02,
+     "impressions": 10601,
+     "clicks": 129,
+     "installs": 0,
+     "conversions": 6.2,
+     "conversionValue": 49.32,
+     "ctr": 0.01219107003315273,
+     "cpc": 1.6405450830494328,
+     "cpm": 20,
+     "cpa": 34.392907085535725,
+     "roas": 0.23260610044111327,
+     "cvr": 0.04770009929574636
+    },
+    "prev7": {
+     "spend": 188.52,
+     "impressions": 9426,
+     "clicks": 114,
+     "installs": 0,
+     "conversions": 6.1,
+     "conversionValue": 48.44,
+     "ctr": 0.012078664560233592,
+     "cpc": 1.655812188529989,
+     "cpm": 20.000000000000004,
+     "cpa": 31.136979366417034,
+     "roas": 0.2569292257240741,
+     "cvr": 0.053178317942936836
+    },
+    "last30": {
+     "spend": 808.32,
+     "impressions": 40416,
+     "clicks": 478,
+     "installs": 0,
+     "conversions": 23.3,
+     "conversionValue": 186.56,
+     "ctr": 0.011835693555639739,
+     "cpc": 1.6898038045662265,
+     "cpm": 20,
+     "cpa": 34.661336968722374,
+     "roas": 0.23080471498312438,
+     "cvr": 0.04875183568628839
+    }
+   }
+  }
+ ],
+ "ads": [
+  {
+   "id": "google_ads:900100",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "channel": "Search",
+   "campaign": "Brand FaithSchool",
+   "adGroup": "Termos de marca",
+   "ad": "RSA marca 01",
+   "creative": {
+    "id": "cr-0",
+    "name": "RSA marca 01",
+    "type": "Texto RSA",
+    "thumbnailUrl": null
+   },
+   "status": "ENABLED",
+   "windows": {
+    "yesterday": {
+     "spend": 25.16,
+     "impressions": 1398,
+     "clicks": 61,
+     "installs": 0,
+     "conversions": 6.1,
+     "conversionValue": 42.41,
+     "ctr": 0.043883994542760776,
+     "cpc": 0.41017232336178316,
+     "cpm": 18,
+     "cpa": 4.152750914859989,
+     "roas": 1.6856296328661473,
+     "cvr": 0.09877123183431102
+    },
+    "last7": {
+     "spend": 183.36,
+     "impressions": 10187,
+     "clicks": 456,
+     "installs": 0,
+     "conversions": 47.1,
+     "conversionValue": 329.78,
+     "ctr": 0.04478766358376091,
+     "cpc": 0.4018963830595181,
+     "cpm": 18.000000000000004,
+     "cpa": 3.8920303935578615,
+     "roas": 1.7985471057950857,
+     "cvr": 0.1032613680830299
+    },
+    "prev7": {
+     "spend": 185.6,
+     "impressions": 10311,
+     "clicks": 472,
+     "installs": 0,
+     "conversions": 50.4,
+     "conversionValue": 353.06,
+     "ctr": 0.04575121246971495,
+     "cpc": 0.3934321961831092,
+     "cpm": 18.000000000000004,
+     "cpa": 3.6798671141634203,
+     "roas": 1.902242603559715,
+     "cvr": 0.10691478359879632
+    },
+    "last30": {
+     "spend": 897.62,
+     "impressions": 49868,
+     "clicks": 2258,
+     "installs": 0,
+     "conversions": 236.4,
+     "conversionValue": 1654.86,
+     "ctr": 0.04528339759871729,
+     "cpc": 0.39749667548156487,
+     "cpm": 18,
+     "cpa": 3.7968977056440996,
+     "roas": 1.8436103742259051,
+     "cvr": 0.10468985637687445
+    }
+   }
+  },
+  {
+   "id": "google_ads:900101",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "channel": "Performance Max",
+   "campaign": "PMax Devocional",
+   "adGroup": "Assets BR",
+   "ad": "PMax asset group A",
+   "creative": {
+    "id": "cr-1",
+    "name": "PMax asset group A",
+    "type": "Video",
+    "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(53%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EVideo%3C%2Ftext%3E%3C%2Fsvg%3E"
+   },
+   "status": "ENABLED",
+   "windows": {
+    "yesterday": {
+     "spend": 62.12,
+     "impressions": 2958,
+     "clicks": 67,
+     "installs": 0,
+     "conversions": 5.5,
+     "conversionValue": 27.65,
+     "ctr": 0.022726377995684745,
+     "cpc": 0.9240363776395628,
+     "cpm": 21,
+     "cpa": 11.234795599689964,
+     "roas": 0.44504592501335594,
+     "cvr": 0.08224772488651798
+    },
+    "last7": {
+     "spend": 494.75,
+     "impressions": 23560,
+     "clicks": 471,
+     "installs": 0,
+     "conversions": 31.3,
+     "conversionValue": 156.57,
+     "ctr": 0.020003020729154372,
+     "cpc": 1.0498414356683903,
+     "cpm": 20.999999999999993,
+     "cpa": 15.799455112209387,
+     "roas": 0.31646661005012366,
+     "cvr": 0.06644795204722607
+    },
+    "prev7": {
+     "spend": 438.26,
+     "impressions": 20870,
+     "clicks": 415,
+     "installs": 0,
+     "conversions": 29.6,
+     "conversionValue": 147.76,
+     "ctr": 0.019863990597019477,
+     "cpc": 1.0571893848535638,
+     "cpm": 20.999999999999996,
+     "cpa": 14.829864425289069,
+     "roas": 0.33715749899059094,
+     "cvr": 0.07128786579132579
+    },
+    "last30": {
+     "spend": 1943.25,
+     "impressions": 92536,
+     "clicks": 1851,
+     "installs": 0,
+     "conversions": 131.3,
+     "conversionValue": 656.52,
+     "ctr": 0.020005356181206337,
+     "cpc": 1.049718875774282,
+     "cpm": 20.999999999999996,
+     "cpa": 14.799715574327443,
+     "roas": 0.3378443305135761,
+     "cvr": 0.07092831416268519
+    }
+   }
+  },
+  {
+   "id": "google_ads:900102",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "channel": "Search",
+   "campaign": "Cantus Search",
+   "adGroup": "Coral e coro",
+   "ad": "RSA coro 02",
+   "creative": {
+    "id": "cr-2",
+    "name": "RSA coro 02",
+    "type": "Texto RSA",
+    "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(106%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3ETexto%20RSA%3C%2Ftext%3E%3C%2Fsvg%3E"
+   },
+   "status": "ENABLED",
+   "windows": {
+    "yesterday": {
+     "spend": 27.08,
+     "impressions": 1128,
+     "clicks": 32,
+     "installs": 0,
+     "conversions": 2.2,
+     "conversionValue": 8.78,
+     "ctr": 0.028535238125827162,
+     "cpc": 0.8410653485410261,
+     "cpm": 24,
+     "cpa": 12.33305526202116,
+     "roas": 0.32433163681004007,
+     "cvr": 0.06819602528912946
+    },
+    "last7": {
+     "spend": 200.54,
+     "impressions": 8356,
+     "clicks": 260,
+     "installs": 0,
+     "conversions": 20.9,
+     "conversionValue": 83.5,
+     "ctr": 0.03113620817905859,
+     "cpc": 0.7708067681838594,
+     "cpm": 24,
+     "cpa": 9.606247800633056,
+     "roas": 0.4163956711314899,
+     "cvr": 0.08024015038765323
+    },
+    "prev7": {
+     "spend": 205.12,
+     "impressions": 8547,
+     "clicks": 259,
+     "installs": 0,
+     "conversions": 25.2,
+     "conversionValue": 100.62,
+     "ctr": 0.030330617834123472,
+     "cpc": 0.791279628105656,
+     "cpm": 24,
+     "cpa": 8.154739986140457,
+     "roas": 0.4905122673191636,
+     "cvr": 0.09703309111639247
+    },
+    "last30": {
+     "spend": 850.57,
+     "impressions": 35440,
+     "clicks": 1077,
+     "installs": 0,
+     "conversions": 93.5,
+     "conversionValue": 373.82,
+     "ctr": 0.03039370547125373,
+     "cpc": 0.7896371840116408,
+     "cpm": 23.999999999999996,
+     "cpa": 9.101331365045715,
+     "roas": 0.439496139582641,
+     "cvr": 0.08676062351100593
+    }
+   }
+  },
+  {
+   "id": "google_ads:900103",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "channel": "Search",
+   "campaign": "Investimento Search",
+   "adGroup": "Educacao financeira",
+   "ad": "RSA coach 01",
+   "creative": {
+    "id": "cr-3",
+    "name": "RSA coach 01",
+    "type": "Texto RSA",
+    "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(159%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3ETexto%20RSA%3C%2Ftext%3E%3C%2Fsvg%3E"
+   },
+   "status": "ENABLED",
+   "windows": {
+    "yesterday": {
+     "spend": 30.95,
+     "impressions": 1146,
+     "clicks": 14,
+     "installs": 0,
+     "conversions": 0.9,
+     "conversionValue": 1.75,
+     "ctr": 0.011897331221401691,
+     "cpc": 2.269416518507163,
+     "cpm": 27,
+     "cpa": 35.362256347928785,
+     "roas": 0.05655747699813116,
+     "cvr": 0.06417623627232388
+    },
+    "last7": {
+     "spend": 210.31,
+     "impressions": 7789,
+     "clicks": 88,
+     "installs": 0,
+     "conversions": 4.7,
+     "conversionValue": 9.44,
+     "ctr": 0.011291916224529344,
+     "cpc": 2.391091065779261,
+     "cpm": 27.000000000000004,
+     "cpa": 44.53728466465327,
+     "roas": 0.04490619522629513,
+     "cvr": 0.0536874011018668
+    },
+    "prev7": {
+     "spend": 253.07,
+     "impressions": 9373,
+     "clicks": 113,
+     "installs": 0,
+     "conversions": 5,
+     "conversionValue": 10,
+     "ctr": 0.012003424784328065,
+     "cpc": 2.249358036154131,
+     "cpm": 27,
+     "cpa": 50.62112364688758,
+     "roas": 0.03950919805635269,
+     "cvr": 0.044435166075031056
+    },
+    "last30": {
+     "spend": 1134.65,
+     "impressions": 42024,
+     "clicks": 496,
+     "installs": 0,
+     "conversions": 23.9,
+     "conversionValue": 47.74,
+     "ctr": 0.011803864567133336,
+     "cpc": 2.2873864611407653,
+     "cpm": 26.999999999999993,
+     "cpa": 47.538726422612505,
+     "roas": 0.04207096299173615,
+     "cvr": 0.04811627557722573
+    }
+   }
+  },
+  {
+   "id": "apple_ads:900104",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "channel": "Search Results",
+   "campaign": "Cantus ASA",
+   "adGroup": "Exact",
+   "ad": "Cantus exact",
+   "creative": {
+    "id": "cr-4",
+    "name": "Cantus exact",
+    "type": "Product page",
+    "thumbnailUrl": null
+   },
+   "status": "ENABLED",
+   "windows": {
+    "yesterday": {
+     "spend": 29.08,
+     "impressions": 969,
+     "clicks": 73,
+     "installs": 32,
+     "conversions": 32.2,
+     "conversionValue": 1772.42,
+     "ctr": 0.07540193053707481,
+     "cpc": 0.397867797101682,
+     "cpm": 30.000000000000004,
+     "cpa": 0.9023407307173024,
+     "roas": 60.95258490246648,
+     "cvr": 0.44092855786904683
+    },
+    "last7": {
+     "spend": 195.29,
+     "impressions": 6510,
+     "clicks": 488,
+     "installs": 190,
+     "conversions": 190.4,
+     "conversionValue": 10474.23,
+     "ctr": 0.07493461714281896,
+     "cpc": 0.4003490128310468,
+     "cpm": 30.000000000000007,
+     "cpa": 1.0254810243464612,
+     "roas": 53.63336687292824,
+     "cvr": 0.39040119058876704
+    },
+    "prev7": {
+     "spend": 176.2,
+     "impressions": 5873,
+     "clicks": 443,
+     "installs": 159,
+     "conversions": 159,
+     "conversionValue": 8743.81,
+     "ctr": 0.07536874165049286,
+     "cpc": 0.398042999564977,
+     "cpm": 30,
+     "cpa": 1.1082975258763792,
+     "roas": 49.62566343050267,
+     "cvr": 0.3591481441323503
+    },
+    "last30": {
+     "spend": 743.47,
+     "impressions": 24782,
+     "clicks": 1910,
+     "installs": 725,
+     "conversions": 724.8,
+     "conversionValue": 39864.62,
+     "ctr": 0.07705178026401399,
+     "cpc": 0.3893485640073019,
+     "cpm": 30.000000000000014,
+     "cpa": 1.025738407895162,
+     "roas": 53.619908913093376,
+     "cvr": 0.3795788097730043
+    }
+   }
+  },
+  {
+   "id": "apple_ads:900105",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "channel": "Search Results",
+   "campaign": "Muse ASA",
+   "adGroup": "Generico",
+   "ad": "Muse generico",
+   "creative": {
+    "id": "cr-5",
+    "name": "Muse generico",
+    "type": "Product page",
+    "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(265%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EProduct%20page%3C%2Ftext%3E%3C%2Fsvg%3E"
+   },
+   "status": "ENABLED",
+   "windows": {
+    "yesterday": {
+     "spend": 35.63,
+     "impressions": 1875,
+     "clicks": 127,
+     "installs": 41,
+     "conversions": 41.3,
+     "conversionValue": 1856.48,
+     "ctr": 0.06766075743176042,
+     "cpc": 0.28081270031838673,
+     "cpm": 19,
+     "cpa": 0.8636849792456953,
+     "roas": 52.10233022612137,
+     "cvr": 0.3251332454150543
+    },
+    "last7": {
+     "spend": 212.95,
+     "impressions": 11208,
+     "clicks": 686,
+     "installs": 199,
+     "conversions": 198.8,
+     "conversionValue": 8943.99,
+     "ctr": 0.06120822543254393,
+     "cpc": 0.3104157956832032,
+     "cpm": 18.999999999999996,
+     "cpa": 1.0713962716176049,
+     "roas": 42.0012661907611,
+     "cvr": 0.2897301436512695
+    },
+    "prev7": {
+     "spend": 203.82,
+     "impressions": 10727,
+     "clicks": 649,
+     "installs": 184,
+     "conversions": 184.2,
+     "conversionValue": 8286.77,
+     "ctr": 0.060535389042107715,
+     "cpc": 0.3138659931099777,
+     "cpm": 19,
+     "cpa": 1.1067921008828276,
+     "roas": 40.65804225030694,
+     "cvr": 0.2835817068622227
+    },
+    "last30": {
+     "spend": 905.72,
+     "impressions": 47669,
+     "clicks": 2891,
+     "installs": 883,
+     "conversions": 882.9,
+     "conversionValue": 39732.61,
+     "ctr": 0.060638856227411414,
+     "cpc": 0.31333044819884265,
+     "cpm": 19,
+     "cpa": 1.0257922324877216,
+     "roas": 43.86853260807729,
+     "cvr": 0.3054521551980977
+    }
+   }
+  },
+  {
+   "id": "apple_ads:900106",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "channel": "Search Results",
+   "campaign": "Faith ASA",
+   "adGroup": "Marca",
+   "ad": "Faith marca",
+   "creative": {
+    "id": "cr-6",
+    "name": "Faith marca",
+    "type": "Product page",
+    "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(318%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EProduct%20page%3C%2Ftext%3E%3C%2Fsvg%3E"
+   },
+   "status": "ENABLED",
+   "windows": {
+    "yesterday": {
+     "spend": 11.49,
+     "impressions": 522,
+     "clicks": 53,
+     "installs": 18,
+     "conversions": 18.1,
+     "conversionValue": 1085.47,
+     "ctr": 0.10138642183179035,
+     "cpc": 0.21699158134311197,
+     "cpm": 22,
+     "cpa": 0.6349722475076771,
+     "roas": 94.49231873598471,
+     "cvr": 0.34173396112164484
+    },
+    "last7": {
+     "spend": 89.75,
+     "impressions": 4080,
+     "clicks": 385,
+     "installs": 144,
+     "conversions": 144.4,
+     "conversionValue": 8661.18,
+     "ctr": 0.0942683213399419,
+     "cpc": 0.23337638442362404,
+     "cpm": 22.000000000000004,
+     "cpa": 0.6217474966879974,
+     "roas": 96.50219794951411,
+     "cvr": 0.37535556743984116
+    },
+    "prev7": {
+     "spend": 90.61,
+     "impressions": 4119,
+     "clicks": 378,
+     "installs": 151,
+     "conversions": 150.6,
+     "conversionValue": 9038.3,
+     "ctr": 0.09185417231108278,
+     "cpc": 0.23951007827377221,
+     "cpm": 22,
+     "cpa": 0.6015148238723915,
+     "roas": 99.74816516363812,
+     "cvr": 0.39817818076680206
+    },
+    "last30": {
+     "spend": 449.73,
+     "impressions": 20442,
+     "clicks": 1869,
+     "installs": 776,
+     "conversions": 776,
+     "conversionValue": 46560.04,
+     "ctr": 0.09144949130869331,
+     "cpc": 0.24056995490262115,
+     "cpm": 21.999999999999996,
+     "cpa": 0.5795472242829335,
+     "roas": 103.52909562156434,
+     "cvr": 0.4150998310798147
+    }
+   }
+  },
+  {
+   "id": "meta_ads:900107",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "channel": "Instagram Reels",
+   "campaign": "Reels Fe",
+   "adGroup": "Publico 25-44",
+   "ad": "Reel testemunho",
+   "creative": {
+    "id": "cr-7",
+    "name": "Reel testemunho",
+    "type": "Video",
+    "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(371%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EVideo%3C%2Ftext%3E%3C%2Fsvg%3E"
+   },
+   "status": "ENABLED",
+   "windows": {
+    "yesterday": {
+     "spend": 52.62,
+     "impressions": 2105,
+     "clicks": 33,
+     "installs": 0,
+     "conversions": 1.9,
+     "conversionValue": 19.48,
+     "ctr": 0.015582554700784386,
+     "cpc": 1.6043582377889272,
+     "cpm": 24.999999999999996,
+     "cpa": 27.007110043586433,
+     "roas": 0.37027286458496034,
+     "cvr": 0.05940503205265849
+    },
+    "last7": {
+     "spend": 436.39,
+     "impressions": 17456,
+     "clicks": 270,
+     "installs": 0,
+     "conversions": 15.7,
+     "conversionValue": 156.69,
+     "ctr": 0.015490956602627913,
+     "cpc": 1.613844815481502,
+     "cpm": 25,
+     "cpa": 27.85000417106197,
+     "roas": 0.35906637351209714,
+     "cvr": 0.05794774053062425
+    },
+    "prev7": {
+     "spend": 413.36,
+     "impressions": 16534,
+     "clicks": 249,
+     "installs": 0,
+     "conversions": 16.1,
+     "conversionValue": 160.72,
+     "ctr": 0.015063339111190807,
+     "cpc": 1.6596585800439878,
+     "cpm": 25,
+     "cpa": 25.719106442199138,
+     "roas": 0.3888159964839331,
+     "cvr": 0.06453018046229125
+    },
+    "last30": {
+     "spend": 1742.25,
+     "impressions": 69690,
+     "clicks": 1036,
+     "installs": 0,
+     "conversions": 61,
+     "conversionValue": 609.75,
+     "ctr": 0.014859365327117692,
+     "cpc": 1.682440632533349,
+     "cpm": 25,
+     "cpa": 28.573194040883077,
+     "roas": 0.34997837433546314,
+     "cvr": 0.05888178374899497
+    }
+   }
+  },
+  {
+   "id": "meta_ads:900108",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "channel": "Instagram Feed",
+   "campaign": "Feed Invest",
+   "adGroup": "Lookalike",
+   "ad": "Carrossel dicas",
+   "creative": {
+    "id": "cr-8",
+    "name": "Carrossel dicas",
+    "type": "Carrossel",
+    "thumbnailUrl": null
+   },
+   "status": "PAUSED",
+   "windows": {
+    "yesterday": {
+     "spend": 32.01,
+     "impressions": 1143,
+     "clicks": 9,
+     "installs": 0,
+     "conversions": 0.3,
+     "conversionValue": 0.31,
+     "ctr": 0.008202536572143437,
+     "cpc": 3.4135781966630367,
+     "cpm": 27.999999999999996,
+     "cpa": 103.91342299071525,
+     "roas": 0.009623395815662341,
+     "cvr": 0.03285021413420327
+    },
+    "last7": {
+     "spend": 289.95,
+     "impressions": 10356,
+     "clicks": 87,
+     "installs": 0,
+     "conversions": 3.2,
+     "conversionValue": 3.21,
+     "ctr": 0.00843337012044821,
+     "cpc": 3.3201436199401475,
+     "cpm": 27.999999999999996,
+     "cpa": 90.35690091470993,
+     "roas": 0.01106722330974946,
+     "cvr": 0.036744770862317554
+    },
+    "prev7": {
+     "spend": 287.35,
+     "impressions": 10263,
+     "clicks": 88,
+     "installs": 0,
+     "conversions": 3.3,
+     "conversionValue": 3.3,
+     "ctr": 0.008543213125991154,
+     "cpc": 3.2774554008040786,
+     "cpm": 28,
+     "cpa": 86.9535943380145,
+     "roas": 0.01150038716183143,
+     "cvr": 0.037692006014882304
+    },
+    "last30": {
+     "spend": 1207.03,
+     "impressions": 43108,
+     "clicks": 349,
+     "installs": 0,
+     "conversions": 12.7,
+     "conversionValue": 12.67,
+     "ctr": 0.008084663051158474,
+     "cpc": 3.463347800993116,
+     "cpm": 27.999999999999996,
+     "cpa": 95.29867618266233,
+     "roas": 0.010493325196703306,
+     "cvr": 0.036342034745108054
+    }
+   }
+  },
+  {
+   "id": "meta_ads:900109",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "channel": "Instagram Reels",
+   "campaign": "Reels Muse",
+   "adGroup": "Interesse video",
+   "ad": "Reel antes e depois",
+   "creative": {
+    "id": "cr-9",
+    "name": "Reel antes e depois",
+    "type": "Video",
+    "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(477%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EVideo%3C%2Ftext%3E%3C%2Fsvg%3E"
+   },
+   "status": "ENABLED",
+   "windows": {
+    "yesterday": {
+     "spend": 22.9,
+     "impressions": 739,
+     "clicks": 14,
+     "installs": 0,
+     "conversions": 1.3,
+     "conversionValue": 16.03,
+     "ctr": 0.01909530251659453,
+     "cpc": 1.6234359195440788,
+     "cpm": 31.000000000000004,
+     "cpa": 17.142438969603624,
+     "roas": 0.7000170758243899,
+     "cvr": 0.09470273876562715
+    },
+    "last7": {
+     "spend": 179.78,
+     "impressions": 5799,
+     "clicks": 108,
+     "installs": 0,
+     "conversions": 9.4,
+     "conversionValue": 112.26,
+     "ctr": 0.018658927742487147,
+     "cpc": 1.6614030788817367,
+     "cpm": 30.999999999999996,
+     "cpa": 19.216874276744356,
+     "roas": 0.6244511894695598,
+     "cvr": 0.08645542739967411
+    },
+    "prev7": {
+     "spend": 206.85,
+     "impressions": 6673,
+     "clicks": 127,
+     "installs": 0,
+     "conversions": 10.8,
+     "conversionValue": 129.4,
+     "ctr": 0.018991912287028942,
+     "cpc": 1.6322737558751423,
+     "cpm": 30.999999999999996,
+     "cpa": 19.18298138290165,
+     "roas": 0.6255544829280785,
+     "cvr": 0.08508968044612894
+    },
+    "last30": {
+     "spend": 910.96,
+     "impressions": 29386,
+     "clicks": 573,
+     "installs": 0,
+     "conversions": 48,
+     "conversionValue": 575.72,
+     "ctr": 0.019489623059016494,
+     "cpc": 1.5905900235283648,
+     "cpm": 31.000000000000007,
+     "cpa": 18.98744641363568,
+     "roas": 0.631996516992527,
+     "cvr": 0.08377061290274902
+    }
+   }
+  },
+  {
+   "id": "meta_ads:900110",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "channel": "Instagram Stories",
+   "campaign": "Stories Muse",
+   "adGroup": "Interesse video",
+   "ad": "Story oferta",
+   "creative": {
+    "id": "cr-10",
+    "name": "Story oferta",
+    "type": "Imagem",
+    "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(530%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EImagem%3C%2Ftext%3E%3C%2Fsvg%3E"
+   },
+   "status": "ENABLED",
+   "windows": {
+    "yesterday": {
+     "spend": 33.43,
+     "impressions": 1671,
+     "clicks": 23,
+     "installs": 0,
+     "conversions": 1,
+     "conversionValue": 8.05,
+     "ctr": 0.013773728840611872,
+     "cpc": 1.4520396206022257,
+     "cpm": 20,
+     "cpa": 33.20045416497145,
+     "roas": 0.24096055916128098,
+     "cvr": 0.04373553486308083
+    },
+    "last7": {
+     "spend": 212.02,
+     "impressions": 10601,
+     "clicks": 129,
+     "installs": 0,
+     "conversions": 6.2,
+     "conversionValue": 49.32,
+     "ctr": 0.01219107003315273,
+     "cpc": 1.6405450830494328,
+     "cpm": 20,
+     "cpa": 34.392907085535725,
+     "roas": 0.23260610044111327,
+     "cvr": 0.04770009929574636
+    },
+    "prev7": {
+     "spend": 188.52,
+     "impressions": 9426,
+     "clicks": 114,
+     "installs": 0,
+     "conversions": 6.1,
+     "conversionValue": 48.44,
+     "ctr": 0.012078664560233592,
+     "cpc": 1.655812188529989,
+     "cpm": 20.000000000000004,
+     "cpa": 31.136979366417034,
+     "roas": 0.2569292257240741,
+     "cvr": 0.053178317942936836
+    },
+    "last30": {
+     "spend": 808.32,
+     "impressions": 40416,
+     "clicks": 478,
+     "installs": 0,
+     "conversions": 23.3,
+     "conversionValue": 186.56,
+     "ctr": 0.011835693555639739,
+     "cpc": 1.6898038045662265,
+     "cpm": 20,
+     "cpa": 34.661336968722374,
+     "roas": 0.23080471498312438,
+     "cvr": 0.04875183568628839
+    }
+   }
+  },
+  {
+   "id": "meta_ads:900111",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "channel": "Instagram Feed",
+   "campaign": "Feed Fe",
+   "adGroup": "Remarketing",
+   "ad": "Imagem versiculo",
+   "creative": {
+    "id": "cr-11",
+    "name": "Imagem versiculo",
+    "type": "Imagem",
+    "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(583%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EImagem%3C%2Ftext%3E%3C%2Fsvg%3E"
+   },
+   "status": "ENABLED",
+   "windows": {
+    "yesterday": {
+     "spend": 19.81,
+     "impressions": 861,
+     "clicks": 22,
+     "installs": 0,
+     "conversions": 1.8,
+     "conversionValue": 36.69,
+     "ctr": 0.025559261534363036,
+     "cpc": 0.8998695040182499,
+     "cpm": 23,
+     "cpa": 10.796641758315108,
+     "roas": 1.8524278611538505,
+     "cvr": 0.08334716703230514
+    },
+    "last7": {
+     "spend": 136.9,
+     "impressions": 5952,
+     "clicks": 148,
+     "installs": 0,
+     "conversions": 13.1,
+     "conversionValue": 262.3,
+     "ctr": 0.024819283571752306,
+     "cpc": 0.9266987877997052,
+     "cpm": 23,
+     "cpa": 10.438314780612052,
+     "roas": 1.9160180949081604,
+     "cvr": 0.08877858229768465
+    },
+    "prev7": {
+     "spend": 142.57,
+     "impressions": 6199,
+     "clicks": 150,
+     "installs": 0,
+     "conversions": 13.2,
+     "conversionValue": 264.47,
+     "ctr": 0.02416683906991768,
+     "cpc": 0.9517173484483483,
+     "cpm": 23,
+     "cpa": 10.781310624409553,
+     "roas": 1.8550620325063976,
+     "cvr": 0.0882747359392096
+    },
+    "last30": {
+     "spend": 590.88,
+     "impressions": 25691,
+     "clicks": 633,
+     "installs": 0,
+     "conversions": 56.7,
+     "conversionValue": 1134.64,
+     "ctr": 0.02465078473553848,
+     "cpc": 0.9330331771078031,
+     "cpm": 23.000000000000004,
+     "cpa": 10.415320992505817,
+     "roas": 1.9202480667077562,
+     "cvr": 0.08958275772577269
+    }
+   }
+  }
+ ],
+ "creatives": [
+  {
+   "key": "google_ads:FaithSchool:PMax asset group A",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "name": "PMax asset group A",
+   "type": "Video",
+   "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(53%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EVideo%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "adsCount": 1,
+   "windows": {
+    "yesterday": {
+     "spend": 62.12,
+     "impressions": 2958,
+     "clicks": 67,
+     "installs": 0,
+     "conversions": 5.5,
+     "conversionValue": 27.65,
+     "ctr": 0.022726377995684745,
+     "cpc": 0.9240363776395628,
+     "cpm": 21,
+     "cpa": 11.234795599689964,
+     "roas": 0.44504592501335594,
+     "cvr": 0.08224772488651798
+    },
+    "last7": {
+     "spend": 494.75,
+     "impressions": 23560,
+     "clicks": 471,
+     "installs": 0,
+     "conversions": 31.3,
+     "conversionValue": 156.57,
+     "ctr": 0.020003020729154372,
+     "cpc": 1.0498414356683903,
+     "cpm": 20.999999999999993,
+     "cpa": 15.799455112209387,
+     "roas": 0.31646661005012366,
+     "cvr": 0.06644795204722607
+    },
+    "prev7": {
+     "spend": 438.26,
+     "impressions": 20870,
+     "clicks": 415,
+     "installs": 0,
+     "conversions": 29.6,
+     "conversionValue": 147.76,
+     "ctr": 0.019863990597019477,
+     "cpc": 1.0571893848535638,
+     "cpm": 20.999999999999996,
+     "cpa": 14.829864425289069,
+     "roas": 0.33715749899059094,
+     "cvr": 0.07128786579132579
+    },
+    "last30": {
+     "spend": 1943.25,
+     "impressions": 92536,
+     "clicks": 1851,
+     "installs": 0,
+     "conversions": 131.3,
+     "conversionValue": 656.52,
+     "ctr": 0.020005356181206337,
+     "cpc": 1.049718875774282,
+     "cpm": 20.999999999999996,
+     "cpa": 14.799715574327443,
+     "roas": 0.3378443305135761,
+     "cvr": 0.07092831416268519
+    }
+   }
+  },
+  {
+   "key": "meta_ads:FaithSchool:Reel testemunho",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "name": "Reel testemunho",
+   "type": "Video",
+   "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(371%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EVideo%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "adsCount": 1,
+   "windows": {
+    "yesterday": {
+     "spend": 52.62,
+     "impressions": 2105,
+     "clicks": 33,
+     "installs": 0,
+     "conversions": 1.9,
+     "conversionValue": 19.48,
+     "ctr": 0.015582554700784386,
+     "cpc": 1.6043582377889272,
+     "cpm": 24.999999999999996,
+     "cpa": 27.007110043586433,
+     "roas": 0.37027286458496034,
+     "cvr": 0.05940503205265849
+    },
+    "last7": {
+     "spend": 436.39,
+     "impressions": 17456,
+     "clicks": 270,
+     "installs": 0,
+     "conversions": 15.7,
+     "conversionValue": 156.69,
+     "ctr": 0.015490956602627913,
+     "cpc": 1.613844815481502,
+     "cpm": 25,
+     "cpa": 27.85000417106197,
+     "roas": 0.35906637351209714,
+     "cvr": 0.05794774053062425
+    },
+    "prev7": {
+     "spend": 413.36,
+     "impressions": 16534,
+     "clicks": 249,
+     "installs": 0,
+     "conversions": 16.1,
+     "conversionValue": 160.72,
+     "ctr": 0.015063339111190807,
+     "cpc": 1.6596585800439878,
+     "cpm": 25,
+     "cpa": 25.719106442199138,
+     "roas": 0.3888159964839331,
+     "cvr": 0.06453018046229125
+    },
+    "last30": {
+     "spend": 1742.25,
+     "impressions": 69690,
+     "clicks": 1036,
+     "installs": 0,
+     "conversions": 61,
+     "conversionValue": 609.75,
+     "ctr": 0.014859365327117692,
+     "cpc": 1.682440632533349,
+     "cpm": 25,
+     "cpa": 28.573194040883077,
+     "roas": 0.34997837433546314,
+     "cvr": 0.05888178374899497
+    }
+   }
+  },
+  {
+   "key": "meta_ads:InvestCoach.AI:Carrossel dicas",
+   "platform": "meta_ads",
+   "product": "InvestCoach.AI",
+   "name": "Carrossel dicas",
+   "type": "Carrossel",
+   "thumbnailUrl": null,
+   "adsCount": 1,
+   "windows": {
+    "yesterday": {
+     "spend": 32.01,
+     "impressions": 1143,
+     "clicks": 9,
+     "installs": 0,
+     "conversions": 0.3,
+     "conversionValue": 0.31,
+     "ctr": 0.008202536572143437,
+     "cpc": 3.4135781966630367,
+     "cpm": 27.999999999999996,
+     "cpa": 103.91342299071525,
+     "roas": 0.009623395815662341,
+     "cvr": 0.03285021413420327
+    },
+    "last7": {
+     "spend": 289.95,
+     "impressions": 10356,
+     "clicks": 87,
+     "installs": 0,
+     "conversions": 3.2,
+     "conversionValue": 3.21,
+     "ctr": 0.00843337012044821,
+     "cpc": 3.3201436199401475,
+     "cpm": 27.999999999999996,
+     "cpa": 90.35690091470993,
+     "roas": 0.01106722330974946,
+     "cvr": 0.036744770862317554
+    },
+    "prev7": {
+     "spend": 287.35,
+     "impressions": 10263,
+     "clicks": 88,
+     "installs": 0,
+     "conversions": 3.3,
+     "conversionValue": 3.3,
+     "ctr": 0.008543213125991154,
+     "cpc": 3.2774554008040786,
+     "cpm": 28,
+     "cpa": 86.9535943380145,
+     "roas": 0.01150038716183143,
+     "cvr": 0.037692006014882304
+    },
+    "last30": {
+     "spend": 1207.03,
+     "impressions": 43108,
+     "clicks": 349,
+     "installs": 0,
+     "conversions": 12.7,
+     "conversionValue": 12.67,
+     "ctr": 0.008084663051158474,
+     "cpc": 3.463347800993116,
+     "cpm": 27.999999999999996,
+     "cpa": 95.29867618266233,
+     "roas": 0.010493325196703306,
+     "cvr": 0.036342034745108054
+    }
+   }
+  },
+  {
+   "key": "google_ads:InvestCoach.AI:RSA coach 01",
+   "platform": "google_ads",
+   "product": "InvestCoach.AI",
+   "name": "RSA coach 01",
+   "type": "Texto RSA",
+   "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(159%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3ETexto%20RSA%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "adsCount": 1,
+   "windows": {
+    "yesterday": {
+     "spend": 30.95,
+     "impressions": 1146,
+     "clicks": 14,
+     "installs": 0,
+     "conversions": 0.9,
+     "conversionValue": 1.75,
+     "ctr": 0.011897331221401691,
+     "cpc": 2.269416518507163,
+     "cpm": 27,
+     "cpa": 35.362256347928785,
+     "roas": 0.05655747699813116,
+     "cvr": 0.06417623627232388
+    },
+    "last7": {
+     "spend": 210.31,
+     "impressions": 7789,
+     "clicks": 88,
+     "installs": 0,
+     "conversions": 4.7,
+     "conversionValue": 9.44,
+     "ctr": 0.011291916224529344,
+     "cpc": 2.391091065779261,
+     "cpm": 27.000000000000004,
+     "cpa": 44.53728466465327,
+     "roas": 0.04490619522629513,
+     "cvr": 0.0536874011018668
+    },
+    "prev7": {
+     "spend": 253.07,
+     "impressions": 9373,
+     "clicks": 113,
+     "installs": 0,
+     "conversions": 5,
+     "conversionValue": 10,
+     "ctr": 0.012003424784328065,
+     "cpc": 2.249358036154131,
+     "cpm": 27,
+     "cpa": 50.62112364688758,
+     "roas": 0.03950919805635269,
+     "cvr": 0.044435166075031056
+    },
+    "last30": {
+     "spend": 1134.65,
+     "impressions": 42024,
+     "clicks": 496,
+     "installs": 0,
+     "conversions": 23.9,
+     "conversionValue": 47.74,
+     "ctr": 0.011803864567133336,
+     "cpc": 2.2873864611407653,
+     "cpm": 26.999999999999993,
+     "cpa": 47.538726422612505,
+     "roas": 0.04207096299173615,
+     "cvr": 0.04811627557722573
+    }
+   }
+  },
+  {
+   "key": "meta_ads:Muse Edit:Reel antes e depois",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "name": "Reel antes e depois",
+   "type": "Video",
+   "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(477%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EVideo%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "adsCount": 1,
+   "windows": {
+    "yesterday": {
+     "spend": 22.9,
+     "impressions": 739,
+     "clicks": 14,
+     "installs": 0,
+     "conversions": 1.3,
+     "conversionValue": 16.03,
+     "ctr": 0.01909530251659453,
+     "cpc": 1.6234359195440788,
+     "cpm": 31.000000000000004,
+     "cpa": 17.142438969603624,
+     "roas": 0.7000170758243899,
+     "cvr": 0.09470273876562715
+    },
+    "last7": {
+     "spend": 179.78,
+     "impressions": 5799,
+     "clicks": 108,
+     "installs": 0,
+     "conversions": 9.4,
+     "conversionValue": 112.26,
+     "ctr": 0.018658927742487147,
+     "cpc": 1.6614030788817367,
+     "cpm": 30.999999999999996,
+     "cpa": 19.216874276744356,
+     "roas": 0.6244511894695598,
+     "cvr": 0.08645542739967411
+    },
+    "prev7": {
+     "spend": 206.85,
+     "impressions": 6673,
+     "clicks": 127,
+     "installs": 0,
+     "conversions": 10.8,
+     "conversionValue": 129.4,
+     "ctr": 0.018991912287028942,
+     "cpc": 1.6322737558751423,
+     "cpm": 30.999999999999996,
+     "cpa": 19.18298138290165,
+     "roas": 0.6255544829280785,
+     "cvr": 0.08508968044612894
+    },
+    "last30": {
+     "spend": 910.96,
+     "impressions": 29386,
+     "clicks": 573,
+     "installs": 0,
+     "conversions": 48,
+     "conversionValue": 575.72,
+     "ctr": 0.019489623059016494,
+     "cpc": 1.5905900235283648,
+     "cpm": 31.000000000000007,
+     "cpa": 18.98744641363568,
+     "roas": 0.631996516992527,
+     "cvr": 0.08377061290274902
+    }
+   }
+  },
+  {
+   "key": "apple_ads:Muse Edit:Muse generico",
+   "platform": "apple_ads",
+   "product": "Muse Edit",
+   "name": "Muse generico",
+   "type": "Product page",
+   "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(265%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EProduct%20page%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "adsCount": 1,
+   "windows": {
+    "yesterday": {
+     "spend": 35.63,
+     "impressions": 1875,
+     "clicks": 127,
+     "installs": 41,
+     "conversions": 41.3,
+     "conversionValue": 1856.48,
+     "ctr": 0.06766075743176042,
+     "cpc": 0.28081270031838673,
+     "cpm": 19,
+     "cpa": 0.8636849792456953,
+     "roas": 52.10233022612137,
+     "cvr": 0.3251332454150543
+    },
+    "last7": {
+     "spend": 212.95,
+     "impressions": 11208,
+     "clicks": 686,
+     "installs": 199,
+     "conversions": 198.8,
+     "conversionValue": 8943.99,
+     "ctr": 0.06120822543254393,
+     "cpc": 0.3104157956832032,
+     "cpm": 18.999999999999996,
+     "cpa": 1.0713962716176049,
+     "roas": 42.0012661907611,
+     "cvr": 0.2897301436512695
+    },
+    "prev7": {
+     "spend": 203.82,
+     "impressions": 10727,
+     "clicks": 649,
+     "installs": 184,
+     "conversions": 184.2,
+     "conversionValue": 8286.77,
+     "ctr": 0.060535389042107715,
+     "cpc": 0.3138659931099777,
+     "cpm": 19,
+     "cpa": 1.1067921008828276,
+     "roas": 40.65804225030694,
+     "cvr": 0.2835817068622227
+    },
+    "last30": {
+     "spend": 905.72,
+     "impressions": 47669,
+     "clicks": 2891,
+     "installs": 883,
+     "conversions": 882.9,
+     "conversionValue": 39732.61,
+     "ctr": 0.060638856227411414,
+     "cpc": 0.31333044819884265,
+     "cpm": 19,
+     "cpa": 1.0257922324877216,
+     "roas": 43.86853260807729,
+     "cvr": 0.3054521551980977
+    }
+   }
+  },
+  {
+   "key": "google_ads:FaithSchool:RSA marca 01",
+   "platform": "google_ads",
+   "product": "FaithSchool",
+   "name": "RSA marca 01",
+   "type": "Texto RSA",
+   "thumbnailUrl": null,
+   "adsCount": 1,
+   "windows": {
+    "yesterday": {
+     "spend": 25.16,
+     "impressions": 1398,
+     "clicks": 61,
+     "installs": 0,
+     "conversions": 6.1,
+     "conversionValue": 42.41,
+     "ctr": 0.043883994542760776,
+     "cpc": 0.41017232336178316,
+     "cpm": 18,
+     "cpa": 4.152750914859989,
+     "roas": 1.6856296328661473,
+     "cvr": 0.09877123183431102
+    },
+    "last7": {
+     "spend": 183.36,
+     "impressions": 10187,
+     "clicks": 456,
+     "installs": 0,
+     "conversions": 47.1,
+     "conversionValue": 329.78,
+     "ctr": 0.04478766358376091,
+     "cpc": 0.4018963830595181,
+     "cpm": 18.000000000000004,
+     "cpa": 3.8920303935578615,
+     "roas": 1.7985471057950857,
+     "cvr": 0.1032613680830299
+    },
+    "prev7": {
+     "spend": 185.6,
+     "impressions": 10311,
+     "clicks": 472,
+     "installs": 0,
+     "conversions": 50.4,
+     "conversionValue": 353.06,
+     "ctr": 0.04575121246971495,
+     "cpc": 0.3934321961831092,
+     "cpm": 18.000000000000004,
+     "cpa": 3.6798671141634203,
+     "roas": 1.902242603559715,
+     "cvr": 0.10691478359879632
+    },
+    "last30": {
+     "spend": 897.62,
+     "impressions": 49868,
+     "clicks": 2258,
+     "installs": 0,
+     "conversions": 236.4,
+     "conversionValue": 1654.86,
+     "ctr": 0.04528339759871729,
+     "cpc": 0.39749667548156487,
+     "cpm": 18,
+     "cpa": 3.7968977056440996,
+     "roas": 1.8436103742259051,
+     "cvr": 0.10468985637687445
+    }
+   }
+  },
+  {
+   "key": "google_ads:CantuStudio:RSA coro 02",
+   "platform": "google_ads",
+   "product": "CantuStudio",
+   "name": "RSA coro 02",
+   "type": "Texto RSA",
+   "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(106%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3ETexto%20RSA%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "adsCount": 1,
+   "windows": {
+    "yesterday": {
+     "spend": 27.08,
+     "impressions": 1128,
+     "clicks": 32,
+     "installs": 0,
+     "conversions": 2.2,
+     "conversionValue": 8.78,
+     "ctr": 0.028535238125827162,
+     "cpc": 0.8410653485410261,
+     "cpm": 24,
+     "cpa": 12.33305526202116,
+     "roas": 0.32433163681004007,
+     "cvr": 0.06819602528912946
+    },
+    "last7": {
+     "spend": 200.54,
+     "impressions": 8356,
+     "clicks": 260,
+     "installs": 0,
+     "conversions": 20.9,
+     "conversionValue": 83.5,
+     "ctr": 0.03113620817905859,
+     "cpc": 0.7708067681838594,
+     "cpm": 24,
+     "cpa": 9.606247800633056,
+     "roas": 0.4163956711314899,
+     "cvr": 0.08024015038765323
+    },
+    "prev7": {
+     "spend": 205.12,
+     "impressions": 8547,
+     "clicks": 259,
+     "installs": 0,
+     "conversions": 25.2,
+     "conversionValue": 100.62,
+     "ctr": 0.030330617834123472,
+     "cpc": 0.791279628105656,
+     "cpm": 24,
+     "cpa": 8.154739986140457,
+     "roas": 0.4905122673191636,
+     "cvr": 0.09703309111639247
+    },
+    "last30": {
+     "spend": 850.57,
+     "impressions": 35440,
+     "clicks": 1077,
+     "installs": 0,
+     "conversions": 93.5,
+     "conversionValue": 373.82,
+     "ctr": 0.03039370547125373,
+     "cpc": 0.7896371840116408,
+     "cpm": 23.999999999999996,
+     "cpa": 9.101331365045715,
+     "roas": 0.439496139582641,
+     "cvr": 0.08676062351100593
+    }
+   }
+  },
+  {
+   "key": "meta_ads:Muse Edit:Story oferta",
+   "platform": "meta_ads",
+   "product": "Muse Edit",
+   "name": "Story oferta",
+   "type": "Imagem",
+   "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(530%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EImagem%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "adsCount": 1,
+   "windows": {
+    "yesterday": {
+     "spend": 33.43,
+     "impressions": 1671,
+     "clicks": 23,
+     "installs": 0,
+     "conversions": 1,
+     "conversionValue": 8.05,
+     "ctr": 0.013773728840611872,
+     "cpc": 1.4520396206022257,
+     "cpm": 20,
+     "cpa": 33.20045416497145,
+     "roas": 0.24096055916128098,
+     "cvr": 0.04373553486308083
+    },
+    "last7": {
+     "spend": 212.02,
+     "impressions": 10601,
+     "clicks": 129,
+     "installs": 0,
+     "conversions": 6.2,
+     "conversionValue": 49.32,
+     "ctr": 0.01219107003315273,
+     "cpc": 1.6405450830494328,
+     "cpm": 20,
+     "cpa": 34.392907085535725,
+     "roas": 0.23260610044111327,
+     "cvr": 0.04770009929574636
+    },
+    "prev7": {
+     "spend": 188.52,
+     "impressions": 9426,
+     "clicks": 114,
+     "installs": 0,
+     "conversions": 6.1,
+     "conversionValue": 48.44,
+     "ctr": 0.012078664560233592,
+     "cpc": 1.655812188529989,
+     "cpm": 20.000000000000004,
+     "cpa": 31.136979366417034,
+     "roas": 0.2569292257240741,
+     "cvr": 0.053178317942936836
+    },
+    "last30": {
+     "spend": 808.32,
+     "impressions": 40416,
+     "clicks": 478,
+     "installs": 0,
+     "conversions": 23.3,
+     "conversionValue": 186.56,
+     "ctr": 0.011835693555639739,
+     "cpc": 1.6898038045662265,
+     "cpm": 20,
+     "cpa": 34.661336968722374,
+     "roas": 0.23080471498312438,
+     "cvr": 0.04875183568628839
+    }
+   }
+  },
+  {
+   "key": "apple_ads:CantuStudio:Cantus exact",
+   "platform": "apple_ads",
+   "product": "CantuStudio",
+   "name": "Cantus exact",
+   "type": "Product page",
+   "thumbnailUrl": null,
+   "adsCount": 1,
+   "windows": {
+    "yesterday": {
+     "spend": 29.08,
+     "impressions": 969,
+     "clicks": 73,
+     "installs": 32,
+     "conversions": 32.2,
+     "conversionValue": 1772.42,
+     "ctr": 0.07540193053707481,
+     "cpc": 0.397867797101682,
+     "cpm": 30.000000000000004,
+     "cpa": 0.9023407307173024,
+     "roas": 60.95258490246648,
+     "cvr": 0.44092855786904683
+    },
+    "last7": {
+     "spend": 195.29,
+     "impressions": 6510,
+     "clicks": 488,
+     "installs": 190,
+     "conversions": 190.4,
+     "conversionValue": 10474.23,
+     "ctr": 0.07493461714281896,
+     "cpc": 0.4003490128310468,
+     "cpm": 30.000000000000007,
+     "cpa": 1.0254810243464612,
+     "roas": 53.63336687292824,
+     "cvr": 0.39040119058876704
+    },
+    "prev7": {
+     "spend": 176.2,
+     "impressions": 5873,
+     "clicks": 443,
+     "installs": 159,
+     "conversions": 159,
+     "conversionValue": 8743.81,
+     "ctr": 0.07536874165049286,
+     "cpc": 0.398042999564977,
+     "cpm": 30,
+     "cpa": 1.1082975258763792,
+     "roas": 49.62566343050267,
+     "cvr": 0.3591481441323503
+    },
+    "last30": {
+     "spend": 743.47,
+     "impressions": 24782,
+     "clicks": 1910,
+     "installs": 725,
+     "conversions": 724.8,
+     "conversionValue": 39864.62,
+     "ctr": 0.07705178026401399,
+     "cpc": 0.3893485640073019,
+     "cpm": 30.000000000000014,
+     "cpa": 1.025738407895162,
+     "roas": 53.619908913093376,
+     "cvr": 0.3795788097730043
+    }
+   }
+  },
+  {
+   "key": "meta_ads:FaithSchool:Imagem versiculo",
+   "platform": "meta_ads",
+   "product": "FaithSchool",
+   "name": "Imagem versiculo",
+   "type": "Imagem",
+   "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(583%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EImagem%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "adsCount": 1,
+   "windows": {
+    "yesterday": {
+     "spend": 19.81,
+     "impressions": 861,
+     "clicks": 22,
+     "installs": 0,
+     "conversions": 1.8,
+     "conversionValue": 36.69,
+     "ctr": 0.025559261534363036,
+     "cpc": 0.8998695040182499,
+     "cpm": 23,
+     "cpa": 10.796641758315108,
+     "roas": 1.8524278611538505,
+     "cvr": 0.08334716703230514
+    },
+    "last7": {
+     "spend": 136.9,
+     "impressions": 5952,
+     "clicks": 148,
+     "installs": 0,
+     "conversions": 13.1,
+     "conversionValue": 262.3,
+     "ctr": 0.024819283571752306,
+     "cpc": 0.9266987877997052,
+     "cpm": 23,
+     "cpa": 10.438314780612052,
+     "roas": 1.9160180949081604,
+     "cvr": 0.08877858229768465
+    },
+    "prev7": {
+     "spend": 142.57,
+     "impressions": 6199,
+     "clicks": 150,
+     "installs": 0,
+     "conversions": 13.2,
+     "conversionValue": 264.47,
+     "ctr": 0.02416683906991768,
+     "cpc": 0.9517173484483483,
+     "cpm": 23,
+     "cpa": 10.781310624409553,
+     "roas": 1.8550620325063976,
+     "cvr": 0.0882747359392096
+    },
+    "last30": {
+     "spend": 590.88,
+     "impressions": 25691,
+     "clicks": 633,
+     "installs": 0,
+     "conversions": 56.7,
+     "conversionValue": 1134.64,
+     "ctr": 0.02465078473553848,
+     "cpc": 0.9330331771078031,
+     "cpm": 23.000000000000004,
+     "cpa": 10.415320992505817,
+     "roas": 1.9202480667077562,
+     "cvr": 0.08958275772577269
+    }
+   }
+  },
+  {
+   "key": "apple_ads:FaithSchool:Faith marca",
+   "platform": "apple_ads",
+   "product": "FaithSchool",
+   "name": "Faith marca",
+   "type": "Product page",
+   "thumbnailUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22hsl(318%2C45%25%2C55%25)%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2254%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3EProduct%20page%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "adsCount": 1,
+   "windows": {
+    "yesterday": {
+     "spend": 11.49,
+     "impressions": 522,
+     "clicks": 53,
+     "installs": 18,
+     "conversions": 18.1,
+     "conversionValue": 1085.47,
+     "ctr": 0.10138642183179035,
+     "cpc": 0.21699158134311197,
+     "cpm": 22,
+     "cpa": 0.6349722475076771,
+     "roas": 94.49231873598471,
+     "cvr": 0.34173396112164484
+    },
+    "last7": {
+     "spend": 89.75,
+     "impressions": 4080,
+     "clicks": 385,
+     "installs": 144,
+     "conversions": 144.4,
+     "conversionValue": 8661.18,
+     "ctr": 0.0942683213399419,
+     "cpc": 0.23337638442362404,
+     "cpm": 22.000000000000004,
+     "cpa": 0.6217474966879974,
+     "roas": 96.50219794951411,
+     "cvr": 0.37535556743984116
+    },
+    "prev7": {
+     "spend": 90.61,
+     "impressions": 4119,
+     "clicks": 378,
+     "installs": 151,
+     "conversions": 150.6,
+     "conversionValue": 9038.3,
+     "ctr": 0.09185417231108278,
+     "cpc": 0.23951007827377221,
+     "cpm": 22,
+     "cpa": 0.6015148238723915,
+     "roas": 99.74816516363812,
+     "cvr": 0.39817818076680206
+    },
+    "last30": {
+     "spend": 449.73,
+     "impressions": 20442,
+     "clicks": 1869,
+     "installs": 776,
+     "conversions": 776,
+     "conversionValue": 46560.04,
+     "ctr": 0.09144949130869331,
+     "cpc": 0.24056995490262115,
+     "cpm": 21.999999999999996,
+     "cpa": 0.5795472242829335,
+     "roas": 103.52909562156434,
+     "cvr": 0.4150998310798147
+    }
+   }
+  }
+ ],
+ "recommendations": [
+  {
+   "id": "r1",
+   "type": "fix",
+   "severity": "critical",
+   "kind": "tracking",
+   "product": "Muse Edit",
+   "platform": "meta_ads",
+   "entityLevel": "campaign",
+   "entityName": "Reels Muse",
+   "title": "Conversoes zeradas em 2 dias com gasto ativo",
+   "evidence": "Gasto R$ 140 nos ultimos 2 dias, 0 conversoes registradas (media 7d: 9/dia).",
+   "action": "Verificar pixel/CAPI e evento de compra antes de manter o orcamento.",
+   "expectedImpact": "Evita ~R$ 70/dia de gasto cego",
+   "requiresApproval": true
+  },
+  {
+   "id": "r2",
+   "type": "fix",
+   "severity": "high",
+   "kind": "waste",
+   "product": "InvestCoach.AI",
+   "platform": "meta_ads",
+   "entityLevel": "ad",
+   "entityName": "Carrossel dicas",
+   "title": "CPA 3x acima da meta no Feed Invest",
+   "evidence": "CPA R$ 210 vs meta R$ 70, ROAS 0,3 em 30 dias.",
+   "action": "Pausar anuncio e redistribuir orcamento para Search.",
+   "expectedImpact": "Economia estimada R$ 900/mes",
+   "requiresApproval": true
+  },
+  {
+   "id": "r3",
+   "type": "fix",
+   "severity": "high",
+   "kind": "fatigue",
+   "product": "FaithSchool",
+   "platform": "meta_ads",
+   "entityLevel": "creative",
+   "entityName": "Reel testemunho",
+   "title": "Fadiga de criativo: CTR caiu 35% em 7 dias",
+   "evidence": "CTR 0,9% vs 1,4% na semana anterior; frequencia alta.",
+   "action": "Subir 2 variacoes novas do roteiro de testemunho.",
+   "expectedImpact": "Recuperar CTR e reduzir CPA ~15%",
+   "requiresApproval": true
+  },
+  {
+   "id": "r4",
+   "type": "fix",
+   "severity": "medium",
+   "kind": "landing",
+   "product": "InvestCoach.AI",
+   "platform": "google_ads",
+   "entityLevel": "campaign",
+   "entityName": "Investimento Search",
+   "title": "Alto CTR, baixa conversao na pagina",
+   "evidence": "CTR 5% mas CVR 1,2%; sessoes sem inicio de cadastro.",
+   "action": "Revisar pagina de destino e proposta acima da dobra.",
+   "expectedImpact": "CVR +0,8pp",
+   "requiresApproval": true
+  },
+  {
+   "id": "r5",
+   "type": "opportunity",
+   "severity": "high",
+   "kind": "scale",
+   "product": "FaithSchool",
+   "platform": "apple_ads",
+   "entityLevel": "campaign",
+   "entityName": "Faith ASA",
+   "title": "Marca no Apple Ads com ROAS forte e baixa cobertura",
+   "evidence": "ROAS 5,8 e CPA R$ 3,10; impressoes limitadas por orcamento.",
+   "action": "Aumentar teto diario em 30%.",
+   "expectedImpact": "+25 instalacoes/semana",
+   "requiresApproval": true
+  },
+  {
+   "id": "r6",
+   "type": "opportunity",
+   "severity": "medium",
+   "kind": "budget_shift",
+   "product": "CantuStudio",
+   "platform": "all",
+   "entityLevel": "product",
+   "entityName": "CantuStudio",
+   "title": "Mover verba de Search genérico para Apple Ads",
+   "evidence": "CPA Apple R$ 4,80 vs Google R$ 21,00.",
+   "action": "Realocar R$ 300/semana para Apple Ads exact.",
+   "expectedImpact": "Mais instalacoes pelo mesmo gasto",
+   "requiresApproval": true
+  },
+  {
+   "id": "r7",
+   "type": "opportunity",
+   "severity": "medium",
+   "kind": "coverage",
+   "product": "Muse Edit",
+   "platform": "tiktok_ads",
+   "entityLevel": "platform",
+   "entityName": "TikTok Ads",
+   "title": "TikTok sem credenciais: sem cobertura",
+   "evidence": "Conector sem dados; 3 produtos com potencial de video curto.",
+   "action": "Configurar credenciais do TikTok Ads no job.",
+   "expectedImpact": "Habilita medicao de canal novo",
+   "requiresApproval": true
+  },
+  {
+   "id": "r8",
+   "type": "opportunity",
+   "severity": "low",
+   "kind": "data",
+   "product": "Nao mapeado",
+   "platform": "all",
+   "entityLevel": "platform",
+   "entityName": "Mapeamento",
+   "title": "Campanhas sem produto mapeado",
+   "evidence": "1 campanha com gasto fora do mapeamento de produto.",
+   "action": "Completar o mapa campanha-produto.",
+   "expectedImpact": "Atribuicao mais confiavel",
+   "requiresApproval": true
+  }
+ ],
+  "web": {
+    "connectors": [
+      {
+        "source": "ga4",
+        "status": "ok",
+        "properties": 2,
+        "message": ""
+      },
+      {
+        "source": "gsc",
+        "status": "error",
+        "properties": 2,
+        "message": "Fake sample error: permission denied"
+      }
+    ],
+    "traffic": [
+      {
+        "product": "FaithSchool",
+        "property": "Fake Site A",
+        "propertyId": "111111111",
+        "windows": {
+          "yesterday": {
+            "sessions": 14,
+            "users": 10,
+            "newUsers": 6,
+            "engagedSessions": 7,
+            "keyEvents": 3,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.2143
+          },
+          "last7": {
+            "sessions": 100,
+            "users": 70,
+            "newUsers": 42,
+            "engagedSessions": 55,
+            "keyEvents": 10,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1
+          },
+          "prev7": {
+            "sessions": 80,
+            "users": 56,
+            "newUsers": 33,
+            "engagedSessions": 44,
+            "keyEvents": 8,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1
+          },
+          "last30": {
+            "sessions": 400,
+            "users": 300,
+            "newUsers": 180,
+            "engagedSessions": 220,
+            "keyEvents": 33,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0825
+          }
+        }
+      },
+      {
+        "product": "CantuStudio",
+        "property": "Fake Site B",
+        "propertyId": "222222222",
+        "windows": {
+          "yesterday": {
+            "sessions": 8,
+            "users": 6,
+            "newUsers": 3,
+            "engagedSessions": 4,
+            "keyEvents": 3,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.375
+          },
+          "last7": {
+            "sessions": 60,
+            "users": 42,
+            "newUsers": 25,
+            "engagedSessions": 33,
+            "keyEvents": 6,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1
+          },
+          "prev7": {
+            "sessions": 48,
+            "users": 33,
+            "newUsers": 19,
+            "engagedSessions": 26,
+            "keyEvents": 5,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1042
+          },
+          "last30": {
+            "sessions": 240,
+            "users": 180,
+            "newUsers": 108,
+            "engagedSessions": 132,
+            "keyEvents": 20,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0833
+          }
+        }
+      }
+    ],
+    "channels": [
+      {
+        "product": "FaithSchool",
+        "channel": "Organic Search",
+        "windows": {
+          "last7": {
+            "sessions": 50,
+            "users": 33,
+            "newUsers": 19,
+            "engagedSessions": 27,
+            "keyEvents": 2,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.04
+          },
+          "prev7": {
+            "sessions": 33,
+            "users": 25,
+            "newUsers": 15,
+            "engagedSessions": 18,
+            "keyEvents": 1,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0303
+          }
+        }
+      },
+      {
+        "product": "FaithSchool",
+        "channel": "Direct",
+        "windows": {
+          "last7": {
+            "sessions": 33,
+            "users": 25,
+            "newUsers": 15,
+            "engagedSessions": 18,
+            "keyEvents": 2,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0606
+          },
+          "prev7": {
+            "sessions": 25,
+            "users": 20,
+            "newUsers": 12,
+            "engagedSessions": 13,
+            "keyEvents": 1,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.04
+          }
+        }
+      },
+      {
+        "product": "FaithSchool",
+        "channel": "Paid Search",
+        "windows": {
+          "last7": {
+            "sessions": 20,
+            "users": 16,
+            "newUsers": 9,
+            "engagedSessions": 11,
+            "keyEvents": 2,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1
+          },
+          "prev7": {
+            "sessions": 16,
+            "users": 14,
+            "newUsers": 8,
+            "engagedSessions": 8,
+            "keyEvents": 1,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0625
+          }
+        }
+      },
+      {
+        "product": "CantuStudio",
+        "channel": "Organic Search",
+        "windows": {
+          "last7": {
+            "sessions": 30,
+            "users": 20,
+            "newUsers": 12,
+            "engagedSessions": 16,
+            "keyEvents": 2,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0667
+          },
+          "prev7": {
+            "sessions": 20,
+            "users": 15,
+            "newUsers": 9,
+            "engagedSessions": 11,
+            "keyEvents": 1,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.05
+          }
+        }
+      },
+      {
+        "product": "CantuStudio",
+        "channel": "Direct",
+        "windows": {
+          "last7": {
+            "sessions": 20,
+            "users": 15,
+            "newUsers": 9,
+            "engagedSessions": 11,
+            "keyEvents": 2,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1
+          },
+          "prev7": {
+            "sessions": 15,
+            "users": 12,
+            "newUsers": 7,
+            "engagedSessions": 8,
+            "keyEvents": 1,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.0667
+          }
+        }
+      },
+      {
+        "product": "CantuStudio",
+        "channel": "Paid Search",
+        "windows": {
+          "last7": {
+            "sessions": 12,
+            "users": 10,
+            "newUsers": 6,
+            "engagedSessions": 6,
+            "keyEvents": 2,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1667
+          },
+          "prev7": {
+            "sessions": 10,
+            "users": 8,
+            "newUsers": 4,
+            "engagedSessions": 5,
+            "keyEvents": 1,
+            "engagementRate": 0.55,
+            "keyEventRate": 0.1
+          }
+        }
+      }
+    ],
+    "search": [
+      {
+        "product": "FaithSchool",
+        "site": "sc-domain:example-fake-site-a.test",
+        "windows": {
+          "yesterday": {
+            "clicks": 5,
+            "impressions": 100,
+            "ctr": 0.05,
+            "position": 12.3
+          },
+          "last7": {
+            "clicks": 33,
+            "impressions": 800,
+            "ctr": 0.0413,
+            "position": 11.8
+          },
+          "prev7": {
+            "clicks": 25,
+            "impressions": 700,
+            "ctr": 0.0357,
+            "position": 13.1
+          },
+          "last30": {
+            "clicks": 100,
+            "impressions": 3000,
+            "ctr": 0.0333,
+            "position": 12.0
+          }
+        }
+      },
+      {
+        "product": "CantuStudio",
+        "site": "sc-domain:example-fake-site-b.test",
+        "windows": {
+          "yesterday": {
+            "clicks": 3,
+            "impressions": 60,
+            "ctr": 0.05,
+            "position": 12.3
+          },
+          "last7": {
+            "clicks": 20,
+            "impressions": 480,
+            "ctr": 0.0417,
+            "position": 11.8
+          },
+          "prev7": {
+            "clicks": 15,
+            "impressions": 420,
+            "ctr": 0.0357,
+            "position": 13.1
+          },
+          "last30": {
+            "clicks": 60,
+            "impressions": 1800,
+            "ctr": 0.0333,
+            "position": 12.0
+          }
+        }
+      }
+    ],
+    "topQueries": [
+      {
+        "product": "FaithSchool",
+        "site": "sc-domain:example-a.test",
+        "query": "fake query alpha",
+        "clicks": 12,
+        "impressions": 900,
+        "ctr": 0.0133,
+        "position": 7.4
+      },
+      {
+        "product": "FaithSchool",
+        "site": "sc-domain:example-a.test",
+        "query": "fake query beta",
+        "clicks": 5,
+        "impressions": 1500,
+        "ctr": 0.0033,
+        "position": 14.2
+      },
+      {
+        "product": "FaithSchool",
+        "site": "sc-domain:example-a.test",
+        "query": "fake query gamma",
+        "clicks": 0,
+        "impressions": 300,
+        "ctr": 0.0,
+        "position": 28.9
+      },
+      {
+        "product": "CantuStudio",
+        "site": "sc-domain:example-b.test",
+        "query": "fake query alpha",
+        "clicks": 12,
+        "impressions": 900,
+        "ctr": 0.0133,
+        "position": 7.4
+      },
+      {
+        "product": "CantuStudio",
+        "site": "sc-domain:example-b.test",
+        "query": "fake query beta",
+        "clicks": 5,
+        "impressions": 1500,
+        "ctr": 0.0033,
+        "position": 14.2
+      },
+      {
+        "product": "CantuStudio",
+        "site": "sc-domain:example-b.test",
+        "query": "fake query gamma",
+        "clicks": 0,
+        "impressions": 300,
+        "ctr": 0.0,
+        "position": 28.9
+      }
+    ]
+  },
+  "revenue": {
+    "connectors": [
+      {
+        "source": "stripe",
+        "status": "ok",
+        "message": ""
+      },
+      {
+        "source": "revenuecat",
+        "status": "missing_credentials",
+        "message": "Fake sample: REVENUECAT_API_KEY ausente"
+      }
+    ],
+    "byProduct": [
+      {
+        "product": "CantuStudio",
+        "windows": {
+          "yesterday": {
+            "revenue": 120.5,
+            "payments": 3,
+            "oneTime": 1,
+            "newSubscriptions": 2
+          },
+          "last7": {
+            "revenue": 980,
+            "payments": 24,
+            "oneTime": 6,
+            "newSubscriptions": 15
+          },
+          "last30": {
+            "revenue": 4100,
+            "payments": 96,
+            "oneTime": 20,
+            "newSubscriptions": 60
+          }
+        },
+        "mrr": 2400,
+        "activeSubscriptions": 48,
+        "trialing": 5
+      },
+      {
+        "product": "FaithSchool",
+        "windows": {
+          "yesterday": {
+            "revenue": 0,
+            "payments": 0,
+            "oneTime": 0,
+            "newSubscriptions": 0
+          },
+          "last7": {
+            "revenue": 150,
+            "payments": 4,
+            "oneTime": 4,
+            "newSubscriptions": 0
+          },
+          "last30": {
+            "revenue": 610,
+            "payments": 15,
+            "oneTime": 12,
+            "newSubscriptions": 3
+          }
+        },
+        "mrr": 90,
+        "activeSubscriptions": 3,
+        "trialing": 0
+      },
+      {
+        "product": "InvestCoach.AI",
+        "windows": {
+          "last30": {
+            "revenue": 80,
+            "payments": 2,
+            "oneTime": 0,
+            "newSubscriptions": 2
+          }
+        },
+        "mrr": 40,
+        "activeSubscriptions": 2,
+        "trialing": 1
+      }
+    ],
+    "unitEconomics": [
+      {
+        "product": "CantuStudio",
+        "spend30": 1800,
+        "revenue30": 4100,
+        "newPaying30": 60,
+        "mrr": 2400,
+        "arpu": 50,
+        "roas": 2.28,
+        "cac": 30,
+        "paybackMonths": 0.6
+      },
+      {
+        "product": "FaithSchool",
+        "spend30": 900,
+        "revenue30": 610,
+        "newPaying30": 3,
+        "mrr": 90,
+        "arpu": 30,
+        "roas": 0.68,
+        "cac": 300,
+        "paybackMonths": 10
+      },
+      {
+        "product": "InvestCoach.AI",
+        "spend30": 300,
+        "revenue30": 80,
+        "newPaying30": 0,
+        "mrr": 40,
+        "arpu": null,
+        "roas": null,
+        "cac": null,
+        "paybackMonths": null
+      }
+    ]
+  }
+}

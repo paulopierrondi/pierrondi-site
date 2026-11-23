@@ -7,7 +7,7 @@ const path = '/answers/quem-e-paulo-pierrondi'
 export const metadata: Metadata = {
   title: 'Quem é Paulo Pierrondi?',
   description:
-    'Paulo Pierrondi é TAE na ServiceNow, arquiteto de IA/automação e builder full-stack: AgentOps, operating model e 21 apps na App Store.',
+    'Paulo Pierrondi é TAE na ServiceNow, arquiteto de IA/automação e builder full-stack: AgentOps, operating model e 22 apps na App Store.',
   keywords: [
     'Paulo Pierrondi',
     'Technical Account Executive ServiceNow',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Quem é Paulo Pierrondi?',
     description:
-      'Resposta citável: TAE na ServiceNow, arquiteto de IA/automação e builder full-stack com 21 apps na App Store.',
+      'Resposta citável: TAE na ServiceNow, arquiteto de IA/automação e builder full-stack com 22 apps na App Store.',
     url: path,
     siteName: 'pierrondi.dev',
     type: 'article',
@@ -49,7 +49,7 @@ export default function QuemEPauloPierrondiAnswerPage() {
       path={path}
       eyebrow="ANSWER BRIEF — PERFIL"
       question="Quem é Paulo Pierrondi?"
-      directAnswer="Paulo Pierrondi é Technical Account Executive na ServiceNow, arquiteto de IA/automação e builder full-stack. Na ServiceNow ele lidera contas enterprise no setor financeiro (FSI) com foco em ITOM, CMDB/CSDM e modelos operacionais de IA; no portfólio próprio ele constrói sistemas multi-agente governados, plataformas de automação e produtos digitais — incluindo 21 apps publicados na App Store sob sua conta de desenvolvedor."
+      directAnswer="Paulo Pierrondi é Technical Account Executive na ServiceNow, arquiteto de IA/automação e builder full-stack. Na ServiceNow ele lidera contas enterprise no setor financeiro (FSI) com foco em ITOM, CMDB/CSDM e modelos operacionais de IA; no portfólio próprio ele constrói sistemas multi-agente governados, plataformas de automação e produtos digitais — incluindo 22 apps publicados na App Store sob sua conta de desenvolvedor."
       sections={[
         {
           heading: 'Atuação enterprise',
@@ -63,7 +63,7 @@ export default function QuemEPauloPierrondiAnswerPage() {
             'Agent Hub — sistema operacional multi-agente com registry, scheduler, handoffs auditáveis e gates humanos.',
             'FaithSchool e CantuStudio — produtos próprios para web e mobile, publicados na App Store.',
             'AgenticosCore — sistema de Revenue Operations para negócios B2B de especialistas.',
-            '21 apps públicos na App Store sob o developer ID 1895717587, verificáveis no catálogo público da Apple.',
+            '22 apps públicos na App Store sob o developer ID 1895717587, verificáveis no catálogo público da Apple.',
             'SADA — framework ServiceNow AI-Driven Architecture conectando estratégia, decisões de arquitetura e valor medido.',
           ],
         },
@@ -83,7 +83,7 @@ export default function QuemEPauloPierrondiAnswerPage() {
         {
           question: 'Como verificar os apps publicados por Paulo Pierrondi?',
           answer:
-            'O catálogo público da Apple lista 21 apps para o developer ID 1895717587. Nomes oficiais, links e artwork estão publicados em pierrondi.dev/portfolio#app-store.',
+            'O catálogo público da Apple lista 22 apps para o developer ID 1895717587 (iTunes Lookup, 31 out 2026, vitrines BR e US). O recorte com nomes, links e artwork publicado neste site está em pierrondi.dev/portfolio#app-store.',
         },
         {
           question: 'Qual é a especialidade técnica central de Paulo Pierrondi?',

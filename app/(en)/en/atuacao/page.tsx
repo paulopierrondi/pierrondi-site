@@ -3,7 +3,7 @@ import PageHeader from '@/components/PageHeader'
 import AtuacaoContent from '@/app/atuacao/AtuacaoContent'
 
 export const metadata: Metadata = {
-  title: 'Work',
+  title: 'Enterprise AI work and AgentOps',
   description:
     'Where Paulo Pierrondi creates value: AI Operating Model, ServiceNow, AgentOps and enterprise strategy, from diagnosis to governed execution.',
   alternates: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Work | pierrondi.dev',
+    title: 'Enterprise AI work and AgentOps | pierrondi.dev',
     description: 'AI Operating Model, ServiceNow and AgentOps for regulated enterprise environments.',
     url: '/en/atuacao',
     siteName: 'pierrondi.dev',

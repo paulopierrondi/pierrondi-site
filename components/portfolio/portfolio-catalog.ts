@@ -213,7 +213,7 @@ const CORE_PORTFOLIO_CATALOG: PortfolioCatalogEntry[] = [
     id: 'agenticoscore', name: 'AgenticosCore', shortCode: 'AC', category: 'products-saas', featured: true, recent: true,
     summary: localized('Revenue OS com diagnóstico, scorecard, plano de ação e cockpit de execução.', 'Revenue OS with diagnostics, scorecards, action plans, and an execution cockpit.'),
     proof: localized('Planos assinados, estados explícitos, agentes especializados e aprovação humana.', 'Signed plans, explicit states, specialized agents, and human approval.'),
-    status: localized('Plataforma operacional pública', 'Public operational platform'), technologies: ['Node.js', 'Agents', 'Scorecards', 'Human gates'], href: 'https://agenticoscore.ai/diagnostico', external: true, cta: localized('Abrir diagnóstico', 'Open diagnostics'),
+    status: localized('Plataforma operacional pública', 'Public operational platform'), technologies: ['Node.js', 'Agents', 'Scorecards', 'Human gates'], href: 'https://agenticoscore.ai/scorecard/', external: true, cta: localized('Abrir diagnóstico', 'Open diagnostics'),
   }),
   item({
     id: 'kommo-whatsapp', name: 'Kommo + WhatsApp', shortCode: 'KW', category: 'automation-ops', featured: true,

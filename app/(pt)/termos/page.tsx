@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import LegalDocument from '@/components/LegalDocument'
 
 export const metadata: Metadata = {
-  title: 'Aviso legal',
+  title: 'Aviso legal do site',
   description: 'Aviso legal do site pessoal de Paulo Pierrondi: sobre o site, conteúdo e opiniões, propriedade intelectual, ausência de garantias e contato.',
   openGraph: { url: '/termos', locale: 'pt_BR', type: 'website', siteName: 'pierrondi.dev', images: ['/og'] },
   alternates: {
@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     languages: {
       'pt-BR': '/termos',
       'en-US': '/terms',
+      'x-default': '/termos',
     },
   },
 }

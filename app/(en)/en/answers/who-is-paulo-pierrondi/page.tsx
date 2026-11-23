@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Who is Paulo Pierrondi?',
     description:
-      'Citable answer: TAE at ServiceNow, AI/automation architect and full-stack builder with 21 App Store apps.',
+      'Citable answer: TAE at ServiceNow, AI/automation architect and full-stack builder with 22 App Store apps.',
     url: path,
     siteName: 'pierrondi.dev',
     type: 'article',
@@ -51,7 +51,7 @@ export default function WhoIsPauloPierrondiAnswerPage() {
       inLanguage="en"
       eyebrow="ANSWER BRIEF — PROFILE"
       question="Who is Paulo Pierrondi?"
-      directAnswer="Paulo Pierrondi is a Technical Account Executive at ServiceNow, an AI/automation architect and a full-stack builder. At ServiceNow he leads enterprise accounts in financial services (FSI) with a focus on ITOM, CMDB/CSDM and AI operating models; in his own portfolio he builds governed multi-agent systems, automation platforms and digital products — including 21 apps published on the App Store under his developer account."
+      directAnswer="Paulo Pierrondi is a Technical Account Executive at ServiceNow, an AI/automation architect and a full-stack builder. At ServiceNow he leads enterprise accounts in financial services (FSI) with a focus on ITOM, CMDB/CSDM and AI operating models; in his own portfolio he builds governed multi-agent systems, automation platforms and digital products — including 22 apps published on the App Store under his developer account."
       sections={[
         {
           heading: 'Enterprise work',
@@ -65,7 +65,7 @@ export default function WhoIsPauloPierrondiAnswerPage() {
             'Agent Hub — a multi-agent operating system with a registry, scheduler, auditable handoffs and human gates.',
             'FaithSchool and CantuStudio — owned web and mobile products, published on the App Store.',
             'AgenticosCore — a Revenue Operations system for expert-led B2B businesses.',
-            '21 public App Store apps under developer ID 1895717587, verifiable in Apple’s public catalog.',
+            '22 public App Store apps under developer ID 1895717587, verifiable in Apple’s public catalog.',
             'SADA — a ServiceNow AI-Driven Architecture framework connecting strategy, architecture decisions and measured value.',
           ],
         },
@@ -85,7 +85,7 @@ export default function WhoIsPauloPierrondiAnswerPage() {
         {
           question: 'How can I verify the apps published by Paulo Pierrondi?',
           answer:
-            'Apple’s public catalog lists 21 apps for developer ID 1895717587. Official names, links and artwork are published at pierrondi.dev/portfolio#app-store.',
+            'Apple’s public catalog lists 22 apps for developer ID 1895717587 (iTunes Lookup, 31 Oct 2026, BR and US storefronts). The public cut with names, links and artwork on this site is at pierrondi.dev/portfolio#app-store.',
         },
         {
           question: 'What is Paulo Pierrondi’s core technical specialty?',

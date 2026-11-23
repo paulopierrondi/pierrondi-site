@@ -1,3 +1,37 @@
+# Sessão 2026-11-23 — merge main into home WebGL defer draft (#81)
+
+- Draft PR #81 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `origin/main` at `41a7fd5` with `git merge` (no rebase). The only conflict was this notes file. Kept main's notes and the 2026-11-02 TBT note.
+- The hero still paints the CSS disk first. `FrontierEventHorizon` mounts after 4s plus `requestIdleCallback`, or on pointerdown, keydown, or a scroll past 32px. Copy, GA4, schema, and `/sprint` were not edited. Person `jobTitle` stays `Technical Account Executive`.
+- Verified on the merge: `npm run lint` clean, `npm test` 234/234, `npm run build` 205 static pages and `/sprint` absent.
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS.md + `.brain` snapshot. cached_tokens: null.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #81 now contains current main and stays draft. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-11-18 — rebase hreflang hub onto current main (draft)
+
+- Draft PR #66 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `origin/main` at `70153a4`. Conflicts were this notes file and `app/(en)/en/answers/page.tsx` (the old `app/en/answers/page.tsx` path). Kept main's notes and the 2026-10-15 hreflang note.
+- Kept main's `openGraph`, `buildCollectionPageSchema` and `languages: {}` on `/en/answers`. The language picker sends `/answers` to `/ai-search` and leaves `/en/answers` on itself. English briefs link the hub in the breadcrumb and related links. The English footer has “Answer briefs”. The hub test now reads the route-group pages.
+- Home pages and the GA4 id `G-1CL8PFYY7T` were not edited. `/sprint` stays unpublished.
+- Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 231/231, `npm run build` generated 204 static pages and `/sprint` is absent. One clean Turbopack build hit the known Space Grotesk `next/font` error (`queries have exactly one entry`); fonts were not edited and the retry succeeded.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #66 is rebased and still draft. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-11-18 — rebase do brief preço fixo onto current main (draft)
+
+- Draft PR #76 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `origin/main` at `70153a4`. The only conflict was this notes file. Kept main's notes and the 2026-10-26 brief note.
+- Kept main's `/answers/consultoria-de-automacao-com-ia` entries in the sitemap, `answers.json`, `geo.md`, `llms.txt`, `llms-full.txt` and `/ai-search`, and added `/answers/automacao-com-ia-preco-fixo` beside them. Home pages and the GA4 id `G-1CL8PFYY7T` were not edited. `/sprint` stays unpublished.
+- Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 228/228, `npm run build` generated 205 static pages. Both answer routes are in the route table. `/sprint` is absent.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #76 is rebased and still draft. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-11-18 — rebase /atuacao titles onto current main (draft)
+
+- Draft PR #75 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `origin/main` at `70153a4`. The only conflict was this notes file. Kept main's notes and the 2026-10-26 title note.
+- Titles stay `Atuação em IA enterprise e AgentOps` and `Enterprise AI work and AgentOps`, including the Open Graph titles. Home pages and the GA4 id `G-1CL8PFYY7T` were not edited. `/sprint` stays unpublished.
+- Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 228/228, `npm run build` generated 204 static pages and `/sprint` is absent from the route table.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #75 is rebased and still draft. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-11-02 — home TBT: defer the WebGL event horizon
 
 - Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
@@ -7,6 +41,19 @@
 - Verified: `./node_modules/.bin/tsc --noEmit` clean, `npm run lint` clean, `npm test` 210/210, `npm run build` 203 pages and `/sprint` absent, `check-apps-urls` against `next start` :3456 121/121.
 - prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS.md + `.brain` snapshot. cached_tokens: null.
 - Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note the draft. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-10-31 — technical SEO sweep (draft)
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Live audit of https://www.pierrondi.dev: sitemap 80 URLs, all 200; `/sprint` 404 and absent; robots points at the sitemap; apex 308 to www. 172 internal hrefs from those pages returned no 3xx/4xx.
+- Fixed in this branch: short and duplicate document titles (contato, blog hubs, legal, PT engajamento, 15 short app names), legal `x-default`, studio Offer/OfferCatalog removed, AgenticosCore links that 301 (`/answers/quanto-custa-revops`, `/plano-de-acao-comercial`, and the other retired RevOps URLs) now point at `https://agenticoscore.ai/answers/` or `https://agenticoscore.ai/scorecard/`.
+- Apple iTunes Lookup for developer ID 1895717587 returned 22 software records on both BR and US storefronts (2026-10-31). Answer copy and the GEO count now say 22. The checked-in `app-store-catalog.json` still lists 21 and was not regenerated. AgenticosCore stays described as Revenue Operations in the answer briefs; agenticoscore.ai now says Legacy Exit. That positioning was not rewritten.
+- Left to other drafts: `/atuacao` titles (#75), `app/blog/posts.ts` titles over 60 characters (#78), `/answers/automacao-com-ia-preco-fixo` (#76). `/en/answers` hreflang stays with #66.
+- GA4 stays one `gtag('config')` for `G-1CL8PFYY7T` with `send_page_view: false`. Person `jobTitle` stays `Technical Account Executive`. No Product schema. No `/sprint`.
+- Mobile Lighthouse on production before this deploy: `/` and `/en` LCP 1.2s, CLS 0, TBT ~5.0s (home JS chunk); `/engajamento` and `/contato` LCP 1.0s, CLS 0, TBT 70ms. No image/font change. Fonts already use `display: swap`.
+- Verified: `npx tsc --noEmit`, `npm run lint`, `npm test` 214/214, `npm run build` 203 pages and `/sprint` absent, `check-apps-urls` against `next start` 121/121, `/sprint` 404.
+- First GitHub `CI / build` failed in `next/font` (`queries have exactly one entry` on Space Grotesk). Lint, typecheck, and tests passed in that run. Local `next build` succeeded. Fonts were not edited.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note this draft. Do not IndexNow or mark shipped until Paulo merges and Railway deploys.
 
 # Sessão 2026-10-30 — engagement links after #69
 
@@ -108,6 +155,40 @@
 - Residual: GA4 Admin → data stream `G-1CL8PFYY7T` → Enhanced measurement → Page views → advanced → “Page changes based on browser history events” must stay off, or client navigations count twice. Query-only URL changes do not emit a manual page_view. PT↔EN crosses root layouts and reloads, so the load path covers it.
 - Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 195/195, `npm run build` 203 pages and `/sprint` absent. `check-apps-urls` against `next start` 121/121, `/sprint` 404. Headless Chrome dataLayer: no `page_view` before accept or with essential consent; one `page_view` after a late accept and after reload with stored consent; one additional `page_view` on same-document `/contato` → `/about` and `/en/contato` → `/en/about`.
 - Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note the draft. Do not mark the property as collecting until Paulo merges, Railway deploys, and DebugView shows one `page_view` after a late accept.
+
+# Sessão 2026-10-26 — Answer brief automação com IA preço fixo (draft)
+
+- Draft only. Do not merge. Do not deploy. Do not call IndexNow.
+- New PT-BR brief: `/answers/automacao-com-ia-preco-fixo`. H1: `Automação com IA com preço fixo e escopo fechado`. Rendered title: `Automação com IA com preço fixo | pierrondi.dev` (47). The root template appends `| pierrondi.dev`; a title that also ends in `| Paulo Pierrondi` would duplicate the brand and break the 62-character sibling budget.
+- No EN twin. Canonical only, same as the measurement brief. Rendered HTML has self-canonical `https://www.pierrondi.dev/answers/automacao-com-ia-preco-fixo`, `index, follow`, and no hreflang to a missing English URL.
+- No price, client, testimonial, metric, review, Product schema, or `/sprint` link. `/engajamento` still has no public price, so the brief stays price-free and links there plus `/contato`.
+- Registered on sitemap (80 → 81), `answers.json`, `llms.txt`, `llms-full.txt`, `geo.md`, `/ai-search`. Inbound links from the fractional comparison brief and from `publicAnswerLinks` (home, `/feitos`, `/about`).
+- Left untouched: open #66 (hreflang hub), #68 (`/engajamento` links), #69 (`/contato` fields), #70 (GA4 events), #75 (`/atuacao` titles). GA4 id `G-1CL8PFYY7T` unchanged. `/sprint` still absent from the route table and returns 404.
+- Verified: `npm test` 193/193, `npm run build` prerenders the route as static. `next start` on port 3456: page 200; internal links 200; `/sprint` 404. Direct answer 77 words. Body copy about 1070 words.
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS.md + `.brain/PROJECT_CONTEXT.md`. cached_tokens: null.
+- Suggested Obsidian/Linear: note this draft on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-10-26 — títulos de /atuacao (draft)
+
+- Draft only. Do not merge. Do not deploy. Do not IndexNow.
+- Live audit of https://www.pierrondi.dev/sitemap.xml: 80 URLs, all HTTP 200, no `/sprint`, JSON-LD parsed on every URL, meta descriptions inside 120–160. Homepage canonical is `https://www.pierrondi.dev`.
+- Highest uncovered gap: `/atuacao` title `Atuação | pierrondi.dev` (23) and `/en/atuacao` title `Work | pierrondi.dev` (20). Both are priority indexable pages whose body is AI Operating Model, ServiceNow, AgentOps and enterprise strategy. The title slot named none of that.
+- Left alone because other drafts already own them: #63 (sameAs, Fractional title, `llms.txt` / `llms-full.txt` / `geo.md` / `answers.json`), #66 (`/en/answers` hreflang), #68 (engajamento links), #69 (contato form), #70 (GA4). Analytics id `G-1CL8PFYY7T` untouched. `/sprint` stays unpublished.
+- Fix: document titles `Atuação em IA enterprise e AgentOps` (rendered 51) and `Enterprise AI work and AgentOps` (rendered 47). Self-canonicals and hreflang pairs unchanged. No new clients, metrics, prices or testimonials. H1 copy unchanged.
+- Residual: `/contato` and `/en/contato` titles stay `Contato` / `Contact` (accurate for that URL; #69 is editing the form). Three proof cases (`/feitos/agentes-governados`, `/feitos/llm-inferencia`, `/feitos/plataformas-automacao-ia`) are in the sitemap and absent from `llms.txt` / `llms-full.txt`; do not patch those files while #63 is open. Case pages still have no in-body `/contato` link (the footer and `/feitos` index do).
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS + `.brain/PROJECT_CONTEXT.md`. cached_tokens: null (CLI hides telemetry).
+- Suggested Obsidian/Linear: note this draft on `02_Projects/pierrondi-site` / AGE-1486. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-10-15 — hreflang hub rebase onto #67
+
+- Draft PR #66 only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow not submitted.
+- Rebased onto `main` after #67. `AnswerBrief` keeps the comparison table from #67 and still prepends the English hub link plus BreadcrumbList entry on `/en/answers/*`.
+- Ahrefs: `/en/answers` declared `pt-BR` and `x-default` at `/answers`, which 308s to `/ai-search`. The pair was not reciprocal.
+- Decision stands: they are not equivalent hubs. `/ai-search` is an English citation portfolio (`inLanguage: en-US`). `/en/answers` is an English index of three briefs. No hreflang between them. Canonicals stay self-referencing on `www`.
+- Real PT/EN pairs stay on the individual briefs: each lists `pt-BR`, self `en-US` or `pt-BR`, and `x-default` to the Portuguese URL.
+- Language picker: `/answers` resolves to `/ai-search`; `/en/answers` stays on itself. Switcher remains hidden on both prefixes.
+- Inbound links: EN footer “Answer briefs” → `/en/answers`. `/sprint` stays unpublished. GA4 id unchanged.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #66 rebased onto #67. Do not mark shipped until Paulo merges and Railway deploys.
 
 # Sessão 2026-10-10 — SEO/GEO sweep (draft)
 

@@ -146,7 +146,7 @@ const FLAGSHIP_PROJECTS = [
     name: 'AgenticosCore',
     category: 'Revenue operations system',
     description: 'Revenue OS connecting diagnosis, scorecard, commercial action plan and operational evidence.',
-    url: 'https://agenticoscore.ai/diagnostico',
+    url: 'https://agenticoscore.ai/scorecard/',
     relationship: 'flagship project',
   },
 ]
