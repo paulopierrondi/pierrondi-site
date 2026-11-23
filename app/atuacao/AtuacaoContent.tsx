@@ -26,6 +26,9 @@ const copy: Record<
       trainingHref: string
       engagementCta: string
       engagementHref: string
+      consultancyHref: string
+      consultancyLabel: string
+      consultancyRest: string
     }
   }
 > = {
@@ -44,6 +47,10 @@ const copy: Record<
       trainingHref: '/treinamentos',
       engagementCta: 'Modelo de engajamento',
       engagementHref: '/engajamento',
+      consultancyHref: '/answers/consultoria-de-automacao-com-ia',
+      consultancyLabel: 'Consultoria de automação com IA para empresas',
+      consultancyRest:
+        ' descreve o que a consultoria entrega a times de operação: critério de aceite, baseline, sistema, métrica e handoff.',
     },
   },
   en: {
@@ -61,6 +68,9 @@ const copy: Record<
       trainingHref: '/en/treinamentos',
       engagementCta: 'Engagement model',
       engagementHref: '/en/engajamento',
+      consultancyHref: '/answers/consultoria-de-automacao-com-ia',
+      consultancyLabel: 'Consultoria de automação com IA para empresas',
+      consultancyRest: ' is the Portuguese brief for operations teams: acceptance criteria, baseline, system, metric, and handoff.',
     },
   },
 }
@@ -232,6 +242,10 @@ export default function AtuacaoContent({ lang }: { lang: AtuacaoLang }) {
         <Reveal>
           <h2>{c.final.h2}</h2>
           <p>{c.final.p}</p>
+          <p>
+            <Link href={c.final.consultancyHref}>{c.final.consultancyLabel}</Link>
+            {c.final.consultancyRest}
+          </p>
           <div className={styles.finalActions}>
             <Link href="/feitos" className={styles.btnPrimary}>
               {c.final.cta} <span aria-hidden="true">→</span>

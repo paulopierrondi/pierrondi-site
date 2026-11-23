@@ -11,6 +11,10 @@ export const publicAnswerLinks: Record<'pt' | 'en', readonly PublicAnswerLink[]>
       label: 'Fractional, consultoria, agência ou interno?',
     },
     {
+      href: '/answers/automacao-com-ia-preco-fixo',
+      label: 'Automação com IA com preço fixo e escopo fechado',
+    },
+    {
       href: '/answers/o-que-e-fractional-ai-automation-officer',
       label: 'O que é Fractional AI Automation Officer?',
     },
@@ -27,6 +31,10 @@ export const publicAnswerLinks: Record<'pt' | 'en', readonly PublicAnswerLink[]>
     {
       href: '/en/answers/fractional-vs-consultancy-vs-agency',
       label: 'Fractional, consultancy, agency or internal?',
+    },
+    {
+      href: '/answers/automacao-com-ia-preco-fixo',
+      label: 'Fixed-price AI automation, closed scope (pt-BR)',
     },
     {
       href: '/answers/o-que-e-fractional-ai-automation-officer',

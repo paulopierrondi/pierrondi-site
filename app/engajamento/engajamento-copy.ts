@@ -14,7 +14,7 @@ type Block = {
 
 export const ENGAJAMENTO_ROUTES: Record<
   EngajamentoLang,
-  { contact: string; proof: string; self: string; answer: string; measure: string }
+  { contact: string; proof: string; self: string; answer: string; measure: string; consultancy: string }
 > = {
   pt: {
     contact: '/contato',
@@ -22,6 +22,7 @@ export const ENGAJAMENTO_ROUTES: Record<
     self: '/engajamento',
     answer: '/answers/o-que-e-fractional-ai-automation-officer',
     measure: '/answers/como-medir-resultado-de-ia-operacional',
+    consultancy: '/answers/consultoria-de-automacao-com-ia',
   },
   en: {
     contact: '/en/contato',
@@ -29,6 +30,7 @@ export const ENGAJAMENTO_ROUTES: Record<
     self: '/en/engajamento',
     answer: '/answers/o-que-e-fractional-ai-automation-officer',
     measure: '/answers/como-medir-resultado-de-ia-operacional',
+    consultancy: '/answers/consultoria-de-automacao-com-ia',
   },
 }
 
@@ -53,6 +55,8 @@ export const ENGAJAMENTO_COPY: Record<
       answerLead: string
       measure: string
       measureLead: string
+      consultancy: string
+      consultancyLead: string
     }
     final: { h2: string; p: string; contact: string; whatsapp: string }
     disclaimer: string
@@ -116,6 +120,9 @@ export const ENGAJAMENTO_COPY: Record<
       answerLead: 'Definição citável da oferta — sem métrica nova e sem twin EN (o site não tem /en/answers).',
       measure: 'Como medir resultado de IA operacional?',
       measureLead: 'Framework honesto: baseline → métrica → evidência / AgentOps — sem número inventado.',
+      consultancy: 'Consultoria de automação com IA para empresas',
+      consultancyLead:
+        'O que a consultoria entrega a mid-market e operações: critério de aceite, baseline, sistema, métrica e handoff.',
     },
     final: {
       h2: 'Vamos abrir o engajamento.',
@@ -185,6 +192,9 @@ export const ENGAJAMENTO_COPY: Record<
       measure: 'How to measure operational AI results?',
       measureLead:
         'Honest framework: baseline → metric → evidence / AgentOps — no invented number. PT-first: there is no /en/answers pattern.',
+      consultancy: 'Consultoria de automação com IA para empresas',
+      consultancyLead:
+        'Portuguese brief: what the consultancy delivers to operations teams, with acceptance criteria and handoff.',
     },
     final: {
       h2: 'Let’s open the engagement.',
