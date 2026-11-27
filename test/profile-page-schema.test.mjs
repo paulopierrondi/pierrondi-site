@@ -48,7 +48,9 @@ test('Person and Organization name the official site and keep real sameAs only',
     siteSchema,
     /disambiguatingDescription:\s*'Official site of Paulo Pierrondi at https:\/\/www\.pierrondi\.dev/,
   )
-  assert.match(siteSchema, /sameAs: \[\.\.\.OFFICIAL_SAME_AS\]/)
+  const [organization, person] = siteSchema.split("'@type': 'Person'", 2)
+  assert.match(organization, /sameAs: \[\.\.\.OFFICIAL_SAME_AS\]/)
+  assert.match(person, /sameAs: \[\.\.\.OFFICIAL_SAME_AS\]/)
   assert.doesNotMatch(siteSchema, /@type': 'Product'/)
   assert.doesNotMatch(siteSchema, /instagram\.com|twitter\.com|x\.com|facebook\.com/)
 

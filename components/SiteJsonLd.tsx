@@ -12,6 +12,7 @@ const siteSchema = {
       alternateName: 'Paulo Pierrondi Studio',
       url: SITE_URL,
       logo: `${SITE_URL}/pierrondi-logo-1024.png`,
+      sameAs: [...OFFICIAL_SAME_AS],
       disambiguatingDescription:
         'Official site of Paulo Pierrondi at https://www.pierrondi.dev. Distinct from freelance marketplace listings.',
       founder: { '@id': `${SITE_URL}/#person` },
