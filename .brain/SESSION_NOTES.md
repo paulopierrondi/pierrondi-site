@@ -1,3 +1,12 @@
+# Sessão 2026-11-23 — merge main into home WebGL defer draft (#81)
+
+- Draft PR #81 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `origin/main` at `41a7fd5` with `git merge` (no rebase). The only conflict was this notes file. Kept main's notes and the 2026-11-02 TBT note.
+- The hero still paints the CSS disk first. `FrontierEventHorizon` mounts after 4s plus `requestIdleCallback`, or on pointerdown, keydown, or a scroll past 32px. Copy, GA4, schema, and `/sprint` were not edited. Person `jobTitle` stays `Technical Account Executive`.
+- Verified on the merge: `npm run lint` clean, `npm test` 234/234, `npm run build` 205 static pages and `/sprint` absent.
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS.md + `.brain` snapshot. cached_tokens: null.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #81 now contains current main and stays draft. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-11-18 — rebase hreflang hub onto current main (draft)
 
 - Draft PR #66 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
@@ -22,6 +31,16 @@
 - Titles stay `Atuação em IA enterprise e AgentOps` and `Enterprise AI work and AgentOps`, including the Open Graph titles. Home pages and the GA4 id `G-1CL8PFYY7T` were not edited. `/sprint` stays unpublished.
 - Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 228/228, `npm run build` generated 204 static pages and `/sprint` is absent from the route table.
 - Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #75 is rebased and still draft. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-11-02 — home TBT: defer the WebGL event horizon
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Mobile Lighthouse on a local `next start` production build (simulated throttling, 3-run median) showed `/` TBT 4874ms and `/en` TBT 5080ms, against `/engajamento` 72ms and `/contato` 62ms. CLS was 0 on all four. The bootup audit attributed ~8923ms to the three.js / react-three-fiber chunk (`FrontierEventHorizon`), with long tasks up to 458ms. Below-fold home sections and gtag were not that spike. Shared framework + gtag long tasks are the same band as `/contato`.
+- Fix stays in the hero: the CSS event-horizon fallback is the first paint. The WebGL canvas mounts after 4s of quiet time plus `requestIdleCallback`, or immediately on pointerdown, keydown, or a scroll past 32px. Copy, parallax, section reveals, GA4 (`G-1CL8PFYY7T`, `send_page_view: false`), CSP, cookie banner, Person `jobTitle`, and `/sprint` (404, absent from the sitemap) were not edited. Open draft files from #75, #76, #78, and #80 were not edited.
+- After, same harness, 3-run median: `/` TBT 122ms, `/en` 173ms, `/engajamento` 80ms, `/contato` 77ms. CLS 0. Local simulated LCP stayed ~3.9s on the home routes (this VM; not the production ~1.2s field number). Headless check: hero gate is `deferred` with zero canvases at load, then `data-frontier-state=ready` and the fallback fades. A pointerdown after hydration flips the gate in ~28ms. `/sprint` 404.
+- Verified: `./node_modules/.bin/tsc --noEmit` clean, `npm run lint` clean, `npm test` 210/210, `npm run build` 203 pages and `/sprint` absent, `check-apps-urls` against `next start` :3456 121/121.
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS.md + `.brain` snapshot. cached_tokens: null.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note the draft. Do not mark shipped until Paulo merges and Railway deploys.
 
 # Sessão 2026-10-31 — technical SEO sweep (draft)
 
