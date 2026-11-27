@@ -15,16 +15,20 @@ export default function ContactSection({ lang }: SectionProps) {
   const copy = COPY[lang].contact
   const whatsapp = lang === 'pt'
     ? {
-        kicker: 'Canal mais direto',
-        action: 'Chamar Paulo no WhatsApp',
-        detail: 'Para começar uma conversa agora',
-        href: getWhatsAppHref('Olá, Paulo! Vim pelo seu site e quero conversar sobre IA, produtos ou sistemas.'),
+        kicker: 'Engajamento fractional',
+        action: 'Trazer um fluxo manual',
+        detail: 'Vira automação mensurável',
+        href: getWhatsAppHref(
+          'Olá, Paulo! Vim pela home. Quero transformar este processo manual em automação mensurável, no engajamento fractional: ',
+        ),
       }
     : {
-        kicker: 'Most direct channel',
-        action: 'Message Paulo on WhatsApp',
-        detail: 'To start a conversation now',
-        href: getWhatsAppHref('Hi Paulo! I found your site and would like to discuss AI, products, or operating systems.'),
+        kicker: 'Fractional engagement',
+        action: 'Bring one manual workflow',
+        detail: 'Turned into a measurable automation',
+        href: getWhatsAppHref(
+          'Hi Paulo! I came from the home page. I want this manual process turned into a measurable automation, as a fractional engagement: ',
+        ),
       }
   const containerRef = useRef<HTMLElement>(null)
   const prefersReducedMotion = useHydratedReducedMotion()
@@ -129,7 +133,6 @@ export default function ContactSection({ lang }: SectionProps) {
               target="_blank"
               rel="noopener noreferrer"
               variants={baseVariants}
-              onClick={() => trackEvent('Contact_WhatsApp_Clicked', { source: 'home_v2', language: lang })}
             >
               <span className={styles.whatsappHeader}>
                 <span>{whatsapp.kicker}</span>

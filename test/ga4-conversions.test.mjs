@@ -57,6 +57,21 @@ test('whatsapp links emit whatsapp_click with the current page', () => {
   })
 })
 
+test('mailto links emit mailto_click with the current page', () => {
+  assert.deepEqual(classifyConversionClick('mailto:pierrondi@gmail.com', '/'), {
+    event: 'mailto_click',
+    params: { page: '/' },
+  })
+  assert.deepEqual(classifyConversionClick('mailto:pierrondi@gmail.com?subject=escopo', '/en'), {
+    event: 'mailto_click',
+    params: { page: '/en' },
+  })
+  assert.deepEqual(classifyConversionClick('  MAILTO:pierrondi@gmail.com', '/contato'), {
+    event: 'mailto_click',
+    params: { page: '/contato' },
+  })
+})
+
 test('unrelated, off-site, and non-link targets are ignored', () => {
   const ignored = [
     '/sprint',
@@ -64,7 +79,6 @@ test('unrelated, off-site, and non-link targets are ignored', () => {
     '/blog/engajamento',
     '/contato',
     '#contact',
-    'mailto:pierrondi@gmail.com',
     'https://api.whatsapp.com/send?phone=5511996262975',
     'https://evil.example/engajamento',
     'https://evil.example/redirect?to=https://wa.me/5511996262975',
