@@ -1,3 +1,12 @@
+# Sessão 2026-11-23 — merge main into GA4 page_title draft (#82)
+
+- Draft PR #82 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Merged `origin/main` at `41a7fd5` with `git merge` (no rebase). The only conflict was this notes file. Kept main's notes and the 2026-11-03 page_title note.
+- `scheduleGa4RoutePageView` still waits two animation frames before the route `page_view`. Consent, the single `gtag('config')` for `G-1CL8PFYY7T` with `send_page_view: false`, and schema were not edited. `/sprint` stays off the route table. Person `jobTitle` stays `Technical Account Executive`.
+- Verified on the merge: `npm run lint` clean, `npm test` 234/234, `npm run build` 205 static pages and `/sprint` absent.
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS.md + `.brain` snapshot. cached_tokens: null.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #82 now contains current main and stays draft. Do not mark shipped until Paulo merges and Railway deploys.
+
 # Sessão 2026-11-18 — rebase hreflang hub onto current main (draft)
 
 - Draft PR #66 only. Do not merge. Do not mark ready. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
@@ -22,6 +31,15 @@
 - Titles stay `Atuação em IA enterprise e AgentOps` and `Enterprise AI work and AgentOps`, including the Open Graph titles. Home pages and the GA4 id `G-1CL8PFYY7T` were not edited. `/sprint` stays unpublished.
 - Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 228/228, `npm run build` generated 204 static pages and `/sprint` is absent from the route table.
 - Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note draft PR #75 is rebased and still draft. Do not mark shipped until Paulo merges and Railway deploys.
+
+# Sessão 2026-11-03 — GA4 page_title on client navigation (draft)
+
+- Draft only. Do not merge. Deploy stays human-gated. Paulo merges. IndexNow was not submitted.
+- Client navigations called `sendPageView` in the pathname effect before Next.js wrote `document.title`, so `/engajamento` could ship an empty or stale `page_title`. `scheduleGa4RoutePageView` waits two animation frames, then calls the existing route handler. `lastLocation` still drops a repeat of the same URL. Consent, the single `gtag('config')` for `G-1CL8PFYY7T` with `send_page_view: false`, `Ga4ConversionListener`, CSP, the cookie banner, and schema were not edited. `/sprint` stays off the route table.
+- Verified: `npx tsc --noEmit` clean, `npm run lint` clean, `npm test` 215/215, `npm run build` 203 pages and `/sprint` absent. Chromium against `next start` on port 3456: stored `cookie-consent=all`; `/treinamentos` → click `[data-engagement-cta]` sent one `page_view` for `/engajamento` with `page_title` `Engajamento fractional de automação | pierrondi.dev`; `/en/treinamentos` → `/en/engajamento` sent `Fractional AI Automation Officer | pierrondi.dev`. `/sprint` returned 404. The live document has one `gtag('config')` script; a second string match is the RSC payload, not a second config.
+- GitHub `CI / build` and `check-apps-urls / local-build-check` failed in about 2 seconds with no steps: "The job was not started because your account is locked due to a billing issue." Not a code failure. `production-check` skipped.
+- prompt_cache.strategy: `cli-prefix-layout`. prefix_version: repo AGENTS.md + `.brain` snapshot. cached_tokens: null.
+- Suggested Obsidian/Linear: on `02_Projects/pierrondi-site` / AGE-1486, note this draft. Do not mark shipped until Paulo merges and Railway deploys.
 
 # Sessão 2026-10-31 — technical SEO sweep (draft)
 
